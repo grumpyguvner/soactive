@@ -18,6 +18,21 @@ define('DIR_CONFIG', DIR_SYSTEM . 'config/');
 // Upgrade
 $upgrade = false;
 
+if (!is_file('../config.php'))
+{
+    if ($file = @fopen('../config.php', 'w')) {
+        chmod('../config.php', '0755');
+        fclose($file);
+    }
+}
+if (!is_file('../admin/config.php'))
+{
+    if ($file = @fopen('../admin/config.php', 'w')) {
+        chmod('../admin/config.php', '0755');
+        fclose($file);
+    }
+}
+
 if (filesize('../config.php') > 0) {
 	$upgrade = true;
 	
