@@ -3,7 +3,10 @@
 define('VERSION', '1.5.4');
 
 // Configuration
-require_once('config.php');
+// TF - 5 November 2012
+// have changed this to 'include_once' as the repository ingnore this file.
+// if it doesn't exist, then 'DIR_APPLICATION' won't be defined, so install.
+include_once('config.php');
 
 // Install 
 if (!defined('DIR_APPLICATION')) {
