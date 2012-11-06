@@ -44,6 +44,9 @@ DD_belatedPNG.fix('#logo img');
 <?php echo $google_analytics; ?>
 </head>
 <body>
+<?php if (APPLICATION_ENV != 'production') { ?>
+<div id="environment"><div class="warning">This site is currently in the <strong><?php echo strtoupper(APPLICATION_ENV); ?></strong> environment<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div></div>
+<?php } ?>
 <div id="container">
 <div id="header">
   <?php if ($logo) { ?>
