@@ -2,11 +2,18 @@
 // Version
 define('VERSION', '1.5.4');
 
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+
 // Configuration
-// TF - 5 November 2012
-// have changed this to 'include_once' as the repository ingnore this file.
-// if it doesn't exist, then 'DIR_APPLICATION' won't be defined, so install.
-include_once('config.php');
+// Override main config settings, if a config exists specially for this environment
+if (is_file('config_' . APPLICATION_ENV . '.php'))
+{
+    include_once('config_' . APPLICATION_ENV . '.php');
+} else {
+    include_once('config.php');
+}
 
 // Install 
 if (!defined('DIR_APPLICATION')) {

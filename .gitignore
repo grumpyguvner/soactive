@@ -1,3 +1,6 @@
 /nbproject
+
 /config.php
+/config_*.php
 /admin/config.php
+/admin/config_*.php
