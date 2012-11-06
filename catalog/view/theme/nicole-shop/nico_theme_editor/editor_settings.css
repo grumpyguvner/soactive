@@ -1,0 +1,23 @@
+ .image .description{display:block;}
+ div.image > span.description {display:block;}
+#social_band{display:block;}
+#language{display:none;}
+#currency{display:block;}
+ .product-grid .cart input.button, .box-product .cart input.button{color:#cccccc;}
+#header #logo a span{display:inline;}
+#header #logo a img{display:none;}
+#menu{border-top:none;border-bottom:none;}
+#menu > div > ul > li > a{padding:10px 15px;}
+#container{margin:20px auto;box-shadow:none;}
+#carousel0{color:#cccccc;}
+.product-info .description{border-top:1px solid ;}
+.product-info .product_wish_compare{display:block;}
+.share{display:block;}
+#tab-description{height:auto;}
+#footer{border-top:2px solid;}
+.column #phone{display:none;}
+#powered > span{display:none;}
+.column #rss{color:#cccccc;}
+#header #search input{color:#cccccc}
+body { background-image: url(http://www.activeaddict.co.uk/catalog/view/theme/nicole-shop/nico_theme_editor//patterns/foggy_birds.png)};
+

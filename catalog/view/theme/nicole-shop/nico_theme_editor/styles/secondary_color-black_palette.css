@@ -1,0 +1,218 @@
+.checkout-heading a
+{
+    background:#212121; 
+}
+div.ei-title h2
+{
+    color:#212121;
+}
+#slideshow0 .flex-direction-nav li a
+{
+   background-color:#212121; 
+   background-color:rgba(33,33,33,0.8);  
+}
+#slideshow0 .flex-direction-nav li a:hover
+{
+    background-color:#212121; 
+}
+ol.flex-control-paging  li a.flex-active
+{
+   background-color:#212121; 
+   background-color:rgba(33,33,33,0.7);  
+}
+.slideshow .nivo-controlNav a.active
+{
+    background:#212121;
+}
+#header #welcome a:hover
+{
+   color:#212121; 
+}
+#cart-total:hover
+{
+    color:#212121;  
+}
+a:hover
+{
+    color:#212121;  
+}
+h2
+{
+   color:#212121;
+}
+.product-list .compare a
+{
+    color:#212121;
+}
+.product-list .wishlist a
+{
+    color:#212121;
+}
+.sitemap-info a:hover
+{
+   color:#212121;
+}
+.dk_options a:hover, .dk_option_current a
+{
+    background-color:#212121;  
+}
+.dk_focus .dk_toggle
+{
+    box-shadow:0 0 5px #212121;  
+}
+.success a
+{
+   color:#212121;
+}
+.column span
+{
+   background:#212121;
+}
+#powered a:hover
+{
+   color:#212121;
+}
+.cart-info tbody .name a:hover
+{
+   color:#212121;
+}
+.breadcrumb a:hover
+{
+   color:#212121;
+}
+.product-filter .display a
+{
+    color:#212121;
+}
+.product-filter .display a:hover
+{
+   color:#212121;
+}
+.product-list .price-old
+{
+    color:#212121;
+}
+.product-info .right > .price .price-new
+{
+    color:#212121;
+}
+.htabs a
+{
+   color:#212121;
+}
+#menu > div > ul > li.home:hover a
+{
+	background-color:#212121;
+	background:url("../../image/home.png") no-repeat center center transparent;
+	background: url("../../image/home.png") no-repeat center center, -moz-linear-gradient(top,  #3d3d3d 0%, #212121 100%);
+	background: url("../../image/home.png") no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3d3d3d), color-stop(100%,#212121));
+	background: url("../../image/home.png") no-repeat center center, -webkit-linear-gradient(top,  #3d3d3d 0%,#212121 100%);
+	background: url("../../image/home.png") no-repeat center center, -o-linear-gradient(top,  #3d3d3d 0%,#212121 100%);
+	background: url("../../image/home.png") no-repeat center center, -ms-linear-gradient(top,  #3d3d3d 0%,#212121 100%);
+	background: url("../../image/home.png") no-repeat center center, linear-gradient(to bottom,  #3d3d3d 0%,#212121 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d3d3d', endColorstr='#212121',GradientType=0 ), url("../image/home.png") no-repeat center center;
+}
+#menu > div > ul > li:hover > a
+{
+   border-bottom: none;
+   background-color: #3d3d3d;
+   background: #212121 url(../images/black2_bkg.png) top left repeat-x;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#212121));
+   background: -webkit-linear-gradient(top, #3d3d3d, #212121);
+   background: -moz-linear-gradient(top, #3d3d3d, #212121);
+   background: -ms-linear-gradient(top, #3d3d3d, #212121);
+   background: -o-linear-gradient(top, #3d3d3d, #212121);
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   color:#fff;
+   text-shadow:1px 1px 1px #413D3D;
+}
+#menu > div > ul > li > div
+{
+   border-bottom: none;
+   background-color: #3d3d3d;
+   background: #212121 url(../images/black2_bkg.png) top left repeat-x;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#212121));
+   background: -webkit-linear-gradient(top, #3d3d3d, #212121);
+   background: -moz-linear-gradient(top, #3d3d3d, #212121);
+   background: -ms-linear-gradient(top, #3d3d3d, #212121);
+   background: -o-linear-gradient(top, #3d3d3d, #212121);
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   border:1px solid #3d3d3d;
+}
+.ei-slider-thumbs li.ei-slider-element
+{
+   background-color:#212121 !important ; 
+}
+.box-product .name a:hover, .product-grid .name a:hover
+{
+    color:#212121;
+}
+.box-product .price-new, .product-grid .price-new
+{
+   color:#212121;
+}
+a.button:hover, input.button:hover
+{
+   background-color: #3d3d3d;
+   background: #212121 url(../images/black2_bkg.png) top left repeat-x;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#212121));
+   background: -webkit-linear-gradient(top, #3d3d3d, #212121);
+   background: -moz-linear-gradient(top, #3d3d3d, #212121);
+   background: -ms-linear-gradient(top, #3d3d3d, #212121);
+   background: -o-linear-gradient(top, #3d3d3d, #212121);
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   text-shadow:0 1px 0 #3d3d3d;
+   border:1px solid #3d3d3d;
+   color:#fff !important;
+}
+.product-info .right input#button-cart.button
+{
+   background-color: #3d3d3d;
+   background: #212121 url(../images/black2_bkg.png) top left repeat-x;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#212121));
+   background: -webkit-linear-gradient(top, #3d3d3d, #212121);
+   background: -moz-linear-gradient(top, #3d3d3d, #212121);
+   background: -ms-linear-gradient(top, #3d3d3d, #212121);
+   background: -o-linear-gradient(top, #3d3d3d, #212121);
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   text-shadow:0 1px 0 #3d3d3d;
+   border:1px solid #3d3d3d;
+   color:#fff !important;
+}
+.box .box-content ul li:hover
+{
+    background:#212121;
+	color:#fff;
+}

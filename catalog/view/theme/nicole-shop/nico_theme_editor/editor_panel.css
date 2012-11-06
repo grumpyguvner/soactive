@@ -1,0 +1,664 @@
+#nico_theme_editor
+{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	height:0px;
+	z-index:9999;
+	color:#000;
+	font-family:'Open Sans'!important;
+	font-size:12px !important;
+	line-height:24px !important;
+}
+
+#nico_theme_editor a
+{
+	outline:none;
+}
+
+.nico_tab
+{
+	display:none;
+	padding:10px;
+	height:255px;
+	overflow-y:auto;
+	background:#fff;
+	background:rgba(255,255,255, 0.99) !important;
+}
+
+.nico_tab > div
+{
+	margin:0px auto;
+	max-width:960px;
+	padding-bottom:30px;
+}
+
+#nico_theme_editor .nico_tab h2
+{
+	margin:0px;
+	margin-top:20px;
+	margin-bottom:5px;
+	background:inherit;
+	border:none;
+	padding:0px;
+	border-bottom:1px solid #ccc;
+	color:#333;
+	font-family:'Open Sans';
+}
+
+#nico_theme_editor .nico_tab h2 span{
+/*
+	background: none repeat scroll 0 0 #efefef;
+	background:-moz-linear-gradient(center top , #FBFBFB 10%, #EEEEEE 50%) repeat scroll 0 0 transparent;
+	background: -o-linear-gradient(top, #FBFBFB 10%, #EEEEEE 50%);
+	background: -ms-linear-gradient(top, #FBFBFB 10%, #EEEEEE 50%);
+	background: -moz-linear-gradient(top, #FBFBFB 10%, #EEEEEE 50%);
+	background: -webkit-linear-gradient(top, #FBFBFB 10%, #EEEEEE 50%);
+	background: linear-gradient(top, #FBFBFB 10%, #EEEEEE 50%);
+	-moz-box-shadow:0px 0px 20px -18px #000 inset;
+	-webkit-box-shadow:0px 0px 8px 0px #fff inset;
+	box-shadow:0px 0px 5px 0px #fff inset;
+	text-shadow:0px 1px 0px #fff;
+	color:#555;
+    clear: both;
+    padding: 2px 10px;
+    margin:10x 0px !important;
+    font-size:12px;
+    font-weight:600;
+    border-radius:3px 3px 0px 0px;
+    display:inline-block;
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;*/
+    font-family:'Open Sans';
+}
+
+#nico_theme_editor .label_option
+{
+	font-size:14px;
+	font-weight:200;
+	background:#eee;
+	padding:5px;
+}
+
+#nico_theme_editor .label_option input
+{
+	vertical-align: middle;
+	margin:0px;
+}
+
+.nico_tabs {
+	text-align: center;
+	list-style: none;
+	padding: 0;
+	line-height: 28px;
+	height: 30px;
+	overflow: hidden;
+	font-size: 12px;
+	position: relative;
+	margin: 0;
+	box-shadow:0px -3px 3px -3px #000000 inset;
+	z-index:-2;
+}
+.nico_tabs li {
+	border: 1px solid #AAA;
+	background: #D1D1D1;
+	background: -o-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+	background: -ms-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+	background: -moz-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+	background: -webkit-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+	background: linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+	display: inline-block;
+	position: relative;
+	z-index: 0;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+	text-shadow: 0 1px #FFF;
+	margin: 0 -5px;
+	padding: 0 30px;
+	cursor:pointer;
+}
+
+.nico_tabs li:hover
+{
+	background: #D1D1D1;
+
+}
+
+.nico_tabs a {
+	  color: #555;
+	  text-decoration: none;
+}
+.nico_tabs li.selected {
+	background: #FFF;
+	color: #333;
+	z-index: 2;
+	border-bottom-color: #FFF;
+}
+.nico_tabs:before {
+	position: absolute;
+	content: " ";
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	border-bottom: 1px solid #AAA;
+	z-index: 1;
+}
+.nico_tabs li:before,
+.nico_tabs li:after {
+	border: 1px solid #AAA;
+	position: absolute;
+	bottom: -1px;
+	width: 5px;
+	height: 5px;
+	content: " ";
+}
+.nico_tabs li:before {
+	left: -6px;
+	border-width: 0 1px 1px 0;
+	box-shadow: 2px 2px 0 #D1D1D1;
+}
+.nico_tabs li:after {
+	right: -6px;
+	border-width: 0 0 1px 1px;
+	box-shadow: -2px 2px 0 #D1D1D1;
+}
+.nico_tabs li.selected:before {
+	box-shadow: 2px 2px 0 #FFF;
+}
+.nico_tabs li.selected:after {
+	box-shadow: -2px 2px 0 #FFF;
+}
+
+
+#nico_theme_editor .color
+{
+	display:inline-block;
+	padding:5px;
+	min-width:50px;
+    vertical-align:middle;
+}
+
+#nico_theme_editor .name
+{
+	font-weight:200;
+}
+
+#nico_theme_editor .color .name
+{
+	display:inline-block;
+    vertical-align:middle;
+    /*font-weight:600;*/
+    max-width:170px;
+    white-space:nowrap;
+}
+
+#nico_theme_editor .color .value
+{
+	display:inline-block;
+	background: url("colorpicker/images/select2.png") repeat scroll 0 0 transparent;
+    height: 24px;
+    position: relative;
+    width: 24px;
+    vertical-align:middle;
+    float:right;
+}
+
+.colorpicker
+{
+	z-index:99999;
+}
+
+
+#nico_theme_editor .font
+{
+	display:inline-block;
+	padding:5px;
+	width:305px;
+    vertical-align:middle;
+}
+
+#nico_theme_editor .font .name
+{
+	display:inline-block;
+    vertical-align:middle;
+    /*font-weight:600;*/
+    width:140px;
+    white-space:nowrap;
+    overflow-x:hidden;
+    line-height:26px;
+}
+
+#nico_theme_editor .font .value
+{
+	display:inline;
+	float:right;
+	width:150px;
+}
+
+
+#nico_theme_editor .slider_container
+{
+	display:none;
+}
+
+#nico_theme_editor .setting, #nico_theme_editor .slider
+{
+	display:inline-block;
+	padding:5px;
+	width:300px;
+    vertical-align:middle;
+}
+
+#nico_theme_editor .setting .name, #nico_theme_editor .slider .name
+{
+	display:inline-block;
+    vertical-align:middle;
+    /*font-weight:600;*/
+    width:140px;
+    white-space:nowrap;
+    overflow-x:hidden;
+    line-height:26px;
+}
+
+#nico_theme_editor .setting .value,
+#nico_theme_editor .slider .value
+{
+	display:inline;
+	float:right;
+	width:150px;
+}
+
+
+#nico_theme_editor .setting .value input[type="text"], 
+#nico_theme_editor .setting .value select,
+#nico_theme_editor .slider .value input[type="text"], 
+#nico_theme_editor .slider .value select
+
+{
+	margin:0px;
+	width:140px;
+	vertical-align: middle;
+}
+
+#nico_theme_editor .setting .color,
+#nico_theme_editor .slider .color
+{
+	width:inherit;
+	padding:0px;
+	min-width:100px;
+}
+
+#nico_theme_editor .setting .color .value,
+#nico_theme_editor .slider .color .value
+{
+	width:24px;
+	height:24px;
+	float:left;
+}
+
+
+#nico_theme_editor textarea
+{
+	width:170px;
+	padding:5px;
+	height:70px;
+}
+
+#nico_theme_editor .setting .value textarea,
+#nico_theme_editor .slider .value textarea
+{
+	width:500px;
+	vertical-align: middle;
+	margin:0px;
+}
+
+#nico_theme_editor .option
+{
+	display:inline-block;
+	padding:5px;
+	width:300px;
+    vertical-align:middle;
+}
+
+#nico_theme_editor .option .name
+{
+	display:inline-block;
+    vertical-align:middle;
+    /*font-weight:600;*/
+    overflow-x:hidden;
+    white-space:nowrap;
+    width:135px;
+    line-height:26px;
+}
+
+#nico_theme_editor .option .value
+{
+	float:right;
+	width:100px;
+}
+
+#nico_theme_editor h3
+{
+	display:inline-block;
+	
+	line-height:150px;
+	font-weight:normal;
+}
+
+#nico_theme_editor .style
+{
+	display:inline-block;
+	padding:5px 5px 0px 0px;
+	width:100px;
+    vertical-align:middle;
+}
+
+#nico_theme_editor .style .name
+{
+    vertical-align:middle;
+	/*font-weight:600;*/
+    overflow-x:hidden;
+    white-space:nowrap;
+    width:100px;
+    line-height:26px;
+    text-align:center;
+}
+
+#nico_theme_editor .style .value
+{
+	width:100px;
+	background-repeat:repeat;
+	box-shadow:0 0px 8px -5px rgb(0, 0, 0);
+	height:30px;
+	border:1px solid #dddddd;
+}
+
+
+#nico_theme_editor .style .value:hover
+{
+	box-shadow:0px 0px 5px -2px #018E00;
+}
+
+
+#nico_theme_editor .style .value.selected
+{
+	box-shadow:0px 0px 5px -2px #018E00, 0 0 30px 0 #FFFFFF inset;
+	border:1px dashed #333;
+}
+
+
+#nico_theme_editor .pattern
+{
+	display:inline-block;
+	padding:5px;
+	width:300px;
+    vertical-align:middle;
+}
+
+#nico_theme_editor .pattern .name
+{
+    vertical-align:middle;
+	/*font-weight:600;*/
+    overflow-x:hidden;
+    white-space:nowrap;
+    width:300px;
+    line-height:26px;
+}
+
+#nico_theme_editor .pattern .value
+{
+	width:300px;
+	background-repeat:repeat;
+	box-shadow:0px 0px 5px -2px #000;
+	height:40px;
+}
+
+
+#nico_theme_editor .pattern .value:hover
+{
+	box-shadow:0px 0px 5px -2px #018E00;
+}
+
+
+#nico_theme_editor .pattern .value.selected
+{
+	box-shadow:0 0 5px -2px #000000, 0 0 15px -5px #018E00 inset, 0 0 30px 0 #FFFFFF inset;
+}
+
+
+#nico_theme_editor .slider_text
+{
+	display:inline-block;
+}
+
+#nico_theme_editor .slider_text_btns
+{
+	padding:10px 0px;
+}
+
+#nico_theme_editor .slider_text_btns a
+{
+	display:inline-block;
+/*	width:32px;*/
+	
+	color:#fff;
+	
+  background-color: #3d3d3d;
+  background: #212121 url(../images/black2_bkg.png) top left repeat-x;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#212121));
+  background: -webkit-linear-gradient(top, #3d3d3d, #212121);
+  background: -moz-linear-gradient(top, #3d3d3d, #212121);
+  background: -ms-linear-gradient(top, #3d3d3d, #212121);
+  background: -o-linear-gradient(top, #3d3d3d, #212121);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  
+	padding:3px 10px;
+  
+	border:1px solid #333;
+	
+}
+
+#show_hide_editor
+{
+	position:absolute;
+	margin-left:10px;
+
+	background: #333;
+	background:rgba(0, 0, 0, 0.8);
+	text-shadow:0px 1px 0px #555;
+	box-shadow:0 0 5px -2px #000000;
+
+	display: inline-block;
+	
+	z-index:-1;
+	padding:5px 30px 30px;
+	font-weight:600;
+	color:#fff;
+	margin-top:-40px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius:3px 3px 0 0;
+}
+
+#show_hide_editor:hover
+{
+	opacity:1!important;
+}
+
+
+
+
+#nico_save_settings, #nico_reset
+{
+	position:absolute;
+	margin-top:100px;
+	right:0px;
+	margin-right:20px;
+	
+  background-color: #3d3d3d;
+  background: #212121 url(../images/black2_bkg.png) top left repeat-x;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#212121));
+  background: -webkit-linear-gradient(top, #3d3d3d, #212121);
+  background: -moz-linear-gradient(top, #3d3d3d, #212121);
+  background: -ms-linear-gradient(top, #3d3d3d, #212121);
+  background: -o-linear-gradient(top, #3d3d3d, #212121);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+  
+  
+	border:1px solid #333;
+	
+
+	display: inline-block;
+	padding:10px 15px;
+	font-weight:600;
+	color:#fff;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width:120px;
+	line-height:16px;
+	
+	border-radius:3px;
+	
+	text-align:center;
+}
+
+#nico_save_settings:hover
+{
+	background:-moz-linear-gradient(center top , #2A7FD3 10%, #5AAFF3 50%) repeat scroll 0 0 transparent;
+	background: -o-linear-gradient(top, #2A7FD3 10%, #5AAFF3 50%);
+	background: -ms-linear-gradient(top, #2A7FD3 10%, #5AAFF3  50%);
+	background: -moz-linear-gradient(top, #2A7FD3 10%, #5AAFF3 50%);
+	background: -webkit-linear-gradient(top, #2A7FD3 10%, #5AAFF3 50%);
+	background: linear-gradient(top, #2A7FD3 10%, #5AAFF3 50%);
+}
+
+#nico_reset
+{
+	margin-top:230px;
+	font-size:11px;
+	opacity:0.4;
+}
+
+#nico_reset:hover
+{
+	opacity:1;
+}
+
+
+._font_select ._font_open_default {text-align:center;text-indent:0px;font-size:14px;background:none;} ._font_open_sans{font-family:'Open Sans';background-position:-0px -0px}._font_droid_sans{font-family:'Droid Sans';background-position:-240px -0px}._font_oswald{font-family:'Oswald';background-position:-480px -0px}._font_droid_serif{font-family:'Droid Serif';background-position:-720px -0px}._font_lobster{font-family:'Lobster';background-position:-960px -0px}._font_yanone_kaffeesatz{font-family:'Yanone Kaffeesatz';background-position:-0px -30px}._font_pt_sans{font-family:'PT Sans';background-position:-240px -30px}._font_lora{font-family:'Lora';background-position:-480px -30px}._font_ubuntu{font-family:'Ubuntu';background-position:-720px -30px}._font_crushed{font-family:'Crushed';background-position:-960px -30px}._font_lato{font-family:'Lato';background-position:-0px -60px}._font_arvo{font-family:'Arvo';background-position:-240px -60px}._font_pt_sans_narrow{font-family:'PT Sans Narrow';background-position:-480px -60px}._font_nunito{font-family:'Nunito';background-position:-720px -60px}._font_open_sans_condensed{font-family:'Open Sans Condensed';background-position:-960px -60px}._font_crafty_girls{font-family:'Crafty Girls';background-position:-0px -90px}._font_just_me_again_down_here{font-family:'Just Me Again Down Here';background-position:-240px -90px}._font_bitter{font-family:'Bitter';background-position:-480px -90px}._font_marck_script{font-family:'Marck Script';background-position:-720px -90px}._font_cabin{font-family:'Cabin';background-position:-960px -90px}._font_dancing_script{font-family:'Dancing Script';background-position:-0px -120px}._font_francois_one{font-family:'Francois One';background-position:-240px -120px}._font_arimo{font-family:'Arimo';background-position:-480px -120px}._font_josefin_sans{font-family:'Josefin Sans';background-position:-720px -120px}._font_play{font-family:'Play';background-position:-960px -120px}._font_coming_soon{font-family:'Coming Soon';background-position:-0px -150px}._font_gochi_hand{font-family:'Gochi Hand';background-position:-240px -150px}._font_pt_serif{font-family:'PT Serif';background-position:-480px -150px}._font_anton{font-family:'Anton';background-position:-720px -150px}._font_raleway{font-family:'Raleway';background-position:-960px -150px}._font_calligraffitti{font-family:'Calligraffitti';background-position:-0px -180px}._font_nobile{font-family:'Nobile';background-position:-240px -180px}._font_cantarell{font-family:'Cantarell';background-position:-480px -180px}._font_shadows_into_light{font-family:'Shadows Into Light';background-position:-720px -180px}._font_salsa{font-family:'Salsa';background-position:-960px -180px}._font_cherry_cream_soda{font-family:'Cherry Cream Soda';background-position:-0px -210px}._font_cuprum{font-family:'Cuprum';background-position:-240px -210px}._font_tangerine{font-family:'Tangerine';background-position:-480px -210px}._font_maven_pro{font-family:'Maven Pro';background-position:-720px -210px}._font_molengo{font-family:'Molengo';background-position:-960px -210px}._font_rock_salt{font-family:'Rock Salt';background-position:-0px -240px}._font_abel{font-family:'Abel';background-position:-240px -240px}._font_reenie_beanie{font-family:'Reenie Beanie';background-position:-480px -240px}._font_pacifico{font-family:'Pacifico';background-position:-720px -240px}._font_chewy{font-family:'Chewy';background-position:-960px -240px}._font_ubuntu_condensed{font-family:'Ubuntu Condensed';background-position:-0px -270px}._font_unkempt{font-family:'Unkempt';background-position:-240px -270px}._font_sunshiney{font-family:'Sunshiney';background-position:-480px -270px}._font_luckiest_guy{font-family:'Luckiest Guy';background-position:-720px -270px}._font_amaranth{font-family:'Amaranth';background-position:-960px -270px}._font_vollkorn{font-family:'Vollkorn';background-position:-0px -300px}._font_bree_serif{font-family:'Bree Serif';background-position:-240px -300px}._font_crimson_text{font-family:'Crimson Text';background-position:-480px -300px}._font_philosopher{font-family:'Philosopher';background-position:-720px -300px}._font_condiment{font-family:'Condiment';background-position:-960px -300px}._font_asap{font-family:'Asap';background-position:-0px -330px}._font_kreon{font-family:'Kreon';background-position:-240px -330px}._font_permanent_marker{font-family:'Permanent Marker';background-position:-480px -330px}._font_walter_turncoat{font-family:'Walter Turncoat';background-position:-720px -330px}._font_rokkitt{font-family:'Rokkitt';background-position:-960px -330px}._font_josefin_slab{font-family:'Josefin Slab';background-position:-0px -360px}._font_droid_sans_mono{font-family:'Droid Sans Mono';background-position:-240px -360px}._font_homemade_apple{font-family:'Homemade Apple';background-position:-480px -360px}._font_muli{font-family:'Muli';background-position:-720px -360px}._font_architects_daughter{font-family:'Architects Daughter';background-position:-960px -360px}._font_merriweather{font-family:'Merriweather';background-position:-0px -390px}._font_mate_sc{font-family:'Mate SC';background-position:-240px -390px}._font_allerta{font-family:'Allerta';background-position:-480px -390px}._font_indie_flower{font-family:'Indie Flower';background-position:-720px -390px}._font_shadows_into_light_two{font-family:'Shadows Into Light Two';background-position:-960px -390px}._font_paytone_one{font-family:'Paytone One';background-position:-0px -420px}._font_syncopate{font-family:'Syncopate';background-position:-240px -420px}._font_copse{font-family:'Copse';background-position:-480px -420px}._font_marvel{font-family:'Marvel';background-position:-720px -420px}._font_news_cycle{font-family:'News Cycle';background-position:-960px -420px}._font_cardo{font-family:'Cardo';background-position:-0px -450px}._font_slackey{font-family:'Slackey';background-position:-240px -450px}._font_varela_round{font-family:'Varela Round';background-position:-480px -450px}._font_lobster_two{font-family:'Lobster Two';background-position:-720px -450px}._font_fontdiner_swanky{font-family:'Fontdiner Swanky';background-position:-960px -450px}._font_covered_by_your_grace{font-family:'Covered By Your Grace';background-position:-0px -480px}._font_questrial{font-family:'Questrial';background-position:-240px -480px}._font_didact_gothic{font-family:'Didact Gothic';background-position:-480px -480px}._font_pt_sans_caption{font-family:'PT Sans Caption';background-position:-720px -480px}._font_old_standard_tt{font-family:'Old Standard TT';background-position:-960px -480px}._font_carter_one{font-family:'Carter One';background-position:-0px -510px}._font_bevan{font-family:'Bevan';background-position:-240px -510px}._font_neucha{font-family:'Neucha';background-position:-480px -510px}._font_just_another_hand{font-family:'Just Another Hand';background-position:-720px -510px}._font_tinos{font-family:'Tinos';background-position:-960px -510px}._font_neuton{font-family:'Neuton';background-position:-0px -540px}._font_inconsolata{font-family:'Inconsolata';background-position:-240px -540px}._font_puritan{font-family:'Puritan';background-position:-480px -540px}._font_cabin_sketch{font-family:'Cabin Sketch';background-position:-720px -540px}._font_signika{font-family:'Signika';background-position:-960px -540px}._font_schoolbell{font-family:'Schoolbell';background-position:-0px -570px}._font_goudy_bookletter_1911{font-family:'Goudy Bookletter 1911';background-position:-240px -570px}._font_leckerli_one{font-family:'Leckerli One';background-position:-480px -570px}._font_amatic_sc{font-family:'Amatic SC';background-position:-720px -570px}._font_waiting_for_the_sunrise{font-family:'Waiting for the Sunrise';background-position:-960px -570px}._font_jura{font-family:'Jura';background-position:-0px -600px}._font_allerta_stencil{font-family:'Allerta Stencil';background-position:-240px -600px}._font_voltaire{font-family:'Voltaire';background-position:-480px -600px}._font_istok_web{font-family:'Istok Web';background-position:-720px -600px}._font_gloria_hallelujah{font-family:'Gloria Hallelujah';background-position:-960px -600px}._font_montserrat{font-family:'Montserrat';background-position:-0px -630px}._font_the_girl_next_door{font-family:'The Girl Next Door';background-position:-240px -630px}._font_short_stack{font-family:'Short Stack';background-position:-480px -630px}._font_quicksand{font-family:'Quicksand';background-position:-720px -630px}._font_bowlby_one_sc{font-family:'Bowlby One SC';background-position:-960px -630px}._font_maiden_orange{font-family:'Maiden Orange';background-position:-0px -660px}._font_comfortaa{font-family:'Comfortaa';background-position:-240px -660px}._font_orbitron{font-family:'Orbitron';background-position:-480px -660px}._font_chivo{font-family:'Chivo';background-position:-720px -660px}._font_bad_script{font-family:'Bad Script';background-position:-960px -660px}._font_pinyon_script{font-family:'Pinyon Script';background-position:-0px -690px}._font_cousine{font-family:'Cousine';background-position:-240px -690px}._font_kranky{font-family:'Kranky';background-position:-480px -690px}._font_quattrocento_sans{font-family:'Quattrocento Sans';background-position:-720px -690px}._font_kameron{font-family:'Kameron';background-position:-960px -690px}._font_brawler{font-family:'Brawler';background-position:-0px -720px}._font_varela{font-family:'Varela';background-position:-240px -720px}._font_kristi{font-family:'Kristi';background-position:-480px -720px}._font_exo{font-family:'Exo';background-position:-720px -720px}._font_love_ya_like_a_sister{font-family:'Love Ya Like A Sister';background-position:-960px -720px}._font_days_one{font-family:'Days One';background-position:-0px -750px}._font_special_elite{font-family:'Special Elite';background-position:-240px -750px}._font_passion_one{font-family:'Passion One';background-position:-480px -750px}._font_medievalsharp{font-family:'MedievalSharp';background-position:-720px -750px}._font_handlee{font-family:'Handlee';background-position:-960px -750px}._font_gruppo{font-family:'Gruppo';background-position:-0px -780px}._font_cabin_condensed{font-family:'Cabin Condensed';background-position:-240px -780px}._font_carme{font-family:'Carme';background-position:-480px -780px}._font_changa_one{font-family:'Changa One';background-position:-720px -780px}._font_michroma{font-family:'Michroma';background-position:-960px -780px}._font_mountains_of_christmas{font-family:'Mountains of Christmas';background-position:-0px -810px}._font_rancho{font-family:'Rancho';background-position:-240px -810px}._font_limelight{font-family:'Limelight';background-position:-480px -810px}._font_sorts_mill_goudy{font-family:'Sorts Mill Goudy';background-position:-720px -810px}._font_delius_unicase{font-family:'Delius Unicase';background-position:-960px -810px}._font_miltonian_tattoo{font-family:'Miltonian Tattoo';background-position:-0px -840px}._font_bentham{font-family:'Bentham';background-position:-240px -840px}._font_shanti{font-family:'Shanti';background-position:-480px -840px}._font_stardos_stencil{font-family:'Stardos Stencil';background-position:-720px -840px}._font_delius{font-family:'Delius';background-position:-960px -840px}._font_im_fell_english{font-family:'IM Fell English';background-position:-0px -870px}._font_eb_garamond{font-family:'EB Garamond';background-position:-240px -870px}._font_volkhov{font-family:'Volkhov';background-position:-480px -870px}._font_fugaz_one{font-family:'Fugaz One';background-position:-720px -870px}._font_merienda_one{font-family:'Merienda One';background-position:-960px -870px}._font_pt_serif_caption{font-family:'PT Serif Caption';background-position:-0px -900px}._font_dosis{font-family:'Dosis';background-position:-240px -900px}._font_podkova{font-family:'Podkova';background-position:-480px -900px}._font_rosario{font-family:'Rosario';background-position:-720px -900px}._font_metrophobic{font-family:'Metrophobic';background-position:-960px -900px}._font_yellowtail{font-family:'Yellowtail';background-position:-0px -930px}._font_six_caps{font-family:'Six Caps';background-position:-240px -930px}._font_corben{font-family:'Corben';background-position:-480px -930px}._font_mako{font-family:'Mako';background-position:-720px -930px}._font_nixie_one{font-family:'Nixie One';background-position:-960px -930px}._font_rochester{font-family:'Rochester';background-position:-0px -960px}._font_metamorphous{font-family:'Metamorphous';background-position:-240px -960px}._font_playfair_display{font-family:'Playfair Display';background-position:-480px -960px}._font_satisfy{font-family:'Satisfy';background-position:-720px -960px}._font_cookie{font-family:'Cookie';background-position:-960px -960px}._font_share{font-family:'Share';background-position:-0px -990px}._font_sue_ellen_francisco{font-family:'Sue Ellen Francisco';background-position:-240px -990px}._font_im_fell_english_sc{font-family:'IM Fell English SC';background-position:-480px -990px}._font_actor{font-family:'Actor';background-position:-720px -990px}._font_gudea{font-family:'Gudea';background-position:-960px -990px}._font_coustard{font-family:'Coustard';background-position:-0px -1020px}._font_quattrocento{font-family:'Quattrocento';background-position:-240px -1020px}._font_sansita_one{font-family:'Sansita One';background-position:-480px -1020px}._font_bangers{font-family:'Bangers';background-position:-720px -1020px}._font_im_fell_dw_pica{font-family:'IM Fell DW Pica';background-position:-960px -1020px}._font_alice{font-family:'Alice';background-position:-0px -1050px}._font_andika{font-family:'Andika';background-position:-240px -1050px}._font_viga{font-family:'Viga';background-position:-480px -1050px}._font_noticia_text{font-family:'Noticia Text';background-position:-720px -1050px}._font_oxygen{font-family:'Oxygen';background-position:-960px -1050px}._font_hammersmith_one{font-family:'Hammersmith One';background-position:-0px -1080px}._font_jockey_one{font-family:'Jockey One';background-position:-240px -1080px}._font_crete_round{font-family:'Crete Round';background-position:-480px -1080px}._font_nothing_you_could_do{font-family:'Nothing You Could Do';background-position:-720px -1080px}._font_geo{font-family:'Geo';background-position:-960px -1080px}._font_coda{font-family:'Coda';background-position:-0px -1110px}._font_patrick_hand{font-family:'Patrick Hand';background-position:-240px -1110px}._font_judson{font-family:'Judson';background-position:-480px -1110px}._font_patua_one{font-family:'Patua One';background-position:-720px -1110px}._font_spinnaker{font-family:'Spinnaker';background-position:-960px -1110px}._font_magra{font-family:'Magra';background-position:-0px -1140px}._font_lekton{font-family:'Lekton';background-position:-240px -1140px}._font_poly{font-family:'Poly';background-position:-480px -1140px}._font_wire_one{font-family:'Wire One';background-position:-720px -1140px}._font_annie_use_your_telescope{font-family:'Annie Use Your Telescope';background-position:-960px -1140px}._font_sancreek{font-family:'Sancreek';background-position:-0px -1170px}._font_allan{font-family:'Allan';background-position:-240px -1170px}._font_ropa_sans{font-family:'Ropa Sans';background-position:-480px -1170px}._font_alfa_slab_one{font-family:'Alfa Slab One';background-position:-720px -1170px}._font_righteous{font-family:'Righteous';background-position:-960px -1170px}._font_ultra{font-family:'Ultra';background-position:-0px -1200px}._font_damion{font-family:'Damion';background-position:-240px -1200px}._font_antic{font-family:'Antic';background-position:-480px -1200px}._font_im_fell_dw_pica_sc{font-family:'IM Fell DW Pica SC';background-position:-720px -1200px}._font_norican{font-family:'Norican';background-position:-960px -1200px}._font_ubuntu_mono{font-family:'Ubuntu Mono';background-position:-0px -1230px}._font_redressed{font-family:'Redressed';background-position:-240px -1230px}._font_pompiere{font-family:'Pompiere';background-position:-480px -1230px}._font_unifrakturmaguntia{font-family:'UnifrakturMaguntia';background-position:-720px -1230px}._font_give_you_glory{font-family:'Give You Glory';background-position:-960px -1230px}._font_anonymous_pro{font-family:'Anonymous Pro';background-position:-0px -1260px}._font_doppio_one{font-family:'Doppio One';background-position:-240px -1260px}._font_delius_swash_caps{font-family:'Delius Swash Caps';background-position:-480px -1260px}._font_snippet{font-family:'Snippet';background-position:-720px -1260px}._font_cedarville_cursive{font-family:'Cedarville Cursive';background-position:-960px -1260px}._font_federo{font-family:'Federo';background-position:-0px -1290px}._font_tienne{font-family:'Tienne';background-position:-240px -1290px}._font_artifika{font-family:'Artifika';background-position:-480px -1290px}._font_aldrich{font-family:'Aldrich';background-position:-720px -1290px}._font_la_belle_aurore{font-family:'La Belle Aurore';background-position:-960px -1290px}._font_abril_fatface{font-family:'Abril Fatface';background-position:-0px -1320px}._font_smythe{font-family:'Smythe';background-position:-240px -1320px}._font_over_the_rainbow{font-family:'Over the Rainbow';background-position:-480px -1320px}._font_aclonica{font-family:'Aclonica';background-position:-720px -1320px}._font_ruluko{font-family:'Ruluko';background-position:-960px -1320px}._font_happy_monkey{font-family:'Happy Monkey';background-position:-0px -1350px}._font_dawning_of_a_new_day{font-family:'Dawning of a New Day';background-position:-240px -1350px}._font_tenor_sans{font-family:'Tenor Sans';background-position:-480px -1350px}._font_chau_philomene_one{font-family:'Chau Philomene One';background-position:-720px -1350px}._font_aladin{font-family:'Aladin';background-position:-960px -1350px}._font_nova_round{font-family:'Nova Round';background-position:-0px -1380px}._font_telex{font-family:'Telex';background-position:-240px -1380px}._font_inder{font-family:'Inder';background-position:-480px -1380px}._font_lustria{font-family:'Lustria';background-position:-720px -1380px}._font_convergence{font-family:'Convergence';background-position:-960px -1380px}._font_contrail_one{font-family:'Contrail One';background-position:-0px -1410px}._font_berkshire_swash{font-family:'Berkshire Swash';background-position:-240px -1410px}._font_gentium_book_basic{font-family:'Gentium Book Basic';background-position:-480px -1410px}._font_im_fell_french_canon_sc{font-family:'IM Fell French Canon SC';background-position:-720px -1410px}._font_glegoo{font-family:'Glegoo';background-position:-960px -1410px}._font_loved_by_the_king{font-family:'Loved by the King';background-position:-0px -1440px}._font_candal{font-family:'Candal';background-position:-240px -1440px}._font_cambo{font-family:'Cambo';background-position:-480px -1440px}._font_caudex{font-family:'Caudex';background-position:-720px -1440px}._font_montez{font-family:'Montez';background-position:-960px -1440px}._font_prata{font-family:'Prata';background-position:-0px -1470px}._font_lusitana{font-family:'Lusitana';background-position:-240px -1470px}._font_kaushan_script{font-family:'Kaushan Script';background-position:-480px -1470px}._font_gentium_basic{font-family:'Gentium Basic';background-position:-720px -1470px}._font_vt323{font-family:'VT323';background-position:-960px -1470px}._font_expletus_sans{font-family:'Expletus Sans';background-position:-0px -1500px}._font_signika_negative{font-family:'Signika Negative';background-position:-240px -1500px}._font_adamina{font-family:'Adamina';background-position:-480px -1500px}._font_forum{font-family:'Forum';background-position:-720px -1500px}._font_im_fell_great_primer_sc{font-family:'IM Fell Great Primer SC';background-position:-960px -1500px}._font_almendra_sc{font-family:'Almendra SC';background-position:-0px -1530px}._font_mate{font-family:'Mate';background-position:-240px -1530px}._font_ovo{font-family:'Ovo';background-position:-480px -1530px}._font_baumans{font-family:'Baumans';background-position:-720px -1530px}._font_rationale{font-family:'Rationale';background-position:-960px -1530px}._font_im_fell_great_primer{font-family:'IM Fell Great Primer';background-position:-0px -1560px}._font_black_ops_one{font-family:'Black Ops One';background-position:-240px -1560px}._font_gfs_neohellenic{font-family:'GFS Neohellenic';background-position:-480px -1560px}._font_buda{font-family:'Buda';background-position:-720px -1560px}._font_unifrakturcook{font-family:'UnifrakturCook';background-position:-960px -1560px}._font_parisienne{font-family:'Parisienne';background-position:-0px -1590px}._font_vidaloka{font-family:'Vidaloka';background-position:-240px -1590px}._font_zeyada{font-family:'Zeyada';background-position:-480px -1590px}._font_league_script{font-family:'League Script';background-position:-720px -1590px}._font_hanuman{font-family:'Hanuman';background-position:-960px -1590px}._font_poiret_one{font-family:'Poiret One';background-position:-0px -1620px}._font_ruslan_display{font-family:'Ruslan Display';background-position:-240px -1620px}._font_im_fell_double_pica_sc{font-family:'IM Fell Double Pica SC';background-position:-480px -1620px}._font_kenia{font-family:'Kenia';background-position:-720px -1620px}._font_arapey{font-family:'Arapey';background-position:-960px -1620px}._font_nova_slim{font-family:'Nova Slim';background-position:-0px -1650px}._font_radley{font-family:'Radley';background-position:-240px -1650px}._font_marmelad{font-family:'Marmelad';background-position:-480px -1650px}._font_fredoka_one{font-family:'Fredoka One';background-position:-720px -1650px}._font_nova_square{font-family:'Nova Square';background-position:-960px -1650px}._font_vibur{font-family:'Vibur';background-position:-0px -1680px}._font_economica{font-family:'Economica';background-position:-240px -1680px}._font_euphoria_script{font-family:'Euphoria Script';background-position:-480px -1680px}._font_im_fell_french_canon{font-family:'IM Fell French Canon';background-position:-720px -1680px}._font_tulpen_one{font-family:'Tulpen One';background-position:-960px -1680px}._font_rammetto_one{font-family:'Rammetto One';background-position:-0px -1710px}._font_bowlby_one{font-family:'Bowlby One';background-position:-240px -1710px}._font_swanky_and_moo_moo{font-family:'Swanky and Moo Moo';background-position:-480px -1710px}._font_kelly_slab{font-family:'Kelly Slab';background-position:-720px -1710px}._font_jolly_lodger{font-family:'Jolly Lodger';background-position:-960px -1710px}._font_nova_oval{font-family:'Nova Oval';background-position:-0px -1740px}._font_holtwood_one_sc{font-family:'Holtwood One SC';background-position:-240px -1740px}._font_gravitas_one{font-family:'Gravitas One';background-position:-480px -1740px}._font_unna{font-family:'Unna';background-position:-720px -1740px}._font_nova_script{font-family:'Nova Script';background-position:-960px -1740px}._font_meddon{font-family:'Meddon';background-position:-0px -1770px}._font_piedra{font-family:'Piedra';background-position:-240px -1770px}._font_nova_flat{font-family:'Nova Flat';background-position:-480px -1770px}._font_modern_antiqua{font-family:'Modern Antiqua';background-position:-720px -1770px}._font_julee{font-family:'Julee';background-position:-960px -1770px}._font_petrona{font-family:'Petrona';background-position:-0px -1800px}._font_im_fell_double_pica{font-family:'IM Fell Double Pica';background-position:-240px -1800px}._font_esteban{font-family:'Esteban';background-position:-480px -1800px}._font_astloch{font-family:'Astloch';background-position:-720px -1800px}._font_electrolize{font-family:'Electrolize';background-position:-960px -1800px}._font_armata{font-family:'Armata';background-position:-0px -1830px}._font_squada_one{font-family:'Squada One';background-position:-240px -1830px}._font_fredericka_the_great{font-family:'Fredericka the Great';background-position:-480px -1830px}._font_coda_caption{font-family:'Coda Caption';background-position:-720px -1830px}._font_lemon{font-family:'Lemon';background-position:-960px -1830px}._font_yeseva_one{font-family:'Yeseva One';background-position:-0px -1860px}._font_alike{font-family:'Alike';background-position:-240px -1860px}._font_prociono{font-family:'Prociono';background-position:-480px -1860px}._font_nova_mono{font-family:'Nova Mono';background-position:-720px -1860px}._font_asset{font-family:'Asset';background-position:-960px -1860px}._font_numans{font-family:'Numans';background-position:-0px -1890px}._font_megrim{font-family:'Megrim';background-position:-240px -1890px}._font_gfs_didot{font-family:'GFS Didot';background-position:-480px -1890px}._font_fjord_one{font-family:'Fjord One';background-position:-720px -1890px}._font_andada{font-family:'Andada';background-position:-960px -1890px}._font_geostar{font-family:'Geostar';background-position:-0px -1920px}._font_wallpoet{font-family:'Wallpoet';background-position:-240px -1920px}._font_great_vibes{font-family:'Great Vibes';background-position:-480px -1920px}._font_ruda{font-family:'Ruda';background-position:-720px -1920px}._font_dorsa{font-family:'Dorsa';background-position:-960px -1920px}._font_monoton{font-family:'Monoton';background-position:-0px -1950px}._font_fanwood_text{font-family:'Fanwood Text';background-position:-240px -1950px}._font_irish_grover{font-family:'Irish Grover';background-position:-480px -1950px}._font_federant{font-family:'Federant';background-position:-720px -1950px}._font_italianno{font-family:'Italianno';background-position:-960px -1950px}._font_sniglet{font-family:'Sniglet';background-position:-0px -1980px}._font_aubrey{font-family:'Aubrey';background-position:-240px -1980px}._font_acme{font-family:'Acme';background-position:-480px -1980px}._font_quantico{font-family:'Quantico';background-position:-720px -1980px}._font_boogaloo{font-family:'Boogaloo';background-position:-960px -1980px}._font_linden_hill{font-family:'Linden Hill';background-position:-0px -2010px}._font_bigshot_one{font-family:'Bigshot One';background-position:-240px -2010px}._font_alike_angular{font-family:'Alike Angular';background-position:-480px -2010px}._font_pontano_sans{font-family:'Pontano Sans';background-position:-720px -2010px}._font_karla{font-family:'Karla';background-position:-960px -2010px}._font_lancelot{font-family:'Lancelot';background-position:-0px -2040px}._font_nova_cut{font-family:'Nova Cut';background-position:-240px -2040px}._font_lilita_one{font-family:'Lilita One';background-position:-480px -2040px}._font_goblin_one{font-family:'Goblin One';background-position:-720px -2040px}._font_homenaje{font-family:'Homenaje';background-position:-960px -2040px}._font_voces{font-family:'Voces';background-position:-0px -2070px}._font_vast_shadow{font-family:'Vast Shadow';background-position:-240px -2070px}._font_playball{font-family:'Playball';background-position:-480px -2070px}._font_sigmar_one{font-family:'Sigmar One';background-position:-720px -2070px}._font_miltonian{font-family:'Miltonian';background-position:-960px -2070px}._font_smokum{font-family:'Smokum';background-position:-0px -2100px}._font_monofett{font-family:'Monofett';background-position:-240px -2100px}._font_galdeano{font-family:'Galdeano';background-position:-480px -2100px}._font_chelsea_market{font-family:'Chelsea Market';background-position:-720px -2100px}._font_poller_one{font-family:'Poller One';background-position:-960px -2100px}._font_allura{font-family:'Allura';background-position:-0px -2130px}._font_imprima{font-family:'Imprima';background-position:-240px -2130px}._font_supermercado_one{font-family:'Supermercado One';background-position:-480px -2130px}._font_passero_one{font-family:'Passero One';background-position:-720px -2130px}._font_suwannaphum{font-family:'Suwannaphum';background-position:-960px -2130px}._font_atomic_age{font-family:'Atomic Age';background-position:-0px -2160px}._font_geostar_fill{font-family:'Geostar Fill';background-position:-240px -2160px}._font_overlock_sc{font-family:'Overlock SC';background-position:-480px -2160px}._font_enriqueta{font-family:'Enriqueta';background-position:-720px -2160px}._font_fresca{font-family:'Fresca';background-position:-960px -2160px}._font_sofia{font-family:'Sofia';background-position:-0px -2190px}._font_alegreya{font-family:'Alegreya';background-position:-240px -2190px}._font_russo_one{font-family:'Russo One';background-position:-480px -2190px}._font_audiowide{font-family:'Audiowide';background-position:-720px -2190px}._font_trade_winds{font-family:'Trade Winds';background-position:-960px -2190px}._font_bubblegum_sans{font-family:'Bubblegum Sans';background-position:-0px -2220px}._font_duru_sans{font-family:'Duru Sans';background-position:-240px -2220px}._font_amethysta{font-family:'Amethysta';background-position:-480px -2220px}._font_oleo_script{font-family:'Oleo Script';background-position:-720px -2220px}._font_trocchi{font-family:'Trocchi';background-position:-960px -2220px}._font_rouge_script{font-family:'Rouge Script';background-position:-0px -2250px}._font_italiana{font-family:'Italiana';background-position:-240px -2250px}._font_flamenco{font-family:'Flamenco';background-position:-480px -2250px}._font_advent_pro{font-family:'Advent Pro';background-position:-720px -2250px}._font_mr_de_haviland{font-family:'Mr De Haviland';background-position:-960px -2250px}._font_sail{font-family:'Sail';background-position:-0px -2280px}._font_antic_slab{font-family:'Antic Slab';background-position:-240px -2280px}._font_trochut{font-family:'Trochut';background-position:-480px -2280px}._font_averia_libre{font-family:'Averia Libre';background-position:-720px -2280px}._font_cantata_one{font-family:'Cantata One';background-position:-960px -2280px}._font_lovers_quarrel{font-family:'Lovers Quarrel';background-position:-0px -2310px}._font_niconne{font-family:'Niconne';background-position:-240px -2310px}._font_bilbo{font-family:'Bilbo';background-position:-480px -2310px}._font_kotta_one{font-family:'Kotta One';background-position:-720px -2310px}._font_junge{font-family:'Junge';background-position:-960px -2310px}._font_henny_penny{font-family:'Henny Penny';background-position:-0px -2340px}._font_ruthie{font-family:'Ruthie';background-position:-240px -2340px}._font_engagement{font-family:'Engagement';background-position:-480px -2340px}._font_gorditas{font-family:'Gorditas';background-position:-720px -2340px}._font_sonsie_one{font-family:'Sonsie One';background-position:-960px -2340px}._font_overlock{font-family:'Overlock';background-position:-0px -2370px}._font_londrina_solid{font-family:'Londrina Solid';background-position:-240px -2370px}._font_buenard{font-family:'Buenard';background-position:-480px -2370px}._font_basic{font-family:'Basic';background-position:-720px -2370px}._font_pt_mono{font-family:'PT Mono';background-position:-960px -2370px}._font_alegreya_sc{font-family:'Alegreya SC';background-position:-0px -2400px}._font_krona_one{font-family:'Krona One';background-position:-240px -2400px}._font_medula_one{font-family:'Medula One';background-position:-480px -2400px}._font_arizonia{font-family:'Arizonia';background-position:-720px -2400px}._font_titan_one{font-family:'Titan One';background-position:-960px -2400px}._font_cutive{font-family:'Cutive';background-position:-0px -2430px}._font_khmer{font-family:'Khmer';background-position:-240px -2430px}._font_iceberg{font-family:'Iceberg';background-position:-480px -2430px}._font_shojumaru{font-family:'Shojumaru';background-position:-720px -2430px}._font_mr_dafoe{font-family:'Mr Dafoe';background-position:-960px -2430px}._font_germania_one{font-family:'Germania One';background-position:-0px -2460px}._font_habibi{font-family:'Habibi';background-position:-240px -2460px}._font_alex_brush{font-family:'Alex Brush';background-position:-480px -2460px}._font_dynalight{font-family:'Dynalight';background-position:-720px -2460px}._font_glass_antiqua{font-family:'Glass Antiqua';background-position:-960px -2460px}._font_ledger{font-family:'Ledger';background-position:-0px -2490px}._font_rosarivo{font-family:'Rosarivo';background-position:-240px -2490px}._font_prosto_one{font-family:'Prosto One';background-position:-480px -2490px}._font_concert_one{font-family:'Concert One';background-position:-720px -2490px}._font_averia_serif_libre{font-family:'Averia Serif Libre';background-position:-960px -2490px}._font_knewave{font-family:'Knewave';background-position:-0px -2520px}._font_miniver{font-family:'Miniver';background-position:-240px -2520px}._font_averia_sans_libre{font-family:'Averia Sans Libre';background-position:-480px -2520px}._font_mystery_quest{font-family:'Mystery Quest';background-position:-720px -2520px}._font_sirin_stencil{font-family:'Sirin Stencil';background-position:-960px -2520px}._font_iceland{font-family:'Iceland';background-position:-0px -2550px}._font_trykker{font-family:'Trykker';background-position:-240px -2550px}._font_averia_gruesa_libre{font-family:'Averia Gruesa Libre';background-position:-480px -2550px}._font_macondo_swash_caps{font-family:'Macondo Swash Caps';background-position:-720px -2550px}._font_qwigley{font-family:'Qwigley';background-position:-960px -2550px}._font_yesteryear{font-family:'Yesteryear';background-position:-0px -2580px}._font_sevillana{font-family:'Sevillana';background-position:-240px -2580px}._font_stint_ultra_condensed{font-family:'Stint Ultra Condensed';background-position:-480px -2580px}._font_fondamento{font-family:'Fondamento';background-position:-720px -2580px}._font_oldenburg{font-family:'Oldenburg';background-position:-960px -2580px}._font_ribeye_marrow{font-family:'Ribeye Marrow';background-position:-0px -2610px}._font_graduate{font-family:'Graduate';background-position:-240px -2610px}._font_belleza{font-family:'Belleza';background-position:-480px -2610px}._font_average{font-family:'Average';background-position:-720px -2610px}._font_emilys_candy{font-family:'Emilys Candy';background-position:-960px -2610px}._font_simonetta{font-family:'Simonetta';background-position:-0px -2640px}._font_flavors{font-family:'Flavors';background-position:-240px -2640px}._font_asul{font-family:'Asul';background-position:-480px -2640px}._font_press_start_2p{font-family:'Press Start 2P';background-position:-720px -2640px}._font_inika{font-family:'Inika';background-position:-960px -2640px}._font_devonshire{font-family:'Devonshire';background-position:-0px -2670px}._font_nosifer{font-family:'Nosifer';background-position:-240px -2670px}._font_princess_sofia{font-family:'Princess Sofia';background-position:-480px -2670px}._font_antic_didone{font-family:'Antic Didone';background-position:-720px -2670px}._font_codystar{font-family:'Codystar';background-position:-960px -2670px}._font_creepster{font-family:'Creepster';background-position:-0px -2700px}._font_frijole{font-family:'Frijole';background-position:-240px -2700px}._font_mrs_sheppards{font-family:'Mrs Sheppards';background-position:-480px -2700px}._font_della_respira{font-family:'Della Respira';background-position:-720px -2700px}._font_bokor{font-family:'Bokor';background-position:-960px -2700px}._font_bilbo_swash_caps{font-family:'Bilbo Swash Caps';background-position:-0px -2730px}._font_belgrano{font-family:'Belgrano';background-position:-240px -2730px}._font_londrina_shadow{font-family:'Londrina Shadow';background-position:-480px -2730px}._font_seaweed_script{font-family:'Seaweed Script';background-position:-720px -2730px}._font_ribeye{font-family:'Ribeye';background-position:-960px -2730px}._font_revalia{font-family:'Revalia';background-position:-0px -2760px}._font_port_lligat_slab{font-family:'Port Lligat Slab';background-position:-240px -2760px}._font_uncial_antiqua{font-family:'Uncial Antiqua';background-position:-480px -2760px}._font_almendra{font-family:'Almendra';background-position:-720px -2760px}._font_stoke{font-family:'Stoke';background-position:-960px -2760px}._font_macondo{font-family:'Macondo';background-position:-0px -2790px}._font_felipa{font-family:'Felipa';background-position:-240px -2790px}._font_balthazar{font-family:'Balthazar';background-position:-480px -2790px}._font_cagliostro{font-family:'Cagliostro';background-position:-720px -2790px}._font_aguafina_script{font-family:'Aguafina Script';background-position:-960px -2790px}._font_caesar_dressing{font-family:'Caesar Dressing';background-position:-0px -2820px}._font_fascinate{font-family:'Fascinate';background-position:-240px -2820px}._font_jim_nightshade{font-family:'Jim Nightshade';background-position:-480px -2820px}._font_spirax{font-family:'Spirax';background-position:-720px -2820px}._font_stint_ultra_expanded{font-family:'Stint Ultra Expanded';background-position:-960px -2820px}._font_sarina{font-family:'Sarina';background-position:-0px -2850px}._font_marko_one{font-family:'Marko One';background-position:-240px -2850px}._font_ewert{font-family:'Ewert';background-position:-480px -2850px}._font_moul{font-family:'Moul';background-position:-720px -2850px}._font_unlock{font-family:'Unlock';background-position:-960px -2850px}._font_chango{font-family:'Chango';background-position:-0px -2880px}._font_wellfleet{font-family:'Wellfleet';background-position:-240px -2880px}._font_metal{font-family:'Metal';background-position:-480px -2880px}._font_moulpali{font-family:'Moulpali';background-position:-720px -2880px}._font_monsieur_la_doulaise{font-family:'Monsieur La Doulaise';background-position:-960px -2880px}._font_londrina_sketch{font-family:'Londrina Sketch';background-position:-0px -2910px}._font_herr_von_muellerhoff{font-family:'Herr Von Muellerhoff';background-position:-240px -2910px}._font_battambang{font-family:'Battambang';background-position:-480px -2910px}._font_chicle{font-family:'Chicle';background-position:-720px -2910px}._font_diplomata_sc{font-family:'Diplomata SC';background-position:-960px -2910px}._font_original_surfer{font-family:'Original Surfer';background-position:-0px -2940px}._font_spicy_rice{font-family:'Spicy Rice';background-position:-240px -2940px}._font_erica_one{font-family:'Erica One';background-position:-480px -2940px}._font_dr_sugiyama{font-family:'Dr Sugiyama';background-position:-720px -2940px}._font_ceviche_one{font-family:'Ceviche One';background-position:-960px -2940px}._font_mrs_saint_delafield{font-family:'Mrs Saint Delafield';background-position:-0px -2970px}._font_montaga{font-family:'Montaga';background-position:-240px -2970px}._font_emblema_one{font-family:'Emblema One';background-position:-480px -2970px}._font_port_lligat_sans{font-family:'Port Lligat Sans';background-position:-720px -2970px}._font_butterfly_kids{font-family:'Butterfly Kids';background-position:-960px -2970px}._font_ruge_boogie{font-family:'Ruge Boogie';background-position:-0px -3000px}._font_dangrek{font-family:'Dangrek';background-position:-240px -3000px}._font_mr_bedfort{font-family:'Mr Bedfort';background-position:-480px -3000px}._font_plaster{font-family:'Plaster';background-position:-720px -3000px}._font_angkor{font-family:'Angkor';background-position:-960px -3000px}._font_content{font-family:'Content';background-position:-0px -3030px}._font_siemreap{font-family:'Siemreap';background-position:-240px -3030px}._font_londrina_outline{font-family:'Londrina Outline';background-position:-480px -3030px}._font_diplomata{font-family:'Diplomata';background-position:-720px -3030px}._font_freehand{font-family:'Freehand';background-position:-960px -3030px}._font_miss_fajardose{font-family:'Miss Fajardose';background-position:-0px -3060px}._font_eater{font-family:'Eater';background-position:-240px -3060px}._font_arbutus{font-family:'Arbutus';background-position:-480px -3060px}._font_fascinate_inline{font-family:'Fascinate Inline';background-position:-720px -3060px}._font_taprom{font-family:'Taprom';background-position:-960px -3060px}._font_bonbon{font-family:'Bonbon';background-position:-0px -3090px}._font_chenla{font-family:'Chenla';background-position:-240px -3090px}._font_nokora{font-family:'Nokora';background-position:-480px -3090px}._font_bayon{font-family:'Bayon';background-position:-720px -3090px}._font_preahvihear{font-family:'Preahvihear';background-position:-960px -3090px}._font_odor_mean_chey{font-family:'Odor Mean Chey';background-position:-0px -3120px}._font_butcherman{font-family:'Butcherman';background-position:-240px -3120px}._font_koulen{font-family:'Koulen';background-position:-480px -3120px}
+
+
+._font_select, ._font_select_size
+{
+		width:100px;
+		display:inline-block;
+		vertical-align:middle;
+		height:25px;
+		line-height:25px;
+}
+
+._font_select_size
+{
+	width:45px;
+}
+/*
+._font_select ul
+{
+		background:#fff;
+		text-align:center;
+		vertical-align:center;
+		font-size:16px;
+		height:200px;
+		overflow-y:auto;
+		overflow-x:hidden;
+		width:275px;
+}
+*/
+._font_select option
+{
+		background-image:url('fonts_sprite.png');
+		width:240px;
+		height:20px;
+		padding-top:5px;
+		border:2px solid #eee;
+		text-indent: -3000px;   
+		background-repeat:no-repeat;
+		margin:1px; 
+		background-color:#fff;
+}
+
+._font_select option:hover
+{
+	background-color:#fff;
+	box-shadow:0 0 100px -50px #2A7FD3 inset;
+}
+
+
+.nico_status
+{
+	position:fixed;
+	top:50%;
+	left:10%;
+	width:80%;
+	
+	font-size:28px;
+	text-align:center;
+	padding:20px 0px;
+	background:#fff;
+	background:rgba(255, 255, 255, 0.8);
+	border:2px solid #ddd;
+	z-index:99999;
+	display:none;
+}
+
+
+
+
+#nico_zoom
+{
+	position:absolute;
+	margin-top:45px;
+	right:10px;
+	margin-right:20px;
+}
+
+#nico_zoom a
+{
+	width:32px;
+	height:32px;
+	display:inline-block;
+	text-indent: -3000px;   
+	background-repeat:no-repeat;
+}
+
+
+
+#nico_zoom_bottomscreen
+{
+	background-image:url('bottom_screen.png');
+}
+#nico_zoom_halfscreen
+{
+	background-image:url('half_screen.png');
+}
+#nico_zoom_fullscreen
+{
+	background-image:url('fullscreen.png');
+}

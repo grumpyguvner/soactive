@@ -1,0 +1,204 @@
+.checkout-heading a
+{
+    background:#F73E3E; 
+}
+div.ei-title h2
+{
+    color:#F73E3E;
+}
+#slideshow0 .flex-direction-nav li a
+{
+   background-color:#F73E3E; 
+   background-color:rgba(247,62,62,0.8);  
+}
+#slideshow0 .flex-direction-nav li a:hover
+{
+    background-color:#F73E3E; 
+}
+ol.flex-control-paging li a.flex-active
+{
+   background-color:#F73E3E; 
+   background-color:rgba(247,62,62,0.7);  
+}
+.slideshow .nivo-controlNav a.active
+{
+    background:#F73E3E;
+}
+#header #welcome a:hover
+{
+   color:#F73E3E; 
+}
+#cart-total:hover
+{
+    color:#F73E3E;  
+}
+a:hover
+{
+    color:#F73E3E;  
+}
+h2
+{
+   color:#F73E3E;
+}
+.product-list .compare a
+{
+    color:#F73E3E;
+}
+.product-list .wishlist a
+{
+    color:#F73E3E;
+}
+.sitemap-info a:hover
+{
+   color:#F73E3E;
+}
+.dk_options a:hover, .dk_option_current a
+{
+    background-color:#F73E3E;  
+	color:#fff;
+	text-shadow:0 1px 0 rgba(247,62,62, 0.5);
+}
+.dk_focus .dk_toggle
+{
+    box-shadow:0 0 5px #F73E3E;  
+}
+.success a
+{
+   color:#F73E3E;
+}
+.column span
+{
+   background:#F73E3E;
+}
+#powered a:hover
+{
+   color:#F73E3E;
+}
+.cart-info tbody .name a:hover
+{
+   color:#F73E3E;
+}
+.breadcrumb a:hover
+{
+   color:#F73E3E;
+}
+.product-filter .display a
+{
+    color:#F73E3E;
+}
+.product-filter .display a:hover
+{
+   color:#F73E3E;
+}
+.product-list .price-old
+{
+    color:#F73E3E;
+}
+.product-info .right > .price .price-new
+{
+    color:#F73E3E;
+}
+.htabs a
+{
+   color:#F73E3E;
+}
+#menu > div > ul > li.home:hover a
+{
+	background-color:#F73E3E;
+	background:url("../../image/home.png") no-repeat center center transparent;
+	background: url("../../image/home.png") no-repeat center center, -moz-linear-gradient(top,  #F73E3E 0%, #F75151 100%);
+	background: url("../../image/home.png") no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F73E3E), color-stop(100%,#F73E3E));
+	background: url("../../image/home.png") no-repeat center center, -webkit-linear-gradient(top,  #F73E3E 0%,#F75151 100%);
+	background: url("../../image/home.png") no-repeat center center, -o-linear-gradient(top,  #F73E3E 0%,#F75151 100%);
+	background: url("../../image/home.png") no-repeat center center, -ms-linear-gradient(top,  #F73E3E 0%,#F75151 100%);
+	background: url("../../image/home.png") no-repeat center center, linear-gradient(to bottom,  #F73E3E 0%,#F75151 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F75151', endColorstr='#F75151',GradientType=0 ), url("../image/home.png") no-repeat center center;
+}
+#menu > div > ul > li:hover > a
+{
+   border-bottom: none;
+   background-color: #F73E3E;
+   background: #F73E3E url(../images/black2_bkg.png) top left repeat-x;
+   background: -webkit-gradient(linear, left top, left bottom, from(#F73E3E), to(#F73E3E));
+   background: -webkit-linear-gradient(top, #F73E3E, #F75151);
+   background: -moz-linear-gradient(top, #F73E3E, #F75151);
+   background: -ms-linear-gradient(top, #F73E3E, #F75151);
+   background: -o-linear-gradient(top, #F73E3E, #F75151);
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   color:#fff !important;
+   text-shadow:1px 1px 1px #F73E3E;
+}
+#menu > div > ul > li > div
+{
+   border-bottom: none;
+   background-color: #F73E3E;
+   background: #F75151 url(../images/black2_bkg.png) top left repeat-x;
+   background: -webkit-gradient(linear, left top, left bottom, from(#F73E3E), to(#F73E3E));
+   background: -webkit-linear-gradient(top, #F73E3E, #F75151);
+   background: -moz-linear-gradient(top, #F73E3E, #F75151);
+   background: -ms-linear-gradient(top, #F73E3E, #F75151);
+   background: -o-linear-gradient(top, #F73E3E, #F75151);
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -moz-background-clip: padding;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+   border:1px solid #F73E3E;
+}
+.ei-slider-thumbs li.ei-slider-element
+{
+   background-color:#F73E3E !important ; 
+}
+.box-product .price-new, .product-grid .price-new
+{
+   color:#F73E3E;
+}
+.box-product .name a:hover, .product-grid .name a:hover
+{
+    color:#F73E3E;
+}
+a.button:hover, input.button:hover
+{
+   background: #f47070; /* Old browsers */
+   background: -moz-linear-gradient(top,  #f47070 1%, #f73e3e 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f47070), color-stop(100%,#f73e3e)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #f47070 1%,#f73e3e 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #f47070 1%,#f73e3e 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #f47070 1%,#f73e3e 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #f47070 1%,#f73e3e 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f47070', endColorstr='#f73e3e',GradientType=0 ); /* IE6-9 */
+   text-shadow:1px 1px 1px #F73E3E;
+   border:1px solid #F73E3E;
+   color:#fff !important;
+}
+.product-info .right input#button-cart.button
+{
+   background: #f47070; /* Old browsers */
+   background: -moz-linear-gradient(top,  #f47070 1%, #f73e3e 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f47070), color-stop(100%,#f73e3e)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #f47070 1%,#f73e3e 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #f47070 1%,#f73e3e 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #f47070 1%,#f73e3e 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #f47070 1%,#f73e3e 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f47070', endColorstr='#f73e3e',GradientType=0 ); /* IE6-9 */
+   text-shadow:1px 1px 1px #F73E3E;
+   color:#fff !important;
+   border:1px solid #F73E3E;
+}
+.box .box-content ul li:hover
+{
+    background:#F73E3E;
+	color:#fff !important;
+}

@@ -1,0 +1,125 @@
+#header #welcome a
+{
+    color:#59A80F;
+}
+ol.flex-control-paging li a:hover
+{
+   background:#59A80F;
+}
+.slideshow .nivo-directionNav a
+{
+   background-color:#59A80F;
+}
+.slideshow .nivo-controlNav a:hover
+{
+    background:#59A80F;
+}
+p a, .static a
+{
+    color:#59A80F;
+}
+.dk_toggle
+{
+    color:#59A80F;
+}
+#menu > div > ul > li.home
+{
+   background: #59a80f; /* Old browsers */
+   background: -moz-linear-gradient(top,  #59a80f 0%, #97ce3d 0%, #62a020 100%, #0f030a 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#59a80f), color-stop(0%,#97ce3d), color-stop(100%,#62a020), color-stop(100%,#0f030a)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#0f030a 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#0f030a 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#0f030a 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#0f030a 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59a80f', endColorstr='#0f030a',GradientType=0 ); /* IE6-9 */
+}
+#menu > div
+{
+   background: #59a80f; /* Old browsers */
+   background: -moz-linear-gradient(top,  #59a80f 0%, #97ce3d 0%, #62a020 100%, #97ce3d 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#59a80f), color-stop(0%,#97ce3d), color-stop(100%,#62a020), color-stop(100%,#97ce3d)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#97ce3d 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#97ce3d 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#97ce3d 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #59a80f 0%,#97ce3d 0%,#62a020 100%,#97ce3d 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59a80f', endColorstr='#97ce3d',GradientType=0 ); /* IE6-9 */
+    border-color:#59A80E;
+    border-color: #59A80E -moz-use-text-color;
+	box-shadow:0 2px 5px -3px #59A80E;
+}
+#menu > div > ul > li
+{
+    border-left:1px solid #51990E;
+}
+#menu > div > ul
+{
+    border-top:1px solid #a4d15c;
+}
+#menu > div > ul > li > a
+{
+    color:#fff;
+	text-shadow:1px 1px 1px #4F960C;
+}
+#menu > div > ul > li ul > li > a:hover
+{
+    background:#59A80F;
+	text-shadow:0 1px 1px #59A80F;
+}
+.box-product .price .price-tax, .product-grid .price .price-tax
+{
+    color:#000;
+}
+.product-filter .display a
+{
+    color:#59A80F;
+}
+a.button, input.button
+{
+   background: #59a80f; /* Old browsers */
+   background: -moz-linear-gradient(top,  #59a80f 0%, #90cc28 0%, #62a020 100%, #0f030a 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#59a80f), color-stop(0%,#90cc28), color-stop(100%,#62a020), color-stop(100%,#0f030a)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59a80f', endColorstr='#0f030a',GradientType=0 ); /* IE6-9 */
+   text-shadow:1px 1px 1px #519B0C;
+   color: #fff !important;
+}
+input.button
+{
+    border:1px solid #519B0C;
+}
+.jcarousel-skin-opencart .jcarousel-next-horizontal
+{
+    background-color:rgba(89,168,15,0.8);
+}
+.jcarousel-skin-opencart .jcarousel-prev-horizontal
+{
+    background-color:rgba(89,168,15,0.8);
+}
+.jcarousel-skin-opencart .jcarousel-next-horizontal:hover
+{
+    background-color:#59A80F;
+}
+.jcarousel-skin-opencart .jcarousel-prev-horizontal:hover
+{
+   background-color:#59A80F;
+}
+.product-info .right input.button
+{
+   background: #59a80f; /* Old browsers */
+   background: -moz-linear-gradient(top,  #59a80f 0%, #90cc28 0%, #62a020 100%, #0f030a 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#59a80f), color-stop(0%,#90cc28), color-stop(100%,#62a020), color-stop(100%,#0f030a)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  #59a80f 0%,#90cc28 0%,#62a020 100%,#0f030a 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#59a80f', endColorstr='#0f030a',GradientType=0 ); /* IE6-9 */
+   border:none;
+   text-shadow:none;
+}
+a.button, input.button
+{
+    border:1px solid #9ED54C;
+}

@@ -1,0 +1,82 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,600,700);
+
+
+#header #logo a {
+	position: absolute;
+    font-size:52px;
+	font-family: 'Yanone Kaffeesatz Light', sans-serif;
+}
+#header #welcome
+{
+   font-size:12px;
+   font-family:'Yanone Kaffeesatz Light', sans-serif;   
+}
+#header #welcome a 
+{
+   font-size:12px;
+   font-family:'Yanone Kaffeesatz Light', sans-serif;  
+}
+#header #cart .heading
+{
+   font-size:12px;
+   font-family:'Yanone Kaffeesatz Light', sans-serif;     
+}
+#menu > div {
+	font-family: 'Yanone Kaffeesatz Bold', sans-serif;
+}		
+
+#menu > ul > li > a {
+	font-size: 14px;
+	font-family: 'Yanone Kaffeesatz Bold', sans-serif;
+}
+
+
+.box .box-heading
+ {	
+	font-family: 'Yanone Kaffeesatz Bold', sans-serif;
+}
+
+.box-product .name a,
+.product-grid .name a 
+{
+    font-size:16px;
+	font-family: 'Yanone Kaffeesatz Light', sans-serif;
+}
+
+
+.product-info h1
+{
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+
+h1, .welcome {
+	font-size: 24px;
+	font-weight: normal;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+h2 {
+	font-size: 14px;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+#footer h3
+{
+   font-size:18px;
+   font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+#social_band h3
+{
+   font-size:18px;
+   font-family: 'Yanone Kaffeesatz', sans-serif;    
+}
+.product-list .name a
+{
+   font-size:22px;
+   font-family: 'Yanone Kaffeesatz', sans-serif;   	
+}
+.product-info > .right > .price > .price-p
+{
+   font-size:24px;
+   font-family: 'Yanone Kaffeesatz', sans-serif; 
+}

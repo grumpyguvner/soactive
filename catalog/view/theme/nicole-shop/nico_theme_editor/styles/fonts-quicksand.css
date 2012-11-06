@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand:200,300,400,600,700);
+
+#header #logo a {
+    font-size:52px;
+	font-family: 'Quicksand', sans-serif;
+}
+#menu > div {
+	font-family: 'Quicksand', sans-serif;
+}		
+
+
+#menu > ul > li > a {
+	font-size: 16px;
+	font-family: 'Quicksand', sans-serif;
+}
+
+
+.box .box-heading {	
+	font-family: 'Quicksand', sans-serif;
+	font-size:24px;
+}
+
+.box-product .name a,
+.product-grid .name a 
+{
+    font-size:16px;
+	font-family: 'Quicksand', sans-serif;
+}
+
+
+.product-info h1
+{
+	font-family: 'Quicksand', sans-serif;
+}
+
+
+h1, .welcome {
+	font-size: 24px;
+	font-weight: normal;
+	font-family: 'Quicksand', sans-serif;
+}
+
+h2 {
+	font-size: 14px;
+	font-family: 'Quicksand', sans-serif;
+}
+
+
+.product-info > .right > .price > .price-p
+{
+   font-size:24px;
+   font-family: 'Quicksand', sans-serif;   
+}
+.cat_heading
+{
+   font-size:25px;
+   font-family: 'Quicksand', sans-serif;
+}
