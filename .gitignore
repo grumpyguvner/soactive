@@ -4,3 +4,7 @@
 /config_*.php
 /admin/config.php
 /admin/config_*.php
+
+/catalog/view/theme/
+!/catalog/view/theme/default/
+!/catalog/view/theme/nicole-shop/
