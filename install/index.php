@@ -2,6 +2,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+define('ALLOW_UPGRADE', false);
+
 // HTTP
 define('HTTP_SERVER', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/');
 define('HTTP_OPENCART', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(rtrim(dirname($_SERVER['SCRIPT_NAME']), 'install'), '/.\\'). '/');
@@ -34,6 +36,12 @@ if (!is_file('../admin/config.php'))
 }
 
 if (filesize('../config.php') > 0) {
+    if (!ALLOW_UPGRADE)
+    {
+        header('Location: ../');
+        exit();
+    }
+    
 	$upgrade = true;
 	
 	$file = file(DIR_OPENCART . 'config.php');
