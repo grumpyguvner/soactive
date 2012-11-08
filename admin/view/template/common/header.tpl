@@ -78,6 +78,9 @@ $(document).ready(function(){
           <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
           <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+          <!--Event Calendar - Start--> 
+          <li><a href="<?php echo $event; ?>"><?php echo $text_event; ?></a></li>
+          <!--Event Calendar - End-->	
         </ul>
       </li>
       <li id="extension"><a class="top"><?php echo $text_extension; ?></a>
