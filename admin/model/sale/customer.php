@@ -1,7 +1,31 @@
 <?php
+require_once(DIR_SYSTEM . 'library/mailchimp.php');
+
 class ModelSaleCustomer extends Model {
 	public function addCustomer($data) {
       	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+      	
+        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
+        {
+            $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+            
+            $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $data['email']);
+
+            if (!$mailchimp->errorCode){
+                $newsletter = ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') ? 1 : 0;
+            }
+            
+            if ((bool)$data['newsletter'] != (bool)$newsletter)
+            {
+                if ((bool)$data['newsletter'])
+                {
+                    $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_listid'),$data['email'], array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
+                } else {
+
+                    $retval = $mailchimp->listUnsubscribe($this->config->get('newsletter_mailchimp_listid'), $data['email']);
+                }
+            }
+        }
       	
       	$customer_id = $this->db->getLastId();
       	
@@ -20,6 +44,28 @@ class ModelSaleCustomer extends Model {
 	
 	public function editCustomer($customer_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', newsletter = '" . (int)$data['newsletter'] . "', customer_group_id = '" . (int)$data['customer_group_id'] . "', status = '" . (int)$data['status'] . "' WHERE customer_id = '" . (int)$customer_id . "'");
+	
+        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
+        {
+            $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+            
+            $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $data['email']);
+
+            if (!$mailchimp->errorCode){
+                $newsletter = ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') ? 1 : 0;
+            }
+            
+            if ((bool)$data['newsletter'] != (bool)$newsletter)
+            {
+                if ((bool)$data['newsletter'])
+                {
+                    $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_listid'),$data['email'], array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
+                } else {
+
+                    $retval = $mailchimp->listUnsubscribe($this->config->get('newsletter_mailchimp_listid'), $data['email']);
+                }
+            }
+        }
 	
       	if ($data['password']) {
         	$this->db->query("UPDATE " . DB_PREFIX . "customer SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE customer_id = '" . (int)$customer_id . "'");

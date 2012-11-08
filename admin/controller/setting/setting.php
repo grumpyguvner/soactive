@@ -131,6 +131,14 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_error_log'] = $this->language->get('entry_error_log');
 		$this->data['entry_error_filename'] = $this->language->get('entry_error_filename');
 		$this->data['entry_google_analytics'] = $this->language->get('entry_google_analytics');
+		$this->data['entry_email_newsletter_subject'] = $this->language->get('entry_email_newsletter_subject');
+		$this->data['entry_email_newsletter_body'] = $this->language->get('entry_email_newsletter_body');
+		$this->data['entry_email_affiliate_subject'] = $this->language->get('entry_email_affiliate_subject');
+		$this->data['entry_email_affiliate_body'] = $this->language->get('entry_email_affiliate_body');
+		$this->data['entry_email_customer_subject'] = $this->language->get('entry_email_customer_subject');
+		$this->data['entry_email_customer_body'] = $this->language->get('entry_email_customer_body');
+		$this->data['entry_email_order_subject'] = $this->language->get('entry_email_order_subject');
+		$this->data['entry_email_order_body'] = $this->language->get('entry_email_order_body');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -143,6 +151,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_mail'] = $this->language->get('tab_mail');
 		$this->data['tab_fraud'] = $this->language->get('tab_fraud');
 		$this->data['tab_server'] = $this->language->get('tab_server');
+		$this->data['tab_email'] = $this->language->get('tab_email');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -934,6 +943,54 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_google_analytics'] = $this->request->post['config_google_analytics']; 
 		} else {
 			$this->data['config_google_analytics'] = $this->config->get('config_google_analytics');
+		}
+						
+		if (isset($this->request->post['config_email_newsletter_subject'])) {
+			$this->data['config_email_newsletter_subject'] = $this->request->post['config_email_newsletter_subject']; 
+		} else {
+			$this->data['config_email_newsletter_subject'] = $this->config->get('config_email_newsletter_subject');
+		}
+				
+		if (isset($this->request->post['config_email_newsletter_body'])) {
+			$this->data['config_email_newsletter_body'] = $this->request->post['config_email_newsletter_body']; 
+		} else {
+			$this->data['config_email_newsletter_body'] = $this->config->get('config_email_newsletter_body');
+		}
+				
+		if (isset($this->request->post['config_email_affiliate_subject'])) {
+			$this->data['config_email_affiliate_subject'] = $this->request->post['config_email_affiliate_subject']; 
+		} else {
+			$this->data['config_email_affiliate_subject'] = $this->config->get('config_email_affiliate_subject');
+		}
+				
+		if (isset($this->request->post['config_email_affiliate_body'])) {
+			$this->data['config_email_affiliate_body'] = $this->request->post['config_email_affiliate_body']; 
+		} else {
+			$this->data['config_email_affiliate_body'] = $this->config->get('config_email_affiliate_body');
+		}
+				
+		if (isset($this->request->post['config_email_customer_subject'])) {
+			$this->data['config_email_customer_subject'] = $this->request->post['config_email_customer_subject']; 
+		} else {
+			$this->data['config_email_customer_subject'] = $this->config->get('config_email_customer_subject');
+		}
+				
+		if (isset($this->request->post['config_email_customer_body'])) {
+			$this->data['config_email_customer_body'] = $this->request->post['config_email_customer_body']; 
+		} else {
+			$this->data['config_email_customer_body'] = $this->config->get('config_email_customer_body');
+		}
+				
+		if (isset($this->request->post['config_email_order_subject'])) {
+			$this->data['config_email_order_subject'] = $this->request->post['config_email_order_subject']; 
+		} else {
+			$this->data['config_email_order_subject'] = $this->config->get('config_email_order_subject');
+		}
+				
+		if (isset($this->request->post['config_email_order_body'])) {
+			$this->data['config_email_order_body'] = $this->request->post['config_email_order_body']; 
+		} else {
+			$this->data['config_email_order_body'] = $this->config->get('config_email_order_body');
 		}
 						
 		$this->template = 'setting/setting.tpl';

@@ -106,6 +106,17 @@ $_['entry_error_log']              = 'Log Errors:';
 $_['entry_error_filename']         = 'Error Log Filename:';
 $_['entry_google_analytics']       = 'Google Analytics Code:<br /><span class="help">Login to your <a onclick="window.open(\'http://www.google.com/analytics/\');"><u>Google Analytics</u></a> account and after creating your web site profile copy and paste the analytics code into this field.</span>';
 
+// Email
+$_['entry_email_newsletter_subject'] = 'Newsletter Confirmation Subject';
+$_['entry_email_newsletter_body']    = 'Newsletter Confirmation Body';
+$_['entry_email_affiliate_subject'] = 'New Affiliate Welcome Subject';
+$_['entry_email_affiliate_body']    = 'New Affiliate Welcome  Body';
+$_['entry_email_customer_subject'] = 'New Customer Welcome Subject';
+$_['entry_email_customer_body']    = 'New Customer Welcome Body';
+$_['entry_email_order_subject'] = 'Order Confirmation Subject';
+$_['entry_email_order_body']    = 'Order Confirmation Greeting Body';
+
+
 // Error
 $_['error_warning']                = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']             = 'Warning: You do not have permission to modify settings!';

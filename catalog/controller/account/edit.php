@@ -1,4 +1,6 @@
 <?php
+require_once(DIR_SYSTEM . 'library/mailchimp.php');
+
 class ControllerAccountEdit extends Controller {
 	private $error = array();
 
@@ -90,6 +92,17 @@ class ControllerAccountEdit extends Controller {
 
 		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
 			$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+            
+            if ($this->config->get('newsletter_mailchimp_enabled') && filter_var($customer_info['email'], FILTER_VALIDATE_EMAIL))
+            {
+                $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+
+                $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $customer_info['email']);
+
+                if (!$mailchimp->errorCode){
+                    $customer_info['newsletter'] = ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') ? 1 : 0;
+                }
+            } 
 		}
 
 		if (isset($this->request->post['firstname'])) {

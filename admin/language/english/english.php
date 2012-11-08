@@ -88,6 +88,7 @@ $_['tab_store']               = 'Store';
 $_['tab_special']             = 'Special';
 $_['tab_local']               = 'Local';
 $_['tab_mail']                = 'Mail';
+$_['tab_email']               = 'Emails';
 $_['tab_module']              = 'Module';
 $_['tab_order']               = 'Order Details';
 $_['tab_order_history']       = 'Order History';
