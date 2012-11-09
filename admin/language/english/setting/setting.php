@@ -68,6 +68,7 @@ $_['entry_stock_display']          = 'Display Stock:<br /><span class="help">Dis
 $_['entry_stock_warning']          = 'Show Out Of Stock Warning:<br /><span class="help">Display out of stock message on the shopping cart page if a product is out of stock but stock checkout is yes. (Warning always shows if stock checkout is no)</span>';
 $_['entry_stock_checkout']         = 'Stock Checkout:<br /><span class="help">Allow customers to still checkout if the products they are ordering are not in stock.</span>';
 $_['entry_stock_status']           = 'Out of Stock Status:<br /><span class="help">Set the default out of stock status selected in product edit.</span>';
+$_['entry_allow_affiliate']        = 'Allow Affiliates';
 $_['entry_affiliate']              = 'Affiliate Terms:<br /><span class="help">Forces people to agree to terms before an affiliate account can be created.</span>';
 $_['entry_commission']             = 'Affiliate Commission (%):<br /><span class="help">The default affiliate commission percentage.</span>';
 $_['entry_return_status']          = 'Return Status:<br /><span class="help">Set the default return status when an returns request is submitted.</span>';

@@ -36,6 +36,7 @@ class ControllerCommonFooter extends Controller {
     	$this->data['sitemap'] = $this->url->link('information/sitemap');
 		$this->data['manufacturer'] = $this->url->link('product/manufacturer');
 		$this->data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
+		$this->data['allow_affiliate'] = $this->config->get('config_allow_affiliate') ? 1 : 0;
 		$this->data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
 		$this->data['special'] = $this->url->link('product/special');
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');

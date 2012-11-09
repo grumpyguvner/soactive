@@ -93,6 +93,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_stock_warning'] = $this->language->get('entry_stock_warning');
 		$this->data['entry_stock_checkout'] = $this->language->get('entry_stock_checkout');
 		$this->data['entry_stock_status'] = $this->language->get('entry_stock_status');
+		$this->data['entry_allow_affiliate'] = $this->language->get('entry_allow_affiliate');	
 		$this->data['entry_affiliate'] = $this->language->get('entry_affiliate');	
 		$this->data['entry_commission'] = $this->language->get('entry_commission');	
 		$this->data['entry_return_status'] = $this->language->get('entry_return_status');
@@ -643,6 +644,12 @@ class ControllerSettingSetting extends Controller {
 		
 		$this->data['stock_statuses'] = $this->model_localisation_stock_status->getStockStatuses();
 
+		if (isset($this->request->post['config_allow_affiliate'])) {
+			$this->data['config_allow_affiliate'] = $this->request->post['config_allow_affiliate'];
+		} else {
+			$this->data['config_allow_affiliate'] = $this->config->get('config_allow_affiliate');		
+		}
+        
 		if (isset($this->request->post['config_affiliate_id'])) {
 			$this->data['config_affiliate_id'] = $this->request->post['config_affiliate_id'];
 		} else {
