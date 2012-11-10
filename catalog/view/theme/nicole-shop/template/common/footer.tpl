@@ -19,6 +19,19 @@ if (isset($_nico_settings['settings']['first_visit_message']) && !empty($_nico_s
 <?php } ?>
 <div id="social_band">
 	<div id="social_about">
+		<h3>Newsletter</h3>
+		<div>
+			<p><?php if (isset($_nico_settings['settings']['newsletter_text']) && !empty($_nico_settings['settings']['newsletter_text'])) echo $_nico_settings['settings']['newsletter_text']; else echo 'You can change this text from the panel settings. Theme settings > Newsletter text<br/><br/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';?></p>
+            <div id="newsletter_wrapper">
+                <form action="/index.php" method="get" id="newsletter_form" target="_blank">
+                    <input type="hidden" name="route" value="module/newsletter/callback">
+                    <input type="hidden" name="subscribe" value="1">
+                	<div class="newsletter_input">
+                    <input type="email" id="newsletter_email" name="email" placeholder="Email newsletter signup"><a class="action" href="#" onclick="$('#newsletter_form').trigger('submit');return false;">GO</a>
+                	</div>
+                </form>
+            </div>
+		</div>
 		<h3>About</h3>
 		<div>
 			<?php if (isset($_nico_settings['settings']['about_text']) && !empty($_nico_settings['settings']['about_text'])) echo $_nico_settings['settings']['about_text']; else echo 'You can change this text from the panel settings. Theme settings > About text<br/><br/>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';?>

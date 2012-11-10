@@ -25,6 +25,40 @@ $(document).ready(function() {
 			location = url;
 		}
 	});
+    
+    $('form#newsletter_form').submit(function() {
+        $('.success, .warning, .attention, .information, .error').remove();
+        
+        $.ajax({
+            url: 'index.php?ajax=1',
+            type: 'get',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(json) {
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+                if (json['success']) {
+                    $('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+
+                    $('.success').fadeIn('slow');
+
+                    $('html, body').animate({ scrollTop: 0 }, 'slow'); 
+                }	
+                
+                if (json['error']) {
+                    $('#notification').html('<div class="warning" style="display: none;">' + json['error'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+
+                    $('.warning').fadeIn('slow');
+
+                    $('html, body').animate({ scrollTop: 0 }, 'slow'); 
+                }
+            }
+        });
+      return false;
+    });
 	
 	/* Ajax Cart */
 	/*$('#cart').live('mouseover', function() {
