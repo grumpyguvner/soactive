@@ -189,6 +189,7 @@ array(
 	'Twitter profile'=> array('#twitter_profile_id ', 'twitter_profile_id', 'text'),
 	'Facebook profile id'=> array('#fb_profile_id', 'fb_profile_id', 'text'),
 	'About us'=> array('#social_about > div', 'about_text', 'textarea'),
+	'Newsletter'=> array('#social_about > div', 'newsletter_text', 'textarea'),
 	'Product page',
 	'Show related products'=> array('#product_page_related_products', 'product_page_related', 'select', array('Under product details' => 'under', 'As a tab' => 'tab', 'Under photo gallery' => 'gallery')),
 	'Misc',
