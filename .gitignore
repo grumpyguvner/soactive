@@ -4,3 +4,11 @@
 /config_*.php
 /admin/config.php
 /admin/config_*.php
+
+!index.html
+
+download
+image/cache/*.jpg
+image/cache/data/*
+system/cache
+system/logs
