@@ -53,6 +53,7 @@ class ControllerModuleFeatured extends Controller {
 					'product_id' => $product_info['product_id'],
 					'thumb'   	 => $image,
 					'name'    	 => $product_info['name'],
+					'quantity'    	 => $product_info['quantity'],
 					'price'   	 => $price,
 					'special' 	 => $special,
 					'rating'     => $rating,
