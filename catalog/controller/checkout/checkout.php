@@ -73,7 +73,7 @@ class ControllerCheckoutCheckout extends Controller {
 			'common/content_top',
 			'common/content_bottom',
 			'common/footer',
-			'common/header'	
+			'common/header',	
 		);
 				
 		$this->response->setOutput($this->render());

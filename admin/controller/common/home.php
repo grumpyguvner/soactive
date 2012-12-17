@@ -196,6 +196,7 @@ class ControllerCommonHome extends Controller {
 		$this->template = 'common/home.tpl';
 		$this->children = array(
 			'common/header',
+                        'common/newspanel',
 			'common/footer'
 		);
 				

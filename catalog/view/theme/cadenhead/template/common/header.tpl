@@ -27,7 +27,7 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/common_1.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
@@ -77,7 +77,7 @@ DD_belatedPNG.fix('#logo img');
 <div id="menu">
   <ul>
       
-      <li><a href="<?php echo $home; ?>"><img id="img_home" src="catalog/view/theme/cadenhead/image/home.png" alt="Home" /></a></li>
+      <li><a href="<?php echo $home; ?>"><img id="img_home" src="catalog/view/theme/cadenhead/image/home.png" alt="Home" style="margin-top: -10px;"/></a></li>
       <li><a href="index.php?route=information/information&information_id=7" id="wishlist-total">Whisky Tasting</a></li>
       <li><a href="index.php?route=information/information&information_id=8">Cadenheads</a></li>
       <?php foreach ($categories as $category) { ?>
@@ -92,15 +92,19 @@ DD_belatedPNG.fix('#logo img');
           <li><a href="<?php echo $category['children'][$i]['href']; ?>"><?php echo $category['children'][$i]['name']; ?></a></li>
           <?php } ?>
           <?php } ?>
+           <li><a href="index.php?route=account/voucher">Voucher Gift</a></li>
+            <li><a href="">Voucher Tasting</a></li>
         </ul>
         <?php } ?>
+         
       </div>
       <?php } ?>
     </li>
     <?php } ?>
-    <li><a href="index.php?route=information/event/events&event_id=1">Event Calendar</a></li>
+    <li><a href="index.php?route=information/event/events&event_id=2">Event Calendar</a></li>
     <li><a href="index.php?route=information/information&information_id=9">Location</a></li>
     <li><a href="index.php?route=information/contact">Contact us</a></li>
+    
   </ul>
 </div>
 <?php } ?>

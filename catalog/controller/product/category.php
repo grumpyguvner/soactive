@@ -106,8 +106,30 @@ class ControllerProductCategory extends Controller {
 									
 			$this->data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['compare'] = $this->url->link('product/compare');
+			if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters'])) ) {
+				
+				foreach(array_keys($this->request->get['att_filters']) as $filter_att) {
+				
+				$data['afilters'][$filter_att] = $this->request->get['att_filters'][$filter_att];
+				}
+
+			}
+                   	
+			if (isset($data['afilters'])) {
 			
+			$afilterURL = $data['afilters'];
+
+			}
+                        
 			$url = '';
+                        
+			if (isset($afilterURL)) {
+
+				foreach ($afilterURL as $key=>$val) {
+				$url .= '&att_filters['.$key.']=' . $val;
+				}
+			}
+			
 			
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -140,6 +162,38 @@ class ControllerProductCategory extends Controller {
 			}
 			
 			$this->data['products'] = array();
+	
+			if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+				
+				foreach(array_keys($this->request->get['att_filters']) as $filter_att) {
+				
+				$data['afilters'][$filter_att] = $this->request->get['att_filters'][$filter_att];
+				}
+
+			}
+			
+			$data['filter_category_id'] = $category_id;
+
+			$data['sort'] = $sort;
+
+			$data['order'] = $order;
+			$data['limit'] = $limit;	
+			$data['start'] = ($page - 1) * $limit;
+				
+
+			
+			
+			// start add url
+			if (isset($data['afilters'])) {
+			$afilterURL = $data['afilters'];
+			}
+		
+		
+			// end add url
+			
+			$product_total = $this->model_catalog_product->getTotalProductsAFiltered($data); 
+			$results = $this->model_catalog_product->getProductsAFiltered($data);
+			
 			
 			$data = array(
 				'filter_category_id' => $category_id, 
@@ -199,6 +253,11 @@ class ControllerProductCategory extends Controller {
 			}
 			
 			$url = '';
+                        if (isset($afilterURL)) {
+				foreach ($afilterURL as $key=>$val) {
+				$url .= '&att_filters['.$key.']=' . $val;
+				}
+			}
 	
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
@@ -263,7 +322,12 @@ class ControllerProductCategory extends Controller {
 			);
 			
 			$url = '';
-	
+                        if (isset($afilterURL)) {
+				foreach ($afilterURL as $key=>$val) {
+				$url .= '&att_filters['.$key.']=' . $val;
+				}
+			}
+                        
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}	
@@ -305,6 +369,11 @@ class ControllerProductCategory extends Controller {
 			);
 						
 			$url = '';
+                        if (isset($afilterURL)) {
+				foreach ($afilterURL as $key=>$val) {
+				$url .= '&att_filters['.$key.']=' . $val;
+				}
+			}
 	
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -351,6 +420,11 @@ class ControllerProductCategory extends Controller {
 			$this->response->setOutput($this->render());										
     	} else {
 			$url = '';
+                        if (isset($afilterURL)) {
+				foreach ($afilterURL as $key=>$val) {
+				$url .= '&att_filters['.$key.']=' . $val;
+				}
+			}
 			
 			if (isset($this->request->get['path'])) {
 				$url .= '&path=' . $this->request->get['path'];

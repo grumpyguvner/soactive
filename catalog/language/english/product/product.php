@@ -9,6 +9,7 @@ $_['text_points']       = 'Price in reward points:';
 $_['text_stock']        = 'Availability:';
 $_['text_instock']      = 'In Stock';
 $_['text_price']        = 'Price:'; 
+$_['text_special_price']= 'Our Price:';
 $_['text_tax']          = 'Ex Tax:'; 
 $_['text_discount']     = '%s or more %s';
 $_['text_option']       = 'Available Options';
@@ -37,7 +38,9 @@ $_['entry_captcha']     = 'Enter the code in the box below:';
 
 // Tabs
 $_['tab_description']   = 'Description';
-$_['tab_attribute']     = 'Specification';
+$_['tab_attribute']     = 'Delivery & Returns';
+$_['tab_attribute_size']= 'Size Guide';
+$_['tab_attribute_fabric']= 'Fabric';
 $_['tab_review']        = 'Reviews (%s)';
 $_['tab_related']       = 'Related Products'; 
 

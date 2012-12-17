@@ -55,6 +55,11 @@
                   <?php } ?>
                 </select></td>
               <td class="left"><select name="banner_module[<?php echo $module_row; ?>][position]">
+                    <?php if ($module['position'] == 'content_banner') { ?>
+                    <option value="content_banner" selected="selected"><?php echo $text_content_banner; ?></option>
+                    <?php } else { ?>
+                    <option value="content_banner"><?php echo $text_content_banner; ?></option>
+                    <?php } ?>
                   <?php if ($module['position'] == 'content_top') { ?>
                   <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
                   <?php } else { ?>
@@ -120,6 +125,7 @@ function addModule() {
 	<?php } ?>
 	html += '    </select></td>';
 	html += '    <td class="left"><select name="banner_module[' + module_row + '][position]">';
+        html += '      <option value="content_banner"><?php echo $text_content_banner; ?></option>';
 	html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
 	html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';

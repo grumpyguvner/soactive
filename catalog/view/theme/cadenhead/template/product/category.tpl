@@ -1,11 +1,16 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><div id="content_product"><?php echo $content_top; ?>
+<div id="content"><div id="content_product">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <h1><?php echo $heading_title; ?></h1>
+  <!--h1><?php echo $heading_title; ?></h1-->
+  <?php echo $content_top; ?>
+  <div class="banner_description">To emphasise the individuality of each cask Authentic Collection whiskies are bottled undiluted at their natural high maturing
+  strenght and are not subject to any artificial chemical processing. Colouring is never added to Cadenhead's Single Malts nor
+  are they subjected to any filtering that might remove natural consituents and spoil their flavours.
+  </div>
   <?php if ($thumb || $description) { ?>
   <div class="category-info">
     <?php if ($thumb) { ?>

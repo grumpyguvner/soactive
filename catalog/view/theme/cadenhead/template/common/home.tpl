@@ -2,7 +2,7 @@
 <div id="content"><div id="contentback">
     <div id="contentslide"><?php echo $content_top; ?></div></div>
     <div id="contentbottom" >
-        <div id="textbottom1"><b>Cadenhead's Whisky Shop & Tasting Room</b><br/><br/>
+        <!--div id="textbottom1"><b>Cadenhead's Whisky Shop & Tasting Room</b><br/><br/>
             Based in Chiltern Street, Marylebone, London; Cadenhead's Whisky Shop
             & Tasting Room is firmly estabilished as one of London's cask strenght
             single malt wisky suppliers.
@@ -12,7 +12,7 @@
             <br/><br/>
             Try our new service... The Cadenhead's whisky Club, a regular supply of
             exclusive whiskies at a great price.
-        </div>
+        </div-->
 <h1 style="display: none;"><?php echo $heading_title; ?></h1>
 <?php echo $content_bottom; ?></div>
 

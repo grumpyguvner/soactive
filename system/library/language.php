@@ -2,10 +2,12 @@
 class Language {
 	private $default = 'english';
 	private $directory;
+        private $theme;
 	private $data = array();
  
-	public function __construct($directory) {
+	public function __construct($directory, $theme = "default") {
 		$this->directory = $directory;
+                $this->theme = $theme;
 	}
 	
   	public function get($key) {
@@ -13,7 +15,20 @@ class Language {
   	}
 	
 	public function load($filename) {
-		$file = DIR_LANGUAGE . $this->directory . '/' . $filename . '.php';
+		
+		$file = DIR_TEMPLATE . $this->theme . "/language/" . $this->directory . '/' . $filename . '.php';
+		
+		if (file_exists($file)) {
+			$_ = array();
+	  		
+			require($file);
+		
+			$this->data = array_merge($this->data, $_);
+			
+			return $this->data;
+		}                
+
+                $file = DIR_LANGUAGE . $this->directory . '/' . $filename . '.php';
     	
 		if (file_exists($file)) {
 			$_ = array();

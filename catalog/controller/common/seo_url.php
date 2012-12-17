@@ -9,7 +9,7 @@ class ControllerCommonSeoUrl extends Controller {
 		// Decode URL
 		if (isset($this->request->get['_route_'])) {
 			$parts = explode('/', $this->request->get['_route_']);
-			
+			$route = "";
 			foreach ($parts as $part) {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "'");
 				
@@ -19,7 +19,18 @@ class ControllerCommonSeoUrl extends Controller {
 					if ($url[0] == 'product_id') {
 						$this->request->get['product_id'] = $url[1];
 					}
-					
+					//articles url
+					if ($url[0] == 'news_id') {
+						$this->request->get['news_id'] = $url[1];
+					}
+					if ($url[0] == 'ncategory_id') {
+						if (!isset($this->request->get['ncat'])) {
+							$this->request->get['ncat'] = $url[1];
+						} else {
+							$this->request->get['ncat'] .= '_' . $url[1];
+						}
+					}
+					//articles url
 					if ($url[0] == 'category_id') {
 						if (!isset($this->request->get['path'])) {
 							$this->request->get['path'] = $url[1];
@@ -34,7 +45,9 @@ class ControllerCommonSeoUrl extends Controller {
 					
 					if ($url[0] == 'information_id') {
 						$this->request->get['information_id'] = $url[1];
-					}	
+					}	else{
+				        $route = $url[0];
+			        }
 				} else {
 					$this->request->get['route'] = 'error/not_found';	
 				}
@@ -45,10 +58,16 @@ class ControllerCommonSeoUrl extends Controller {
 			} elseif (isset($this->request->get['path'])) {
 				$this->request->get['route'] = 'product/category';
 			} elseif (isset($this->request->get['manufacturer_id'])) {
-				$this->request->get['route'] = 'product/manufacturer/info';
+				$this->request->get['route'] = 'product/manufacturer/product';
 			} elseif (isset($this->request->get['information_id'])) {
 				$this->request->get['route'] = 'information/information';
-			}
+			} elseif (isset($this->request->get['news_id'])) {
+				$this->request->get['route'] = 'news/article';
+			} elseif (isset($this->request->get['ncat'])) {
+				$this->request->get['route'] = 'news/ncategory';
+			}else {
+			    $this->request->get['route'] = $route;
+		    }
 			
 			if (isset($this->request->get['route'])) {
 				return $this->forward($this->request->get['route']);
@@ -68,7 +87,7 @@ class ControllerCommonSeoUrl extends Controller {
 			
 			foreach ($data as $key => $value) {
 				if (isset($data['route'])) {
-					if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id')) {
+					if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id') || ($data['route'] == 'news/article' && $key == 'news_id')) {
 						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
 					
 						if ($query->num_rows) {
@@ -88,7 +107,27 @@ class ControllerCommonSeoUrl extends Controller {
 						}
 						
 						unset($data[$key]);
-					}
+					} elseif ($key == 'ncat') {
+						$ncategories = explode('_', $value);
+						
+						foreach ($ncategories as $ncategory) {
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'ncategory_id=" . (int)$ncategory . "'");
+					
+							if ($query->num_rows) {
+								$url .= '/' . $query->row['keyword'];
+							}							
+						}
+						
+						unset($data[$key]);
+					} elseif ($key == 'route') {
+			   $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($value) . "'");
+			
+			   if ($query->num_rows) {
+				  $url .= '/' . $query->row['keyword'];
+				  
+				  unset($data[$key]);
+			   }               
+			}
 				}
 			}
 		
@@ -100,6 +139,11 @@ class ControllerCommonSeoUrl extends Controller {
 				if ($data) {
 					foreach ($data as $key => $value) {
 						$query .= '&' . $key . '=' . $value;
+                                                if ($key == 'att_filters') {
+							foreach ($value as $kez => $valz) {
+								$query .= '&' . $key . '[' . $kez . ']=' . $valz;
+								}
+						}
 					}
 					
 					if ($query) {

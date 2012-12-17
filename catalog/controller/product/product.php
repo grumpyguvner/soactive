@@ -141,6 +141,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['text_discount'] = $this->language->get('text_discount');
 			$this->data['text_stock'] = $this->language->get('text_stock');
 			$this->data['text_price'] = $this->language->get('text_price');
+                        $this->data['text_special_price'] = $this->language->get('text_special_price');
 			$this->data['text_tax'] = $this->language->get('text_tax');
 			$this->data['text_discount'] = $this->language->get('text_discount');
 			$this->data['text_option'] = $this->language->get('text_option');
@@ -161,6 +162,10 @@ class ControllerProductProduct extends Controller {
 			$this->data['entry_captcha'] = $this->language->get('entry_captcha');
 			
 			$this->data['button_cart'] = $this->language->get('button_cart');
+                        $this->data['button_cart_pavillon'] = $this->language->get('button_cart_pavillon');
+                        $this->data['button_checkout'] = $this->language->get('button_checkout');
+                        $this->data['button_checkout_pavillon'] = $this->language->get('button_checkout_pavillon');
+                        $this->data['button_shopping_pavillon'] = $this->language->get('button_shopping_pavillon');
 			$this->data['button_wishlist'] = $this->language->get('button_wishlist');
 			$this->data['button_compare'] = $this->language->get('button_compare');			
 			$this->data['button_upload'] = $this->language->get('button_upload');
@@ -170,6 +175,8 @@ class ControllerProductProduct extends Controller {
 
 			$this->data['tab_description'] = $this->language->get('tab_description');
 			$this->data['tab_attribute'] = $this->language->get('tab_attribute');
+                        $this->data['tab_attribute_size'] = $this->language->get('tab_attribute_size');
+                        $this->data['tab_attribute_fabric'] = $this->language->get('tab_attribute_fabric');
 			$this->data['tab_review'] = sprintf($this->language->get('tab_review'), $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']));
 			$this->data['tab_related'] = $this->language->get('tab_related');
 			
@@ -179,6 +186,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['model'] = $product_info['model'];
 			$this->data['reward'] = $product_info['reward'];
 			$this->data['points'] = $product_info['points'];
+                        $this->data['stock_quantity'] = $product_info['quantity'];
 			
 			if ($product_info['quantity'] <= 0) {
 				$this->data['stock'] = $product_info['stock_status'];
@@ -297,7 +305,23 @@ class ControllerProductProduct extends Controller {
 			$this->data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
-			$this->data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
+			$attGroups = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
+                        $this->data['attribute_groups'] = array();
+                        $this->data['product_tabs'] = array();
+                        foreach ($attGroups as $attGroup){
+                            //TODO: Amend attribute groups to have a "Do not display" flag
+                            switch ($attGroup['name']){
+                                case "Menu Filters":
+                                    //ignore menu filters
+                                    break;
+                                case "Product Tabs":
+                                    foreach ($attGroup['attribute'] as $tab)
+                                        $this->data['product_tabs'][] = array('name'=>$tab['name'],'text'=>html_entity_decode($tab['text']));
+                                    break;
+                                default:
+                                    $this->data['attribute_groups'][] = $attGroup;
+                            }
+                        }
 			
 			$this->data['products'] = array();
 			
@@ -340,6 +364,48 @@ class ControllerProductProduct extends Controller {
 				);
 			}	
 			
+                        /* Customers also bought - added TF 20/07/2012 */
+			$this->data['alsoBought'] = array();
+			$results = $this->model_catalog_product->getProductCustomersAlsoBought($this->request->get['product_id']);
+			
+			foreach ($results as $result) {
+				if ($result['image']) {
+					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
+				} else {
+					$image = false;
+				}
+				
+				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+				} else {
+					$price = false;
+				}
+						
+				if ((float)$result['special']) {
+					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+				} else {
+					$special = false;
+				}
+				
+				if ($this->config->get('config_review_status')) {
+					$rating = (int)$result['rating'];
+				} else {
+					$rating = false;
+				}
+							
+				$this->data['alsoBought'][] = array(
+					'product_id' => $result['product_id'],
+					'thumb'   	 => $image,
+					'name'    	 => $result['name'],
+					'price'   	 => $price,
+					'special' 	 => $special,
+					'rating'     => $rating,
+					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
+					'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+				);
+			}
+			/* End Customers also bought - added TF 20/07/2012 */
+                        
 			$this->data['tags'] = array();
 					
 			$tags = explode(',', $product_info['tag']);

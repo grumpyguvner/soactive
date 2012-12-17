@@ -7,7 +7,7 @@ class ControllerCommonContentBottom extends Controller {
 		$this->load->model('catalog/information');
 		
 		if (isset($this->request->get['route'])) {
-			$route = (string)$this->request->get['route'];
+			$route = $this->request->get['route'];
 		} else {
 			$route = 'common/home';
 		}
@@ -26,6 +26,16 @@ class ControllerCommonContentBottom extends Controller {
 		
 		if ($route == 'information/information' && isset($this->request->get['information_id'])) {
 			$layout_id = $this->model_catalog_information->getInformationLayoutId($this->request->get['information_id']);
+		}
+		
+		if ($route == 'news/article' && isset($this->request->get['news_id'])) {
+			$layout_id = $this->model_catalog_news->getNewsLayoutId($this->request->get['news_id']);
+		}
+		
+		if ($route == 'news/ncategory' && isset($this->request->get['ncat'])) {
+			$ncat = explode('_', (string)$this->request->get['ncat']);
+				
+			$layout_id = $this->model_catalog_ncategory->getncategoryLayoutId(end($ncat));			
 		}
 		
 		if (!$layout_id) {

@@ -6,7 +6,7 @@
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
     <?php } ?>
   </div>
-  <h1><?php echo $heading_title; ?></h1>
+  <h2><?php echo $heading_title; ?></h2>
     <?php 
 if(count($available_events)>0){
 	foreach($available_events as $v){

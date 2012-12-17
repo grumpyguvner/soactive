@@ -23,6 +23,7 @@
   <?php if ($error_logs) { ?>
   <div class="warning"><?php echo $error_logs; ?></div>
   <?php } ?>
+  <?php echo $newspanel; ?> <br />
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/home.png" alt="" /> <?php echo $heading_title; ?></h1>

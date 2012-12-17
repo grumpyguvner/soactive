@@ -50,6 +50,14 @@ class ControllerCheckoutCart extends Controller {
 			$this->redirect($this->url->link('checkout/cart'));
 		}
 		
+                $this->language->load('total/advanced_coupon');
+		// Advanced Coupon    
+		if (isset($this->request->post['advanced_coupon']) && $this->validateAdvancedCoupon()) { 
+			$this->session->data['advanced_coupon'][] = $this->request->post['advanced_coupon'];	
+			$this->session->data['success'] = $this->language->get('text_advanced_coupon_success');
+			$this->redirect($this->url->link('checkout/cart'));
+		}
+                
 		// Voucher
 		if (isset($this->request->post['voucher']) && $this->validateVoucher()) { 
 			$this->session->data['voucher'] = $this->request->post['voucher'];
@@ -136,6 +144,9 @@ class ControllerCheckoutCart extends Controller {
 			$this->data['button_update'] = $this->language->get('button_update');
 			$this->data['button_remove'] = $this->language->get('button_remove');
 			$this->data['button_coupon'] = $this->language->get('button_coupon');
+                        $this->data['text_use_advanced_coupon'] = $this->language->get('text_use_advanced_coupon');
+			$this->data['entry_advanced_coupon'] = $this->language->get('entry_advanced_coupon');
+			$this->data['button_advanced_coupon'] = $this->language->get('button_coupon');
 			$this->data['button_voucher'] = $this->language->get('button_voucher');
 			$this->data['button_reward'] = $this->language->get('button_reward');
 			$this->data['button_quote'] = $this->language->get('button_quote');
@@ -274,7 +285,7 @@ class ControllerCheckoutCart extends Controller {
 			} else {
 				$this->data['coupon'] = '';
 			}
-			
+			$this->data['advanced_coupon_status'] = $this->config->get('advanced_coupon_status');
 			$this->data['voucher_status'] = $this->config->get('voucher_status');
 			
 			if (isset($this->request->post['voucher'])) {
@@ -436,7 +447,19 @@ class ControllerCheckoutCart extends Controller {
 			return false;
 		}		
 	}
-	
+	private function validateAdvancedCoupon() {
+			$this->load->model('checkout/advanced_coupon');
+				$advanced_coupon_info = $this->model_checkout_advanced_coupon->getAdvancedCoupon($this->request->post['advanced_coupon']);			
+				if (!$advanced_coupon_info) {			
+					$this->error['warning'] = $this->language->get('text_advanced_coupon_error');
+				}
+				if (!$this->error) {
+					return true;
+				} else {
+					return false;
+				}		
+			}
+                        
 	private function validateVoucher() {
 		$this->load->model('checkout/voucher');
 				

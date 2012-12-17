@@ -75,7 +75,7 @@
       </table>
     </div>
   </form>
-  <?php if ($coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
+  <?php if ($coupon_status || $advanced_coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
   <h2><?php echo $text_next; ?></h2>
   <div class="content">
     <p><?php echo $text_next_choice; ?></p>
@@ -90,6 +90,12 @@
         <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
       </tr>
       <?php } ?>
+      <?php if ($advanced_coupon_status) { ?>
+     	 		<tr class="highlight">
+        		<td><input type="radio" name="next" value="advanced_coupon" id="use_advanced_coupon" /></td>
+        		<td><label for="use_advanced_coupon"><?php echo $text_use_advanced_coupon; ?></label></td>
+      			</tr>
+      		<?php } ?>
       <?php if ($voucher_status) { ?>
       <tr class="highlight">
         <td><?php if ($next == 'voucher') { ?>
@@ -132,6 +138,15 @@
         <input type="submit" value="<?php echo $button_coupon; ?>" class="button" />
       </form>
     </div>
+      <div id="advanced_coupon" class="content" style="display: <?php echo ($next == 'advanced_coupon' ? 'block' : 'none'); ?>;">		
+			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+				<?php echo $entry_advanced_coupon; ?>&nbsp;
+				<input type="text" name="advanced_coupon" value="" />
+				<input type="hidden" name="next" value="advanced_coupon" />
+				&nbsp;
+				<input type="submit" value="<?php echo $button_advanced_coupon; ?>" class="button" />
+				</form>
+			</div>
     <div id="voucher" class="content" style="display: <?php echo ($next == 'voucher' ? 'block' : 'none'); ?>;">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <?php echo $entry_voucher; ?>&nbsp;

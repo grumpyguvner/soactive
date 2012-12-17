@@ -73,6 +73,7 @@ $_['tab_address']             = 'Address';
 $_['tab_admin']               = 'Admin';
 $_['tab_attribute']           = 'Attribute';
 $_['tab_coupon_history']      = 'Coupon History';
+$_['tab_advanced_coupon_history']= 'Advanced Coupon History';
 $_['tab_customer']            = 'Customer Details';
 $_['tab_data']                = 'Data';
 $_['tab_design']              = 'Design';

@@ -76,6 +76,8 @@ label {
 #column-left {
 	float: left;
 	width: 180px;
+        margin-left: 14px;
+        margin-right: 10px;
 }
 #column-right {
 	float: right;
@@ -84,6 +86,7 @@ label {
 #content {
 	min-height: 400px;
 	margin-bottom: 25px;
+        margin-right: 14px;
         
 }
 #content_contact {
@@ -95,8 +98,10 @@ label {
        margin: 10px;
 }
 #content_product {
-       width: 97%; 
-       margin: 10px;
+       width: 99%; 
+       margin-left: 8px;
+       margin-top: 10px;
+       margin-bottom: 10px;
 }
 #contentback{
     height: 464px;
@@ -105,7 +110,7 @@ label {
     margin: 10px 10px 10px 10px;
 }
 #contentbottom{
-    margin: 390px 10px 10px 10px;
+    margin: 360px 10px 10px 10px;
 }
 #textbottom1{
     float: left;
@@ -118,7 +123,7 @@ label {
     padding-bottom: 34px;
 }
 #contentslide{
-  padding-left: 12px;
+    
   padding-top: 322px;
   
 }
@@ -135,6 +140,7 @@ label {
 	padding-bottom: 4px;
 	position: relative;
 	z-index: 99;
+        margin-right: 15px;
 }
 #header #logo {
 	position: absolute;
@@ -301,7 +307,7 @@ label {
 	position: absolute;
 	top: 54px;
 	left: 18px;
-	width: 2980px;
+	width: 298px;
 	z-index: 15;
 }
 #header .button-search {
@@ -332,7 +338,7 @@ label {
 	top: 58px;
 	right: 0px;
 	z-index: 5;
-	width: 140px;
+	width: 146px;
 	text-align: right;
 	color: #000000;
 }
@@ -385,7 +391,7 @@ label {
 	position: relative;
 	float: left;
 	z-index: 20;
-	padding: 6px 14px 3px 0px;
+	padding: 6px 14px 1px 0px;
 }
 #menu > ul > li:hover {
         border-bottom: 4px solid #000000;
@@ -393,10 +399,10 @@ label {
 #menu > ul > li > a {
 	font-size: 13px;
 	color: #000000;
-	line-height: 14px;
+	line-height: 15px;
 	text-decoration: none;
 	display: block;
-	padding: 4px 10px 4px 10px;
+	padding: 8px 0px 1px 16px;
 	margin-bottom: 5px;
 	z-index: 6;
 	position: relative;
@@ -448,7 +454,14 @@ label {
 .breadcrumb {
 	color: #CCCCCC;
 	margin-bottom: 10px;
+        margin-left: 4px; 
 }
+
+.breadcrumb a, a b {
+    color: grey;
+    font-size: 11px;
+}
+
 .success, .warning, .attention, .information {
 	padding: 10px 10px 10px 33px;
 	margin-bottom: 15px;
@@ -465,6 +478,8 @@ label {
 	-moz-border-radius: 5px 5px 5px 5px;
 	-khtml-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
+        margin-left: 14px;
+        margin-right: 14px;
 }
 .warning {
 	background: #FFD1D1 url('../image/warning.png') 10px center no-repeat;
@@ -473,6 +488,8 @@ label {
 	-moz-border-radius: 5px 5px 5px 5px;
 	-khtml-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
+        margin-left: 14px;
+        margin-right: 14px;
 }
 .attention {
 	background: #FFF5CC url('../image/attention.png') 10px center no-repeat;
@@ -704,12 +721,13 @@ a.button:hover, input.button:hover {
 	border-radius: 7px 7px 0px 0px;
 	border-bottom: 2px solid #000000;
 	
-	padding: 8px 10px 7px 10px;
+	padding: 8px 0px 7px 0px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 14px;
 	color: #333;
+        
 }
 .box .box-content {
 	
@@ -719,6 +737,7 @@ a.button:hover, input.button:hover {
 	border-radius: 0px 0px 7px 7px;
 	
 	padding: 10px 0;
+        
 }
 /* box products */
 .box-product {
@@ -771,6 +790,7 @@ a.button:hover, input.button:hover {
 /* box category */
 .box-category {
 	margin-top: -5px;
+        margin-left: -8px;
 }
 .box-category ul {
 	list-style: none;
@@ -808,10 +828,10 @@ a.button:hover, input.button:hover {
 }
 /* content */
 #content .content {
-	padding: 10px;
+	
 	overflow: auto;
 	margin-bottom: 20px;
-	border: 1px solid #EEEEEE;
+	
 }
 #content .content .left {
 	float: left;
@@ -867,9 +887,11 @@ a.button:hover, input.button:hover {
 }
 /* product */
 .product-filter {
-	border-bottom: 1px solid #EEEEEE;
+	border-bottom: 1px solid #000000;
+        border-top: 1px solid #000000;
 	padding-bottom: 5px;
-	overflow: auto;
+        padding-top: 5px;
+	overflow: hidden;
 }
 .product-filter .display {
 	margin-right: 15px;
@@ -979,10 +1001,10 @@ a.button:hover, input.button:hover {
 	overflow: auto;
 }
 .product-grid > div {
-	width: 130px;
+	width: 170px;
 	display: inline-block;
 	vertical-align: top;
-	margin-right: 20px;
+	margin-right: 18px;
 	margin-bottom: 15px;
 }
 #column-left + #column-right + #content .product-grid > div {
@@ -994,14 +1016,15 @@ a.button:hover, input.button:hover {
 }
 .product-grid .image img {
 	padding: 3px;
-	border: 1px solid #E7E7E7;
+	
 }
 .product-grid .name a {
-	color: #38B0E3;
+	color: #000000;
 	font-weight: bold;
 	text-decoration: none;
 	display: block;
 	margin-bottom: 4px;
+        min-height: 43px;
 }
 .product-grid .description {
 	display: none;
@@ -1050,19 +1073,28 @@ a.button:hover, input.button:hover {
 .product-info {
 	overflow: auto;
 	margin-bottom: 20px;
+        width: 100%;
 }
 .product-info > .left {
 	float: left;
 	margin-right: 15px;
+        width: 23%;
 }
-.product-info > .left + .right {
-	margin-left: 265px;
+.product-info > .center {
+	float: left;
+        width: 45%;
 }
+.product-info > .right {
+	float: right;
+	margin-left: 15px;
+        width: 28%;
+}
+
 .product-info .image {
 	/*border: 1px solid #E7E7E7;*/
 	float: left;
 	margin-bottom: 20px;
-	padding: 10px;
+	
 	text-align: center;
 }
 .product-info .image-additional {
@@ -1099,7 +1131,7 @@ a.button:hover, input.button:hover {
 .product-info .price {
 	overflow: auto;
 	border-bottom: 1px solid #E7E7E7;
-	padding: 0px 5px 10px 5px;
+	padding: 0px 5px 4px 5px;
 	margin-bottom: 10px;
 	font-size: 15px;
 	font-weight: bold;
@@ -1147,9 +1179,9 @@ a.button:hover, input.button:hover {
 	cursor: pointer;
 }
 .product-info .cart {
-	border-bottom: 1px solid #E7E7E7;
+	
 	padding: 0px 5px 10px 5px;
-	margin-bottom: 20px;
+	margin-bottom: 4px;
 	color: #4D4D4D;
 	overflow: auto;
 }
@@ -1210,8 +1242,7 @@ a.button:hover, input.button:hover {
 .attribute {
 	border-collapse: collapse;
 	width: 100%;
-	border-top: 1px solid #DDDDDD;
-	border-left: 1px solid #DDDDDD;
+	
 	margin-bottom: 20px;
 }
 .attribute thead td, .attribute thead tr td:first-child {
@@ -1640,6 +1671,8 @@ a.button:hover, input.button:hover {
 	background: #ffffff;
         padding-top: 11px;
         padding-bottom: 11px;
+        margin-left: 14px;
+        margin-right: 13px;
         
 }
 div#footerlast{
@@ -1853,9 +1886,13 @@ div#textfooter2{
 #mymenu{
      
     border: 1px solid #CCCCCC;
-    background: url('../image/select.png') no-repeat right;
+    background: url(http://whisky.local/catalog/view/theme/cadenhead/image/select.png) no-repeat right;
     overflow: hidden;
     width: 66px;
     height: 32px;
     
+}
+.banner_description {
+    color: #4D4D4D;
+    margin-bottom: 16px;
 }

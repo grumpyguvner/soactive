@@ -48,17 +48,25 @@ class ControllerModuleFeatured extends Controller {
 				} else {
 					$rating = false;
 				}
+				
+				$summary = trim(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')));
+				if (strlen($summary) > 73) $summary = trim(substr($summary, 0, 70)) . '...';
+				
+				$name = trim(strip_tags(html_entity_decode($product_info['name'], ENT_QUOTES, 'UTF-8')));
+				if (strlen($name) > 21) $name = trim(substr($name, 0, 18)) . '...';
 					
 				$this->data['products'][] = array(
-					'product_id' => $product_info['product_id'],
-					'thumb'   	 => $image,
-					'name'    	 => $product_info['name'],
-					'quantity'    	 => $product_info['quantity'],
-					'price'   	 => $price,
-					'special' 	 => $special,
-					'rating'     => $rating,
-					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']),
-					'href'    	 => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+					'product_id'  => $product_info['product_id'],
+					'thumb'   	  => $image,
+					'name'    	  => $product_info['name'],
+					'shortname'    	  => htmlentities($name, ENT_QUOTES, 'UTF-8'),
+                                        'quantity'    	 => $product_info['quantity'],
+					'price'   	  => $price,
+					'special' 	  => $special,
+					'summary'     => htmlentities($summary, ENT_QUOTES, 'UTF-8'),
+					'rating'      => $rating,
+					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']),
+					'href'    	  => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
 				);
 			}
 		}

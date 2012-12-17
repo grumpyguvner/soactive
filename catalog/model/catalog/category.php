@@ -1,5 +1,29 @@
 <?php
 class ModelCatalogCategory extends Model {
+    public function getParentCategory($category_id) {
+		
+		$query = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+
+		
+
+		if ($query->num_rows) {
+
+			return $query->row['parent_id'];
+
+		} else {
+
+			return false;
+
+		}
+		
+	}
+	
+	public function getProductCategories($prodid) {
+  $query = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . $prodid . "'");
+  if($query->num_rows > 0) { return $query->rows; 
+  } else {
+  return false; }
+}
 	public function getCategory($category_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
 		
