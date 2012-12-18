@@ -213,8 +213,8 @@
                         <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
                         <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />
                     </div>
-                    &nbsp;&nbsp;<a href="<?php echo $checkout; ?>" class="button"><?php echo $button_checkout; ?></a>
-                    &nbsp;<a href="<?php echo $shopping; ?>" class="button"><?php echo $button_shopping; ?></a>
+                    &nbsp;&nbsp;<a href="<?php echo $this->url->link('checkout/cart');/*$checkout;*/ ?>" class="button"><?php echo $button_checkout; ?></a>
+                    &nbsp;<a href="<?php echo $this->url->link('common/home');/*$shopping;*/ ?>" class="button"><?php echo $button_shopping; ?></a>
                     <?php if ($minimum > 1) { ?>
                     <div class="minimum"><?php echo $text_minimum; ?></div>
                     <?php } ?>

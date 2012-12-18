@@ -7,10 +7,10 @@
   </div>
   <!--h1><?php echo $heading_title; ?></h1-->
   <?php echo $content_top; ?>
-  <div class="banner_description">To emphasise the individuality of each cask Authentic Collection whiskies are bottled undiluted at their natural high maturing
+  <!--div class="banner_description">To emphasise the individuality of each cask Authentic Collection whiskies are bottled undiluted at their natural high maturing
   strenght and are not subject to any artificial chemical processing. Colouring is never added to Cadenhead's Single Malts nor
   are they subjected to any filtering that might remove natural consituents and spoil their flavours.
-  </div>
+  </div-->
   <?php if ($thumb || $description) { ?>
   <div class="category-info">
     <?php if ($thumb) { ?>

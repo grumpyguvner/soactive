@@ -428,8 +428,11 @@ class ControllerModuleAFilters extends Controller {
 		
 		$this->data['href'] = $this->url->link('product/category', 'path=' . $path . $url);
 		
-		if (isset($big_array2)) {
-			$this->data['attributes'] = $big_array2;
+		//        if (isset($big_array2)) {
+                //            $this->data['attributes'] = $big_array2;
+                $filters = $this->model_catalog_category->getCategoryAttributes($category_id);
+                  if (isset($filters)) {
+                        $this->data['attributes'] = $filters;
 		} else {
 			$this->data['attributes'] = "";	
 		}

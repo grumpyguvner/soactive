@@ -164,8 +164,8 @@ class ControllerProductProduct extends Controller {
 			$this->data['button_cart'] = $this->language->get('button_cart');
                         $this->data['button_cart_pavillon'] = $this->language->get('button_cart_pavillon');
                         $this->data['button_checkout'] = $this->language->get('button_checkout');
-                        $this->data['button_checkout_pavillon'] = $this->language->get('button_checkout_pavillon');
-                        $this->data['button_shopping_pavillon'] = $this->language->get('button_shopping_pavillon');
+                        $this->data['button_shopping'] = $this->language->get('button_shopping');
+                        $this->data['button_checkout'] = $this->language->get('button_checkout');
 			$this->data['button_wishlist'] = $this->language->get('button_wishlist');
 			$this->data['button_compare'] = $this->language->get('button_compare');			
 			$this->data['button_upload'] = $this->language->get('button_upload');

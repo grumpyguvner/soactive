@@ -71,10 +71,10 @@ DD_belatedPNG.fix('#logo img');
     <?php foreach ($categories as $category) { ?>
     <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
       <div>
-      <?php if (isset($category['children_html']) && !$category['children_html']=="") { ?>
+      <?php if (!$category['children_html']=="") { ?>
         <?php echo $category['children_html']; ?>
       <?php } else { ?>
-        <?php if (isset($category['children'])) { ?>
+        <?php if ($category['children']) { ?>
             <?php for ($i = 0; $i < count($category['children']);) { ?>
             <div style='float: left; text-align: left;'>
                 <ul>

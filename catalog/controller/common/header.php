@@ -99,32 +99,74 @@ class ControllerCommonHeader extends Controller {
 		foreach ($categories as $category) {
 			if ($category['top']) {
 				$children_data = array();
+				$children_html = "";
 				
 				$children = $this->model_catalog_category->getCategories($category['category_id']);
-				
+                                
 				foreach ($children as $child) {
 					$data = array(
 						'filter_category_id'  => $child['category_id'],
-						'filter_sub_category' => true
-					);
-					
+						'filter_sub_category' => true	
+					);		
+						
 					$product_total = $this->model_catalog_product->getTotalProducts($data);
 									
 					$children_data[] = array(
-						'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
+//						'name'  => $child['name'] . ' (' . $product_total . ')',
+						'name'  => $child['name'],
 						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
-					);						
+					);
+//                                        $children_html .= '<li><a href="' . $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']) . '">'. $child['name'] . ' (' . $product_total . ')' . '</a></li>';
+                                        $children_html .= '<li><a href="' . $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']) . '">'. $child['name'] . '</a></li>';
 				}
+                                
+                                if (!$children_html=="")
+                                    $children_html = "<div style='min-width: 130px; padding: 5px;'><div style='float: left; text-align: left;'><ul>" . $children_html . "</ul></div></div>";
 				
+                                else {
+                                    //If no sub categories then add attribute filter
+                                    $groups = $this->model_catalog_category->getCategoryAttributes($category['category_id']);
+                                    $children_html = "";
+
+                                    foreach ($groups as $group) {
+                                        if (array_key_exists('attribute_types',$group)){
+                                            //TODO: Amend attribute groups to have a "Display on menu" flag
+                                          /*  if ($group['name']=="Menu Filters"){ */
+                                                $children_html = "";
+                                                foreach ($group['attribute_types'] as $type) {
+                                                    $children_html .= "<div style='float: left; text-align: left;'>";
+                                                    $children_html .= '<h3 style="margin: 4px 0px; border-bottom: 1px solid #7C217D;">'.$type['type_name'].'</h3>';
+                                                    $children_html .= "<ul>";
+                                                    foreach ($type['types'] as $value) {
+                                                        $children = explode(",", $value);
+                                                        foreach ($children as $child) {
+                                                            $children_html .= '<li><a href="' . $this->url->link('product/category', 'path=' . $category['category_id'] . '&att_filters['.$type['type_id'].']=' . urlencode(trim($child))) . '">'. trim($child) . '</a></li>';
+                                                        }
+                                                    }                                            
+                                                    $children_html .= "</ul>";
+                                                    $children_html .= "</div>";
+                                                }                                            
+                                           /* } */
+                                        }
+                                    }
+                                    if (!$children_html=="")
+                                        $children_html = "<div style='min-width: 260px; padding: 5px;'>" . $children_html . "</div>";
+
+                                }
+                                
+                                
 				// Level 1
 				$this->data['categories'][] = array(
 					'name'     => $category['name'],
 					'children' => $children_data,
+					'children_html' => $children_html,
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
 			}
 		}
+                                
+				
 		
 		$this->children = array(
 			'module/language',
