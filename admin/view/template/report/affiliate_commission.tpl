@@ -53,7 +53,10 @@
           <?php } ?>
         </tbody>
       </table>
-      <div class="pagination"><?php echo $pagination; ?></div>
+      <div class="pagination">
+          <div class="buttons"><a onclick="location='<?php echo $export; ?>'" class="button"><span><?php echo $button_export; ?></span></a></div>
+          <?php echo $pagination; ?>
+      </div>
     </div>
   </div>
 </div>

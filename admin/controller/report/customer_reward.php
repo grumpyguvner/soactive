@@ -124,6 +124,9 @@ class ControllerReportCustomerReward extends Controller {
 		$pagination->url = $this->url->link('report/customer_reward', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
+        
+		$this->data['button_export'] = $this->language->get('button_export');
+		$this->data['export'] = $this->url->link('report/customer_reward/download', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		
 		$this->data['filter_date_start'] = $filter_date_start;
 		$this->data['filter_date_end'] = $filter_date_end;		
@@ -135,6 +138,72 @@ class ControllerReportCustomerReward extends Controller {
 		);
 				
 		$this->response->setOutput($this->render());
+	}
+    
+    public function download() {
+		$this->load->language('report/customer_reward');
+        
+        // build column headings
+        $headings = array();
+        
+        $headings[] = $this->language->get('column_customer');
+        $headings[] = $this->language->get('column_email');
+        $headings[] = $this->language->get('column_customer_group');
+        $headings[] = $this->language->get('column_status');
+        $headings[] = $this->language->get('column_points');
+        $headings[] = $this->language->get('column_orders');
+        $headings[] = $this->language->get('column_total');
+        
+        // Get Model
+		$this->load->model('report/customer');
+        
+        if (isset($this->request->get['filter_date_start'])) {
+			$filter_date_start = $this->request->get['filter_date_start'];
+		} else {
+			$filter_date_start = '';
+		}
+
+		if (isset($this->request->get['filter_date_end'])) {
+			$filter_date_end = $this->request->get['filter_date_end'];
+		} else {
+			$filter_date_end = '';
+		}
+        
+		$data = array(
+			'filter_date_start'	     => $filter_date_start, 
+			'filter_date_end'	     => $filter_date_end
+		);
+        
+		$results = $this->model_report_customer->getRewardPoints($data);
+		
+        $data = array();
+		foreach ($results as $rownum => $result) {
+			$data[$rownum][] = $result['customer'];
+			$data[$rownum][] = $result['email'];
+			$data[$rownum][] = $result['customer_group'];
+			$data[$rownum][] = ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'));
+			$data[$rownum][] = $result['points'];
+			$data[$rownum][] = $result['orders'];
+			$data[$rownum][] = $this->currency->format($result['total'], $this->config->get('config_currency'));
+		}
+        
+        // create data formats per column
+        $settings = array();
+        
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'price';
+        
+        // load excel model
+		$this->load->model('report/export');
+        // send to excel builder and return spreadsheet
+        $this->model_report_export->download('report_customer_reward', 'Customer Reward Report', $data, $headings, $settings);
+        
+		exit;
 	}
 }
 ?>

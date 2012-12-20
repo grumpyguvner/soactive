@@ -22,9 +22,9 @@
   </div>
   <?php } ?>
   <?php if ($categories) { ?>
-  <h2><?php echo $text_refine; ?></h2>
-  <div class="category-list">
-    <?php if (count($categories) <= 5) { ?>
+  <!--h2><?php /*echo $text_refine; */?></h2-->
+  <!--div class="category-list">
+    <?php /* if (count($categories) <= 5) { ?>
     <ul>
       <?php foreach ($categories as $category) { ?>
       <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
@@ -41,8 +41,8 @@
       <?php } ?>
     </ul>
     <?php } ?>
-    <?php } ?>
-  </div>
+    <?php }*/ ?>
+  </div-->
   <?php } ?>
   <?php if ($products) { ?>
   <div class="product-filter">

@@ -17,8 +17,8 @@
       <table class="list">
         <thead>
           <tr>
-            <td class="left"><?php echo $column_name; ?></td>
             <td class="left"><?php echo $column_model; ?></td>
+            <td class="left"><?php echo $column_name; ?></td>
             <td class="right"><?php echo $column_viewed; ?></td>
             <td class="right"><?php echo $column_percent; ?></td>
           </tr>
@@ -27,8 +27,8 @@
           <?php if ($products) { ?>
           <?php foreach ($products as $product) { ?>
           <tr>
-            <td class="left"><?php echo $product['name']; ?></td>
             <td class="left"><?php echo $product['model']; ?></td>
+            <td class="left"><?php echo $product['name']; ?></td>
             <td class="right"><?php echo $product['viewed']; ?></td>
             <td class="right"><?php echo $product['percent']; ?></td>
           </tr>
@@ -40,7 +40,10 @@
           <?php } ?>
         </tbody>
       </table>
-      <div class="pagination"><?php echo $pagination; ?></div>
+      <div class="pagination">
+          <div class="buttons"><a onclick="location='<?php echo $export; ?>'" class="button"><span><?php echo $button_export; ?></span></a></div>
+          <?php echo $pagination; ?>
+      </div>
     </div>
   </div>
 </div>

@@ -170,6 +170,9 @@ class ControllerReportSaleShipping extends Controller {
 		$pagination->url = $this->url->link('report/sale_shipping', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
+        
+		$this->data['button_export'] = $this->language->get('button_export');
+		$this->data['export'] = $this->url->link('report/sale_shipping/download', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		
 		$this->data['filter_date_start'] = $filter_date_start;
 		$this->data['filter_date_end'] = $filter_date_end;		
@@ -183,6 +186,80 @@ class ControllerReportSaleShipping extends Controller {
 		);
 				
 		$this->response->setOutput($this->render());
+	}
+    
+    public function download() {
+		$this->load->language('report/sale_shipping');
+        
+        // build column headings
+        $headings = array();
+        
+        $headings[] = $this->language->get('column_date_start');
+        $headings[] = $this->language->get('column_date_end');
+        $headings[] = $this->language->get('column_title');
+        $headings[] = $this->language->get('column_orders');
+        $headings[] = $this->language->get('column_total');
+        
+        // Get Model
+		$this->load->model('report/sale');
+        
+		if (isset($this->request->get['filter_date_start'])) {
+			$filter_date_start = $this->request->get['filter_date_start'];
+		} else {
+			$filter_date_start = '';
+		}
+
+		if (isset($this->request->get['filter_date_end'])) {
+			$filter_date_end = $this->request->get['filter_date_end'];
+		} else {
+			$filter_date_end = '';
+		}
+		
+		if (isset($this->request->get['filter_group'])) {
+			$filter_group = $this->request->get['filter_group'];
+		} else {
+			$filter_group = 'week';
+		}
+		
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$filter_order_status_id = $this->request->get['filter_order_status_id'];
+		} else {
+			$filter_order_status_id = 0;
+		}	
+        
+		$data = array(
+			'filter_date_start'	     => $filter_date_start, 
+			'filter_date_end'	     => $filter_date_end, 
+			'filter_group'           => $filter_group,
+			'filter_order_status_id' => $filter_order_status_id
+		);
+        
+		$results = $this->model_report_sale->getShipping($data);
+		
+        $data = array();
+		foreach ($results as $rownum => $result) {
+            $data[$rownum][] = date($this->language->get('date_format_short'), strtotime($result['date_start']));
+			$data[$rownum][] = date($this->language->get('date_format_short'), strtotime($result['date_end']));
+			$data[$rownum][] = $result['title'];
+			$data[$rownum][] = $result['orders'];
+			$data[$rownum][] = $this->currency->format($result['total'], $this->config->get('config_currency'));
+		}
+        
+        // create data formats per column
+        $settings = array();
+        
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'price';
+        
+        // load excel model
+		$this->load->model('report/export');
+        // send to excel builder and return spreadsheet
+        $this->model_report_export->download('report_sale_shipping', 'Sale Shipping Report', $data, $headings, $settings);
+        
+		exit;
 	}
 }
 ?>

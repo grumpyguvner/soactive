@@ -8,13 +8,13 @@ class ControllerReportSaleOrder extends Controller {
 		if (isset($this->request->get['filter_date_start'])) {
 			$filter_date_start = $this->request->get['filter_date_start'];
 		} else {
-			$filter_date_start = date('Y-m-d', strtotime(date('Y') . '-' . date('m') . '-01'));
+			$filter_date_start = '';
 		}
 
 		if (isset($this->request->get['filter_date_end'])) {
 			$filter_date_end = $this->request->get['filter_date_end'];
 		} else {
-			$filter_date_end = date('Y-m-d');
+			$filter_date_end = '';
 		}
 		
 		if (isset($this->request->get['filter_group'])) {
@@ -172,6 +172,9 @@ class ControllerReportSaleOrder extends Controller {
 		$pagination->url = $this->url->link('report/sale_order', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();		
+        
+		$this->data['button_export'] = $this->language->get('button_export');
+		$this->data['export'] = $this->url->link('report/sale_order/download', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$this->data['filter_date_start'] = $filter_date_start;
 		$this->data['filter_date_end'] = $filter_date_end;		
@@ -185,6 +188,83 @@ class ControllerReportSaleOrder extends Controller {
 		);
 				
 		$this->response->setOutput($this->render());
+	}
+    
+    public function download() {
+		$this->load->language('report/sale_order');
+        
+        // build column headings
+        $headings = array();
+        
+        $headings[] = $this->language->get('column_date_start');
+        $headings[] = $this->language->get('column_date_end');
+        $headings[] = $this->language->get('column_orders');
+        $headings[] = $this->language->get('column_products');
+        $headings[] = $this->language->get('column_tax');
+        $headings[] = $this->language->get('column_total');
+        
+        // Get Model
+		$this->load->model('report/sale');
+        
+		if (isset($this->request->get['filter_date_start'])) {
+			$filter_date_start = $this->request->get['filter_date_start'];
+		} else {
+			$filter_date_start = '';
+		}
+
+		if (isset($this->request->get['filter_date_end'])) {
+			$filter_date_end = $this->request->get['filter_date_end'];
+		} else {
+			$filter_date_end = '';
+		}
+		
+		if (isset($this->request->get['filter_group'])) {
+			$filter_group = $this->request->get['filter_group'];
+		} else {
+			$filter_group = 'week';
+		}
+		
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$filter_order_status_id = $this->request->get['filter_order_status_id'];
+		} else {
+			$filter_order_status_id = 0;
+		}	
+        
+		$data = array(
+			'filter_date_start'	     => $filter_date_start, 
+			'filter_date_end'	     => $filter_date_end, 
+			'filter_group'           => $filter_group,
+			'filter_order_status_id' => $filter_order_status_id
+		);
+        
+		$results = $this->model_report_sale->getOrders($data);
+		
+        $data = array();
+		foreach ($results as $rownum => $result) {
+            $data[$rownum][] = date($this->language->get('date_format_short'), strtotime($result['date_start']));
+			$data[$rownum][] = date($this->language->get('date_format_short'), strtotime($result['date_end']));
+			$data[$rownum][] = $result['orders'];
+			$data[$rownum][] = $result['products'];
+			$data[$rownum][] = $this->currency->format($result['tax'], $this->config->get('config_currency'));
+			$data[$rownum][] = $this->currency->format($result['total'], $this->config->get('config_currency'));
+		}
+        
+        // create data formats per column
+        $settings = array();
+        
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'price';
+        $settings[] = 'price';
+        
+        // load excel model
+		$this->load->model('report/export');
+        // send to excel builder and return spreadsheet
+        $this->model_report_export->download('report_sale_orders', 'Sale Orders Report', $data, $headings, $settings);
+        
+		exit;
 	}
 }
 ?>

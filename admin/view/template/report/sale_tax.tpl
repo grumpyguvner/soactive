@@ -68,7 +68,10 @@
           <?php } ?>
         </tbody>
       </table>
-      <div class="pagination"><?php echo $pagination; ?></div>
+      <div class="pagination">
+          <div class="buttons"><a onclick="location='<?php echo $export; ?>'" class="button"><span><?php echo $button_export; ?></span></a></div>
+          <?php echo $pagination; ?>
+      </div>
     </div>
   </div>
 </div>
@@ -96,7 +99,7 @@ function filter() {
 	
 	var filter_order_status_id = $('select[name=\'filter_order_status_id\']').attr('value');
 	
-	if (filter_order_status_id != 0) {
+	if (filter_order_status_id) {
 		url += '&filter_order_status_id=' + encodeURIComponent(filter_order_status_id);
 	}	
 

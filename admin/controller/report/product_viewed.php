@@ -71,6 +71,9 @@ class ControllerReportProductViewed extends Controller {
 		$this->data['column_percent'] = $this->language->get('column_percent');
 		
 		$this->data['button_reset'] = $this->language->get('button_reset');
+        
+		$this->data['button_export'] = $this->language->get('Export');
+		$this->data['export'] = $this->url->link('report/product_viewed/download', 'token=' . $this->session->data['token'], 'SSL');
 
 		$url = '';		
 				
@@ -116,6 +119,57 @@ class ControllerReportProductViewed extends Controller {
 		$this->session->data['success'] = $this->language->get('text_success');
 		
 		$this->redirect($this->url->link('report/product_viewed', 'token=' . $this->session->data['token'], 'SSL'));
+	}
+    
+	public function download() {
+		$this->load->language('report/product_viewed');
+        
+        // Get Model
+		$this->load->model('report/product');
+        
+        // build column headings
+        $headings = array();
+        
+        $headings[] = $this->language->get('column_model');
+        $headings[] = $this->language->get('column_name');
+        $headings[] = $this->language->get('column_viewed');
+        $headings[] = $this->language->get('column_percent');
+        
+        /// retrieve and build data for excel - taking in account for variable sizes that not all products have
+        $product_viewed_total = $this->model_report_product->getTotalProductsViewed(); 
+		
+		$product_views_total = $this->model_report_product->getTotalProductViews(); 
+        
+        $results = $this->model_report_product->getProductsViewed();
+        
+		$data = array();
+		foreach ($results as $rownum => $result) {
+			if ($result['viewed']) {
+				$percent = round($result['viewed'] / $product_views_total * 100, 2);
+			} else {
+				$percent = 0;
+			}
+					
+			$data[$rownum][] = $result['name'];
+			$data[$rownum][] = $result['model'];
+			$data[$rownum][] = $result['viewed'];
+			$data[$rownum][] = $percent . '%';
+		}
+        
+        // create data formats per column
+        $settings = array();
+        
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        
+        // load excel model
+		$this->load->model('report/export');
+        // send to excel builder and return spreadsheet
+        $this->model_report_export->download('report_product_viewed', 'Products Viewed Report', $data, $headings, $settings);
+        
+		exit;
 	}
 }
 ?>

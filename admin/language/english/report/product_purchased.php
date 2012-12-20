@@ -4,6 +4,7 @@ $_['heading_title']     = 'Products Purchased Report';
 
 // Text
 $_['text_all_status']   = 'All Statuses';
+$_['text_all_group']    = 'All Groups';
 
 // Column
 $_['column_date_start'] = 'Date Start';
@@ -17,4 +18,7 @@ $_['column_total']      = 'Total';
 $_['entry_date_start']  = 'Date Start:';
 $_['entry_date_end']    = 'Date End:';
 $_['entry_status']      = 'Order Status:';
+$_['entry_group']       = 'Customer Group:';
+
+$_['button_export']     = 'Export';
 ?>

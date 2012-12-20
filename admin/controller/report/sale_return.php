@@ -167,6 +167,9 @@ class ControllerReportSaleReturn extends Controller {
 		$pagination->url = $this->url->link('report/sale_return', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
+        
+		$this->data['button_export'] = $this->language->get('button_export');
+		$this->data['export'] = $this->url->link('report/sale_return/download', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		
 		$this->data['filter_date_start'] = $filter_date_start;
 		$this->data['filter_date_end'] = $filter_date_end;		
@@ -180,6 +183,74 @@ class ControllerReportSaleReturn extends Controller {
 		);
 				
 		$this->response->setOutput($this->render());
+	}
+    
+    public function download() {
+		$this->load->language('report/sale_return');
+        
+        // build column headings
+        $headings = array();
+        
+        $headings[] = $this->language->get('column_date_start');
+        $headings[] = $this->language->get('column_date_end');
+        $headings[] = $this->language->get('column_returns');
+        
+        // Get Model
+		$this->load->model('report/return');
+        
+		if (isset($this->request->get['filter_date_start'])) {
+			$filter_date_start = $this->request->get['filter_date_start'];
+		} else {
+			$filter_date_start = '';
+		}
+
+		if (isset($this->request->get['filter_date_end'])) {
+			$filter_date_end = $this->request->get['filter_date_end'];
+		} else {
+			$filter_date_end = '';
+		}
+		
+		if (isset($this->request->get['filter_group'])) {
+			$filter_group = $this->request->get['filter_group'];
+		} else {
+			$filter_group = 'week';
+		}
+		
+		if (isset($this->request->get['filter_return_status_id'])) {
+			$filter_return_status_id = $this->request->get['filter_return_status_id'];
+		} else {
+			$filter_return_status_id = 0;
+		}	
+        
+		$data = array(
+			'filter_date_start'	      => $filter_date_start, 
+			'filter_date_end'	      => $filter_date_end, 
+			'filter_group'            => $filter_group,
+			'filter_return_status_id' => $filter_return_status_id
+		);
+        
+		$results = $this->model_report_return->getReturns($data);
+		
+        $data = array();
+		foreach ($results as $rownum => $result) {
+            $data[$rownum][] = date($this->language->get('date_format_short'), strtotime($result['date_start']));
+			$data[$rownum][] = date($this->language->get('date_format_short'), strtotime($result['date_end']));
+			$data[$rownum][] = $result['returns'];
+		}
+        
+        // create data formats per column
+        $settings = array();
+        
+        $settings[] = 'text';
+        $settings[] = 'text';
+        $settings[] = 'text';
+        
+        // load excel model
+		$this->load->model('report/export');
+        // send to excel builder and return spreadsheet
+        $this->model_report_export->download('report_sale_returns', 'Sale Returns Report', $data, $headings, $settings);
+        
+		exit;
 	}
 }
 ?>

@@ -49,13 +49,16 @@
           <?php } ?>
         </tbody>
       </table>
-      <div class="pagination"><?php echo $pagination; ?></div>
+      <div class="pagination">
+          <div class="buttons"><a onclick="location='<?php echo $export; ?>'" class="button"><span><?php echo $button_export; ?></span></a></div>
+          <?php echo $pagination; ?>
+      </div>
     </div>
   </div>
 </div>
 <script type="text/javascript"><!--
 function filter() {
-	url = 'index.php?route=report/sale_order&token=<?php echo $token; ?>';
+	url = 'index.php?route=report/sale_coupon&token=<?php echo $token; ?>';
 	
 	var filter_date_start = $('input[name=\'filter_date_start\']').attr('value');
 	

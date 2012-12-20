@@ -555,3 +555,12 @@ table.form > tbody > tr > td {
 	position: relative;
 	top: 3px;
 }
+.pagination .buttons{
+        float: right;
+        padding-left: 10px;
+}
+.list tbody td:not(.cke_top){
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 0 5px;
+    vertical-align: middle;
+}
