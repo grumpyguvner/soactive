@@ -17,6 +17,7 @@
 	<div id="tabs" class="htabs">
       <a href="#tab-module">Modules</a>
       <a href="#tab-mailchimp">MailChimp</a>
+      <a href="#tab-mailcampaign">MailCampaign</a>
       <a href="#tab-email">Email List</a>
     </div>
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -191,7 +192,7 @@
             ?>
             </select>
           </td>
-        </tr>
+        </tr-->
         <?php
         } else {
         ?>
@@ -246,6 +247,128 @@
         </tr>
       </table>
 	  </div>
+        <!----------------- Start tab Campaign ----------------------->
+        <div id="tab-mailcampaign">
+	  <table class="form">
+  	    <tr>
+          <td><?php echo $mailcampaign_enabled; ?></td>
+          <td><?php if ($newsletter_mailcampaign_enabled) { ?>
+                <input type="radio" name="newsletter_mailcampaign_enabled" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_enabled" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="newsletter_mailcampaign_enabled" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_enabled" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $mailcampaign_apikey; ?></td>
+          <td>
+            <input type="text" name="newsletter_mailcampaign_apikey" value="<?php echo $newsletter_mailcampaign_apikey; ?>" size="50" />
+          </td>
+        </tr>
+        <?php 
+        if (is_array($newsletter_mailcampaign_lists))
+        {
+        ?>
+        <tr>
+          <td><?php echo $mailcampaign_lists; ?></td>
+          <td>
+            <select name="newsletter_mailcampaign_listid">
+            <?php
+            foreach ($newsletter_mailcampaign_lists as $listid => $listname)
+            {
+              echo '<option value="'.$listid.'"'.($listid == $newsletter_mailcampaign_listid ? ' selected="selected"' : '').'>'.$listname.'</option>';
+            }
+            ?>
+            </select>
+          </td>
+        </tr>
+        <?php
+        } else {
+        ?>
+        <tr>
+          <td><?php echo $mailcampaign_listid; ?></td>
+          <td><input type="text" name="newsletter_mailcampaign_listid" value="<?php echo $newsletter_mailcampaign_listid; ?>" size="10" /></td>
+        </tr>
+        <?php
+        } // end if
+        ?>
+        <?php 
+        if (is_array($newsletter_mailcampaign_clients))
+        {
+        ?>
+        <tr>
+          <td><?php echo $mailcampaign_client_id; ?></td>
+          <td>
+            <select name="newsletter_mailcampaign_client_id">
+            <?php
+            foreach ($newsletter_mailcampaign_clients as $ctlistid => $listname)
+            {
+              echo '<option value="'.$ctlistid.'"'.($ctlistid == $newsletter_mailcampaign_client_id ? ' selected="selected"' : '').'>'.$listname.'</option>';
+            }
+            ?>
+            </select>
+          </td>
+        </tr>
+        <?php
+        } else {
+        ?>
+        <tr>
+          <td><?php echo $mailcampaign_client_id; ?></td>
+          <td><input type="text" name="newsletter_mailcampaign_client_id" value="<?php echo $newsletter_mailcampaign_client_id; ?>" size="10" /></td>
+        </tr>
+        <?php
+        } // end if
+        ?>
+        <!--tr>
+          <td><?php /* echo $mailcampaign_double_optin; ?></td>
+          <td><?php if ($newsletter_mailcampaign_double_optin) { ?>
+                <input type="radio" name="newsletter_mailcampaign_double_optin" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_double_optin" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="newsletter_mailcampaign_double_optin" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_double_optin" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } */?></td>
+        </tr-->
+        <!--tr>
+          <td><?php /* echo $mailcampaign_update_existing; ?></td>
+          <td><?php if ($newsletter_mailcampaign_update_existing) { ?>
+                <input type="radio" name="newsletter_mailcampaign_update_existing" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_update_existing" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="newsletter_mailcampaign_update_existing" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_update_existing" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $mailcampaign_send_welcome; ?></td>
+          <td><?php if ($newsletter_mailcampaign_send_welcome) { ?>
+                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } */?></td>
+          </tr-->
+      </table>
+	  </div>
+        <!------------------- End tab Campaign ------------------------>
     </form>
   </div>
 </div>

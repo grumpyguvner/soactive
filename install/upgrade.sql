@@ -254,7 +254,7 @@ ALTER TABLE `oc_user` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT ''
 ALTER TABLE `oc_user` MODIFY `password` varchar(40) NOT NULL;
 ALTER TABLE `oc_user` MODIFY `ip` varchar(40) NOT NULL;
 
-CREATE TABLE IF NOT EXISTS `advanced_coupon` (
+CREATE TABLE IF NOT EXISTS `oc_advanced_coupon` (
   `advanced_coupon_id` int(11) NOT NULL auto_increment,
   `name` varchar(64) NOT NULL,
   `code` varchar(32) NOT NULL,
@@ -267,12 +267,12 @@ CREATE TABLE IF NOT EXISTS `advanced_coupon` (
   UNIQUE KEY `name` (`code`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
-INSERT INTO `advanced_coupon` VALUES(2, '$10 Off', 'GET10', 'a:21:{s:4:"type";s:1:"F";s:8:"discount";s:2:"10";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"0";s:12:"quantity_buy";s:1:"0";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2012-08-16', 0, '2012-06-04');
-INSERT INTO `advanced_coupon` VALUES(3, '10% Off', 'GET10P', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:2:"10";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"0";s:12:"quantity_buy";s:1:"0";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2012-11-29', 0, '2012-06-04');
-INSERT INTO `advanced_coupon` VALUES(4, 'Buy One Get One Free', 'BOGOF', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:3:"100";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"1";s:12:"quantity_buy";s:1:"1";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2013-02-21', 0, '2012-06-04');
-INSERT INTO `advanced_coupon` VALUES(6, 'Buy Two Get One Free ', 'BTGOF', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:3:"100";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"1";s:12:"quantity_buy";s:1:"2";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2013-05-29', 0, '2012-06-04');
+INSERT INTO `oc_advanced_coupon` VALUES(2, '$10 Off', 'GET10', 'a:21:{s:4:"type";s:1:"F";s:8:"discount";s:2:"10";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"0";s:12:"quantity_buy";s:1:"0";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2012-08-16', 0, '2012-06-04');
+INSERT INTO `oc_advanced_coupon` VALUES(3, '10% Off', 'GET10P', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:2:"10";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"0";s:12:"quantity_buy";s:1:"0";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2012-11-29', 0, '2012-06-04');
+INSERT INTO `oc_advanced_coupon` VALUES(4, 'Buy One Get One Free', 'BOGOF', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:3:"100";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"1";s:12:"quantity_buy";s:1:"1";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2013-02-21', 0, '2012-06-04');
+INSERT INTO `oc_advanced_coupon` VALUES(6, 'Buy Two Get One Free ', 'BTGOF', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:3:"100";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"1";s:12:"quantity_buy";s:1:"2";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2013-05-29', 0, '2012-06-04');
 
-CREATE TABLE IF NOT EXISTS `advanced_coupon_history` (
+CREATE TABLE IF NOT EXISTS `oc_advanced_coupon_history` (
   `advanced_coupon_history_id` int(11) NOT NULL auto_increment,
   `advanced_coupon_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
@@ -281,3 +281,99 @@ CREATE TABLE IF NOT EXISTS `advanced_coupon_history` (
   `date_added` datetime NOT NULL,
   PRIMARY KEY  (`advanced_coupon_history_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `oc_ncategory` (
+  `ncategory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `top` tinyint(1) NOT NULL,
+  `column` int(3) NOT NULL,
+  `sort_order` int(3) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`ncategory_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=59 ;
+
+CREATE TABLE IF NOT EXISTS `oc_ncategory_description` (
+  `ncategory_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` text COLLATE utf8_bin NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
+  `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`ncategory_id`,`language_id`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS `oc_ncategory_to_layout` (
+  `ncategory_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`ncategory_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS `oc_ncategory_to_store` (
+  `ncategory_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`ncategory_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS `oc_ncomments` (
+  `ncomment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `news_id` int(11) NOT NULL,
+  `author` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `text` text COLLATE utf8_bin NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`ncomment_id`),
+  KEY `news_id` (`news_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=37 ;
+
+CREATE TABLE IF NOT EXISTS `oc_news` (
+  `news_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(1) NOT NULL DEFAULT '0',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `acom` int(1) NOT NULL DEFAULT '0',
+  `date_added` datetime DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`news_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+CREATE TABLE IF NOT EXISTS `oc_news_description` (
+  `news_id` int(11) NOT NULL DEFAULT '0',
+  `language_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `meta_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `meta_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`news_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `oc_news_related` (
+  `news_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY (`news_id`,`product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS `oc_news_to_layout` (
+  `news_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `layout_id` int(11) NOT NULL,
+  PRIMARY KEY (`news_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS `oc_news_to_ncategory` (
+  `news_id` int(11) NOT NULL,
+  `ncategory_id` int(11) NOT NULL,
+  PRIMARY KEY (`news_id`,`ncategory_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS `oc_news_to_store` (
+  `news_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`news_id`,`store_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DELETE FROM `preffix_url_alias` WHERE `query` = "news/headlines";
+INSERT INTO `preffix_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');

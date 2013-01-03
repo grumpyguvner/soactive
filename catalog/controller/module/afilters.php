@@ -54,7 +54,7 @@ class ControllerModuleAFilters extends Controller {
 
    	    				'text'      => $category_info['name'],
 
-						'href'      => $this->url->link('product/category', 'path=' . $path),
+					'href'      => $this->url->link('product/category', 'path=' . $path),
 
         				'separator' => $this->language->get('text_separator')
 

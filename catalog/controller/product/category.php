@@ -37,7 +37,7 @@ class ControllerProductCategory extends Controller {
 
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
+		'href'      => $this->url->link('common/home'),
        		'separator' => false
    		);	
 			
@@ -106,7 +106,10 @@ class ControllerProductCategory extends Controller {
 									
 			$this->data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
 			$this->data['compare'] = $this->url->link('product/compare');
-			if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters'])) ) {
+			
+                        $url = '';
+            // ------------- start add attributes filters module --------------------            
+                        if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters'])) ) {
 				
 				foreach(array_keys($this->request->get['att_filters']) as $filter_att) {
 				
@@ -121,7 +124,7 @@ class ControllerProductCategory extends Controller {
 
 			}
                         
-			$url = '';
+			
                         
 			if (isset($afilterURL)) {
 
@@ -129,7 +132,7 @@ class ControllerProductCategory extends Controller {
 				$url .= '&att_filters['.$key.']=' . $val;
 				}
 			}
-			
+            // ------------- end start add attributes filters module --------------------
 			
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -160,7 +163,7 @@ class ControllerProductCategory extends Controller {
 					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
 				);
 			}
-			
+			// ------------------ start add attributes filters module - replace -----------------
 			$this->data['products'] = array();
 	
 			if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
@@ -193,8 +196,9 @@ class ControllerProductCategory extends Controller {
 			
 			$product_total = $this->model_catalog_product->getTotalProductsAFiltered($data); 
 			$results = $this->model_catalog_product->getProductsAFiltered($data);
-			
-			
+	
+                // - --------------------------  replaced ------------------------------------
+		/*      $this->data['products'] = array();
 			$data = array(
 				'filter_category_id' => $category_id, 
 				'sort'               => $sort,
@@ -205,7 +209,8 @@ class ControllerProductCategory extends Controller {
 					
 			$product_total = $this->model_catalog_product->getTotalProducts($data); 
 			
-			$results = $this->model_catalog_product->getProducts($data);
+			$results = $this->model_catalog_product->getProducts($data); */
+               // --------------------------- end replaced		------------------------
 			
 			foreach ($results as $result) {
 				if ($result['image']) {

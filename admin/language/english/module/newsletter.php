@@ -48,10 +48,29 @@ $_['mailchimp_double_optin']     = 'Double Opt-in:';
 $_['mailchimp_update_existing']  = 'Update Existing Record:';
 $_['mailchimp_send_welcome']     = 'Send Welcome Email:';
 
-// Error
+// Mailcampaign
+$_['mailcampaign_enabled']          = 'Enable MailCampaign:';
+$_['mailcampaign_apikey']           = 'API Key:'; 
+$_['mailcampaign_listid']           = 'List ID:';
+$_['mailcampaign_client_id']        = 'Client ID:';
+$_['mailcampaign_lists']            = 'List:';
+$_['mailcampaign_double_optin']     = 'Double Opt-in:';
+$_['mailcampaign_update_existing']  = 'Update Existing Record:';
+$_['mailcampaign_send_welcome']     = 'Send Welcome Email:';
+
+// Error MailChimp
 $_['error_permission']    = 'Warning: You do not have permission to modify this module!';
 $_['error_title']   	  = 'You must enter a title for all languages!';
 $_['error_newsletter_mailchimp_apikey']   	  = 'You must provide a valid MailChimp API Key to enable MailChimp.';
 $_['error_newsletter_mailchimp_listid']   	  = 'You must provide a valid MailChimp List to enable MailChimp.';
 $_['error_newsletter_override']   	  = 'Warning: You are using an external Mailing API. This Email List is not in use.';
+
+// Error Mailcampaign
+$_['error_permission']    = 'Warning: You do not have permission to modify this module!';
+$_['error_title']   	  = 'You must enter a title for all languages!';
+$_['error_newsletter_mailcampaign_apikey']   	  = 'You must provide a valid MailCampaign API Key to enable MailCampaign.';
+$_['error_newsletter_mailcampaign_lists']   	  = 'You must provide a valid MailCampaign List to enable MailCampaign.';
+$_['error_newsletter_mailcampaign_clients']   	  = 'You must provide a valid MailCampaign Client to enable MailCampaign.';
+$_['error_newsletter_override']   	  = 'Warning: You are using an external Mailing API. This Email List is not in use.';
+
 ?>

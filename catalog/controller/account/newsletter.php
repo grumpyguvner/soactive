@@ -1,5 +1,6 @@
 <?php 
 require_once(DIR_SYSTEM . 'library/mailchimp.php');
+require_once(DIR_SYSTEM . 'library/csrest_clients.php');
 
 class ControllerAccountNewsletter extends Controller {  
 	public function index() {
@@ -13,7 +14,7 @@ class ControllerAccountNewsletter extends Controller {
     	
 		$this->document->setTitle($this->language->get('heading_title'));
 				
-		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') { 
 			$this->load->model('account/customer');
 			
 			$this->model_account_customer->editNewsletter($this->request->post['newsletter']);
@@ -55,19 +56,45 @@ class ControllerAccountNewsletter extends Controller {
 
     	$this->data['action'] = $this->url->link('account/newsletter', '', 'SSL');
 		
-		$this->data['newsletter'] = $this->customer->getNewsletter();
-        
-        if (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
+        $flag = false;
+        //------------------------- Start Mailcampaign ----------------------------------
+         if (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailcampaign_enabled'))
+        {
+            $mailcampaign = new CS_REST_Clients($this->config->get('newsletter_mailcampaign_client_id'), $this->config->get('newsletter_mailcampaign_apikey'));
+            $email_address = $this->customer->getEmail();
+            $result = $mailcampaign->get_lists_for_email($email_address);
+            
+            if ($result->was_successful()){
+                foreach ($result->response as $list){
+                    if ($list->ListID == $this->config->get('newsletter_mailcampaign_listid') && $list->SubscriberState == 'Active')
+                    { 
+                        $flag = true;
+                    }
+                }
+            }
+        }
+        //------------------------- End Mailcampaign ------------------------------------
+        elseif (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
         {
             $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
             
             $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $this->customer->getEmail());
 
             if (!$mailchimp->errorCode){
-                $this->data['newsletter'] = ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') ? 1 : 0;
+                if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') $flag = true;
             }
+        }else {
+            		$this->data['newsletter'] = $this->customer->getNewsletter();
+
         }
+
+        $this->data['newsletter'] = $flag;
 		
+  //           if ($flag !== FALSE) {
+  //              return $flag;
+  //          }
+            
+        
 		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/newsletter.tpl')) {
