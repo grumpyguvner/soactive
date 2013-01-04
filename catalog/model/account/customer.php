@@ -12,15 +12,40 @@ class ModelAccountCustomer extends Model {
 		$this->load->model('account/customer_group');
 		
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
-        
-                $this->load->model('account/newsletter');
-                    if ($data['newsletter'] == 1)
-                    {
-                        $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname']);   
-                    } else {
-                        $this->model_account_newsletter->unsubscribe($data['email']);
-                    }
-                
+        //------------------------ Start Mailcampaign -----------------------------
+                if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailcampaign_enabled'))
+                {
+                    $this->load->model('account/newsletter');
+                        if ($data['newsletter'] == 1)
+                        {
+                            $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname']);   
+                        } else {
+                            $this->model_account_newsletter->unsubscribe($data['email']);
+                        }
+                }
+         //---------------------- End Mailcampaign ------------------------------           
+                    
+         elseif (filter_var($data['email'], FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
+        {
+            $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+            
+            $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $data['email']);
+
+            if (!$mailchimp->errorCode){
+                $newsletter = ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') ? 1 : 0;
+            }
+            
+            if ((bool)$data['newsletter'] != (bool)$newsletter)
+            {
+                if ($data['newsletter'])
+                {
+                    $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_listid'),$data['email'], array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
+                } else {
+
+                    $retval = $mailchimp->listUnsubscribe($this->config->get('newsletter_mailchimp_listid'), $data['email']);
+                }
+            }
+        }       
         
       	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
       	
@@ -91,14 +116,40 @@ class ModelAccountCustomer extends Model {
 
 	public function editNewsletter($newsletter) {
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter = '" . (int)$newsletter . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
-        
-            $this->load->model('account/newsletter');
-            if ($newsletter == 1)
+        //---------------------- Start Mailcampaign --------------------------------------
+            if (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailcampaign_enabled'))
+            {
+                $this->load->model('account/newsletter');
+                if ($newsletter == 1)
                     {
                         $this->model_account_newsletter->subscribe($this->customer->getEmail(), $this->customer->getFirstName(), $this->customer->getLastName());   
                     } else {
                         $this->model_account_newsletter->unsubscribe($this->customer->getEmail());
                     }
+            }
+         //---------------------- End Mailcampaign --------------------------------------
+                    
+           elseif (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
+        {
+            $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+            
+            $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $this->customer->getEmail());
+
+            if (!$mailchimp->errorCode){
+                $newsletterExists = ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') ? 1 : 0;
+            }
+            
+            if ((bool)$newsletter != (bool)$newsletterExists)
+            {
+                if ((bool)$newsletter)
+                {
+                    $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_listid'),$this->customer->getEmail(), array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
+                } else {
+
+                    $retval = $mailchimp->listUnsubscribe($this->config->get('newsletter_mailchimp_listid'), $this->customer->getEmail());
+                }
+            }
+        }
         
 	}
 					
