@@ -21,7 +21,7 @@ class ControllerInformationContact extends Controller {
 	  		$mail->setSender($this->request->post['name']);
 	  		$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
 	  		$mail->setText(strip_tags(html_entity_decode($this->request->post['enquiry'], ENT_QUOTES, 'UTF-8')));
-      		$mail->send();
+                        $mail->send();
 
 	  		$this->redirect($this->url->link('information/contact/success'));
     	}
@@ -36,18 +36,21 @@ class ControllerInformationContact extends Controller {
 
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('information/contact'),
+                'href'      => $this->url->link('information/contact'),
         	'separator' => $this->language->get('text_separator')
       	);	
-			
+	$this->data['text_designed'] = $this->language->get('text_designed');	
     	$this->data['heading_title'] = $this->language->get('heading_title');
-
+        $this->data['text_contactinfo'] = $this->language->get('text_contactinfo');
+        $this->data['text_titlecontact'] = $this->language->get('text_titlecontact');
     	$this->data['text_location'] = $this->language->get('text_location');
-		$this->data['text_contact'] = $this->language->get('text_contact');
-		$this->data['text_address'] = $this->language->get('text_address');
+        $this->data['text_contact'] = $this->language->get('text_contact');
+	$this->data['text_address'] = $this->language->get('text_address');
     	$this->data['text_telephone'] = $this->language->get('text_telephone');
     	$this->data['text_fax'] = $this->language->get('text_fax');
-
+        $this->data['text_linecontact'] = $this->language->get('text_linecontact');
+        $this->data['text_email'] = $this->language->get('text_email');
+        
     	$this->data['entry_name'] = $this->language->get('entry_name');
     	$this->data['entry_email'] = $this->language->get('entry_email');
     	$this->data['entry_enquiry'] = $this->language->get('entry_enquiry');
@@ -79,11 +82,12 @@ class ControllerInformationContact extends Controller {
 
     	$this->data['button_continue'] = $this->language->get('button_continue');
     
-		$this->data['action'] = $this->url->link('information/contact');
-		$this->data['store'] = $this->config->get('config_name');
+	$this->data['action'] = $this->url->link('information/contact');
+	$this->data['store'] = $this->config->get('config_name');
     	$this->data['address'] = nl2br($this->config->get('config_address'));
     	$this->data['telephone'] = $this->config->get('config_telephone');
     	$this->data['fax'] = $this->config->get('config_fax');
+        $this->data['email'] = $this->config->get('config_email');
     	
 		if (isset($this->request->post['name'])) {
 			$this->data['name'] = $this->request->post['name'];
@@ -149,7 +153,7 @@ class ControllerInformationContact extends Controller {
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
     	$this->data['text_message'] = $this->language->get('text_message');
-
+        
     	$this->data['button_continue'] = $this->language->get('button_continue');
 
     	$this->data['continue'] = $this->url->link('common/home');

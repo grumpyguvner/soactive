@@ -54,6 +54,7 @@ $_['entry_stock_checkout']         = 'Stock Checkout:<br /><span class="help">Al
 $_['entry_logo']                   = 'Store Logo:';
 $_['entry_icon']                   = 'Icon:<br /><span class="help">The icon should be a PNG that is 16px x 16px.</span>';
 $_['entry_image_category']         = 'Category Image Size:';
+$_['entry_image_information']      = 'Information Image Size:';
 $_['entry_image_thumb']            = 'Product Image Thumb Size:';
 $_['entry_image_popup']            = 'Product Image Popup Size:';
 $_['entry_image_product']          = 'Product Image List Size:';
@@ -80,6 +81,7 @@ $_['error_image_thumb']            = 'Product Image Thumb Size dimensions requir
 $_['error_image_popup']            = 'Product Image Popup Size dimensions required!';
 $_['error_image_product']          = 'Product List Size dimensions required!';
 $_['error_image_category']         = 'Category List Size dimensions required!';
+$_['error_image_information']      = 'Information List Size dimensions required!';
 $_['error_image_additional']       = 'Additional Product Image Size dimensions required!';
 $_['error_image_related']          = 'Related Product Image Size dimensions required!';
 $_['error_image_compare']          = 'Compare Image Size dimensions required!';

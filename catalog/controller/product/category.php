@@ -92,6 +92,7 @@ class ControllerProductCategory extends Controller {
 			$this->data['text_grid'] = $this->language->get('text_grid');
 			$this->data['text_sort'] = $this->language->get('text_sort');
 			$this->data['text_limit'] = $this->language->get('text_limit');
+                        $this->data['text_designed'] = $this->language->get('text_designed');
 					
 			$this->data['button_cart'] = $this->language->get('button_cart');
 			$this->data['button_wishlist'] = $this->language->get('button_wishlist');
@@ -400,7 +401,26 @@ class ControllerProductCategory extends Controller {
 			$pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
 		
 			$this->data['pagination'] = $pagination->render();
+                        
+                        /************************ Added Antonio 06/02/2013 ************************/
+                        $pagination1 = new Pagination_Sealskinz();
+			$pagination1->total = $product_total;
+			$pagination1->page = $page;
+			$pagination1->limit = $limit;
+			$pagination1->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
 		
+			$this->data['pagination1'] = $pagination1->render();
+                        
+                        $pagination2 = new InfoPage();
+			$pagination2->total = $product_total;
+			$pagination2->page = $page;
+			$pagination2->limit = $limit;
+			$pagination2->text = $this->language->get('text_pagination');
+			$pagination2->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
+		
+			$this->data['pagination2'] = $pagination2->render();
+                        /************************ Added Antonio 06/02/2013 ************************/
+                        
 			$this->data['sort'] = $sort;
 			$this->data['order'] = $order;
 			$this->data['limit'] = $limit;

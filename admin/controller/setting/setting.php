@@ -100,6 +100,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
 		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
+                $this->data['entry_image_information'] = $this->language->get('entry_image_information');
 		$this->data['entry_image_thumb'] = $this->language->get('entry_image_thumb');
 		$this->data['entry_image_popup'] = $this->language->get('entry_image_popup');
 		$this->data['entry_image_product'] = $this->language->get('entry_image_product');
@@ -219,7 +220,13 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['error_image_category'] = '';
 		}
-				
+                
+		if (isset($this->error['image_information'])) {
+			$this->data['error_image_information'] = $this->error['image_information'];
+		} else {
+			$this->data['error_image_information'] = '';
+		}	
+                
  		if (isset($this->error['image_thumb'])) {
 			$this->data['error_image_thumb'] = $this->error['image_thumb'];
 		} else {
@@ -713,6 +720,18 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_image_category_height'] = $this->config->get('config_image_category_height');
 		}
+                
+                if (isset($this->request->post['config_image_information_width'])) {
+			$this->data['config_image_information_width'] = $this->request->post['config_image_information_width'];
+		} else {
+			$this->data['config_image_information_width'] = $this->config->get('config_image_information_width');
+		}
+		
+		if (isset($this->request->post['config_image_information_height'])) {
+			$this->data['config_image_information_height'] = $this->request->post['config_image_information_height'];
+		} else {
+			$this->data['config_image_information_height'] = $this->config->get('config_image_information_height');
+		}
 				
 		if (isset($this->request->post['config_image_thumb_width'])) {
 			$this->data['config_image_thumb_width'] = $this->request->post['config_image_thumb_width'];
@@ -1053,7 +1072,11 @@ class ControllerSettingSetting extends Controller {
 		if (!$this->request->post['config_image_category_width'] || !$this->request->post['config_image_category_height']) {
 			$this->error['image_category'] = $this->language->get('error_image_category');
 		} 
-				
+		
+                if (!$this->request->post['config_image_information_width'] || !$this->request->post['config_image_information_height']) {
+			$this->error['image_information'] = $this->language->get('error_image_information');
+		}
+                
 		if (!$this->request->post['config_image_thumb_width'] || !$this->request->post['config_image_thumb_height']) {
 			$this->error['image_thumb'] = $this->language->get('error_image_thumb');
 		}	

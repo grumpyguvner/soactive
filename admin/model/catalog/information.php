@@ -4,7 +4,13 @@ class ModelCatalogInformation extends Model {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', bottom = '" . (isset($data['bottom']) ? (int)$data['bottom'] : 0) . "', status = '" . (int)$data['status'] . "'");
 
 		$information_id = $this->db->getLastId(); 
-		
+                
+                /************************ Added Antonio 04/02/2013 **********************/
+                if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "information SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE information_id = '" . (int)$information_id . "'");
+		}
+		/************************ End Added Antonio 04/02/2013 **********************/
+                
 		foreach ($data['information_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
 		}
@@ -33,7 +39,13 @@ class ModelCatalogInformation extends Model {
 	public function editInformation($information_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', bottom = '" . (isset($data['bottom']) ? (int)$data['bottom'] : 0) . "', status = '" . (int)$data['status'] . "' WHERE information_id = '" . (int)$information_id . "'");
 		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
+                /************************ Added Antonio 04/02/2013 **********************/
+                if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "information SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE information_id = '" . (int)$information_id . "'");
+		}
+                /************************ End Added Antonio 04/02/2013 **********************/
+		
+                $this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
 					
 		foreach ($data['information_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
@@ -176,8 +188,16 @@ class ModelCatalogInformation extends Model {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information");
 		
 		return $query->row['total'];
-	}	
-	
+	}
+        
+        /************************ Added Antonio 04/02/2013 **********************/
+        public function getTotalInformationsByImageId($image_id) {
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information WHERE image_id = '" . (int)$image_id . "'");
+		
+		return $query->row['total'];
+	}
+	/************************ End Added Antonio 04/02/2013 **********************/
+        
 	public function getTotalInformationsByLayoutId($layout_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "information_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 

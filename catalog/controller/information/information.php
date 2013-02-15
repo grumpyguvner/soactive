@@ -7,6 +7,8 @@ class ControllerInformationInformation extends Controller {
 		
 		$this->data['breadcrumbs'] = array();
 		
+                $this->load->model('tool/image'); 
+                
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
 			'href'      => $this->url->link('common/home'),
@@ -20,20 +22,32 @@ class ControllerInformationInformation extends Controller {
 		}
 		
 		$information_info = $this->model_catalog_information->getInformation($information_id);
-   		
+                
 		if ($information_info) {
-	  		$this->document->setTitle($information_info['title']); 
+	  		$this->document->setTitle($information_info['title']);
+                        
 
       		$this->data['breadcrumbs'][] = array(
         		'text'      => $information_info['title'],
 				'href'      => $this->url->link('information/information', 'information_id=' .  $information_id),      		
         		'separator' => $this->language->get('text_separator')
-      		);		
-						
+      		);
+                
+					
       		$this->data['heading_title'] = $information_info['title'];
-      		
       		$this->data['button_continue'] = $this->language->get('button_continue');
-			
+                $this->data['text_designed'] = $this->language->get('text_designed');
+                $this->data['seo'] = $this->request->get['_route_'];
+                
+                /************************** Added Antonio 05/02/2013 **********************/	
+                if ($information_info['image']) {
+				$this->data['thumb'] = $this->model_tool_image->resize($information_info['image'], $this->config->get('config_image_information_width'), $this->config->get('config_image_information_height'));
+			} else {
+				$this->data['thumb'] = '';
+			}
+                 
+		/************************** End Added Antonio 05/02/2013 **********************/	
+   		
 			$this->data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
       		
 			$this->data['continue'] = $this->url->link('common/home');
@@ -54,6 +68,7 @@ class ControllerInformationInformation extends Controller {
 			);
 						
 	  		$this->response->setOutput($this->render());
+                        
     	} else {
       		$this->data['breadcrumbs'][] = array(
         		'text'      => $this->language->get('text_error'),
@@ -70,7 +85,8 @@ class ControllerInformationInformation extends Controller {
       		$this->data['button_continue'] = $this->language->get('button_continue');
 
       		$this->data['continue'] = $this->url->link('common/home');
-
+                
+                
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
 			} else {

@@ -5,6 +5,9 @@ $_['heading_title']     = 'Information';
 // Text
 $_['text_success']      = 'Success: You have modified information!';
 $_['text_default']      = 'Default';
+$_['text_image_manager']= 'Image Manager';
+$_['text_browse']       = 'Browse Files';
+$_['text_clear']        = 'Clear Image';
 
 // Column
 $_['column_title']      = 'Information Title';
@@ -16,6 +19,7 @@ $_['entry_title']       = 'Information Title:';
 $_['entry_description'] = 'Description:';
 $_['entry_store']       = 'Stores:';
 $_['entry_keyword']     = 'SEO Keyword:<br /><span class="help">Do not use spaces instead replace spaces with - and make sure the keyword is globally unique.</span>';
+$_['entry_image']       = 'Image:';
 $_['entry_bottom']      = 'Bottom:<br/><span class="help">Display in the bottom footer.</span>';
 $_['entry_status']      = 'Status:';
 $_['entry_sort_order']  = 'Sort Order:';

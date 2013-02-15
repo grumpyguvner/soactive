@@ -633,6 +633,15 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><span class="required">*</span> <?php echo $entry_image_information; ?></td>
+              <td><input type="text" name="config_image_information_width" value="<?php echo $config_image_information_width; ?>" size="3" />
+                x
+                <input type="text" name="config_image_information_height" value="<?php echo $config_image_information_height; ?>" size="3" />
+                <?php if ($error_image_information) { ?>
+                <span class="error"><?php echo $error_image_information; ?></span>
+                <?php } ?></td>
+            </tr>
+            <tr>
               <td><span class="required">*</span> <?php echo $entry_image_thumb; ?></td>
               <td><input type="text" name="config_image_thumb_width" value="<?php echo $config_image_thumb_width; ?>" size="3" />
                 x

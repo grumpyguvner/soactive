@@ -220,6 +220,7 @@ ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '
 ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company;
 ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company_id;
 ALTER TABLE `oc_information` ADD bottom int(1) NOT NULL DEFAULT '1' COMMENT '' AFTER information_id;
+ALTER TABLE `oc_information` ADD image varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '' AFTER status;
 
 #### Start 1.5.4
 CREATE TABLE IF NOT EXISTS `oc_customer_online` (

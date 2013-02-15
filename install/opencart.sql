@@ -1166,6 +1166,7 @@ CREATE TABLE `oc_information` (
   `bottom` int(1) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
+  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`information_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -1173,11 +1174,11 @@ CREATE TABLE `oc_information` (
 -- Dumping data for table `oc_information`
 --
 
-INSERT INTO `oc_information` (`information_id`, `bottom`, `sort_order`, `status`) VALUES
-(3, 1, 3, 1),
-(4, 1, 1, 1),
-(5, 1, 4, 1),
-(6, 1, 2, 1);
+INSERT INTO `oc_information` (`information_id`, `bottom`, `sort_order`, `status`, `image`) VALUES
+(3, 1, 3, 1, NULL),
+(4, 1, 1, 1, NULL),
+(5, 1, 4, 1, NULL),
+(6, 1, 2, 1, NULL);
 
 -- --------------------------------------------------------
 

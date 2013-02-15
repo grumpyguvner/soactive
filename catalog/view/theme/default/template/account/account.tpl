@@ -1,4 +1,5 @@
 <?php echo $header; ?>
+<div class="container">
 <?php if ($success) { ?>
 <div class="success"><?php echo $success; ?></div>
 <?php } ?>
@@ -38,4 +39,5 @@
     </ul>
   </div>
   <?php echo $content_bottom; ?></div>
+</div>
 <?php echo $footer; ?> 

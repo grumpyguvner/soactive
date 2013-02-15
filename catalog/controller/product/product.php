@@ -153,6 +153,15 @@ class ControllerProductProduct extends Controller {
 			$this->data['text_share'] = $this->language->get('text_share');
 			$this->data['text_wait'] = $this->language->get('text_wait');
 			$this->data['text_tags'] = $this->language->get('text_tags');
+                        $this->data['text_rating1'] = $this->language->get('text_rating1');
+                        $this->data['text_rating2'] = $this->language->get('text_rating2');
+                        $this->data['text_rating3'] = $this->language->get('text_rating3');
+                        $this->data['text_rating4'] = $this->language->get('text_rating4');
+                        $this->data['text_rating5'] = $this->language->get('text_rating5');
+                        $this->data['text_termal_rating'] = $this->language->get('text_termal_rating');
+                        $this->data['text_gender'] = $this->language->get('text_gender');
+                        $this->data['text_activity'] = $this->language->get('text_activity');
+                        $this->data['text_filter'] = $this->language->get('text_filter');
 			
 			$this->data['entry_name'] = $this->language->get('entry_name');
 			$this->data['entry_review'] = $this->language->get('entry_review');
@@ -406,6 +415,7 @@ class ControllerProductProduct extends Controller {
 			}
 			/* End Customers also bought - added TF 20/07/2012 */
                         
+                                                
 			$this->data['tags'] = array();
 					
 			$tags = explode(',', $product_info['tag']);

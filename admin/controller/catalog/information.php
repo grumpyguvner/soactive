@@ -266,12 +266,16 @@ class ControllerCatalogInformation extends Controller {
 
 		$this->data['text_default'] = $this->language->get('text_default');
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
-    	$this->data['text_disabled'] = $this->language->get('text_disabled');
+                $this->data['text_disabled'] = $this->language->get('text_disabled');
+                $this->data['text_image_manager'] = $this->language->get('text_image_manager');
+                $this->data['text_browse'] = $this->language->get('text_browse');
+                $this->data['text_clear'] = $this->language->get('text_clear');	
 		
 		$this->data['entry_title'] = $this->language->get('entry_title');
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
+                $this->data['entry_image'] = $this->language->get('entry_image');
 		$this->data['entry_bottom'] = $this->language->get('entry_bottom');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -375,7 +379,29 @@ class ControllerCatalogInformation extends Controller {
 		} else {
 			$this->data['keyword'] = '';
 		}
+                
+                /************************ Added Antonio 04/02/2013 **********************/
+                if (isset($this->request->post['image'])) {
+			$this->data['image'] = $this->request->post['image'];
+		} elseif (!empty($information_info)) {
+			$this->data['image'] = $information_info['image'];
+		} else {
+			$this->data['image'] = '';
+		}
 		
+		$this->load->model('tool/image');
+
+		if (isset($this->request->post['image']) && file_exists(DIR_IMAGE . $this->request->post['image'])) {
+			$this->data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
+		} elseif (!empty($information_info) && $information_info['image'] && file_exists(DIR_IMAGE . $information_info['image'])) {
+			$this->data['thumb'] = $this->model_tool_image->resize($information_info['image'], 100, 100);
+		} else {
+			$this->data['thumb'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+                /************************ Added Antonio 04/02/2013 **********************/
+                
 		if (isset($this->request->post['bottom'])) {
 			$this->data['bottom'] = $this->request->post['bottom'];
 		} elseif (!empty($information_info)) {

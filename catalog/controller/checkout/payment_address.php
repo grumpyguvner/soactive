@@ -7,9 +7,14 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		$this->data['text_address_new'] = $this->language->get('text_address_new');
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
-
+                $this->data['text_personal_details'] = $this->language->get('text_personal_details');
+                $this->data['text_your_address'] = $this->language->get('text_your_address');
+                
 		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
 		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
+                $this->data['entry_email'] = $this->language->get('entry_email');
+                $this->data['entry_telephone'] = $this->language->get('entry_telephone');
+                $this->data['entry_fax'] = $this->language->get('entry_fax');
 		$this->data['entry_company'] = $this->language->get('entry_company');
 		$this->data['entry_company_id'] = $this->language->get('entry_company_id');
 		$this->data['entry_tax_id'] = $this->language->get('entry_tax_id');			

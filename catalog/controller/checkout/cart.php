@@ -114,11 +114,11 @@ class ControllerCheckoutCart extends Controller {
 				}
 			}		
 				
-      		$this->data['heading_title'] = $this->language->get('heading_title');
+                        $this->data['heading_title'] = $this->language->get('heading_title');
 			
 			$this->data['text_next'] = $this->language->get('text_next');
 			$this->data['text_next_choice'] = $this->language->get('text_next_choice');
-     		$this->data['text_use_coupon'] = $this->language->get('text_use_coupon');
+                        $this->data['text_use_coupon'] = $this->language->get('text_use_coupon');
 			$this->data['text_use_voucher'] = $this->language->get('text_use_voucher');
 			$this->data['text_use_reward'] = sprintf($this->language->get('text_use_reward'), $points);
 			$this->data['text_shipping_estimate'] = $this->language->get('text_shipping_estimate');
@@ -128,11 +128,12 @@ class ControllerCheckoutCart extends Controller {
 			$this->data['text_none'] = $this->language->get('text_none');
 						
 			$this->data['column_image'] = $this->language->get('column_image');
-      		$this->data['column_name'] = $this->language->get('column_name');
-      		$this->data['column_model'] = $this->language->get('column_model');
-      		$this->data['column_quantity'] = $this->language->get('column_quantity');
-			$this->data['column_price'] = $this->language->get('column_price');
-      		$this->data['column_total'] = $this->language->get('column_total');
+                        $this->data['column_name'] = $this->language->get('column_name');
+                        $this->data['column_model'] = $this->language->get('column_model');
+                        $this->data['column_rrp'] = $this->language->get('column_rrp');
+                        $this->data['column_quantity'] = $this->language->get('column_quantity');
+                        $this->data['column_price'] = $this->language->get('column_price');
+                        $this->data['column_total'] = $this->language->get('column_total');
 			
 			$this->data['entry_coupon'] = $this->language->get('entry_coupon');
 			$this->data['entry_voucher'] = $this->language->get('entry_voucher');

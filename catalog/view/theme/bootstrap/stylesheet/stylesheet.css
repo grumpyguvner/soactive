@@ -1365,7 +1365,7 @@ a.button:hover, input.button:hover {
 	margin-bottom: 20px;
 }
 .wishlist-info td {
-	padding: 7px;
+	padding: 2px; /* Modified for Bootstrap original padding: 7px; */
 }
 .wishlist-info thead td {
 	color: #4D4D4D;
@@ -1561,7 +1561,7 @@ a.button:hover, input.button:hover {
 	border-right: 1px solid #DDDDDD;
 }
 .cart-info td {
-	padding: 7px;
+	padding: 3px; /*Modified for Bootstrap original padding: 7px; */
 }
 .cart-info thead td {
 	color: #4D4D4D;

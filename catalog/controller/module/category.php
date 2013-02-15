@@ -4,7 +4,12 @@ class ControllerModuleCategory extends Controller {
 		$this->language->load('module/category');
 		
     	$this->data['heading_title'] = $this->language->get('heading_title');
-		
+	$this->data['text_termal_rating'] = $this->language->get('text_termal_rating');
+        $this->data['text_gender'] = $this->language->get('text_gender');
+        $this->data['text_activity'] = $this->language->get('text_activity');
+        $this->data['text_filter'] = $this->language->get('text_filter');
+        
+        
 		if (isset($this->request->get['path'])) {
 			$parts = explode('_', (string)$this->request->get['path']);
 		} else {

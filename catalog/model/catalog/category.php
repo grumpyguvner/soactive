@@ -208,7 +208,10 @@ class ModelCatalogCategory extends Model {
                         $big_array2[$i]['attribute_types'][$j]['type_id'] = $type;
                         $big_array2[$i]['attribute_types'][$j]['type_name'] = $attributes[$type][0]['attribute_name'];
                         $big_array2[$i]['attribute_types'][$j]['types'] = array();
-
+                        /********************** Added ******************************************/
+                        $category = $this->model_catalog_category->getCategory($category_id);
+                        $big_array2[$i]['attribute_types'][$j]['category_name'] = $category['name'];
+                        /********************** End Added **************************************/
                         foreach ($attributes[$type] as $atts) {
 
                             $big_array2[$i]['attribute_types'][$j]['types'][] = $atts['attribute_text'];

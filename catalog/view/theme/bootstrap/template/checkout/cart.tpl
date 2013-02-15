@@ -33,12 +33,12 @@
           <table>
         <thead>
           <tr>
-            <td class="image"><?php echo $column_image; ?></td>
-            <td class="name"><?php echo $column_name; ?></td>
-            <td class="model"><?php echo $column_model; ?></td>
-            <td class="quantity"><?php echo $column_quantity; ?></td>
-            <td class="price"><?php echo $column_price; ?></td>
-            <td class="total"><?php echo $column_total; ?></td>
+            <td class="image"><h4><?php echo $column_image; ?></h4></td>
+            <td class="name"><h4><?php echo $column_name; ?></h4></td>
+            <td class="model"><h4><?php echo $column_model; ?></h4></td>
+            <td class="quantity"><h4><?php echo $column_quantity; ?></h4></td>
+            <td class="price"><h4><?php echo $column_price; ?></h4></td>
+            <td class="total"><h4><?php echo $column_total; ?></h4></td>
           </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@
             <td class="image"><?php if ($product['thumb']) { ?>
               <a href="<?php echo $product['href']; ?>"><img class="span1" src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
               <?php } ?></td>
-            <td class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+            <td class="name"><a href="<?php echo $product['href']; ?>"><h4 style="font-weight: normal"><?php echo $product['name']; ?></h4></a>
               <?php if (!$product['stock']) { ?>
               <span class="stock">***</span>
               <?php } ?>
@@ -59,13 +59,13 @@
               <?php if ($product['reward']) { ?>
               <small><?php echo $product['reward']; ?></small>
               <?php } ?></td>
-            <td class="model"><?php echo $product['model']; ?></td>
+            <td class="model"><h4 style="font-weight: normal"><?php echo $product['model']; ?></h4></td>
             <td class="quantity"><input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" style="width: 30px;" />
               &nbsp;
               <input type="image" src="catalog/view/theme/default/image/update.png" alt="<?php echo $button_update; ?>" title="<?php echo $button_update; ?>" />
               &nbsp;<a href="<?php echo $product['remove']; ?>"><img src="catalog/view/theme/default/image/remove.png" alt="<?php echo $button_remove; ?>" title="<?php echo $button_remove; ?>" /></a></td>
-            <td class="price"><?php echo $product['price']; ?></td>
-            <td class="total"><?php echo $product['total']; ?></td>
+            <td class="price"><h4 style="font-weight: normal"><?php echo $product['price']; ?></h4></td>
+            <td class="total"><h4 style="font-weight: normal"><?php echo $product['total']; ?></h4></td>
           </tr>
           <?php } ?>
           <?php foreach ($vouchers as $vouchers) { ?>
