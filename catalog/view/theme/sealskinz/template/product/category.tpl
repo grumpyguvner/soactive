@@ -68,7 +68,7 @@
                             <?php } ?>
                           </select>
                         </div>
-                        <div class="pagination-text"><?php echo $pagination2; ?></div>
+                        <div class="pagination-text"><?php  echo $pagination2; ?></div>
                       </div>
                 
                     <?php if ($products) { ?>
@@ -103,7 +103,7 @@
                         </div>
                     <?php } ?>
                 </div>
-                <div class="pagination"><?php echo $pagination1; ?></div>
+                <div class="pagination"><?php echo $pagination; ?></div>
                     <?php if (!$categories && !$products) { ?>
                         <div class="content"><?php echo $text_empty; ?></div>
                         <!--div class="buttons">

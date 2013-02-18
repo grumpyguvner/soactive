@@ -394,32 +394,19 @@ class ControllerProductCategory extends Controller {
 			}
 					
 			$pagination = new Pagination();
-			$pagination->total = $product_total;
-			$pagination->page = $page;
-			$pagination->limit = $limit;
-			$pagination->text = $this->language->get('text_pagination');
-			$pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
-		
-			$this->data['pagination'] = $pagination->render();
-                        
-                        /************************ Added Antonio 06/02/2013 ************************/
-                        $pagination1 = new Pagination_Sealskinz();
-			$pagination1->total = $product_total;
-			$pagination1->page = $page;
-			$pagination1->limit = $limit;
-			$pagination1->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
-		
-			$this->data['pagination1'] = $pagination1->render();
-                        
-                        $pagination2 = new InfoPage();
-			$pagination2->total = $product_total;
-			$pagination2->page = $page;
-			$pagination2->limit = $limit;
-			$pagination2->text = $this->language->get('text_pagination');
-			$pagination2->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
-		
-			$this->data['pagination2'] = $pagination2->render();
-                        /************************ Added Antonio 06/02/2013 ************************/
+                        $pagination->total = $product_total;
+                        $pagination->page = $page;
+                        $pagination->limit = $limit;
+                        $pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&page={page}');
+                        $this->data['pagination'] = $pagination->render();
+                       
+                        $pagination2 = new Pagination();
+                        $pagination2->total = $product_total;
+                        $pagination2->page = $page;
+                        $pagination2->limit = $limit;
+                        $pagination2->text = $this->language->get('text_pagination');
+           
+                        $this->data['pagination2'] = $pagination2->text();
                         
 			$this->data['sort'] = $sort;
 			$this->data['order'] = $order;
