@@ -2,7 +2,6 @@
 <h1 style="background: url('view/image/finished.png') no-repeat;">Step 4 - Finished!</h1>
 <div style="width: 100%; display: inline-block;">
   <div style="float: left; width: 569px;">
-    <div class="warning">Don't forget to delete your installation directory!</div>
     <p>Congratulations! You have successfully installed OpenCart.</p>
     <div style="text-align: center; float: left; margin-bottom: 15px;"><a href="../"><img src="view/image/screenshot_1.png" alt="" width="270" style="border: 1px solid #DDDDDD; padding: 2px; margin-bottom: 3px;" /></a><br />
       <a href="../">Go to your Online Shop</a>

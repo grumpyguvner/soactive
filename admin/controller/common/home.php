@@ -34,13 +34,6 @@ class ControllerCommonHome extends Controller {
 		$this->data['column_action'] = $this->language->get('column_action');
 		
 		$this->data['entry_range'] = $this->language->get('entry_range');
-		
-		// Check install directory exists
- 		if (is_dir(dirname(DIR_APPLICATION) . '/install')) {
-			$this->data['error_install'] = $this->language->get('error_install');
-		} else {
-			$this->data['error_install'] = '';
-		}
 
 		// Check image directory is writable
 		$file = DIR_IMAGE . 'test';

@@ -15,8 +15,8 @@ class ControllerStep2 extends Controller {
 		
 		$this->data['action'] = HTTP_SERVER . 'index.php?route=step_2';
 
-		$this->data['config_catalog'] = DIR_OPENCART . 'config.php';
-		$this->data['config_admin'] = DIR_OPENCART . 'admin/config.php';
+		$this->data['config_catalog'] = DIR_OPENCART . FILE_CONFIG;
+		$this->data['config_admin'] = DIR_OPENCART . 'admin/' .FILE_CONFIG;
 		
 		$this->data['cache'] = DIR_SYSTEM . 'cache';
 		$this->data['logs'] = DIR_SYSTEM . 'logs';
@@ -68,12 +68,12 @@ class ControllerStep2 extends Controller {
 			$this->error['warning'] = 'Warning: ZLIB extension needs to be loaded for OpenCart to work!';
 		}
 	
-		if (!is_writable(DIR_OPENCART . 'config.php')) {
-			$this->error['warning'] = 'Warning: config.php needs to be writable for OpenCart to be installed!';
+		if (!is_writable(DIR_OPENCART . FILE_CONFIG)) {
+			$this->error['warning'] = 'Warning: ' . FILE_CONFIG . ' needs to be writable for OpenCart to be installed!';
 		}
 				
-		if (!is_writable(DIR_OPENCART . 'admin/config.php')) {
-			$this->error['warning'] = 'Warning: admin/config.php needs to be writable for OpenCart to be installed!';
+		if (!is_writable(DIR_OPENCART . 'admin/' . FILE_CONFIG)) {
+			$this->error['warning'] = 'Warning: admin/' . FILE_CONFIG . ' needs to be writable for OpenCart to be installed!';
 		}
 
 		if (!is_writable(DIR_SYSTEM . 'cache')) {

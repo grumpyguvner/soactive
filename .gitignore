@@ -1,15 +1,16 @@
-/nbproject
-
-/config.php
-/config_*.php
-/admin/config.php
-/admin/config_*.php
+config_*.php
+admin/config_*.php
+!/config_staging.php
+!/admin/config_staging.php
 
 !index.html
 
-download
-image/cache/*.jpg
-image/cache/data/*
-system/cache
-system/logs
-/image/
+/download/*
+/image/data/*
+/image/cache/*
+/image/cache/data/*
+/system/cache/*
+/system/logs/*
+
+.DS_Store
+/nbproject

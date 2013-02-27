@@ -8,6 +8,13 @@ class ControllerCommonFooter extends Controller {
 		if (file_exists(DIR_SYSTEM . 'config/svn/svn.ver')) {
 			$this->data['text_footer'] .= '.r' . trim(file_get_contents(DIR_SYSTEM . 'config/svn/svn.ver'));
 		}
+        
+        if (ENVIRONMENT_WARNING)
+        {
+            $this->data['error_environment'] = 'Warning: You are currently in the <strong>' . strtoupper(APPLICATION_ENV) . '</strong> environment!';
+        } else {
+            $this->data['error_environment'] = '';
+        }
 		
 		$this->template = 'common/footer.tpl';
 	

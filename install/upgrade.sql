@@ -72,9 +72,6 @@ ALTER TABLE oc_tax_rate DROP priority;
 ALTER TABLE oc_tax_rate MODIFY rate decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '';
 ALTER TABLE oc_tax_rate DROP description;
 
-ALTER TABLE oc_product_tag ADD INDEX product_id (product_id);
-ALTER TABLE oc_product_tag ADD INDEX language_id (language_id);
-ALTER TABLE oc_product_tag ADD INDEX tag (tag);
 
 
 #### START 1.5.2

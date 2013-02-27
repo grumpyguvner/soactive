@@ -79,7 +79,14 @@ class ControllerCommonFooter extends Controller {
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
-		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');		
+		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');	
+        
+        if (ENVIRONMENT_WARNING)
+        {
+            $this->data['error_environment'] = 'Warning: You are currently in the <strong>' . strtoupper(APPLICATION_ENV) . '</strong> environment!';
+        } else {
+            $this->data['error_environment'] = '';
+        }
 
 		$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 		

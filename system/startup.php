@@ -2,6 +2,12 @@
 // Error Reporting
 error_reporting(E_ALL);
 
+// Define VERSION Number if it doesn't exists in config
+// VERSION 1.5.4 is the base version
+defined('VERSION') || define('VERSION', '1.5.4');
+
+defined('ENVIRONMENT_WARNING') || define('ENVIRONMENT_WARNING', (APPLICATION_ENV == 'production') ? false : true);
+
 // Check Version
 if (version_compare(phpversion(), '5.1.0', '<') == true) {
 	exit('PHP5.1+ Required');
