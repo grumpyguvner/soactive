@@ -1,7 +1,4 @@
 <?php
-// Version
-define('VERSION', '1.5.4');
-
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));

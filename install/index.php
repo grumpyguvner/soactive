@@ -2,7 +2,21 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-define('ALLOW_UPGRADE', false);
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : die('Warning: You must set an environment variable <em>APPLICATION_ENV</em>')));
+
+// set config fiel name which we will write to
+defined('FILE_CONFIG')
+    || define('FILE_CONFIG', (APPLICATION_ENV == 'production') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
+
+// Set up version numbers
+define('BASE_VERSION', '1.5.4');
+define('BOUNDLESS_VERSION', '1');
+
+define('FULL_VERSION', BASE_VERSION . ((BOUNDLESS_VERSION) ? ':' . BOUNDLESS_VERSION : ''));
+
+define('ALLOW_UPGRADE', true);
 
 // HTTP
 define('HTTP_SERVER', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/');
@@ -20,22 +34,22 @@ define('DIR_CONFIG', DIR_SYSTEM . 'config/');
 // Upgrade
 $upgrade = false;
 
-if (!is_file('../config.php'))
+if (!is_file('../' . FILE_CONFIG))
 {
-    if ($file = @fopen('../config.php', 'w')) {
-        chmod('../config.php', '0755');
+    if ($file = @fopen('../' . FILE_CONFIG, 'w')) {
+        chmod('../' . FILE_CONFIG, '0755');
         fclose($file);
     }
 }
-if (!is_file('../admin/config.php'))
+if (!is_file('../admin/' . FILE_CONFIG))
 {
-    if ($file = @fopen('../admin/config.php', 'w')) {
-        chmod('../admin/config.php', '0755');
+    if ($file = @fopen('../admin/' . FILE_CONFIG, 'w')) {
+        chmod('../admin/' . FILE_CONFIG, '0755');
         fclose($file);
     }
 }
 
-if (filesize('../config.php') > 0) {
+if (filesize('../' . FILE_CONFIG) > 0) {
     if (!ALLOW_UPGRADE)
     {
         header('Location: ../');
@@ -44,14 +58,17 @@ if (filesize('../config.php') > 0) {
     
 	$upgrade = true;
 	
-	$file = file(DIR_OPENCART . 'config.php');
+	$file = file(DIR_OPENCART . FILE_CONFIG);
 	
 	foreach ($file as $num => $line) {
-		if (strpos(strtoupper($line), 'DB_') !== false) {
+		if (strpos(strtoupper($line), 'DB_') !== false ||
+            strpos(strtoupper($line), 'VERSION') !== false) {
 			eval($line);
 		}
 	}
 }
+
+defined('VERSION') || define('VERSION', FULL_VERSION);
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');

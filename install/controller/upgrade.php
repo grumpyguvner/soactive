@@ -29,7 +29,7 @@ class ControllerUpgrade extends Controller {
 			'header',
 			'footer'
 		);
-
+        
 		$this->response->setOutput($this->render());
 
 	}
@@ -37,7 +37,6 @@ class ControllerUpgrade extends Controller {
 	public function upgrade() {
 
 		if ($this->validate()) {
-
 			$this->load->model('upgrade');
 
 			$this->model_upgrade->mysql($this->request->post, 'upgrade.sql');
@@ -52,6 +51,12 @@ class ControllerUpgrade extends Controller {
 	}
 
 	private function validate() {
+
+		if (VERSION == FULL_VERSION) {
+			$this->error['warning'] = "Site is already upto date and on version number " . VERSION;
+            return false;
+		}
+        
 		if (!defined('DB_HOSTNAME')) {
 			$this->error['warning'] = 'Host required!';
 		}
@@ -65,7 +70,7 @@ class ControllerUpgrade extends Controller {
 		}
 
 		if (!$connection = @mysql_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD)) {
-			$this->error['warning'] = 'Error: Could not connect to the database please make sure the database server, username and password is correct in the config.php file!';
+			$this->error['warning'] = 'Error: Could not connect to the database please make sure the database server, username and password is correct in the ' . FILE_CONFIG . ' file!';
 		} else {
 			if (!@mysql_select_db(DB_DATABASE, $connection)) {
 				$this->error['warning'] = 'Error: Database "'. DB_DATABASE . '" does not exist!';

@@ -63,7 +63,14 @@ class ControllerCommonHeader extends Controller {
 			$this->data['logo'] = $server . $this->config->get('config_logo');
 		} else {
 			$this->data['logo'] = '';
-		}
+		}        
+        
+        if (ENVIRONMENT_WARNING)
+        {
+            $this->data['error_environment'] = 'Warning: You are currently in the <strong>' . strtoupper(APPLICATION_ENV) . '</strong> environment!';
+        } else {
+            $this->data['error_environment'] = '';
+        }
 		
 		$this->data['text_home'] = $this->language->get('text_home');
 		$this->data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));

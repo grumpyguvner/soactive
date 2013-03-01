@@ -72,8 +72,8 @@ DD_belatedPNG.fix('#logo img');
 </head>
 <body>
 <?php include($_theme_include_path . '/nico_theme_editor/editor.inc');?>
-<?php if (APPLICATION_ENV != 'production') { ?>
-<div id="environment">This site is currently in the <strong><?php echo strtoupper(APPLICATION_ENV); ?></strong> environment</div>
+<?php if ($error_environment) { ?>
+<div id="environment"><div class="warning"><button type="button" class="close" data-dismiss="alert">×</button><?php echo $error_environment; ?></div></div>
 <?php } ?>
 <div id="container">
 <div id="header">

@@ -36,10 +36,11 @@ class ControllerStep3 extends Controller {
 			$output .= 'define(\'DB_USERNAME\', \'' . addslashes($this->request->post['db_user']) . '\');' . "\n";
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes($this->request->post['db_password']) . '\');' . "\n";
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_name']) . '\');' . "\n";
-			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n";
+			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n\n";
+			$output .= 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n";
 			$output .= '?>';				
 		
-			$file = fopen(DIR_OPENCART . 'config.php', 'w');
+			$file = fopen(DIR_OPENCART . FILE_CONFIG, 'w');
 		
 			fwrite($file, $output);
 
@@ -76,9 +77,10 @@ class ControllerStep3 extends Controller {
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes($this->request->post['db_password']) . '\');' . "\n";
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_name']) . '\');' . "\n";
 			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n";
+			$output .= 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n";
 			$output .= '?>';	
 
-			$file = fopen(DIR_OPENCART . 'admin/config.php', 'w');
+			$file = fopen(DIR_OPENCART . 'admin/' . FILE_CONFIG, 'w');
 		
 			fwrite($file, $output);
 
@@ -223,12 +225,12 @@ class ControllerStep3 extends Controller {
 			mysql_close($connection);
 		}
 		
-		if (!is_writable(DIR_OPENCART . 'config.php')) {
-			$this->error['warning'] = 'Error: Could not write to config.php please check you have set the correct permissions on: ' . DIR_OPENCART . 'config.php!';
+		if (!is_writable(DIR_OPENCART . FILE_CONFIG)) {
+			$this->error['warning'] = 'Error: Could not write to ' . FILE_CONFIG . ' please check you have set the correct permissions on: ' . DIR_OPENCART . FILE_CONFIG . '!';
 		}
 	
-		if (!is_writable(DIR_OPENCART . 'admin/config.php')) {
-			$this->error['warning'] = 'Error: Could not write to config.php please check you have set the correct permissions on: ' . DIR_OPENCART . 'admin/config.php!';
+		if (!is_writable(DIR_OPENCART . 'admin/' . FILE_CONFIG)) {
+			$this->error['warning'] = 'Error: Could not write to ' . FILE_CONFIG . ' please check you have set the correct permissions on: ' . DIR_OPENCART . 'admin/' . FILE_CONFIG . '!';
 		}	
 		
     	if (!$this->error) {

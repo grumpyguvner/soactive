@@ -47,6 +47,7 @@ class ModelUpgrade extends Model {
 						}
 					}
 					if (preg_match('/^ALTER TABLE (.+?) ADD INDEX (.+?) /', $line, $matches)) {
+                        
 						$info = mysql_fetch_assoc(mysql_query(sprintf("SHOW INDEX FROM %s", $matches[1]), $connection));
 						
 						if ($info['Key_name'] == 'PRIMARY') { 
@@ -195,18 +196,46 @@ class ModelUpgrade extends Model {
 		if (!$query->num_rows) {
 			$db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = 0, `group` = 'config', `key` = 'config_customer_group_display', `value` = 'a:1:{i:0;s:1:\"8\";}', `serialized` = 1");
 		}
+        
+        $version = 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n";
 
-		// Attempt to add new HTTPS_CATALOG to the admin/config.php
-		// Get HTTP_ADMIN from main config.php to find out what the admin folder name is incase it was renamed
-		$file = file(DIR_OPENCART . 'config.php');
+		// Attempt to add new HTTPS_CATALOG to the admin/config_*.php
+		// Get HTTP_ADMIN from main FILE_CONFIG to find out what the admin folder name is incase it was renamed
+        // Also update version number in config file
+        $update = false;
+		$versionexists = false;
+        
+		$lines = file(DIR_OPENCART . FILE_CONFIG);
 
-		foreach ($file as $num => $line) {
+		foreach ($lines as $num => $line) {
 			if (strpos(strtoupper($line), 'HTTP_ADMIN') !== false) {
 				eval($line);
-				break;
-			}
+			} elseif (strpos($line, 'VERSION') !== false) {
+                $lines[$num] = $version;
+                $versionexists = true;
+                $update = true;
+            }
 		}
 
+        // If not version exists, add it
+        if (!$versionexists){
+            $endline = array_pop($lines);
+            $lines[] = '';
+            $lines[] = $version;
+            $lines[] = $endline;
+            $update = true;
+        }
+
+        if ($update) {
+            // Write the data back to the config file
+            $data = '';
+            foreach ($lines as $line) {
+                $data .= $line;
+            }
+            file_put_contents(DIR_OPENCART . FILE_CONFIG, $data);
+        }
+        
+        
 		if (defined('HTTP_ADMIN') && ini_get('open_basedir') == false) {
 			$adminFolder = trim(str_replace(str_replace('install/', '', HTTP_SERVER), '', HTTP_ADMIN), '/');
 
@@ -215,42 +244,59 @@ class ModelUpgrade extends Model {
 			// If directory exists...
 			if (is_dir($dirAdmin)) {
 
-				// If config.php exists and is writable...
-				if (is_writable($dirAdmin . 'config.php')) {
-					$lines = file($dirAdmin . 'config.php');
+				// If FILE_CONFIG exists and is writable...
+				if (is_writable($dirAdmin . FILE_CONFIG)) {
+					$lines = file($dirAdmin . FILE_CONFIG);
 
 					// Loop through and seee if HTTPS_CATALOG already exists and get the values for HTTP_CATALOG and HTTPS_SERVER
-					$exists = false;
+					$update = false;
+					$catexists = false;
 					$schema = 'http';
 					$http_catalog = false;
 					$https_server_idx = false;
+					$versionexists = false;
 					
 					foreach ($lines as $i => $line) {
 						if (strpos($line, 'HTTPS_CATALOG') !== false) {
-							$exists = true;
-							break;
+							$catexists = true;
 						} elseif (strpos($line, 'HTTP_CATALOG') !== false) {
 							$http_catalog = $lines[$i];
-						} elseif (strpos($line, 'HTTPS_SERVER')) {
+						} elseif (strpos($line, 'HTTPS_SERVER') !== false) {
 							$https_server_idx = $i;
 							if (strpos($lines[$i], 'https://') !== false) {
 								$schema = 'https';
 							}
+						} elseif (strpos($line, 'VERSION') !== false) {
+                            $lines[$i] = $version;
+                            $versionexists = true;
+                            $update = true;
 						}
 					}
 
 					// If not exists, add it
-					if (!$exists && $http_catalog && $https_server_idx !== false){
+					if (!$catexists && $http_catalog && $https_server_idx !== false) {
 						//$https_catalog_line = "define('HTTPS_CATALOG', " . str_replace(array('http','https'), $schema, $http_catalog) . ");";
 						$https_catalog = str_replace('HTTP_CATALOG', 'HTTPS_CATALOG', str_replace(array('http','https'), $schema, $http_catalog));
 						$lines[$https_server_idx] = $lines[$https_server_idx] . $https_catalog;
+						$update = true;
+                    }
 
+					// If not version exists, add it
+					if (!$versionexists){
+                        $endline = array_pop($lines);
+						$lines[] = '';
+						$lines[] = $version;
+						$lines[] = $endline;
+						$update = true;
+                    }
+                    
+                    if ($update) {
 						// Write the data back to the config file
 						$data = '';
 						foreach ($lines as $line) {
 							$data .= $line;
 						}
-						file_put_contents($dirAdmin . 'config.php', $data);
+						file_put_contents($dirAdmin . FILE_CONFIG, $data);
 					}
 				}
 			}

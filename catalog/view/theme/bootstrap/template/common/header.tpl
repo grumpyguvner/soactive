@@ -52,8 +52,8 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
 <?php echo $google_analytics; ?>
 </head>
 <body>
-<?php if (APPLICATION_ENV != 'production') { ?>
-<div id="environment"><div class="warning">This site is currently in the <strong><?php echo strtoupper(APPLICATION_ENV); ?></strong> environment<img src="catalog/view/theme/bootstrap/image/close.png" alt="" class="close" /></div></div>
+<?php if ($error_environment) { ?>
+<div id="environment"><div class="warning"><button type="button" class="close" data-dismiss="alert">×</button><?php echo $error_environment; ?></div></div>
 <?php } ?>
 <div class="container"> 
     
