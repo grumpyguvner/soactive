@@ -64,7 +64,7 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
     <div id="background">
         <div class="container">
                 <div class="row">
-                        <div class="span12">
+                        <div class="margin-30">
                            <div id="container-in">
                                 <div id="menuh">
                                     <div id="left">
@@ -122,7 +122,7 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
     <div class="gradiente">
         <div class="container">
             <div class="row">
-               <div class="span12">
+               <div class="margin-30">
                   <div id="container-in">
                       <div style="width: 100%">
                               <div id="logo" style="float: left">
@@ -152,7 +152,7 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
     </div>
     <div class="linegreen">
        <div class="row">
-          <div class="span12">
+          <div class="margin-30">
              
           </div>
       </div>
@@ -162,27 +162,48 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
     <div class="menu-gradient">
         <div class="container">
             <div class="row">
-                    <div class="span12">
+                    <div class="margin">
                       <div id="container-in"> 
                         <div id='cssmenu'>
                             <ul>
                                 <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
                                <li><a href=""><span>Shop By Activity</span></a>
-                                   <?php if ($categories) { ?>
+                                   <?php if ($attributes) { ?>
                                    
-                                   
-                                        <?php foreach ($categories as $category) { ?>
-                                        
-                                          
-                                          <?php if (!$category['children_html']=="") { ?>
-                                         
-                                            <?php /* echo $category['children_html']; */?>
+                                   <ul class="wrap-menu">
+                                        <div id="left">
+                                       <?php foreach ($attributes as $attribute) { ?>
+                                       
+                                           <div class="<?php echo $attribute['name'] ?>">
                                             
-                                          <?php } ?>
-               
-                                        </li>
+                                           </div>
+                                       
                                         <?php } ?>
-                                      
+                                       </div>
+                                       <div id="right" class="menu-list">
+                                           <div class="activities"><b>Activities</b></div>
+                                           <?php if ($categories) { ?>
+                                                <div id="left" class="menu-column-left">
+                                                <?php for ($i=0; $i < count($categories) && $i < 8; $i++) { ?>
+                                                    <li><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
+                                                <?php } ?>
+                                                </div>   
+                                                <div id="right" class="menu-column-right">
+                                                    <?php $count = 0; ?>
+                                                <?php for ($i=9; $i < count($categories); $i++) { ?>
+                                                    <li style="border-left: none !important;"><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
+                                                    <?php $count = $count + 1; ?>
+                                                <?php } ?>
+                                                    <?php $ncat= 8 - $count; ?>
+                                                    <?php for ($c=0; $c < $ncat; $c++) { ?>
+                                                    <li style="border-left: none !important;">&nbsp</li>
+                                                    <?php } ?>
+                                                </div>
+                                           <?php } ?>
+                                       </div>
+                                       
+                                       
+                                     </ul>
                                 <?php } ?>
                                </li>
                                <li><a href="about-us"><span>About us</span></a></li>

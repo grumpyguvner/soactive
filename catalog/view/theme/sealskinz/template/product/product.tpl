@@ -45,12 +45,12 @@
                
 <!----------------------------------------- Title + Price --------------------------------------------->
                    
-                        <div style="border-bottom: 1px solid #E7E7E7;">
-                            <h1 style="color: grey"><?php echo $heading_title; ?></h1>
+                        <div class="p-name"><h1><?php echo $heading_title; ?></h1></div>
+                        <div class="np-details">
                             <?php if ($price) { ?>
                                 <div class="price"><div id="left"><?php echo $text_price; ?></div>
                                   <?php if (!$special) { ?>
-                                  <div class="product-price" id="right"><h1 style="margin-top: 0px; margin-left: 8px;"><?php echo $price; ?></h1></div>
+                                  <div class="product-price" id="right"><h1><?php echo $price; ?></h1></div>
                                   <?php } else { ?>
                                   <span class="price-old"><?php echo $price; ?></span> <span class="price-new"><?php echo $special; ?></span>
                                   <?php } ?>
@@ -80,8 +80,8 @@
                         <div style="width: 100%">
                            <?php if ($options) { ?>
                                 <div class="options">
-                                  <h4 style="color: grey">Our best selling, totally waterproof, windproof and breathable knitted beanie hat</h4>
-                                  <br />
+                                  <h4>Our best selling, totally waterproof, windproof and breathable knitted beanie hat</h4>
+                                  
                                   <?php foreach ($options as $option) { ?>
                                   <?php if ($option['type'] == 'select') { ?>
                                   <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -425,7 +425,7 @@
               <?php if (isset($products)) { ?>
                     <div class="span9" id="related">
                             <div class="related-title" >
-                                <h3 style="margin: 0px; color: white"><?php echo $tab_related ?></h3>
+                                <h3><?php echo $tab_related ?></h3>
                             </div>
                                    <div class="product-grid">    
                                <?php foreach ($products as $product) { ?>
@@ -445,8 +445,8 @@
                                                                        <tr>
                                                                        <td class="table-price">
                                                                            <div class="price">
-                                                                             <h4><?php if (!$product['special']) { ?></h4>
-                                                                             <?php echo $product['price']; ?>
+                                                                             <?php if (!$product['special']) { ?>
+                                                                             <h4><?php echo $product['price']; ?></h4>
                                                                              <?php } else { ?>
                                                                              <span class="price-old"><h4><?php echo $product['price']; ?></h4></span> <span class="price-new"><?php echo $product['special']; ?></span>
                                                                              <?php } ?>

@@ -48,7 +48,7 @@
             <td class="image"><h4><?php echo $column_image; ?></h4></td>
             <td class="name"><h4><?php echo $column_name; ?></h4></td>
             <td class="model"><h4><?php echo $column_model; ?></h4></td>
-            <td class="rrp"><h4><?php echo $column_rrp; ?></h4></td>
+            <!--td class="rrp"><h4><?php /* echo $column_rrp; */ ?></h4></td-->
             <td class="price"><h4><?php echo $column_price; ?></h4></td>
             <td class="quantity"><h4><?php echo $column_quantity; ?></h4></td>
             <td class="total"><h4><?php echo $column_total; ?></h4></td>
@@ -77,9 +77,9 @@
             <td class="model">
                 <h4 style="font-weight: normal"><?php echo $product['model']; ?></h4>
             </td>
-            <td class="rrp">
+            <!--td class="rrp">
                 <h4 style="font-weight: normal"></h4>
-            </td>
+            </td-->
             <td class="price"><h4 style="font-weight: normal">
                 <?php echo $product['price']; ?></h4>
             </td>

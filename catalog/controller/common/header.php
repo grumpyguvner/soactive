@@ -157,8 +157,6 @@ class ControllerCommonHeader extends Controller {
                                         $children_html = "<div style='min-width: 260px; padding: 5px;'>" . $children_html . "</div>";
 
                                 }
-                                
-                                
 				// Level 1
 				$this->data['categories'][] = array(
 					'name'          => $category['name'],
@@ -168,10 +166,36 @@ class ControllerCommonHeader extends Controller {
 					'href'          => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
 			}
+                        /********************************* Star Menu SealSkinz ************************************/
+                        else if ($category['status'] == '1') {
+                                                            
+                                // Level 1
+				$this->data['categories'][] = array(
+					'name'          => $category['name'],
+					'href'          => $this->url->link('product/category', 'path=' . $category['category_id'])
+				);
+                             
+                        }
+                        
+                        /********************************* Star Menu SealSkinz ************************************/
+                        
+                }
+                
+                   /********************************* Star Menu SealSkinz ************************************/
+                   
+                   $this->data['attributes'] = array();
+                            $groups_seal = $this->model_catalog_category->getAttributes();
+                            foreach ($groups_seal as $result) {
+                                if ($result['attribute_group'] == 'Type') {					
+                                $this->data['attributes'][] = array(
+                                        'attribute_group' => $result['attribute_group'],
+                                        'name'            => $result['name']
+                                );
+                                }
 		}
-                                
-				
-		
+                                            
+                 /********************************* Star Menu SealSkinz ************************************/
+                                    
 		$this->children = array(
 			'module/language',
 			'module/currency',

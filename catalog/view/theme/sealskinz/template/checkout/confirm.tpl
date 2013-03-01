@@ -6,7 +6,7 @@
               <tr>
                 <td class="name"><h4><?php echo $column_name; ?></h4></td>
                 <td class="model"><h4><?php echo $column_model; ?></h4></td>
-                <td class="rrp"><h4><?php echo $column_rrp; ?></h4></td>
+                <!--td class="rrp"><h4><?php /* echo $column_rrp; */ ?></h4></td-->
                 <td class="quantity"><h4><?php echo $column_quantity; ?></h4></td>
                 <td class="price"><h4><?php echo $column_price; ?></h4></td>
                 <td class="total"><h4><?php echo $column_total; ?></h4></td>
@@ -21,7 +21,7 @@
                   &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
                   <?php } ?></td>
                 <td class="model"><h4 style="font-weight: normal"><?php echo $product['model']; ?></h4></td>
-                <td class="rrp"><h4 style="font-weight: normal"></h4></td>
+                <!--td class="rrp"><h4 style="font-weight: normal"></h4></td-->
                 <td class="quantity"><h4 style="font-weight: normal"><?php echo $product['quantity']; ?></h4></td>
                 <td class="price"><h4 style="font-weight: normal"><?php echo $product['price']; ?></h4></td>
                 <td class="total"><h4 style="font-weight: normal"><?php echo $product['total']; ?></h4></td>
@@ -40,7 +40,7 @@
             <tfoot>
               <?php foreach ($totals as $total) { ?>
               <tr>
-                <td colspan="5" class="price"><h4><?php echo $total['title']; ?>:</h4></td>
+                <td colspan="4" class="price"><h4><?php echo $total['title']; ?>:</h4></td>
                 <td class="total"><h4 style="font-weight: normal"><?php echo $total['text']; ?></h4></td>
               </tr>
               <?php } ?>

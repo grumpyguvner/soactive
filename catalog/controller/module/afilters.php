@@ -9,7 +9,10 @@ class ControllerModuleAFilters extends Controller {
 		
 
     	$this->data['heading_title'] = $this->language->get('heading_title');
-
+        $this->data['text_type'] = $this->language->get('text_type');
+        $this->data['text_termal_rating'] = $this->language->get('text_termal_rating');
+        $this->data['text_gender'] = $this->language->get('text_gender');
+        $this->data['text_activity'] = $this->language->get('text_activity');
 
 							
 

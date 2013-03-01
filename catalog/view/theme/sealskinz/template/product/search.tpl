@@ -3,31 +3,31 @@
     <div class="container">
       <div class="row"> 
           <div class="span12">
-           
+           <div id="container-in">
                 <div class="breadcrumb">
                     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
                     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
                     <?php } ?>
                 </div>
+           </div>
             </div>
       </div>
     </div>
   </div>
-<div class="container">
+<div id="content-back">
+    <div class="green-bar">
+<div id="container-in" class="content-in">
     <?php echo $column_left; ?><?php echo $column_right; ?>
     <div id="content"><?php echo $content_top; ?>
     <div class="row">
-        <div class="span12">    
+        <div class="search-title">    
             <h1><?php echo $heading_title; ?></h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="span12">
             <b><?php echo $text_critea; ?></b>
         </div>
     </div>
+    
     <div class="row">
-        <div class="span12"> 
+        <div class="search-result"> 
             <div class="content">
                 <p><?php echo $entry_search; ?>
                 <?php if ($filter_name) { ?>
@@ -86,8 +86,8 @@
   </div>
   <h2><?php echo $text_search; ?></h2>
   <?php if ($products) { ?>
-  <div class="product-filter">
-    <div class="display"><b><?php echo $text_display; ?></b> <?php echo $text_list; ?> <b>/</b> <a onclick="display('grid');"><?php echo $text_grid; ?></a></div>
+  <div class="product-filter" id="margin-0">
+    <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
     <div class="limit"><?php echo $text_limit; ?>
       <select onchange="location = this.value;">
         <?php foreach ($limits as $limits) { ?>
@@ -148,6 +148,8 @@
   <?php }?>
   <?php echo $content_bottom; ?>
 </div>
+</div>
+    </div>
 </div>
 <script type="text/javascript"><!--
 $('#content input[name=\'filter_name\']').keydown(function(e) {

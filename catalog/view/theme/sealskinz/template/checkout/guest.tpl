@@ -1,3 +1,4 @@
+<div class="wrap-guest">
 <div id="left" class="half">
     <div class="left" style="border-right: none;">
       <h2><?php echo $text_your_details; ?></h2>
@@ -160,6 +161,7 @@
             </select>
         </div>
   </div>
+</div>
 </div>
 </div>
 <?php if ($shipping_required) { ?>

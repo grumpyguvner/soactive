@@ -19,11 +19,11 @@ class ModelCatalogCategory extends Model {
 	}
 	
 	public function getProductCategories($prodid) {
-  $query = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . $prodid . "'");
-  if($query->num_rows > 0) { return $query->rows; 
-  } else {
-  return false; }
-}
+            $query = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . $prodid . "'");
+            if($query->num_rows > 0) { return $query->rows; 
+            } else {
+            return false; }
+        }
 	public function getCategory($category_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
 		
@@ -35,6 +35,12 @@ class ModelCatalogCategory extends Model {
 
 		return $query->rows;
 	}
+        
+        public function getAttributes() {
+            $query = $this->db->query("SELECT name, (SELECT agd.name FROM " . DB_PREFIX . "attribute_group_description agd WHERE agd.attribute_group_id = a.attribute_group_id AND agd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS attribute_group FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+            
+            return $query-> rows;
+        }
         
         public function getCategoryAttributes($category_id = 0, $att_filters = null) {
         // Get all attributes for current category
@@ -198,7 +204,7 @@ class ModelCatalogCategory extends Model {
                     $big_array2[$i]['attribute_group_id'] = $barray['attribute_group_id'];
                     $big_array2[$i]['name'] = $barray['name'];
                     $big_array2[$i]['attribute_types'] = array();
-
+                       
                     $types = $barray['attribute_types'];
 
                     $j = 0;
@@ -208,14 +214,11 @@ class ModelCatalogCategory extends Model {
                         $big_array2[$i]['attribute_types'][$j]['type_id'] = $type;
                         $big_array2[$i]['attribute_types'][$j]['type_name'] = $attributes[$type][0]['attribute_name'];
                         $big_array2[$i]['attribute_types'][$j]['types'] = array();
-                        /********************** Added ******************************************/
-                        $category = $this->model_catalog_category->getCategory($category_id);
-                        $big_array2[$i]['attribute_types'][$j]['category_name'] = $category['name'];
-                        /********************** End Added **************************************/
                         foreach ($attributes[$type] as $atts) {
 
                             $big_array2[$i]['attribute_types'][$j]['types'][] = $atts['attribute_text'];
                         }
+                        
                         $j++;
                     }
                     $i++;

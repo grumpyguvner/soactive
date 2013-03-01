@@ -37,7 +37,7 @@ class ControllerInformationInformation extends Controller {
       		$this->data['heading_title'] = $information_info['title'];
       		$this->data['button_continue'] = $this->language->get('button_continue');
                 $this->data['text_designed'] = $this->language->get('text_designed');
-                $this->data['seo'] = $this->request->get['_route_'];
+                
                 
                 /************************** Added Antonio 05/02/2013 **********************/	
                 if ($information_info['image']) {

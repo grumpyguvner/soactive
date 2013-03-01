@@ -39,11 +39,12 @@ class ControllerInformationContact extends Controller {
                 'href'      => $this->url->link('information/contact'),
         	'separator' => $this->language->get('text_separator')
       	);	
-	$this->data['text_designed'] = $this->language->get('text_designed');	
+        $this->data['text_designed'] = $this->language->get('text_designed');	
     	$this->data['heading_title'] = $this->language->get('heading_title');
         $this->data['text_contactinfo'] = $this->language->get('text_contactinfo');
         $this->data['text_titlecontact'] = $this->language->get('text_titlecontact');
     	$this->data['text_location'] = $this->language->get('text_location');
+        $this->data['text_contact_us'] = $this->language->get('text_contact_us');
         $this->data['text_contact'] = $this->language->get('text_contact');
 	$this->data['text_address'] = $this->language->get('text_address');
     	$this->data['text_telephone'] = $this->language->get('text_telephone');
