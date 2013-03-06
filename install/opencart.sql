@@ -2663,6 +2663,8 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (69, 0, 'config', 'config_image_popup_width', '500', 0),
 (70, 0, 'config', 'config_image_thumb_height', '228', 0),
 (71, 0, 'config', 'config_image_thumb_width', '228', 0),
+(126, 0, 'config', 'config_image_information_height', '228', 0),
+(127, 0, 'config', 'config_image_information_width', '228', 0),
 (72, 0, 'config', 'config_icon', 'data/cart.png', 0),
 (73, 0, 'config', 'config_logo', 'data/logo.png', 0),
 (74, 0, 'config', 'config_cart_weight', '1', 0),
@@ -2716,7 +2718,7 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (123, 0, 'config', 'config_order_edit', '100', 0),
 (124, 0, 'config', 'config_voucher_min', '1', 0),
 (125, 0, 'config', 'config_voucher_max', '1000', 0),
-(126, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:\"1\";}', 1);
+(128, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:\"1\";}', 1);
 
 -- --------------------------------------------------------
 
@@ -2915,6 +2917,12 @@ CREATE TABLE `oc_user` (
 -- Dumping data for table `oc_user`
 --
 
+INSERT INTO `oc_user` (`user_id`,`user_group_id`,`username`,`password`,`salt`,`firstname`,`lastname`,`email`,`code`,`ip`,`status`,`date_added`) VALUES 
+(1,1,'mark.horton','b06be8f59c3565602247050a2ff77c34','','','','mark.horton@boundlesscommerce.co.uk','','',1,'2013-01-01 12:00:00');
+(2,1,'beckie.waters','91a77f0e7923a1c6157a4871c706dddfb5d55b0e','a316d881d','Beckie','Waters','beckie.waters@boundlesscommerce.co.uk','','',1,'2013-01-01 12:00:00'),
+(3,1,'tim.faulkner','ceeb722911a54bc293a8fed0d2832a8c42f678cc','528b00cac','Tim','Faulkner','tim.faulkner@boundlesscommerce.co.uk','','',1,'2013-01-01 12:00:00'),
+(4,1,'antonio.villella','de3671fb4f8ec43c746dce5c65e2dbb07933573c','bf739804b','antonio','villella','antonio.villella@boundlesscommerce.co.uk','','',1,'2013-01-01 12:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -2926,6 +2934,7 @@ CREATE TABLE `oc_user_group` (
   `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) COLLATE utf8_bin NOT NULL,
   `permission` text COLLATE utf8_bin NOT NULL,
+  `superuser` TINYINT DEFAULT 0,
   PRIMARY KEY (`user_group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -7235,5 +7244,5 @@ CREATE TABLE IF NOT EXISTS `oc_news_to_store` (
   `store_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`news_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-DELETE FROM `preffix_url_alias` WHERE `query` = "news/headlines";
-INSERT INTO `preffix_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');
+DELETE FROM `oc_url_alias` WHERE `query` = "news/headlines";
+INSERT INTO `oc_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');

@@ -217,7 +217,6 @@ ALTER TABLE oc_customer_group ADD sort_order int(3) NOT NULL DEFAULT 0 COMMENT '
 ALTER TABLE `oc_order` ADD payment_company_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company;
 ALTER TABLE `oc_order` ADD payment_tax_id varchar(32) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin AFTER payment_company_id;
 ALTER TABLE `oc_information` ADD bottom int(1) NOT NULL DEFAULT '1' COMMENT '' AFTER information_id;
-ALTER TABLE `oc_information` ADD image varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '' AFTER status;
 
 #### Start 1.5.4
 CREATE TABLE IF NOT EXISTS `oc_customer_online` (
@@ -252,6 +251,12 @@ ALTER TABLE `oc_user` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT ''
 ALTER TABLE `oc_user` MODIFY `password` varchar(40) NOT NULL;
 ALTER TABLE `oc_user` MODIFY `ip` varchar(40) NOT NULL;
 
+#### Start 1.5.4:1
+ALTER TABLE `oc_user` MODIFY `code` VARCHAR(64) COLLATE utf8_bin NOT NULL;
+ALTER TABLE `oc_user_group` ADD `superuser` TINYINT DEFAULT 0;
+UPDATE `oc_user_group` SET `superuser` = 1 WHERE `user_group_id` = 1;
+ALTER TABLE `oc_information` ADD image varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '' AFTER status;
+
 CREATE TABLE IF NOT EXISTS `oc_advanced_coupon` (
   `advanced_coupon_id` int(11) NOT NULL auto_increment,
   `name` varchar(64) NOT NULL,
@@ -264,11 +269,6 @@ CREATE TABLE IF NOT EXISTS `oc_advanced_coupon` (
   PRIMARY KEY  (`advanced_coupon_id`),
   UNIQUE KEY `name` (`code`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
-INSERT INTO `oc_advanced_coupon` VALUES(2, '$10 Off', 'GET10', 'a:21:{s:4:"type";s:1:"F";s:8:"discount";s:2:"10";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"0";s:12:"quantity_buy";s:1:"0";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2012-08-16', 0, '2012-06-04');
-INSERT INTO `oc_advanced_coupon` VALUES(3, '10% Off', 'GET10P', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:2:"10";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"0";s:12:"quantity_buy";s:1:"0";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2012-11-29', 0, '2012-06-04');
-INSERT INTO `oc_advanced_coupon` VALUES(4, 'Buy One Get One Free', 'BOGOF', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:3:"100";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"1";s:12:"quantity_buy";s:1:"1";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2013-02-21', 0, '2012-06-04');
-INSERT INTO `oc_advanced_coupon` VALUES(6, 'Buy Two Get One Free ', 'BTGOF', 'a:21:{s:4:"type";s:1:"P";s:8:"discount";s:3:"100";s:13:"quantity_type";s:1:"P";s:13:"quantity_sale";s:1:"1";s:12:"quantity_buy";s:1:"2";s:14:"quantity_total";s:1:"0";s:5:"total";s:1:"0";s:6:"logged";s:1:"0";s:8:"shipping";s:1:"0";s:14:"coupon_combine";s:1:"0";s:10:"uses_total";s:3:"100";s:13:"uses_customer";s:3:"100";s:15:"special_combine";s:1:"1";s:16:"discount_combine";s:1:"1";s:7:"product";a:0:{}s:11:"product_buy";a:0:{}s:5:"store";a:1:{i:0;s:1:"0";}s:14:"customer_group";a:2:{i:0;s:1:"8";i:1;s:1:"6";}s:8:"currency";a:3:{i:0;s:1:"3";i:1;s:1:"1";i:2;s:1:"2";}s:8:"language";a:1:{i:0;s:1:"1";}s:3:"day";a:7:{i:0;s:6:"Monday";i:1;s:7:"Tuesday";i:2;s:9:"Wednesday";i:3;s:8:"Thursday";i:4;s:6:"Friday";i:5;s:8:"Saturday";i:6;s:6:"Sunday";}}', '2012-06-01', '2013-05-29', 0, '2012-06-04');
 
 CREATE TABLE IF NOT EXISTS `oc_advanced_coupon_history` (
   `advanced_coupon_history_id` int(11) NOT NULL auto_increment,
@@ -373,5 +373,6 @@ CREATE TABLE IF NOT EXISTS `oc_news_to_store` (
   `store_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`news_id`,`store_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-DELETE FROM `preffix_url_alias` WHERE `query` = "news/headlines";
-INSERT INTO `preffix_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');
+
+DELETE FROM `oc_url_alias` WHERE `query` = "news/headlines";
+INSERT INTO `oc_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');
