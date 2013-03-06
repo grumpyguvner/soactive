@@ -23,6 +23,22 @@
               <span class="error"><?php echo $error_name; ?></span>
               <?php  } ?></td>
           </tr>
+          <?php if ($this->user->isSuperuser()) { ?>
+          <tr>
+            <td><?php echo $entry_superuser; ?></td>
+            <td><?php if ($superuser) { ?>
+                <input type="radio" name="superuser" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="superuser" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="superuser" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="superuser" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+          </tr>
+          <?php } ?>
           <tr>
             <td><?php echo $entry_access; ?></td>
             <td><div class="scrollbox">
