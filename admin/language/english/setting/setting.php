@@ -107,6 +107,9 @@ $_['entry_error_display']          = 'Display Errors:';
 $_['entry_error_log']              = 'Log Errors:';
 $_['entry_error_filename']         = 'Error Log Filename:';
 $_['entry_google_analytics']       = 'Google Analytics Code:<br /><span class="help">Login to your <a onclick="window.open(\'http://www.google.com/analytics/\');"><u>Google Analytics</u></a> account and after creating your web site profile copy and paste the analytics code into this field.</span>';
+$_['entry_cron_status']            = 'Cron enabled:';
+$_['entry_cron_user']              = 'Cron user:';
+$_['entry_cron_permission']        = 'Cron Permission:';
 
 // Email
 $_['entry_email_newsletter_subject'] = 'Newsletter Confirmation Subject';

@@ -17,7 +17,11 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-fraud"><?php echo $tab_fraud; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a><a href="#tab-email"><?php echo $tab_email; ?></a></div>
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-fraud"><?php echo $tab_fraud; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a><a href="#tab-email"><?php echo $tab_email; ?></a><?php
+      if (!$display) {
+?><a href="#tab-cron"><?php echo $tab_cron; ?></a><?php
+}
+?></div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <div id="tab-general">
           <table class="form">
@@ -954,6 +958,56 @@
             <tr>
               <td><?php echo $entry_email_order_body; ?></td>
               <td><textarea name="config_email_order_body" cols="40" rows="5"><?php echo $config_email_order_body; ?></textarea></td>
+            </tr>
+          </table>
+        </div>
+        <div id="tab-cron" <?php echo $display; ?>>
+          <table class="form">
+            <tr>
+              <td><?php echo $entry_cron_status; ?></td>
+              <td><?php if ($config_cron_status) { ?>
+                <input type="radio" name="config_cron_status" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_cron_status" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_cron_status" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_cron_status" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_cron_user; ?></td>
+              <td><select name="config_cron_user_id">
+                  <option></option>
+                  <?php foreach ($users as $user) { ?>
+                  <?php if ($user['user_id'] == $config_cron_user_id) { ?>
+                  <option value="<?php echo $user['user_id']; ?>" selected="selected"><?php echo $user['username']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $user['user_id']; ?>"><?php echo $user['username']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_cron_permission; ?></td>
+              <td><div class="scrollbox">
+                <?php $class = 'odd'; ?>
+                <?php foreach ($permissions as $permission) { ?>
+                <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                <div class="<?php echo $class; ?>">
+                  <?php if (in_array($permission, $config_cron_permission)) { ?>
+                  <input type="checkbox" name="config_cron_permission[]" value="<?php echo $permission; ?>" checked="checked" />
+                  <?php echo $permission; ?>
+                  <?php } else { ?>
+                  <input type="checkbox" name="config_cron_permission[]" value="<?php echo $permission; ?>" />
+                  <?php echo $permission; ?>
+                  <?php } ?>
+                </div>
+                <?php } ?>
+              </div>
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
             </tr>
           </table>
         </div>
