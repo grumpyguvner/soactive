@@ -283,6 +283,7 @@ class ControllerModuleAFilters extends Controller {
 				
 				$big_array2[$i]['attribute_group_id'] = $barray['attribute_group_id'];
 				$big_array2[$i]['name'] = $barray['name'];
+                                $big_array2[$i]['category_id'] = $category_id;
 				$big_array2[$i]['attribute_types'] = array();
 				
 				$types = $barray['attribute_types'];
@@ -417,10 +418,13 @@ class ControllerModuleAFilters extends Controller {
 			}
 			
 			if (isset($afilterURL)) {
-				foreach ($afilterURL as $key=>$val) {
-				$url .= '&att_filters['.$key.']=' . $val;
-				}
-                                
+                            foreach ($afilterURL as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+                                    foreach ($val as $val2) {
+                                    $url .= '&att_filters['.$key.'][]=' . urlencode($val2);
+                                    }
+                            }
 			}
 		
 		
@@ -428,7 +432,25 @@ class ControllerModuleAFilters extends Controller {
 		
 		//--------------------------------------------------------------------------------------------------
 		
+                //-------------------------------- Categories Sealskinz ------------------------------------//
+                $this->data['categories'] = array();
+					
+		$categories = $this->model_catalog_category->getCategories(0);
 		
+		foreach ($categories as $category) {
+                    if ($category['status'] == '1') {
+                                                            
+                                $this->data['categories'][] = array(
+                                    'name'       => $category['name'],
+                                    'category_id'=> $category['category_id']
+				);
+                               
+                        }
+                }
+                $this->data['cat_id'] = $category_id;
+                
+                //-------------------------------- End Categories Sealskinz --------------------------------//       
+		 
 		$this->data['href'] = $this->url->link('product/category', 'path=' . $path . $url);
 		
 		//        if (isset($big_array2)) {

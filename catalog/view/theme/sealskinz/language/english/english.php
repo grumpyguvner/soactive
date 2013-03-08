@@ -17,6 +17,10 @@ $_['text_select']           = ' --- Please Select --- ';
 $_['text_all_zones']        = 'All Zones';
 $_['text_pagination']       = 'Showing {start} to {end} of {total} ({pages} Pages)';
 $_['text_separator']        = ' / ';
+$_['text_win_price']        = 'WIN SEALSKINZ PRIZES!!';
+$_['text_join_club']        = 'JOIN THE CLUB, SIGN UP TO SEALSKINZ NOW!';
+$_['text_subscribe_newsletter']      = 'Subscribe to our newsletter for all the latest news & events';
+$_['text_write_review']      = 'Write a review on your product and be entered into a draw for lots goodies.';
 
 // Buttons
 $_['button_add_address']    = 'Add Address';

@@ -1,6 +1,6 @@
 <div id="cart">
   
-    <a><span id="cart-total"><?php echo $text_items; ?></span></a>
+    <a><span id="cart-total"><img src="catalog/view/theme/sealskinz/image/shopping-cart.png" alt="Cart" />&nbsp<?php echo $text_items; ?></span></a>
   
     <ul style="margin: -13px 0 0 -202px;"><li class="cart-menu">
   

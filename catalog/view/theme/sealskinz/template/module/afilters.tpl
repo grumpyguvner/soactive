@@ -3,7 +3,7 @@
  <div class="box-heading"><?php echo $heading_title; ?></div>
     <div class="box-content">
         <div class="box-category">
-            <form action="<?php echo $href; ?>" method="get" name="afilter" id="afilter">
+            <form action="<?php echo $href_no_attributes; ?>" method="get" name="afilter" id="afilter">
             <?php if (isset($_GET['path'])) { ?>
             <input type="hidden" name="route" value="product/category" />
             <input type="hidden" name="path" value="<?php echo $_GET['path']; ?>" />
@@ -21,20 +21,21 @@
                             <div class="box-category">
                                 <ul>
                                   <?php foreach($attributes as $att1) { // pentru fiecare grup ?>
-                                       <?php if($att1['name'] == 'Type') { ?> 
+                                       <?php if($att1['name'] == 'Filter') { ?> 
                                            <?php /* echo $att1['name']; */?> 
-                                           <?php foreach ($att1['attribute_types'] as $type) { ?>
-                                              <li>
-                                                 <input type="hidden" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>]" value="0" /> 
-                                                 <?php asort($type['types']); foreach ($type['types'] as $type_value) { ?>
+                                           <?php foreach ($att1['attribute_types'] as $type1) { ?>
+                                             <?php if($type1['type_name'] == 'Type') { ?>
+                                                  
+                                                 <?php asort($type1['types']); foreach ($type1['types'] as $type_value1) { ?>
                                                     <?php // var_dump($afilters[$type['type_id']]); ?>
-                                                    <?php if (isset($afilters) && ($afilters[$type['type_id']] == $type_value)){ ?>
-                                                        <input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>]" value="<?php echo $type_value; ?>" checked="checked" /> <span><?php echo $type_value;?></span>
+                                                    <?php if (isset($afilters[$type1['type_id']]) && in_array($type_value1, $afilters[$type1['type_id']])){ ?>
+                                                        <li><input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type1['type_id']; ?>][]" value="<?php echo $type_value1; ?>" checked="checked" /> <span><?php echo $type_value1;?></span></li>
                                                     <?php } else { ?>
-                                                        <input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>]" value="<?php echo $type_value; ?>" /> <span><?php echo $type_value ?></span>
+                                                        
+                                                        <li><input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type1['type_id']; ?>][]" value="<?php echo $type_value1; ?>" /> <span><?php echo $type_value1 ?></span></li>
                                                     <?php  } ?>
                                                  <?php } ?>
-                                              </li>
+                                             <?php } ?> 
                                             <?php } ?> 
                                        <?php } ?>
                                   <?php } ?>
@@ -54,7 +55,17 @@
                     <div class="accordion-inner" style="padding: 0 0 9px;">
                       <div class="box-content">
                         <div class="box-category">
-                          
+                            <ul>
+                              <?php if ($categories) { ?>
+                                <?php foreach ($categories as $category) { ?>
+                                   <?php if (isset($afilters[0]) && in_array($category['category_id'], $afilters[0])) { ?> 
+                                        <li><input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" checked="checked" /> <span><?php echo $category['name'];?></span></li>
+                                   <?php } else { ?>
+                                        <li><input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" /> <span><?php echo $category['name'];?></span></li>
+                                   <?php } ?>
+                               <?php } ?>
+                              <?php } ?> 
+                            </ul>
                         </div>
                      </div>
                     </div>
@@ -68,7 +79,28 @@
                   </div>
                   <div class="accordion-body collapse" id="collapseThree" style="height: 0px;">
                     <div class="accordion-inner" style="padding: 0 0 9px;">
-                      
+                      <div class="box-content">
+                        <div class="box-category">  
+                               <ul>
+                                  <?php foreach($attributes as $att2) { // pentru fiecare grup ?>
+                                       <?php if($att1['name'] == 'Filter') { ?> 
+                                           <?php /* echo $att1['name']; */?> 
+                                           <?php foreach ($att2['attribute_types'] as $type2) { ?>
+                                             <?php if($type2['type_name'] == 'Gender') { ?>
+                                                 <?php asort($type2['types']); foreach ($type2['types'] as $type_value2) { ?>
+                                                    <?php if (isset($afilters[$type2['type_id']]) && in_array($type_value2, $afilters[$type2['type_id']])){ ?>
+                                                        <li><input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type2['type_id']; ?>][]" value="<?php echo $type_value1; ?>" checked="checked" /> <span><?php echo $type_value2;?></span></li>
+                                                    <?php } else { ?>
+                                                        <li><input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type2['type_id']; ?>][]" value="<?php echo $type_value2; ?>" /> <span><?php echo $type_value2 ?></span></li>
+                                                    <?php  } ?>
+                                                 <?php } ?>
+                                             <?php } ?> 
+                                            <?php } ?> 
+                                       <?php } ?>
+                                  <?php } ?>
+                                </ul> 
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -83,18 +115,19 @@
                        <ul>
                            <li>
                               <?php foreach($attributes as $att) { // pentru fiecare grup ?>
-                                <?php if($att['name'] == 'Technology') { ?>
+                                <?php if($att['name'] == 'Filter') { ?>
                                   <?php foreach ($att['attribute_types'] as $type) { ?>
-                                    <?php /* echo $type['type_name']; */?>
-                                    <input type="hidden" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>]" value="0" />
+                                   <?php if($type['type_name'] == 'Thermal Rating') { ?>
+                                    
                                     <?php asort($type['types']); foreach ($type['types'] as $type_value) { ?>
-                                        <?php // var_dump($afilters[$type['type_id']]); ?>
-                                        <?php if (isset($afilters) && ($afilters[$type['type_id']] == $type_value)){ ?>
-                                           <input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>]" value="<?php echo $type_value; ?>" checked="checked" /> <?php echo $type_value;?>
+                                        
+                                        <?php if (isset($afilters[$type['type_id']]) && in_array($type_value, $afilters[$type['type_id']])){ ?>
+                                            <input type="image" class="r<?php echo $type_value; ?>b" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>][]" value="<?php echo $type_value; ?>" /> 
                                         <?php } else { ?>
-                                           <input type="checkbox" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>]" value="<?php echo $type_value; ?>" /> <?php echo $type_value ?> 
+                                            <input type="image" class="r<?php echo $type_value; ?>" onchange="$('#afilter').submit();" name="att_filters[<?php echo $type['type_id']; ?>][]" value="<?php echo $type_value; ?>" />  
                                         <?php  } ?>
                                    <?php } ?>
+                                  <?php } ?>         
                                 <?php } ?> 
                               <?php } ?>            
                             <?php } ?> 

@@ -21,13 +21,31 @@ class ModelCatalogProduct extends Model {
 		
 		/* start 1.5.3.1 */
 		if (!$product_data) {
+                    
+                        $myCategories = array();
+                        
+			if (!empty($data['filter_category_id']))
+                                $myCategories[] = $data['filter_category_id'];
+                        
+                        if (isset($data['afilters'])) {
+                            
+                                if (isset($data['afilters'][0])) {
+                                    foreach ($data['afilters'][0] as $cat_id) {
+                                        if (!in_array($cat_id, $myCategories))
+                                                $myCategories[] = $cat_id;
+                                    }
+                                    unset($data['afilters'][0]);
+                                }
+                        }  
+                    
+                    
 			$sql = "SELECT p.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)"; 
 			
 			if (!empty($data['filter_tag'])) {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_tag pt ON (p.product_id = pt.product_id)";			
 			}
 						
-			if (!empty($data['filter_category_id'])) {
+			if (!empty($myCategories)) {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
 			}
 			
@@ -75,11 +93,13 @@ class ModelCatalogProduct extends Model {
 				$sql .= ")";
 			}
 			
-			if (!empty($data['filter_category_id'])) {
+			if (!empty($myCategories)) {
+                                $implode_data = array();
+
+                                foreach ($myCategories as $category_id) {
+                                        $implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+                                }
 				if (!empty($data['filter_sub_category'])) {
-					$implode_data = array();
-					
-					$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
 					
 					$this->load->model('catalog/category');
 					
@@ -89,11 +109,11 @@ class ModelCatalogProduct extends Model {
 						$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
 					}
 								
-					$sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
-				} else {
-					$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
 				}
-			}		
+                                
+                                $sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+				
+			}
 					
 			if (!empty($data['filter_manufacturer_id'])) {
 				$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
@@ -143,16 +163,18 @@ class ModelCatalogProduct extends Model {
 				
 				if (isset($data['afilters'])) {
 					
-					foreach(array_keys($data['afilters']) as $data_afilters){
+					foreach($data['afilters'] as $key => $data_afilters){
+                                                $display_product = false;
+                                                if (!is_array($data_afilters))
+                                                    $data_afilters = explode (",", $data_afilters);
+						foreach($data_afilters as $attr) {
 						
-						if ($data['afilters'][$data_afilters] != '0') {
-							
-							if(!$this->productHasAtt($result['product_id'], $data['afilters'][$data_afilters])){
-								
-								$display_product = false;	
-								
-							}
-						}
+                                                    if($this->productHasAtt($result['product_id'], $attr)){
+
+                                                            $display_product = true;	
+
+                                                    }
+                                                }
 					}
 				}  
 				
@@ -215,6 +237,9 @@ class ModelCatalogProduct extends Model {
 	private function productHasAtt($product_id, $att_value /*, $option_value_id*/){
 			
 		$hasAtt = false;
+                
+                if (!is_array($att_value))
+                    $att_value = explode (",", $att_value);
 	
 		$product_att = $this->getProductAttributes($product_id);
 		
@@ -222,7 +247,7 @@ class ModelCatalogProduct extends Model {
 			
 			foreach ($product_ats['attribute'] as $product_at) {
 			
-			if ($product_at['text'] == $att_value){
+			if (in_array($product_at['text'], $att_value)) {
 				
 						$hasAtt = true;
 						
@@ -239,9 +264,25 @@ class ModelCatalogProduct extends Model {
 	
 		$total = 0;
 
+                $myCategories = array();
+
+                if (!empty($data['filter_category_id']))
+                        $myCategories[] = $data['filter_category_id'];
+
+                if (isset($data['afilters'])) {
+
+                        if (isset($data['afilters'][0])) {
+                            foreach ($data['afilters'][0] as $cat_id) {
+                                if (!in_array($cat_id, $myCategories))
+                                        $myCategories[] = $cat_id;
+                            }
+                            unset($data['afilters'][0]);
+                        }
+                }  
+                
 		$sql = "SELECT p.product_id FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)";
 
-		if (!empty($data['filter_category_id'])) {
+		if (!empty($myCategories)) {
 			$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
 		}
 		
@@ -293,25 +334,27 @@ class ModelCatalogProduct extends Model {
 			$sql .= ")";
 		}
 		
-		if (!empty($data['filter_category_id'])) {
-			if (!empty($data['filter_sub_category'])) {
-				$implode_data = array();
-				
-				$implode_data[] = "p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
-				
-				$this->load->model('catalog/category');
-				
-				$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
-					
-				foreach ($categories as $category_id) {
-					$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
-				}
-							
-				$sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
-			} else {
-				$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
-			}
-		}		
+                if (!empty($myCategories)) {
+                        $implode_data = array();
+
+                        foreach ($myCategories as $category_id) {
+                                $implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+                        }
+                        if (!empty($data['filter_sub_category'])) {
+
+                                $this->load->model('catalog/category');
+
+                                $categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
+
+                                foreach ($categories as $category_id) {
+                                        $implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+                                }
+
+                        }
+
+                        $sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+
+                }
 		
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
@@ -441,9 +484,25 @@ class ModelCatalogProduct extends Model {
 		$product_data = $this->cache->get('product.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache);
 		
 		if (!$product_data) {
+                        $myCategories = array();
+
+                        if (!empty($data['filter_category_id']))
+                                $myCategories[] = $data['filter_category_id'];
+
+                        if (isset($data['afilters'])) {
+
+                                if (isset($data['afilters'][0])) {
+                                    foreach ($data['afilters'][0] as $cat_id) {
+                                        if (!in_array($cat_id, $myCategories))
+                                                $myCategories[] = $cat_id;
+                                    }
+                                    unset($data['afilters'][0]);
+                                }
+                        }  
+                    
 			$sql = "SELECT p.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)"; 
 						
-			if (!empty($data['filter_category_id'])) {
+			if (!empty($myCategories)) {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
 			}
 			
@@ -499,25 +558,27 @@ class ModelCatalogProduct extends Model {
 				}					
 			}
 			
-			if (!empty($data['filter_category_id'])) {
+			if (!empty($myCategories)) {
+                                $implode_data = array();
+
+                                foreach ($myCategories as $category_id) {
+                                        $implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+                                }
 				if (!empty($data['filter_sub_category'])) {
-					$implode_data = array();
-					
-					$implode_data[] = (int)$data['filter_category_id'];
 					
 					$this->load->model('catalog/category');
 					
 					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
 										
 					foreach ($categories as $category_id) {
-						$implode_data[] = (int)$category_id;
+						$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
 					}
 								
-					$sql .= " AND p2c.category_id IN (" . implode(', ', $implode_data) . ")";			
-				} else {
-					$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
 				}
-			}		
+                                
+                                $sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+				
+			}
 					
 			if (!empty($data['filter_manufacturer_id'])) {
 				$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
@@ -846,9 +907,26 @@ class ModelCatalogProduct extends Model {
 		$product_data = $this->cache->get('product.total.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$customer_group_id . '.' . $cache);
 		
 		if (!$product_data) {
+                        $myCategories = array();
+
+                        if (!empty($data['filter_category_id']))
+                                $myCategories[] = $data['filter_category_id'];
+
+                        if (isset($data['afilters'])) {
+
+                                if (isset($data['afilters'][0])) {
+                                    foreach ($data['afilters'][0] as $cat_id) {
+                                        if (!in_array($cat_id, $myCategories))
+                                                $myCategories[] = $cat_id;
+                                    }
+                                    unset($data['afilters'][0]);
+                                }
+                        }  
+
+                    
 			$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)";
 	
-			if (!empty($data['filter_category_id'])) {
+			if (!empty($myCategories)) {
 				$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
 			}
 						
@@ -904,25 +982,27 @@ class ModelCatalogProduct extends Model {
 				}				
 			}
 						
-			if (!empty($data['filter_category_id'])) {
+			if (!empty($myCategories)) {
+                                $implode_data = array();
+
+                                foreach ($myCategories as $category_id) {
+                                        $implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
+                                }
 				if (!empty($data['filter_sub_category'])) {
-					$implode_data = array();
-					
-					$implode_data[] = (int)$data['filter_category_id'];
 					
 					$this->load->model('catalog/category');
 					
 					$categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
 										
 					foreach ($categories as $category_id) {
-						$implode_data[] = (int)$category_id;
+						$implode_data[] = "p2c.category_id = '" . (int)$category_id . "'";
 					}
 								
-					$sql .= " AND p2c.category_id IN (" . implode(', ', $implode_data) . ")";			
-				} else {
-					$sql .= " AND p2c.category_id = '" . (int)$data['filter_category_id'] . "'";
 				}
-			}		
+                                
+                                $sql .= " AND (" . implode(' OR ', $implode_data) . ")";			
+				
+			}
 			
 			if (!empty($data['filter_manufacturer_id'])) {
 				$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
@@ -953,5 +1033,11 @@ class ModelCatalogProduct extends Model {
 			return 0;	
 		}
 	}
+        
+         public function getAttributesName($att_id) {
+            $query = $this->db->query("SELECT pa.text, attribute_id FROM " . DB_PREFIX . "product_attribute pa WHERE pa.attribute_id = '" . (int)$att_id . "' AND pa.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+            
+            return $query-> rows;
+        }
 }
 ?>

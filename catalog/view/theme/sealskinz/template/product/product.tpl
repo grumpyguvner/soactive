@@ -80,7 +80,7 @@
                         <div style="width: 100%">
                            <?php if ($options) { ?>
                                 <div class="options">
-                                  <h4>Our best selling, totally waterproof, windproof and breathable knitted beanie hat</h4>
+                                  <h4><?php echo $text_option_details ?></h4>
                                   
                                   <?php foreach ($options as $option) { ?>
                                   <?php if ($option['type'] == 'select') { ?>
@@ -444,13 +444,13 @@
                                                                        <tbody>
                                                                        <tr>
                                                                        <td class="table-price">
-                                                                           <div class="price">
+                                                                           
                                                                              <?php if (!$product['special']) { ?>
                                                                              <h4><?php echo $product['price']; ?></h4>
                                                                              <?php } else { ?>
                                                                              <span class="price-old"><h4><?php echo $product['price']; ?></h4></span> <span class="price-new"><?php echo $product['special']; ?></span>
                                                                              <?php } ?>
-                                                                           </div>
+                                                                          
                                                                        </td>
                                                                        <td class="table-info"><a href="" style="color: white !important;"><h4>VIEW PRODUCT INFO</h4></a></td>
                                                                        </tr>
