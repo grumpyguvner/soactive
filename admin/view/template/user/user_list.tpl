@@ -27,6 +27,11 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_username; ?>"><?php echo $column_username; ?></a>
                 <?php } ?></td>
+              <td class="left"><?php if ($sort == 'user_group') { ?>
+                <a href="<?php echo $sort_user_group; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_user_group; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_user_group; ?>"><?php echo $column_user_group; ?></a>
+                <?php } ?></td>
               <td class="left"><?php if ($sort == 'status') { ?>
                 <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                 <?php } else { ?>
@@ -44,12 +49,15 @@
             <?php if ($users) { ?>
             <?php foreach ($users as $user) { ?>
             <tr>
-              <td style="text-align: center;"><?php if ($user['selected']) { ?>
+              <td style="text-align: center;"><?php if ($user['superuser'] && !$this->user->isSuperuser()) { ?>
+                &nbsp;
+                <?php } elseif ($user['selected']) { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $user['user_id']; ?>" checked="checked" />
                 <?php } else { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $user['user_id']; ?>" />
                 <?php } ?></td>
               <td class="left"><?php echo $user['username']; ?></td>
+              <td class="left"><?php echo $user['user_group']; ?></td>
               <td class="left"><?php echo $user['status']; ?></td>
               <td class="left"><?php echo $user['date_added']; ?></td>
               <td class="right"><?php foreach ($user['action'] as $action) { ?>
@@ -59,7 +67,7 @@
             <?php } ?>
             <?php } else { ?>
             <tr>
-              <td class="center" colspan="5"><?php echo $text_no_results; ?></td>
+              <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

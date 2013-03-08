@@ -1,7 +1,5 @@
-config_*.php
-admin/config_*.php
-!/config_staging.php
-!/admin/config_staging.php
+config*.php
+admin/config*.php
 
 !index.html
 

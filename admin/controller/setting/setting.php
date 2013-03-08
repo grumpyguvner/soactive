@@ -30,6 +30,8 @@ class ControllerSettingSetting extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_yes'] = $this->language->get('text_yes');
 		$this->data['text_no'] = $this->language->get('text_no');
+		$this->data['text_select_all'] = $this->language->get('text_select_all');
+		$this->data['text_unselect_all'] = $this->language->get('text_unselect_all');
 		$this->data['text_items'] = $this->language->get('text_items');
 		$this->data['text_product'] = $this->language->get('text_product');
 		$this->data['text_voucher'] = $this->language->get('text_voucher');
@@ -100,7 +102,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
 		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
-                $this->data['entry_image_information'] = $this->language->get('entry_image_information');
+        $this->data['entry_image_information'] = $this->language->get('entry_image_information');
 		$this->data['entry_image_thumb'] = $this->language->get('entry_image_thumb');
 		$this->data['entry_image_popup'] = $this->language->get('entry_image_popup');
 		$this->data['entry_image_product'] = $this->language->get('entry_image_product');
@@ -125,6 +127,10 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_fraud_status'] = $this->language->get('entry_fraud_status');
 		$this->data['entry_use_ssl'] = $this->language->get('entry_use_ssl');
 		$this->data['entry_maintenance'] = $this->language->get('entry_maintenance');
+		$this->data['entry_maintenance'] = $this->language->get('entry_maintenance');
+		$this->data['entry_cron_status'] = $this->language->get('entry_cron_status');
+		$this->data['entry_cron_user'] = $this->language->get('entry_cron_user');
+		$this->data['entry_cron_permission'] = $this->language->get('entry_cron_permission');
 		
 		$this->data['entry_encryption'] = $this->language->get('entry_encryption');
 		$this->data['entry_seo_url'] = $this->language->get('entry_seo_url');
@@ -154,6 +160,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['tab_fraud'] = $this->language->get('tab_fraud');
 		$this->data['tab_server'] = $this->language->get('tab_server');
 		$this->data['tab_email'] = $this->language->get('tab_email');
+		$this->data['tab_cron'] = $this->language->get('tab_cron');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -320,6 +327,8 @@ class ControllerSettingSetting extends Controller {
 		$this->data['cancel'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['token'] = $this->session->data['token'];
+        
+        $this->data['display'] = (!$this->user->isSuperuser()) ? ' style="display: none;"': '';
 
 		if (isset($this->request->post['config_name'])) {
 			$this->data['config_name'] = $this->request->post['config_name'];
@@ -1017,6 +1026,57 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_email_order_body'] = $this->request->post['config_email_order_body']; 
 		} else {
 			$this->data['config_email_order_body'] = $this->config->get('config_email_order_body');
+		}
+        if (isset($this->request->post['config_cron_status'])) {
+			$this->data['config_cron_status'] = $this->request->post['config_cron_status'];
+		} else {
+			$this->data['config_cron_status'] = $this->config->get('config_cron_status');
+		}
+		
+    	$this->load->model('user/user');
+		$this->data['users'] = $this->model_user_user->getUsers();
+        
+		if (isset($this->request->post['config_cron_user_id'])) {
+			$this->data['config_cron_user_id'] = $this->request->post['config_cron_user_id'];
+		} elseif ($this->config->get('config_cron_user_id')) {
+			$this->data['config_cron_user_id'] = $this->config->get('config_cron_user_id');	
+		} else {
+			$this->data['config_cron_user_id'] = 0;		
+		}
+		
+		$ignore = array(
+			'common/home',
+			'common/startup',
+			'common/login',
+			'common/logout',
+			'common/forgotten',
+			'common/reset',			
+			'error/not_found',
+			'error/permission',
+			'common/footer',
+			'common/header'
+		);
+        
+		$this->data['permissions'] = array();
+		
+		$files = glob(DIR_APPLICATION . 'controller/*/*.php');
+		
+		foreach ($files as $file) {
+			$data = explode('/', dirname($file));
+			
+			$permission = end($data) . '/' . basename($file, '.php');
+			
+			if (!in_array($permission, $ignore)) {
+				$this->data['permissions'][] = $permission;
+			}
+		}
+
+		if (isset($this->request->post['config_cron_permission'])) {
+			$this->data['config_cron_permission'] = $this->request->post['config_cron_permission'];
+		} elseif ($this->config->get('config_cron_permission')) {
+			$this->data['config_cron_permission'] = $this->config->get('config_cron_permission');	
+		} else {
+			$this->data['config_cron_permission'] = array();			
 		}
 						
 		$this->template = 'setting/setting.tpl';

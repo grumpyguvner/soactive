@@ -393,6 +393,39 @@ class ControllerCommonHome extends Controller {
 				return $this->forward('error/permission');
 			}
 		}
-	}	
+	}		
+	
+	public function cronpermission() {
+		if (isset($this->request->get['route'])) {
+			$route = '';
+			
+			$part = explode('/', $this->request->get['route']);
+			
+			if (isset($part[0])) {
+				$route .= $part[0];
+			}
+			
+			if (isset($part[1])) {
+				$route .= '/' . $part[1];
+			}
+			
+			$ignore = array(
+				'common/login',
+				'common/logout',
+				'common/forgotten',
+				'common/reset',
+				'error/not_found',
+				'error/permission'		
+			);
+            
+            $config_ignore = $this->config->get('config_cron_permission');
+
+            $ignore = array_merge($ignore, $config_ignore);
+                        
+			if (!in_array($route, $ignore)) {
+				return $this->forward('error/permission');
+			}
+		}
+	}
 }
 ?>
