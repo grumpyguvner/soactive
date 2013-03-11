@@ -68,7 +68,7 @@ if (filesize('../' . FILE_CONFIG) > 0) {
 	}
 }
 
-defined('VERSION') || define('VERSION', FULL_VERSION);
+defined('VERSION') || define('VERSION', BASE_VERSION);
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
