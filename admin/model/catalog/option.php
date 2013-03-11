@@ -20,6 +20,9 @@ class ModelCatalogOption extends Model {
 				}
 			}
 		}
+                // previously nothing was being returned but it is better to return the
+                // newly created id.
+                return $option_id;
 	}
 	
 	public function editOption($option_id, $data) {

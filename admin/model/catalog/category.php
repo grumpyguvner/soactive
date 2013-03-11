@@ -97,6 +97,15 @@ class ModelCatalogCategory extends Model {
 		return $query->row;
 	} 
 	
+	public function getCategoryByKeyword($keyword) {
+                $category_id = 0;
+		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
+
+                if($query->row)
+                    $category_id = substr ((string) $query->row['query'], 12);
+		return $this->getCategory($category_id);
+	}
+	
 	public function getCategories($parent_id = 0) {
 		$category_data = $this->cache->get('category.' . (int)$this->config->get('config_language_id') . '.' . (int)$parent_id);
 	
