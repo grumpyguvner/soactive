@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']                    = 'Administration';
+$_['heading_title']                    = 'Admin';
 
 // Text
 $_['text_affiliate']                   = 'Affiliates';
@@ -48,7 +48,7 @@ $_['text_report_sale_tax']             = 'Tax';
 $_['text_report_sale_shipping']        = 'Shipping';
 $_['text_report_sale_return']          = 'Returns';
 $_['text_report_sale_coupon']          = 'Coupons';
-$_['text_report_sale_advanced_coupon']          = 'Advanced Coupons';
+$_['text_report_sale_advanced_coupon'] = 'Advanced Coupons';
 $_['text_report_product_viewed']       = 'Viewed';
 $_['text_report_product_purchased']    = 'Purchased';
 $_['text_report_product_stock']        = 'Stock';
