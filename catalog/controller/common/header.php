@@ -173,35 +173,35 @@ class ControllerCommonHeader extends Controller {
 					'href'          => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
 			}
-                        /********************************* Star Menu SealSkinz ************************************/
+                        /********************************* Start Menu SealSkinz ************************************/
                         else if ($category['status'] == '1') {
                                                             
                                 // Level 1
 				$this->data['categories'][] = array(
 					'name'          => $category['name'],
-					'href'          => $this->url->link('product/category', 'path=' . $category['category_id'])
+					'href'          => $this->url->link('product/category', 'path=' . $category['category_id'] . '&att_filters[0][]=' . $category['category_id'])
 				);
-                             
+                               
                         }
-                        
-                        /********************************* Star Menu SealSkinz ************************************/
+                       
+                        /********************************* End Menu SealSkinz ************************************/
                         
                 }
                 
-                   /********************************* Star Menu SealSkinz ************************************/
-                   
-                   $this->data['attributes'] = array();
-                            $groups_seal = $this->model_catalog_category->getAttributes();
-                            foreach ($groups_seal as $result) {
-                                if ($result['attribute_group'] == 'Type') {					
+                   /********************************* Start Menu SealSkinz ************************************/
+                    
+                     $this->data['attributes'] = array();
+                            $groups_seal = $this->model_catalog_product->getAttributesName(30);
+                            
+                            for ($i=1; $i < 4; $i++) {
+                                					
                                 $this->data['attributes'][] = array(
-                                        'attribute_group' => $result['attribute_group'],
-                                        'name'            => $result['name']
+                                        'name'    => $groups_seal[$i]['text'],
+                                        'href'    => $this->url->link('product/category', 'path=' . $categories[0]['category_id'] . '&att_filters['. $groups_seal[$i]['attribute_id'] . '][]=' . $groups_seal[$i]['text'])
                                 );
-                                }
-		}
-                                            
-                 /********************************* Star Menu SealSkinz ************************************/
+                                
+		}              
+                 /********************************* End Menu SealSkinz ************************************/
                                     
 		$this->children = array(
 			'module/language',

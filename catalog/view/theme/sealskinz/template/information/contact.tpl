@@ -35,7 +35,7 @@
               <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <div class="text-contact">
                     <p><?php echo $text_titlecontact ?></p>
-                    <?php echo $text_contactinfo ?>
+                    <p id="text-cont"><?php echo $text_contactinfo ?></p>
                 </div>
                 <div id="left" class="contact-name">   
                     <p><b><?php echo $entry_name; ?></b><p><br />
@@ -78,7 +78,7 @@
                 
             <div class="contact-info">
               <div class="left">
-                <h3><?php echo $text_contact; ?></h3>
+                <h3><?php echo $text_contact_us; ?></h3>
                 <?php if ($telephone) { ?>
                 <span><?php echo $text_telephone; ?></span>
                 <span><?php echo $telephone; ?></span><br />

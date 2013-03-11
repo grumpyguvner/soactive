@@ -82,11 +82,11 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li><a href="#">Free UK Delivery</a>
+                                        <li><a href="free-uk-delivery">Free UK Delivery</a>
                                     </li>
                                     </ul>
                                     <ul>	
-                                        <li><a href="#">Free UK Returns</a></li>
+                                        <li><a href="free-uk-returns">Free UK Returns</a></li>
                                     </ul>
                                 </div>
                                <div id="right">
@@ -162,7 +162,7 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
     <div class="menu-gradient">
         <div class="container">
             <div class="row">
-                    <div class="margin">
+                    <div class="margin-30">
                       <div id="container-in"> 
                         <div id='cssmenu'>
                             <ul>
@@ -174,9 +174,9 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
                                         <div id="left">
                                        <?php foreach ($attributes as $attribute) { ?>
                                        
-                                           <div class="<?php echo $attribute['name'] ?>">
+                                           <a href="<?php echo $attribute['href'] ?>" alt="<?php echo $attribute['name'] ?>" /><div class="<?php echo $attribute['name'] ?>">
                                             
-                                           </div>
+                                           </div></a>
                                        
                                         <?php } ?>
                                        </div>
@@ -207,8 +207,8 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
                                 <?php } ?>
                                </li>
                                <li><a href="about-us"><span>About us</span></a></li>
-                               <li><a href=""><span>Blog</span></a></li>
-                               <li><a href=""><span>Find Stockist</span></a></li>
+                               <li><a href="blog"><span>Blog</span></a></li>
+                               <li><a href="http://www.sealskinz.com/uk-stockists"><span>Find Stockist</span></a></li>
                                <li><a href="registration"><span>Product Registration</span></a></li>
                                <li style="float: right; padding: 12px 18px;"><span>Follow us</span>&nbsp<span><a href="http://www.facebook.com" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="http://www.twitter.com" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
                             </ul>

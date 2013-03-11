@@ -5,7 +5,11 @@ class ControllerCommonHome extends Controller {
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
 		$this->data['heading_title'] = $this->config->get('config_title');
-		
+                $this->data['text_win_price'] = $this->language->get('text_win_price');
+                $this->data['text_join_club'] = $this->language->get('text_join_club');
+                $this->data['text_subscribe_newsletter'] = $this->language->get('text_subscribe_newsletter');
+		$this->data['text_write_review'] = $this->language->get('text_write_review');
+                
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';
 		} else {

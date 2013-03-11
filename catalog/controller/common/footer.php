@@ -49,7 +49,7 @@ class ControllerCommonFooter extends Controller {
 			
 				$this->data['categories'][] = array(
 					'name' => $result['name'],
-					'href' => $this->url->link('product/category', 'path=' . $result['category_id'])
+					'href' => $this->url->link('product/category', 'path=' . $result['category_id'] . '&att_filters[0][]=' . $result['category_id'])
 				);
 			
                 }

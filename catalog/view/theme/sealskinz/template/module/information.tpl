@@ -99,6 +99,42 @@
 </div>
 <div class="<?php echo $seo ?>"></div>
 
+<?php } else if(($seo == 'free-uk-delivery') || ($seo == 'free-uk-returns')) { ?>
+   <div class="box">
+  <div class="box-heading">
+      <?php echo $heading_title; ?>
+  </div>
+  <div class="box-infocontent">
+    <ul>
+      <?php foreach ($informations as $information) { ?>
+        <?php if ($information['sort_order'] == '18') { ?>
+            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
+        <?php } else if ($information['sort_order'] == '19') {?>
+            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
+        <?php } ?>
+      <?php } ?>
+    </ul>
+  </div>
+</div>
+<div class="<?php echo $seo ?>"></div>
+
+<?php } else if(($seo == 'blog')) { ?>
+   <div class="box">
+  <div class="box-heading">
+      <?php echo $heading_title; ?>
+  </div>
+  <div class="box-infocontent">
+    <ul>
+      <?php foreach ($informations as $information) { ?>
+        <?php if ($information['sort_order'] == '20') { ?>
+            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
+        <?php } ?>
+      <?php } ?>
+    </ul>
+  </div>
+</div>
+<div class="<?php echo $seo ?>"></div>
+
 <?php } else { ?>
 <div class="box">
   <div class="box-heading">

@@ -110,12 +110,11 @@ class ControllerProductCategory extends Controller {
 			
                         $url = '';
             // ------------- start add attributes filters module --------------------            
-                        if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters'])) ) {
+                        if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
 				
-				foreach(array_keys($this->request->get['att_filters']) as $filter_att) {
+
 				
-				$data['afilters'][$filter_att] = $this->request->get['att_filters'][$filter_att];
-				}
+				$data['afilters'] = $this->request->get['att_filters'];
 
 			}
                    	
@@ -130,7 +129,11 @@ class ControllerProductCategory extends Controller {
 			if (isset($afilterURL)) {
 
 				foreach ($afilterURL as $key=>$val) {
-				$url .= '&att_filters['.$key.']=' . $val;
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+				foreach ($val as $val2) {
+				$url .= '&att_filters['.$key.'][]=' . urlencode($val2);
+				}
 				}
 			}
             // ------------- end start add attributes filters module --------------------
@@ -177,7 +180,7 @@ class ControllerProductCategory extends Controller {
 			}
 			
 			$data['filter_category_id'] = $category_id;
-
+	
 			$data['sort'] = $sort;
 
 			$data['order'] = $order;
@@ -189,8 +192,10 @@ class ControllerProductCategory extends Controller {
 			
 			// start add url
 			if (isset($data['afilters'])) {
-			$afilterURL = $data['afilters'];
-			}
+                            $afilterURL = $data['afilters'];
+			} else {
+                            $afilterURL = array();
+                        }
 		
 		
 			// end add url
@@ -259,9 +264,11 @@ class ControllerProductCategory extends Controller {
 			}
 			
 			$url = '';
-                        if (isset($afilterURL)) {
-				foreach ($afilterURL as $key=>$val) {
-				$url .= '&att_filters['.$key.']=' . $val;
+                        foreach ($afilterURL as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+				foreach ($val as $val2) {
+				$url .= '&att_filters['.$key.'][]=' . urlencode($val2);
 				}
 			}
 	
@@ -328,9 +335,11 @@ class ControllerProductCategory extends Controller {
 			);
 			
 			$url = '';
-                        if (isset($afilterURL)) {
-				foreach ($afilterURL as $key=>$val) {
-				$url .= '&att_filters['.$key.']=' . $val;
+                        foreach ($afilterURL as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+				foreach ($val as $val2) {
+				$url .= '&att_filters['.$key.'][]=' . urlencode($val2);
 				}
 			}
                         
@@ -375,11 +384,13 @@ class ControllerProductCategory extends Controller {
 			);
 						
 			$url = '';
-                        if (isset($afilterURL)) {
-				foreach ($afilterURL as $key=>$val) {
-				$url .= '&att_filters['.$key.']=' . $val;
+                        foreach ($afilterURL as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+				foreach ($val as $val2) {
+				$url .= '&att_filters['.$key.'][]=' . urlencode($val2);
 				}
-			}
+				}
 	
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -432,11 +443,11 @@ class ControllerProductCategory extends Controller {
 			$this->response->setOutput($this->render());										
     	} else {
 			$url = '';
-                        if (isset($afilterURL)) {
-				foreach ($afilterURL as $key=>$val) {
-				$url .= '&att_filters['.$key.']=' . $val;
+                        foreach ($afilterURL as $key=>$val) {
+				foreach ($val as $val2) {
+				$url .= '&att_filters['.$key.'][]=' . urlencode($val2);
 				}
-			}
+				}
 			
 			if (isset($this->request->get['path'])) {
 				$url .= '&path=' . $this->request->get['path'];
