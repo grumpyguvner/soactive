@@ -1,0 +1,16 @@
+@media (max-width: 767px) {
+#container-in
+{
+    width: 100%;
+    display: inline-block;
+}
+#cssmenu{
+    width: 100%;
+    display: inline-block;
+}
+#category-link {
+    width: 100%;
+    display: inline-block;
+}
+
+}

@@ -24,12 +24,12 @@
             <div id="column-left"><div class="register-account"></div></div>
             <div id="content"><div class="row"><div class="margin-30" id="padding-20"><?php echo $content_top; ?>
     
-           <h1><?php echo $heading_title; ?></h1>
+           <h1 style="color: #ADA8A4;"><?php echo $heading_title; ?></h1>
         
             <p><?php echo $text_account_already; ?></p>
      
     
-            <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+            <form action="<?php echo $action; ?>" class="form-register" method="post" enctype="multipart/form-data">
             <h3><?php echo $text_your_details; ?></h3>
             <div class="content">
                 <div class="row">
@@ -89,9 +89,9 @@
                     <input type="text" name="company" value="<?php echo $company; ?>" />
                     </div>
                    
-                    <table class="form">
+                    <table class="form" style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
                              
-                        <tr style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
+                        <tr >
                           <td><?php echo $entry_customer_group; ?></td>
                           <td><?php foreach ($customer_groups as $customer_group) { ?>
                             <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
