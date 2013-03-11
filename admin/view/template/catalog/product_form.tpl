@@ -501,7 +501,7 @@
               <?php } ?>
               <tfoot>
                 <tr>
-                  <td colspan="6"></td>
+                  <td colspan="7"></td>
                   <td class="left"><a onclick="addOptionValue('<?php echo $option_row; ?>');" class="button"><?php echo $button_add_option_value; ?></a></td>
                 </tr>
               </tfoot>
