@@ -12,8 +12,10 @@ if (is_file('config_' . APPLICATION_ENV . '.php'))
     include_once('config.php');
 }
 
-// Install 
-if (!defined('DIR_APPLICATION')) {
+// Install
+include_once('../install/version.php');
+defined('FULL_VERSION') || define('FULL_VERSION', '');
+if (!defined('VERSION') || VERSION != FULL_VERSION) {
 	header('Location: ../install/index.php');
 	exit;
 }
