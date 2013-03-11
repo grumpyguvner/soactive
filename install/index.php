@@ -8,7 +8,7 @@ defined('APPLICATION_ENV')
 
 // set config fiel name which we will write to
 defined('FILE_CONFIG')
-    || define('FILE_CONFIG', (APPLICATION_ENV == 'production') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
+    || define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
 
 // Set up version numbers
 define('BASE_VERSION', '1.5.4');
@@ -68,7 +68,7 @@ if (filesize('../' . FILE_CONFIG) > 0) {
 	}
 }
 
-defined('VERSION') || define('VERSION', FULL_VERSION);
+defined('VERSION') || define('VERSION', BASE_VERSION);
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');

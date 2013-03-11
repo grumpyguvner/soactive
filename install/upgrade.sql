@@ -251,7 +251,7 @@ ALTER TABLE `oc_user` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT ''
 ALTER TABLE `oc_user` MODIFY `password` varchar(40) NOT NULL;
 ALTER TABLE `oc_user` MODIFY `ip` varchar(40) NOT NULL;
 
-#### Start 1.5.4:1
+#### Start 1.5.4:BC1
 ALTER TABLE `oc_user` MODIFY `code` VARCHAR(64) COLLATE utf8_bin NOT NULL;
 ALTER TABLE `oc_user_group` ADD `superuser` TINYINT DEFAULT 0;
 UPDATE `oc_user_group` SET `superuser` = 1 WHERE `user_group_id` = 1;
