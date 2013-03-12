@@ -91,7 +91,7 @@
                 <?php } ?>
                 <?php if ($email) { ?>
                 <span><?php echo $text_email; ?></span>
-                <span style="color: #74964B; font-weight: bold;"><?php echo $email; ?></span>
+                <span style="color: #74964B; font-weight: bold;"><?php echo $email_store; ?></span>
                 <br/>
                 <?php } ?>
              </div>

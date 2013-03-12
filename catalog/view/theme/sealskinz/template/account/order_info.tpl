@@ -14,9 +14,11 @@
       </div>
     </div>
   </div>
-<div id="container-in" class="content-in">
+<div id="content-back">
+    <div class="green-bar">
+        <div id="container-in" class="content-in">
     <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
+<div id="content"><div class="row"><div class="margin-30"><?php echo $content_top; ?>
   
   <h1><?php echo $heading_title; ?></h1>
   <table class="list">
@@ -148,9 +150,11 @@
     </tbody>
   </table>
   <?php } ?>
-  <div class="buttons">
+  <div class="buttons" id="margin-r26">
     <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
   </div>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?></div></div></div>
+        </div>
+    </div>
 </div>
 <?php echo $footer; ?> 

@@ -687,7 +687,7 @@ input.large-field, select.large-field {
 }
 table.list {
 	border-collapse: collapse;
-	width: 100%;
+	width: 96%;
 	border-top: 1px solid #DDDDDD;
 	border-left: 1px solid #DDDDDD;
 	margin-bottom: 20px;
@@ -747,7 +747,7 @@ table.radio tr.highlight:hover td {
 	
 	padding-top: 8px;
 	display: inline-block;
-	width: 98%;
+	width: 94%;
 	margin-bottom: 10px;
         margin-left: 14px !important;
 }
@@ -870,7 +870,7 @@ a.button:hover, input.button:hover {
 	border-left: 1px solid #DDDDDD;
 	border-right: 1px solid #DDDDDD;
 	border-bottom: 1px solid #DDDDDD;
-	padding: 10px;
+	padding: 22px;
 	/*margin-bottom: 20px;*/
 	z-index: 2;
 	overflow: auto;
@@ -894,7 +894,49 @@ a.button:hover, input.button:hover {
 	margin-bottom: 0;
         min-height: 515px;
 }
-
+.img-account {
+        background-image: url('../image/account/account.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+        height: 549px;
+        
+}
+.box-account {
+	margin-bottom: 0;
+        min-height: 564px;
+}
+.box-account .box-heading {
+	
+	border-left: 1px solid #DDDDDD;
+        border-right: 1px solid #DDDDDD;
+	background-color: #9fcf67;
+	padding: 15px 0px 15px 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #333;
+}
+.box-account .box-content {
+	background: #FFFFFF;
+	
+}
+.box-account .box-content ul {
+        list-style: none outside none;
+        margin-left: 0;
+}
+.box-account .box-content ul > li > a {
+        color: #979797 !important;
+}
+.box-account .box-content ul > li {
+      
+        padding: 5px 5px 5px 20px;
+        border-bottom: 1px solid #dddddd;
+        background-color: #f9f9f9;
+}
+.wrap-edit {
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
 .infocontent {
     margin-left: 144px;
     padding-top: 50px;
@@ -1655,7 +1697,7 @@ a.button:hover, input.button:hover {
 }
 /* wishlist */
 .wishlist-info table {
-	width: 100%;
+	width: 80% !important;
 	border-collapse: collapse;
 	border-top: 1px solid #DDDDDD;
 	border-left: 1px solid #DDDDDD;
@@ -1737,7 +1779,7 @@ a.button:hover, input.button:hover {
 .order-list .order-content {
 	padding: 10px 0px;
 	display: inline-block;
-	width: 100%;
+	width: 86%;
 	margin-bottom: 20px;
 	border-top: 1px solid #EEEEEE;
 	border-bottom: 1px solid #EEEEEE;
@@ -3281,6 +3323,21 @@ input[type="color"]:focus, .uneditable-input:focus {
 .margin-30 {
     margin-left: 30px;
 }
+.margin-65 {
+    margin-left: 65px;
+}
+.margin-95 {
+    margin-left: 95px;
+}
+#margin-r26 {
+    margin-right: 50px;
+}
+#margin-r50 {
+    margin-right: 50px;
+}
+#margin-t33 {
+    margin-top: 33px;
+}
 #padding-20 {
     padding-left: 20px;
     padding-right: 20px;
@@ -3389,59 +3446,64 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: white;
     height: 20px;
     width: 20px;
+    margin-right: 4px;
 }
 .r2 {
     background-image: url('../image/product/2r.png');
     background-repeat: no-repeat;
     padding: 1px 6px 3px 6px;
     color: white;
+    margin-right: 4px;
 }
 .r3 {
     background-image: url('../image/product/3r.png');
     background-repeat: no-repeat;
     padding: 1px 6px 3px 6px;
     color: white;
+    margin-right: 4px;
 }
 .r4 {
     background-image: url('../image/product/4r.png');
     background-repeat: no-repeat;
     padding: 1px 6px 3px 6px;
     color: white;
+    margin-right: 4px;
 }
 .r5 {
     background-image: url('../image/product/5r.png');
     background-repeat: no-repeat;
     padding: 1px 6px 3px 6px;
     color: white;
+    margin-right: 4px;
 }
 .r1b {
     background-image: url('../image/product/1r-big.png');
     background-repeat: no-repeat;
-    padding: 6px 10px 14px 24px;
+    padding: 6px 10px 14px 14px;
     color: white;
 }
 .r2b {
     background-image: url('../image/product/2r-big.png');
     background-repeat: no-repeat;
-    padding: 6px 10px 14px 24px;
+    padding: 6px 10px 14px 14px;
     color: white;
 }
 .r3b {
     background-image: url('../image/product/3r-big.png');
     background-repeat: no-repeat;
-    padding: 6px 10px 14px 24px;
+    padding: 6px 10px 14px 14px;
     color: white;
 }
 .r4b {
     background-image: url('../image/product/4r-big.png');
     background-repeat: no-repeat;
-    padding: 6px 10px 14px 24px;
+    padding: 6px 10px 14px 14px;
     color: white;
 }
 .r5b {
     background-image: url('../image/product/5r-big.png');
     background-repeat: no-repeat;
-    padding: 6px 10px 14px 24px;
+    padding: 6px 10px 14px 14px;
     color: white;
 }
 .account {

@@ -88,6 +88,7 @@ class ControllerInformationContact extends Controller {
     	$this->data['address'] = nl2br($this->config->get('config_address'));
     	$this->data['telephone'] = $this->config->get('config_telephone');
     	$this->data['fax'] = $this->config->get('config_fax');
+        $this->data['email_store'] = $this->config->get('config_email');
         $this->data['email'] = $this->config->get('config_email');
     	
 		if (isset($this->request->post['name'])) {

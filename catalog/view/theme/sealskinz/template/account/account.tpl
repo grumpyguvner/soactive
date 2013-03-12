@@ -18,14 +18,16 @@
     </div>
   </div>
 
-<div id="container-in" class="content-in">
+<div id="content-back">
+    <div class="green-bar">
+        <div id="container-in" class="content-in">
     
 <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
+<div id="content"><div class="row"><div class="margin-95"><?php echo $content_top; ?>
   
-  <!--h1><?php /* echo $heading_title; */ ?></h1-->
+  <h1 style="color: #aea7a2; font-size: 32px !important; font-weight: normal;"><?php echo $text_account; ?></h1>
   <h2><?php echo $text_my_account; ?></h2>
-  <div class="content">
+  <div class="wrap-edit">
     <ul>
       <li><a href="<?php echo $edit; ?>"><?php echo $text_edit; ?></a></li>
       <li><a href="<?php echo $password; ?>"><?php echo $text_password; ?></a></li>
@@ -34,7 +36,7 @@
     </ul>
   </div>
   <h2><?php echo $text_my_orders; ?></h2>
-  <div class="content">
+  <div class="wrap-edit">
     <ul>
       <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
       <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
@@ -46,11 +48,15 @@
     </ul>
   </div>
   <h2><?php echo $text_my_newsletter; ?></h2>
-  <div class="content">
+  <div class="wrap-edit">
     <ul>
       <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
     </ul>
   </div>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?></div></div>
 </div>
+</div>
+    </div>
+</div>
+
 <?php echo $footer; ?> 

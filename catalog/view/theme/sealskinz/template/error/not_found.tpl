@@ -15,7 +15,9 @@
     </div>
   </div>
 
-    <div id="container-in" class="content-in"> 
+<div id="content-back">
+  <div class="green-bar">
+     <div id="container-in" class="content-in">
         <?php echo $column_left; ?><?php echo $column_right; ?>
         <div id="content">
           <div class="row">
@@ -29,7 +31,9 @@
                 <?php echo $content_bottom; ?>
               </div>
           </div>
-        </div>
+       </div>
+    </div>
   </div>
+</div>
 
 <?php echo $footer; ?>

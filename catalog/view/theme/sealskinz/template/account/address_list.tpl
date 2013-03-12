@@ -21,10 +21,12 @@
     </div>
   </div>
 
-<div id="container-in" class="content-in">
+<div id="content-back">
+    <div class="green-bar">
+        <div id="container-in" class="content-in">
     
 <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
+<div id="content"><div class="row"><?php echo $content_top; ?>
   
   <h1><?php echo $heading_title; ?></h1>
   <h2><?php echo $text_address_book; ?></h2>
@@ -42,6 +44,8 @@
     <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
     <div class="right"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_new_address; ?></a></div>
   </div>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?></div></div>
+        </div>
+    </div>
 </div>
 <?php echo $footer; ?>
