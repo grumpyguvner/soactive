@@ -5,6 +5,7 @@
 <title>OpenCart - Installation</title>
 <base href="<?php echo $base; ?>" />
 <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
+<script type="text/javascript" src="../admin/view/javascript/jquery/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 <div id="container">
