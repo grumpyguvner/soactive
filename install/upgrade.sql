@@ -251,6 +251,7 @@ ALTER TABLE `oc_user` ADD `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT ''
 ALTER TABLE `oc_user` MODIFY `password` varchar(40) NOT NULL;
 ALTER TABLE `oc_user` MODIFY `ip` varchar(40) NOT NULL;
 
+###########################################################
 #### Start 1.5.4:BC1
 ALTER TABLE `oc_user` MODIFY `code` VARCHAR(64) COLLATE utf8_bin NOT NULL;
 ALTER TABLE `oc_user_group` ADD `superuser` TINYINT DEFAULT 0;
@@ -376,3 +377,7 @@ CREATE TABLE IF NOT EXISTS `oc_news_to_store` (
 
 DELETE FROM `oc_url_alias` WHERE `query` = "news/headlines";
 INSERT INTO `oc_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');
+
+###########################################################
+#### Start 1.5.4:BC1
+ALTER TABLE `oc_product_option_value` ADD `sku` varchar(64) COLLATE utf8_bin NOT NULL AFTER `option_value_id`;

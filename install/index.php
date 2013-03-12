@@ -2,6 +2,11 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Set up version numbers
+require_once('version.php');
+
+define('ALLOW_UPGRADE', true);
+
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : die('Warning: You must set an environment variable <em>APPLICATION_ENV</em>')));
@@ -9,14 +14,6 @@ defined('APPLICATION_ENV')
 // set config fiel name which we will write to
 defined('FILE_CONFIG')
     || define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
-
-// Set up version numbers
-define('BASE_VERSION', '1.5.4');
-define('BOUNDLESS_VERSION', 'BC1');
-
-define('FULL_VERSION', BASE_VERSION . ((BOUNDLESS_VERSION) ? ':' . BOUNDLESS_VERSION : ''));
-
-define('ALLOW_UPGRADE', true);
 
 // HTTP
 define('HTTP_SERVER', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/');

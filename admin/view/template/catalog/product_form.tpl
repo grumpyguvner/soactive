@@ -420,6 +420,7 @@
               <thead>
                 <tr>
                   <td class="left"><?php echo $entry_option_value; ?></td>
+                  <td class="left"><?php echo $entry_sku; ?></td>
                   <td class="right"><?php echo $entry_quantity; ?></td>
                   <td class="left"><?php echo $entry_subtract; ?></td>
                   <td class="right"><?php echo $entry_price; ?></td>
@@ -443,6 +444,7 @@
                       <?php } ?>
                     </select>
                     <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][product_option_value_id]" value="<?php echo $product_option_value['product_option_value_id']; ?>" /></td>
+                  <td class="left"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][sku]" value="<?php echo $product_option_value['sku']; ?>" size="10" /></td>
                   <td class="right"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][quantity]" value="<?php echo $product_option_value['quantity']; ?>" size="3" /></td>
                   <td class="left"><select name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][subtract]">
                       <?php if ($product_option_value['subtract']) { ?>
@@ -499,7 +501,7 @@
               <?php } ?>
               <tfoot>
                 <tr>
-                  <td colspan="6"></td>
+                  <td colspan="7"></td>
                   <td class="left"><a onclick="addOptionValue('<?php echo $option_row; ?>');" class="button"><?php echo $button_add_option_value; ?></a></td>
                 </tr>
               </tfoot>
