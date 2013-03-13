@@ -241,17 +241,33 @@
             <tr>
               <td><?php echo $entry_review; ?></td>
               <td><?php if ($config_review_status) { ?>
-                <input type="radio" name="config_review_status" value="1" checked="checked" />
+                <input type="radio" name="config_review_status" value="1" checked="checked" id="confYes" />
                 <?php echo $text_yes; ?>
-                <input type="radio" name="config_review_status" value="0" />
+                <input type="radio" name="config_review_status" value="0" id="confNo" />
                 <?php echo $text_no; ?>
                 <?php } else { ?>
-                <input type="radio" name="config_review_status" value="1" />
+                <input type="radio" name="config_review_status" value="1" id="confYes" />
                 <?php echo $text_yes; ?>
-                <input type="radio" name="config_review_status" value="0" checked="checked" />
+                <input type="radio" name="config_review_status" value="0" checked="checked" id="confNo"/>
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
+           
+            <tr>
+              <td><?php echo $entry_anonymous_review; ?></td>
+              <td><?php if ($config_anonymous_review_status) { ?>
+                <input type="radio" name="config_anonymous_review_status" value="1" checked="checked" id="confAYes" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_anonymous_review_status" value="0" id="confANo" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_anonymous_review_status" value="1" id="confAYes" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_anonymous_review_status" value="0" checked="checked" id="confANo" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            
             <tr>
               <td><?php echo $entry_download; ?></td>
               <td><?php if ($config_download) { ?>
@@ -1015,6 +1031,20 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $("#confNo").click(function(){
+
+    $("#confAYes").attr("disabled",true);
+    $("#confANo").attr("disabled",true);
+    });
+    $("#confYes").click(function(){
+
+    $("#confAYes").attr("disabled",false);
+    $("#confANo").attr("disabled",false);
+    });
+    });
+</script>
 <script type="text/javascript"><!--
 $('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_template\']').attr('value')));
 //--></script> 

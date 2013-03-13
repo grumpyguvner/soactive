@@ -6,6 +6,7 @@ class ControllerModuleInformation extends Controller {
                 $this->data['heading_title'] = $this->language->get('heading_title');
 		$this->data['text_contact'] = $this->language->get('text_contact');
                 $this->data['text_sitemap'] = $this->language->get('text_sitemap');
+                $this->data['text_stockist'] = $this->language->get('text_stockist');
                 $this->data['seo'] = $this->request->get['_route_'];
 		
 		$this->load->model('catalog/information');
@@ -22,6 +23,7 @@ class ControllerModuleInformation extends Controller {
 
 		$this->data['contact'] = $this->url->link('information/contact');
                 $this->data['sitemap'] = $this->url->link('information/sitemap');
+                $this->data['stockist'] = $this->url->link('common/store_locations', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/information.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/information.tpl';

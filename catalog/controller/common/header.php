@@ -82,6 +82,7 @@ class ControllerCommonHeader extends Controller {
                 $this->data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', 'SSL'), $this->customer->getFirstName(), $this->url->link('account/logout', '', 'SSL'));
 		$this->data['text_account'] = $this->language->get('text_account');
                 $this->data['text_checkout'] = $this->language->get('text_checkout');
+                $this->data['text_stockist'] = $this->language->get('text_stockist');
 				
 		$this->data['home'] = $this->url->link('common/home');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
@@ -91,6 +92,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
                 $this->data['login'] = $this->url->link('account/login', '', 'SSL');
                 $this->data['register'] = $this->url->link('account/register', '', 'SSL');
+                $this->data['stockist'] = $this->url->link('common/store_locations', '', 'SSL');
 		
 		if (isset($this->request->get['filter_name'])) {
 			$this->data['filter_name'] = $this->request->get['filter_name'];

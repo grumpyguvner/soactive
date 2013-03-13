@@ -307,10 +307,12 @@
                           </a>
                       </li>
                       <?php } ?>
+                      <?php if ($review_anonymous_status == '1' || $logged) { ?>
                       <li class=""><a data-toggle="tab" href="#review-status" style="border-radius: 0 0 0 0;"><?php if ($review_status) { ?>
                         <?php echo $tab_review; ?>
                         <?php } ?></a>
                       </li>
+                      <?php } ?>
                   </ul>
                   <div class="tab-content" id="myTabContent">
                       <div id="description" class="tab-pane fade active in">
@@ -365,9 +367,9 @@
                       <?php } ?>
                         <?php } ?>
                       </p>
-                      
+                      <?php if ($review_anonymous_status == '1' || $logged) { ?>
                       <div id="review-status" class="tab-pane fade">
-                        <p><?php if ($review_status) { ?>
+                        <p>
 
                         <div id="review"></div>
                         <h2 id="review-title"><?php echo $text_write; ?></h2>
@@ -400,9 +402,10 @@
                           <div class="right"><a id="button-review"  class="button"><?php echo $button_continue; ?></a></div>
                         </div>
 
-                        <?php } ?>
+                        
                       </p>
                       </div>
+                      <?php } ?>
                     </div>
         </div>     
             <div class="product-press">             

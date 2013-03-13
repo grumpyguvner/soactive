@@ -71,6 +71,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
 		$this->data['entry_review'] = $this->language->get('entry_review');
+                $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
 		$this->data['entry_download'] = $this->language->get('entry_download');
 		$this->data['entry_upload_allowed'] = $this->language->get('entry_upload_allowed');
 		$this->data['entry_voucher_min'] = $this->language->get('entry_voucher_min');
@@ -492,6 +493,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_review_status'] = $this->request->post['config_review_status'];
 		} else {
 			$this->data['config_review_status'] = $this->config->get('config_review_status');
+		}
+                
+                if (isset($this->request->post['config_anonymous_review_status'])) {
+			$this->data['config_anonymous_review_status'] = $this->request->post['config_anonymous_review_status'];
+		} else {
+			$this->data['config_anonymous_review_status'] = $this->config->get('config_anonymous_review_status');
 		}
 		
 		if (isset($this->request->post['config_download'])) {
