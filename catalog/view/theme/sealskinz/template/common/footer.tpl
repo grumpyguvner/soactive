@@ -64,7 +64,7 @@
                                         <li><a href="how-it-works"><?php echo $text_how_works ?></a></li>
                                         <li><a href="product-care"><?php echo $text_product_care ?></a></li>
                                         <li><a href="testimonials"><?php echo $text_testimonials ?></a></li>
-                                        <li><a href="uk-stockist"><?php echo $text_stockist ?></a></li>
+                                        <li><a href="<?php echo $stockist ?>"><?php echo $text_stockist ?></a></li>
                                         <li><a href="international"><?php echo $text_international ?></a></li>
                                     </ul>
                                </div>

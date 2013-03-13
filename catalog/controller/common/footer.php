@@ -79,7 +79,8 @@ class ControllerCommonFooter extends Controller {
 		$this->data['account'] = $this->url->link('account/account', '', 'SSL');
 		$this->data['order'] = $this->url->link('account/order', '', 'SSL');
 		$this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
-		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');	
+		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+                $this->data['stockist'] = $this->url->link('common/store_locations', '', 'SSL');	
         
         if (ENVIRONMENT_WARNING)
         {

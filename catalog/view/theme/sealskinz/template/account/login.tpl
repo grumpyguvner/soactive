@@ -36,7 +36,7 @@
                               <div class="content">
                               <p><b><?php echo $text_register; ?></b></p>
                               <p><?php echo $text_register_account; ?></p>
-                              <a href="<?php echo $register; ?>" class="button"><?php echo $button_continue; ?></a></div>
+                              <a href="<?php echo $register; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
                               </div>
                           </div>
 
@@ -54,7 +54,7 @@
                             <br />
                             <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
                             <br />
-                            <input type="submit" value="<?php echo $button_login; ?>" class="button" />
+                            <input type="submit" value="<?php echo $button_login; ?>" class="button-account" />
                             <?php if ($redirect) { ?>
                             <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
                             <?php } ?>

@@ -208,7 +208,7 @@ DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
                                </li>
                                <li><a href="about-us"><span>About us</span></a></li>
                                <li><a href="blog"><span>Blog</span></a></li>
-                               <li><a href="http://www.sealskinz.com/uk-stockists"><span>Find Stockist</span></a></li>
+                               <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                                <li><a href="registration"><span>Product Registration</span></a></li>
                                <li style="float: right; padding: 12px 18px;"><span>Follow us</span>&nbsp<span><a href="http://www.facebook.com" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="http://www.twitter.com" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
                             </ul>

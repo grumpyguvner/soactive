@@ -25,7 +25,7 @@
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><div class="row"><div class="margin-95"><?php echo $content_top; ?>
   
-  <h1 style="color: #aea7a2; font-size: 32px !important; font-weight: normal;"><?php echo $text_account; ?></h1>
+  <h1 class="heading-account"><?php echo $text_account; ?></h1>
   <h2><?php echo $text_my_account; ?></h2>
   <div class="wrap-edit">
     <ul>

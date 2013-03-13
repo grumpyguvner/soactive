@@ -21,18 +21,18 @@
     <?php echo $column_left; ?><?php echo $column_right; ?>
 
 <div id="content"><div class="row"><?php echo $content_top; ?>
-    
-            <h1><?php echo $heading_title; ?></h1>
-    
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <h2><?php echo $text_edit_address; ?></h2>
-    
+   <div class="margin-95" id="margin-t33"> 
+      <h1 class="heading-account"><?php echo $heading_title; ?></h1>
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+      <h2><?php echo $text_edit_address; ?></h2>
+   </div>
             <div class="content">
                 <div class="row">
+                  <div class="margin-65">  
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_firstname; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="firstname" value="<?php echo $firstname; ?>" />
                         <?php if ($error_firstname) { ?>
                         <span class="error"><?php echo $error_firstname; ?></span>
@@ -41,7 +41,7 @@
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_lastname; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="lastname" value="<?php echo $lastname; ?>" />
                         <?php if ($error_lastname) { ?>
                         <span class="error"><?php echo $error_lastname; ?></span>
@@ -50,14 +50,14 @@
                     <div class="span2">
                         <?php echo $entry_company; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="company" value="<?php echo $company; ?>" />
                     </div>
                     <?php if ($company_id_display) { ?>
                         <div class="span2">
                             <?php echo $entry_company_id; ?>
                         </div>
-                        <div class="span7">
+                        <div class="span5">
                             <input type="text" name="company_id" value="<?php echo $company_id; ?>" />
                             <?php if ($error_company_id) { ?>
                             <span class="error"><?php echo $error_company_id; ?></span>
@@ -68,7 +68,7 @@
                         <div class="span2">
                             <?php echo $entry_tax_id; ?>
                         </div>
-                        <div class="span7">
+                        <div class="span5">
                             <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
                             <?php if ($error_tax_id) { ?>
                             <span class="error"><?php echo $error_tax_id; ?></span>
@@ -78,7 +78,7 @@
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_address_1; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
                         <?php if ($error_address_1) { ?>
                         <span class="error"><?php echo $error_address_1; ?></span>
@@ -87,7 +87,7 @@
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_address_1; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
                         <?php if ($error_address_1) { ?>
                         <span class="error"><?php echo $error_address_1; ?></span>
@@ -96,13 +96,13 @@
                     <div class="span2">
                         <?php echo $entry_address_2; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
                     </div>
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_city; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="city" value="<?php echo $city; ?>" />
                         <?php if ($error_city) { ?>
                         <span class="error"><?php echo $error_city; ?></span>
@@ -111,7 +111,7 @@
                     <div class="span2">
                         <span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
                         <?php if ($error_postcode) { ?>
                         <span class="error"><?php echo $error_postcode; ?></span>
@@ -120,7 +120,7 @@
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_country; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <select name="country_id">
                             <option value=""><?php echo $text_select; ?></option>
                             <?php foreach ($countries as $country) { ?>
@@ -138,7 +138,7 @@
                     <div class="span2">
                         <span class="required">*</span> <?php echo $entry_zone; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <select name="zone_id">
                         </select>
                         <?php if ($error_zone) { ?>
@@ -148,7 +148,7 @@
                     <div class="span2">
                         <?php echo $entry_default; ?>
                     </div>
-                    <div class="span7">
+                    <div class="span5">
                         <?php if ($default) { ?>
                         <input type="radio" name="default" value="1" checked="checked" />
                         <?php echo $text_yes; ?>
@@ -161,13 +161,16 @@
                         <?php echo $text_no; ?>
                         <?php } ?>
                     </div>
+                  </div> 
                 </div>
            </div>
         
     <div class="buttons">
-      <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
-      <div class="right">
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
+      <div id="margin-r50" class="margin-65">   
+        <div class="left"><a href="<?php echo $back; ?>" class="button-account"><?php echo $button_back; ?></a></div>
+        <div class="right">
+          <input type="submit" value="<?php echo $button_continue; ?>" class="button-account" />
+        </div>
       </div>
     </div>
   </form>

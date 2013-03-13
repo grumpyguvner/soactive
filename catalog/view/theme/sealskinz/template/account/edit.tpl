@@ -27,10 +27,9 @@
 <div id="content"><div class="row"><?php echo $content_top; ?>
   
     <div class="margin-95" id="margin-t33">
-            <h1 style="color: #afa69f; font-size: 32px !important; font-weight: normal !important;"><?php echo $heading_title; ?></h1>
-       
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <h2><?php echo $text_your_details; ?></h2>
+       <h1 class="heading-account"><?php echo $heading_title; ?></h1>
+       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+       <h2><?php echo $text_your_details; ?></h2>
     </div>
             <div class="content">
                 <div class="row">
@@ -86,9 +85,9 @@
     
     <div class="buttons">
       <div class="margin-65" id="margin-r50">  
-      <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
+      <div class="left"><a href="<?php echo $back; ?>" class="button-account"><?php echo $button_back; ?></a></div>
       <div class="right">
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
+        <input type="submit" value="<?php echo $button_continue; ?>" class="button-account" />
       </div>
       </div>
     </div>
