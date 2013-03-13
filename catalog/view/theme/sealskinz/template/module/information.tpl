@@ -84,16 +84,15 @@
       <?php foreach ($informations as $information) { ?>
         <?php if ($information['sort_order'] == '12') { ?>
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-        <?php } else if ($information['sort_order'] == '13') {?>
+        <?php } else if ($information['sort_order'] == '13') { ?>
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-        <?php } else if ($information['sort_order'] == '14') {?>
+        <?php } else if ($information['sort_order'] == '14') { ?>
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-        <?php } else if ($information['sort_order'] == '15') {?>
-            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-        <?php } else if ($information['sort_order'] == '16') {?>
+        <?php } else if ($information['sort_order'] == '16') { ?>
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
         <?php } ?>
       <?php } ?>
+            <li><a href="<?php echo $stockist; ?>"><?php echo $text_stockist; ?> </a></li>
     </ul>
   </div>
 </div>

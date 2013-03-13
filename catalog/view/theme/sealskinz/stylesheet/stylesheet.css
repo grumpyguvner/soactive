@@ -3576,7 +3576,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     border: 1px solid #DDDDDD;
     color: #000000;
     float: left;
-    height: 205px;
+    height: 264px;
     list-style: none outside none;
     margin: 7px;
     padding: 0;
@@ -3596,7 +3596,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 #listing ul li .sAddress {
     border-bottom: 0 solid #DDDDDD;
     display: block;
-    height: 100px;
+    height: 160px;
     padding: 5px;
 }
 #listing ul li .sInfo {

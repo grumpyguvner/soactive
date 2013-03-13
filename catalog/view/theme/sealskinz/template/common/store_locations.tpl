@@ -64,7 +64,12 @@
                            <ul>
                                <li>
                                     <span class="sName"><a href="<?php echo $sLocation['href']; ?>" ><b><?php echo $sLocation['Name'] ?></b></a></span>
-                                    <span class="sAddress"><?php echo $sLocation['Address'] ?></span>
+                                    <span class="sAddress">
+                                       <?php $loc_address = explode(",", $sLocation['Address']); ?>
+                                           <?php foreach ($loc_address as $loc) { ?>
+                                        <?php echo $loc ?><br />
+                                       <?php } ?>
+                                        </span>
                                     <span class="sInfo"><?php echo substr(html_entity_decode($sLocation['Details']), 0, 80) ?></span>
                                     <br  />                    
                                     <span class="rMore"><a href="<?php echo $sLocation['href'] ?>" >read more...</a></span>

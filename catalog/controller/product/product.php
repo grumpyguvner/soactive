@@ -197,7 +197,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['reward'] = $product_info['reward'];
 			$this->data['points'] = $product_info['points'];
                         $this->data['stock_quantity'] = $product_info['quantity'];
-			
+			$this->data['logged'] = $this->customer->isLogged();
 			if ($product_info['quantity'] <= 0) {
 				$this->data['stock'] = $product_info['stock_status'];
 			} elseif ($this->config->get('config_stock_display')) {
@@ -312,6 +312,7 @@ class ControllerProductProduct extends Controller {
 			}
 			
 			$this->data['review_status'] = $this->config->get('config_review_status');
+                        $this->data['review_anonymous_status'] = $this->config->get('config_anonymous_review_status');
 			$this->data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
