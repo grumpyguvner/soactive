@@ -114,6 +114,8 @@ class ControllerCommonHeader extends Controller {
 			
 			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
 		} else {
+            $this->url->setCheckPermission(true, $this->user);
+            
 			$this->data['logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
 	
 			$this->data['home'] = $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL');
@@ -180,10 +182,11 @@ class ControllerCommonHeader extends Controller {
 			$this->data['weight_class'] = $this->url->link('localisation/weight_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['length_class'] = $this->url->link('localisation/length_class', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['zencart'] = $this->url->link('tool/zencart', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');	
-            ### Event Calendar - Start ###
-            $this->data['event'] =  $this->url->link('catalog/event&token=' . $this->session->data['token'], 'SSL');
-            ### Event Calendar - End ###
+			$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
+            
+            $this->data['event'] =  $this->url->link('catalog/event', '&token=' . $this->session->data['token'], 'SSL');
+            
+            $this->url->setCheckPermission(false);
 			
 			$this->data['stores'] = array();
 			
