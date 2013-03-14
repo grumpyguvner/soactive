@@ -73,7 +73,7 @@ DD_belatedPNG.fix('#logo img');
 <body>
 <?php include($_theme_include_path . '/nico_theme_editor/editor.inc');?>
 <?php if ($error_environment) { ?>
-<div id="environment"><div class="warning"><button type="button" class="close" data-dismiss="alert">×</button><?php echo $error_environment; ?></div></div>
+<div id="environment"><div class="warning"><?php echo $error_environment; ?></div></div>
 <?php } ?>
 <div id="container">
 <div id="header">
