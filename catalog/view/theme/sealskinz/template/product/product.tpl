@@ -27,20 +27,27 @@
                   
                     <?php if ($thumb || $images) { ?>
                       <?php if ($thumb) { ?>
-                       <div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" class="span3" /></a></div>
+                       <div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
                       <?php } ?>
                       <?php if ($images) { ?>
+                       <?php $count = 0; ?>
                        <div class="image-additional">
+                           
                          <?php foreach ($images as $image) { ?>
                            <?php if (!empty($image['popup'])) { ?>
                             <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
                             <?php } ?>
                             <?php if (!empty($image['video'])) { ?>
-                             <a href="" /><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="98px" width="98px" /></a>
-                         <?php  } ?>
+                            <a href="#" class="viewVideo"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
+                              <div class="videos vidContainer">
+                                  <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="386" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>" frameborder="1" allowfullscreen></iframe>
+                              </div>
+                              
+                         <?php $count++;  } ?>
                          <?php } ?>
                          
                        </div>
+                       
                       <?php } ?>
                    
                   <?php } ?>
@@ -618,4 +625,20 @@ $('.datetime').datetimepicker({
 });
 $('.time').timepicker({timeFormat: 'h:m'});
 //--></script> 
+
+<script type="text/javascript">
+ $(document).ready(function () {
+     $('.image-additional .viewVideo').click(function () {
+         $('.videos').hide();
+         $(this).next().show();
+         return false;
+     });
+     
+    $('.closeVideo a').click(function () { 
+      $(this).parents('.videos').hide();
+      return false;
+    });
+ });
+</script>
+       
 <?php echo $footer; ?>

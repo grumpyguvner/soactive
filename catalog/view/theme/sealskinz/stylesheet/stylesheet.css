@@ -2768,12 +2768,12 @@ input[type="color"]:focus, .uneditable-input:focus {
     width: 86%;
 }
 .product-img {
-    width: 44%;
+    width: 51%;
     float: left;
     margin-left: 20px;
 }
 .product-details {
-    width: 50%;
+    width: 43%;
     float: right;
     margin-right: 20px;
 }
@@ -3641,4 +3641,24 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: #AFA69F;
     font-size: 32px !important;
     font-weight: normal;
+}
+.videos {
+    position: absolute;
+    top: 289px;
+    left: 459px;
+    float: left;
+    display: none;
+}
+.closeVideo {
+    position: absolute;
+    top: -24px;
+    left: 344px;
+    float: left;
+}
+.closeVideo p {
+    color: #000000;
+    font-weight: bold;
+}
+.thumbVideo {
+    height: 106px;
 }

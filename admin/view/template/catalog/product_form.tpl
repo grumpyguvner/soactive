@@ -619,25 +619,24 @@
             <tbody id="image-row<?php echo $image_row; ?>">
               <tr>
                 <td class="left">
-                    <?php if($product_image['image'] && !empty($product_image['image'])) { ?>
-                    <div class="image"><img src="<?php echo $product_image['thumb']; ?>" alt="" id="thumb<?php echo $image_row; ?>" />
-                        <?php if (isset($product_image['image'])) { ?>
-                        <input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="image<?php echo $image_row; ?>" />
-                        <?php } ?>
+                    <?php if (!empty($product_image['image']) && !empty($product_image['video'])) { ?>
+                        <div class="image" style="text-align: center; width: 150px;">
+                             <img src="<?php echo $product_image['image']; ?>" alt="" id="video_image<?php echo $image_row; ?>" height:="133px" width="133px" />
+                             <input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="image<?php echo $image_row; ?>" />
+                        </div>
+                        <div class="video">
+                             <?php echo $text_link_youtube; ?><input type="text" name="product_image[<?php echo $image_row; ?>][video]" value='<?php echo $product_image['reference_number'];  ?>' />
+                        </div>
+                    <?php } elseif (!empty($product_image['image']) && empty($product_image['video'])) { ?>
+                    
+                        <div class="image"><img src="<?php echo $product_image['thumb']; ?>" alt="" id="thumb<?php echo $image_row; ?>" />
+                            <input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="image<?php echo $image_row; ?>" />
+                          
                         <br />
                         <a onclick="image_upload('image<?php echo $image_row; ?>', 'thumb<?php echo $image_row; ?>');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb<?php echo $image_row; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $image_row; ?>').attr('value', '');"><?php echo $text_clear; ?></a>
-                    </div>
-                    <?php } elseif ($product_image['video'] && !empty($product_image['video'])) {?>
-                    <div class="image" style="text-align: center; width: 150px;">
-                        <img src="<?php echo $product_image['video_image']; ?>" alt="" id="video_image<?php echo $image_row; ?>" height:="133px" width="133px" />
-                        <input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['video_image']; ?>" id="image<?php echo $image_row; ?>" />
-                                                
-                    </div>
-                    <div class="video">
-                        <?php echo $text_link_youtube; ?><input type="text" name="product_image[<?php echo $image_row; ?>][video]" value='<?php echo $product_image['reference_number'];  ?>' />
-                        
-                    </div>
+                        </div>
                     <?php } ?>
+                    
                 </td>
                 <td class="right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" size="2" /></td>
                 <td class="left"><a onclick="$('#image-row<?php echo $image_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>

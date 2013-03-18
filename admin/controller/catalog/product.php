@@ -74,6 +74,12 @@ class ControllerCatalogProduct extends Controller {
         $this->load->model('catalog/product');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+            foreach ($this->request->post['product_image'] as &$image) {
+                if (empty($image['image']) && !empty($image['video'])) {
+                   $image['image'] = 'http://img.youtube.com/vi/' . $image['video'] . '/0.jpg'; 
+                }
+            }
+            
             $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
@@ -1083,26 +1089,24 @@ class ControllerCatalogProduct extends Controller {
         $this->data['product_images_videos'] = array();
 
         foreach ($product_images_videos as $product_image_video) {
-            $video_image = 'http://img.youtube.com/vi/';
-            $video = 'http://www.youtube.com/watch?v=';
+            
+            $video = '';
             $reference_number = '';
             $image = '';
-            if (!empty($product_image_video['image'])) {
+            if (!empty($product_image_video['image']) && empty($product_image_video['video'])) {
                 if (file_exists(DIR_IMAGE . $product_image_video['image'])) {
                     $image = $product_image_video['image'];
                 } else {
                     $image = 'no_image.jpg';
                 }
-            } elseif ($product_image_video['video']) {
-                if (!empty($product_image_video['video'])) {
-                    $video_image .= $product_image_video['video'] . '/0.jpg';
-                    $video .= $product_image_video['video'];
+            } elseif (!empty($product_image_video['video']) && !empty($product_image_video['image'])) {
+                    $image = 'http://img.youtube.com/vi/' . $product_image_video['video'] . '/0.jpg';
+                    $video = 'http://www.youtube.com/watch?v=' . $product_image_video['video'];
                     $reference_number = $product_image_video['video'];
-                }
             }
+            
             $this->data['product_images_videos'][] = array(
                 'image' => $image,
-                'video_image' => $video_image,
                 'video' => $video,
                 'reference_number' => $reference_number,
                 'thumb' => $this->model_tool_image->resize($image, 100, 100),
