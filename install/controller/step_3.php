@@ -9,6 +9,8 @@ class ControllerStep3 extends Controller {
 			$this->model_install->mysql($this->request->post);
 			
 			$output  = '<?php' . "\n";
+			$output .= '// VERSION' . "\n";
+			$output .= 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n\n";
 			$output .= '// HTTP' . "\n";
 			$output .= 'define(\'HTTP_SERVER\', \'' . HTTP_OPENCART . '\');' . "\n";
 			$output .= 'define(\'HTTP_IMAGE\', \'' . HTTP_OPENCART . 'image/\');' . "\n";			
@@ -36,9 +38,7 @@ class ControllerStep3 extends Controller {
 			$output .= 'define(\'DB_USERNAME\', \'' . addslashes($this->request->post['db_user']) . '\');' . "\n";
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes($this->request->post['db_password']) . '\');' . "\n";
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_name']) . '\');' . "\n";
-			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n\n";
-			$output .= 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n";
-			$output .= '?>';				
+			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n";		
 		
 			$file = fopen(DIR_OPENCART . FILE_CONFIG, 'w');
 		
@@ -47,6 +47,8 @@ class ControllerStep3 extends Controller {
 			fclose($file);
 	 
 			$output  = '<?php' . "\n";
+			$output .= '// VERSION' . "\n";
+			$output .= 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n\n";
 			$output .= '// HTTP' . "\n";
 			$output .= 'define(\'HTTP_SERVER\', \'' . HTTP_OPENCART . 'admin/\');' . "\n";
 			$output .= 'define(\'HTTP_CATALOG\', \'' . HTTP_OPENCART . '\');' . "\n";
@@ -77,8 +79,6 @@ class ControllerStep3 extends Controller {
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes($this->request->post['db_password']) . '\');' . "\n";
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_name']) . '\');' . "\n";
 			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n";
-			$output .= 'define(\'VERSION\', \'' . addslashes(FULL_VERSION) . '\');' . "\n";
-			$output .= '?>';	
 
 			$file = fopen(DIR_OPENCART . 'admin/' . FILE_CONFIG, 'w');
 		
@@ -163,6 +163,12 @@ class ControllerStep3 extends Controller {
 			$this->data['db_prefix'] = '';
 		}
 		
+		if (isset($this->request->post['new_user'])) {
+			$this->data['new_user'] = $this->request->post['new_user'];
+		} else {
+			$this->data['new_user'] = 0;
+		}
+		
 		if (isset($this->request->post['username'])) {
 			$this->data['username'] = $this->request->post['username'];
 		} else {
@@ -202,18 +208,21 @@ class ControllerStep3 extends Controller {
 		if (!$this->request->post['db_name']) {
 			$this->error['db_name'] = 'Database Name required!';
 		}
-		
-		if (!$this->request->post['username']) {
-			$this->error['username'] = 'Username required!';
-		}
+        
+        if (isset($this->request->post['new_user']))
+        {
+            if (!$this->request->post['username']) {
+                $this->error['username'] = 'Username required!';
+            }
 
-		if (!$this->request->post['password']) {
-			$this->error['password'] = 'Password required!';
-		}
+            if (!$this->request->post['password']) {
+                $this->error['password'] = 'Password required!';
+            }
 
-		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
-			$this->error['email'] = 'Invalid E-Mail!';
-		}
+            if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+                $this->error['email'] = 'Invalid E-Mail!';
+            }
+        }
 
 		if (!$connection = @mysql_connect($this->request->post['db_host'], $this->request->post['db_user'], $this->request->post['db_password'])) {
 			$this->error['warning'] = 'Error: Could not connect to the database please make sure the database server, username and password is correct!';

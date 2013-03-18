@@ -43,26 +43,37 @@
           </tr>
         </table>
       </div>
-      <p>2. Please enter a username and password for the administration.</p>
+      <p>2. Please enter a username and password for the administration (if required).</p>
       <div style="background: #F7F7F7; border: 1px solid #DDDDDD; padding: 10px; margin-bottom: 15px;">
         <table>
           <tr>
-            <td width="185"><span class="required">*</span>Username:</td>
-            <td><input type="text" name="username" value="<?php echo $username; ?>" />
+            <td width="185"><label for="input_new_user">Create new user:</label></td>
+            <td><?php
+            if ($new_user)
+            {
+            ?><input type="checkbox" id="input_new_user" name="new_user" value="1" checked="checked" /><?php
+            } else {
+            ?><input type="checkbox" id="input_new_user" name="new_user" value="1" /><?php
+            } // end if
+            ?></td>
+          </tr>
+          <tr>
+            <td>Username:</td>
+            <td><input type="text" name="username" class="userfield" value="<?php echo $username; ?>" />
               <?php if ($error_username) { ?>
               <span class="required"><?php echo $error_username; ?></span>
               <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span>Password:</td>
-            <td><input type="text" name="password" value="<?php echo $password; ?>" />
+            <td>Password:</td>
+            <td><input type="text" name="password" class="userfield" value="<?php echo $password; ?>" />
               <?php if ($error_password) { ?>
               <span class="required"><?php echo $error_password; ?></span>
               <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span>E-Mail:</td>
-            <td><input type="text" name="email" value="<?php echo $email; ?>" />
+            <td>E-Mail:</td>
+            <td><input type="text" name="email" class="userfield" value="<?php echo $email; ?>" />
               <?php if ($error_email) { ?>
               <span class="required"><?php echo $error_email; ?></span>
               <?php } ?></td>
@@ -81,4 +92,14 @@
     </ul>
   </div>
 </div>
+<script type="text/javascript"><!--
+$('#input_new_user').change(function(e) {
+	if ($(this).is(':checked')) {
+        $('input.userfield').attr('disabled', false);
+    } else {
+        $('input.userfield').attr('disabled', 'disabled');
+    }
+});
+$('#input_new_user').trigger('change');
+//--></script> 
 <?php echo $footer; ?>
