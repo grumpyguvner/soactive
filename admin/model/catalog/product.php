@@ -63,10 +63,11 @@ class ModelCatalogProduct extends Model {
 		
 		if (isset($data['product_image'])) {
 			foreach ($data['product_image'] as $product_image) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape(html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$product_image['sort_order'] . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape(html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8')) . "', video = '" . $this->db->escape(html_entity_decode($product_image['video'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$product_image['sort_order'] . "'");
 			}
 		}
-		
+                
+                 
 		if (isset($data['product_download'])) {
 			foreach ($data['product_download'] as $download_id) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_download SET product_id = '" . (int)$product_id . "', download_id = '" . (int)$download_id . "'");
@@ -188,10 +189,10 @@ class ModelCatalogProduct extends Model {
 		
 		if (isset($data['product_image'])) {
 			foreach ($data['product_image'] as $product_image) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape(html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$product_image['sort_order'] . "'");
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_image SET product_id = '" . (int)$product_id . "', image = '" . $this->db->escape(html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8')) . "', video = '" . $this->db->escape(html_entity_decode($product_image['video'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$product_image['sort_order'] . "'");
 			}
 		}
-		
+                
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_download WHERE product_id = '" . (int)$product_id . "'");
 		
 		if (isset($data['product_download'])) {
@@ -522,8 +523,8 @@ class ModelCatalogProduct extends Model {
 		
 		return $query->rows;
 	}
-	
-	public function getProductDiscounts($product_id) {
+                    
+        public function getProductDiscounts($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_discount WHERE product_id = '" . (int)$product_id . "' ORDER BY quantity, priority, price");
 		
 		return $query->rows;

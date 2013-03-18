@@ -32,8 +32,14 @@
                       <?php if ($images) { ?>
                        <div class="image-additional">
                          <?php foreach ($images as $image) { ?>
+                           <?php if (!empty($image['popup'])) { ?>
                             <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+                            <?php } ?>
+                            <?php if (!empty($image['video'])) { ?>
+                             <a href="" /><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="98px" width="98px" /></a>
+                         <?php  } ?>
                          <?php } ?>
+                         
                        </div>
                       <?php } ?>
                    

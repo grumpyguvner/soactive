@@ -238,6 +238,23 @@ body > #container {
 .image img {
 	margin-bottom: 5px;
 }
+.video {
+	/*border: 1px solid #EEEEEE;
+	padding: 10px;
+	display: inline-block;*/
+        float: right;
+        margin-top: 58px;
+        /*height: 121px;
+        width: 400px;*/
+}
+.video input[type="textarea"] {
+        width: 99%;
+        height: 96%;
+}  
+.img-video {
+    height: 98px !important;
+    width: 98px !important;
+}
 .box {
 	margin-bottom: 15px;
 }
