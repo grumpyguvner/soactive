@@ -376,7 +376,7 @@ class ControllerProductProduct extends Controller {
 				);
 			}	
 			
-                        /* Customers also bought - added TF 20/07/2012 */
+                        /* Customers also bought */
 			$this->data['alsoBought'] = array();
 			$results = $this->model_catalog_product->getProductCustomersAlsoBought($this->request->get['product_id']);
 			
@@ -416,8 +416,34 @@ class ControllerProductProduct extends Controller {
 					'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
 				);
 			}
-			/* End Customers also bought - added TF 20/07/2012 */
+			/* End Customers also bought */
                         
+                        /***************************** News press **********************************************/
+                        $this->data['news'] = array();
+
+                        $news = $this->model_catalog_product->getInfoPress($this->request->get['product_id']);
+                        if (!empty($news)) {
+                            foreach ($news as $nproduct) {
+                                    if ($nproduct['image'] && $nproduct['status'] == '1') {
+                                                    $image = $this->model_tool_image->resize($nproduct['image'], 203, 217);
+                                            } else {
+                                                    $image = 'no_press_img.jpg';
+                                            }
+                            $this->data['news'][] = array(
+                                            'title'              => $nproduct['title'],
+                                            'acom'               => $nproduct['acom'],
+                                            'thumb'              => $image,
+                                            'short_description'  => substr(strip_tags(html_entity_decode($nproduct['description'])),0,140),
+                                            'short_description2' => substr(strip_tags(html_entity_decode($nproduct['description'])),0,350),
+                                            'href'               => $this->url->link('news/article', 'ncat=' . $nproduct['ncategory_id'] . '&news_id=' . $nproduct['news_id']),
+                                            'status'             => $nproduct['status']
+
+                            );
+                            }
+                        }
+                        $this->data['no_press_img'] = $this->model_tool_image->resize('no_press_img.jpg', 203, 217);
+                        /******************************** End News press ***********************************************/
+
                                                 
 			$this->data['tags'] = array();
 					
@@ -490,7 +516,8 @@ class ControllerProductProduct extends Controller {
       		$this->data['button_continue'] = $this->language->get('button_continue');
 
       		$this->data['continue'] = $this->url->link('common/home');
-
+                
+                
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
 			} else {
@@ -648,5 +675,6 @@ class ControllerProductProduct extends Controller {
 		
 		$this->response->setOutput(json_encode($json));		
 	}
+       
 }
 ?>

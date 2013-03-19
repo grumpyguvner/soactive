@@ -911,12 +911,12 @@ a.button-account:hover, input.button-account:hover {
 }
 .tab-content-press {
         background-color: #efefef !important;
-        padding: 10px;
+        
         border-left: 1px solid #DDDDDD;
 	border-right: 1px solid #DDDDDD;
 	border-bottom: 1px solid #DDDDDD;
 	padding-top: 18px;
-        padding-bottom: 10px;
+        padding-bottom: 14px;
         padding-left: 10px;
         padding-right: 10px;
         z-index: 2;
@@ -1524,7 +1524,7 @@ a.button-account:hover, input.button-account:hover {
 .product-info .image-additional a {
 	float: left;
 	display: block;
-	margin-left: 10px;
+	margin-left: 8px;
 	margin-bottom: 10px;
 }
 .product-info .description {
@@ -3652,13 +3652,61 @@ input[type="color"]:focus, .uneditable-input:focus {
 .closeVideo {
     position: absolute;
     top: -24px;
-    left: 344px;
+    left: 324px;
     float: left;
 }
 .closeVideo p {
     color: #000000;
     font-weight: bold;
 }
+
 .thumbVideo {
     height: 106px;
 }
+/***** Slideshow News Press ******/
+.slideshow-press { margin: 0 auto; }
+.slideshow-press .slides {
+	display: block;
+	position: relative;
+	overflow: hidden;
+        margin: 0;
+}
+.slideshow-press .slides li {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+.slideshow-press .slides li img {
+	max-width: none;
+}
+.slideshow-press .slides li.active { display: block; position: relative; }
+.slideshow-press .crop li img { width: auto; }
+
+.slideshow-press .pager {
+	height: 40px;
+	text-align: center;
+}
+.slideshow-press .pager li { display: inline-block; }
+.slideshow-press .pager li a,
+.slideshow-press .pager li a span {
+	display: block;
+	height: 4px;
+	width: 4px;
+}
+.slideshow-press .pager li a {
+	padding: 18px 8px;
+-webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.slideshow-press .pager li a span {
+	overflow: hidden;
+	background: #c0c0c0;
+	text-indent: -9999px;
+-webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+	border-radius: 2px;
+}
+.slideshow-press .pager li.active a span { background: #404040; }
+/***** End Slideshow News Press ******/

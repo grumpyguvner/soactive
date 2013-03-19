@@ -40,7 +40,7 @@
                             <?php if (!empty($image['video'])) { ?>
                             <a href="#" class="viewVideo"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
                               <div class="videos vidContainer">
-                                  <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="386" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>" frameborder="1" allowfullscreen></iframe>
+                                  <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="365" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>" frameborder="0" allowfullscreen></iframe>
                               </div>
                               
                          <?php $count++;  } ?>
@@ -428,7 +428,21 @@
                           </ul>
                         <div class="tab-content-press" id="myTabContent">
                             <div id="home" class="tab-pane fade active in">
-                              <p><img src="catalog/view/theme/sealskinz/image/product/press.png" alt="Press" /></p>
+                              
+                              <?php if ($news && !empty($news)) { ?>
+                                <div class="slideshow-press">
+                                  <ul class="slides">
+                                    <?php foreach ($news as $pnews) { ?>
+                                       <?php if ($pnews['status'] == '1') { ?> 
+                                        <li><a href="<?php echo $pnews['href'] ?>"><img src="<?php echo $pnews['thumb']; ?>" alt="Press" /></a></li>
+                                            
+                                       <?php } ?>
+                                    <?php } ?>
+                                  </ul>
+                                </div>    
+                              <?php } else { ?>
+                                    <p><img src="<?php echo $no_press_img; ?>" height="" alt="" /></p> 
+                              <?php } ?>
                             </div>
                             
                        </div>
@@ -640,5 +654,9 @@ $('.time').timepicker({timeFormat: 'h:m'});
     });
  });
 </script>
-       
+<script type="text/javascript">
+    $(document).ready( function(){
+            $('.slideshow-press').blueberry({pager: false});
+    });
+</script>
 <?php echo $footer; ?>

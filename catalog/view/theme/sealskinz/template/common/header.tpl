@@ -39,6 +39,9 @@
  <!-- Bootstrap js -->
 <script src="catalog/view/javascript/bootstrap/bootstrap.min.js"></script>
  <!-- End Bootstrap js -->
+ <!-- Slidenews press -->
+ <script src="catalog/view/javascript/slidepress/jquery.slidepress.js" type="text/javascript"></script>
+ <!-- End Slidenews press -->
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
