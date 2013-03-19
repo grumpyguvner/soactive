@@ -21,7 +21,7 @@
 
 (function($){
 	$.fn.extend({
-		blueberry: function(options) {
+		slidepress: function(options) {
 
 			//default values for plugin options
 			var defaults = {

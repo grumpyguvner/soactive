@@ -656,7 +656,7 @@ $('.time').timepicker({timeFormat: 'h:m'});
 </script>
 <script type="text/javascript">
     $(document).ready( function(){
-            $('.slideshow-press').blueberry({pager: false});
+            $('.slideshow-press').slidepress({pager: false});
     });
 </script>
 <?php echo $footer; ?>
