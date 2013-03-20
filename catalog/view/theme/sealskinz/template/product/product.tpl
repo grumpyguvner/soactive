@@ -40,7 +40,7 @@
                             <?php if (!empty($image['video'])) { ?>
                             <a href="#" class="viewVideo"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
                               <div class="videos vidContainer">
-                                  <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="365" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>" frameborder="0" allowfullscreen></iframe>
+                                  <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="365" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>
                               </div>
                               
                          <?php $count++;  } ?>
