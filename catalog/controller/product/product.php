@@ -363,6 +363,14 @@ class ControllerProductProduct extends Controller {
 				} else {
 					$rating = false;
 				}
+                                
+                                $idcategory = $this ->model_catalog_product->getCategories($product_info['product_id']);
+                                
+                                foreach ($idcategory as $categoryid) {
+                                    if ($categoryid['category_id']) {
+                                        $idcat = $categoryid['category_id'];
+                                    }
+                                }
 							
 				$this->data['products'][] = array(
 					'product_id' => $result['product_id'],
@@ -372,7 +380,7 @@ class ControllerProductProduct extends Controller {
 					'special' 	 => $special,
 					'rating'     => $rating,
 					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-					'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+					'href'    	 => $this->url->link('product/product', 'path=' . $idcat . '&product_id=' . $result['product_id']),
 				);
 			}	
 			

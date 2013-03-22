@@ -149,7 +149,7 @@ function display(view) {
                            html += '   <tbody>';
                            html += '     <tr>';
                            html += '       <td class="table-price">' + price  + '</td>';
-                           html += '       <td class="table-info"><a href="" style="color: white !important;"><h4>VIEW PRODUCT INFO</h4></a></td>';
+                           html += '       <td class="table-info"><a href="" style="color: white !important;"><h5><?php echo $text_pview; ?></h5></a></td>';
                            html += '     </tr>';
                            html += '  </tbody>';
                            html += '</table>';

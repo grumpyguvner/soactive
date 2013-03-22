@@ -430,19 +430,26 @@
                             <div id="home" class="tab-pane fade active in">
                               
                               <?php if ($news && !empty($news)) { ?>
+                                <?php if ((count($news) > '1')) { ?>
                                 <div class="slideshow-press">
                                   <ul class="slides">
                                     <?php foreach ($news as $pnews) { ?>
                                        <?php if ($pnews['status'] == '1') { ?> 
                                         <li><a href="<?php echo $pnews['href'] ?>"><img src="<?php echo $pnews['thumb']; ?>" alt="Press" /></a></li>
-                                            
                                        <?php } ?>
                                     <?php } ?>
                                   </ul>
-                                </div>    
+                                </div>
+                                <?php } elseif (count($news) == '1') { ?>
+                                    <?php foreach ($news as $pnews) { ?>
+                                        <?php if ($pnews['status'] == '1') { ?> 
+                                            <a href="<?php echo $pnews['href'] ?>"><img src="<?php echo $pnews['thumb']; ?>" alt="Press" /></a>
+                                        <?php } ?> 
+                                    <?php } ?>
+                                <?php } ?>
                               <?php } else { ?>
                                     <p><img src="<?php echo $no_press_img; ?>" height="" alt="" /></p> 
-                              <?php } ?>
+                                <?php } ?>
                             </div>
                             
                        </div>
@@ -482,7 +489,7 @@
                                                                              <?php } ?>
                                                                           
                                                                        </td>
-                                                                       <td class="table-info"><a href="" style="color: white !important;"><h4>VIEW PRODUCT INFO</h4></a></td>
+                                                                       <td class="table-info"><a href="<?php echo $product['href']; ?>" style="color: white !important;"><h5>VIEW PRODUCT INFO</h5></a></td>
                                                                        </tr>
                                                                        </tbody>
                                                                     </table>

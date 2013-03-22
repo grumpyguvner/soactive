@@ -46,6 +46,14 @@ class ControllerNewsArticle extends Controller {
 		);
 			
 		}
+                
+                $limit = $this->config->get('config_catalog_limit');
+                
+                if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else { 
+			$page = 1;
+		}
 		
 		if (isset($this->request->get['news_id'])) {
 		$this->data['entry_name'] = $this->language->get('entry_name');
@@ -58,6 +66,7 @@ class ControllerNewsArticle extends Controller {
 		$this->data['text_send'] = $this->language->get('bsend');
 		$this->data['title_comments'] = sprintf($this->model_catalog_ncomments->getTotalNcommentsByNewsId($this->request->get['news_id']));
 		$this->data['text_coms'] = $this->language->get('title_comments');
+                $this->data['text_recent_articles'] = $this->language->get('text_recent_articles');
 		
 		$this->data['news_id'] = $this->request->get['news_id'];
 			
@@ -66,13 +75,13 @@ class ControllerNewsArticle extends Controller {
 			if ($news_info) {
 				$this->document->setTitle($news_info['title']); 
 				$this->document->setDescription($news_info['meta_desc']);
-			    $this->document->setKeywords($news_info['meta_key']);
+                                $this->document->setKeywords($news_info['meta_key']);
 				
-					$this->data['breadcrumbs'][] = array(
-        		'text'      => $news_info['title'],
-				'href'      => $this->url->link('news/article', 'news_id=' .  $this->request->get['news_id']),      		
-        		'separator' => $this->language->get('text_separator')
-      		);	
+				$this->data['breadcrumbs'][] = array(
+                                    'text'      => $news_info['title'],
+                                    'href'      => $this->url->link('news/article', 'news_id=' .  $this->request->get['news_id']),      		
+                                    'separator' => $this->language->get('text_separator')
+                            );	
 			
 				$this->data['news_info'] = $news_info;
 				
@@ -89,12 +98,18 @@ class ControllerNewsArticle extends Controller {
 				$this->data['button_cart'] = $this->language->get('button_cart');
 				
 				$this->data['news_prelated'] = $this->language->get('news_prelated');
+                                
+                                $this->data['news_recent'] = $this->language->get('news_recent');
+                                
+                                $this->data['button_back'] = $this->language->get('button_back');
+                                
+                                $this->data['button_more'] = $this->language->get('button_more');
 				
 		    $this->data['products'] = array();
 			
-			$results = $this->model_catalog_news->getProductRelated($this->request->get['news_id']);
+			$related = $this->model_catalog_news->getProductRelated($this->request->get['news_id']);
 			
-			foreach ($results as $result) {
+			foreach ($related as $result) {
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
 				} else {
@@ -118,18 +133,73 @@ class ControllerNewsArticle extends Controller {
 				} else {
 					$rating = false;
 				}
-							
+                                
+				$idcategory = $this ->model_catalog_product->getCategories($result['product_id']);
+                                
+                                foreach ($idcategory as $categoryid) {
+                                    if ($categoryid['category_id']) {
+                                        $idcat = $categoryid['category_id'];
+                                    }
+                                }
+                                
 				$this->data['products'][] = array(
-					'product_id' => $result['product_id'],
+					'product_id'     => $result['product_id'],
 					'thumb'   	 => $image,
 					'name'    	 => $result['name'],
 					'price'   	 => $price,
 					'special' 	 => $special,
-					'rating'     => $rating,
-					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-					'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+					'rating'         => $rating,
+					'reviews'        => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
+					'href'    	 => $this->url->link('product/product', 'path=' . $idcat . '&product_id=' . $result['product_id']),
 				);
-			}	
+			
+                        }
+                        
+                        $data = array(
+				'start'           => ($page - 1) * $limit,
+				'limit'           => $limit 
+			);
+                        if ($this->config->get('bnews_image_width')) {
+                            $bwidth = $this->config->get('bnews_image_width');
+			} else {
+                            $bwidth = 136;
+			}
+			
+			if ($this->config->get('bnews_image_height')) {
+                            $bheight = $this->config->get('bnews_image_height');
+			} else {
+                            $bheight = 136;
+			}
+                        
+                        $this->data['rarticles'] = array();
+                        
+                        $news_total = $this->model_catalog_news->getTotalNews($data);
+			$rnews = $this->model_catalog_news->getNewsLimited($data);
+			
+                        if ($news_total >= 1) {
+                            foreach ($rnews as $rarticle) {
+                                    if ($rarticle['image']) {
+                                            $image = $this->model_tool_image->resize($rarticle['image'], $bwidth, $bheight);
+                                    } else {
+                                            $image = false;
+                                    }
+                                    
+                                    $this->data['rarticles'][] = array(
+                                            'article_id'  => $rarticle['news_id'],
+                                            'name'        => $rarticle['title'],
+                                            'acom'        => $rarticle['acom'],
+                                            'thumb'       => $image,
+                                            'description' => utf8_substr(strip_tags(html_entity_decode($rarticle['description'], ENT_QUOTES, 'UTF-8')), 0, 60) . '..',
+                                            'date_added' => date($this->language->get('date_format_short'), strtotime($rarticle['date_added'])),
+                                            'total_comments' => $this->model_catalog_ncomments->getTotalNcommentsByNewsId($rarticle['news_id']),
+                                            'href'        => $this->url->link('news/article' . '&news_id=' . $rarticle['news_id'])
+                                    );
+                            }
+                        }
+                        else {
+                            $this->data['rarticles'][] = array();
+                        }
+                        
 			if ($this->config->get('bnews_thumb_width')) {
             $bwidth = $this->config->get('bnews_thumb_width');
 			} else {
@@ -170,7 +240,7 @@ class ControllerNewsArticle extends Controller {
         		'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
         	     );
 				}
-                $pagination = new Pagination();
+                        $pagination = new Pagination();
 		        $pagination->total = $comment_total;
 		        $pagination->page = $page;
 		        $pagination->limit = 10; 
