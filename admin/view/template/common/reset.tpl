@@ -1,36 +1,48 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <div class="box">
-    <div class="heading">
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#reset').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
-    </div>
-    <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="reset">
-        <p><?php echo $text_password; ?></p>
-        <table class="form">
-          <tr>
-            <td><?php echo $entry_password; ?></td>
-            <td><input type="password" name="password" value="<?php echo $password; ?>" />
-              <?php if ($error_password) { ?>
-              <span class="error"><?php echo $error_password; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_confirm; ?></td>
-            <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
-              <?php if ($error_confirm) { ?>
-              <span class="error"><?php echo $error_confirm; ?></span>
-              <?php } ?></td>
-          </tr>
-        </table>
-      </form>
-    </div>
-  </div>
+
+	<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="reset" class="form-reset">
+
+		<h1 class="form-heading">
+			<?php if ($this->config->get('config_logo')) { ?>
+				<img src="<?php echo HTTP_IMAGE.$this->config->get('config_logo'); ?>" alt="<?php echo $this->config->get('config_name'); ?>">
+			<?php } else { ?>
+				<?php echo $this->config->get('config_name'); ?>
+			<?php } ?>
+		</h1>
+
+		<h2 class="form-heading"><i class="icon-lock"></i> <?php echo $heading_title; ?></h2>
+
+		<p class="help-block"><?php echo $text_password; ?></p>
+
+		<div class="control-group<?php if ($error_password) { ?> error<?php } ?>">
+			<label class="control-label"><?php echo $entry_password; ?></label>
+			<div class="controls">
+				<input type="password" name="password" value="<?php echo $password; ?>" class="input-block-level">
+				<?php if ($error_password) { ?>
+				<span class="error help-block"><?php echo $error_password; ?></span>
+				<?php } ?>
+			</div>
+		</div>
+
+		<div class="control-group<?php if ($error_confirm) { ?> error<?php } ?>">
+			<label class="control-label"><?php echo $entry_confirm; ?></label>
+			<div class="controls">
+				<input type="password" name="confirm" value="<?php echo $confirm; ?>" class="input-block-level">
+				<?php if ($error_confirm) { ?>
+				<span class="error help-block"><?php echo $error_confirm; ?></span>
+				<?php } ?>
+			</div>
+		</div>
+
+		<div class="buttons form-actions form-actions-top">
+			<?php echo p3html::tb_ajax_button($button_save, "$('#reset').submit();", 'success'); ?>
+			<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+		</div>
+
+	</form>
+
 </div>
+
 <?php echo $footer; ?>

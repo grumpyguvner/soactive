@@ -1,69 +1,83 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/country.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-globe"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input type="text" name="name" value="<?php echo $name; ?>" />
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group<?php if ($error_name) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+            <div class="controls">
+							<input type="text" name="name" value="<?php echo $name; ?>" class="span3">
               <?php if ($error_name) { ?>
-              <span class="error"><?php echo $error_name; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_description; ?></td>
-            <td><input type="text" name="description" value="<?php echo $description; ?>" />
+              <span class="error help-block"><?php echo $error_name; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_description) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_description; ?></label>
+            <div class="controls">
+							<input type="text" name="description" value="<?php echo $description; ?>" class="span3">
               <?php if ($error_description) { ?>
-              <span class="error"><?php echo $error_description; ?></span>
-              <?php } ?></td>
-          </tr>
-        </table>
-        <br />
-        <table id="zone-to-geo-zone" class="list">
+              <span class="error help-block"><?php echo $error_description; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+        </div>
+
+        <br>
+
+        <table id="zone-to-geo-zone" class="list table table-striped table-hover">
           <thead>
             <tr>
-              <td class="left"><?php echo $entry_country; ?></td>
-              <td class="left"><?php echo $entry_zone; ?></td>
-              <td></td>
+              <th class="column-name"><?php echo $entry_country; ?></th>
+              <th class="column-name"><?php echo $entry_zone; ?></th>
+              <th class="column-action"></th>
             </tr>
           </thead>
-          <?php $zone_to_geo_zone_row = 0; ?>
-          <?php foreach ($zone_to_geo_zones as $zone_to_geo_zone) { ?>
-          <tbody id="zone-to-geo-zone-row<?php echo $zone_to_geo_zone_row; ?>">
-            <tr>
-              <td class="left"><select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][country_id]" id="country<?php echo $zone_to_geo_zone_row; ?>" onchange="$('#zone<?php echo $zone_to_geo_zone_row; ?>').load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=0');">
-                  <?php foreach ($countries as $country) { ?>
-                  <?php  if ($country['country_id'] == $zone_to_geo_zone['country_id']) { ?>
-                  <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-              <td class="left"><select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][zone_id]" id="zone<?php echo $zone_to_geo_zone_row; ?>">
-                </select></td>
-              <td class="left"><a onclick="$('#zone-to-geo-zone-row<?php echo $zone_to_geo_zone_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+					<tbody>
+						<?php $zone_to_geo_zone_row = 0; ?>
+						<?php foreach ($zone_to_geo_zones as $zone_to_geo_zone) { ?>
+						<tr id="zone-to-geo-zone-row<?php echo $zone_to_geo_zone_row; ?>">
+              <td class="column-name">
+								<select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][country_id]" id="country<?php echo $zone_to_geo_zone_row; ?>"
+									class="span3">
+									<?php echo p3html::oc_country_options($countries, $zone_to_geo_zone); ?>
+                </select>
+							</td>
+              <td class="column-name">
+								<select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][zone_id]" id="zone<?php echo $zone_to_geo_zone_row; ?>" class="span3">
+                </select>
+							</td>
+              <td class="column-action">
+								<a onclick="$('#zone-to-geo-zone-row<?php echo $zone_to_geo_zone_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a>
+							</td>
             </tr>
+						<?php $zone_to_geo_zone_row++; ?>
+						<?php } ?>
           </tbody>
-          <?php $zone_to_geo_zone_row++; ?>
-          <?php } ?>
           <tfoot>
             <tr>
               <td colspan="2"></td>
-              <td class="left"><a onclick="addGeoZone();" class="button"><?php echo $button_add_geo_zone; ?></a></td>
+              <td class="column-action">
+								<a onclick="addGeoZone();" class="btn btn-small" title="<?php echo $button_add_geo_zone; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_geo_zone; ?></a>
+							</td>
             </tr>
           </tfoot>
         </table>
@@ -71,37 +85,55 @@
     </div>
   </div>
 </div>
-<script type="text/javascript"><!--
+
+<!--<script>
 $('#zone-id').load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + $('#country-id').attr('value') + '&zone_id=0');
-//--></script>
-<?php $zone_to_geo_zone_row = 0; ?>
-<?php foreach ($zone_to_geo_zones as $zone_to_geo_zone) { ?>
-<script type="text/javascript"><!--
-$('#zone<?php echo $zone_to_geo_zone_row; ?>').load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=<?php echo $zone_to_geo_zone['country_id']; ?>&zone_id=<?php echo $zone_to_geo_zone['zone_id']; ?>');
-//--></script>
-<?php $zone_to_geo_zone_row++; ?>
-<?php } ?>
-<script type="text/javascript"><!--
+</script>-->
+
+<script>
+jQuery(document).ready(function($){
+
+	$(document).on('change', 'select[name*="country_id"]', function(){
+		var country_id = $(this).val();
+		var zone_select = $(this).closest('tr').find('select[name*="zone_id"]');
+		zone_select.load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + country_id + '&zone_id=0', function(){
+			$(this).trigger('change');
+		});
+	});
+
+	<?php $zone_to_geo_zone_row = 0; ?>
+	<?php foreach ($zone_to_geo_zones as $zone_to_geo_zone) { ?>
+	$('#zone<?php echo $zone_to_geo_zone_row; ?>').load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=<?php echo $zone_to_geo_zone['country_id']; ?>&zone_id=<?php echo $zone_to_geo_zone['zone_id']; ?>', function(){
+		$(this).trigger('change');
+	});
+	<?php $zone_to_geo_zone_row++; ?>
+	<?php } ?>
+});
+</script>
+
+<script>
 var zone_to_geo_zone_row = <?php echo $zone_to_geo_zone_row; ?>;
 
 function addGeoZone() {
-	html  = '<tbody id="zone-to-geo-zone-row' + zone_to_geo_zone_row + '">';
-	html += '<tr>';
-	html += '<td class="left"><select name="zone_to_geo_zone[' + zone_to_geo_zone_row + '][country_id]" id="country' + zone_to_geo_zone_row + '" onchange="$(\'#zone' + zone_to_geo_zone_row + '\').load(\'index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=\' + this.value + \'&zone_id=0\');">';
-	<?php foreach ($countries as $country) { ?>
-	html += '<option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
-	<?php } ?>   
-	html += '</select></td>';
-	html += '<td class="left"><select name="zone_to_geo_zone[' + zone_to_geo_zone_row + '][zone_id]" id="zone' + zone_to_geo_zone_row + '"></select></td>';
-	html += '<td class="left"><a onclick="$(\'#zone-to-geo-zone-row' + zone_to_geo_zone_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+	html  = '<tr id="zone-to-geo-zone-row' + zone_to_geo_zone_row + '">';
+	html += '	<td class="column-name"><select name="zone_to_geo_zone[' + zone_to_geo_zone_row + '][country_id]" id="country' + zone_to_geo_zone_row + '" class="span3">';
+	html += '		<?php echo p3html::oc_country_options($countries, null, true); ?>';
+	html += '	</select></td>';
+	html += '	<td class="column-name"><select name="zone_to_geo_zone[' + zone_to_geo_zone_row + '][zone_id]" id="zone' + zone_to_geo_zone_row + '" class="span3"></select></td>';
+	html += '	<td class="column-action"><a onclick="$(\'#zone-to-geo-zone-row' + zone_to_geo_zone_row + '\').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>';
 	html += '</tr>';
-	html += '</tbody>';
-	
-	$('#zone-to-geo-zone > tfoot').before(html);
-		
-	$('#zone' + zone_to_geo_zone_row).load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + $('#country' + zone_to_geo_zone_row).attr('value') + '&zone_id=0');
-	
+
+	$('#zone-to-geo-zone > tbody').append(html);
+
+	$('#zone' + zone_to_geo_zone_row).load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + $('#country' + zone_to_geo_zone_row).attr('value') + '&zone_id=0', function(){
+		<?php if ($this->config->get('p3adminrebooted_select2')) { ?>
+		$(this).closest('tr').find('select').select2();
+		$(this).trigger('change');
+		<?php } ?>
+	});
+
 	zone_to_geo_zone_row++;
 }
-//--></script> 
+</script>
+
 <?php echo $footer; ?>

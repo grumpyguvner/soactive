@@ -1,87 +1,86 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/tax.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-dollar"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_title; ?></td>
-            <td><input type="text" name="title" value="<?php echo $title; ?>" />
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group<?php if ($error_title) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_title; ?></label>
+            <div class="controls">
+							<input type="text" name="title" value="<?php echo $title; ?>" class="span3">
               <?php if ($error_title) { ?>
-              <span class="error"><?php echo $error_title; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_description; ?></td>
-            <td><input type="text" name="description" value="<?php echo $description; ?>" />
+              <span class="error help-block"><?php echo $error_title; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_description) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_description; ?></label>
+            <div class="controls">
+							<input type="text" name="description" value="<?php echo $description; ?>" class="span5">
               <?php if ($error_description) { ?>
-              <br />
-              <span class="error"><?php echo $error_description; ?></span>
-              <?php } ?></td>
-          </tr>
-        </table>
-        <br />
-        <table id="tax-rule" class="list">
+              <span class="error help-block"><?php echo $error_description; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+        </div>
+
+        <br>
+
+        <table id="tax-rule" class="list table table-striped table-hover">
           <thead>
             <tr>
-              <td class="left"><?php echo $entry_rate; ?></td>
-              <td class="left"><?php echo $entry_based; ?></td>
-              <td class="left"><?php echo $entry_priority; ?></td>
-              <td></td>
+              <th class="column-number"><?php echo $entry_rate; ?></th>
+              <th class="column-name"><?php echo $entry_based; ?></th>
+              <th class="column-sort"><?php echo $entry_priority; ?></th>
+              <th class="column-action"></th>
             </tr>
           </thead>
-          <?php $tax_rule_row = 0; ?>
-          <?php foreach ($tax_rules as $tax_rule) { ?>
-          <tbody id="tax-rule-row<?php echo $tax_rule_row; ?>">
-            <tr>
-              <td class="left"><select name="tax_rule[<?php echo $tax_rule_row; ?>][tax_rate_id]">
-                  <?php foreach ($tax_rates as $tax_rate) { ?>
-                  <?php  if ($tax_rate['tax_rate_id'] == $tax_rule['tax_rate_id']) { ?>
-                  <option value="<?php echo $tax_rate['tax_rate_id']; ?>" selected="selected"><?php echo $tax_rate['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $tax_rate['tax_rate_id']; ?>"><?php echo $tax_rate['name']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select></td>
-              <td class="left"><select name="tax_rule[<?php echo $tax_rule_row; ?>][based]">
-                  <?php  if ($tax_rule['based'] == 'shipping') { ?>
-                  <option value="shipping" selected="selected"><?php echo $text_shipping; ?></option>
-                  <?php } else { ?>
-                  <option value="shipping"><?php echo $text_shipping; ?></option>
-                  <?php } ?>
-                  <?php  if ($tax_rule['based'] == 'payment') { ?>
-                  <option value="payment" selected="selected"><?php echo $text_payment; ?></option>
-                  <?php } else { ?>
-                  <option value="payment"><?php echo $text_payment; ?></option>
-                  <?php } ?>  
-                  <?php  if ($tax_rule['based'] == 'store') { ?>
-                  <option value="store" selected="selected"><?php echo $text_store; ?></option>
-                  <?php } else { ?>
-                  <option value="store"><?php echo $text_store; ?></option>
-                  <?php } ?>                                    
-                </select></td>
-              <td class="left"><input type="text" name="tax_rule[<?php echo $tax_rule_row; ?>][priority]" value="<?php echo $tax_rule['priority']; ?>" size="1" /></td>
-              <td class="left"><a onclick="$('#tax-rule-row<?php echo $tax_rule_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+					<tbody>
+ 						<?php $tax_rule_row = 0; ?>
+						<?php foreach ($tax_rules as $tax_rule) { ?>
+            <tr id="tax-rule-row<?php echo $tax_rule_row; ?>">
+              <td class="column-name">
+								<select name="tax_rule[<?php echo $tax_rule_row; ?>][tax_rate_id]" class="span3">
+									<?php echo p3html::oc_tax_rate_options($tax_rates, $tax_rule);?>
+                </select>
+							</td>
+              <td class="column-name">
+								<select name="tax_rule[<?php echo $tax_rule_row; ?>][based]" class="span2">
+									<?php echo p3html::oc_tax_rule_options($this->language, $tax_rule, 'based', array('shipping'=>$text_shipping, 'payment'=>$text_payment)); ?>
+                </select>
+							</td>
+              <td class="column-sort">
+								<input type="text" name="tax_rule[<?php echo $tax_rule_row; ?>][priority]" value="<?php echo $tax_rule['priority']; ?>" class="input-mini"></td>
+              <td class="column-action">
+								<a onclick="$('#tax-rule-row<?php echo $tax_rule_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a>
+							</td>
             </tr>
+						<?php $tax_rule_row++; ?>
+						<?php } ?>
           </tbody>
-          <?php $tax_rule_row++; ?>
-          <?php } ?>
           <tfoot>
             <tr>
               <td colspan="3"></td>
-              <td class="left"><a onclick="addRule();" class="button"><?php echo $button_add_rule; ?></a></td>
+              <td class="column-action">
+								<a onclick="addRule();" class="btn btn-small" title="<?php echo $button_add_rule; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_rule; ?></a>
+							</td>
             </tr>
           </tfoot>
         </table>
@@ -89,30 +88,29 @@
     </div>
   </div>
 </div>
-<script type="text/javascript"><!--
+
+<script>
 var tax_rule_row = <?php echo $tax_rule_row; ?>;
 
 function addRule() {
-	html  = '<tbody id="tax-rule-row' + tax_rule_row + '">';
-	html += '  <tr>';
-	html += '    <td class="left"><select name="tax_rule[' + tax_rule_row + '][tax_rate_id]">';
-    <?php foreach ($tax_rates as $tax_rate) { ?>
-    html += '      <option value="<?php echo $tax_rate['tax_rate_id']; ?>"><?php echo addslashes($tax_rate['name']); ?></option>';
-    <?php } ?>
-    html += '    </select></td>';
-	html += '    <td class="left"><select name="tax_rule[' + tax_rule_row + '][based]">';
-    html += '      <option value="shipping"><?php echo $text_shipping; ?></option>';
-    html += '      <option value="payment"><?php echo $text_payment; ?></option>';
-    html += '      <option value="store"><?php echo $text_store; ?></option>';
-    html += '    </select></td>';
-	html += '    <td class="left"><input type="text" name="tax_rule[' + tax_rule_row + '][priority]" value="" size="1" /></td>';
-	html += '    <td class="left"><a onclick="$(\'#tax-rule-row' + tax_rule_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
-	html += '  </tr>';
-	html += '</tbody>';
-	
-	$('#tax-rule > tfoot').before(html);
-	
+	html  = '<tr id="tax-rule-row' + tax_rule_row + '">';
+	html += '	<td class="column-name"><select name="tax_rule[' + tax_rule_row + '][tax_rate_id]" class="span3">';
+	html += '		<?php echo p3html::oc_tax_rate_options($tax_rates, null, true);?>';
+	html += '	</select></td>';
+	html += '	<td class="column-name"><select name="tax_rule[' + tax_rule_row + '][based]" class="span2">';
+	html += '		<?php echo p3html::oc_tax_rule_options($this->language, $tax_rule, 'based', array('shipping'=>$text_shipping, 'payment'=>$text_payment), true); ?>';
+	html += '	</select></td>';
+	html += '	<td class="column-sort"><input type="text" name="tax_rule[' + tax_rule_row + '][priority]" value="" class="input-mini"></td>';
+	html += '	<td class="column-action"><a onclick="$(\'#tax-rule-row' + tax_rule_row + '\').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>';
+	html += '</tr>';
+
+	$('#tax-rule > tbody').append(html);
+
+	<?php if ($this->config->get('p3adminrebooted_select2')) { ?>
+	$('#tax-rule-row' + tax_rule_row + ' select').select2();
+	<?php } ?>
+
 	tax_rule_row++;
 }
-//--></script> 
+</script>
 <?php echo $footer; ?>

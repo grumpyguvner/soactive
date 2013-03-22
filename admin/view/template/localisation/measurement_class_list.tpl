@@ -1,65 +1,70 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/measurement.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="location='<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <h1><i class="icon-compass"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+			<?php if ($success) { ?>
+				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_insert($button_insert, $insert); ?>
+				<?php echo p3html::tb_form_button_delete($button_delete); ?>
+			</div>
     </div>
+
     <div class="content">
+
+			<?php if ($measurement_classes) { ?>
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="list">
+        <table class="list table table-striped table-hover">
           <thead>
             <tr>
-              <td width="1" style="align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'title') { ?>
-                <a href="<?php echo $sort_title; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_title; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_title; ?>"><?php echo $column_title; ?></a>
-                <?php } ?></td>
-              <td class="left"><?php if ($sort == 'unit') { ?>
-                <a href="<?php echo $sort_unit; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_unit; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_unit; ?>"><?php echo $column_unit; ?></a>
-                <?php } ?></td>
-              <td class="right"><?php echo $column_action; ?></td>
+              <th class="column-checkbox">
+								<input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);">
+							</th>
+              <th class="column-name">
+								<?php echo p3html::tb_sort_heading($column_title, $sort_title, $sort, $order, 'title'); ?>
+							</th>
+              <th class="column-code">
+								<?php echo p3html::tb_sort_heading($column_unit, $sort_unit, $sort, $order, 'unit'); ?>
+							</th>
+              <th class="column-number">
+								<?php echo p3html::tb_sort_heading($column_value, $sort_value, $sort, $order, 'value'); ?>
+							</th>
+              <th class="column-action"><?php echo $column_action; ?></th>
             </tr>
           </thead>
           <tbody>
-            <?php if ($measurement_classes) { ?>
             <?php foreach ($measurement_classes as $measurement_class) { ?>
             <tr>
-              <td style="align: center;"><?php if ($measurement_class['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $measurement_class['measurement_class_id']; ?>" checked="checked" />
-                <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $measurement_class['measurement_class_id']; ?>" />
-                <?php } ?></td>
-              <td class="left"><?php echo $measurement_class['title']; ?></td>
-              <td class="left"><?php echo $measurement_class['unit']; ?></td>
-              <td class="right"><?php foreach ($measurement_class['action'] as $action) { ?>
-                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-                <?php } ?></td>
-            </tr>
-            <?php } ?>
-            <?php } else { ?>
-            <tr>
-              <td class="center" colspan="4"><?php echo $text_no_results; ?></td>
+              <td class="column-checkbox">
+                <input type="checkbox" name="selected[]" value="<?php echo $measurement_class['measurement_class_id']; ?>"<?php if ($measurement_class['selected']) { ?> checked="checked"<?php } ?>>
+							</td>
+              <td class="column-name"><?php echo $measurement_class['title']; ?></td>
+              <td class="column-code"><?php echo $measurement_class['unit']; ?></td>
+              <td class="column-number"><?php echo $measurement_class['value']; ?></td>
+              <td class="column-action">
+								<?php echo p3html::tb_action_buttons($measurement_class); ?>
+							</td>
             </tr>
             <?php } ?>
           </tbody>
         </table>
       </form>
+
       <div class="pagination"><?php echo $pagination; ?></div>
+			<?php } else { ?>
+			<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>
+			<?php } ?>
+
     </div>
   </div>
 </div>

@@ -597,6 +597,7 @@ class ControllerCatalogProduct extends Controller {
         $this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
         $this->data['entry_reward'] = $this->language->get('entry_reward');
         $this->data['entry_layout'] = $this->language->get('entry_layout');
+        $this->data['entry_youtube_url'] = $this->language->get('entry_youtube_url');
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');

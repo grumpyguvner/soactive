@@ -1,81 +1,95 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/language.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-flag"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+			<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input type="text" name="name" value="<?php echo $name; ?>" />
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group<?php if ($error_name) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+            <div class="controls">
+							<input type="text" name="name" value="<?php echo $name; ?>" class="span3">
               <?php if ($error_name) { ?>
-              <span class="error"><?php echo $error_name; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-            <td><input type="text" name="code" value="<?php echo $code; ?>" />
+              <span class="error help-block"><?php echo $error_name; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_code) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_code; ?></label>
+            <div class="controls">
+							<input type="text" name="code" value="<?php echo $code; ?>" class="span1">
               <?php if ($error_code) { ?>
-              <span class="error"><?php echo $error_code; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_locale; ?></td>
-            <td><input type="text" name="locale" value="<?php echo $locale; ?>" />
+              <span class="error help-block"><?php echo $error_code; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_locale) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_locale; ?></label>
+            <div class="controls">
+							<input type="text" name="locale" value="<?php echo $locale; ?>" class="span4">
               <?php if ($error_locale) { ?>
-              <span class="error"><?php echo $error_locale; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_image; ?></td>
-            <td><input type="text" name="image" value="<?php echo $image; ?>" />
+              <span class="error help-block"><?php echo $error_locale; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_image) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_image; ?></label>
+            <div class="controls">
+							<input type="text" name="image" value="<?php echo $image; ?>" class="span2">
               <?php if ($error_image) { ?>
-              <span class="error"><?php echo $error_image; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_directory; ?></td>
-            <td><input type="text" name="directory" value="<?php echo $directory; ?>" />
+              <span class="error help-block"><?php echo $error_image; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_directory) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_directory; ?></label>
+            <div class="controls">
+							<input type="text" name="directory" value="<?php echo $directory; ?>" class="span2">
               <?php if ($error_directory) { ?>
-              <span class="error"><?php echo $error_directory; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_filename; ?></td>
-            <td><input type="text" name="filename" value="<?php echo $filename; ?>" />
+              <span class="error help-block"><?php echo $error_directory; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_filename) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_filename; ?></label>
+            <div class="controls">
+							<input type="text" name="filename" value="<?php echo $filename; ?>" class="span2">
               <?php if ($error_filename) { ?>
-              <span class="error"><?php echo $error_filename; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select name="status">
-                <?php if ($status) { ?>
-                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                <option value="0"><?php echo $text_disabled; ?></option>
-                <?php } else { ?>
-                <option value="1"><?php echo $text_enabled; ?></option>
-                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_sort_order; ?></td>
-            <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>
-          </tr>
-        </table>
+              <span class="error help-block"><?php echo $error_filename; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_status; ?></label>
+            <div class="controls">
+							<select name="status" class="span2">
+								<?php echo p3html::oc_status_options($this->language, $status) ?>
+              </select>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_sort_order; ?></label>
+            <div class="controls"><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" class="span1 i-mini"></div>
+          </div>
+        </div>
       </form>
+
     </div>
   </div>
 </div>

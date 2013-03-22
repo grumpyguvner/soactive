@@ -1,29 +1,34 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
-  <div class="box">
-    <div class="heading">
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#forgotten').submit();" class="button"><?php echo $button_reset; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
-    </div>
-    <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="forgotten">
-        <p><?php echo $text_email; ?></p>
-        <table class="form">
-          <tr>
-            <td><?php echo $entry_email; ?></td>
-            <td><input type="text" name="email" value="<?php echo $email; ?>" /></td>
-          </tr>
-        </table>
-      </form>
-    </div>
-  </div>
+
+  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="forgotten" class="form-signin">
+
+		<h1 class="form-heading">
+			<?php if ($this->config->get('config_logo')) { ?>
+				<img src="<?php echo HTTP_IMAGE.$this->config->get('config_logo'); ?>" alt="<?php echo $this->config->get('config_name'); ?>">
+			<?php } else { ?>
+				<?php echo $this->config->get('config_name'); ?>
+			<?php } ?>
+		</h1>
+
+		<h2 class="form-heading"><i class="icon-lock"></i> <?php echo $heading_title; ?></h2>
+
+		<?php if ($error_warning) { ?>
+			<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+		<?php } ?>
+
+		<?php echo p3html::tb_alert('warning', $text_email, false, 'warning'); ?>
+
+		<input type="text" name="email" value="<?php echo $email; ?>" placeholder="<?php echo trim($entry_email, ':'); ?>" class="input-block-level">
+
+		<div class="buttons form-actions form-actions-top">
+			<?php echo p3html::tb_ajax_button($button_reset, "$('#forgotten').submit();", 'warning'); ?>
+			<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+		</div>
+
+  </form>
+
 </div>
+
 <?php echo $footer; ?>

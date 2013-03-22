@@ -1,33 +1,36 @@
+<?php require_once DIR_TEMPLATE.'helper/p3html.php'?>
+
 <?php if ($error) { ?>
-<div class="warning"><?php echo $error; ?></div>
+	<?php echo p3html::tb_alert('error', $error, true, 'warning'); ?>
 <?php } ?>
 <?php if ($success) { ?>
-<div class="success"><?php echo $success; ?></div>
+	<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
 <?php } ?>
-<table class="list">
+
+<?php if ($histories) { ?>
+<table class="list table table-striped table-hover">
   <thead>
     <tr>
-      <td class="left"><b><?php echo $column_date_added; ?></b></td>
-      <td class="left"><b><?php echo $column_comment; ?></b></td>
-      <td class="left"><b><?php echo $column_status; ?></b></td>
-      <td class="left"><b><?php echo $column_notify; ?></b></td>
+      <th class="column-date"><?php echo $column_date_added; ?></th>
+      <th class="column-name"><?php echo $column_comment; ?></th>
+      <th class="column-status"><?php echo $column_status; ?></th>
+      <th class="column-status"><?php echo $column_notify; ?></th>
     </tr>
   </thead>
   <tbody>
-    <?php if ($histories) { ?>
     <?php foreach ($histories as $history) { ?>
     <tr>
-      <td class="left"><?php echo $history['date_added']; ?></td>
-      <td class="left"><?php echo $history['comment']; ?></td>
-      <td class="left"><?php echo $history['status']; ?></td>
-      <td class="left"><?php echo $history['notify']; ?></td>
-    </tr>
-    <?php } ?>
-    <?php } else { ?>
-    <tr>
-      <td class="center" colspan="4"><?php echo $text_no_results; ?></td>
+      <td class="column-date"><?php echo $history['date_added']; ?></td>
+      <td class="column-name"><?php echo $history['comment']; ?></td>
+      <td class="column-status"><?php echo $history['status']; ?></td>
+      <td class="column-status"><?php echo $history['notify']; ?></td>
     </tr>
     <?php } ?>
   </tbody>
 </table>
+
 <div class="pagination"><?php echo $pagination; ?></div>
+
+<?php } else { ?>
+<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>
+<?php } ?>

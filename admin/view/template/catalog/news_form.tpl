@@ -1,18 +1,22 @@
 <?php echo $header; ?>
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
+  
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
 <?php if ($error_warning) { ?>
   <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <div class="box">
 <div class="heading">
-  <h1><img src="view/image/information.png" alt="" /> <?php echo $heading_title; ?></h1>
-   <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
-</div>
+      <h1><i class="icon-info"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
+    </div>
 <div class="content">
 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
   <div id="tab_general" class="page">
@@ -43,12 +47,22 @@
 			</td>
         </tr>
       <?php } ?>
-	  <tr>
-              <td><?php echo $entry_image; ?></td>
-              <td><div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" /><br />
-                  <input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
-                  <a onclick="image_upload('image', 'thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
-            </tr>
+        <tr>
+            
+	  <div class="control-group">
+              <td><label class="control-label"><?php echo $entry_image; ?></label></td>
+              <td><div class="controls" valign="top">
+                    <div class="image">
+                        <img src="<?php echo $thumb; ?>" alt="" id="thumb">
+                        <input type="hidden" name="image" value="<?php echo $image; ?>" id="image">
+                        <br><br>
+                        <a class="btn" title="<?php echo $text_browse; ?>" data-toggle="modal" data-target="#dialog" onclick="image_upload('image', 'thumb');"><i class="icon-folder-open"></i><span class="hidden-phone"> <?php echo $text_browse; ?></span></a>
+                        <a class="btn" title="<?php echo $text_clear; ?>" onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><i class="icon-trash"></i><span class="hidden-phone"> <?php echo $text_clear; ?></span></a>
+                    </div>
+            </div></td>
+            </div>
+            
+    </tr>
 	  <thead>
 	<tr> <td style="background: #06f; border: 4px solid #ddd; border-right: none;">
 	<div style=" padding: 8px; font-size: 16px; color: #fff; font-weight: bold; display: block;"><?php echo $tab_seo; ?></div>
@@ -261,32 +275,8 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 });
 <?php } ?>
 //--></script> 
-<script type="text/javascript"><!--
-function image_upload(field, thumb) {
-	$('#dialog').remove();
-	
-	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-	
-	$('#dialog').dialog({
-		title: '<?php echo $text_image_manager; ?>',
-		close: function (event, ui) {
-			if ($('#' + field).attr('value')) {
-				$.ajax({
-					url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#' + field).attr('value')),
-					dataType: 'text',
-					success: function(text) {
-						$('#' + thumb).replaceWith('<img src="' + text + '" alt="" id="' + thumb + '" />');
-					}
-				});
-			}
-		},	
-		bgiframe: false,
-		width: 800,
-		height: 400,
-		resizable: false,
-		modal: false
-	});
-};
-//--></script> 
+<!--FILEMANAGER-->
+<?php include_once DIR_TEMPLATE.'javascript/filemanager_dialog.tpl'; ?>
+<!--FILEMANAGER-->
 
 </div>

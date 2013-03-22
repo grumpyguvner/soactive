@@ -1,50 +1,56 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
-  <?php if ($error) { ?>
-  <div class="warning"><?php echo $error; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/shipping.png" alt="" /> <?php echo $heading_title; ?></h1>
+      <h1><i class="icon-truck"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($success) { ?>
+				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+			<?php } ?>
+			<?php if ($error) { ?>
+				<?php echo p3html::tb_alert('error', $error, true, 'warning'); ?>
+			<?php } ?>
     </div>
+
     <div class="content">
-      <table class="list">
+
+			<?php if ($extensions) { ?>
+			<?php	foreach ($extensions as $extension) $sorting[] = $extension['sort_order']; array_multisort($sorting, $extensions); ?>
+      <table class="list table table-striped table-hover">
         <thead>
           <tr>
-            <td class="left"><?php echo $column_name; ?></td>
-            <td class="left"><?php echo $column_status; ?></td>
-            <td class="right"><?php echo $column_sort_order; ?></td>
-            <td class="right"><?php echo $column_action; ?></td>
+            <th class="column-name"><?php echo $column_name; ?></th>
+            <th class="column-status"><?php echo $column_status; ?></th>
+            <th class="column-sort hidden-phone"><?php echo $column_sort_order; ?></th>
+            <th class="column-action"><?php echo $column_action; ?></th>
           </tr>
         </thead>
         <tbody>
-          <?php if ($extensions) { ?>
           <?php foreach ($extensions as $extension) { ?>
           <tr>
-            <td class="left"><?php echo $extension['name']; ?></td>
-            <td class="left"><?php echo $extension['status'] ?></td>
-            <td class="right"><?php echo $extension['sort_order']; ?></td>
-            <td class="right"><?php foreach ($extension['action'] as $action) { ?>
-              [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-              <?php } ?></td>
-          </tr>
-          <?php } ?>
-          <?php } else { ?>
-          <tr>
-            <td class="center" colspan="8"><?php echo $text_no_results; ?></td>
+            <td class="column-name"><?php echo $extension['name']; ?></td>
+            <td class="column-status">
+							<?php //echo $extension['status'] ?>
+							<?php $status = $this->language->get('text_enabled')==$extension['status'] ?>
+							<?php echo p3html::tb_status_label($status, $extension['status']); ?>
+						</td>
+            <td class="column-sort hidden-phone"><?php echo $extension['sort_order']; ?></td>
+            <td class="column-action">
+							<?php echo p3html::tb_action_buttons($extension); ?>
+						</td>
           </tr>
           <?php } ?>
         </tbody>
       </table>
+			<?php } else { ?>
+			<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>
+			<?php } ?>
     </div>
   </div>
 </div>
+
 <?php echo $footer; ?>

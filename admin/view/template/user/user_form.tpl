@@ -1,118 +1,98 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/user.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><?php
-          echo (!$is_superuser || $this->user->isSuperuser()) ? '<a onclick="$(\'#form\').submit();" class="button">' . $button_save . '</a> <a onclick="location = \'' . $cancel . '\'" class="button">' . $button_cancel . '</a>' : '<a onclick="location = \'' . $cancel . '\'" class="button">' . $button_back . '</a>'; ?></div>
+      <h1><i class="icon-user"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <?php
-          if (!$is_superuser || $this->user->isSuperuser())
-          {
-          ?>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_username; ?></td>
-            <td><input type="text" name="username" value="<?php echo $username; ?>" />
+
+			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+
+				<div class="form">
+          <div class="control-group<?php if ($error_username) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_username; ?></label>
+            <div class="controls">
+							<input type="text" name="username" value="<?php echo $username; ?>" class="span2">
               <?php if ($error_username) { ?>
-              <span class="error"><?php echo $error_username; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_firstname; ?></td>
-            <td><input type="text" name="firstname" value="<?php echo $firstname; ?>" />
+              <span class="error help-block"><?php echo $error_username; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_firstname) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_firstname; ?></label>
+            <div class="controls">
+							<input type="text" name="firstname" value="<?php echo $firstname; ?>" class="span3">
               <?php if ($error_firstname) { ?>
-              <span class="error"><?php echo $error_firstname; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_lastname; ?></td>
-            <td><input type="text" name="lastname" value="<?php echo $lastname; ?>" />
+              <span class="error help-block"><?php echo $error_firstname; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_lastname) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_lastname; ?></label>
+            <div class="controls">
+							<input type="text" name="lastname" value="<?php echo $lastname; ?>" class="span3">
               <?php if ($error_lastname) { ?>
-              <span class="error"><?php echo $error_lastname; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_email; ?></td>
-            <td><input type="text" name="email" value="<?php echo $email; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_user_group; ?></td>
-            <td><select name="user_group_id">
-                <?php foreach ($user_groups as $user_group) { ?>
-                <?php if ($user_group['user_group_id'] == $user_group_id) { ?>
-                <option value="<?php echo $user_group['user_group_id']; ?>" selected="selected"><?php echo $user_group['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $user_group['user_group_id']; ?>"><?php echo $user_group['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_password; ?></td>
-            <td><input type="password" name="password" value="<?php echo $password; ?>"  />
+              <span class="error help-block"><?php echo $error_lastname; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_email; ?></label>
+            <div class="controls"><input type="text" name="email" value="<?php echo $email; ?>" class="span4"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_user_group; ?></label>
+            <div class="controls">
+							<select name="user_group_id">
+								<?php echo p3html::oc_user_group_options($user_groups, $user_group_id); ?>
+              </select>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_password; ?></label>
+            <div class="controls">
+							<input type="password" name="password" value="<?php echo $password; ?>" class="span2">
               <?php if ($error_password) { ?>
-              <span class="error"><?php echo $error_password; ?></span>
-              <?php  } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_confirm; ?></td>
-            <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
+              <span class="error help-block"><?php echo $error_password; ?></span>
+              <?php  } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_confirm; ?></label>
+            <div class="controls">
+							<input type="password" name="confirm" value="<?php echo $confirm; ?>" class="span2">
               <?php if ($error_confirm) { ?>
-              <span class="error"><?php echo $error_confirm; ?></span>
-              <?php  } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select name="status">
-                <?php if ($status) { ?>
-                <option value="0"><?php echo $text_disabled; ?></option>
-                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                <?php } else { ?>
-                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                <option value="1"><?php echo $text_enabled; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <?php
-          } else {
-          ?>
-          <tr>
-            <td><?php echo $entry_firstname; ?></td>
-            <td><strong><?php echo $firstname; ?></strong></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_lastname; ?></td>
-            <td><strong><?php echo $lastname; ?></strong></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_email; ?></td>
-            <td><strong><?php echo $email; ?></strong></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_user_group; ?></td>
-            <td><strong><?php echo $user_group_name; ?></strong></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><strong><?php echo ($status) ? $text_enabled : $text_disabled; ?></strong></td>
-          </tr>
-          <?php
-          }
-          ?>
-        </table>
+              <span class="error help-block"><?php echo $error_confirm; ?></span>
+              <?php  } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_status; ?></label>
+            <div class="controls">
+							<select name="status" class="span2">
+								<?php echo p3html::oc_status_options($this->language, $status); ?>
+              </select>
+						</div>
+          </div>
+        </div>
+
       </form>
+
     </div>
   </div>
 </div>
-<?php echo $footer; ?> 
+
+<?php echo $footer; ?>
