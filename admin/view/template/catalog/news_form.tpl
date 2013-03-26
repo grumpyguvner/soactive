@@ -18,9 +18,9 @@
 			</div>
     </div>
 <div class="content">
-<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
   <div id="tab_general" class="page">
-    <table class="form">
+    <table id="module" class="list table table-striped table-hover">
 	<thead>
 	<tr> <td style="background: #06f; border: 4px solid #ddd; border-right: none;">
 	<div style=" padding: 8px; font-size: 16px; color: #fff; font-weight: bold; display: block;"><?php echo $tab_general; ?></div>
@@ -40,7 +40,7 @@
       <tr>
           <td><span class="required">*</span> <?php echo $entry_description; ?></td>
           <td><textarea name="news_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset( $news_description[$language['language_id']]['description']) ? $news_description[$language['language_id']]['description'] : ''; ?></textarea>
-            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" style="vertical-align: top;" />
+            <!--img src="view/image/flags/<?php /* echo $language['image']; ?>" title="<?php echo $language['name']; */?>" style="vertical-align: top;" /-->
             <?php if (isset($error_description[$language['language_id']])) { ?>
                   <br /><span class="error"><?php echo $error_description[$language['language_id']]; ?></span>
                   <?php } ?>

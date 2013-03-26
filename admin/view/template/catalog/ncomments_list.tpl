@@ -1,10 +1,8 @@
 <?php echo $header; ?>
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
+  
+    <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <?php if ($error_warning) { ?>
   <div class="warning"><?php echo $error_warning; ?></div>
   <?php } ?>
@@ -17,11 +15,14 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/review.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><span><?php echo $button_insert; ?></span></a><a onclick="$('form').submit();" class="button"><span><?php echo $button_delete; ?></span></a></div>
+      <div class="buttons">
+          <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-small"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_insert; ?></span></a>
+          <a onclick="$('form').submit();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_delete; ?>"></i><span class="hidden-phone"> <?php echo $button_delete; ?></span></a>
+      </div>
     </div>
     <div class="content">
-      <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="list">
+      <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <table id="module" class="list table table-striped table-hover">
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
@@ -57,11 +58,11 @@
                 <?php } else { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $comment['ncomment_id']; ?>" />
                 <?php } ?></td>
-              <td class="left"><?php echo $comment['name']; ?></td>
-              <td class="left"><?php echo $comment['author']; ?></td>
-              <td class="left"><?php echo $comment['status']; ?></td>
-              <td class="left"><?php echo $comment['date_added']; ?></td>
-              <td class="right"><?php foreach ($comment['action'] as $action) { ?>
+              <td class="comment-name"><?php echo $comment['name']; ?></td>
+              <td class="comment-author"><?php echo $comment['author']; ?></td>
+              <td class="comment-status"><?php echo $comment['status']; ?></td>
+              <td class="comment-date"><?php echo $comment['date_added']; ?></td>
+              <td class="column-action"><?php foreach ($comment['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
             </tr>

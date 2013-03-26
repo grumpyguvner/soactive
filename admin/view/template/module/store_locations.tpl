@@ -1,10 +1,8 @@
 <?php echo $header; ?>
 <div id="content">
-<div class="breadcrumb">
-  <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-  <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-  <?php } ?>
-</div>
+
+    <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
 <?php if ($success) { ?>
   <div class="success"><?php echo $success; ?></div>
   <?php } ?>
@@ -12,13 +10,19 @@
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <div class="box">
-  <div class="heading">
-    <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
-    <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
-  </div>
+    <div class="heading">
+            <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
+            <?php if ($error_warning) { ?>
+                <?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+            <?php } ?>
+            <div class="buttons form-actions form-actions-top">
+                <?php echo p3html::tb_form_button_save($button_save); ?>
+                <?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+            </div>
+        </div>
   <div class="content">
-    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-      <table class="form">
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+      <table id="module" class="form table table-striped table-hover">
         <tr>
           <td><?php echo $store_loc_iWidth; ?></td>
           <td><input type="text" name="store_locations_iWidth" value="<?php echo $store_locations_iWidth; ?>" size="1" /></td>
@@ -57,12 +61,18 @@
         </tr>
         <tr>
               <td><?php echo $entry_icon; ?></td>
-              <td valign="top"><div class="image"><img src="<?php echo $thumb_icon; ?>" alt="" id="thumb_icon" />
+              <td valign="top">
+                  
+                  <div class="image"><img src="<?php echo $thumb_icon; ?>" alt="" id="thumb_icon" />
                 <input type="hidden" name="store_locations_image_icon" value="<?php echo $store_locations_image_icon; ?>" id="store_locations_image_icon" />
-                <br /><a onclick="image_upload('store_locations_image_icon', 'thumb_icon');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb_icon').attr('src', '<?php echo $no_image; ?>'); $('#store_locations_image_icon').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+                <br />
+                <a class="btn" title="<?php echo $text_browse; ?>" data-toggle="modal" data-target="#dialog" onclick="image_upload('store_locations_image_icon', 'thumb_icon');"><i class="icon-folder-open"></i><span class="hidden-phone"> <?php echo $text_browse; ?></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a class="btn"  title="<?php echo $text_clear; ?>" onclick="$('#thumb_icon').attr('src', '<?php echo $no_image; ?>'); $('#store_locations_image_icon').attr('value', '');"><i class="icon-trash"></i><span class="hidden-phone"> <?php echo $text_clear; ?></span></a>
+                  </div>
+              </td>
          </tr>
       </table>
-      <table class="list">
+      <table id="module" class="list table table-striped table-hover">
           <thead>
           	<tr>
             	<td colspan="4"><div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a>&nbsp;<a onclick="$('#form').attr('action','<?php echo $delete; ?>');$('#form').submit();" class="button"><?php echo $button_delete; ?></a></div>
@@ -98,7 +108,7 @@
             <?php } ?>
           </tbody>
         </table>
-      <table id="module" class="list">
+      <table id="module" class="list table table-striped table-hover">
         <thead>
           <tr>
             <td class="left"><?php echo $entry_limit; ?></td>
@@ -209,29 +219,7 @@ function addModule() {
 	module_row++;
 }
 //--></script>
-<script type="text/javascript"><!--
-function image_upload(field, thumb) {
-	$('#dialog').remove();
-	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-	$('#dialog').dialog({
-		title: '<?php echo $text_image_manager; ?>',
-		close: function (event, ui) {
-			if ($('#' + field).attr('value')) {
-				$.ajax({
-					url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#' + field).val()),
-					dataType: 'text',
-					success: function(data) {
-						$('#' + thumb).replaceWith('<img src="' + data + '" alt="" id="' + thumb + '" />');
-					}
-				});
-			}
-		},	
-		bgiframe: false,
-		width: 800,
-		height: 400,
-		resizable: false,
-		modal: false
-	});
-};
-//--></script> 
+<!--FILEMANAGER-->
+<?php include_once DIR_TEMPLATE . 'javascript/filemanager_dialog.tpl'; ?>
+<!--FILEMANAGER-->
 <?php echo $footer; ?>

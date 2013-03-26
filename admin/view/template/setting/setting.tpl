@@ -588,7 +588,19 @@
                 <?php } ?>
 							</div>
             </div>
-
+              
+            <div class="control-group<?php if ($error_image_information) { ?> error<?php } ?>">
+              <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_image_information; ?></label>
+              <div class="controls">
+								<input type="text" name="config_image_information_width" value="<?php echo $config_image_information_width; ?>" class="input-mini">
+                x
+                <input type="text" name="config_image_information_height" value="<?php echo $config_image_information_height; ?>" class="input-mini">
+                <?php if ($error_image_information) { ?>
+                <span class="error help-block"><?php echo $error_image_information; ?></span>
+                <?php } ?>
+							</div>
+            </div>
+              
             <div class="control-group<?php if ($error_image_thumb) { ?> error<?php } ?>">
               <label class="control-label"><?php echo $entry_image_thumb; ?></label>
               <div class="controls">
