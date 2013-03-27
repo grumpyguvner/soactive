@@ -1,22 +1,27 @@
 <?php echo $header; ?>
 <div id="content">
-<div class="breadcrumb">
-  <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-  <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-  <?php } ?>
-</div>
+
+    <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <div class="box">
   <div class="heading">
-    <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
-    <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
+        <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
+        <?php if ($error_warning) { ?>
+            <?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+        <?php } ?>
+        <div class="buttons form-actions form-actions-top">
+            <?php echo p3html::tb_form_button_save($button_save); ?>
+            <?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+        </div>
   </div>
+    
   <div class="content">
-    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
     <div>
-      <table class="form">
+      <table id="module" class="list table table-striped table-hover">
         <tr>
           <td><?php echo $store_loc_name; ?></td>
           <td><input type="text" id="Name" name="Name" value="<?php echo $Name ?>" style="width:180px" /></td>
@@ -56,24 +61,30 @@
       </table>
       </div>
       <div id="tab-image">
-          <table id="images" class="list">
+          <table id="images" class="list table table-striped table-hover">
             <thead>
               <tr>
-                <td class="left"><?php echo $store_loc_image; ?></td>
-                <td class="right"><?php echo $entry_sort_order; ?></td>
-                <td></td>
+                <th class="column-loc-image"><?php echo $store_loc_image; ?></th>
+                <th class="column-sort"><?php echo $entry_sort_order; ?></th>
+                <th class="column-action"></th>
               </tr>
             </thead>
             <?php $image_row = 0; ?>
             <?php foreach ($location_images as $location_image) { ?>
             <tbody id="image-row<?php echo $image_row; ?>">
               <tr>
-                <td class="left"><div class="image"><img src="<?php echo $location_image['thumb']; ?>" alt="" id="thumb<?php echo $image_row; ?>" />
+                <td class="column-loc-image">
+                    <div class="image"><img src="<?php echo $location_image['thumb']; ?>" alt="" id="thumb<?php echo $image_row; ?>" />
                     <input type="hidden" name="location_image[<?php echo $image_row; ?>][image]" value="<?php echo $location_image['image']; ?>" id="image<?php echo $image_row; ?>" />
                     <br />
-                    <a onclick="image_upload('image<?php echo $image_row; ?>', 'thumb<?php echo $image_row; ?>');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb<?php echo $image_row; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $image_row; ?>').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
-                <td class="right"><input type="text" name="location_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $location_image['sort_order']; ?>" size="2" /></td>
-                <td class="left"><a onclick="$('#image-row<?php echo $image_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+                    <a class="btn" title="<?php echo $text_browse; ?>" data-toggle="modal" data-target="#dialog" onclick="image_upload('image<?php echo $image_row; ?>', 'thumb<?php echo $image_row; ?>');"><i class="icon-folder-open"></i><span class="hidden-phone"> <?php echo $text_browse; ?></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a class="btn" title="<?php echo $text_clear; ?>" onclick="$('#thumb<?php echo $image_row; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $image_row; ?>').attr('value', '');"><i class="icon-trash"></i><span class="hidden-phone"> <?php echo $text_clear; ?></span></a>
+                    </div>
+                    
+                    
+                </td>
+                <td class="column-sort"><input type="text" name="location_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $location_image['sort_order']; ?>" size="2" class="span1 i-mini" /></td>
+                <td class="column-action"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>
               </tr>
             </tbody>
             <?php $image_row++; ?>
@@ -81,7 +92,7 @@
             <tfoot>
               <tr>
                 <td colspan="2"></td>
-                <td class="left"><a onclick="addImage();" class="button"><?php echo $button_add_image; ?></a></td>
+                <td class="column-action"><a onclick="addImage();" class="btn btn-small"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_image; ?></span></a></td>
               </tr>
             </tfoot>
           </table>
@@ -107,9 +118,9 @@ CKEDITOR.replace('Details', {
 	function addImage() {
 		html  = '<tbody id="image-row' + image_row + '">';
 		html += '  <tr>';
-		html += '    <td class="left"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + image_row + '" /><input type="hidden" name="location_image[' + image_row + '][image]" value="" id="image' + image_row + '" /><br /><a onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div></td>';
-		html += '    <td class="right"><input type="text" name="location_image[' + image_row + '][sort_order]" value="0" /></td>';
-		html += '    <td class="left"><a onclick="$(\'#image-row' + image_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+		html += '    <td class="column-loc-image"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + image_row + '" /><input type="hidden" name="location_image[' + image_row + '][image]" value="" id="image' + image_row + '" /><br /><a class="btn" title="<?php echo $text_browse; ?>" data-toggle="modal" data-target="#dialog" onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');"><i class="icon-folder-open"></i><span class="hidden-phone"> <?php echo $text_browse; ?></span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="btn" title="<?php echo $text_browse; ?>" onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');"><i class="icon-trash"></i><span class="hidden-phone"> <?php echo $text_clear; ?></span></a></div></td>';
+		html += '    <td class="column-sort"><input type="text" name="location_image[' + image_row + '][sort_order]" value="0" class="span1 i-mini" /></td>';
+		html += '    <td class="column-action"><a onclick="$(\'#image-row' + image_row  + '\').remove();" class="btn btn-small"><i class="icon-trash ims"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>';
 		html += '  </tr>';
 		html += '</tbody>';
 		
@@ -118,31 +129,9 @@ CKEDITOR.replace('Details', {
 		image_row++;
 	}
 </script> 
-<script type="text/javascript"><!--
-function image_upload(field, thumb) {
-	$('#dialog').remove();
-	
-	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-	
-	$('#dialog').dialog({
-		title: '<?php echo $text_image_manager; ?>',
-		close: function (event, ui) {
-			if ($('#' + field).attr('value')) {
-				$.ajax({
-					url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#' + field).attr('value')),
-					dataType: 'text',
-					success: function(text) {
-						$('#' + thumb).replaceWith('<img src="' + text + '" alt="" id="' + thumb + '" />');
-					}
-				});
-			}
-		},	
-		bgiframe: false,
-		width: 800,
-		height: 400,
-		resizable: false,
-		modal: false
-	});
-};
-//--></script>
+
+<!--FILEMANAGER-->
+<?php include_once DIR_TEMPLATE . 'javascript/filemanager_dialog.tpl'; ?>
+<!--FILEMANAGER-->
+
 <?php echo $footer; ?>

@@ -128,6 +128,7 @@ $this->config->set('config_error_display', 0);
 							<li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
 							<li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
 							<li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+                                                        <li><a href="<?php echo $event; ?>"><?php echo $text_event; ?></a></li>
 						</ul>
 					</li>
 
@@ -160,6 +161,7 @@ $this->config->set('config_error_display', 0);
 							</li>
 							<li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
 							<li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
+                                                        <li><a href="<?php echo $advanced_coupon; ?>"><?php echo $text_advanced_coupon; ?></a></li>
 							<li class="dropdown-submenu">
 								<a href="#" class="parent submenu-toggle" data-toggle="submenu"><?php echo $text_voucher; ?> <i class="icon-right-open hidden-collapsed"></i></a>
 								<a href="#" class="visible-collapsed submenu-toggle" data-toggle="submenu"><i class="icon-down-open"></i></a>
@@ -228,6 +230,7 @@ $this->config->set('config_error_display', 0);
 							</li>
 							<li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
 							<li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
+                                                        <li><a href="<?php echo $zencart; ?>"><?php echo $text_zencart; ?></a></li>
 						</ul>
 					</li>
 
@@ -244,6 +247,7 @@ $this->config->set('config_error_display', 0);
 									<li><a href="<?php echo $report_sale_shipping; ?>"><?php echo $text_report_sale_shipping; ?></a></li>
 									<li><a href="<?php echo $report_sale_return; ?>"><?php echo $text_report_sale_return; ?></a></li>
 									<li><a href="<?php echo $report_sale_coupon; ?>"><?php echo $text_report_sale_coupon; ?></a></li>
+                                                                        <li><a href="<?php echo $report_sale_advanced_coupon; ?>"><?php echo $text_report_sale_advanced_coupon; ?></a></li>
 								</ul>
 							</li>
 							<li class="dropdown-submenu">
@@ -252,6 +256,7 @@ $this->config->set('config_error_display', 0);
 								<ul class="dropdown-menu">
 									<li><a href="<?php echo $report_product_viewed; ?>"><?php echo $text_report_product_viewed; ?></a></li>
 									<li><a href="<?php echo $report_product_purchased; ?>"><?php echo $text_report_product_purchased; ?></a></li>
+                                                                        <li><a href="<?php echo $report_product_stock; ?>"><?php echo $text_report_product_stock; ?></a></li>
 								</ul>
 							</li>
 							<li class="dropdown-submenu">

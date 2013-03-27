@@ -74,9 +74,8 @@
       </table>
       <table id="module" class="list table table-striped table-hover">
           <thead>
-          	<tr>
-            	<td colspan="4"><div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a>&nbsp;<a onclick="$('#form').attr('action','<?php echo $delete; ?>');$('#form').submit();" class="button"><?php echo $button_delete; ?></a></div>
-                </td>
+            <tr>
+            	<td colspan="4"><div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button btn"><i class="icon-plus"></i><?php echo $button_insert; ?></a>&nbsp;<a onclick="$('#form').attr('action','<?php echo $delete; ?>');$('#form').submit();" class="button btn btn-danger"><i class="icon-trash"></i><?php echo $button_delete; ?></a></div></td>
             </tr>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
@@ -111,26 +110,32 @@
       <table id="module" class="list table table-striped table-hover">
         <thead>
           <tr>
-            <td class="left"><?php echo $entry_limit; ?></td>
-            <td class="left"><?php echo $entry_image; ?></td>
-            <td class="left"><?php echo $entry_layout; ?></td>
-            <td class="left"><?php echo $entry_position; ?></td>
-            <td class="left"><?php echo $entry_status; ?></td>
-            <td class="right"><?php echo $entry_sort_order; ?></td>
-            <td></td>
+            <th class="column-number"><?php echo $entry_limit; ?></th>
+            <th class="column-image"><?php echo $entry_image; ?></th>
+            <th class="column-layout"><?php echo $entry_layout; ?></th>
+            <th class="column-position"><?php echo $entry_position; ?></th>
+            <th class="column-status"><?php echo $entry_status; ?></th>
+            <th class="column-sort"><?php echo $entry_sort_order; ?></th>
+            <th class="column-action"></th>
           </tr>
         </thead>
         <?php $module_row = 0; ?>
         <?php foreach ($modules as $module) { ?>
         <tbody id="module-row<?php echo $module_row; ?>">
           <tr>
-            <td class="left"><input type="text" name="store_locations_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" /></td>
-            <td class="left"><input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" />
-              <input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_height]" value="<?php echo $module['image_height']; ?>" size="3" />
+            <td class="column-number">
+                <label class="visible-480"><?php echo $entry_limit; ?></label>
+                <input type="text" name="store_locations_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" class="input-small" /></td>
+            <td class="column-number">
+                <label class="visible-480"><?php echo $entry_image; ?></label>
+                <input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" class="input-small" />
+              <input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_height]" value="<?php echo $module['image_height']; ?>" size="3" class="input-small" />
               <?php if (isset($error_image[$module_row])) { ?>
               <span class="error"><?php echo $error_image[$module_row]; ?></span>
               <?php } ?></td>
-            <td class="left"><select name="store_locations_module[<?php echo $module_row; ?>][layout_id]">
+            <td class="column-layout">
+                <label class="visible-480"><?php echo $entry_layout; ?></label>
+                <select name="store_locations_module[<?php echo $module_row; ?>][layout_id]" class="span2 i-medium">
                 <?php foreach ($layouts as $layout) { ?>
                 <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
                 <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
@@ -139,7 +144,9 @@
                 <?php } ?>
                 <?php } ?>
               </select></td>
-            <td class="left"><select name="store_locations_module[<?php echo $module_row; ?>][position]">
+            <td class="column-position">
+                <label class="visible-480"><?php echo $entry_position; ?></label>
+                <select name="store_locations_module[<?php echo $module_row; ?>][position]" class="span2 i-medium">
                 <?php if ($module['position'] == 'content_top') { ?>
                 <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
                 <?php } else { ?>
@@ -161,7 +168,9 @@
                 <option value="column_right"><?php echo $text_column_right; ?></option>
                 <?php } ?>
               </select></td>
-            <td class="left"><select name="store_locations_module[<?php echo $module_row; ?>][status]">
+            <td class="column-status">
+                <label class="visible-480"><?php echo $entry_status; ?></label>
+                <select name="store_locations_module[<?php echo $module_row; ?>][status]" class="input-small">
                 <?php if ($module['status']) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
@@ -170,8 +179,10 @@
                 <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                 <?php } ?>
               </select></td>
-            <td class="right"><input type="text" name="store_locations_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
-            <td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>
+            <td class="column-sort">
+                <label class="visible-480"><?php echo $entry_sort_order; ?></label>
+                <input type="text" name="store_locations_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" class="span1 i-mini" /></td>
+            <td class="column-action"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>
           </tr>
         </tbody>
         <?php $module_row++; ?>
@@ -179,7 +190,9 @@
         <tfoot>
           <tr>
             <td colspan="6"></td>
-            <td class="left"><a onclick="addModule();" class="button"><span><?php echo $button_add_module; ?></span></a></td>
+            <td class="column-action">
+                <a onclick="addModule();" class="btn btn-small" title="<?php echo $button_add_module; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_module; ?></span></a>
+            </td>
           </tr>
         </tfoot>
       </table>
@@ -192,25 +205,25 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {	
 	html  = '<tbody id="module-row' + module_row + '">';
 	html += '  <tr>';
-	html += '    <td class="left"><input type="text" name="store_locations_module[' + module_row + '][limit]" value="5" size="1" /></td>';
-	html += '    <td class="left"><input type="text" name="store_locations_module[' + module_row + '][image_width]" value="80" size="3" /> <input type="text" name="store_locations_module[' + module_row + '][image_height]" value="80" size="3" /></td>';		
-	html += '    <td class="left"><select name="store_locations_module[' + module_row + '][layout_id]">';
+	html += '    <td class="column-number"><label class="visible-480"><?php echo addslashes($entry_limit); ?></label><input type="text" name="store_locations_module[' + module_row + '][limit]" value="5" size="1" class="input-small" /></td>';
+	html += '    <td class="column-number"><label class="visible-480"><?php echo addslashes($entry_image); ?></label><input type="text" name="store_locations_module[' + module_row + '][image_width]" value="80" size="3" class="input-small" /> <input type="text" name="store_locations_module[' + module_row + '][image_height]" value="80" size="3" class="input-small" /></td>';		
+	html += '    <td class="column-layout"><label class="visible-480"><?php echo addslashes($entry_layout); ?></label><select name="store_locations_module[' + module_row + '][layout_id]" class="span2 i-medium">';
 	<?php foreach ($layouts as $layout) { ?>
 	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-	html += '    <td class="left"><select name="store_locations_module[' + module_row + '][position]">';
+	html += '    <td class="column-position"><label class="visible-480"><?php echo addslashes($entry_position); ?></label><select name="store_locations_module[' + module_row + '][position]" class="span2 i-medium">';
 	html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
 	html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
 	html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
 	html += '    </select></td>';
-	html += '    <td class="left"><select name="store_locations_module[' + module_row + '][status]">';
+	html += '    <td class="column-status"><label class="visible-480"><?php echo addslashes($entry_status); ?></label><select name="store_locations_module[' + module_row + '][status]" class="input-small">';
     html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
     html += '      <option value="0"><?php echo $text_disabled; ?></option>';
     html += '    </select></td>';
-	html += '    <td class="right"><input type="text" name="store_locations_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
-	html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
+	html += '    <td class="column-sort"><label class="visible-480"><?php echo addslashes($entry_sort_order); ?></label><input type="text" name="store_locations_module[' + module_row + '][sort_order]" value="" size="3" class="span1 i-mini" /></td>';
+	html += '    <td class="column-action"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="btn btn-small"><i class="icon-trash ims"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>';
 	html += '  </tr>';
 	html += '</tbody>';
 	
