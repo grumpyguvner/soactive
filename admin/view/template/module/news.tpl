@@ -10,9 +10,9 @@
 <div class="heading">
   <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
   <div class="buttons form-actions form-actions-top">
-				<?php echo p3html::tb_form_button_insert($button_insert); ?>
-				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
-			</div>
+        <?php echo p3html::tb_form_button_insert($button_insert); ?>
+        <?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+  </div>
 </div>
 <div class="content">
 
