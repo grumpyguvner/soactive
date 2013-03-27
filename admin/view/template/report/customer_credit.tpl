@@ -8,6 +8,9 @@
 
     <div class="heading">
       <h1><i class="icon-chart-bar"></i> <?php echo $heading_title; ?></h1>
+      <div class="buttons form-actions form-actions-top">
+          <?php echo p3html::tb_form_button($button_export, "location = '$export';", null, 'download'); ?>
+			</div>
     </div>
 
     <div class="content">

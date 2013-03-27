@@ -195,7 +195,7 @@ class ControllerCommonHeader extends Controller {
                      $this->data['attributes'] = array();
                             $groups_seal = $this->model_catalog_product->getAttributesName(30);
                             
-                            for ($i=1; $i < 4; $i++) {
+                            for ($i=1; $i < 4 && $i < count($groups_seal); $i++) {
                                 					
                                 $this->data['attributes'][] = array(
                                         'name'    => $groups_seal[$i]['text'],

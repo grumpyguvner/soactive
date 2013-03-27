@@ -33,6 +33,7 @@
             <td class="column-date hidden-400">&nbsp;</td>
             <td class="column-action">
 							<?php echo p3html::tb_ajax_button($button_filter, "filter();", 'info', null, 'filter' , null, 'hidden-1024'); ?>
+                            <?php echo p3html::tb_form_button($button_export, "location = '$export';", null, 'download'); ?>
 						</td>
           </tr>
         </thead>

@@ -15,9 +15,9 @@ p3html::set_order_status_label_for_orders($this, $orders);
 
     <div class="heading">
       <h1><i class="icon-home"></i> <?php echo $heading_title; ?></h1>
-			<?php if ($error_install) { ?>
+			<?php /* if ($error_install) { ?>
 			<div class="warning alert alert-error"><?php echo $error_install; ?></div>
-			<?php } ?>
+			<?php } */ ?>
 			<?php if ($error_image) { ?>
 			<div class="warning alert alert-error"><?php echo $error_image; ?></div>
 			<?php } ?>
@@ -38,6 +38,8 @@ p3html::set_order_status_label_for_orders($this, $orders);
     <div class="content">
 
 			<div class="row">
+                <?php echo $newspanel; ?> <br />
+
 
 				<div class="overview span6">
 					<div class="dashboard-heading"><h4><i class="icon-list"></i> <?php echo $text_overview; ?></h4></div>

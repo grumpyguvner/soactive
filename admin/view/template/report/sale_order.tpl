@@ -42,6 +42,7 @@
 				<span class="span2 pull-right" style="text-align:right;">
 					<label class="span2">&nbsp;</label>
 					<?php echo p3html::tb_ajax_button($button_filter, "filter();", 'info', null, 'filter' , null); ?>
+                    <?php echo p3html::tb_form_button($button_export, "location = '$export';", null, 'download'); ?>
 				</span>
       </div>
       </div>

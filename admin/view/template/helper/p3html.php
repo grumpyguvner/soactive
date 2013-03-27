@@ -226,6 +226,11 @@ class p3html
 		return self::options($customer_groups, $current, 'customer_group_id', 'name', $addSlashes);
 	}
 
+	public static function oc_user_options($users, $current=null, $addSlashes=false)
+	{
+		return self::options($users, $current, 'user_id', 'username', $addSlashes);
+	}
+
 	public static function oc_user_group_options($user_groups, $current=null, $addSlashes=false)
 	{
 		return self::options($user_groups, $current, 'user_group_id', 'name', $addSlashes);
@@ -261,6 +266,7 @@ class p3html
 	public static function oc_position_options($language, $current=null, $addSlashes=false)
 	{
 		$options = array(
+			array('position'=>'content_banner', 'name'=>$language->get('text_content_banner')),
 			array('position'=>'content_top', 'name'=>$language->get('text_content_top')),
 			array('position'=>'content_bottom', 'name'=>$language->get('text_content_bottom')),
 			array('position'=>'column_left', 'name'=>$language->get('text_column_left')),
