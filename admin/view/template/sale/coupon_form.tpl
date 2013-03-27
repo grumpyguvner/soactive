@@ -27,7 +27,6 @@
 
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
                 <div class="tab-content">
-
                     <div class="tab-pane active" id="tab-general">
                         <div class="form">
                             <div class="control-group<?php if ($error_name) { ?> error<?php } ?>">
