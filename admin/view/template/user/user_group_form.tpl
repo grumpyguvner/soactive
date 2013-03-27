@@ -29,6 +29,18 @@
               <?php  } ?>
 						</div>
           </div>
+           <?php if ($this->user->isSuperuser()) { ?>
+            <div class="control-group">
+              <label class="control-label"><?php echo $entry_superuser; ?></label>
+              <div class="controls">
+								<?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+								<?php echo p3html::tb_bool_buttons_radio($this->language, 'superuser', $superuser); ?>
+								<?php } else { ?>
+								<?php echo p3html::tb_bool_radio_buttons($this->language, 'superuser', $superuser); ?>
+								<?php } ?>
+							</div>
+            </div>
+          <?php } ?>
           <div class="control-group">
             <label class="control-label"><?php echo $entry_access; ?></label>
             <div class="controls">

@@ -5,12 +5,13 @@
 	<div class="container">
 		<div class="row">
 			<div id="footer-content" class="span12">
-				<p><small><em>Admin ReBOOTed</em> theme <?php if (defined('P3_THEME_VER')) { echo 'v.'.P3_THEME_VER.' '; } ?>by <strong>pine3ree</strong></small></p>
 				<p><small><?php echo $text_footer; ?></small></p>
 			</div>
+            <?php if ($error_environment) echo '<div id="error_environment" class="alert alert-error" style="float: right"><button type="button" class="close" data-dismiss="alert">&times;</button>' . $error_environment . '</div>'; ?>
 		</div>
 	</div>
 </div>
+
 
 </div><!--page-wrapper-end-->
 

@@ -17,6 +17,32 @@ if ($this->config->get('p3adminrebooted_select2')) {
 }
 // DISABLE ERROR DISPLAY
 $this->config->set('config_error_display', 0);
+
+
+function fixMenu($menu) {
+    $menu = preg_replace('%\s+%m', ' ', $menu);
+    $menu = preg_replace('% (<(\/*)ul>) %iU', '\\1', $menu);
+    $menu = preg_replace('% (<li(.*)/li>) %iU', '\\1', $menu);
+    $menu = preg_replace('% (<a(.*)/a>) %iU', '\\1', $menu);
+
+    $regex_array = array('%<li([^>]*)><a href=""(.*)</a></li>%iU',
+                         '%<ul([^>]*)>(\s*)</ul>%iU',
+                         //'%<li class="dropdown-submenu"><a href="#"(.*?)href="#"(.*?)</a></li>%i'
+                        );
+
+    do {
+        $change = false;
+        foreach ($regex_array as $regex) {
+            if (preg_match($regex, $menu)) {
+                $change = true;
+                $menu = preg_replace($regex, '', $menu);
+            }
+        }
+    } while ($change);
+
+    return $menu;
+}
+
 ?><!DOCTYPE html>
 <html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>">
 
@@ -99,8 +125,10 @@ $this->config->set('config_error_display', 0);
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-
 			<div class="nav-collapse collapse navbar-inverse-collapse" id="nav-top">
+<?php
+ob_start("fixMenu");
+?>
 				<ul class="nav">
 
 					<li id="dashboard">
@@ -128,6 +156,7 @@ $this->config->set('config_error_display', 0);
 							<li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
 							<li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
 							<li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+                            <li><a href="<?php echo $event; ?>"><?php echo $text_event; ?></a></li>	
 						</ul>
 					</li>
 
@@ -160,6 +189,7 @@ $this->config->set('config_error_display', 0);
 							</li>
 							<li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
 							<li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
+                            <li><a href="<?php echo $advanced_coupon; ?>"><?php echo $text_advanced_coupon; ?></a></li>
 							<li class="dropdown-submenu">
 								<a href="#" class="parent submenu-toggle" data-toggle="submenu"><?php echo $text_voucher; ?> <i class="icon-right-open hidden-collapsed"></i></a>
 								<a href="#" class="visible-collapsed submenu-toggle" data-toggle="submenu"><i class="icon-down-open"></i></a>
@@ -228,6 +258,7 @@ $this->config->set('config_error_display', 0);
 							</li>
 							<li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
 							<li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
+                            <li><a href="<?php echo $zencart; ?>"><?php echo $text_zencart; ?></a></li>
 						</ul>
 					</li>
 
@@ -244,6 +275,7 @@ $this->config->set('config_error_display', 0);
 									<li><a href="<?php echo $report_sale_shipping; ?>"><?php echo $text_report_sale_shipping; ?></a></li>
 									<li><a href="<?php echo $report_sale_return; ?>"><?php echo $text_report_sale_return; ?></a></li>
 									<li><a href="<?php echo $report_sale_coupon; ?>"><?php echo $text_report_sale_coupon; ?></a></li>
+                                    <li><a href="<?php echo $report_sale_advanced_coupon; ?>"><?php echo $text_report_sale_advanced_coupon; ?></a></li>
 								</ul>
 							</li>
 							<li class="dropdown-submenu">
@@ -262,6 +294,7 @@ $this->config->set('config_error_display', 0);
 									<li><a href="<?php echo $report_customer_online; ?>"><?php echo $text_report_customer_online; ?></a></li>
 									<?php } ?>
 									<li><a href="<?php echo $report_customer_order; ?>"><?php echo $text_report_customer_order; ?></a></li>
+                                    <li><a href="<?php echo $report_product_stock; ?>"><?php echo $text_report_product_stock; ?></a></li>
 									<li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>
 									<li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>
 								</ul>
@@ -287,7 +320,9 @@ $this->config->set('config_error_display', 0);
 					</li>
 					<?php endif; ?>
 				</ul>
-
+<?php
+ob_end_flush();
+?>
 				<ul class="nav pull-right">
 					<li id="store" class="dropdown">
 						<a href="<?php echo $store; ?>" target="_blank" title="<?php echo $text_front; ?>"<?php if (!$stores) { ?> data-hint="tooltip" data-placement="bottom"<?php } ?>

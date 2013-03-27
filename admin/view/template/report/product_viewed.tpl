@@ -12,7 +12,8 @@
 				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
 			<?php } ?>
       <div class="buttons form-actions form-actions-top">
-				<?php echo p3html::tb_form_button($button_reset, "location = '$reset';", null, 'back'); ?>
+          <?php echo p3html::tb_form_button($button_reset, "location = '$reset';", null, 'back'); ?>
+          <?php echo p3html::tb_form_button($button_export, "location = '$export';", null, 'download'); ?>
 			</div>
     </div>
 
@@ -40,6 +41,7 @@
         </tbody>
       </table>
 
+      
       <div class="pagination"><?php echo $pagination; ?></div>
 			<?php } else { ?>
 			<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>

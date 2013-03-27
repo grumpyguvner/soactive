@@ -486,6 +486,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="column-name"><?php echo $entry_option_value; ?></th>
+                                                        <th class="column-name"><?php echo $entry_sku; ?></th>
                                                         <th class="column-number"><?php echo $entry_quantity; ?></th>
                                                         <th class="column-number"><?php echo $entry_subtract; ?></th>
                                                         <th class="column-number"><?php echo $entry_price; ?></th>
@@ -505,6 +506,10 @@
                                                                     <?php } ?>
                                                                 </select>
                                                                 <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][product_option_value_id]" value="<?php echo $product_option_value['product_option_value_id']; ?>">
+                                                            </td>
+                                                            <td class="column-number">
+                                                                <label class="visible-480"><?php echo $entry_sku; ?></label>
+                                                                <input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][sku]" value="<?php echo $product_option_value['sku']; ?>" class="span1 i-mini">
                                                             </td>
                                                             <td class="column-number">
                                                                 <label class="visible-480"><?php echo $entry_quantity; ?></label>
@@ -546,7 +551,7 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <td colspan="6"></td>
+                                                        <td colspan="7"></td>
                                                         <td class="column-action">
                                                             <a onclick="addOptionValue('<?php echo $option_row; ?>');" class="btn btn-small" title="<?php echo $button_add_option_value; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_option_value; ?></a>
                                                         </td>
