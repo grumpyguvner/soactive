@@ -44,6 +44,9 @@ DD_belatedPNG.fix('#logo img');
 <?php echo $google_analytics; ?>
 </head>
 <body>
+<?php if ($error_environment) { ?>
+<div id="environment"><div class="warning"><?php echo $error_environment; ?></div></div>
+<?php } ?>
 <div id="notification"></div>
 <div id="container">
 <div id="header">

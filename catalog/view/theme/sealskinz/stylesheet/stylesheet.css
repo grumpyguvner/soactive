@@ -13,7 +13,13 @@ body {
         height:100%;
         
 }
-
+#error_environment {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    margin-bottom: 0;
+}
 body, td, th, input, textarea, select, a {
 	font-size: 12px;
 }

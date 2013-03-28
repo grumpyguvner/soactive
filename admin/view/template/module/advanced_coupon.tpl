@@ -24,10 +24,10 @@
         <table id="module" class="list table table-striped table-hover">
         <thead>
           <tr>
-            <th class="left"><?php echo $entry_advanced_coupon; ?></th>
-            <th class="left"><?php echo $entry_product; ?></th>
-            <th class="left"><?php echo $entry_limit; ?></th>
-            <th class="left"><?php echo $entry_image; ?></th>
+            <th class="column-name"><?php echo $entry_advanced_coupon; ?></th>
+            <th class="column-name"><?php echo $entry_product; ?></th>
+            <th class="column-number"><?php echo $entry_limit; ?></th>
+            <th class="column-number"><?php echo $entry_image; ?></th>
             <th class="column-layout"><?php echo $entry_layout; ?></th>
             <th class="column-position"><?php echo $entry_position; ?></th>
             <th class="column-status"><?php echo $entry_status; ?></th>
@@ -39,7 +39,9 @@
         <?php foreach ($modules as $module) { ?>
         <tbody id="module-row<?php echo $module_row; ?>">
           <tr>
-            <td class="column-name"><select name="advanced_coupon_module[<?php echo $module_row; ?>][advanced_coupon_id]" class="span2 i-medium">
+            <td class="column-name">
+                <label class="visible-480"><?php echo $entry_advanced_coupon; ?></label>
+                <select name="advanced_coupon_module[<?php echo $module_row; ?>][advanced_coupon_id]" class="span2 i-medium">
                 <?php foreach ($coupons as $coupon) { ?>
                 <?php if ($coupon['advanced_coupon_id'] == $module['advanced_coupon_id']) { ?>
                 <option value="<?php echo $coupon['advanced_coupon_id']; ?>" selected="selected"><?php echo $coupon['name']; ?></option>
@@ -47,8 +49,11 @@
                 <option value="<?php echo $coupon['advanced_coupon_id']; ?>"><?php echo $coupon['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
-              </select></td>
-            <td class="column-name"><select name="advanced_coupon_module[<?php echo $module_row; ?>][product]" class="span2 i-medium">
+              </select>
+            </td>
+            <td class="column-name">
+                <label class="visible-480"><?php echo $entry_product; ?></label>
+                <select name="advanced_coupon_module[<?php echo $module_row; ?>][product]" class="span2 i-medium">
                 <?php if ($module['product'] == 'product') { ?>
                 <option value="product" selected="selected"><?php echo $text_product; ?></option>
                 <?php } else { ?>
@@ -59,14 +64,23 @@
                 <?php } else { ?>
                 <option value="product_buy"><?php echo $text_product_buy; ?></option>
                 <?php } ?>
-               </select></td>
-            <td class="column-number"><input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" class="span1 i-mini" /></td>
-            <td class="column-number"><input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" class="span1 i-mini" />
+               </select>
+            </td>
+            <td class="column-number">
+                <label class="visible-480"><?php echo $entry_limit; ?></label>
+                <input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" class="span1 i-mini" />
+            </td>
+            <td class="column-number">
+                <label class="visible-480"><?php echo $entry_image; ?></label>
+                <input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" class="span1 i-mini" />
               <input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][image_height]" value="<?php echo $module['image_height']; ?>" size="3" class="span1 i-mini" />
               <?php if (isset($error_image[$module_row])) { ?>
               <span class="error"><?php echo $error_image[$module_row]; ?></span>
-              <?php } ?></td>
-            <td class="column-layout"><select name="advanced_coupon_module[<?php echo $module_row; ?>][layout_id]" class="span2 i-medium">
+              <?php } ?>
+            </td>
+            <td class="column-layout">
+                <label class="visible-480"><?php echo $entry_layout; ?></label>
+                <select name="advanced_coupon_module[<?php echo $module_row; ?>][layout_id]" class="span2 i-medium">
                 <?php foreach ($layouts as $layout) { ?>
                 <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
                 <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
@@ -74,8 +88,11 @@
                 <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
-              </select></td>
-            <td class="column-position"><select name="advanced_coupon_module[<?php echo $module_row; ?>][position]" class="span2 i-medium">
+              </select>
+            </td>
+            <td class="column-position">
+                <label class="visible-480"><?php echo $entry_position; ?></label>
+                <select name="advanced_coupon_module[<?php echo $module_row; ?>][position]" class="span2 i-medium">
                 <?php if ($module['position'] == 'content_top') { ?>
                 <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
                 <?php } else { ?>
@@ -96,8 +113,11 @@
                 <?php } else { ?>
                 <option value="column_right"><?php echo $text_column_right; ?></option>
                 <?php } ?>
-              </select></td>
-            <td class="column-status"><select name="advanced_coupon_module[<?php echo $module_row; ?>][status]">
+              </select>
+            </td>
+            <td class="column-status">
+                <label class="visible-480"><?php echo $entry_status; ?></label>
+                <select name="advanced_coupon_module[<?php echo $module_row; ?>][status]">
                 <?php if ($module['status']) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
@@ -106,10 +126,12 @@
                 <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                 <?php } ?>
               </select></td>
-            <td class="column-sort"><input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3"  class="span1 i-mini" /></td>
+            <td class="column-sort">
+                <label class="visible-480"><?php echo $entry_sort_order; ?></label>
+                <input type="text" name="advanced_coupon_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3"  class="span1 i-mini" /></td>
             <td class="column-action">
-								<a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a>
-							</td>
+                    <a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a>
+            </td>
           </tr>
         </tbody>
         <?php $module_row++; ?>

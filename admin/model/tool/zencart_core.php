@@ -1,7 +1,5 @@
 <?php
-// Define application environment (default is PRODUCTION)
-defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', strtoupper((getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production')));
+ini_set('max_execution_time', 3600);
 
 static $config = NULL;
 static $log = NULL;
@@ -688,418 +686,6 @@ function create_array($type, $table, $fields, $criteria, $output_type = "default
     return $data;
 }
 
-
-
-
-class ModelToolZencart extends Model {
-
-    private $debugMode = true;
-    
-    private $languageId = 0;
-    
-    private $size_option_id = 0;
-
-    protected function getDefaultLanguageId(&$database) {
-        $code = $this->config->get('config_language');
-        $sql = "SELECT language_id FROM `" . DB_PREFIX . "language` WHERE code = '$code'";
-        $result = $database->query($sql);
-        $this->languageId = 1;
-        if ($result->rows) {
-            foreach ($result->rows as $row) {
-                $this->languageId = $row['language_id'];
-                break;
-            }
-        }
-        return $this->languageId;
-    }
-
-    function runSchedulerOperation() {
-    }
-
-    function import() {
-        // we use our own error handler
-        global $config;
-        global $log;
-        $config = $this->config;
-        $log = $this->log;
-        set_error_handler('error_handler_for_zencart', E_ALL);
-        register_shutdown_function('fatal_error_shutdown_handler_for_zencart');
-        
-        $database = & $this->db;
-        $this->languageId = $this->getDefaultLanguageId($database);
-
-        if (!$this->cacheZencartData())
-            return false;
-
-        echo "Import Complete";
-    }
-
-    function cacheZencartData($forceRefresh = false) {
-
-        /* DB Connection Info */
-        if($this->debugMode) echo "initializing variables";
-
-        $sys_dbhost = 'neptune.totallyboundless.com';
-        $sys_dbuser = 'sealskinz_sql';
-        $sys_dbpass = '6rubuJAphAGa';
-        $sys_dbname = 'sealskinz_live';
-
-        if($this->debugMode) echo "initializing database/n<br/>";
-
-        $db = new queryFactory();
-        if (!$db->connect($sys_dbhost, $sys_dbuser, $sys_dbpass, $sys_dbname, false, false)) {
-        //    echo 'No Connection';
-            die('No Database Connection');
-        }
-        if($this->debugMode) echo "database initialized/n<br/>";
-
-        if($this->debugMode) echo "fetching products from zencart/n<br/>";
-        $aProduct = $db->Execute('SELECT * FROM products LEFT JOIN products_description ON (products.products_id = products_description.products_id AND products_description.language_id = 1) WHERE IFNULL(products.products_model,"") <> "" ORDER BY products.products_model');
-        
-        $myModel = "";
-        $product_id = 0;
-        $myProductIds = array();
-        $myProductOptionIds = array();
-        $error = false;
-
-        if ($aProduct->RecordCount() > 0) {
-            while (!$aProduct->EOF) {
-                if($this->debugMode) echo "=================================================================================================/n<br/>";
-                if($this->debugMode) echo "processing product ".$aProduct->fields['products_model']." ".$aProduct->fields['products_name']."/n<br/>";
-
-                if($this->debugMode) echo "initializing category array/n<br/>";
-                $aCategory = $db->Execute('SELECT c.* FROM products_to_categories pc JOIN categories_description c ON pc.categories_id = c.categories_id WHERE pc.products_id = '.$aProduct->fields['products_id']);
-                $type = "";
-                $myCategory = "";
-                $myCategoryIds = array();
-                if ($aCategory->RecordCount() > 0) {
-                    while (!$aCategory->EOF) {
-                        if($this->debugMode) echo "/n<br/>";
-                        if($this->debugMode) echo "processing category ".$aCategory->fields['categories_name']."/n<br/>";
-                        
-                        switch ((string) $aCategory->fields['categories_name']) {
-                            case "Socks":
-                            case "Hats":
-                            case "Gloves":
-                                //Save these as attribute instead of category
-                                $type = (string) $aCategory->fields['categories_name'];
-                                break;
-                            default:
-                                //initialise category variables
-                                $category = seoUrl((string) $aCategory->fields['categories_name']);
-                                $category_item = array (
-                                    "name" => (string) $aCategory->fields['categories_name'],
-                                    "description" => $aCategory->fields['categories_description']
-                                );
-
-                                if ($myCategory != $category) {
-                                    $myCategory = $category;
-                                    $category_id = $this->createCategory($category, $category_item);
-                                }
-                                if ($category_id) {
-                                    if (!in_array($category_id, $myCategoryIds))
-                                        $myCategoryIds[] = $category_id;
-                                } else {
-                                    $error = true;
-                                }
-                        }
-                        
-                        $aCategory->MoveNext();
-                        
-                    }
-                }
-                
-                if($this->debugMode) echo "initializing sku lookup array/n<br/>";
-                $aStock = $db->Execute('SELECT * FROM products_with_attributes_stock WHERE products_id = '.$aProduct->fields['products_id'].' ORDER BY sku');
-                if ($aStock->RecordCount() > 0) {
-                    while (!$aStock->EOF) {
-                        if($this->debugMode) echo "/n<br/>";
-                        if($this->debugMode) echo "processing sku ".$aStock->fields['sku']."/n<br/>";
-                        //initialise sku variables
-                        $size = "ONE SIZE";
-                        $colour = "";
-                        //We will be updating the quantity via Sage Interface
-                        $quantity = (float) $aStock->fields['quantity'];
-//                        $quantity = 0;
-                        $opts = explode(",", $aStock->fields['stock_attributes']);
-                        foreach ($opts as $k) {
-                            $aOptions = $db->Execute('SELECT * FROM products_attributes JOIN products_options ON (products_attributes.options_id = products_options.products_options_id AND products_options.language_id = 1) JOIN products_options_values ON (products_attributes.options_values_id = products_options_values.products_options_values_id AND products_options_values.language_id = 1) WHERE products_attributes.products_id = '.$aProduct->fields['products_id'].' AND products_attributes.products_attributes_id = '.$k);
-                            if ($aOptions->RecordCount() > 0) {
-                                while (!$aOptions->EOF) {
-                                    if($this->debugMode) echo "fetching sku options ".$aOptions->fields['products_attributes_id']."/n<br/>";
-                                    if($this->debugMode) echo "option ".$aOptions->fields['products_options_name'].":".$aOptions->fields['products_options_values_name']."/n<br/>";
-                                    switch ($aOptions->fields['products_options_name']) {
-                                        case "Size":
-                                            $size = (string) $aOptions->fields['products_options_values_name'];
-                                            break;
-                                        case "Product Code":
-                                            $colour = substr((string) $aOptions->fields['products_options_values_name'], 5);
-                                            break;
-                                        default:
-                                            //ignore
-                                            break;
-                                    }
-                                    $aOptions->MoveNext();
-                                }
-                            }
-                        }
-                        // The product model is obtained from the first 5 characters of the SKU code
-                        // the main model cant be used because different colours have different models
-                        $model = substr((string) $aStock->fields['sku'], 0, 5);
-                        
-                        $stock_item = array (
-                            "name" => (string) $aProduct->fields['products_name'] . $colour,
-                            "description" => $aProduct->fields['products_description'],
-                            "image" => (string) $aProduct->fields['products_image'],
-                            "status" => (int) $aProduct->fields['products_status'],
-                            "price" => (float) $aProduct->fields['products_price'],
-                            "type" => (string) $type,
-                            "sku" => (string) $aStock->fields['sku'],
-                            "size" => $size,
-                            "quantity" => $quantity,
-                            "categories" => $myCategoryIds
-                        );
-                        
-                        if ($myModel != $model) {
-                            $myModel = $model;
-                            $product_id = $this->createProduct($model, $stock_item);
-                        }
-                        if ($product_id) {
-                            if (!in_array($product_id, $myProductIds))
-                                $myProductIds[] = $product_id;
-                            $product_option_id = $this->createProductOption($product_id, $stock_item);
-                            if ($product_option_id) {
-                                if (!in_array($product_option_id, $myProductOptionIds))
-                                    $myProductOptionIds[] = $product_option_id;
-                            } else {
-                                $error = true;
-                            }
-                        } else {
-                            $error = true;
-                        }
-                        $aStock->MoveNext();
-                    }
-                }
-                if($this->debugMode) echo "sku lookup array initialized/n<br/>";
-                $aProduct->MoveNext();
-            }
-        }
-
-        return true;
-    }
-
-    function createCategory($category, $category_item) {
-        if (!is_array($category_item) || !array_key_exists("name", $category_item))
-            return false;
-        
-        //We only create a new category the first time it is encountered as 
-        // many fields will be controlled via backoffice and we dont want to overwrite.
-        $this->load->model('catalog/category');
-        $category_info = $this->model_catalog_category->getCategoryByKeyword($category);
-        $data = array(
-            "parent_id" => (int) 0,
-            "top" => (int) 1,
-            "column" => (int) 1,
-            "sort_order" => (int) 999,
-            "status" => (int) 1,
-            'category_description' => array(
-                $this->languageId => array(
-                    'name' => (string) $category_item['name'],
-                    'meta_keyword' => (string) $category_item['name'],
-                    'meta_description' => "",
-                    'description' => (string) $category_item['description']
-            )),
-            'keyword' => $category,
-            'product_store' => array(0)
-        );
-
-        if (!$category_info) {
-            // if product doesn't exist then create it
-            $category_id = $this->model_catalog_category->addCategory($data);
-            // fetch the newly created product
-            $category_info = $this->model_catalog_category->getCategory($category_id);
-        } else {
-            $category_id = $category_info['category_id'];
-            $this->model_catalog_category->editCategory($category_id, $data);
-        }
-        if (!$category_info) {
-            // if product still doesn't exist then we have a problem
-            return false;
-        }
-
-        return $category_info['category_id'];
-    }
-
-    function createProduct($model, $stock_item) {
-        if (!is_array($stock_item) || !array_key_exists("sku", $stock_item))
-            return false;
-        
-        //Fetch the product image
-        $url = "http://www.sealskinz.com/images/large/" . $stock_item['image'];
-        $saveto = DIR_IMAGE . 'data/products/' . $model . '.jpg';
-        if (!file_exists($saveto)) {
-            if($this->debugMode) echo "retrieving ".$url." and saving as ".$saveto."/n<br/>";
-            grab_image($url, $saveto);
-        }
-        $image = (file_exists($saveto) ? 'data/products/' . $model . '.jpg' : "");
-        if($this->debugMode) echo "using ".$image." as image/n<br/>";
-        
-        //We only create a new product the first time it is encountered as 
-        // many fields will be controlled via backoffice and we dont want to overwrite.
-        $this->load->model('catalog/product');
-        $product_info = $this->model_catalog_product->getProductByModel($model);
-        $data = array(
-            'model' => $model,
-            'sku' => "",
-            'upc' => "",
-            'ean' => "",
-            'jan' => "",
-            'isbn' => "",
-            'mpn' => "",
-            'location' => "",
-            'quantity' => 0,
-            'minimum' => "",
-            'subtract' => 1,
-            'stock_status_id' => 7, //TODO: lookup "In Stock" OOS status code instead of hard code
-            'forward' => 0,
-            'date_available' => date("Y-m-d"),
-            'manufacturer_id' => NULL,
-            'shipping' => 1,
-            'price' => round(($stock_item['price']*1.2),2),
-            'points' => 0,
-            'weight' => NULL,
-            'weight_class_id' => NULL,
-            'length' => NULL,
-            'width' => NULL,
-            'height' => NULL,
-            'length_class_id' => NULL,
-            'status' => $stock_item['status'],
-            'tax_class_id' => 9, //TODO: lookup "STANDARD" VAT code instead of hard code
-            'sort_order' => 999, //Set to 999 so that manually entered orders appear first
-            'image' => $image,
-            'product_description' => array(
-                $this->languageId => array(
-                    'name' => (string) $stock_item['name'],
-                    'meta_keyword' => (string) $stock_item['name'],
-                    'meta_description' => "",
-                    'description' => (string) $stock_item['description'],
-                    'tag' => NULL
-            )),
-            'product_attribute' => ((string) $stock_item['type']=="" ? NULL : array( array(
-                'attribute_id' => 1, //TODO: lookup "TYPE" Attribute code instead of hard code
-                'product_attribute_description' => array(
-                    $this->languageId => array(
-                        'text' => (string) $stock_item['type']
-                ))
-            ))),
-            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
-            'product_category' => $stock_item['categories'],
-            'product_store' => array(0)
-        );
-
-        if (!$product_info) {
-            // if product doesn't exist then create it
-            $product_id = $this->model_catalog_product->addProduct($data);
-            // fetch the newly created product
-            $product_info = $this->model_catalog_product->getProduct($product_id);
-        } else {
-            $product_id = $product_info['product_id'];
-            $data['product_store'] = $this->model_catalog_product->getProductStores($product_id);
-            $data['product_option'] = $this->model_catalog_product->getProductOptions($product_id);
-            $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
-            $data['product_special'] = $this->model_catalog_product->getProductSpecials($product_id);
-            $data['product_image'] = $this->model_catalog_product->getProductImages($product_id);
-            $data['product_download'] = $this->model_catalog_product->getProductDownloads($product_id);
-            $data['product_asset'] = $this->model_catalog_product->getProductAssets($product_id);
-//            $data['product_category'] = $this->model_catalog_product->getProductCategories($product_id);
-            $data['product_related'] = $this->model_catalog_product->getProductRelated($product_id);
-            $data['product_reward'] = $this->model_catalog_product->getProductRewards($product_id);
-            $data['product_layout'] = $this->model_catalog_product->getProductLayouts($product_id);
-            $this->model_catalog_product->editProduct($product_id, $data);
-        }
-        if (!$product_info) {
-            // if product still doesn't exist then we have a problem
-            return false;
-        }
-
-        return $product_info['product_id'];
-    }
-
-    function createProductOption($product_id, $stock_item) {
-        if (!is_array($stock_item) || !array_key_exists("sku", $stock_item))
-            return false;
-        
-        $quantity = $stock_item['quantity'];
-
-        $option_id = $this->getSizeOptionId();
-        $option_value_id = $this->getSizeOptionValueId($option_id, $stock_item['size']);
-        $product_option_id = $this->getProductOptionId($product_id, $option_id);
-        
-        $database = & $this->db;
-        $sql = "SELECT product_option_value_id FROM " . DB_PREFIX . "product_option_value WHERE product_option_id = '" . (int)$product_option_id . "' AND product_id = '" . (int)$product_id . "' AND option_id = '" . (int)$option_id . "' AND option_value_id = '" . (int)$option_value_id . "'";
-        $result = $database->query($sql);
-        if ($result->rows) {
-            $product_option_value_id = $result->rows[0]['product_option_value_id'];
-//TODO: Add SKU at option level to standard product
-//            $database->query("UPDATE " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', option_value_id = '" . (int)$option_value_id . "', sku = '" . $stock_item['sku'] . "', quantity = '" . (int)$quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+' WHERE product_option_value_id = '" . (int)$product_option_value_id . "'");
-            $database->query("UPDATE " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', option_value_id = '" . (int)$option_value_id . "', quantity = '" . (int)$quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+' WHERE product_option_value_id = '" . (int)$product_option_value_id . "'");
-        } else {
-//            $database->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', option_value_id = '" . (int)$option_value_id . "', sku = '" . $stock_item['sku'] . "', quantity = '" . (int)$quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+'");
-            $database->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', option_value_id = '" . (int)$option_value_id . "', quantity = '" . (int)$quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+'");
-            $product_option_value_id = (int)$database->getLastId();
-        }
-        $database->query("UPDATE " . DB_PREFIX . "product p SET quantity = (SELECT SUM(quantity) FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_id = p.product_id)");
-        return $product_option_value_id;
-    }
-
-    function getSizeOptionId() {
-        if (!$this->size_option_id) {
-            $database = & $this->db;
-            $sql = "SELECT option_id FROM `" . DB_PREFIX . "option_description` WHERE name = 'Size' AND language_id = '" . (int)$this->languageId . "'";
-            $result = $database->query($sql);
-            if ($result->rows) {
-                $this->size_option_id = (int) $result->rows[0]['option_id'];
-            } else {
-                $this->load->model('catalog/option');
-                // if size option doesn't exist then create it
-                $data = array(
-                    'option_id' => NULL,
-                    'type' => "select",
-                    'sort_order' => 0,
-                    'name' => "Size"
-                );
-                $this->size_option_id = (int) $this->model_catalog_option->addOption($data);
-            }
-        }
-        return $this->size_option_id;
-    }
-
-    function getSizeOptionValueId($option_id, $name) {
-        //We should be able to cache these in an array ?
-        $database = & $this->db;
-        $sql = "SELECT option_value_id FROM `" . DB_PREFIX . "option_value_description` WHERE option_id = '" . (int)$option_id . "' AND name = '" . $database->escape($name) . "' AND language_id = '" . (int)$this->languageId . "'";
-        $result = $database->query($sql);
-        if ($result->rows)
-            return (int) $result->rows[0]['option_value_id'];
-        
-        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', image = '', sort_order = '0'");
-        $option_value_id = $database->getLastId();
-        $database->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int)$option_value_id . "', option_id = '" . (int)$option_id . "', name = '" .  $database->escape($name) . "', language_id = '" . (int)$this->languageId . "'");
-        return (int)$option_value_id;
-    }
-
-    function getProductOptionId($product_id, $option_id) {
-        $database = & $this->db;
-        $sql = "SELECT product_option_id FROM " . DB_PREFIX . "product_option WHERE product_id = '" . (int)$product_id . "' AND option_id = '" . (int)$option_id . "'";
-        $result = $database->query($sql);
-        if ($result->rows)
-            return (int) $result->rows[0]['product_option_id'];
-        
-        $database->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', required = '1'");
-        return (int)$database->getLastId();
-    }
-}
-
 function seoUrl($string) {
     //Unwanted:  {UPPERCASE} ; / ? : @ & = + $ , . ! ~ * ' ( )
     $string = strtolower($string);
@@ -1126,4 +712,86 @@ function grab_image($url,$saveto){
     fwrite($fp, $raw);
     fclose($fp);
 }
-?>
+
+class ModelToolZencart extends Model {
+
+    public $debugMode = false;
+    private $languageId = 0;
+    private $size_option_id = 0;
+    
+    function __construct ($registry) {
+        parent::__construct($registry);
+        
+        // we use our own error handler
+        global $config;
+        global $log;
+        $config = $this->config;
+        $log = $this->log;
+        
+        set_error_handler('error_handler_for_zencart', E_ALL);
+        register_shutdown_function('fatal_error_shutdown_handler_for_zencart');
+        
+        $this->debug("initializing database");
+        
+        $sys_dbhost = $this->config->get('zencart_host');
+        $sys_dbuser = $this->config->get('zencart_user');
+        $sys_dbpass = $this->config->get('zencart_password');
+        $sys_dbname = $this->config->get('zencart_name');
+
+        $this->dbQF = new queryFactory();
+        if (!$this->dbQF->connect($sys_dbhost, $sys_dbuser, $sys_dbpass, $sys_dbname, false, false)) {
+        //    echo "No Connection';
+            die('No Database Connection');
+        }
+        $this->debug("database initialized");
+        
+        $this->languageId = $this->getDefaultLanguageId();
+    }
+    
+    protected function debug ($message) {
+        if($this->debugMode)
+        {
+            echo $message . "<br/>\n";
+        }
+    }
+
+    protected function getDefaultLanguageId() {
+        $code = $this->config->get('config_language');
+        $sql = "SELECT language_id FROM `" . DB_PREFIX . "language` WHERE code = '$code'";
+        $result = $this->db->query($sql);
+        $this->languageId = 1;
+        if ($result->rows) {
+            foreach ($result->rows as $row) {
+                $this->languageId = $row['language_id'];
+                break;
+            }
+        }
+        return $this->languageId;
+    }
+
+    protected function runSchedulerOperation() {
+    }
+    
+    protected function tableLookUp ($table, $return, $search) {
+        
+        $sql = 'SELECT ' . $return . ' as value FROM ' . $table;
+        
+        $implode = array();
+        
+        foreach ($search as $field => $value)
+        {
+            $implode[] = $field . " = '" . $this->db->escape($value) . "'";
+        }
+        if (!empty($implode)) $sql .= " WHERE " . implode(' AND ', $implode);
+        
+        $sql .= ' LIMIT 1';
+        
+        $result = $this->db->query($sql);
+        
+        if ($result->num_rows)
+        {
+            return $result->row['value'];
+        }
+        return 0; 
+    }
+}

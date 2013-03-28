@@ -44,10 +44,10 @@ DD_belatedPNG.fix('#logo img');
 <?php echo $google_analytics; ?>
 </head>
 <body>
-<?php if ($error_environment) { ?>
-<div id="environment"><div class="warning"><button type="button" class="close" data-dismiss="alert">×</button><?php echo $error_environment; ?></div></div>
-<?php } ?>
 <div id="container">
+<?php if ($error_environment) { ?>
+<div id="environment"><div class="warning"><?php echo $error_environment; ?></div></div>
+<?php } ?>
 <div id="header">
   <?php if ($logo) { ?>
   <div id="logo"><a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a></div>

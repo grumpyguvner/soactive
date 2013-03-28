@@ -43,6 +43,9 @@
 	<script src="catalog/view/javascript/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
+<?php if ($error_environment) { ?>
+<div id="environment"><div class="warning"><?php echo $error_environment; ?></div></div>
+<?php } ?>
 <div id="notification"></div>
 <div id="container">
 	<div id="header">

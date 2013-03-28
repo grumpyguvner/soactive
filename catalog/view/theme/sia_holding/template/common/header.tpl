@@ -45,6 +45,9 @@ DD_belatedPNG.fix('#logo img');
 </head>
 <body>
 <div id="container">
+<?php if ($error_environment) { ?>
+<div id="environment"><div class="warning"><?php echo $error_environment; ?></div></div>
+<?php } ?>
 <div id="header">
   <?php if ($logo) { ?>
   <div id="logo"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></div>
