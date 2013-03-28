@@ -1,36 +1,30 @@
-   <div class="row" style="margin-left: 0px;">
-            <div class="carousel slide" id="myCarousel" style="margin-bottom: 0px;">
-                <div class="carousel-inner">
-                  <?php foreach ($banners as $banner) { ?>
-                        <?php if ($banner['link']) { ?>
-                          <div class="item">
-                            <a href="<?php echo $banner['link']; ?>"><img src="<?php echo $banner['image']; ?>" alt="<?php echo $banner['title']; ?>" /></a>
-                            <div class="carousel-caption">
-                              <h4></h4>
-                              <p></p>
-                           </div>
-                          </div>
-                            <?php } else { ?>
-                          <div class="item">
-                            <img src="<?php echo $banner['image']; ?>" alt="<?php echo $banner['title']; ?>" />
-                            <!--div class="carousel-caption">
-                              <h4></h4>
-                              
-                           </div-->
-                          </div>
-                            <?php } ?>
-                        <?php } ?>
-                </div>
-                <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
-                <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
-              </div>
-
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-                    $('.carousel').carousel();
-        });
-    </script>
-
-        
+<?php
+if (!empty($banners)) {
+    ?>
+    <div class="row">
+        <div class="carousel slide" id="myCarousel">
+            <img src="/catalog/view/theme/<?php echo $this->config->get('config_template') ?>/image/carouselSpacer.png" alt="" />
+            <div class="carousel-inner">
+                <?php foreach ($banners as $key => $banner) { 
+                    ?>
+                    <div class="item<?php if ($key == 0) echo ' active'; ?>">
+                        <?php if ($banner['link']) echo '<a href="' . $banner['link'] . '">'; ?><img src="<?php echo $banner['image']; ?>" width="<?php echo $banner['width']; ?>" height="<?php echo $banner['height']; ?>" /><?php if ($banner['link']) echo '</a>'; ?>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+        <?php
+        if (count($banners) > 1) {
+            ?>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#myCarousel').append('<a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a><a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>').carousel();
+                });
+            </script>
+            <?php
+        }
+        ?>
     </div>
+    <?php
+}
+?>
