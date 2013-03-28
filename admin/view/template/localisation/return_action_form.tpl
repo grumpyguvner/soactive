@@ -1,33 +1,43 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+	
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-back"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><?php foreach ($languages as $language) { ?>
-              <input type="text" name="return_action[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($return_action[$language['language_id']]) ? $return_action[$language['language_id']]['name'] : ''; ?>" />
-              <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
-              <?php if (isset($error_name[$language['language_id']])) { ?>
-              <span class="error"><?php echo $error_name[$language['language_id']]; ?></span><br />
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+            <div class="controls">
+							<?php foreach ($languages as $language) { ?>
+							<div class="language-row<?php if (isset($error_name[$language['language_id']])) { ?> error<?php } ?>">
+								<input type="text" name="return_action[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($return_action[$language['language_id']]) ? $return_action[$language['language_id']]['name'] : ''; ?>" class="span3">
+								<i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i>
+								<?php if (isset($error_name[$language['language_id']])) { ?>
+								<span class="error help-block"><?php echo $error_name[$language['language_id']]; ?></span><br>
+								<?php } ?>
+							</div>
               <?php } ?>
-              <?php } ?></td>
-          </tr>
-        </table>
+						</div>
+          </div>
+        </div>
       </form>
+
     </div>
   </div>
 </div>

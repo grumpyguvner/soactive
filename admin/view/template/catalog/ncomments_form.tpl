@@ -1,24 +1,25 @@
 <?php echo $header; ?>
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+  
+    <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
     <div class="heading">
-      <h1><img src="view/image/review.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
-    </div>
+            <h1><img src="view/image/review.png" alt="" /> <?php echo $heading_title; ?></h1>
+            <?php if ($error_warning) { ?>
+                <?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+            <?php } ?>
+            <div class="buttons form-actions form-actions-top">
+                <?php echo p3html::tb_form_button_save($button_save); ?>
+                <?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+            </div>
+        </div>
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <table id="module" class="list table table-striped table-hover">
           <tr>
             <td><span class="required">*</span> <?php echo $entry_author; ?></td>
-            <td><input type="text" name="author" value="<?php echo $author; ?>" />
+            <td><input type="text" name="author" value="<?php echo $author; ?>"  class="span3 i-medium"/>
               <?php if ($error_author) { ?>
               <span class="error"><?php echo $error_author; ?></span>
               <?php } ?></td>
@@ -26,7 +27,7 @@
           <tr>
             <td><?php echo $entry_product; ?></td>
             <td>
-			<select name="news_id">
+			<select name="news_id" class="span3 i-medium">
 		  <?php foreach ($anews as $news ){ ?>
 		  <?php if ($news['news_id'] == $news_id) { ?>
 		  <option value="<?php echo $news['news_id']; ?>" selected="selected"><?php echo $news['title'] ?></option>
@@ -43,7 +44,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_text; ?></td>
-            <td><textarea name="text" cols="60" rows="8"><?php echo $text; ?></textarea>
+            <td><textarea name="text" cols="60" rows="8" class="span3 i-medium"><?php echo $text; ?></textarea>
               <?php if ($error_text) { ?>
               <span class="error"><?php echo $error_text; ?></span>
               <?php } ?></td>

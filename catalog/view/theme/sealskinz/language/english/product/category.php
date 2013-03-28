@@ -31,5 +31,6 @@ $_['text_termal_rating']= 'Termal Rating';
 $_['text_gender']       = 'Gender';
 $_['text_activity']     = 'Activity';
 $_['text_filter']       = 'Filter';
+$_['text_pview']        = 'VIEW PRODUCT INFO';
 
 ?>

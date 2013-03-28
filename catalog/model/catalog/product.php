@@ -1039,5 +1039,19 @@ class ModelCatalogProduct extends Model {
             
             return $query-> rows;
         }
+        
+        public function getInfoPress($product_id) {
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "news_to_store n2s ON (n.news_id = n2s.news_id) LEFT JOIN " . DB_PREFIX . "news_related nr ON (n.news_id = nr.news_id) LEFT JOIN " . DB_PREFIX . "news_to_ncategory ntc ON (n.news_id = ntc.news_id) WHERE product_id = '" . (int)$product_id . "' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
+            
+            if($query->num_rows > 0) {
+		  
+		  return $query->rows;
+		  
+	  } else {	 
+		  
+		  return false;
+		  
+	  }
+        }
 }
 ?>

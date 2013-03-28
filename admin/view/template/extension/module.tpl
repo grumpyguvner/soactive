@@ -1,45 +1,46 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
-  <?php if ($error) { ?>
-  <div class="warning"><?php echo $error; ?></div>
-  <?php } ?>
+
+	<?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
+      <h1 class="icon-cogs"><i></i> <?php echo $heading_title; ?></h1>
+			<?php if ($success) { ?>
+				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+			<?php } ?>
+			<?php if ($error) { ?>
+			<div class="warning alert alert-error"><?php echo $error; ?></div>
+			<?php } ?>
+
     </div>
+
     <div class="content">
-      <table class="list">
-        <thead>
-          <tr>
-            <td class="left"><?php echo $column_name; ?></td>
-            <td class="right"><?php echo $column_action; ?></td>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if ($extensions) { ?>
+
+			<?php if ($extensions) { ?>
+			<table class="list table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="column-name"><?php echo $column_name; ?></th>
+						<th class="column-action"><?php echo $column_action; ?></th>
+					</tr>
+				</thead>
+				<tbody>
           <?php foreach ($extensions as $extension) { ?>
           <tr>
-            <td class="left"><?php echo $extension['name']; ?></td>
-            <td class="right"><?php foreach ($extension['action'] as $action) { ?>
-              [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-              <?php } ?></td>
-          </tr>
-          <?php } ?>
-          <?php } else { ?>
-          <tr>
-            <td class="center" colspan="8"><?php echo $text_no_results; ?></td>
+            <td class="column-name"><?php echo $extension['name']; ?></td>
+            <td class="column-action">
+							<?php echo p3html::tb_action_buttons($extension); ?>
+						</td>
           </tr>
           <?php } ?>
         </tbody>
       </table>
+			<?php } else { ?>
+			<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>
+			<?php } ?>
     </div>
   </div>
 </div>

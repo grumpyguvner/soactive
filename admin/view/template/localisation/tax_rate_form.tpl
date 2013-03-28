@@ -1,83 +1,83 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/tax.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-dollar"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input type="text" name="name" value="<?php echo $name; ?>" />
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group<?php if ($error_name) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+            <div class="controls">
+							<input type="text" name="name" value="<?php echo $name; ?>" class="span3">
               <?php if ($error_name) { ?>
-              <span class="error"><?php echo $error_name; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_rate; ?></td>
-            <td><input type="text" name="rate" value="<?php echo $rate; ?>" />
+              <span class="error help-block"><?php echo $error_name; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_rate) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_rate; ?></label>
+            <div class="controls">
+							<input type="text" name="rate" value="<?php echo $rate; ?>" class="span2">
               <?php if ($error_rate) { ?>
-              <span class="error"><?php echo $error_rate; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_type; ?></td>
-            <td><select name="type">
-                <?php if ($type == 'P') { ?>
-                <option value="P" selected="selected"><?php echo $text_percent; ?></option>
-                <?php } else { ?>
-                <option value="P"><?php echo $text_percent; ?></option>
-                <?php } ?>
-                <?php if ($type == 'F') { ?>
-                <option value="F" selected="selected"><?php echo $text_amount; ?></option>
-                <?php } else { ?>
-                <option value="F"><?php echo $text_amount; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_customer_group; ?></td>
-            <td><div class="scrollbox">
+              <span class="error help-block"><?php echo $error_rate; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_type; ?></label>
+            <div class="controls">
+							<select name="type" class="span2">
+								<?php echo p3html::oc_rate_type_options($this->language, $type); ?>
+              </select>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_customer_group; ?></label>
+            <div class="controls">
+							<div class="scrollbox">
                 <?php $class = 'even'; ?>
                 <?php foreach ($customer_groups as $customer_group) { ?>
                 <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
                 <div class="<?php echo $class; ?>">
-                  <?php if (in_array($customer_group['customer_group_id'], $tax_rate_customer_group)) { ?>
-                  <input type="checkbox" name="tax_rate_customer_group[]" value="<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
-                  <?php echo $customer_group['name']; ?>
-                  <?php } else { ?>
-                  <input type="checkbox" name="tax_rate_customer_group[]" value="<?php echo $customer_group['customer_group_id']; ?>" />
-                  <?php echo $customer_group['name']; ?>
-                  <?php } ?>
+                  <?php $checked = (in_array($customer_group['customer_group_id'], $tax_rate_customer_group)); ?>
+									<label class="checkbox inline">
+										<input type="checkbox" name="tax_rate_customer_group[]" value="<?php echo $customer_group['customer_group_id']; ?>"<?php if ($checked) { ?> checked="checked"<?php } ?>>
+										<?php echo $customer_group['name']; ?>
+									</label>
                 </div>
                 <?php } ?>
-              </div></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_geo_zone; ?></td>
-            <td><select name="geo_zone_id">
-                <?php foreach ($geo_zones as $geo_zone) { ?>
-                <?php  if ($geo_zone['geo_zone_id'] == $geo_zone_id) { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>" selected="selected"><?php echo $geo_zone['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select></td>
-          </tr>
-        </table>
+              </div>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_geo_zone; ?></label>
+            <div class="controls">
+							<select name="geo_zone_id" class="span3">
+								<?php echo p3html::oc_geo_zone_options($geo_zones, $geo_zone_id); ?>
+              </select>
+						</div>
+          </div>
+        </div>
       </form>
+
     </div>
   </div>
 </div>
+
 <?php echo $footer; ?>

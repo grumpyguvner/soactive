@@ -381,3 +381,7 @@ INSERT INTO `oc_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-
 ###########################################################
 #### Start 1.5.4:BC1
 ALTER TABLE `oc_product_option_value` ADD `sku` varchar(64) COLLATE utf8_bin NOT NULL AFTER `option_value_id`;
+
+# REMEMBER TO ADD ROW config_anonymous_review IN setting!!!!
+
+ALTER TABLE `oc_product_image` ADD `video` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `image`;

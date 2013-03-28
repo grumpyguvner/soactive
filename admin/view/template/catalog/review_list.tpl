@@ -1,83 +1,80 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/review.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <h1><i class="icon-newspaper"></i> <?php echo $heading_title; ?></h1>
+
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+			<?php if ($success) { ?>
+				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+			<?php } ?>
+
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_insert($button_insert, $insert); ?>
+				<?php echo p3html::tb_form_button_delete($button_delete); ?>
+			</div>
     </div>
+
     <div class="content">
+
+			<?php if ($reviews) { ?>
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="list">
+        <table class="list table table-striped table-hover">
           <thead>
             <tr>
-              <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'pd.name') { ?>
-                <a href="<?php echo $sort_product; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_product; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_product; ?>"><?php echo $column_product; ?></a>
-                <?php } ?></td>
-              <td class="left"><?php if ($sort == 'r.author') { ?>
-                <a href="<?php echo $sort_author; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_author; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_author; ?>"><?php echo $column_author; ?></a>
-                <?php } ?></td>
-              <td class="right"><?php if ($sort == 'r.rating') { ?>
-                <a href="<?php echo $sort_rating; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_rating; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_rating; ?>"><?php echo $column_rating; ?></a>
-                <?php } ?></td>
-              <td class="left"><?php if ($sort == 'r.status') { ?>
-                <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
-                <?php } ?></td>
-              <td class="left"><?php if ($sort == 'r.date_added') { ?>
-                <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_date_added; ?>"><?php echo $column_date_added; ?></a>
-                <?php } ?></td>
-              <td class="right"><?php echo $column_action; ?></td>
+              <th class="column-checkbox">
+								<input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);">
+							</th>
+              <th class="column-name">
+									<?php echo p3html::tb_sort_heading($column_product, $sort_product, $sort, $order, 'pd.name'); ?>
+							</th>
+              <th class="column-name hidden-phone">
+								<?php echo p3html::tb_sort_heading($column_author, $sort_author, $sort, $order, 'r.author'); ?>
+							</th>
+              <th class="column-number">
+								<?php echo p3html::tb_sort_heading($column_rating, $sort_rating, $sort, $order, 'r.rating'); ?>
+							</th>
+              <th class="column-status hidden-phone">
+								<?php echo p3html::tb_sort_heading($column_status, $sort_status, $sort, $order, 'r.status'); ?>
+							</th>
+              <th class="column-date hidden-phone">
+								<?php echo p3html::tb_sort_heading($column_date_added, $sort_date_added, $sort, $order, 'r.date_added'); ?>
+							</th>
+              <th class="column-action"><?php echo $column_action; ?></th>
             </tr>
           </thead>
           <tbody>
-            <?php if ($reviews) { ?>
             <?php foreach ($reviews as $review) { ?>
             <tr>
-              <td style="text-align: center;"><?php if ($review['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $review['review_id']; ?>" checked="checked" />
-                <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $review['review_id']; ?>" />
-                <?php } ?></td>
-              <td class="left"><?php echo $review['name']; ?></td>
-              <td class="left"><?php echo $review['author']; ?></td>
-              <td class="right"><?php echo $review['rating']; ?></td>
-              <td class="left"><?php echo $review['status']; ?></td>
-              <td class="left"><?php echo $review['date_added']; ?></td>
-              <td class="right"><?php foreach ($review['action'] as $action) { ?>
-                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-                <?php } ?></td>
-            </tr>
-            <?php } ?>
-            <?php } else { ?>
-            <tr>
-              <td class="center" colspan="7"><?php echo $text_no_results; ?></td>
+              <td class="column-checkbox">
+                <input type="checkbox" name="selected[]" value="<?php echo $review['review_id']; ?>"<?php if ($review['selected']) { ?> checked="checked"<?php } ?>>
+							</td>
+              <td class="column-name"><?php echo $review['name']; ?></td>
+              <td class="column-name hidden-phone"><?php echo $review['author']; ?></td>
+              <td class="column-number"><?php echo $review['rating']; ?></td>
+              <td class="column-status hidden-phone"><?php echo $review['status']; ?></td>
+              <td class="column-date hidden-phone"><?php echo $review['date_added']; ?></td>
+              <td class="column-action">
+								<?php echo p3html::tb_action_buttons($review); ?>
+							</td>
             </tr>
             <?php } ?>
           </tbody>
         </table>
       </form>
+
       <div class="pagination"><?php echo $pagination; ?></div>
+			<?php } else { ?>
+			<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>
+			<?php } ?>
+
     </div>
   </div>
 </div>

@@ -1,48 +1,54 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/information.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-star"></i> <?php echo $heading_title; ?></h1>
+
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><?php foreach ($languages as $language) { ?>
-              <input type="text" name="attribute_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($attribute_description[$language['language_id']]) ? $attribute_description[$language['language_id']]['name'] : ''; ?>" />
-              <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+						<?php foreach ($languages as $language) { ?>
+            <div class="controls language-row<?php if (isset($error_name[$language['language_id']])) { ?> error<?php } ?>">
+              <input type="text" name="attribute_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($attribute_description[$language['language_id']]) ? $attribute_description[$language['language_id']]['name'] : ''; ?>" class="span3 i-xlarge">
+              <i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i>
               <?php if (isset($error_name[$language['language_id']])) { ?>
-              <span class="error"><?php echo $error_name[$language['language_id']]; ?></span><br />
+              <span class="error help-block"><?php echo $error_name[$language['language_id']]; ?></span>
               <?php } ?>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_attribute_group; ?></td>
-            <td><select name="attribute_group_id">
+						</div>
+						<?php } ?>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_attribute_group; ?></label>
+            <div class="controls">
+							<select name="attribute_group_id" class="span3 i-xlarge">
                 <?php foreach ($attribute_groups as $attribute_group) { ?>
-                <?php if ($attribute_group['attribute_group_id'] == $attribute_group_id) { ?>
-                <option value="<?php echo $attribute_group['attribute_group_id']; ?>" selected="selected"><?php echo $attribute_group['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $attribute_group['attribute_group_id']; ?>"><?php echo $attribute_group['name']; ?></option>
+                <option value="<?php echo $attribute_group['attribute_group_id']; ?>"<?php if ($attribute_group['attribute_group_id'] == $attribute_group_id) { ?> selected="selected"<?php } ?>><?php echo $attribute_group['name']; ?></option>
                 <?php } ?>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_sort_order; ?></td>
-            <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>
-          </tr>
-        </table>
+              </select>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_sort_order; ?></label>
+            <div class="controls"><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" class="input-mini"></div>
+          </div>
+        </div>
       </form>
     </div>
   </div>

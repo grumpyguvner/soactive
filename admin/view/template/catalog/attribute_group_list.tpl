@@ -1,66 +1,68 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <h1><i class="icon-star-empty"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+			<?php if ($success) { ?>
+				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_insert($button_insert, $insert); ?>
+				<?php echo p3html::tb_form_button_delete($button_delete); ?>
+			</div>
     </div>
+
     <div class="content">
+
+			<?php if ($attribute_groups) { ?>
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="list">
+        <table class="list table table-striped table-hover">
           <thead>
             <tr>
-              <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-              <td class="left"><?php if ($sort == 'agd.name') { ?>
-                <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
-                <?php } ?></td>
-              <td class="right"><?php if ($sort == 'ag.sort_order') { ?>
-                <a href="<?php echo $sort_sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sort_order; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_sort_order; ?>"><?php echo $column_sort_order; ?></a>
-                <?php } ?></td>
-              <td class="right"><?php echo $column_action; ?></td>
+              <th class="column-checkbox">
+								<input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);">
+							</th>
+              <th class="column-name">
+								<?php echo p3html::tb_sort_heading($column_name, $sort_name, $sort, $order, 'agd.name'); ?>
+							</th>
+              <th class="column-sort -hidden-phone">
+								<?php echo p3html::tb_sort_heading($column_sort_order, $sort_sort_order, $sort, $order, 'ag.sort_order'); ?>
+							</th>
+              <th class="column-action"><?php echo $column_action; ?></th>
             </tr>
           </thead>
           <tbody>
-            <?php if ($attribute_groups) { ?>
             <?php foreach ($attribute_groups as $attribute_group) { ?>
             <tr>
-              <td style="text-align: center;"><?php if ($attribute_group['selected']) { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $attribute_group['attribute_group_id']; ?>" checked="checked" />
-                <?php } else { ?>
-                <input type="checkbox" name="selected[]" value="<?php echo $attribute_group['attribute_group_id']; ?>" />
-                <?php } ?></td>
-              <td class="left"><?php echo $attribute_group['name']; ?></td>
-              <td class="right"><?php echo $attribute_group['sort_order']; ?></td>
-              <td class="right"><?php foreach ($attribute_group['action'] as $action) { ?>
-                [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-                <?php } ?></td>
-            </tr>
-            <?php } ?>
-            <?php } else { ?>
-            <tr>
-              <td class="center" colspan="4"><?php echo $text_no_results; ?></td>
+              <td class="column-checkbox">
+                <input type="checkbox" name="selected[]" value="<?php echo $attribute_group['attribute_group_id']; ?>"<?php if ($attribute_group['selected']) { ?> checked="checked"<?php } ?>>
+							</td>
+              <td class="column-name"><?php echo $attribute_group['name']; ?></td>
+              <td class="column-sort -hidden-phone"><?php echo $attribute_group['sort_order']; ?></td>
+              <td class="column-action">
+								<?php echo p3html::tb_action_buttons($attribute_group); ?>
+							</td>
             </tr>
             <?php } ?>
           </tbody>
         </table>
       </form>
+
       <div class="pagination"><?php echo $pagination; ?></div>
+			<?php } else { ?>
+			<?php echo p3html::tb_alert('warning', $text_no_results, false, 'no-results'); ?>
+			<?php } ?>
+
     </div>
   </div>
 </div>
+
 <?php echo $footer; ?>

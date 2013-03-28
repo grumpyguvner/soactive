@@ -1,65 +1,70 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+	<?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
     <div class="heading">
-      <h1><img src="view/image/payment.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-dollar"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
         <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_title; ?></td>
-            <td><input type="text" name="title" value="<?php echo $title; ?>" />
+          <div class="control-group<?php if ($error_title) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_title; ?></label>
+            <div class="controls">
+							<input type="text" name="title" value="<?php echo $title; ?>" class="span2">
               <?php if ($error_title) { ?>
-              <span class="error"><?php echo $error_title; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-            <td><input type="text" name="code" value="<?php echo $code; ?>" />
+              <span class="error help-block"><?php echo $error_title; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group<?php if ($error_code) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_code; ?></label>
+            <div class="controls">
+							<input type="text" name="code" value="<?php echo $code; ?>" class="span1">
               <?php if ($error_code) { ?>
-              <span class="error"><?php echo $error_code; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_symbol_left; ?></td>
-            <td><input type="text" name="symbol_left" value="<?php echo $symbol_left; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_symbol_right; ?></td>
-            <td><input type="text" name="symbol_right" value="<?php echo $symbol_right; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_decimal_place; ?></td>
-            <td><input type="text" name="decimal_place" value="<?php echo $decimal_place; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_value; ?></td>
-            <td><input type="text" name="value" value="<?php echo $value; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select name="status">
-                <?php if ($status) { ?>
-                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                <option value="0"><?php echo $text_disabled; ?></option>
-                <?php } else { ?>
-                <option value="1"><?php echo $text_enabled; ?></option>
-                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
+              <span class="error help-block"><?php echo $error_code; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_symbol_left; ?></label>
+            <div class="controls"><input type="text" name="symbol_left" value="<?php echo $symbol_left; ?>" class="span1"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_symbol_right; ?></label>
+            <div class="controls"><input type="text" name="symbol_right" value="<?php echo $symbol_right; ?>" class="span1"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_decimal_place; ?></label>
+            <div class="controls"><input type="text" name="decimal_place" value="<?php echo $decimal_place; ?>" class="span1"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_value; ?></label>
+            <div class="controls"><input type="text" name="value" value="<?php echo $value; ?>" class="span2"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_status; ?></label>
+            <div class="controls">
+							<select name="status" class="span2">
+								<?php echo p3html::oc_status_options($this->language, $status);?>
+              </select>
+						</div>
+          </div>
         </table>
       </form>
+
     </div>
   </div>
 </div>

@@ -1,68 +1,76 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
-  <div class="box">    <div class="heading">
-      <h1><img src="view/image/country.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
+  <div class="box">
+
+		<div class="heading">
+      <h1><i class="icon-globe"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
         <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input type="text" name="name" value="<?php echo $name; ?>" />
+          <div class="control-group<?php if ($error_name) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+            <div class="controls">
+							<input type="text" name="name" value="<?php echo $name; ?>" class="span4">
               <?php if ($error_name) { ?>
-              <span class="error"><?php echo $error_name; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_iso_code_2; ?></td>
-            <td><input type="text" name="iso_code_2" value="<?php echo $iso_code_2; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_iso_code_3; ?></td>
-            <td><input type="text" name="iso_code_3" value="<?php echo $iso_code_3; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_address_format; ?></td>
-            <td><textarea name="address_format" cols="40" rows="5"><?php echo $address_format; ?></textarea></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_postcode_required; ?></td>
-            <td><?php if ($postcode_required) { ?>
-              <input type="radio" name="postcode_required" value="1" checked="checked" />
-              <?php echo $text_yes; ?>
-              <input type="radio" name="postcode_required" value="0" />
-              <?php echo $text_no; ?>
-              <?php } else { ?>
-              <input type="radio" name="postcode_required" value="1" />
-              <?php echo $text_yes; ?>
-              <input type="radio" name="postcode_required" value="0" checked="checked" />
-              <?php echo $text_no; ?>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select name="status">
-                <?php if ($status) { ?>
-                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                <option value="0"><?php echo $text_disabled; ?></option>
-                <?php } else { ?>
-                <option value="1"><?php echo $text_enabled; ?></option>
-                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-        </table>
+              <span class="error help-block"><?php echo $error_name; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_iso_code_2; ?></label>
+            <div class="controls">
+							<input type="text" name="iso_code_2" value="<?php echo $iso_code_2; ?>" class="span1">
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_iso_code_3; ?></label>
+            <div class="controls">
+							<input type="text" name="iso_code_3" value="<?php echo $iso_code_3; ?>" class="span1">
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_address_format; ?></label>
+            <div class="controls">
+							<textarea name="address_format" class="span6 i-xxlarge" rows="8"><?php echo $address_format; ?></textarea>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_postcode_required; ?></label>
+            <div class="controls">
+							<?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+							<?php echo p3html::tb_bool_buttons_radio($this->language, 'postcode_required', $postcode_required); ?>
+							<?php } else { ?>
+							<?php echo p3html::tb_bool_radio_buttons($this->language, 'postcode_required', $postcode_required); ?>
+							<?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_status; ?></label>
+            <div class="controls">
+							<select name="status" class="span2">
+								<?php echo p3html::oc_status_options($this->language, $status); ?>
+              </select>
+						</div>
+          </div>
+        </div>
       </form>
+
     </div>
   </div>
 </div>
+
 <?php echo $footer; ?>

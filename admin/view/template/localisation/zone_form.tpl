@@ -1,59 +1,61 @@
 <?php echo $header; ?>
+
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
+
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
-      <h1><img src="view/image/country.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+      <h1><i class="icon-globe"></i> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
     </div>
+
     <div class="content">
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input type="text" name="name" value="<?php echo $name; ?>" />
+
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+        <div class="form">
+          <div class="control-group<?php if ($error_name) { ?> error<?php } ?>">
+            <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_name; ?></label>
+            <div class="controls">
+							<input type="text" name="name" value="<?php echo $name; ?>" class="span3">
               <?php if ($error_name) { ?>
-              <span class="error"><?php echo $error_name; ?></span>
-              <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_code; ?></td>
-            <td><input type="text" name="code" value="<?php echo $code; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_country; ?></td>
-            <td><select name="country_id">
-                <?php foreach ($countries as $country) { ?>
-                <?php if ($country['country_id'] == $country_id) { ?>
-                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select name="status">
-                <?php if ($status) { ?>
-                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                <option value="0"><?php echo $text_disabled; ?></option>
-                <?php } else { ?>
-                <option value="1"><?php echo $text_enabled; ?></option>
-                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-        </table>
+              <span class="error help-block"><?php echo $error_name; ?></span>
+              <?php } ?>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_code; ?></label>
+            <div class="controls"><input type="text" name="code" value="<?php echo $code; ?>" class="span1"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_country; ?></label>
+            <div class="controls">
+							<select name="country_id" class="span3">
+								<?php echo p3html::oc_country_options($countries, $country_id); ?>
+              </select>
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_status; ?></label>
+            <div class="controls">
+							<select name="status" class="span2">
+								<?php echo p3html::oc_status_options($this->language, $status); ?>
+              </select>
+						</div>
+          </div>
+        </div>
       </form>
+
     </div>
+
   </div>
 </div>
+
 <?php echo $footer; ?>

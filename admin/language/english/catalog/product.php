@@ -14,6 +14,8 @@ $_['text_option']            = 'Option';
 $_['text_option_value']      = 'Option Value';
 $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
+$_['text_link_youtube']      = 'http://www.youtube.com/watch?v=';
+$_['entry_youtube_url']      = 'Video Youtube';
 
 // Column
 $_['column_name']            = 'Product Name';
@@ -54,7 +56,7 @@ $_['entry_weight_class']     = 'Weight Class:';
 $_['entry_weight']           = 'Weight:';
 $_['entry_length']           = 'Length Class:';
 $_['entry_dimension']        = 'Dimensions (L x W x H):';
-$_['entry_image']            = 'Image:';
+$_['entry_image']            = 'Image or Youtube Video:';
 $_['entry_customer_group']   = 'Customer Group:';
 $_['entry_date_start']       = 'Date Start:';
 $_['entry_date_end']         = 'Date End:';

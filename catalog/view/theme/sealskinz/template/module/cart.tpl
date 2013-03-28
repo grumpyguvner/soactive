@@ -2,7 +2,7 @@
   
     <a><span id="cart-total"><img src="catalog/view/theme/sealskinz/image/shopping-cart.png" alt="Cart" />&nbsp<?php echo $text_items; ?></span></a>
   
-    <ul style="margin: -13px 0 0 -202px;"><li class="cart-menu">
+    <ul style="margin: -13px 0 0 -173px;"><li class="cart-menu">
   
     <?php if ($products || $vouchers) { ?>
     <div class="mini-cart-info">

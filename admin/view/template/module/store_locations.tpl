@@ -1,10 +1,8 @@
 <?php echo $header; ?>
 <div id="content">
-<div class="breadcrumb">
-  <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-  <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-  <?php } ?>
-</div>
+
+    <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
 <?php if ($success) { ?>
   <div class="success"><?php echo $success; ?></div>
   <?php } ?>
@@ -12,13 +10,19 @@
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <div class="box">
-  <div class="heading">
-    <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
-    <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
-  </div>
+    <div class="heading">
+            <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
+            <?php if ($error_warning) { ?>
+                <?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+            <?php } ?>
+            <div class="buttons form-actions form-actions-top">
+                <?php echo p3html::tb_form_button_save($button_save); ?>
+                <?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+            </div>
+        </div>
   <div class="content">
-    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-      <table class="form">
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+      <table id="module" class="form table table-striped table-hover">
         <tr>
           <td><?php echo $store_loc_iWidth; ?></td>
           <td><input type="text" name="store_locations_iWidth" value="<?php echo $store_locations_iWidth; ?>" size="1" /></td>
@@ -57,16 +61,21 @@
         </tr>
         <tr>
               <td><?php echo $entry_icon; ?></td>
-              <td valign="top"><div class="image"><img src="<?php echo $thumb_icon; ?>" alt="" id="thumb_icon" />
+              <td valign="top">
+                  
+                  <div class="image"><img src="<?php echo $thumb_icon; ?>" alt="" id="thumb_icon" />
                 <input type="hidden" name="store_locations_image_icon" value="<?php echo $store_locations_image_icon; ?>" id="store_locations_image_icon" />
-                <br /><a onclick="image_upload('store_locations_image_icon', 'thumb_icon');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb_icon').attr('src', '<?php echo $no_image; ?>'); $('#store_locations_image_icon').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+                <br />
+                <a class="btn" title="<?php echo $text_browse; ?>" data-toggle="modal" data-target="#dialog" onclick="image_upload('store_locations_image_icon', 'thumb_icon');"><i class="icon-folder-open"></i><span class="hidden-phone"> <?php echo $text_browse; ?></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a class="btn"  title="<?php echo $text_clear; ?>" onclick="$('#thumb_icon').attr('src', '<?php echo $no_image; ?>'); $('#store_locations_image_icon').attr('value', '');"><i class="icon-trash"></i><span class="hidden-phone"> <?php echo $text_clear; ?></span></a>
+                  </div>
+              </td>
          </tr>
       </table>
-      <table class="list">
+      <table id="module" class="list table table-striped table-hover">
           <thead>
-          	<tr>
-            	<td colspan="4"><div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a>&nbsp;<a onclick="$('#form').attr('action','<?php echo $delete; ?>');$('#form').submit();" class="button"><?php echo $button_delete; ?></a></div>
-                </td>
+            <tr>
+            	<td colspan="4"><div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button btn"><i class="icon-plus"></i><?php echo $button_insert; ?></a>&nbsp;<a onclick="$('#form').attr('action','<?php echo $delete; ?>');$('#form').submit();" class="button btn btn-danger"><i class="icon-trash"></i><?php echo $button_delete; ?></a></div></td>
             </tr>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
@@ -98,29 +107,35 @@
             <?php } ?>
           </tbody>
         </table>
-      <table id="module" class="list">
+      <table id="module" class="list table table-striped table-hover">
         <thead>
           <tr>
-            <td class="left"><?php echo $entry_limit; ?></td>
-            <td class="left"><?php echo $entry_image; ?></td>
-            <td class="left"><?php echo $entry_layout; ?></td>
-            <td class="left"><?php echo $entry_position; ?></td>
-            <td class="left"><?php echo $entry_status; ?></td>
-            <td class="right"><?php echo $entry_sort_order; ?></td>
-            <td></td>
+            <th class="column-number"><?php echo $entry_limit; ?></th>
+            <th class="column-image"><?php echo $entry_image; ?></th>
+            <th class="column-layout"><?php echo $entry_layout; ?></th>
+            <th class="column-position"><?php echo $entry_position; ?></th>
+            <th class="column-status"><?php echo $entry_status; ?></th>
+            <th class="column-sort"><?php echo $entry_sort_order; ?></th>
+            <th class="column-action"></th>
           </tr>
         </thead>
         <?php $module_row = 0; ?>
         <?php foreach ($modules as $module) { ?>
         <tbody id="module-row<?php echo $module_row; ?>">
           <tr>
-            <td class="left"><input type="text" name="store_locations_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" /></td>
-            <td class="left"><input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" />
-              <input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_height]" value="<?php echo $module['image_height']; ?>" size="3" />
+            <td class="column-number">
+                <label class="visible-480"><?php echo $entry_limit; ?></label>
+                <input type="text" name="store_locations_module[<?php echo $module_row; ?>][limit]" value="<?php echo $module['limit']; ?>" size="1" class="input-small" /></td>
+            <td class="column-number">
+                <label class="visible-480"><?php echo $entry_image; ?></label>
+                <input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_width]" value="<?php echo $module['image_width']; ?>" size="3" class="input-small" />
+              <input type="text" name="store_locations_module[<?php echo $module_row; ?>][image_height]" value="<?php echo $module['image_height']; ?>" size="3" class="input-small" />
               <?php if (isset($error_image[$module_row])) { ?>
               <span class="error"><?php echo $error_image[$module_row]; ?></span>
               <?php } ?></td>
-            <td class="left"><select name="store_locations_module[<?php echo $module_row; ?>][layout_id]">
+            <td class="column-layout">
+                <label class="visible-480"><?php echo $entry_layout; ?></label>
+                <select name="store_locations_module[<?php echo $module_row; ?>][layout_id]" class="span2 i-medium">
                 <?php foreach ($layouts as $layout) { ?>
                 <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
                 <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
@@ -129,7 +144,9 @@
                 <?php } ?>
                 <?php } ?>
               </select></td>
-            <td class="left"><select name="store_locations_module[<?php echo $module_row; ?>][position]">
+            <td class="column-position">
+                <label class="visible-480"><?php echo $entry_position; ?></label>
+                <select name="store_locations_module[<?php echo $module_row; ?>][position]" class="span2 i-medium">
                 <?php if ($module['position'] == 'content_top') { ?>
                 <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
                 <?php } else { ?>
@@ -151,7 +168,9 @@
                 <option value="column_right"><?php echo $text_column_right; ?></option>
                 <?php } ?>
               </select></td>
-            <td class="left"><select name="store_locations_module[<?php echo $module_row; ?>][status]">
+            <td class="column-status">
+                <label class="visible-480"><?php echo $entry_status; ?></label>
+                <select name="store_locations_module[<?php echo $module_row; ?>][status]" class="input-small">
                 <?php if ($module['status']) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
@@ -160,8 +179,10 @@
                 <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                 <?php } ?>
               </select></td>
-            <td class="right"><input type="text" name="store_locations_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" /></td>
-            <td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>
+            <td class="column-sort">
+                <label class="visible-480"><?php echo $entry_sort_order; ?></label>
+                <input type="text" name="store_locations_module[<?php echo $module_row; ?>][sort_order]" value="<?php echo $module['sort_order']; ?>" size="3" class="span1 i-mini" /></td>
+            <td class="column-action"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>
           </tr>
         </tbody>
         <?php $module_row++; ?>
@@ -169,7 +190,9 @@
         <tfoot>
           <tr>
             <td colspan="6"></td>
-            <td class="left"><a onclick="addModule();" class="button"><span><?php echo $button_add_module; ?></span></a></td>
+            <td class="column-action">
+                <a onclick="addModule();" class="btn btn-small" title="<?php echo $button_add_module; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_module; ?></span></a>
+            </td>
           </tr>
         </tfoot>
       </table>
@@ -182,25 +205,25 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {	
 	html  = '<tbody id="module-row' + module_row + '">';
 	html += '  <tr>';
-	html += '    <td class="left"><input type="text" name="store_locations_module[' + module_row + '][limit]" value="5" size="1" /></td>';
-	html += '    <td class="left"><input type="text" name="store_locations_module[' + module_row + '][image_width]" value="80" size="3" /> <input type="text" name="store_locations_module[' + module_row + '][image_height]" value="80" size="3" /></td>';		
-	html += '    <td class="left"><select name="store_locations_module[' + module_row + '][layout_id]">';
+	html += '    <td class="column-number"><label class="visible-480"><?php echo addslashes($entry_limit); ?></label><input type="text" name="store_locations_module[' + module_row + '][limit]" value="5" size="1" class="input-small" /></td>';
+	html += '    <td class="column-number"><label class="visible-480"><?php echo addslashes($entry_image); ?></label><input type="text" name="store_locations_module[' + module_row + '][image_width]" value="80" size="3" class="input-small" /> <input type="text" name="store_locations_module[' + module_row + '][image_height]" value="80" size="3" class="input-small" /></td>';		
+	html += '    <td class="column-layout"><label class="visible-480"><?php echo addslashes($entry_layout); ?></label><select name="store_locations_module[' + module_row + '][layout_id]" class="span2 i-medium">';
 	<?php foreach ($layouts as $layout) { ?>
 	html += '      <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-	html += '    <td class="left"><select name="store_locations_module[' + module_row + '][position]">';
+	html += '    <td class="column-position"><label class="visible-480"><?php echo addslashes($entry_position); ?></label><select name="store_locations_module[' + module_row + '][position]" class="span2 i-medium">';
 	html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
 	html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
 	html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
 	html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
 	html += '    </select></td>';
-	html += '    <td class="left"><select name="store_locations_module[' + module_row + '][status]">';
+	html += '    <td class="column-status"><label class="visible-480"><?php echo addslashes($entry_status); ?></label><select name="store_locations_module[' + module_row + '][status]" class="input-small">';
     html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
     html += '      <option value="0"><?php echo $text_disabled; ?></option>';
     html += '    </select></td>';
-	html += '    <td class="right"><input type="text" name="store_locations_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
-	html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
+	html += '    <td class="column-sort"><label class="visible-480"><?php echo addslashes($entry_sort_order); ?></label><input type="text" name="store_locations_module[' + module_row + '][sort_order]" value="" size="3" class="span1 i-mini" /></td>';
+	html += '    <td class="column-action"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="btn btn-small"><i class="icon-trash ims"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a></td>';
 	html += '  </tr>';
 	html += '</tbody>';
 	
@@ -209,29 +232,7 @@ function addModule() {
 	module_row++;
 }
 //--></script>
-<script type="text/javascript"><!--
-function image_upload(field, thumb) {
-	$('#dialog').remove();
-	$('#content').prepend('<div id="dialog" style="padding: 3px 0px 0px 0px;"><iframe src="index.php?route=common/filemanager&token=<?php echo $token; ?>&field=' + encodeURIComponent(field) + '" style="padding:0; margin: 0; display: block; width: 100%; height: 100%;" frameborder="no" scrolling="auto"></iframe></div>');
-	$('#dialog').dialog({
-		title: '<?php echo $text_image_manager; ?>',
-		close: function (event, ui) {
-			if ($('#' + field).attr('value')) {
-				$.ajax({
-					url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#' + field).val()),
-					dataType: 'text',
-					success: function(data) {
-						$('#' + thumb).replaceWith('<img src="' + data + '" alt="" id="' + thumb + '" />');
-					}
-				});
-			}
-		},	
-		bgiframe: false,
-		width: 800,
-		height: 400,
-		resizable: false,
-		modal: false
-	});
-};
-//--></script> 
+<!--FILEMANAGER-->
+<?php include_once DIR_TEMPLATE . 'javascript/filemanager_dialog.tpl'; ?>
+<!--FILEMANAGER-->
 <?php echo $footer; ?>

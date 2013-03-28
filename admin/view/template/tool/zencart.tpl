@@ -1,89 +1,72 @@
 <?php echo $header; ?>
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
+  
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
-    <div class="heading">
+     <div class="heading">
       <h1><img src="view/image/log.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a></div>
-    </div>
-    <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a></div>
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <div id="tab-general">
-          <table class="form">
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_zencart_host; ?></td>
-              <td><input type="text" name="zencart_host" value="<?php echo $zencart_host; ?>" size="100" />
-                <?php if ($error_zencart_host) { ?>
-                <span class="error"><?php echo $error_zencart_host; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_zencart_user; ?></td>
-              <td><input type="text" name="zencart_user" value="<?php echo $zencart_user; ?>" size="100" />
-                <?php if ($error_zencart_user) { ?>
-                <span class="error"><?php echo $error_zencart_user; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_zencart_password; ?></td>
-              <td><input type="text" name="zencart_password" value="<?php echo $zencart_password; ?>" size="100" />
-                <?php if ($error_zencart_password) { ?>
-                <span class="error"><?php echo $error_zencart_password; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><span class="required">*</span> <?php echo $entry_zencart_name; ?></td>
-              <td><input type="text" name="zencart_name" value="<?php echo $zencart_name; ?>" size="100" />
-                <?php if ($error_zencart_name) { ?>
-                <span class="error"><?php echo $error_zencart_name; ?></span>
-                <?php } ?></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_products; ?></td>
-              <td><input type="hidden" name="zencart_products" value="0" />
-                  <input type="checkbox" name="zencart_products" value="1" <?php if ($zencart_products) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_products_truncate; ?></td>
-              <td><input type="hidden" name="zencart_products_truncate" value="0" />
-                  <input type="checkbox" name="zencart_products_truncate" value="1" <?php if ($zencart_products_truncate) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_products_debug; ?></td>
-              <td><input type="hidden" name="zencart_products_debug" value="0" />
-                  <input type="checkbox" name="zencart_products_debug" value="1" <?php if ($zencart_products_debug) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_orders; ?></td>
-              <td><input type="hidden" name="zencart_orders" value="0" />
-                  <input type="checkbox" name="zencart_orders" value="1"<?php if ($zencart_orders) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_orders_truncate; ?></td>
-              <td><input type="hidden" name="zencart_orders_truncate" value="0" />
-                  <input type="checkbox" name="zencart_orders_truncate" value="1" <?php if ($zencart_orders_limit) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_orders_limit; ?></td>
-              <td><input type="text" name="zencart_orders_limit" value="<?php echo $zencart_orders_limit; ?>" size="5" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_orders_debug; ?></td>
-              <td><input type="hidden" name="zencart_orders_debug" value="0" />
-                  <input type="checkbox" name="zencart_orders_debug" value="1" <?php if ($zencart_orders_debug) echo ' checked="checked"'; ?> /></td>
-            </tr>
-          </table>
+        <?php if ($error_warning) { ?>
+                <?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+        <?php } ?>
+        <?php if ($success) { ?>
+                <?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+        <?php } ?>
+        <div class="buttons form-actions form-actions-top">
+            <?php echo p3html::tb_form_button_save($button_save); ?>
+           <a onclick="location='<?php echo $import; ?>'" class="btn"><span><?php echo $button_import; ?></span></a>
         </div>
+    </div>
+    
+    <div class="content">
+      <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a data-toggle="tab" href="#tab-general"><?php echo $tab_general; ?></a></li>
+      </ul>
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+          <div class="tab-general" id="myTabContent">
+              <div id="home" class="tab-pane fade in active">
+                  
+                <div class="control-group<?php if ($error_zencart_server) { ?> error<?php } ?>">
+                    <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_zencart_server; ?></label>
+                    <div class="controls">
+                        <input type="text" name="zencart_server" value="<?php echo $zencart_server; ?>" class="span4 i-xlarge">
+                        <?php if ($error_zencart_server) { ?>
+                            <span class="error help-block"><?php echo $error_zencart_server; ?></span>
+                        <?php } ?>
+                    </div>
+                </div>
+                  
+                <div class="control-group<?php if ($error_zencart_port) { ?> error<?php } ?>">
+                    <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_zencart_port; ?></label>
+                    <div class="controls">
+                        <input type="text" name="zencart_port" value="<?php echo $zencart_port; ?>" class="span4 i-xlarge">
+                        <?php if ($error_zencart_port) { ?>
+                            <span class="error help-block"><?php echo $error_zencart_port; ?></span>
+                        <?php } ?>
+                    </div>
+                </div>
+                  
+                <div class="control-group<?php if ($error_zencart_warehouse) { ?> error<?php } ?>">
+                    <label class="control-label"><i class="required text-error icon-asterisk"></i> <?php echo $entry_zencart_warehouse; ?></label>
+                    <div class="controls">
+                        <input type="text" name="zencart_warehouse" value="<?php echo $zencart_warehouse; ?>" class="span4 i-xlarge">
+                        <?php if ($error_zencart_warehouse) { ?>
+                            <span class="error help-block"><?php echo $error_zencart_warehouse; ?></span>
+                        <?php } ?>
+                    </div>
+                </div>  
+                  
+              </div>
+            </div>
+        
       </form>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+    $('#myTab a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+    })
+</script>
 <?php echo $footer; ?>

@@ -105,6 +105,14 @@ class ControllerAccountWishList extends Controller {
 				} else {
 					$special = false;
 				}
+                                
+                                $idcategory = $this ->model_catalog_product->getCategories($product_info['product_id']);
+                                
+                                foreach ($idcategory as $categoryid) {
+                                    if ($categoryid['category_id']) {
+                                        $idcat = $categoryid['category_id'];
+                                    }
+                                }
 																			
 				$this->data['products'][] = array(
 					'product_id' => $product_info['product_id'],
@@ -114,7 +122,7 @@ class ControllerAccountWishList extends Controller {
 					'stock'      => $stock,
 					'price'      => $price,		
 					'special'    => $special,
-					'href'       => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+					'href'       => $this->url->link('product/product', 'path=' . $idcat . '&product_id=' . $product_info['product_id']),
 					'remove'     => $this->url->link('account/wishlist', 'remove=' . $product_info['product_id'])
 				);
 			} else {

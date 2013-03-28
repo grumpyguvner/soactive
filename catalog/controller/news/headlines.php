@@ -77,7 +77,7 @@ class ControllernewsHeadlines extends Controller {
 					'name'        => $result['title'],
 					'acom'        => $result['acom'],
 					'thumb'       => $image,
-					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 500) . '..',
+					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 200) . '..',
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'total_comments' => $this->model_catalog_ncomments->getTotalNcommentsByNewsId($result['news_id']),
 					'href'        => $this->url->link('news/article' . '&news_id=' . $result['news_id'])

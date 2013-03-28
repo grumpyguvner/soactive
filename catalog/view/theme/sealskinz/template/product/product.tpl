@@ -27,14 +27,27 @@
                   
                     <?php if ($thumb || $images) { ?>
                       <?php if ($thumb) { ?>
-                       <div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" class="span3" /></a></div>
+                       <div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
                       <?php } ?>
                       <?php if ($images) { ?>
+                       <?php $count = 0; ?>
                        <div class="image-additional">
+                           
                          <?php foreach ($images as $image) { ?>
+                           <?php if (!empty($image['popup'])) { ?>
                             <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+                            <?php } ?>
+                            <?php if (!empty($image['video'])) { ?>
+                            <a href="#" class="viewVideo"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
+                              <div class="videos vidContainer">
+                                  <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="365" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>
+                              </div>
+                              
+                         <?php $count++;  } ?>
                          <?php } ?>
+                         
                        </div>
+                       
                       <?php } ?>
                    
                   <?php } ?>
@@ -415,7 +428,28 @@
                           </ul>
                         <div class="tab-content-press" id="myTabContent">
                             <div id="home" class="tab-pane fade active in">
-                              <p><img src="catalog/view/theme/sealskinz/image/product/press.png" alt="Press" /></p>
+                              
+                              <?php if ($news && !empty($news)) { ?>
+                                <?php if ((count($news) > '1')) { ?>
+                                <div class="slideshow-press">
+                                  <ul class="slides">
+                                    <?php foreach ($news as $pnews) { ?>
+                                       <?php if ($pnews['status'] == '1') { ?> 
+                                        <li><a href="<?php echo $pnews['href'] ?>"><img src="<?php echo $pnews['thumb']; ?>" alt="Press" /></a></li>
+                                       <?php } ?>
+                                    <?php } ?>
+                                  </ul>
+                                </div>
+                                <?php } elseif (count($news) == '1') { ?>
+                                    <?php foreach ($news as $pnews) { ?>
+                                        <?php if ($pnews['status'] == '1') { ?> 
+                                            <a href="<?php echo $pnews['href'] ?>"><img src="<?php echo $pnews['thumb']; ?>" alt="Press" /></a>
+                                        <?php } ?> 
+                                    <?php } ?>
+                                <?php } ?>
+                              <?php } else { ?>
+                                    <p><img src="<?php echo $no_press_img; ?>" height="" alt="" /></p> 
+                                <?php } ?>
                             </div>
                             
                        </div>
@@ -455,7 +489,7 @@
                                                                              <?php } ?>
                                                                           
                                                                        </td>
-                                                                       <td class="table-info"><a href="" style="color: white !important;"><h4>VIEW PRODUCT INFO</h4></a></td>
+                                                                       <td class="table-info"><a href="<?php echo $product['href']; ?>" style="color: white !important;"><h5>VIEW PRODUCT INFO</h5></a></td>
                                                                        </tr>
                                                                        </tbody>
                                                                     </table>
@@ -612,4 +646,24 @@ $('.datetime').datetimepicker({
 });
 $('.time').timepicker({timeFormat: 'h:m'});
 //--></script> 
+
+<script type="text/javascript">
+ $(document).ready(function () {
+     $('.image-additional .viewVideo').click(function () {
+         $('.videos').hide();
+         $(this).next().show();
+         return false;
+     });
+     
+    $('.closeVideo a').click(function () { 
+      $(this).parents('.videos').hide();
+      return false;
+    });
+ });
+</script>
+<script type="text/javascript">
+    $(document).ready( function(){
+            $('.slideshow-press').slidepress({pager: false});
+    });
+</script>
 <?php echo $footer; ?>
