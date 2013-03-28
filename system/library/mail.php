@@ -19,7 +19,12 @@ class Mail {
 	public $parameter = '';
 
 	public function setTo($to) {
-		$this->to = $to;
+        if (defined('INTERCEPT_EMAIL'))
+        {
+            $this->to = INTERCEPT_EMAIL;
+        } else {
+            $this->to = $to;
+        }
 	}
 
 	public function setFrom($from) {
