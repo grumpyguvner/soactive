@@ -67,7 +67,7 @@
                   <?php foreach ($stores as $store) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
                   <div class="<?php echo $class; ?>">
-                    <?php if (in_array($store['store_id'], $product_store)) { ?>
+                    <?php if (in_array($store['store_id'], $zencart_products_store)) { ?>
                     <input type="checkbox" name="zencart_products_store[]" value="<?php echo $store['store_id']; ?>" checked="checked" />
                     <?php echo $store['name']; ?>
                     <?php } else { ?>
