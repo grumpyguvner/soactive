@@ -10,6 +10,7 @@ $_['entry_zencart_name'] = 'Zencart Name';
 $_['entry_zencart_products'] = 'Import Products';
 $_['entry_zencart_products_truncate'] = 'Truncate Products';
 $_['entry_zencart_products_debug'] = 'Show Debug for Products';
+$_['entry_zencart_products_store'] = 'Import products to store';
 $_['entry_zencart_orders'] = 'Import Customers and Orders';
 $_['entry_zencart_orders_truncate'] = 'Truncate Customers and Orders';
 $_['entry_zencart_orders_limit'] = 'Max number of Customers to import';
