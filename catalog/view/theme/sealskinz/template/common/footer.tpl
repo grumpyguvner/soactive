@@ -84,7 +84,7 @@
         </div>
     </div> 
 </div>
-
+<?php if ($error_environment) echo '<div id="error_environment" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>' . $error_environment . '</div>'; ?>
 
 <script type="text/javascript">
     $('form.newsletter-form').submit(function() {
