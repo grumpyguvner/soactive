@@ -493,6 +493,34 @@ label {
 	margin-left: 8px;
 	border-left: 1px solid #CCC;
 }
+
+#myCarousel {
+    margin-bottom: 0;
+    background: #000;
+    position: relative;
+}
+#myCarousel .carousel-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#myCarousel img {
+    width: 100%;
+}
+
+#myCarousel {
+    margin-bottom: 0;
+    background: #000;
+    position: relative;
+}
+#myCarousel .carousel-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#myCarousel img {
+    width: 100%;
+}
 /* menu */
 #menu {
 	background: #585858;
@@ -2265,6 +2293,7 @@ a.button-account:hover, input.button-account:hover {
         border-right: 1px solid #434245;
         border-left: 1px solid #434245;
         color: white !important;
+        font-weight: bold;
 	
 }
 
@@ -2582,6 +2611,11 @@ input[type="color"]:focus, .uneditable-input:focus {
 #category-link {
     width: 984px;
 }
+
+#error-cat-link {
+    margin: 205px 0 0 7px;
+    width: 984px;
+}
 #newsletter_email {
     width: 183px;
     height: 36px;
@@ -2892,7 +2926,11 @@ input[type="color"]:focus, .uneditable-input:focus {
 .img-great {
     margin-top: -12px;
 }
-
+.wrap-rating {
+    width: 64%;
+    margin: auto;
+    text-align: center;
+}
 .rating-top-1 {
     background-image: url('../image/product/1.png');
     position: absolute;
@@ -3236,6 +3274,28 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .error-wrap {
     margin-left: 30px;
+}
+.wrong {
+    background-image: url('../image/error_page.jpg');
+    background-repeat: no-repeat;
+    height: 516px;
+}
+#green-bar {
+    background-image: url("../image/bar-transp.png");
+    background-position: left top;
+    background-repeat: repeat-x;
+    width: 100%;
+    margin: 0;
+}
+#green-bar h1{
+    padding: 5px;
+    margin: 0;
+    font-size: 28px !important;
+}
+.buttons-error {
+    margin-bottom: 20px;
+    overflow: auto;
+    padding: 44px;
 }
 .filter-wrap {
     width: 436px;
@@ -3730,4 +3790,10 @@ input[type="color"]:focus, .uneditable-input:focus {
 .wrapper-rnews {
     border-top: 1px solid #CCCCCC;
     overflow: hidden;
+}
+.win-sp {
+    background-image: url('../image/button-home.png');
+    background-repeat: no-repeat;
+    width: 208px;
+    height: 38px;
 }
