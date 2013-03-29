@@ -716,8 +716,8 @@ function grab_image($url,$saveto){
 class ModelToolZencart extends Model {
 
     public $debugMode = false;
-    private $languageId = 0;
-    private $size_option_id = 0;
+    public $languageId = 0;
+    public $size_option_id = 0;
     
     function __construct ($registry) {
         parent::__construct($registry);

@@ -118,6 +118,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                         //initialise sku variables
                         $size = "ONE SIZE";
                         $colour = "";
+                        $therm = "";
                         //We will be updating the quantity via Sage Interface
                         $quantity = (float) $aStock->fields['quantity'];
 //                        $quantity = 0;
@@ -135,6 +136,9 @@ class ModelToolZencartProduct extends ModelToolZencart {
                                         case "Product Code":
                                             $colour = substr((string) $aOptions->fields['products_options_values_name'], 5);
                                             break;
+                                        case "Thermal Rating":
+                                            $therm = (string) $aOptions->fields['products_options_values_name'];
+                                            break;
                                         default:
                                             //ignore
                                             break;
@@ -143,6 +147,22 @@ class ModelToolZencartProduct extends ModelToolZencart {
                                 }
                             }
                         }
+                        
+                        $aOptions = $this->dbQF->Execute('SELECT * FROM products_attributes JOIN products_options ON (products_attributes.options_id = products_options.products_options_id AND products_options.language_id = 1) JOIN products_options_values ON (products_attributes.options_values_id = products_options_values.products_options_values_id AND products_options_values.language_id = 1) WHERE products_attributes.products_id = '.$aProduct->fields['products_id'].' AND products_attributes.options_id = 7');
+                        if ($aOptions->RecordCount() > 0) {
+                            while (!$aOptions->EOF) {
+                                switch ($aOptions->fields['products_options_name']) {
+                                    case "Thermal Rating":
+                                        $therm = (string) $aOptions->fields['products_options_values_name'];
+                                        break;
+                                    default:
+                                        //ignore
+                                        break;
+                                }
+                                $aOptions->MoveNext();
+                            }
+                        }
+                        
                         // The product model is obtained from the first 5 characters of the SKU code
                         // the main model cant be used because different colours have different models
                         $model = substr((string) $aStock->fields['sku'], 0, 5);
@@ -154,6 +174,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                             "status" => (int) $aProduct->fields['products_status'],
                             "price" => (float) $aProduct->fields['products_price'],
                             "type" => (string) $type,
+                            "therm" => (string) $therm,
                             "sku" => (string) $aStock->fields['sku'],
                             "size" => $size,
                             "quantity" => $quantity,
@@ -210,7 +231,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                     'description' => (string) $category_item['description']
             )),
             'keyword' => $category,
-            'product_store' => array(0)
+            'category_store' => $this->config->get('zencart_products_store')
         );
 
         if (!$category_info) {
@@ -246,6 +267,27 @@ class ModelToolZencartProduct extends ModelToolZencart {
         
         $image = (file_exists($saveto) ? 'data/products/' . $model . '.jpg' : "");
         $this->debug("using ".$image." as image");
+        
+        
+        $attribute = array();
+        if (!empty($stock_item['type']))
+        {
+            $attribute[] = array(
+                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Type')), 
+                'product_attribute_description' => array(
+                    $this->languageId => array(
+                        'text' => (string) $stock_item['type']
+                )));
+        };
+        if (!empty($stock_item['therm']))
+        {
+            $attribute[] = array(
+                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Thermal Rating')), 
+                'product_attribute_description' => array(
+                    $this->languageId => array(
+                        'text' => (string) $stock_item['therm']
+                )));
+        };
         
         //We only create a new product the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
@@ -288,16 +330,10 @@ class ModelToolZencartProduct extends ModelToolZencart {
                     'description' => (string) $stock_item['description'],
                     'tag' => NULL
             )),
-            'product_attribute' => ((string) $stock_item['type']=="" ? NULL : array( array(
-                'attribute_id' => 1, //TODO: lookup "TYPE" Attribute code instead of hard code
-                'product_attribute_description' => array(
-                    $this->languageId => array(
-                        'text' => (string) $stock_item['type']
-                ))
-            ))),
+            'product_attribute' => $attribute,
             'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
             'product_category' => $stock_item['categories'],
-            'product_store' => array(0)
+            'product_store' => $this->config->get('zencart_products_store')
         );
 
         if (!$product_info) {
