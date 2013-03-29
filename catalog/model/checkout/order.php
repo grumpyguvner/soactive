@@ -241,7 +241,7 @@ class ModelCheckoutOrder extends Model {
 			}
 			
 			// Send out order confirmation mail
-			$language = new Language($order_info['language_directory']);
+			$language = new Language($order_info['language_directory'], $registry);
 			$language->load($order_info['language_filename']);
 			$language->load('mail/order');
 		 
@@ -621,7 +621,7 @@ class ModelCheckoutOrder extends Model {
 			}	
 	
 			if ($notify) {
-				$language = new Language($order_info['language_directory']);
+				$language = new Language($order_info['language_directory'], $registry);
 				$language->load($order_info['language_filename']);
 				$language->load('mail/order');
 			
