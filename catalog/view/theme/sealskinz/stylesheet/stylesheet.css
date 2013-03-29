@@ -507,6 +507,20 @@ label {
 #myCarousel img {
     width: 100%;
 }
+
+#myCarousel {
+    margin-bottom: 0;
+    background: #000;
+    position: relative;
+}
+#myCarousel .carousel-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#myCarousel img {
+    width: 100%;
+}
 /* menu */
 #menu {
 	background: #585858;

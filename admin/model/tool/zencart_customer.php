@@ -9,23 +9,23 @@ class ModelToolZencartCustomer extends ModelToolZencart {
         if ($this->config->get('zencart_orders_truncate')) {
             
             $this->debug("truncating tables");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "address");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "address`");
             
-            $this->db->query("TRUNCATE " . DB_PREFIX . "customer");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "customer_ip");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "customer_ip_blacklist");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "customer_online");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "customer_reward");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "customer_transaction");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "customer`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "customer_ip`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "customer_ip_blacklist`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "customer_online`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "customer_reward`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "customer_transaction`");
             
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_download");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_fraud");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_history");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_option");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_product");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_total");
-            $this->db->query("TRUNCATE " . DB_PREFIX . "order_voucher");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_download`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_fraud`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_history`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_option`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_product`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_total`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "order_voucher`");
             
         }
 
