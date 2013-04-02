@@ -6,6 +6,17 @@ class ModelToolZencartProduct extends ModelToolZencart {
     function import() {
         $this->debugMode = $this->config->get('zencart_products_debug');
         
+        $this->truncate();
+
+        if (!$this->cacheZencartData())
+            return false;
+
+        $this->debug("Import Complete");
+        return true;
+    }
+
+    function truncate() {
+        
         if ($this->config->get('zencart_orders_truncate')) {
             
             $this->debug("truncating tables");
@@ -43,12 +54,6 @@ class ModelToolZencartProduct extends ModelToolZencart {
             
             $this->db->query("TRUNCATE `" . DB_PREFIX . "url_alias`");
         }
-
-        if (!$this->cacheZencartData())
-            return false;
-
-        $this->debug("Import Complete");
-        return true;
     }
 
     function cacheZencartData($forceRefresh = false) {

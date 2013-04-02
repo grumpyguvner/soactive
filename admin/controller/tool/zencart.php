@@ -22,10 +22,17 @@ class ControllerToolZencart extends Controller {
             $this->config->set('zencart_products_truncate', $this->request->post['zencart_products_truncate']);
             $this->config->set('zencart_products_debug', $this->request->post['zencart_products_debug']);
             $this->config->set('zencart_products_store', $this->request->post['zencart_products_store']);
+            $this->config->set('zencart_customers', $this->request->post['zencart_customers']);
             $this->config->set('zencart_orders', $this->request->post['zencart_orders']);
             $this->config->set('zencart_orders_truncate', $this->request->post['zencart_orders_truncate']);
             $this->config->set('zencart_orders_limit', $this->request->post['zencart_orders_limit']);
             $this->config->set('zencart_orders_debug', $this->request->post['zencart_orders_debug']);
+            
+            if ($this->request->post['zencart_products_truncate'])
+            {
+                $this->load->model('tool/zencart_product');
+                $this->model_tool_zencart_product->truncate();
+            }
             
             if ($this->request->post['zencart_products'])
             {
@@ -34,7 +41,13 @@ class ControllerToolZencart extends Controller {
                 $this->session->data['success'] = $this->language->get('text_success');
             }
             
-            if ($this->request->post['zencart_orders'])
+            if ($this->request->post['zencart_orders_truncate'])
+            {
+                $this->load->model('tool/zencart_customer');
+                $this->model_tool_zencart_customer->truncate();
+            }
+            
+            if ($this->request->post['zencart_customers'])
             {
                 $this->load->model('tool/zencart_customer');
                 $this->model_tool_zencart_customer->import();
@@ -60,6 +73,7 @@ class ControllerToolZencart extends Controller {
 		$this->data['entry_zencart_products_truncate'] = $this->language->get('entry_zencart_products_truncate');
 		$this->data['entry_zencart_products_debug'] = $this->language->get('entry_zencart_products_debug');
 		$this->data['entry_zencart_products_store'] = $this->language->get('entry_zencart_products_store');
+		$this->data['entry_zencart_customers'] = $this->language->get('entry_zencart_customers');
 		$this->data['entry_zencart_orders'] = $this->language->get('entry_zencart_orders');
 		$this->data['entry_zencart_orders_truncate'] = $this->language->get('entry_zencart_orders_truncate');
 		$this->data['entry_zencart_orders_limit'] = $this->language->get('entry_zencart_orders_limit');
@@ -118,6 +132,12 @@ class ControllerToolZencart extends Controller {
         } else {
             $this->data['zencart_products_store'] = array(0);
         }
+                
+		if (isset($this->request->post['zencart_customers'])) {
+			$this->data['zencart_customers'] = $this->request->post['zencart_customers'];
+		} else {
+			$this->data['zencart_customers'] = $this->config->get('zencart_customers');			
+		}
                 
 		if (isset($this->request->post['zencart_orders'])) {
 			$this->data['zencart_orders'] = $this->request->post['zencart_orders'];

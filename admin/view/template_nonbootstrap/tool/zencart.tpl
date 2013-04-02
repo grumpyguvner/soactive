@@ -47,6 +47,11 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><?php echo $entry_zencart_products_truncate; ?></td>
+              <td><input type="hidden" name="zencart_products_truncate" value="0" />
+                  <input type="checkbox" name="zencart_products_truncate" value="1" <?php if ($zencart_products_truncate) echo ' checked="checked"'; ?> /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_zencart_products; ?></td>
               <td><input type="hidden" name="zencart_products" value="0" />
                   <input type="checkbox" name="zencart_products" value="1" <?php if ($zencart_products) echo ' checked="checked"'; ?> /></td>
@@ -79,24 +84,24 @@
                 </div></td>
             </tr>
             <tr>
-              <td><?php echo $entry_zencart_products_truncate; ?></td>
-              <td><input type="hidden" name="zencart_products_truncate" value="0" />
-                  <input type="checkbox" name="zencart_products_truncate" value="1" <?php if ($zencart_products_truncate) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
               <td><?php echo $entry_zencart_products_debug; ?></td>
               <td><input type="hidden" name="zencart_products_debug" value="0" />
                   <input type="checkbox" name="zencart_products_debug" value="1" <?php if ($zencart_products_debug) echo ' checked="checked"'; ?> /></td>
             </tr>
             <tr>
+              <td><?php echo $entry_zencart_orders_truncate; ?></td>
+              <td><input type="hidden" name="zencart_orders_truncate" value="0" />
+                  <input type="checkbox" name="zencart_orders_truncate" value="1" <?php if ($zencart_orders_truncate) echo ' checked="checked"'; ?> /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_zencart_customers; ?></td>
+              <td><input type="hidden" name="zencart_customers" value="0" />
+                  <input type="checkbox" name="zencart_customers" value="1"<?php if ($zencart_customers) echo ' checked="checked"'; ?> /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_zencart_orders; ?></td>
               <td><input type="hidden" name="zencart_orders" value="0" />
                   <input type="checkbox" name="zencart_orders" value="1"<?php if ($zencart_orders) echo ' checked="checked"'; ?> /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_zencart_orders_truncate; ?></td>
-              <td><input type="hidden" name="zencart_orders_truncate" value="0" />
-                  <input type="checkbox" name="zencart_orders_truncate" value="1" <?php if ($zencart_orders_limit) echo ' checked="checked"'; ?> /></td>
             </tr>
             <tr>
               <td><?php echo $entry_zencart_orders_limit; ?></td>

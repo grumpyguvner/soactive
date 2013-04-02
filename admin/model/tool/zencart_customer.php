@@ -6,6 +6,16 @@ class ModelToolZencartCustomer extends ModelToolZencart {
     function import() {
         $this->debugMode = $this->config->get('zencart_orders_debug');
         
+        $this->truncate();
+
+        if (!$this->cacheZencartData())
+            return false;
+
+        $this->debug("Import Complete");
+        return true;
+    }
+
+    function truncate() {
         if ($this->config->get('zencart_orders_truncate')) {
             
             $this->debug("truncating tables");
@@ -27,13 +37,9 @@ class ModelToolZencartCustomer extends ModelToolZencart {
             $this->db->query("TRUNCATE `" . DB_PREFIX . "order_total`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "order_voucher`");
             
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "review`");
+            
         }
-
-        if (!$this->cacheZencartData())
-            return false;
-
-        $this->debug("Import Complete");
-        return true;
     }
 
     function cacheZencartData($forceRefresh = false) {
@@ -103,13 +109,49 @@ class ModelToolZencartCustomer extends ModelToolZencart {
                 
                 $this->db->query("UPDATE " . DB_PREFIX . "customer SET approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['customers_info_date_account_created']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
                 
-                $this->processOrders($customer_id, $customer);
+                $this->processReviews($customer_id, $customer);
+                
+                if ($this->config->get('zencart_orders'))
+                {
+                    $this->processOrders($customer_id, $customer);
+                }
                 
                 $aCustomer->MoveNext();
             }
         }
 
         return true;
+    }
+    
+    function processReviews ($customer_id, $customer)
+    {
+        $this->debug("=================================================================================================");
+        $this->debug("processing reviews for  ".$customer['firstname']." ".$customer['lastname']."");
+        
+        $aReview = $this->dbQF->Execute('SELECT r.*, rd.*, p.products_model FROM reviews r LEFT JOIN reviews_description rd ON rd.reviews_id = r.reviews_id LEFT JOIN products p ON p.products_id = r.products_id WHERE r.customers_id = ' . (int)$customer_id . ' ORDER BY r.reviews_id');
+        
+        if ($aReview->RecordCount() > 0) {
+            while (!$aReview->EOF) {
+                $this->debug("processing review for  ".$aReview->fields['products_model']);
+        
+                $data = array();
+                
+                $data['author'] = 0;
+                
+                $data['product_id'] = $this->tableLookUp(DB_PREFIX . "product", 'product_id', array('model' => $aReview->fields['products_model']));
+                $data['text'] = $aReview->fields['reviews_text'];
+                $data['rating'] = $aReview->fields['reviews_rating'];
+                $data['status'] = $aReview->fields['reviews_status'];
+                $data['customer_id'] = $customer['customer_id'];
+                $data['author'] = $customer['firstname'] . ' ' . $customer['lastname'];
+                $data['date_added'] = $aReview->fields['date_added'];
+                
+                $this->db->query("INSERT INTO " . DB_PREFIX . "review SET author = '" . $this->db->escape($data['author']) . "', customer_id = '" . (int)$data['customer_id'] . "', product_id = '" . (int)$data['product_id'] . "', text = '" . $this->db->escape($data['text']) . "', rating = '" . (int)$data['rating'] . "', status = '" . (int)$data['status'] . "', date_added = '" . $this->db->escape($data['date_added']) . "'");
+                
+                $aReview->MoveNext();
+            }
+        }
+        
     }
     
     function processOrders ($customer_id, $customer)
