@@ -107,7 +107,9 @@ class ModelToolZencartCustomer extends ModelToolZencart {
                 $this->load->model('sale/customer');
                 $customer['customer_id'] = $this->model_sale_customer->addCustomer($customer);
                 
-                $this->db->query("UPDATE " . DB_PREFIX . "customer SET approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['customers_info_date_account_created']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
+                $password = $stack = explode(':', $aCustomer->fields['customers_password']);
+                
+                $this->db->query("UPDATE " . DB_PREFIX . "customer SET password = '" . $this->db->escape($password[0]) . "', salt = '" . $this->db->escape($password[1]) . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['customers_info_date_account_created']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
                 
                 $this->processReviews($customer_id, $customer);
                 
