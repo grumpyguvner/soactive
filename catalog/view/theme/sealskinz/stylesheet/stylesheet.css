@@ -2732,6 +2732,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     float: left;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 .product-press {
     width: 30%;
