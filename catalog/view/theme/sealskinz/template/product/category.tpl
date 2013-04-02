@@ -145,13 +145,14 @@
                 html += '<div class="description">' + $(element).find('.description').html() + '</div>';
 			
                 var price = $(element).find('.price').html();
+                var href = $(element).find('.name a').attr('href');
 			
                 if (price != null) {
                     html += '<table class="table table-bordered" id="table-price">';
                     html += '   <tbody>';
                     html += '     <tr>';
                     html += '       <td class="table-price">' + price  + '</td>';
-                    html += '       <td class="table-info"><a href="" style="color: white !important;"><h5><?php echo $text_pview; ?></h5></a></td>';
+                    html += '       <td class="table-info"><a href="' + href  + '" style="color: white !important;"><h5><?php echo $text_pview; ?></h5></a></td>';
                     html += '     </tr>';
                     html += '  </tbody>';
                     html += '</table>';
