@@ -230,7 +230,7 @@
                                             <?php } ?>
                                         </li>
                                         <li><a href="about-us"><span>About us</span></a></li>
-                                        <li><a href="blog"><span>Blog</span></a></li>
+                                        <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span>Blog</span></a></li>
                                         <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                                         <li><a href="registration"><span>Product Registration</span></a></li>
                                         <li style="float: right; padding: 12px 18px;"><span>Follow us</span>&nbsp<span><a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
