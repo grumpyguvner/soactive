@@ -1049,6 +1049,7 @@ a.button-account:hover, input.button-account:hover {
 .box-product .image {
 	display: block;
 	margin-bottom: 0px;
+    
 }
 .box-product .name a {
 	color: #38B0E3;
@@ -1062,6 +1063,8 @@ a.button-account:hover, input.button-account:hover {
 	font-weight: bold;
 	color: #333333;
 	margin-bottom: 4px;
+    width: 220px;
+    height: 136px;
 }
 .box-product .price-old {
 	color: #F00;
@@ -3168,7 +3171,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     height: 677px;
 }
 .privacy-policy {
-    background-image: url('../image/information/customer-service.png');
+    /*background-image: url('../image/information/customer-service.png');*/
     background-repeat: no-repeat;
     background-position: bottom left;
     margin-left: 0;
