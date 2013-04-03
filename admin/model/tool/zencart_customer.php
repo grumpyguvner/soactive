@@ -143,7 +143,7 @@ class ModelToolZencartCustomer extends ModelToolZencart {
                 $data['product_id'] = $this->tableLookUp(DB_PREFIX . "product", 'product_id', array('model' => $aReview->fields['products_model']));
                 $data['text'] = $aReview->fields['reviews_text'];
                 $data['rating'] = $aReview->fields['reviews_rating'];
-                $data['status'] = $aReview->fields['reviews_status'];
+                $data['status'] = $aReview->fields['status'];
                 $data['customer_id'] = $customer['customer_id'];
                 $data['author'] = $customer['firstname'] . ' ' . $customer['lastname'];
                 $data['date_added'] = $aReview->fields['date_added'];
