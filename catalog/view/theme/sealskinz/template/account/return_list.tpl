@@ -18,7 +18,9 @@
     <div class="green-bar">
         <div id="container-in" class="content-in">
     <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><div class="row"><?php echo $content_top; ?>
+<div id="content"><div class="row">
+        <div class="content-account">
+    <?php echo $content_top; ?>
   
   <h1><?php echo $heading_title; ?></h1>
   <?php if ($returns) { ?>
@@ -41,7 +43,9 @@
   <div class="buttons">
     <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
   </div>
-  <?php echo $content_bottom; ?></div></div>
+  <?php echo $content_bottom; ?>
+    </div>
+    </div></div>
         </div>
     </div>
 </div>

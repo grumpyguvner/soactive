@@ -24,13 +24,13 @@
 
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><div class="row"><?php echo $content_top; ?>
-   <div class="margin-95" id="margin-t33"> 
+   <div class="content-account"> 
        <h1><?php echo $heading_title; ?></h1>
-   </div>
+  
   <?php if ($products) { ?>
     
             <div class="wishlist-info">
-             <div class="margin-95">    
+            
               <table>
                 <thead>
                   <tr>
@@ -65,24 +65,25 @@
                 </tbody>
                 <?php } ?>
               </table>
-             </div>   
+               
             </div>
         
     
   <div class="buttons">
-    <div id="margin-r50" class="margin-65">  
+      
         <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
-    </div>
+    
   </div>
   <?php } else { ?>
   <div class="content"><?php echo $text_empty; ?></div>
   <div class="buttons">
-    <div id="margin-r50" class="margin-65">
+   
         <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
-    </div>
+    
   </div>
   <?php } ?>
   <?php echo $content_bottom; ?>
+    </div>
 </div>
 </div>
 </div>

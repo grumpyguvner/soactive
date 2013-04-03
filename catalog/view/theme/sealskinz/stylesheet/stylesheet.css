@@ -1343,11 +1343,20 @@ a.button-account:hover, input.button-account:hover {
     width: 769px;
     display: inline-block
 }
+.product-grid-search {
+	width: 100%;
+        display: inline-block
+}
 .product-grid > div {
     width: 33.07%;
     vertical-align: top;
     border: 1px solid #CCCCCC;
-    margin-left: 9px;
+        line-height: 20px;
+}
+.product-grid-search > div {
+	width: 24.79%;
+	vertical-align: top;
+        border: 1px solid #CCCCCC;
     line-height: 20px;
 }
 #column-left + #column-right + #content .product-grid > div {
@@ -1357,7 +1366,11 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     margin-bottom: 0px;
     text-align: center;
-    height: 136px;
+}
+.product-grid-search .image {
+	display: block;
+	margin-bottom: 0px;
+        text-align: center;
 }
 .product-grid .image img {
 
@@ -1371,8 +1384,20 @@ a.button-account:hover, input.button-account:hover {
     max-width: 301px;
     display: inline;
 }
-
+.product-grid-search .name {
+	text-align: center;
+        padding: 8px;
+        max-width: 301px;
+        display: inline;
+}
 .product-grid .name a {
+	color: #000000 !important;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+	margin-bottom: 4px;
+}
+.product-grid-search .name a {
     color: #000000 !important;
     font-weight: bold;
     text-decoration: none;
@@ -1382,15 +1407,26 @@ a.button-account:hover, input.button-account:hover {
 .product-grid .description {
     display: none;
 }
+.product-grid-search .description {
+	display: none;
+}
 .product-grid .rating {
     display: block;
     margin-bottom: 4px;
+}
+.product-grid-search .rating {
+	display: block;
+	margin-bottom: 4px;
 }
 .product-grid .contain {
     border-top: 1px solid #CCCCCC;
     width: 100%;
     min-height: 52px;
-
+}
+.product-grid-search .contain {
+        border-top: 1px solid #CCCCCC;
+        width: 100%;
+        min-height: 52px;
 }
 .contain {
     border-top: 1px solid #CCCCCC;
@@ -1398,6 +1434,13 @@ a.button-account:hover, input.button-account:hover {
     min-height: 52px;
 }
 .product-grid .price {
+	display: block;
+	font-weight: bold;
+	color: #333333;
+        text-align: center;
+        padding: 6px;
+}
+.product-grid-search .price {
     display: block;
     font-weight: bold;
     color: #333333;
@@ -1414,24 +1457,53 @@ a.button-account:hover, input.button-account:hover {
     padding: 6px;
     background-color: #96c462;
 }
+.product-grid-search .view {
+	display: block;
+	font-weight: bold;
+	color: #333333;
+        text-align: center;
+        width: 75.9%;
+        min-height: 40px;
+        padding: 6px;
+        background-color: #96c462;
+}
 .product-grid .view a{
     color: white !important;
+}
+.product-grid-search .view a{
+	color: white !important;
 }
 .product-grid .price-old {
     color: #F00;
     text-decoration: line-through;
 }
+.product-grid-search .price-old {
+	color: #F00;
+	text-decoration: line-through;
+}
 .product-grid .price-new {
     font-weight: bold;
+}
+.product-grid-search .price-new {
+	font-weight: bold;
 }
 .product-grid .price .price-tax {
     display: none;
 }
+.product-grid-search .price .price-tax {
+	display: none;
+}
 .product-grid .cart {
     margin-bottom: 3px;
 }
+.product-grid-search .cart {
+	margin-bottom: 3px;
+}
 .product-grid .wishlist, .product-grid .compare {
     margin-bottom: 3px;
+}
+.product-grid-search .wishlist, .product-grid .compare {
+	margin-bottom: 3px;
 }
 .product-grid .wishlist a {
     color: #333333;
@@ -1440,12 +1512,26 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     background: url('../image/add.png') left center no-repeat;
 }
+.product-grid-search .wishlist a {
+	color: #333333;
+	text-decoration: none;
+	padding-left: 18px;
+	display: block;
+	background: url('../image/add.png') left center no-repeat;
+}
 .product-grid .compare a {
     color: #333333;
     text-decoration: none;
     padding-left: 18px;
     display: block;
     background: url('../image/add.png') left center no-repeat;
+}
+.product-grid-search .compare a {
+	color: #333333;
+	text-decoration: none;
+	padding-left: 18px;
+	display: block;
+	background: url('../image/add.png') left center no-repeat;
 }
 /* Product */
 .product-info {
@@ -1765,6 +1851,7 @@ a.button-account:hover, input.button-account:hover {
 /* orders */
 .order-list {
     margin-bottom: 10px;
+        line-height: 40px;
 }
 .order-list .order-id {
     width: 49%;
@@ -1780,7 +1867,7 @@ a.button-account:hover, input.button-account:hover {
 .order-list .order-content {
     padding: 10px 0px;
     display: inline-block;
-    width: 86%;
+	width: 100%;
     margin-bottom: 20px;
     border-top: 1px solid #EEEEEE;
     border-bottom: 1px solid #EEEEEE;
@@ -3384,6 +3471,12 @@ input[type="color"]:focus, .uneditable-input:focus {
 #margin-l30 {
     margin-left: 30px;
 }
+#margin-l85 {
+    margin-left: 85px;
+}
+#margin-l95 {
+    margin-left: 95px;
+}
 #margin-r20 {
     margin-right: 20px;
 }
@@ -3392,6 +3485,9 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 #margin-r50 {
     margin-right: 50px;
+}
+#margin-r60 {
+    margin-right: 60px;
 }
 #margin-t33 {
     margin-top: 33px;
@@ -3650,6 +3746,16 @@ input[type="color"]:focus, .uneditable-input:focus {
     border-bottom-width: 3px;
     border-left-width: 3px;
     margin-bottom: 0;
+}
+.content-account {
+    margin-left: 95px;
+    margin-right: 60px;
+    margin-top: 33px;
+}
+.content-account h1{
+    color: #AFA69F;
+    font-size: 32px !important;
+    font-weight: normal;
 }
 .heading-account {
     color: #AFA69F;
