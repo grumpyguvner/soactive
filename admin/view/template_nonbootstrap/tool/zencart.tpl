@@ -112,6 +112,11 @@
               <td><input type="hidden" name="zencart_orders_debug" value="0" />
                   <input type="checkbox" name="zencart_orders_debug" value="1" <?php if ($zencart_orders_debug) echo ' checked="checked"'; ?> /></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_zencart_stockists; ?></td>
+              <td><input type="hidden" name="zencart_stockists" value="0" />
+                  <input type="checkbox" name="zencart_stockists" value="1" <?php if ($zencart_stockists) echo ' checked="checked"'; ?> /></td>
+            </tr>
           </table>
         </div>
       </form>

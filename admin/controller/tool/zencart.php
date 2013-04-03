@@ -27,6 +27,7 @@ class ControllerToolZencart extends Controller {
             $this->config->set('zencart_orders_truncate', $this->request->post['zencart_orders_truncate']);
             $this->config->set('zencart_orders_limit', $this->request->post['zencart_orders_limit']);
             $this->config->set('zencart_orders_debug', $this->request->post['zencart_orders_debug']);
+            $this->config->set('zencart_stockists', $this->request->post['zencart_stockists']);
             
             if ($this->request->post['zencart_products_truncate'])
             {
@@ -51,6 +52,13 @@ class ControllerToolZencart extends Controller {
             {
                 $this->load->model('tool/zencart_customer');
                 $this->model_tool_zencart_customer->import();
+                $this->session->data['success'] = $this->language->get('text_success');
+            }
+            
+            if ($this->request->post['zencart_stockists'])
+            {
+                $this->load->model('tool/zencart_stockists');
+                $this->model_tool_zencart_stockists->import();
                 $this->session->data['success'] = $this->language->get('text_success');
             }
 		}
@@ -78,6 +86,7 @@ class ControllerToolZencart extends Controller {
 		$this->data['entry_zencart_orders_truncate'] = $this->language->get('entry_zencart_orders_truncate');
 		$this->data['entry_zencart_orders_limit'] = $this->language->get('entry_zencart_orders_limit');
 		$this->data['entry_zencart_orders_debug'] = $this->language->get('entry_zencart_orders_debug');
+		$this->data['entry_zencart_stockists'] = $this->language->get('entry_zencart_stockists');
 
 		if (isset($this->request->post['zencart_host'])) {
 			$this->data['zencart_host'] = $this->request->post['zencart_host'];
@@ -161,6 +170,12 @@ class ControllerToolZencart extends Controller {
 			$this->data['zencart_orders_debug'] = $this->request->post['zencart_orders_debug'];
 		} else {
 			$this->data['zencart_orders_debug'] = $this->config->get('zencart_orders_debug');			
+		}
+                
+		if (isset($this->request->post['zencart_stockists'])) {
+			$this->data['zencart_stockists'] = $this->request->post['zencart_stockists'];
+		} else {
+			$this->data['zencart_stockists'] = $this->config->get('zencart_stockists');			
 		}
                 
  		if (isset($this->error['zencart_host'])) {

@@ -16,6 +16,7 @@ $_['entry_zencart_orders'] = 'Import Orders (requires importing customers)';
 $_['entry_zencart_orders_truncate'] = 'Truncate Customers and Orders';
 $_['entry_zencart_orders_limit'] = 'Max number of Customers to import';
 $_['entry_zencart_orders_debug'] = 'Show Debug for Customers and Orders';
+$_['entry_zencart_stockists'] = 'Import Stockists';
 
 $_['text_success']  = 'Success: You have successfully cleared your error log!';
 ?>
