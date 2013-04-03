@@ -68,19 +68,25 @@
                             <div id="container-in">
                                 <div id="menuh">
                                     <div id="left">
-                                        <ul style="width: 90px;">
-                                            <li><a href="#" class="top_parent"><img src="catalog/view/theme/sealskinz/image/currency/eng.png" alt="English" />&nbsp English</a>
+                                        <ul style="width: 70px;">
+                                            <li><a href="#" class="top_parent" onclick="return false;"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK</a>
                                                 <ul>
-                                                    <li style="width: 88px;"><a href="#"><img src="catalog/view/theme/sealskinz/image/currency/eng.png" alt="English" />&nbsp English</a></li>
-                                                    <li style="width: 88px;"><a href="#"><img src="/catalog/view/theme/sealskinz/image/ita.png" alt="English" />&nbsp Italian</a></li>
+                                                    <li style="width: 68px;"><a href="#"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
+                                                    <li style="width: 68px;"><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/US/"><img src="/image/flags/us.png" alt="English" />&nbsp US</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
+                                        <?php
+                                        if ($currency) {
+                                        ?>
                                         <ul style="width: 88px;">	
                                             <li>
                                                 <?php echo $currency; ?>
                                             </li>
                                         </ul>
+                                        <?php
+                                        }
+                                        ?>
                                         <ul>
                                             <li><a href="free-uk-delivery">Free UK Delivery</a>
                                             </li>
