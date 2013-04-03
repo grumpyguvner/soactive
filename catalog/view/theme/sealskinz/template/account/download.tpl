@@ -19,8 +19,9 @@
         <div id="container-in" class="content-in">
     <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><div class="row"><?php echo $content_top; ?>
-  
+  <div class="content-account">
   <h1><?php echo $heading_title; ?></h1>
+ <?php if (isset($downloads) && !empty($downloads) ) { ?> 
   <?php foreach ($downloads as $download) { ?>
   <div class="download-list">
     <div class="download-id"><b><?php echo $text_order; ?></b> <?php echo $download['order_id']; ?></div>
@@ -37,11 +38,18 @@
     </div>
   </div>
   <?php } ?>
+  
   <div class="pagination"><?php echo $pagination; ?></div>
-  <div class="buttons">
-    <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
-  </div>
-  <?php echo $content_bottom; ?></div></div>
+   <?php } else { ?>
+    <div class="content"><?php echo $text_error; ?></div>
+    <div class="buttons">
+        <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
+    </div>
+  <?php } ?>
+  
+  <?php echo $content_bottom; ?>
+    </div>
+    </div></div>
         </div>
     </div>
 </div>
