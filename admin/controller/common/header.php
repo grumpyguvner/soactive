@@ -192,7 +192,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');
 
             $this->data['news'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'], 'SSL');
-            $this->data['module/store_locations'] = $this->url->link('module/store_locations', '&token=' . $this->session->data['token'], 'SSL');
+            $this->data['store_locations'] = $this->url->link('module/store_locations', '&token=' . $this->session->data['token'], 'SSL');
             $this->data['welcome'] = $this->url->link('module/welcome', '&token=' . $this->session->data['token'], 'SSL');
             
             $this->data['event'] = $this->url->link('catalog/event', '&token=' . $this->session->data['token'], 'SSL');

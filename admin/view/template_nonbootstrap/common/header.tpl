@@ -88,7 +88,7 @@ ob_start("fixMenu");
 ?>
     <ul class="left" style="display: none;">
       <li id="dashboard"><a href="<?php echo $home; ?>" class="top"><?php echo $text_dashboard; ?></a></li>
-      <li id="catalog"><a class="top"><?php echo $text_cms; ?></a>
+      <li id="cms"><a class="top"><?php echo $text_cms; ?></a>
         <ul>
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
           <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
