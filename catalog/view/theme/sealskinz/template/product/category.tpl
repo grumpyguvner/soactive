@@ -1,19 +1,17 @@
 <?php echo $header; ?>
-<div class="content">
-    <?php echo $content_top; ?>
-    <?php if ($thumb || $description) { ?>
-
-        <div class="row" style="margin-left: 3px;"> 
-
-            <?php if ($thumb) { ?>
-                <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
-            <?php } ?>
-            <?php if ($description) { ?>
-                <?php echo $description; ?>
-            <?php } ?>
-        </div>
-
-    <?php } ?>
+<div class="banner">
+    <?php echo $content_top; 
+    if ($thumb || $description) { 
+        if ($thumb)
+        { ?>
+            <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
+        <?php 
+        } 
+        /* if ($description) { ?>
+          <?php echo $description; ?>
+          <?php } */ 
+    }
+    ?>
 </div>
 
 <div class="breadline">

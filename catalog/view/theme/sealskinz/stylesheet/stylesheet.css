@@ -2206,9 +2206,9 @@ a.button-account:hover, input.button-account:hover {
 .banner div {
     text-align: center;
     width: 100%;
-    display: none;
 }
 .banner div img {
+    width: 100%;
 }
 
 /******* Start Menu nuovo ******************************************************/

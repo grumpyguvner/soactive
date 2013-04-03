@@ -1,7 +1,6 @@
 <?php
 if (!empty($banners)) {
     ?>
-    <div class="row">
         <div class="carousel slide" id="myCarousel">
             <img src="/catalog/view/theme/<?php echo $this->config->get('config_template') ?>/image/carouselSpacer.png" alt="" />
             <div class="carousel-inner">
@@ -24,7 +23,6 @@ if (!empty($banners)) {
             <?php
         }
         ?>
-    </div>
     <?php
 }
 ?>
