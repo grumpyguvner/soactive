@@ -21,9 +21,9 @@
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-767.css" />
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-768-979.css" />
         <!-- Bootstrap css -->
-        <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+        <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
         <!-- End css Bootstrap css -->
         <?php foreach ($styles as $style) { ?>
             <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
