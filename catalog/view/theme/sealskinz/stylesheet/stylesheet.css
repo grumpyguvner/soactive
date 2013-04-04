@@ -3945,3 +3945,16 @@ input[type="color"]:focus, .uneditable-input:focus {
     width: 208px;
     height: 38px;
 }
+.iRow {
+    background: url('../image/backgrounds/quote.jpg') no-repeat scroll left top transparent;
+    border: 1px solid #EFEFEF;
+    clear: left;
+    display: block;
+    margin: 5px 20px;
+    padding: 20px 10px 10px 50px;
+}
+.quote {
+    color: #4D4D4D;
+    line-height: 20px;
+    margin-bottom: 5px;
+}

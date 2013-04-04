@@ -185,5 +185,36 @@ class ModelCatalogNews extends Model {
 		
 		return $query->row['total'];
 	}
+        public function getNewsNoTestimonials($data = array()) {
+		$query = "SELECT n.*, nd.* FROM " . DB_PREFIX . "news n LEFT JOIN " . DB_PREFIX . "news_description nd ON (n.news_id = nd.news_id) LEFT JOIN " . DB_PREFIX . "news_to_store n2s ON (n.news_id = n2s.news_id)";
+		
+		
+				$query .= " LEFT JOIN " . DB_PREFIX . "news_to_ncategory n2n ON (n.news_id = n2n.news_id) LEFT JOIN " . DB_PREFIX . "ncategory_description ncd ON (n2n.ncategory_id = ncd.ncategory_id)";			
+			
+			
+		$query .= " WHERE ncd.name <> 'Testimonial' AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "'"; 
+		
+		if (!empty($data['filter_ncategory_id'])) {
+				if (!empty($data['filter_sub_ncategory'])) {
+					$implode_data = array();
+					
+					$implode_data[] = "n2n.ncategory_id = '" . (int)$data['filter_category_id'] . "'";
+					
+					$this->load->model('catalog/ncategory');
+					
+					$ncategories = $this->model_catalog_ncategory->getncategoriesByParentId($data['filter_ncategory_id']);
+										
+					foreach ($ncategories as $ncategory_id) {
+						$implode_data[] = "n2n.ncategory_id = '" . (int)$ncategory_id . "'";
+					}
+								
+					$query .= " AND (" . implode(' OR ', $implode_data) . ")";			
+				} else {
+					$query .= " AND n2n.ncategory_id = '" . (int)$data['filter_ncategory_id'] . "'";
+				}
+			}		
+		$sql = $this->db->query($query);	
+		return $sql->rows;
+	}
 }
 ?>

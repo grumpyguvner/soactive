@@ -11,4 +11,6 @@ $_['text_logged']         = '<span style="float: left"><a href="%s">%s</a></span
 $_['text_account']        = 'My Account';
 $_['text_checkout']       = 'Checkout';
 $_['text_stockist']       = 'Find Stockist';
+$_['text_activity']       = 'Shop By Activity';
+$_['text_activities']     = 'Activities';
 ?>

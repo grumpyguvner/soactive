@@ -80,9 +80,11 @@
                                         if ($currency) {
                                         ?>
                                         <ul style="width: 88px;">	
+                                          <?php if ($currency != '') { ?>
                                             <li>
                                                 <?php echo $currency; ?>
                                             </li>
+                                            <?php } ?>
                                         </ul>
                                         <?php
                                         }
@@ -173,7 +175,7 @@
                                 <div id='cssmenu'>
                                     <ul>
                                         <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
-                                        <li><a href=""><span>Shop By Activity</span></a>
+                                        <li><a href=""><span><?php echo $text_activity ?></span></a>
                                             <?php
                                             if ($attributes) {
                                                 $attGroup = '';
@@ -210,7 +212,7 @@
                                                         </div>
                                                     <?php } ?>
                                                     <div id="right" class="menu-list">
-                                                        <div class="activities"><b>Activities</b></div>
+                                                        <div class="activities"><b><?php echo $text_activities ?></b></div>
                                                         <?php if ($categories) { ?>
                                                             <div id="left" class="menu-column-left">
                                                                 <?php for ($i = 0; $i < count($categories) && $i < 8; $i++) { ?>

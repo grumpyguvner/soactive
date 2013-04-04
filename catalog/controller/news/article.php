@@ -174,7 +174,7 @@ class ControllerNewsArticle extends Controller {
                         $this->data['rarticles'] = array();
                         
                         $news_total = $this->model_catalog_news->getTotalNews($data);
-			$rnews = $this->model_catalog_news->getNewsLimited($data);
+			$rnews = $this->model_catalog_news->getNewsNoTestimonials($data);
 			
                         if ($news_total >= 1) {
                             foreach ($rnews as $rarticle) {
@@ -185,6 +185,7 @@ class ControllerNewsArticle extends Controller {
                                     }
                                     
                                     $this->data['rarticles'][] = array(
+                                            
                                             'article_id'  => $rarticle['news_id'],
                                             'name'        => $rarticle['title'],
                                             'acom'        => $rarticle['acom'],

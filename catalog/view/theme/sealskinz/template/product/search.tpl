@@ -123,7 +123,7 @@
             <div class="line-image"></div>
         </div>
       <?php } ?>
-      <div class="description"><?php echo $product['description']; ?></div>
+      <!--div class="description"><?php /* echo $product['description']; */ ?></div-->
       
       <?php if ($product['price']) { ?>
       <table class="table table-bordered" id="table-price">
@@ -156,7 +156,9 @@
   
   </div>
     </div>
-  <div class="pagination"><?php echo $pagination; ?></div>
+    <?php if (count($products) >= '12') {?>
+        <div class="pagination"><?php echo $pagination; ?></div>
+    <?php } ?>
   <?php } else { ?>
   <div class="content"><?php echo $text_empty; ?></div>
   <?php }?>
@@ -220,7 +222,7 @@ function display(view) {
 			}
 			
 			
-			html += '<div class="description">' + $(element).find('.description').html() + '</div>';
+			html += '<div class="description" style="display: none;>' + $(element).find('.description').html() + '</div>';
 			
 			var price = $(element).find('.price').html();
 			
