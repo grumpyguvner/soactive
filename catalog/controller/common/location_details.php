@@ -127,11 +127,7 @@ class ControllerCommonLocationDetails extends Controller {
 		
 		
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/location_details.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/location_details.tpl';
-		} else {
-			$this->template = 'default/template/common/location_details.tpl';
-		}
+		$this->setTemplate('common/location_details.tpl');
 			
 		$this->children = array(
 				'common/column_left',

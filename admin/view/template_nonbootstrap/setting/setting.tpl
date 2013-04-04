@@ -17,7 +17,11 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><a href="#tab-fraud"><?php echo $tab_fraud; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a><a href="#tab-email"><?php echo $tab_email; ?></a><?php
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-store"><?php echo $tab_store; ?></a><a href="#tab-local"><?php echo $tab_local; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mail"><?php echo $tab_mail; ?></a><?php
+      if (!$display) {
+?><a href="#tab-fraud"><?php echo $tab_fraud; ?></a><a href="#tab-server"><?php echo $tab_server; ?></a><?php
+}
+?><a href="#tab-email"><?php echo $tab_email; ?></a><?php
       if (!$display) {
 ?><a href="#tab-cron"><?php echo $tab_cron; ?></a><?php
 }
@@ -79,7 +83,7 @@
               <td><?php echo $entry_meta_description; ?></td>
               <td><textarea name="config_meta_description" cols="40" rows="5"><?php echo $config_meta_description; ?></textarea></td>
             </tr>
-            <tr>
+            <tr <?php echo $display; ?>>
               <td><?php echo $entry_template; ?></td>
               <td><select name="config_template" onchange="$('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent(this.value));">
                   <?php foreach ($templates as $template) { ?>
@@ -91,9 +95,25 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td></td>
               <td id="template"></td>
+            </tr>
+            <tr<?php echo $display; ?>>
+              <td><?php echo $entry_base_template; ?></td>
+              <td><select name="config_base_template" onchange="$('#base_template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent(this.value));">
+                  <?php foreach ($templates as $template) { ?>
+                  <?php if ($template == $config_base_template) { ?>
+                  <option value="<?php echo $template; ?>" selected="selected"><?php echo $template; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $template; ?>"><?php echo $template; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr<?php echo $display; ?>>
+              <td></td>
+              <td id="base_template"></td>
             </tr>
             <tr>
               <td><?php echo $entry_layout; ?></td>
@@ -643,7 +663,7 @@
                   <br />
                   <a onclick="image_upload('icon', 'thumb-icon');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-icon').attr('src', '<?php echo $no_image; ?>'); $('#icon').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_category; ?></td>
               <td><input type="text" name="config_image_category_width" value="<?php echo $config_image_category_width; ?>" size="3" />
                 x
@@ -652,7 +672,7 @@
                 <span class="error"><?php echo $error_image_category; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_information; ?></td>
               <td><input type="text" name="config_image_information_width" value="<?php echo $config_image_information_width; ?>" size="3" />
                 x
@@ -661,7 +681,7 @@
                 <span class="error"><?php echo $error_image_information; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_thumb; ?></td>
               <td><input type="text" name="config_image_thumb_width" value="<?php echo $config_image_thumb_width; ?>" size="3" />
                 x
@@ -670,7 +690,7 @@
                 <span class="error"><?php echo $error_image_thumb; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_popup; ?></td>
               <td><input type="text" name="config_image_popup_width" value="<?php echo $config_image_popup_width; ?>" size="3" />
                 x
@@ -679,7 +699,7 @@
                 <span class="error"><?php echo $error_image_popup; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_product; ?></td>
               <td><input type="text" name="config_image_product_width" value="<?php echo $config_image_product_width; ?>" size="3" />
                 x
@@ -688,7 +708,7 @@
                 <span class="error"><?php echo $error_image_product; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_additional; ?></td>
               <td><input type="text" name="config_image_additional_width" value="<?php echo $config_image_additional_width; ?>" size="3" />
                 x
@@ -697,7 +717,7 @@
                 <span class="error"><?php echo $error_image_additional; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_related; ?></td>
               <td><input type="text" name="config_image_related_width" value="<?php echo $config_image_related_width; ?>" size="3" />
                 x
@@ -706,7 +726,7 @@
                 <span class="error"><?php echo $error_image_related; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_compare; ?></td>
               <td><input type="text" name="config_image_compare_width" value="<?php echo $config_image_compare_width; ?>" size="3" />
                 x
@@ -715,7 +735,7 @@
                 <span class="error"><?php echo $error_image_compare; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_wishlist; ?></td>
               <td><input type="text" name="config_image_wishlist_width" value="<?php echo $config_image_wishlist_width; ?>" size="3" />
                 x
@@ -724,7 +744,7 @@
                 <span class="error"><?php echo $error_image_wishlist; ?></span>
                 <?php } ?></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_cart; ?></td>
               <td><input type="text" name="config_image_cart_width" value="<?php echo $config_image_cart_width; ?>" size="3" />
                 x
@@ -737,7 +757,7 @@
         </div>
         <div id="tab-mail">
           <table class="form">
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_mail_protocol; ?></td>
               <td><select name="config_mail_protocol">
                   <?php if ($config_mail_protocol == 'mail') { ?>
@@ -752,27 +772,27 @@
                   <?php } ?>
                 </select></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_mail_parameter; ?></td>
               <td><input type="text" name="config_mail_parameter" value="<?php echo $config_mail_parameter; ?>" /></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_smtp_host; ?></td>
               <td><input type="text" name="config_smtp_host" value="<?php echo $config_smtp_host; ?>" /></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_smtp_username; ?></td>
               <td><input type="text" name="config_smtp_username" value="<?php echo $config_smtp_username; ?>" /></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_smtp_password; ?></td>
               <td><input type="text" name="config_smtp_password" value="<?php echo $config_smtp_password; ?>" /></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_smtp_port; ?></td>
               <td><input type="text" name="config_smtp_port" value="<?php echo $config_smtp_port; ?>" /></td>
             </tr>
-            <tr>
+            <tr<?php echo $display; ?>>
               <td><?php echo $entry_smtp_timeout; ?></td>
               <td><input type="text" name="config_smtp_timeout" value="<?php echo $config_smtp_timeout; ?>" /></td>
             </tr>
@@ -810,7 +830,7 @@
             </tr>
           </table>
         </div>
-        <div id="tab-fraud">
+        <div id="tab-fraud"<?php echo $display; ?>>
           <table class="form">
             <tr>
               <td><?php echo $entry_fraud_detection; ?></td>
@@ -848,7 +868,7 @@
             </tr>
           </table>
         </div>
-        <div id="tab-server">
+        <div id="tab-server"<?php echo $display; ?>>
           <table class="form">
             <tr>
               <td><?php echo $entry_use_ssl; ?></td>
@@ -1048,6 +1068,7 @@
 </script>
 <script type="text/javascript"><!--
 $('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_template\']').attr('value')));
+$('#base_template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_base_template\']').attr('value')));
 //--></script> 
 <script type="text/javascript"><!--
 $('select[name=\'config_country_id\']').bind('change', function() {

@@ -70,11 +70,7 @@ class ControllerModuleAdvancedCoupon extends Controller {
 			);
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/advanced_coupon.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/advanced_coupon.tpl';
-		} else {
-			$this->template = 'default/template/module/advanced_coupon.tpl';
-		}
+		$this->setTemplate('module/advanced_coupon.tpl');
 
 		$this->render();
 	}

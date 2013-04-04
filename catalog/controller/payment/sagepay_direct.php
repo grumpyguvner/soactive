@@ -94,11 +94,7 @@ class ControllerPaymentSagepayDirect extends Controller {
 			);
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/sagepay_direct.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/sagepay_direct.tpl';
-		} else {
-			$this->template = 'default/template/payment/sagepay_direct.tpl';
-		}	
+		$this->setTemplate('payment/sagepay_direct.tpl');	
 		
 		$this->render();		
 	}

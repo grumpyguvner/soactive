@@ -466,11 +466,7 @@ class ControllerProductProduct extends Controller {
 			
 			$this->model_catalog_product->updateViewed($this->request->get['product_id']);
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/product.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/product/product.tpl';
-			} else {
-				$this->template = 'default/template/product/product.tpl';
-			}
+			$this->setTemplate('product/product.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -526,11 +522,7 @@ class ControllerProductProduct extends Controller {
       		$this->data['continue'] = $this->url->link('common/home');
                 
                 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -584,11 +576,7 @@ class ControllerProductProduct extends Controller {
 			
 		$this->data['pagination'] = $pagination->render();
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/review.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/product/review.tpl';
-		} else {
-			$this->template = 'default/template/product/review.tpl';
-		}
+		$this->setTemplate('product/review.tpl');
 		
 		$this->response->setOutput($this->render());
 	}

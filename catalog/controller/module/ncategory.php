@@ -79,11 +79,7 @@ class ControllerModulencategory extends Controller {
 			);
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/ncategory.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/ncategory.tpl';
-		} else {
-			$this->template = 'default/template/module/ncategory.tpl';
-		}
+		$this->setTemplate('module/ncategory.tpl');
 		
 		$this->render();
   	}

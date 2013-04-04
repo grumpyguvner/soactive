@@ -24,11 +24,7 @@ class ControllerModuleNewsletter extends Controller {
 				$this->data['action'] = HTTP_SERVER;
 			}
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/'.$this->name.'.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/module/'.$this->name.'.tpl';
-			} else {
-				$this->template = 'default/template/module/'.$this->name.'.tpl';
-			}
+			$this->setTemplate('module/'.$this->name.'.tpl');
 
 
 			$this->render();

@@ -161,11 +161,7 @@ class ControllerAccountVoucher extends Controller {
 			$this->data['agree'] = false;
 		}	
 				
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/voucher.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/voucher.tpl';
-		} else {
-			$this->template = 'default/template/account/voucher.tpl';
-		}
+		$this->setTemplate('account/voucher.tpl');
 		
 		$this->children = array(
 			'common/column_left',
@@ -206,11 +202,7 @@ class ControllerAccountVoucher extends Controller {
 
     	$this->data['continue'] = $this->url->link('checkout/cart');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/success.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/success.tpl';
-		} else {
-			$this->template = 'default/template/common/success.tpl';
-		}
+		$this->setTemplate('common/success.tpl');
 		
 		$this->children = array(
 			'common/column_left',

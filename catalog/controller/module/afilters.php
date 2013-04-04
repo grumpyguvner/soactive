@@ -475,15 +475,7 @@ class ControllerModuleAFilters extends Controller {
 		}
 		
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/afilters.tpl')) {
-
-			$this->template = $this->config->get('config_template') . '/template/module/afilters.tpl';
-
-		} else {
-
-			$this->template = 'default/template/module/afilters.tpl';
-
-		}
+		$this->setTemplate('module/afilters.tpl');
 
 		
 

@@ -39,11 +39,7 @@ class ControllerAffiliateLogout extends Controller {
 
     	$this->data['continue'] = $this->url->link('common/home');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/success.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/success.tpl';
-		} else {
-			$this->template = 'default/template/common/success.tpl';
-		}
+		$this->setTemplate('common/success.tpl');
 		
 		$this->children = array(
 			'common/column_left',

@@ -34,11 +34,7 @@ class ControllerPaymentWebPaymentSoftware extends Controller {
 			);
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/web_payment_software.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/web_payment_software.tpl';
-		} else {
-			$this->template = 'default/template/payment/web_payment_software.tpl';
-		}	
+		$this->setTemplate('payment/web_payment_software.tpl');	
 		
 		$this->render();		
 	}

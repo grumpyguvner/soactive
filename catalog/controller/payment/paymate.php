@@ -33,11 +33,7 @@ class ControllerPaymentPaymate extends Controller {
 		
 		$this->data['return'] = $this->url->link('payment/paymate/callback', 'hash=' . md5($order_info['order_id'] . $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false) . $order_info['currency_code'] . $this->config->get('paymate_password')));
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/paymate.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/paymate.tpl';
-		} else {
-			$this->template = 'default/template/payment/paymate.tpl';
-		}	
+		$this->setTemplate('payment/paymate.tpl');	
 		
 		$this->render();
 	}
@@ -104,11 +100,7 @@ class ControllerPaymentPaymate extends Controller {
 			
 			$this->data['continue'] = $this->url->link('common/home');
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/success.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/common/success.tpl';
-			} else {
-				$this->template = 'default/template/common/success.tpl';
-			}
+			$this->setTemplate('common/success.tpl');
 			
 			$this->children = array(
 				'common/column_left',

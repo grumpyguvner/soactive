@@ -10,11 +10,7 @@ class ControllerCommonHome extends Controller {
                 $this->data['text_subscribe_newsletter'] = $this->language->get('text_subscribe_newsletter');
 		$this->data['text_write_review'] = $this->language->get('text_write_review');
                 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';
-		} else {
-			$this->template = 'default/template/common/home.tpl';
-		}
+		$this->setTemplate('common/home.tpl');
 		
 		$this->children = array(
 			'common/column_left',

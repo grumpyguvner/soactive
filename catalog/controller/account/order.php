@@ -126,11 +126,7 @@ class ControllerAccountOrder extends Controller {
 
 		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/order_list.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/order_list.tpl';
-		} else {
-			$this->template = 'default/template/account/order_list.tpl';
-		}
+		$this->setTemplate('account/order_list.tpl');
 		
 		$this->children = array(
 			'common/column_left',
@@ -368,11 +364,7 @@ class ControllerAccountOrder extends Controller {
 
       		$this->data['continue'] = $this->url->link('account/order', '', 'SSL');
 		
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/order_info.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/account/order_info.tpl';
-			} else {
-				$this->template = 'default/template/account/order_info.tpl';
-			}
+			$this->setTemplate('account/order_info.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -421,11 +413,7 @@ class ControllerAccountOrder extends Controller {
 												
       		$this->data['continue'] = $this->url->link('account/order', '', 'SSL');
 			 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',

@@ -52,11 +52,7 @@ class ControllerInformationInformation extends Controller {
       		
 			$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/information.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/information/information.tpl';
-			} else {
-				$this->template = 'default/template/information/information.tpl';
-			}
+			$this->setTemplate('information/information.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -87,11 +83,7 @@ class ControllerInformationInformation extends Controller {
       		$this->data['continue'] = $this->url->link('common/home');
                 
                 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',

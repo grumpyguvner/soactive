@@ -84,11 +84,7 @@ class ControllerAccountTransaction extends Controller {
 		
 		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/transaction.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/transaction.tpl';
-		} else {
-			$this->template = 'default/template/account/transaction.tpl';
-		}
+		$this->setTemplate('account/transaction.tpl');
 		
 		$this->children = array(
 			'common/column_left',

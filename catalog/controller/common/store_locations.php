@@ -137,11 +137,7 @@ class ControllerCommonStoreLocations extends Controller {
      	//End - google map code
 		
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/store_locations.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/store_locations.tpl';
-		} else {
-			$this->template = 'default/template/common/store_locations.tpl';
-		}
+		$this->setTemplate('common/store_locations.tpl');
 			
 		$this->children = array(
 				'common/column_left',

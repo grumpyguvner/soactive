@@ -69,11 +69,7 @@ class ControllerInformationEvent extends Controller {
 			}
 			
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/event.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/information/event.tpl';
-			} else {
-				$this->template = 'default/template/information/event.tpl';
-			}
+			$this->setTemplate('information/event.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -102,11 +98,7 @@ class ControllerInformationEvent extends Controller {
 
       		$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -168,11 +160,7 @@ class ControllerInformationEvent extends Controller {
 		
 		//echo '<pre>';print_r($this->data['available_events']);echo '</pre>';
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/event/events.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/event/events.tpl';
-			} else {
-				$this->template = 'default/template/information/events.tpl';
-			}
+		$this->setTemplate('event/events.tpl');
 		
 		$this->children = array(
 			'common/column_left',
@@ -226,11 +214,7 @@ class ControllerInformationEvent extends Controller {
 		
 		
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/event_sub.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/information/event_sub.tpl';
-		} else {
-			$this->template = 'default/template/information/event_sub.tpl';
-		}
+		$this->setTemplate('information/event_sub.tpl');
 		
 		$this->children = array(
 			'common/column_left',

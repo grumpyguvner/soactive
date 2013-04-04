@@ -159,11 +159,7 @@ class ControllerAccountLogin extends Controller {
 			$this->data['password'] = '';
 		}
 				
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/login.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/login.tpl';
-		} else {
-			$this->template = 'default/template/account/login.tpl';
-		}
+		$this->setTemplate('account/login.tpl');
 		
 		$this->children = array(
 			'common/column_left',

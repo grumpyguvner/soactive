@@ -65,11 +65,7 @@ class ControllerAccountAccount extends Controller {
 			$this->data['reward'] = '';
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
-		} else {
-			$this->template = 'default/template/account/account.tpl';
-		}
+		$this->setTemplate('account/account.tpl');
 		
 		$this->children = array(
 			'common/column_left',
