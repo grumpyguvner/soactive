@@ -49,6 +49,16 @@ abstract class Controller {
 		}		
 	}
 	
+	protected function setTemplate($template) {
+        if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/' . $template)) {
+            $this->template = $this->config->get('config_template') . '/template/' . $template;
+        } elseif (file_exists(DIR_TEMPLATE . $this->config->get('config_base_template') . '/template/' . $template)) {
+            $this->template = $this->config->get('config_base_template') . '/template/' . $template;
+        } else {
+            $this->template = 'default/template/' . $template;
+        }
+	}
+	
 	protected function render() {
 		foreach ($this->children as $child) {
 			$this->data[basename($child)] = $this->getChild($child);

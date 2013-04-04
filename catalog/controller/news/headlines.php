@@ -95,11 +95,7 @@ class ControllernewsHeadlines extends Controller {
 		
 			$this->data['pagination'] = $pagination->render();
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/headlines.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/news/headlines.tpl';
-			} else {
-				$this->template = 'default/template/news/headlines.tpl';
-			}
+			$this->setTemplate('news/headlines.tpl');
 			
 			$this->children = array(
 				'common/column_left',

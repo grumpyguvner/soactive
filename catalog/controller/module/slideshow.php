@@ -37,11 +37,7 @@ class ControllerModuleSlideshow extends Controller {
 		
 		$this->data['module'] = $module++;
 						
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/slideshow.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/slideshow.tpl';
-		} else {
-			$this->template = 'default/template/module/slideshow.tpl';
-		}
+		$this->setTemplate('module/slideshow.tpl');
 		
 		$this->render();
 	}

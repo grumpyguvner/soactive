@@ -97,11 +97,7 @@ class ControllerAccountNewsletter extends Controller {
         
 		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/newsletter.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/newsletter.tpl';
-		} else {
-			$this->template = 'default/template/account/newsletter.tpl';
-		}
+		$this->setTemplate('account/newsletter.tpl');
 		
 		$this->children = array(
 			'common/column_left',

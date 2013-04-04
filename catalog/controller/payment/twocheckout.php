@@ -65,11 +65,7 @@ class ControllerPaymentTwoCheckout extends Controller {
 
 		$this->data['return_url'] = $this->url->link('payment/twocheckout/callback', '', 'SSL');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/twocheckout.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/twocheckout.tpl';
-		} else {
-			$this->template = 'default/template/payment/twocheckout.tpl';
-		}	
+		$this->setTemplate('payment/twocheckout.tpl');	
 		
 		$this->render();
 	}

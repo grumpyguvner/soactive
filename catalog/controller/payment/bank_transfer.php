@@ -13,11 +13,7 @@ class ControllerPaymentBankTransfer extends Controller {
 
 		$this->data['continue'] = $this->url->link('checkout/success');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/bank_transfer.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/bank_transfer.tpl';
-		} else {
-			$this->template = 'default/template/payment/bank_transfer.tpl';
-		}	
+		$this->setTemplate('payment/bank_transfer.tpl');	
 		
 		$this->render(); 
 	}

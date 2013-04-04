@@ -219,11 +219,7 @@ class ControllerNewsSearch extends Controller {
 		$this->data['filter_category_id'] = $filter_category_id;
 		$this->data['filter_sub_category'] = $filter_sub_category;
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/search.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/news/search.tpl';
-		} else {
-			$this->template = 'default/template/news/search.tpl';
-		}
+		$this->setTemplate('news/search.tpl');
 		
 		$this->children = array(
 			'common/column_left',

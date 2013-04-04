@@ -158,11 +158,7 @@ class Controllernewsncategory extends Controller {
 		
 			$this->data['pagination'] = $pagination->render();
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/ncategory.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/news/ncategory.tpl';
-			} else {
-				$this->template = 'default/template/news/ncategory.tpl';
-			}
+			$this->setTemplate('news/ncategory.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -202,11 +198,7 @@ class Controllernewsncategory extends Controller {
 
       		$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',

@@ -105,11 +105,7 @@ class ControllerModuleEvent extends Controller {
 		
 		$this->data['event_cal'] = $cal_str;
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/event.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/event.tpl';
-		} else {
-			$this->template = 'default/template/module/event.tpl';
-		}
+		$this->setTemplate('module/event.tpl');
 		
 		$this->render();
 	}

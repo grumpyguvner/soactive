@@ -250,11 +250,7 @@ class ControllerNewsArticle extends Controller {
 				
 				
 				
-				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/article.tpl')) {
-					$this->template = $this->config->get('config_template') . '/template/news/article.tpl';
-				} else {
-					$this->template = 'default/template/news/article.tpl';
-				}
+				$this->setTemplate('news/article.tpl');
 				
 				$this->children = array(
 				'common/column_left',
@@ -284,11 +280,7 @@ class ControllerNewsArticle extends Controller {
 				
 				$this->data['continue'] = $this->url->link('common/home');
 				
-				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-					$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-				} else {
-					$this->template = 'default/template/error/not_found.tpl';
-				}
+				$this->setTemplate('error/not_found.tpl');
 					
 				$this->children = array(
 				'common/column_left',

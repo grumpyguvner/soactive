@@ -21,11 +21,7 @@ class ControllerModuleContact extends Controller {
 		$this->data['contact'] = $this->url->link('information/contact');
                 
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/contact.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/contact.tpl';
-		} else {
-			$this->template = 'default/template/module/contact.tpl';
-		}
+		$this->setTemplate('module/contact.tpl');
 		
 		$this->render();
 	}

@@ -80,11 +80,7 @@ class ControllerPaymentGoogleCheckout extends Controller {
 			$this->data['cart'] = base64_encode($xml);
 			$this->data['signature'] = base64_encode($hmac);
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/google_checkout.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/payment/google_checkout.tpl';
-			} else {
-				$this->template = 'default/template/payment/google_checkout.tpl';
-			}	
+			$this->setTemplate('payment/google_checkout.tpl');	
 			
 			$this->render();
 		}

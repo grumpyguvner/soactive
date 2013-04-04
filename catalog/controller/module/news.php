@@ -73,24 +73,12 @@ class ControllerModuleNews extends Controller {
 	$this->id = 'news';
 		
 		if ($setting['position'] == 'column_left') {
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/news_side.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/module/news_side.tpl';
-			} else {
-				$this->template = 'default/template/module/news_side.tpl';
-			}
+			$this->setTemplate('module/news_side.tpl');
 		} else {
 		if ($setting['position'] == 'column_right') {
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/news_side.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/module/news_side.tpl';
-			} else {
-				$this->template = 'default/template/module/news_side.tpl';
-			}
+			$this->setTemplate('module/news_side.tpl');
 		} else {
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/news.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/module/news.tpl';
-			} else {
-				$this->template = 'default/template/module/news.tpl';
-			}
+			$this->setTemplate('module/news.tpl');
 		}
 		}
 		$this->render(); 

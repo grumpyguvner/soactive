@@ -387,11 +387,7 @@ class ControllerCheckoutCart extends Controller {
 						
 			$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/cart.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/checkout/cart.tpl';
-			} else {
-				$this->template = 'default/template/checkout/cart.tpl';
-			}
+			$this->setTemplate('checkout/cart.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -414,11 +410,7 @@ class ControllerCheckoutCart extends Controller {
 
 			unset($this->session->data['success']);
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',

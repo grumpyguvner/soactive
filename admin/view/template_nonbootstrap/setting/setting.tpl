@@ -96,6 +96,22 @@
               <td id="template"></td>
             </tr>
             <tr>
+              <td><?php echo $entry_base_template; ?></td>
+              <td><select name="config_base_template" onchange="$('#base_template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent(this.value));">
+                  <?php foreach ($templates as $template) { ?>
+                  <?php if ($template == $config_base_template) { ?>
+                  <option value="<?php echo $template; ?>" selected="selected"><?php echo $template; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $template; ?>"><?php echo $template; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td id="base_template"></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_layout; ?></td>
               <td><select name="config_layout_id">
                   <?php foreach ($layouts as $layout) { ?>
@@ -1048,6 +1064,7 @@
 </script>
 <script type="text/javascript"><!--
 $('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_template\']').attr('value')));
+$('#base_template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name=\'config_base_template\']').attr('value')));
 //--></script> 
 <script type="text/javascript"><!--
 $('select[name=\'config_country_id\']').bind('change', function() {

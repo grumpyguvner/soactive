@@ -110,11 +110,7 @@ class ControllerPaymentSagepay extends Controller {
 
 		$this->data['crypt'] = base64_encode($this->simpleXor(utf8_decode(implode('&', $crypt_data)), $password));
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/sagepay.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/sagepay.tpl';
-		} else {
-			$this->template = 'default/template/payment/sagepay.tpl';
-		}	
+		$this->setTemplate('payment/sagepay.tpl');	
 		
 		$this->render();		
 	}

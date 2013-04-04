@@ -59,6 +59,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_template'] = $this->language->get('entry_template');
+		$this->data['entry_base_template'] = $this->language->get('entry_base_template');
 		$this->data['entry_country'] = $this->language->get('entry_country');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');		
 		$this->data['entry_language'] = $this->language->get('entry_language');
@@ -71,7 +72,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
 		$this->data['entry_review'] = $this->language->get('entry_review');
-                $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
+        $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
 		$this->data['entry_download'] = $this->language->get('entry_download');
 		$this->data['entry_upload_allowed'] = $this->language->get('entry_upload_allowed');
 		$this->data['entry_voucher_min'] = $this->language->get('entry_voucher_min');
@@ -393,6 +394,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_template'] = $this->request->post['config_template'];
 		} else {
 			$this->data['config_template'] = $this->config->get('config_template');
+		}
+        
+		if (isset($this->request->post['config_base_template'])) {
+			$this->data['config_base_template'] = $this->request->post['config_base_template'];
+		} else {
+			$this->data['config_base_template'] = $this->config->get('config_base_template');
 		}
 		
 		$this->data['templates'] = array();

@@ -38,11 +38,7 @@ class ControllerModuleAccount extends Controller {
                 
                 $this->data['routes'] = $this->request->get['route'];
                 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/account.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/account.tpl';
-		} else {
-			$this->template = 'default/template/module/account.tpl';
-		}
+		$this->setTemplate('module/account.tpl');
 		
 		$this->render();
 	}

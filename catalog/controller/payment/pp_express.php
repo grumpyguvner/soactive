@@ -19,11 +19,7 @@ class ControllerPaymentPPExpress extends Controller {
 			$api_endpoint = 'https://api-3t.sandbox.pp.com/nvp';
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/pp_express.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/pp_express.tpl';
-		} else {
-			$this->template = 'default/template/payment/pp_express.tpl';
-		}	
+		$this->setTemplate('payment/pp_express.tpl');	
 
 		$this->render();		
 	}
