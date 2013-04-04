@@ -50,9 +50,9 @@
                     <div id="left" class="wrap2-left">
                         <h4><?php echo $text_sizeguide; ?></h4>
                         <ul>
-                            <li><a href="socks-size-guides">Socks</a></li>
-                            <li><a href="hats-size-guides">Hats</a></li>
-                            <li><a href="gloves-size-guides">Gloves</a></li>
+                            <li><a href="socks-size-guides"><?php echo $text_soks ?></a></li>
+                            <li><a href="gloves-size-guides"><?php echo $text_gloves ?></a></li>
+                            <li><a href="hats-size-guides"><?php echo $text_hats ?></a></li>
                         </ul>
                     </div>
                     <div id="right" class="wrap2-right">
@@ -60,7 +60,13 @@
                         <ul>
                             <li><a href="how-it-works"><?php echo $text_how_works ?></a></li>
                             <li><a href="product-care"><?php echo $text_product_care ?></a></li>
-                            <li><a href="testimonials"><?php echo $text_testimonials ?></a></li>
+                            <?php if ($ncategories) { ?>
+                                <?php foreach ($ncategories as $ncategory) { ?>
+                                    <?php if ($ncategory['name'] == 'Testimonial') { ?>
+                                        <li><a href="<?php echo $ncategory['href']; ?>"><?php echo $text_testimonials ?></a></li>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
                             <li><a href="<?php echo $stockist ?>"><?php echo $text_stockist ?></a></li>
                             <li><a href="international"><?php echo $text_international ?></a></li>
                         </ul>

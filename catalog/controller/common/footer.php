@@ -40,6 +40,9 @@ class ControllerCommonFooter extends Controller {
         $this->data['text_nation'] = $this->language->get('text_nation');
         $this->data['store'] = $this->config->get('config_name');
         $this->data['address'] = nl2br($this->config->get('config_address'));
+        $this->data['text_soks'] = $this->language->get('text_soks');
+        $this->data['text_gloves'] = $this->language->get('text_gloves');
+        $this->data['text_hats'] = $this->language->get('text_hats');
 
         /* Added for Sailskinz */
 
@@ -54,6 +57,22 @@ class ControllerCommonFooter extends Controller {
                 'href' => $this->url->link('product/category', 'path=' . $result['category_id'] . '&att_filters[0][]=' . $result['category_id'])
             );
         }
+        
+        $this->load->model('catalog/ncategory');
+
+        $this->data['ncategories'] = array();
+        
+        $ncategories = $this->model_catalog_ncategory->getncategories();
+
+        foreach ($ncategories as $ncat) {
+
+            $this->data['ncategories'][] = array(
+                'ncat_id'   => $ncat['ncategory_id'],
+                'name'      => $ncat['name'],
+                'href'      => $this->url->link('news/ncategory', 'ncat=' . $ncat['ncategory_id'])
+            );
+        }
+        
         /* End added for Sailskinz */
 
         $this->load->model('catalog/information');

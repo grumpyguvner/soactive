@@ -132,7 +132,7 @@
                                         <div class="wrap-rarticles">
                                     <?php for ($i=0; $i < count($rarticles) && $i < 4; $i++) { ?>
                                         <div class="rarticles">
-                                            <div class="image"><a href="<?php echo $rarticles[$i]['href'] ?>"><img src="<?php echo $rarticles[$i]['thumb'] ?>" alt="<?php echo $rarticles[$i]['name'] ?>" /></a></div>
+                                            <div class="image"><a href="<?php echo $rarticles[$i]['href'] ?>"><img src="<?php echo $rarticles[$i]['thumb'] ?>" alt="<?php echo $rarticles[$i]['name'] ?>" width="136" height="136" /></a></div>
                                             <div class="name"><a href="<?php echo $rarticles[$i]['href'] ?>"><?php echo $rarticles[$i]['name'] ?></a></div>
                                             <div class="description"><p><?php echo $rarticles[$i]['description']; ?></p></div>
                                             <div class="readmore"><a class="button" href="<?php echo $rarticles[$i]['href']; ?>"><span><?php echo $button_more; ?></span></a></div>
@@ -150,7 +150,7 @@
                                         <div id="right">
                                             <table>
                                                 <tr>
-                                                    <td align="right"><a onclick="location='<?php echo $news; ?>'" class="button-account"><span><?php echo $button_news; ?></span></a></td>
+                                                    <td align="right"><a href="press" class="button-account"><span><?php echo $button_news; ?></span></a></td>
                                                 </tr>
                                             </table>
                                         </div>
