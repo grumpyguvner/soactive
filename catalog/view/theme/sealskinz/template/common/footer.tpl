@@ -15,7 +15,7 @@
                 </div>
                 <div id="right">
                     <ul>
-                        <li><a href="/soks"><?php echo $text_soks ?></a></li>
+                        <li><a href="/socks"><?php echo $text_socks ?></a></li>
                         <li><a href="/gloves"><?php echo $text_gloves ?></a></li>
                         <li><a href="/hats"><?php echo $text_hats ?></a></li>
                     </ul>
@@ -59,7 +59,7 @@
                     <div id="left" class="wrap2-left">
                         <h4><?php echo $text_sizeguide; ?></h4>
                         <ul>
-                            <li><a href="socks-size-guides"><?php echo $text_soks ?></a></li>
+                            <li><a href="socks-size-guides"><?php echo $text_socks ?></a></li>
                             <li><a href="gloves-size-guides"><?php echo $text_gloves ?></a></li>
                             <li><a href="hats-size-guides"><?php echo $text_hats ?></a></li>
                         </ul>
