@@ -38,6 +38,10 @@
           <td><input type="text" id="Email" value="<?php echo $Email; ?>" name="Email" style="width:90px" /></td>
         </tr>
         <tr>
+          <td><?php echo $store_loc_website; ?></td>
+          <td><input type="text" id="Website" value="<?php echo $Email; ?>" name="Website" /></td>
+        </tr>
+        <tr>
           <td><?php echo $store_loc_phone; ?></td>
           <td><input type="text" id="Phone" name="Phone" value="<?php echo $Phone; ?>"  /></td>
         </tr>

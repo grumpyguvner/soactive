@@ -102,6 +102,19 @@ class ControllerCommonStoreLocations extends Controller {
 		$this->data['noOfPages'] = $noOfPages;
 		$this->data['pageLink'] = $this->url->link('common/store_locations&address=' . $this->data['address'] . '&distance=' . $this->data['distance']);
 		
+                if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else { 
+			$page = 1;
+		}
+                                
+                $pagination = new Pagination();
+                $pagination->total = $total;
+                $pagination->page = $pageNo;
+                $pagination->limit = $perPage;
+                $pagination->url = $this->url->link('common/store_locations&address=' . $this->data['address'] . '&distance=' . $this->data['distance'] . '&pno={page}');
+                $this->data['pagination'] = $pagination->render();
+                
 		$this->data['Locations'] = array();
 		
 		if (count($cords) > 0) {
