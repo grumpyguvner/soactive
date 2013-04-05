@@ -2,6 +2,7 @@ html {
     overflow: -moz-scrollbars-vertical;
     margin: 0;
     padding: 0;
+    background-image: url(../image/footer.png);
 }
 body {
     background-color: #000000;
@@ -2219,8 +2220,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .footer-wrap {
     width: 100%;
-    background-image: url(../image/footer.png); 
-    background-image: repeat-x;
+    background-image: url(../image/footer.png);
     min-height: 379px;
 }
 #footer #margin-r46{
