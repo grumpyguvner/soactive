@@ -28,6 +28,7 @@ class ControllerToolZencart extends Controller {
             $this->config->set('zencart_orders_limit', $this->request->post['zencart_orders_limit']);
             $this->config->set('zencart_orders_debug', $this->request->post['zencart_orders_debug']);
             $this->config->set('zencart_stockists', $this->request->post['zencart_stockists']);
+            $this->config->set('zencart_testimonials', $this->request->post['zencart_testimonials']);
             
             if ($this->request->post['zencart_products_truncate'])
             {
@@ -61,6 +62,13 @@ class ControllerToolZencart extends Controller {
                 $this->model_tool_zencart_stockists->import();
                 $this->session->data['success'] = $this->language->get('text_success');
             }
+            
+            if ($this->request->post['zencart_testimonials'])
+            {
+                $this->load->model('tool/zencart_testimonials');
+                $this->model_tool_zencart_testimonials->import();
+                $this->session->data['success'] = $this->language->get('text_success');
+            }
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -87,6 +95,7 @@ class ControllerToolZencart extends Controller {
 		$this->data['entry_zencart_orders_limit'] = $this->language->get('entry_zencart_orders_limit');
 		$this->data['entry_zencart_orders_debug'] = $this->language->get('entry_zencart_orders_debug');
 		$this->data['entry_zencart_stockists'] = $this->language->get('entry_zencart_stockists');
+		$this->data['entry_zencart_testimonials'] = $this->language->get('entry_zencart_testimonials');
 
 		if (isset($this->request->post['zencart_host'])) {
 			$this->data['zencart_host'] = $this->request->post['zencart_host'];
@@ -176,6 +185,12 @@ class ControllerToolZencart extends Controller {
 			$this->data['zencart_stockists'] = $this->request->post['zencart_stockists'];
 		} else {
 			$this->data['zencart_stockists'] = $this->config->get('zencart_stockists');			
+		}
+                
+		if (isset($this->request->post['zencart_testimonials'])) {
+			$this->data['zencart_testimonials'] = $this->request->post['zencart_testimonials'];
+		} else {
+			$this->data['zencart_testimonials'] = $this->config->get('zencart_testimonials');			
 		}
                 
  		if (isset($this->error['zencart_host'])) {
