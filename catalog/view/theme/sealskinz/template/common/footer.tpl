@@ -4,13 +4,22 @@
 
             <div class="column" id="margin-r46">
                 <h4><?php echo $text_categories; ?></h4>
-                <ul>
-                    <?php foreach ($categories as $category) { ?>
-                        <?php if ($category['name'] != 'Shop By Activity') { ?>
-                            <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
+                <div id="left">
+                    <ul>
+                        <?php foreach ($categories as $category) { ?>
+                            <?php if ($category['name'] != 'Shop By Activity') { ?>
+                                <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
-                </ul>
+                    </ul>
+                </div>
+                <div id="right">
+                    <ul>
+                        <li><a href="/soks"><?php echo $text_soks ?></a></li>
+                        <li><a href="/gloves"><?php echo $text_gloves ?></a></li>
+                        <li><a href="/hats"><?php echo $text_hats ?></a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="column" id="column2">

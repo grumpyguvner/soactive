@@ -26,33 +26,30 @@
                             <!----------------------------------------- Image + Image add ----------------------------------------->
 
                             <?php if ($thumb || $images) { ?>
-                                <?php if ($thumb) { ?>
-                                    <div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
-                                <?php } ?>
+                                <div class="image" id="wrap-image">
+                                    <?php if ($thumb) { ?>
+                                        <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
+                                    <?php } ?>
+                                </div>
                                 <?php if ($images) { ?>
                                     <?php $count = 0; ?>
                                     <div class="image-additional">
-
+                                        <?php if ($additional) { ?>
+                                            <a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/>
+                                        <?php } ?>
                                         <?php foreach ($images as $image) { ?>
-                                            <?php if (!empty($image['popup'])) { ?>
-                                                <a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
-                                            <?php } ?>
-                                            <?php if (!empty($image['video'])) { ?>
-                                                <a href="#" class="viewVideo"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
-                                                <div class="videos vidContainer">
-                                                    <div class="closeVideo"><a href="#"><b>Close</b></a></div><iframe id="playingMovie" width="365" height="394" src="http://www.youtube.com/embed/<?php echo $image['video']; ?>?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>
-                                                </div>
-
-                                                <?php $count++;
+                                            <?php if (empty($image['video'])) { ?>
+                                            <a href="<?php echo $image['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $image['main']; ?>"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+                                            <?php } else { ?>
+                                                <a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
+                                                <?php
+                                                $count++;
                                             }
                                             ?>
-        <?php } ?>
-
+                                      <?php } ?>
                                     </div>
-
                                 <?php } ?>
-
-<?php } ?>
+                          <?php } ?>
 
                             <!------------------------------------- End Image + Image add ----------------------------------------->
                         </div>
@@ -62,7 +59,7 @@
 
                             <div class="p-name"><h1><?php echo $heading_title; ?></h1></div>
                             <div class="np-details">
-                                    <?php if ($price) { ?>
+                                <?php if ($price) { ?>
                                     <div class="price"><div id="left"><?php echo $text_price; ?></div>
                                         <?php if (!$special) { ?>
                                             <div class="product-price" id="right"><h1><?php echo $price; ?></h1></div>
@@ -76,7 +73,7 @@
                                         <?php if ($points) { ?>
                                             <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
                                         <?php } ?>
-    <?php if ($discounts) { ?>
+                                        <?php if ($discounts) { ?>
                                             <br />
                                             <div class="discount">
                                                 <?php foreach ($discounts as $discount) { ?>
@@ -85,7 +82,7 @@
                                             </div>
                                     <?php } ?>
                                     </div>
-<?php } ?>
+                                <?php } ?>
                             </div>
 
                             <!----------------------------------------- End Title + Price ----------------------------------------->
@@ -93,36 +90,36 @@
                             <!---------------------------------------------- Option + Cart ----------------------------------------------->
 
                             <div style="width: 100%">
-<?php if ($options) { ?>
+                                <?php if ($options) { ?>
                                     <div class="options">
                                         <h4><?php echo $text_option_details ?></h4>
 
                                         <?php foreach ($options as $option) { ?>
                                                 <?php if ($option['type'] == 'select') { ?>
-                                                <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
-                                                    <?php if ($option['required']) { ?>
-                                                        <span class="required">*</span>
-            <?php } ?>
-                                                    <b><?php echo $option['name']; ?>:</b><br />
-                                                    <select name="option[<?php echo $option['product_option_id']; ?>]">
-                                                        <option value=""><?php echo $text_select; ?></option>
-                                                            <?php foreach ($option['option_value'] as $option_value) { ?>
-                                                            <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
-                                                                <?php if ($option_value['price']) { ?>
-                                                                    (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
-                                                            <?php } ?>
-                                                            </option>
-            <?php } ?>
-                                                    </select>
-                                                </div>
-                                                <br />
-                                            <?php } ?>
-                                                <?php if ($option['type'] == 'radio') { ?>
+                                                    <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
+                                                        <?php if ($option['required']) { ?>
+                                                            <span class="required">*</span>
+                                                         <?php } ?>
+                                                        <b><?php echo $option['name']; ?>:</b><br />
+                                                        <select name="option[<?php echo $option['product_option_id']; ?>]">
+                                                            <option value=""><?php echo $text_select; ?></option>
+                                                                <?php foreach ($option['option_value'] as $option_value) { ?>
+                                                                    <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+                                                                        <?php if ($option_value['price']) { ?>
+                                                                            (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
+                                                                        <?php } ?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <br />
+                                              <?php } ?>
+                                              <?php if ($option['type'] == 'radio') { ?>
                                                 <div id="option-<?php echo $option['product_option_id']; ?>" class="option-buy">
                                                     <?php /* if ($option['required']) */ { ?>
                                                         <!--span class="required">*</span>
             <?php } ?>
-                                                <b><?php /* echo $option['name']; */ ?>:</b><br /-->
+                                            <b><?php /* echo $option['name']; */ ?>:</b><br /-->
                                                     <table>
                                                         <tr>
                                                         <input type="hidden" name="quantity" size="2" value="<?php echo $minimum; ?>" />
@@ -631,13 +628,6 @@
     </div>
 </div> 
 </div>
-
-<script type="text/javascript"><!--
-    $('.colorbox').colorbox({
-        overlayClose: true,
-        opacity: 0.5
-    });
-    //--></script> 
 <script type="text/javascript"><!--
     $('.button-cart').bind('click', function() {
     
@@ -687,19 +677,19 @@
                     },
                     onComplete: function(file, json) {
                         $('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', false);
-                        		
+                                    		
                         $('.error').remove();
-                        		
+                                    		
                         if (json['success']) {
                             alert(json['success']);
-                        			
+                                    			
                             $('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
                         }
-                        		
+                                    		
                         if (json['error']) {
                             $('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json['error'] + '</span>');
                         }
-                        		
+                                    		
                         $('.loading').remove();	
                     }
                 });
@@ -770,18 +760,29 @@
     //--></script> 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.image-additional .viewVideo').click(function () {
-            $('.videos').hide();
-            $(this).next().show();
+    
+$(document).ready(function () {
+        
+        $('.image-additional').delegate('a.videoAdditional','click', function(){
+            $('#wrap-image').html('<iframe id="playingMovie" width="366" height="373" src="http://www.youtube.com/embed/' + $(this).data('video') + '?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>');
             return false;
         });
-     
-        $('.closeVideo a').click(function () { 
-            $(this).parents('.videos').hide();
+        
+        $('.image-additional').delegate('a.imageAdditional','click', function(){
+            $('#wrap-image').html('<img src="' + $(this).data('main') + '" alt="" />');
             return false;
         });
-    });
+        
+        $('#wrap-image').delegate('img','click', function(){
+            $('.colorbox').colorbox({
+                overlayClose: true,
+                opacity: 0.5,
+                open: true
+            });
+        });
+        
+});
+    
 </script>
 <script type="text/javascript">
     $(document).ready( function(){
