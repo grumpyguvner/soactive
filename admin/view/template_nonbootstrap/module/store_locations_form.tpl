@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <td><?php echo $store_loc_website; ?></td>
-          <td><input type="text" id="Website" value="<?php echo $Email; ?>" name="Website" /></td>
+          <td><input type="text" id="Website" value="<?php echo $Website; ?>" name="Website" /></td>
         </tr>
         <tr>
           <td><?php echo $store_loc_phone; ?></td>

@@ -31,6 +31,7 @@ class ControllerCommonLocationDetails extends Controller {
 				'store_loc_name',
 				'store_loc_detail',
 				'store_loc_address',
+                                'store_loc_website',
 				'store_loc_email',
 				'store_loc_phone',
 				'store_loc_offers',
@@ -84,6 +85,7 @@ class ControllerCommonLocationDetails extends Controller {
 			$Location['Name'] = html_entity_decode($Location['Name'], ENT_QUOTES, 'UTF-8');
 			$Location['Details'] = html_entity_decode($Location['Details'], ENT_QUOTES, 'UTF-8');
 			$Location['Address'] = html_entity_decode($Location['Address'], ENT_QUOTES, 'UTF-8');
+                        $Location['Website'] = html_entity_decode($Location['Website'], ENT_QUOTES, 'UTF-8');
 			$Location['SpecialOffers'] = html_entity_decode($Location['SpecialOffers'], ENT_QUOTES, 'UTF-8');
 			$Location['href'] = $this->url->link('common/location_details&loc_id=' . $location_id);
 			
