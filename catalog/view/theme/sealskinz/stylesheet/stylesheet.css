@@ -2733,7 +2733,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: 205px 0 0 7px;
     width: 984px;
 }
-#newsletter_email {
+.newsletter-form input[name=email] {
     width: 183px;
     height: 36px;
     padding: 0 6px 0 17px;
