@@ -318,10 +318,12 @@
                                             </a>
                                         </li>
                                     <?php } ?>
-                                            <?php if ($review_anonymous_status == '1' || $logged) { ?>
+                                            
                                         <li class=""><a data-toggle="tab" href="#review-status" style="border-radius: 0 0 0 0;"><?php if ($review_status) { ?>
-                                                    <?php echo $tab_review; ?>
-                                        <?php } ?></a>
+                                            
+                                                <?php echo $tab_review; ?>
+                                            
+                                            </a>
                                         </li>
     <?php } ?>
                                 </ul>
@@ -378,45 +380,46 @@
                                         <?php } ?>
                                     <?php } ?>
                                     </p>
-    <?php if ($review_anonymous_status == '1' || $logged) { ?>
+    
                                         <div id="review-status" class="tab-pane fade">
                                             <p>
 
                                             <div id="review"></div>
-                                            <h2 id="review-title"><?php echo $text_write; ?></h2>
-                                            <b><?php echo $entry_name; ?></b><br />
-                                            <input type="text" name="name" value="" />
-                                            <br />
-                                            <br />
-                                            <b><?php echo $entry_review; ?></b>
-                                            <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
-                                            <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
-                                            <br />
-                                            <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
-                                            <input type="radio" name="rating" value="1" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="2" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="3" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="4" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="5" />
-                                            &nbsp;<span><?php echo $entry_good; ?></span><br />
-                                            <br />
-                                            <b><?php echo $entry_captcha; ?></b><br />
-                                            <input type="text" name="captcha" value="" />
-                                            <br />
-                                            <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />
-                                            <br />
-                                            <div class="buttons">
-                                                <div class="right"><a id="button-review"  class="button"><?php echo $button_continue; ?></a></div>
-                                            </div>
-
+                                            <?php if ($review_anonymous_status == '1' || $logged) { ?>
+                                                <h2 id="review-title"><?php echo $text_write; ?></h2>
+                                                <b><?php echo $entry_name; ?></b><br />
+                                                <input type="text" name="name" value="" />
+                                                <br />
+                                                <br />
+                                                <b><?php echo $entry_review; ?></b>
+                                                <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
+                                                <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
+                                                <br />
+                                                <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
+                                                <input type="radio" name="rating" value="1" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="2" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="3" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="4" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="5" />
+                                                &nbsp;<span><?php echo $entry_good; ?></span><br />
+                                                <br />
+                                                <b><?php echo $entry_captcha; ?></b><br />
+                                                <input type="text" name="captcha" value="" />
+                                                <br />
+                                                <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />
+                                                <br />
+                                                <div class="buttons">
+                                                    <div class="right"><a id="button-review"  class="button"><?php echo $button_continue; ?></a></div>
+                                                </div>
+                                            <?php } ?>
 
                                             </p>
                                         </div>
-    <?php } ?>
+    
                                 </div>
                             </div>
 <?php } else { ?>
@@ -432,10 +435,10 @@
                                             </a>
                                         </li>
                                     <?php } ?>
-                                            <?php if ($review_anonymous_status == '1' || $logged) { ?>
+                                           
                                         <li class=""><a data-toggle="tab" href="#review-status" style="border-radius: 0 0 0 0;"><?php if ($review_status) { ?>
                                                     <?php echo $tab_review; ?>
-                                        <?php } ?></a>
+                                       </a>
                                         </li>
     <?php } ?>
                                 </ul>
@@ -494,45 +497,46 @@
                                         <?php } ?>
                                     <?php } ?>
                                     </p>
-    <?php if ($review_anonymous_status == '1' || $logged) { ?>
+    
                                         <div id="review-status" class="tab-pane fade">
-                                            <p>
+                                          
 
                                             <div id="review"></div>
-                                            <h2 id="review-title"><?php echo $text_write; ?></h2>
-                                            <b><?php echo $entry_name; ?></b><br />
-                                            <input type="text" name="name" value="" />
-                                            <br />
-                                            <br />
-                                            <b><?php echo $entry_review; ?></b>
-                                            <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
-                                            <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
-                                            <br />
-                                            <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
-                                            <input type="radio" name="rating" value="1" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="2" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="3" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="4" />
-                                            &nbsp;
-                                            <input type="radio" name="rating" value="5" />
-                                            &nbsp;<span><?php echo $entry_good; ?></span><br />
-                                            <br />
-                                            <b><?php echo $entry_captcha; ?></b><br />
-                                            <input type="text" name="captcha" value="" />
-                                            <br />
-                                            <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />
-                                            <br />
-                                            <div class="buttons">
-                                                <div class="right"><a id="button-review"  class="button"><?php echo $button_continue; ?></a></div>
-                                            </div>
+                                            <?php if ($review_anonymous_status == '1' || $logged) { ?>
+                                                <h2 id="review-title"><?php echo $text_write; ?></h2>
 
-
-                                            </p>
+                                                <b><?php echo $entry_name; ?></b><br />
+                                                <input type="text" name="name" value="" />
+                                                <br />
+                                                <br />
+                                                <b><?php echo $entry_review; ?></b>
+                                                <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
+                                                <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
+                                                <br />
+                                                <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
+                                                <input type="radio" name="rating" value="1" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="2" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="3" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="4" />
+                                                &nbsp;
+                                                <input type="radio" name="rating" value="5" />
+                                                &nbsp;<span><?php echo $entry_good; ?></span><br />
+                                                <br />
+                                                <b><?php echo $entry_captcha; ?></b><br />
+                                                <input type="text" name="captcha" value="" />
+                                                <br />
+                                                <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />
+                                                <br />
+                                                <div class="buttons">
+                                                    <div class="right"><a id="button-review"  class="button"><?php echo $button_continue; ?></a></div>
+                                                </div>
+                                        <?php } ?>
+                                            
                                         </div>
-    <?php } ?>
+    
                                 </div>
                             </div>
 <?php } ?>
