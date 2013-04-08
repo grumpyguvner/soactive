@@ -897,7 +897,7 @@ a.button-account:hover, input.button-account:hover {
     overflow: auto;
 }
 .tab-content-press {
-    background-color: #efefef !important;
+    background-color: #fff !important;
 
     border-left: 1px solid #DDDDDD;
     border-right: 1px solid #DDDDDD;
@@ -2939,7 +2939,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .table-price {
     text-align: center !important;
-    height: 40px;
+    height: 31px;
     vertical-align: middle !important;
 }
 .table-price h4 {
@@ -2955,7 +2955,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 .table-info {
     text-align: center !important;
     background-color: #96C462;
-    height: 40px;
+    height: 31px;
     vertical-align: middle !important;
 }
 .table-info h4{
@@ -3386,7 +3386,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-size: 12px;
 }
 .grid-wrap {
-    background-color: #efefef;
+    background-color: #fff;
 }
 .grid-wrap .name {
     display: inline;

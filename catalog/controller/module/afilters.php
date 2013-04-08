@@ -438,13 +438,16 @@ class ControllerModuleAFilters extends Controller {
 		$categories = $this->model_catalog_category->getCategories(0);
 		
 		foreach ($categories as $category) {
-                    if ($category['status'] == '1') {
-                                                            
-                                $this->data['categories'][] = array(
-                                    'name'       => $category['name'],
-                                    'category_id'=> $category['category_id']
-				);
-                               
+                    $children = $this->model_catalog_category->getCategories($category['category_id']);
+                    foreach ($children as $child) {
+                        if ($child['status'] == '1') {
+
+                                    $this->data['categories'][] = array(
+                                        'name'       => $child['name'],
+                                        'category_id'=> $child['category_id']
+                                    );
+
+                            }
                         }
                 }
                 $this->data['cat_id'] = $category_id;

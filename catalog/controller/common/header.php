@@ -178,7 +178,7 @@ class ControllerCommonHeader extends Controller {
                 );
             }
             /*             * ******************************* Start Menu SealSkinz *********************************** */
-            else if ($category['status'] == '1') {
+            else if ($category['status'] == '1' && $category['parent_id'] > 0) {
 
                 // Level 1
                 $this->data['categories'][] = array(
@@ -197,7 +197,8 @@ class ControllerCommonHeader extends Controller {
 
         if ($attributesByGroup->num_rows) {
             foreach ($attributesByGroup->rows as $row) {
-                $row['href'] = $this->url->link('product/category', 'path=' . $categories[0]['category_id'] . '&att_filters[' . $row['attribute_id'] . '][]=' . $row['text']);
+//                $row['href'] = $this->url->link('product/category', 'path=' . $categories[0]['category_id'] . '&att_filters[' . $row['attribute_id'] . '][]=' . $row['text']);
+                $row['href'] = $this->url->link('product/category', 'path=0&att_filters[' . $row['attribute_id'] . '][]=' . $row['text']);
 
                 $this->data['attributes'][$row['attribute_group_id']][$row['attribute_id']][] = $row;
             }

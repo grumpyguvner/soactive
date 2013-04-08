@@ -17,7 +17,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
 
     function truncate() {
         
-        if ($this->config->get('zencart_orders_truncate')) {
+        if ($this->config->get('zencart_products_truncate')) {
             
             $this->debug("truncating tables");
             
@@ -77,6 +77,24 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 $type = "";
                 $myCategory = "";
                 $myCategoryIds = array();
+                                
+                // Always add product to "Activity" Category
+                $category = seoUrl((string) "Activity");
+                $category_item = array (
+                    "name" => (string) "Activity",
+                    "description" => "All activities"
+                );
+                if ($myCategory != $category) {
+                    $myCategory = $category;
+                    $parent_id = $this->createCategory($category, $category_item, 0);
+                }
+                if ($parent_id) {
+                    if (!in_array($parent_id, $myCategoryIds))
+                        $myCategoryIds[] = $parent_id;
+                } else {
+                    $error = true;
+                }
+
                 if ($aCategory->RecordCount() > 0) {
                     while (!$aCategory->EOF) {
                         $this->debug("");
@@ -99,7 +117,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
 
                                 if ($myCategory != $category) {
                                     $myCategory = $category;
-                                    $category_id = $this->createCategory($category, $category_item);
+                                    $category_id = $this->createCategory($category, $category_item, $parent_id);
                                 }
                                 if ($category_id) {
                                     if (!in_array($category_id, $myCategoryIds))
@@ -214,7 +232,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
         return true;
     }
 
-    function createCategory($category, $category_item) {
+    function createCategory($category, $category_item, $parent_id = 0) {
         if (!is_array($category_item) || !array_key_exists("name", $category_item))
             return false;
         
@@ -223,7 +241,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
         $this->load->model('catalog/category');
         $category_info = $this->model_catalog_category->getCategoryByKeyword($category);
         $data = array(
-            "parent_id" => (int) 0,
+            "parent_id" => (int) $parent_id,
             "top" => (int) 1,
             "column" => (int) 1,
             "sort_order" => (int) 999,

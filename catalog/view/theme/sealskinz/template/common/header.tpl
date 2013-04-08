@@ -207,33 +207,36 @@
                                                             <?php } ?>
                                                         </div>
                                                     <?php } ?>
-                                                    <div id="right" class="menu-list">
-                                                        <div class="activities"><b><?php echo $text_activities ?></b></div>
-                                                        <?php if ($categories) { ?>
-                                                            <div id="left" class="menu-column-left">
-                                                                <?php for ($i = 0; $i < count($categories) && $i < 8; $i++) { ?>
-                                                                    <li><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
-                                                                <?php } ?>
-                                                            </div>   
-                                                            <div id="right" class="menu-column-right">
-                                                                <?php $count = 0; ?>
-                                                                <?php for ($i = 9; $i < count($categories); $i++) { ?>
-                                                                    <li style="border-left: none !important;"><a href="<?php echo $categories[$i]['href']; ?>"><?php echo $categories[$i]['name']; ?></a></li>
-                                                                    <?php $count = $count + 1; ?>
-                                                                <?php } ?>
-                                                                <?php $ncat = 8 - $count; ?>
-                                                                <?php for ($c = 0; $c < $ncat; $c++) { ?>
-                                                                    <li style="border-left: none !important;">&nbsp</li>
-                                                                <?php } ?>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
+                                                    <?php if ($categories) { ?>
+                                                        <div id="right" class="menu-list">
+                                                            <div class="activities"><b><?php echo $categories[0]['name'] ?></b></div>
+                                                            <?php $children = $categories[0]['children']; ?>
+                                                            <?php if ($children) { ?>
+                                                                <div id="left" class="menu-column-left">
+                                                                    <?php for ($i = 0; $i < count($children) && $i < 8; $i++) { ?>
+                                                                        <li><a href="<?php echo $children[$i]['href']; ?>"><?php echo $children[$i]['name']; ?></a></li>
+                                                                    <?php } ?>
+                                                                </div>   
+                                                                <div id="right" class="menu-column-right">
+                                                                    <?php $count = 0; ?>
+                                                                    <?php for ($i = 9; $i < count($children); $i++) { ?>
+                                                                        <li style="border-left: none !important;"><a href="<?php echo $children[$i]['href']; ?>"><?php echo $children[$i]['name']; ?></a></li>
+                                                                        <?php $count = $count + 1; ?>
+                                                                    <?php } ?>
+                                                                    <?php $ncat = 8 - $count; ?>
+                                                                    <?php for ($c = 0; $c < $ncat; $c++) { ?>
+                                                                        <li style="border-left: none !important;">&nbsp</li>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    <?php } ?>
 
 
                                                 </ul>
                                             <?php } ?>
                                         </li>
-                                        <li><a href="our-history"><span>About us</span></a></li>
+                                        <li><a href="our-history"><span>Brand Story</span></a></li>
                                         <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span>Blog</span></a></li>
                                         <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                                         <li><a href="registration"><span>Product Registration</span></a></li>
