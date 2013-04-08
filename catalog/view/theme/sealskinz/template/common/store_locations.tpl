@@ -76,23 +76,12 @@
                                </li>
                            </ul>
                     <?php } ?>
-                   </div> 
-                         <table class="margin-7">
-                              <tr>
-                                  <td colspan="2">
-                         <?php for($i=0;$i<$noOfPages;$i++) { ?>
-                                          <span class="content"><a href="<?php echo $pageLink; echo '&pno='; echo $i+1; ?>" title="Page No <?php echo $i+1; ?>"><?php echo $i+1; ?></a></span>
-                                      <?php } ?>
-                                  </td>
-                             </tr>
-                        <?php } 
+                   </div>   
+                   <div class="pagination" style="margin-left: 0 !important;"><?php echo $pagination; ?></div>
+                   <?php } 
                           else {
                         ?>
-                       <tr>
-                          <td colspan="2" style="text-align:center">
                               <div style="font-weight:bold;padding-top:10px;"><?php echo $store_loc_no_store; ?></div>
-                          </td>
-                     
                       <?php } ?>
                      </table>
                 </div>

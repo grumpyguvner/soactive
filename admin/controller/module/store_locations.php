@@ -294,6 +294,7 @@ class ControllerModuleStoreLocations extends Controller {
 				'store_loc_latlon',
 				'store_loc_gcode_req',
 				'store_loc_email',
+                                'store_loc_website',
 				'store_loc_phone',
 				'store_loc_offers',
 				'store_loc_btn_remove',
