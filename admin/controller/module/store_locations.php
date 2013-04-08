@@ -159,6 +159,7 @@ class ControllerModuleStoreLocations extends Controller {
 				'Details',
 				'Address',
 				'Email',
+                                'Website',
 				'Phone',
 				'SpecialOffers',
 				'Timing',
