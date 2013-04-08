@@ -237,7 +237,7 @@
                                                 </ul>
                                             <?php } ?>
                                         </li>
-                                        <li><a href="about-us"><span>About us</span></a></li>
+                                        <li><a href="our-history"><span>Brand Story</span></a></li>
                                         <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span>Blog</span></a></li>
                                         <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                                         <li><a href="registration"><span>Product Registration</span></a></li>
