@@ -78,6 +78,23 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 $myCategory = "";
                 $myCategoryIds = array();
                                 
+                // Always add product to "Type" Category
+                $category = seoUrl((string) "Type");
+                $category_item = array (
+                    "name" => (string) "Type",
+                    "description" => "All types"
+                );
+                if ($myCategory != $category) {
+                    $myCategory = $category;
+                    $parent_type_id = $this->createCategory($category, $category_item, 0);
+                }
+                if ($parent_type_id) {
+                    if (!in_array($parent_type_id, $myCategoryIds))
+                        $myCategoryIds[] = $parent_type_id;
+                } else {
+                    $error = true;
+                }
+                                
                 // Always add product to "Activity" Category
                 $category = seoUrl((string) "Activity");
                 $category_item = array (
@@ -86,11 +103,11 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 );
                 if ($myCategory != $category) {
                     $myCategory = $category;
-                    $parent_id = $this->createCategory($category, $category_item, 0);
+                    $parent_activity_id = $this->createCategory($category, $category_item, 0);
                 }
-                if ($parent_id) {
-                    if (!in_array($parent_id, $myCategoryIds))
-                        $myCategoryIds[] = $parent_id;
+                if ($parent_activity_id) {
+                    if (!in_array($parent_activity_id, $myCategoryIds))
+                        $myCategoryIds[] = $parent_activity_id;
                 } else {
                     $error = true;
                 }
@@ -104,8 +121,23 @@ class ModelToolZencartProduct extends ModelToolZencart {
                             case "Socks":
                             case "Hats":
                             case "Gloves":
-                                //Save these as attribute instead of category
-                                $type = (string) $aCategory->fields['categories_name'];
+                                //initialise category variables
+                                $category = seoUrl((string) $aCategory->fields['categories_name']);
+                                $category_item = array (
+                                    "name" => (string) $aCategory->fields['categories_name'],
+                                    "description" => $aCategory->fields['categories_description']
+                                );
+
+                                if ($myCategory != $category) {
+                                    $myCategory = $category;
+                                    $category_id = $this->createCategory($category, $category_item, $parent_type_id);
+                                }
+                                if ($category_id) {
+                                    if (!in_array($category_id, $myCategoryIds))
+                                        $myCategoryIds[] = $category_id;
+                                } else {
+                                    $error = true;
+                                }
                                 break;
                             default:
                                 //initialise category variables
@@ -117,7 +149,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
 
                                 if ($myCategory != $category) {
                                     $myCategory = $category;
-                                    $category_id = $this->createCategory($category, $category_item, $parent_id);
+                                    $category_id = $this->createCategory($category, $category_item, $parent_activity_id);
                                 }
                                 if ($category_id) {
                                     if (!in_array($category_id, $myCategoryIds))
@@ -196,7 +228,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                             "image" => (string) $aProduct->fields['products_image'],
                             "status" => (int) $aProduct->fields['products_status'],
                             "price" => (float) $aProduct->fields['products_price'],
-                            "type" => (string) $type,
+//                            "type" => (string) $type,
                             "therm" => (string) $therm,
                             "sku" => (string) $aStock->fields['sku'],
                             "size" => $size,
@@ -293,15 +325,15 @@ class ModelToolZencartProduct extends ModelToolZencart {
         
         
         $attribute = array();
-        if (!empty($stock_item['type']))
-        {
-            $attribute[] = array(
-                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Type')), 
-                'product_attribute_description' => array(
-                    $this->languageId => array(
-                        'text' => (string) $stock_item['type']
-                )));
-        };
+//        if (!empty($stock_item['type']))
+//        {
+//            $attribute[] = array(
+//                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Type')), 
+//                'product_attribute_description' => array(
+//                    $this->languageId => array(
+//                        'text' => (string) $stock_item['type']
+//                )));
+//        };
         if (!empty($stock_item['therm']))
         {
             $attribute[] = array(
@@ -426,7 +458,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 // if size option doesn't exist then create it
                 $data = array(
                     'option_id' => NULL,
-                    'type' => "select",
+                    'type' => "radio",
                     'sort_order' => 0,
                     'option_description' => array(1 => array('name' => "Size"))
                 );

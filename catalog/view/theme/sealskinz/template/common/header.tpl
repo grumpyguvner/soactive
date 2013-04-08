@@ -172,42 +172,18 @@
                                     <ul>
                                         <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
                                         <li><a href=""><span><?php echo $text_activity ?></span></a>
-                                            <?php
-                                            if ($attributes) {
-                                                $attGroup = '';
-                                                $att = '';
-                                                foreach ($attributes as $attribute_group) {
-                                                    foreach ($attribute_group as $attribute) {
-                                                        foreach ($attribute as $item) {
-                                                            if ($item['attribute_group_name'] == 'Filter' &&
-                                                                    $item['attribute_name'] == 'Type') {
-                                                                $attGroup = $item['attribute_group_id'];
-                                                                $att = $item['attribute_id'];
-                                                                break;
-                                                            }
-                                                        }
-                                                        if ($att)
-                                                            break;
-                                                    }
-                                                    if ($att)
-                                                        break;
-                                                }
-                                                ?>
+                                            <?php if ($categories) { ?>
                                                 <ul class="wrap-menu">
-                                                    <?php
-                                                    if ($att) {
-                                                        ?>
                                                         <div id="left">
-                                                            <?php foreach ($attributes[$attGroup][$att] as $attribute) { ?>
-
-                                                                <a href="<?php echo $attribute['href'] ?>" alt="<?php echo $attribute['text'] ?>" /><div class="<?php echo $attribute['text'] ?>">
-
-                                                                </div></a>
-
+                                                            <?php $children = $categories[1]['children']; ?>
+                                                            <?php if ($children) { ?>
+                                                                <?php for ($i = 0; $i < count($children) && $i < 3; $i++) { ?>
+                                                                    <a href="<?php echo $children[$i]['href'] ?>" alt="<?php echo $children[$i]['name'] ?>" >
+                                                                        <div class="<?php echo $children[$i]['name'] ?>">&nbsp;</div>
+                                                                    </a>
+                                                                <?php } ?>
                                                             <?php } ?>
                                                         </div>
-                                                    <?php } ?>
-                                                    <?php if ($categories) { ?>
                                                         <div id="right" class="menu-list">
                                                             <div class="activities"><b><?php echo $categories[0]['name'] ?></b></div>
                                                             <?php $children = $categories[0]['children']; ?>
@@ -230,9 +206,6 @@
                                                                 </div>
                                                             <?php } ?>
                                                         </div>
-                                                    <?php } ?>
-
-
                                                 </ul>
                                             <?php } ?>
                                         </li>
