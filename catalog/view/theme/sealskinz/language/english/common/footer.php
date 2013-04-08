@@ -34,7 +34,7 @@ $_['text_stockist']         = "UK Stockist";
 $_['text_international']    = "International";
 $_['text_ltd']              = "Ltd";
 $_['text_nation']           = "United Kingdom";
-$_['text_soks']           = 'Socks';
+$_['text_socks']           = 'Socks';
 $_['text_gloves']         = 'Gloves';
 $_['text_hats']           = 'Hats';
 

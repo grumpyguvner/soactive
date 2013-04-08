@@ -40,7 +40,7 @@ class ControllerCommonFooter extends Controller {
         $this->data['text_nation'] = $this->language->get('text_nation');
         $this->data['store'] = $this->config->get('config_name');
         $this->data['address'] = nl2br($this->config->get('config_address'));
-        $this->data['text_soks'] = $this->language->get('text_soks');
+        $this->data['text_socks'] = $this->language->get('text_socks');
         $this->data['text_gloves'] = $this->language->get('text_gloves');
         $this->data['text_hats'] = $this->language->get('text_hats');
 
