@@ -6,7 +6,7 @@
                 <h4><?php echo $text_categories; ?></h4>
                 <div id="left">
                     <ul>
-                        <?php foreach ($categories as $category) { ?>
+                        <?php foreach ($categories[0]['children'] as $category) { ?>
                             <?php if ($category['name'] != 'Shop By Activity') { ?>
                                 <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
                             <?php } ?>
@@ -15,9 +15,11 @@
                 </div>
                 <div id="right">
                     <ul>
-                        <li><a href="/socks"><?php echo $text_socks ?></a></li>
-                        <li><a href="/gloves"><?php echo $text_gloves ?></a></li>
-                        <li><a href="/hats"><?php echo $text_hats ?></a></li>
+                        <?php foreach ($categories[1]['children'] as $category) { ?>
+                            <?php if ($category['name'] != 'Shop By Activity') { ?>
+                                <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
+                            <?php } ?>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -77,7 +79,6 @@
                                 <?php } ?>
                             <?php } ?>
                             <li><a href="<?php echo $stockist ?>"><?php echo $text_stockist ?></a></li>
-                            <li><a href="international"><?php echo $text_international ?></a></li>
                         </ul>
                     </div>
                 </div>

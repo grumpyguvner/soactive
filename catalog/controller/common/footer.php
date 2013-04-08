@@ -50,12 +50,27 @@ class ControllerCommonFooter extends Controller {
 
         $this->data['categories'] = array();
 
-        foreach ($this->model_catalog_category->getCategories() as $result) {
+        $categories = $this->model_catalog_category->getCategories(0);
 
-            $this->data['categories'][] = array(
-                'name' => $result['name'],
-                'href' => $this->url->link('product/category', 'path=' . $result['category_id'] . '&att_filters[0][]=' . $result['category_id'])
-            );
+        foreach ($categories as $category) {
+            if ($category['top']) {
+                $children_data = array();
+
+                $children = $this->model_catalog_category->getCategories($category['category_id']);
+
+                foreach ($children as $child) {
+                    $children_data[] = array(
+                        'name' => $child['name'],
+                        'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+                    );
+                }
+
+                $this->data['categories'][] = array(
+                    'name' => $category['name'],
+                    'children' => $children_data,
+                    'href' => $this->url->link('product/category', 'path=' . $category['category_id'])
+                );
+            }
         }
         
         $this->load->model('catalog/ncategory');
