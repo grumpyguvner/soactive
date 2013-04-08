@@ -97,7 +97,7 @@
                                             <li><a href="free-uk-returns">Free UK Returns</a></li>
                                         </ul>
                                     </div>
-                                    <div id="right">
+                                    <div id="right" class="rlink">
                                         <ul>
                                             <?php if (!$logged) { ?>
                                                 <li>
@@ -114,12 +114,8 @@
                                         <ul>	
                                             <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
                                         </ul>
-
-                                        <ul>	
-                                            <li>
-                                                <?php echo $cart; ?>
-                                            </li>
-                                        </ul>
+                                        <?php echo $cart; ?>
+                                        
                                     </div>
                                 </div> <!-- end the menuh-container div -->  
                             </div>	<!-- end the menuh div --> 
@@ -237,7 +233,7 @@
                                                 </ul>
                                             <?php } ?>
                                         </li>
-                                        <li><a href="our-history"><span>Brand Story</span></a></li>
+                                        <li><a href="our-history"><span>About us</span></a></li>
                                         <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span>Blog</span></a></li>
                                         <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                                         <li><a href="registration"><span>Product Registration</span></a></li>
