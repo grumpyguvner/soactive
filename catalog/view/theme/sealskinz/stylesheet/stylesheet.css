@@ -1148,22 +1148,26 @@ a.button-account:hover, input.button-account:hover {
 .box-category > ul > li ul > li > a.active {
     font-weight: bold;
 }
-#headfilter {
+#afilter .accordion-heading {
     border-bottom: 0 none;
     background-color: #403c3d;
 
 }
-#headfilter a {
+#afilter .accordion-heading a {
     color: white !important;
     font-weight: bold;
 }
-#headfilter a:hover {
+#afilter .accordion-heading a:hover {
     color: #74964a !important;
 }
-#accordion {
+#afilter .accordion-group {
     border-radius: 0px 0px 0px 0px  !important;
     margin: 0px !important;
     border-top: 0px;
+}
+#afilter .accordion-inner {
+    height: auto;
+    padding: 0 0 9px;
 }
 #content-in {
     box-shadow: 0 2px 2px #ffffff;
@@ -3619,72 +3623,51 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-weight: normal;
     font-family: Arial;
 }
-.r1 {
-    background-image: url('../image/product/1r.png');
-    background-repeat: no-repeat;
+input.thermal {
+    background: transparent url('../image/product/1r.png') no-repeat top left;
     padding: 1px 6px 3px 6px;
     color: white;
     height: 20px;
     width: 20px;
     margin-right: 4px;
 }
-.r2 {
+input.thermalBig {
+    background: transparent url('../image/product/1r-big.png') no-repeat top left;
+    padding: 6px 10px 14px 14px;
+    color: white;
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+}
+input.r1 {
+    background-image: url('../image/product/1r.png');
+}
+input.r2 {
     background-image: url('../image/product/2r.png');
-    background-repeat: no-repeat;
-    padding: 1px 6px 3px 6px;
-    color: white;
-    margin-right: 4px;
 }
-.r3 {
+input.r3 {
     background-image: url('../image/product/3r.png');
-    background-repeat: no-repeat;
-    padding: 1px 6px 3px 6px;
-    color: white;
-    margin-right: 4px;
 }
-.r4 {
+input.r4 {
     background-image: url('../image/product/4r.png');
-    background-repeat: no-repeat;
-    padding: 1px 6px 3px 6px;
-    color: white;
-    margin-right: 4px;
 }
-.r5 {
+input.r5 {
     background-image: url('../image/product/5r.png');
-    background-repeat: no-repeat;
-    padding: 1px 6px 3px 6px;
-    color: white;
-    margin-right: 4px;
 }
-.r1b {
+input.r1b {
     background-image: url('../image/product/1r-big.png');
-    background-repeat: no-repeat;
-    padding: 6px 10px 14px 14px;
-    color: white;
 }
-.r2b {
+input.r2b {
     background-image: url('../image/product/2r-big.png');
-    background-repeat: no-repeat;
-    padding: 6px 10px 14px 14px;
-    color: white;
 }
-.r3b {
+input.r3b {
     background-image: url('../image/product/3r-big.png');
-    background-repeat: no-repeat;
-    padding: 6px 10px 14px 14px;
-    color: white;
 }
-.r4b {
+input.r4b {
     background-image: url('../image/product/4r-big.png');
-    background-repeat: no-repeat;
-    padding: 6px 10px 14px 14px;
-    color: white;
 }
-.r5b {
+input.r5b {
     background-image: url('../image/product/5r-big.png');
-    background-repeat: no-repeat;
-    padding: 6px 10px 14px 14px;
-    color: white;
 }
 .account {
     background-image: url('../image/account/account.png');
