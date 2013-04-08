@@ -55,45 +55,46 @@ class ControllerAccountNewsletter extends Controller {
 		$this->data['button_back'] = $this->language->get('button_back');
 
     	$this->data['action'] = $this->url->link('account/newsletter', '', 'SSL');
+        
+        $this->data['newsletter'] = $this->customer->getNewsletter();
 		
-        $flag = false;
-        //------------------------- Start Mailcampaign ----------------------------------
-         if (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailcampaign_enabled'))
+        if (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL))
         {
-            $mailcampaign = new CS_REST_Clients($this->config->get('newsletter_mailcampaign_client_id'), $this->config->get('newsletter_mailcampaign_apikey'));
-            $email_address = $this->customer->getEmail();
-            $result = $mailcampaign->get_lists_for_email($email_address);
+            $this->data['newsletter'] = false;
             
-            if ($result->was_successful()){
-                foreach ($result->response as $list){
-                    if ($list->ListID == $this->config->get('newsletter_mailcampaign_listid') && $list->SubscriberState == 'Active')
-                    { 
-                        $flag = true;
+            if ($this->config->get('newsletter_mailchimp_enabled'))
+            {
+                $this->data['newsletter'] = false;
+                
+                $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+
+                $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $this->customer->getEmail());
+
+                if (!$mailchimp->errorCode){
+                    if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') 
+                    {
+                        $this->data['newsletter'] = true;
+                    }
+                }
+            }
+            
+            if ($this->config->get('newsletter_mailcampaign_enabled'))
+            {
+                $this->data['newsletter'] = false;
+                $mailcampaign = new CS_REST_Clients($this->config->get('newsletter_mailcampaign_client_id'), $this->config->get('newsletter_mailcampaign_apikey'));
+                $email_address = $this->customer->getEmail();
+                $result = $mailcampaign->get_lists_for_email($email_address);
+
+                if ($result->was_successful()){
+                    foreach ($result->response as $list){
+                        if ($list->ListID == $this->config->get('newsletter_mailcampaign_listid') && $list->SubscriberState == 'Active')
+                        { 
+                            $this->data['newsletter'] = true;
+                        }
                     }
                 }
             }
         }
-        //------------------------- End Mailcampaign ------------------------------------
-        elseif (filter_var($this->customer->getEmail(), FILTER_VALIDATE_EMAIL) && $this->config->get('newsletter_mailchimp_enabled'))
-        {
-            $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
-            
-            $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $this->customer->getEmail());
-
-            if (!$mailchimp->errorCode){
-                if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed') $flag = true;
-            }
-        }else {
-            		$this->data['newsletter'] = $this->customer->getNewsletter();
-
-        }
-
-        $this->data['newsletter'] = $flag;
-		
-  //           if ($flag !== FALSE) {
-  //              return $flag;
-  //          }
-            
         
 		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
 

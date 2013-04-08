@@ -35,7 +35,7 @@
                                         <input type="hidden" name="route" value="module/newsletter/callback">
                                         <input type="hidden" name="subscribe" value="1">
                                         <div class="newsletter_input">
-                                            <input type="email" id="newsletter_email" name="email" placeholder="Email Address"><a class="submit" href="#"><img src="catalog/view/theme/sealskinz/image/go-button.png" alt="Go Button" /></a>
+                                            <input type="email" name="email" placeholder="Email Address"><a class="submit" href="#"><img src="catalog/view/theme/sealskinz/image/go-button.png" alt="Go Button" /></a>
                                         </div>
                                     </form>
                                 </div>
@@ -101,44 +101,4 @@
 </div>
 <?php if ($error_environment) echo '<div id="error_environment" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>' . $error_environment . '</div>'; ?>
 
-<script type="text/javascript">
-    $('form.newsletter-form').submit(function() {
-        $('.success, .warning, .attention, .information, .error').remove();
-        
-        $.ajax({
-            url: 'index.php?ajax=1',
-            type: 'get',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(json) {
-
-                if (json['redirect']) {
-                    location = json['redirect'];
-                }
-
-                if (json['success']) {
-                    $('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-
-                    $('.success').fadeIn('slow');
-
-                    $('html, body').animate({ scrollTop: 0 }, 'slow'); 
-                }	
-                
-                if (json['error']) {
-                    $('#notification').html('<div class="warning" style="display: none;">' + json['error'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-
-                    $('.warning').fadeIn('slow');
-
-                    $('html, body').animate({ scrollTop: 0 }, 'slow'); 
-                }
-            }
-        });
-      return false;
-    });
-    
-    $('form.newsletter-form .submit').click(function () {
-        $('form.newsletter-form').trigger('submit');
-        return false;
-    })
-</script>    
 </body></html>

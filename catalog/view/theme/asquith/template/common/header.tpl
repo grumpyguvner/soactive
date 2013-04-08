@@ -80,11 +80,11 @@
 	  <div class="bottomRow">
 	  		<?php echo $currency; ?>
 			<div id="header_newsletter_wrapper">
-                <form action="/index.php" method="get" id="header_newsletter_form" target="_blank">
+                <form action="/index.php" method="get" id="header_newsletter_form" class="newsletter-form" target="_blank">
                 	<div id="header_newsletter" class="header_input">
                     <input type="hidden" name="route" value="module/newsletter/callback">
                     <input type="hidden" name="subscribe" value="1">
-                    <input type="email" id="newsletter_email" name="email" placeholder="Email newsletter signup"><a class="action" href="#" onclick="$('#header_newsletter_form').trigger('submit');return false;">GO</a>
+                    <input type="email" id="newsletter_email" name="email" placeholder="Email newsletter signup"><a class="action" href="#">GO</a>
                 	</div>
                 </form>
             </div>
