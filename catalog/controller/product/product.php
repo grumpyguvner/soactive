@@ -163,6 +163,7 @@ class ControllerProductProduct extends Controller {
                         $this->data['text_activity'] = $this->language->get('text_activity');
                         $this->data['text_filter'] = $this->language->get('text_filter');
                         $this->data['text_option_details'] = $this->language->get('text_option_details');
+                        $this->data['text_write_review'] = $this->language->get('text_write_review');
 			
 			$this->data['entry_name'] = $this->language->get('entry_name');
 			$this->data['entry_review'] = $this->language->get('entry_review');

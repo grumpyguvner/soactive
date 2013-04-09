@@ -1115,6 +1115,10 @@ a.button-account:hover, input.button-account:hover {
 #afilter .accordion-heading a {
     color: white !important;
     font-weight: bold;
+    background: transparent url('../image/arrow-up.png') no-repeat right center;
+}
+#afilter .accordion-heading a.collapsed {
+    background-image: url('../image/arrow-down.png');
 }
 #afilter .accordion-heading a:hover {
     color: #74964a !important;
@@ -1551,7 +1555,6 @@ a.button-account:hover, input.button-account:hover {
     border: 1px solid #E7E7E7;
     float: left;
     margin-bottom: 20px;
-    padding: 10px;
     text-align: center;
 }
 .product-info .image-additional {
@@ -1567,6 +1570,22 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     margin-left: 8px;
     margin-bottom: 10px;
+}
+#arrow-up{
+    background-image: url('../image/arrow-up.png');
+    background-repeat: no-repeat;
+    margin-top: 6px;
+    width: 10px;
+    height: 6px;
+    float: right;
+}
+#arrow-down{
+    background-image: url('../image/arrow-down.png');
+    background-repeat: no-repeat;
+    margin-top: 6px;
+    width: 10px;
+    height: 6px;
+    float: right;
 }
 .product-info .description {
 
@@ -2942,34 +2961,39 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .table-price {
     text-align: center !important;
-    height: 31px;
     vertical-align: middle !important;
+    padding: 0 !important;
 }
 .table-price h4 {
     font-family: Arial;
     font-weight: normal;
     font-size: 15px;
+    margin: 0 !important;
 }
 .table-price h5 {
     font-family: Arial;
     font-weight: normal;
     font-size: 13px;
+    margin: 0 !important;
 }
 .table-info {
     text-align: center !important;
     background-color: #96C462;
     height: 31px;
+    padding: 0 !important;
     vertical-align: middle !important;
 }
 .table-info h4{
     font-family: Arial;
     font-weight: normal;
     font-size: 15px;
+    margin: 0 !important;
 }
 .table-info a>h5 {
     font-family: Arial;
     font-weight: normal;
     font-size: 13px;
+    margin: 0 !important;
 }
 .navbar-search .search-query {
     border-radius: 10px 10px 10px 10px !important;
@@ -3751,6 +3775,7 @@ input.r5b {
 
 .thumbVideo {
     height: 106px;
+    z-index: 1;
 }
 /***** Slideshow News Press ******/
 .slideshow-press { margin: 0 auto; }
@@ -3901,6 +3926,17 @@ input.r5b {
     margin-bottom: 5px;
 }
 #wrap-image {
-    width: 346px;
+    width: 366px;
     height: 373px;
+}
+.play-button {
+    position: relative;
+    background-image: url('../image/play_icon.png');
+    background-repeat: no-repeat;
+    z-index: 2;
+    display: inline-block;
+}
+.play-button img {
+    position: relative;
+    z-index: 1;
 }

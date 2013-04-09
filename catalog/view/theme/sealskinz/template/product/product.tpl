@@ -41,7 +41,7 @@
                                             <?php if (empty($image['video'])) { ?>
                                             <a href="<?php echo $image['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $image['main']; ?>"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
                                             <?php } else { ?>
-                                                <a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
+                                            <a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank"><span class="play-button" style="height:106px;width:116px;"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></span></a>
                                                 <?php
                                                 $count++;
                                             }
@@ -305,35 +305,41 @@
                         <!----------------------------------------- End Option + Cart ----------------------------------------->
 
                         <!----------------------------------------- Tab ----------------------------------------->          
-<?php if (!empty($news)) { ?>
-                            <div class="product-tab"> 
-                                <ul class="nav nav-tabs" id="myTab" style="margin-bottom: 0;">
-                                    <li class="active"><a data-toggle="tab" href="#description" style="border-radius: 0 0 0 0;"><?php echo $tab_description; ?></a>
-                                    </li>
 
-    <?php foreach ($attribute_groups as $attribute_group) { ?>
+                            <div class="product-tab" <?php if (empty($news)) { ?> style="width: 95%;" <?php }  ?>> 
+                                <ul class="nav nav-tabs" id="myTab" style="margin-bottom: 0;">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#description" style="border-radius: 0 0 0 0;"><?php echo $tab_description; ?></a>
+                                    </li>
+                                    <?php foreach ($attribute_groups as $attribute_group) { ?>
                                         <li class="">
                                             <a data-toggle="tab" href="#<?php echo $attribute_group['name']; ?>" style="border-radius: 0 0 0 0;">
-        <?php echo $attribute_group['name']; ?>
+                                                <?php echo $attribute_group['name']; ?>
                                             </a>
                                         </li>
                                     <?php } ?>
                                             
-                                        <li class=""><a data-toggle="tab" href="#review-status" style="border-radius: 0 0 0 0;"><?php if ($review_status) { ?>
-                                            
-                                                <?php echo $tab_review; ?>
-                                            
+                                        <li class="">
+                                            <a data-toggle="tab" href="#review-status" style="border-radius: 0 0 0 0;">
+                                              <?php if ($review_status) { ?>
+                                                  <?php echo $tab_review; ?>
+                                                <?php } ?>
                                             </a>
                                         </li>
-    <?php } ?>
+                                              
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div id="description" class="tab-pane fade active in">
                                         <p><?php echo $description; ?></p>
+                                        <?php if ($review_anonymous_status == '1' || $logged) { ?>
+                                        <br/>
+                                        <a class="button" data-toggle="tab" href="#review-status"><?php echo $text_write_review ?></a>
+                                        <?php } ?>
                                     </div>
-                                    <p><?php if ($attribute_groups) { ?>
+                                    <?php if ($attribute_groups) { ?>
         <?php foreach ($attribute_groups as $attribute_group) { ?>
                                             <div id="<?php echo $attribute_group['name']; ?>" class="tab-pane fade">
+                                               
                                                 <table class="attribute">
                                                     <thead>
                                                         <tr>
@@ -376,14 +382,13 @@
             <?php } ?>
                                                     </tbody>
                                                 </table>
+                                                
                                             </div>
                                         <?php } ?>
                                     <?php } ?>
-                                    </p>
+                                    
     
                                         <div id="review-status" class="tab-pane fade">
-                                            <p>
-
                                             <div id="review"></div>
                                             <?php if ($review_anonymous_status == '1' || $logged) { ?>
                                                 <h2 id="review-title"><?php echo $text_write; ?></h2>
@@ -417,129 +422,12 @@
                                                 </div>
                                             <?php } ?>
 
-                                            </p>
-                                        </div>
-    
-                                </div>
-                            </div>
-<?php } else { ?>
-                            <div class="product-tab" style="width: 95%"> 
-                                <ul class="nav nav-tabs" id="myTab" style="margin-bottom: 0;">
-                                    <li class="active"><a data-toggle="tab" href="#description" style="border-radius: 0 0 0 0;"><?php echo $tab_description; ?></a>
-                                    </li>
-
-    <?php foreach ($attribute_groups as $attribute_group) { ?>
-                                        <li class="">
-                                            <a data-toggle="tab" href="#<?php echo $attribute_group['name']; ?>" style="border-radius: 0 0 0 0;">
-        <?php echo $attribute_group['name']; ?>
-                                            </a>
-                                        </li>
-                                    <?php } ?>
                                            
-                                        <li class=""><a data-toggle="tab" href="#review-status" style="border-radius: 0 0 0 0;"><?php if ($review_status) { ?>
-                                                    <?php echo $tab_review; ?>
-                                       </a>
-                                        </li>
-    <?php } ?>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div id="description" class="tab-pane fade active in">
-                                        <p><?php echo $description; ?></p>
-                                    </div>
-                                    <p><?php if ($attribute_groups) { ?>
-        <?php foreach ($attribute_groups as $attribute_group) { ?>
-                                            <div id="<?php echo $attribute_group['name']; ?>" class="tab-pane fade">
-                                                <table class="attribute">
-                                                    <thead>
-                                                        <tr>
-                                                            <td colspan="2"><?php echo $attribute_group['name']; ?></td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                            <?php foreach ($attribute_group['attribute'] as $attribute) { ?>
-                                                            <tr>
-                <?php if ($attribute['name'] == 'Thermal Rating') { ?>
-                                                                    <td><?php echo $attribute['name']; ?></td>
-                                                                    <td>
-                                                                        <div class="rating">
-                                                                            <div class="wrap-rating">  
-                                                                                <img src="catalog/view/theme/sealskinz/image/product/line-rating.png" alt="Rating" class="line-rating" />
-                                                                                <div class="rating-1"><span style="color: white;">1</span></div>
-                                                                                <div class="rating-2"><span style="color: white;">2</span></div>
-                                                                                <div class="rating-3"><span style="color: white;">3</span></div>
-                                                                                <div class="rating-4"><span style="color: white;">4</span></div>
-                                                                                <div class="rating-5"><span style="color: white;">5</span></div>
-                                                                                <div class="rating-big">
-                                                                                    <?php if ($attribute['text'] == '1') { ?>
-                                                                                        <div class="rating-1big"><span><?php echo $text_rating1 ?></span></div>
-                                                                                    <?php } else if (($attribute['text'] == '2')) { ?>        
-                                                                                        <div class="rating-2big"><span><?php echo $text_rating2 ?></span></div>
-                                                                                    <?php } else if (($attribute['text'] == '3')) { ?>      
-                                                                                        <div class="rating-3big"><span><?php echo $text_rating3 ?></span></div>
-                                                                                    <?php } else if (($attribute['text'] == '4')) { ?>
-                                                                                        <div class="rating-4big"><span><?php echo $text_rating4 ?></span></div>
-                                                                                    <?php } else if (($attribute['text'] == '5')) { ?>
-                                                                                        <div class="rating-5big"><span><?php echo $text_rating5 ?></span></div>
-                    <?php } ?>  
-                                                                                </div>
-                                                                            </div>  
-                                                                        </div>
-                                                                    </td>
-                <?php } else { ?>  
-                                                                    <td><?php echo $attribute['name']; ?></td>
-                                                                    <td><?php echo $attribute['text']; ?></td>
-                                                            <?php } ?>
-                                                            </tr>
-            <?php } ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        <?php } ?>
-                                    <?php } ?>
-                                    </p>
-    
-                                        <div id="review-status" class="tab-pane fade">
-                                          
-
-                                            <div id="review"></div>
-                                            <?php if ($review_anonymous_status == '1' || $logged) { ?>
-                                                <h2 id="review-title"><?php echo $text_write; ?></h2>
-
-                                                <b><?php echo $entry_name; ?></b><br />
-                                                <input type="text" name="name" value="" />
-                                                <br />
-                                                <br />
-                                                <b><?php echo $entry_review; ?></b>
-                                                <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
-                                                <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
-                                                <br />
-                                                <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
-                                                <input type="radio" name="rating" value="1" />
-                                                &nbsp;
-                                                <input type="radio" name="rating" value="2" />
-                                                &nbsp;
-                                                <input type="radio" name="rating" value="3" />
-                                                &nbsp;
-                                                <input type="radio" name="rating" value="4" />
-                                                &nbsp;
-                                                <input type="radio" name="rating" value="5" />
-                                                &nbsp;<span><?php echo $entry_good; ?></span><br />
-                                                <br />
-                                                <b><?php echo $entry_captcha; ?></b><br />
-                                                <input type="text" name="captcha" value="" />
-                                                <br />
-                                                <img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />
-                                                <br />
-                                                <div class="buttons">
-                                                    <div class="right"><a id="button-review"  class="button"><?php echo $button_continue; ?></a></div>
-                                                </div>
-                                        <?php } ?>
-                                            
                                         </div>
     
                                 </div>
                             </div>
-<?php } ?>
+
                         <!----------------------------------------- End Tab ----------------------------------------->
 
                         <!----------------------------------------- Start Press ----------------------------------------->
@@ -575,9 +463,8 @@
 
                                 </div>
                             </div>  
-                        <?php } else { ?>
-
-<?php } ?>     
+                        <?php }  ?>
+   
                         <!----------------------------------------- End Press ----------------------------------------->
 
 
@@ -747,7 +634,10 @@
     });
     //--></script> 
 <script type="text/javascript"><!--
-    $('#tabs a').tabs();
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
     //--></script> 
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
 <script type="text/javascript"><!--

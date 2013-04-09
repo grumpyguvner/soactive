@@ -57,7 +57,7 @@ if ($attributes) {
                                 <div class="accordion-group" id="accordion<?php echo++$cnt; ?>">
                                     <div class="accordion-heading">
                                         <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">
-                                            <?php echo $attribute['type_name']; ?>
+                                            <?php echo $attribute['type_name']; ?><div id="arrow-up"></div>
                                         </a>
                                     </div>
                                     <div class="accordion-body in collapse" id="collapse<?php echo $cnt; ?>">
