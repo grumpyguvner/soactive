@@ -3,7 +3,7 @@
     <div class="box-green"></div>
     <div class="<?php echo $seo ?>"></div>
 
-<?php } else if(($seo == 'our-factory') || ($seo == 'our-history') || ($seo == 'technology')) { ?>
+<?php } else if(($seo == 'our-factory') || ($seo == 'our-history') || ($seo == 'our-technology')) { ?>
    <div class="box">
   <div class="box-heading">
       <?php echo $heading_title; ?>
