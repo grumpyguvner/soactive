@@ -21,7 +21,7 @@ body {
     z-index: 2;
     margin-bottom: 0;
 }
-body, td, th, input, textarea, select, a {
+body, td, th, input, textarea, select {
     font-size: 12px;
 }
 
@@ -47,13 +47,12 @@ p {
     margin-top: 0px;
     margin-bottom: 20px;
 }
-a{
-    color: #96c462  !important;
+a, a:link, a:visited {
+    color: #96c462;
 }
 a:hover {
     text-decoration: underline;
-    color: #74964a !important;
-    font-weight: bolder;
+    color: #74964a;
 }
 .content a{
     color: #96c462;
@@ -130,11 +129,11 @@ label {
     cursor: pointer;
 }
 /* layout */
-#container {
-    width: 984px;
+.container {
+    width: 984px !important;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    position: relative;
 }
 .navbar-header{
     width: 100%;
@@ -477,7 +476,7 @@ label {
 #myCarousel .carouselBasebarContainer img {
     width: auto;
 }
-#myCarousel .carouselBasebarContainer .img-great {
+#myCarousel .carouselBasebarContainer .imgGreat {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -590,33 +589,30 @@ background-color: #8BAE5C;
 #menu > ul > li > div > ul > li > a {
     color: #FFFFFF;
 }
-.breadline {
-    background-color: #000000; 
-    width: 100%;
+#breadcrumb {
+    background: #000000; 
 }
-.breadcrumb {
-    background-color: #000000 !important;
-    color: white !important ;
-    margin-bottom: 10px;
-    margin: 0px !important;
-    padding-bottom: 38px !important;
-    padding-top: 38px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+#breadcrumb .container {
+    color: #506736;
+    line-height: 40px;
+    padding: 25px 0;
+    font-size: 40px;
+    vertical-align: baseline;
 }
-.breadcrumb .great {
-    float:right;
-    background-image: url(../image/great_company.png);
-    width: 222px;
-    height: 47px;
-}
-
-.breadcrumb a {
-    color: #ffffff !important;
+#breadcrumb a {
+    color: #fff;
     font-size: 24px;
+    line-height: 40px;
+    vertical-align: top;
 }
-.breadcrumb a:hover {
+#breadcrumb a:hover {
     color: #74964a !important;
+    text-decoration: none;
+}
+#breadcrumb .imgGreat {
+    position: absolute;
+    right: 0;
+    top: 22px;
 }
 .success, .warning, .attention, .information {
     padding: 10px 10px 10px 33px;
@@ -3004,9 +3000,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .half {
     width: 50%;
 }
-.img-great {
-    text-align: left;
-}
 .wrap-rating {
     width: 64%;
     margin: auto;
@@ -3399,7 +3392,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .grid-wrap h5{
     font-family: Arial;
-    font-size: 14px;
+    font-size: 14px !important;
     font-weight: normal;
 }
 .nimage {
@@ -3490,6 +3483,9 @@ input[type="color"]:focus, .uneditable-input:focus {
     padding-bottom: 40px;
     min-height: 440px;
 } 
+#homeWinBar {
+    background: #000;
+}
 .contact-image {
     background-image: url('../image/information/contact-us.png');
     background-repeat: no-repeat;

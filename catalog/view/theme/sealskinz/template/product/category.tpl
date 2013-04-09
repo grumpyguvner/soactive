@@ -1,37 +1,47 @@
 <?php echo $header; ?>
 <div class="banner">
-    <?php echo $content_top; 
-    if ($thumb || $description) { 
-        if ($thumb)
-        { ?>
+    <?php
+    echo $content_top;
+    if ($thumb || $description) {
+        if ($thumb) {
+            ?>
             <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
-        <?php 
-        } 
+            <?php
+        }
         /* if ($description) { ?>
           <?php echo $description; ?>
-          <?php } */ 
+          <?php } */
     }
     ?>
 </div>
-
-<div class="breadline">
+<div id="breadcrumb">
     <div class="container">
-        <div class="row"> 
-            <div class="span12">
-                <div id="container-in">
-                    <div class="breadcrumb">
-                        <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                            <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                        <?php } ?>
-                        <div id="right" class="img-great">
-                            <img src="catalog/view/theme/sealskinz/image/great_company.png" alt="Designed by a great British company" />
-                            <div class="design"><?php echo $text_designed ?></div>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="imgGreat">
+            <img src="catalog/view/theme/sealskinz/image/great-british-company.png" alt="Designed by a great British company" />
+        </div>    
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        }
+        ?>
     </div>
+</div>
+<div id="notification">
+    <?php if ($success) { ?>
+        <div class="success"><?php echo $success; ?></div>
+    <?php
+    }
+    if ($error_warning) {
+        ?>
+        <div class="warning"><?php echo $error_warning; ?></div>
+    <?php
+    }
+    if ($attention) {
+        ?>
+        <div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+        <?php
+    }
+    ?>
 </div>
 
 
@@ -39,20 +49,20 @@
 <div id="content-back">
     <div class="green-bar">
         <div id="container-in" class="content-in">
-            <?php echo $column_left; ?><?php echo $column_right; ?>
+<?php echo $column_left; ?><?php echo $column_right; ?>
             <div id="content"> 
                 <div class="row" style="line-height: 0">
                     <div class="product-filter">
                             <!--div class="display"><b><?php /* echo $text_display; ?></b> <?php echo $text_grid; ?> <b>/</b> <a onclick="display('list');"><?php echo $text_list; */ ?></a></div-->
                         <!--div class="limit"><?php /* echo $text_limit; ?>
-              <select onchange="location = this.value;">
-              <?php foreach ($limits as $limits) { ?>
-              <?php if ($limits['value'] == $limit) { ?>
-              <option value="<?php echo $limits['href']; ?>" selected="selected"><?php echo $limits['text']; ?></option>
-              <?php } else { ?>
-              <option value="<?php echo $limits['href']; ?>"><?php echo $limits['text']; ?></option>
-              <?php } ?>
-              <?php } */ ?>
+                          <select onchange="location = this.value;">
+                          <?php foreach ($limits as $limits) { ?>
+                          <?php if ($limits['value'] == $limit) { ?>
+                          <option value="<?php echo $limits['href']; ?>" selected="selected"><?php echo $limits['text']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $limits['href']; ?>"><?php echo $limits['text']; ?></option>
+                          <?php } ?>
+                          <?php } */ ?>
                           </select>
                         </div-->
                         <div class="sort" style="margin-right: 20px;"><?php echo $text_sort; ?>
@@ -62,56 +72,56 @@
                                         <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
                                     <?php } else { ?>
                                         <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
-                                    <?php } ?>
-                                <?php } ?>
+    <?php } ?>
+<?php } ?>
                             </select>
                         </div>
                         <div class="pagination-text"><?php echo $pagination2; ?></div>
                     </div>
 
-                    <?php if ($products) { ?>
+<?php if ($products) { ?>
 
 
 
                         <div class="product-list">
-                            <?php foreach ($products as $product) { ?>
+    <?php foreach ($products as $product) { ?>
                                 <div class="span3" style="margin-left: 0px;">
                                     <div class="grid-wrap"> 
                                         <div class="name"><a href="<?php echo $product['href']; ?>"><h5><?php echo $product['name']; ?></h5></a></div>
                                         <div class="image">
                                             <?php if ($product['thumb']) { ?>
                                                 <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
-                                            <?php } ?>
+        <?php } ?>
                                         </div>
                                     </div>
                                     <!--div class="description"><?php /* echo $product['description']; */ ?></div-->
 
-                                    <?php if ($product['price']) { ?>
+                                        <?php if ($product['price']) { ?>
                                         <div class="price">
                                             <?php if (!$product['special']) { ?>
                                                 <h4><?php echo $product['price']; ?></h4>
                                             <?php } else { ?>
                                                 <span class="price-old"><h4 style="margin-bottom: 0; margin-top: 0;"><?php echo $product['price']; ?></h4></span> <span class="price-new"><h4 style="margin-bottom: 0; margin-top: 0;"><?php echo $product['special']; ?></h4></span>
-                                            <?php } ?>
+            <?php } ?>
                                             <?php if ($product['tax']) { ?>
                                                 <br />
                                                 <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
-                                            <?php } ?>
+                                        <?php } ?>
                                         </div>
-                                    <?php } ?>
+                                <?php } ?>
 
                                 </div>
-                            <?php } ?>
+                        <?php } ?>
                         </div>
                         <div class="pagination"><?php echo $pagination; ?></div>
-                        <?php if (!$categories && !$products) { ?>
+    <?php if (!$categories && !$products) { ?>
                             <div class="content"><?php echo $text_empty; ?></div>
                             <!--div class="buttons">
                               <div class="right"><a href="<?php /* echo $continue; */ ?>" class="btn"><?php /* echo $button_continue; */ ?></a></div>
                             </div-->
                         <?php } ?>
-                        <?php echo $content_bottom; ?>
-                    <?php } ?>
+    <?php echo $content_bottom; ?>
+<?php } ?>
                 </div> 
             </div>
         </div>

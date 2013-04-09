@@ -1,18 +1,22 @@
 <?php echo $header; ?>
-<div class="breadline">
+<div id="breadcrumb">
     <div class="container">
-      <div class="row"> 
-          <div class="span12">
-              <div id="container-in">
-                <div class="breadcrumb">
-                    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                    <?php } ?>
-                </div>
-             </div>
-         </div>
-     </div>
-   </div>
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
+    </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php } 
+?>
 </div>
 <div id="content-back">
     <div class="green-bar">

@@ -225,5 +225,3 @@
             </div>
 
         </div>
-
-        <div id="notification"></div>

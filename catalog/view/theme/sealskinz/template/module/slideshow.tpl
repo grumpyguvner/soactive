@@ -6,9 +6,8 @@ if (!empty($banners))
         <img src="/catalog/view/theme/<?php echo $this->config->get('config_template') ?>/image/carouselSpacer.png" alt="" />
         <div class="carouselBasebarContainer">
             <div class="container">
-                <div class="img-great">
-                    <img src="catalog/view/theme/sealskinz/image/great_company.png" alt="Designed by a great British company">
-                    <div class="design">Designed by a great British company</div>
+                <div class="imgGreat">
+                    <img src="catalog/view/theme/sealskinz/image/great-british-company.png" alt="Designed by a great British company" />
                 </div>
             </div>
         </div>
