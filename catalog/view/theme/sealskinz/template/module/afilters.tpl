@@ -11,15 +11,14 @@ if ($attributes) {
         <div class="box-heading"><?php echo $heading_title; ?></div>
         <div class="box-content">
             <div class="box-category">
-                <form action="index.php" method="get" name="afilter" id="afilter">
-                    <input type="hidden" name="route" value="product/category" />
-                    <input type="hidden" name="path" value="0" />
+                <form action="<?php echo $path; ?>" method="get" name="afilter" id="afilter">
+<!--                    <input type="hidden" name="route" value="product/category" />
+                    <input type="hidden" name="path" value="<?php echo $path; ?>" /> -->
                     <div class="accordion">
                         <?php
                         if ($categories) {
                             arsort($categories);
                             foreach ($categories as $category_group) {
-                                if ($category_root_id != $category_group['category_id']) {
                             ?>
                                     <div class="accordion-group" id="accordion<?php echo++$cnt; ?>">
                                         <div class="accordion-heading">
@@ -33,10 +32,12 @@ if ($attributes) {
                                                     <div class="box-category">
                                                         <ul>
                                                             <?php foreach ($category_group['children'] as $category) { ?>
-                                                                <?php if (isset($afilters[0]) && in_array($category['category_id'], $afilters[0])) { ?> 
-                                                                    <li><label><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" checked="checked" /> <span><?php echo $category['name']; ?></span></label></li>
-                                                                <?php } else { ?>
-                                                                    <li><label><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" /> <span><?php echo $category['name']; ?></span></label></li>
+                                                                <?php if ($cat_id != $category['category_id']) { ?>
+                                                                    <?php if (isset($afilters[0]) && in_array($category['category_id'], $afilters[0])) { ?> 
+                                                                        <li><label><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" checked="checked" /> <span><?php echo $category['name']; ?></span></label></li>
+                                                                    <?php } else { ?>
+                                                                        <li><label><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" /> <span><?php echo $category['name']; ?></span></label></li>
+                                                                    <?php } ?>
                                                                 <?php } ?>
                                                             <?php } ?>
                                                         </ul>
@@ -46,7 +47,6 @@ if ($attributes) {
                                         </div>
                                     </div>
                             <?php
-                                }
                             }
                         }
 
@@ -57,7 +57,7 @@ if ($attributes) {
                                 <div class="accordion-group" id="accordion<?php echo++$cnt; ?>">
                                     <div class="accordion-heading">
                                         <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">
-                                            <?php echo $attribute['type_name']; ?>
+                                            <?php echo $attribute['type_name']; ?><div id="arrow-up"></div>
                                         </a>
                                     </div>
                                     <div class="accordion-body in collapse" id="collapse<?php echo $cnt; ?>">

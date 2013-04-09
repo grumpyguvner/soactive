@@ -37,6 +37,7 @@ $_['text_gender']       = 'Gender';
 $_['text_activity']     = 'Activity';
 $_['text_filter']       = 'Filter';
 $_['text_option_details'] = '';
+$_['text_write_review'] = 'WRITE REVIEW';
 
 // Entry
 $_['entry_name']        = 'Your Name:';
