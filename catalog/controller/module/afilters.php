@@ -32,6 +32,8 @@ class ControllerModuleAFilters extends Controller {
 
                 $category_info = $this->model_catalog_category->getCategory($path_id);
                 if ($category_info) {
+                    $this->data['path'] = $this->url->link('product/category', 'path=' . $this->request->get['path']);
+                    
                     $this->data['breadcrumbs'][] = array(
                         'text' => $category_info['name'],
                         'href' => $this->url->link('product/category', 'path=' . $path),
