@@ -114,8 +114,9 @@
                                         <ul>	
                                             <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
                                         </ul>
-                                        <?php echo $cart; ?>
-                                        
+                                        <ul>
+                                            <li><?php echo $cart; ?></li>
+                                        </ul> 
                                     </div>
                                 </div> <!-- end the menuh-container div -->  
                             </div>	<!-- end the menuh div --> 
