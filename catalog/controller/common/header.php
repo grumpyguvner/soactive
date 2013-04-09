@@ -177,33 +177,7 @@ class ControllerCommonHeader extends Controller {
                     'href' => $this->url->link('product/category', 'path=' . $category['category_id'])
                 );
             }
-            /*             * ******************************* Start Menu SealSkinz *********************************** */
-            else if ($category['status'] == '1' && $category['parent_id'] > 0) {
-
-                // Level 1
-                $this->data['categories'][] = array(
-                    'name' => $category['name'],
-                    'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '&att_filters[0][]=' . $category['category_id'])
-                );
-            }
-
-            /*             * ******************************* End Menu SealSkinz *********************************** */
         }
-
-        $this->load->model('catalog/attribute');
-
-        $this->data['attributes'] = array();
-        $attributesByGroup = $this->model_catalog_attribute->getAttributesByGroup();
-
-        if ($attributesByGroup->num_rows) {
-            foreach ($attributesByGroup->rows as $row) {
-//                $row['href'] = $this->url->link('product/category', 'path=' . $categories[0]['category_id'] . '&att_filters[' . $row['attribute_id'] . '][]=' . $row['text']);
-                $row['href'] = $this->url->link('product/category', 'path=0&att_filters[' . $row['attribute_id'] . '][]=' . $row['text']);
-
-                $this->data['attributes'][$row['attribute_group_id']][$row['attribute_id']][] = $row;
-            }
-        }
-        /*         * ******************************* End Menu SealSkinz *********************************** */
 
         $this->children = array(
             'module/language',
