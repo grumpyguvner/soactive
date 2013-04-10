@@ -16,7 +16,6 @@
         <?php foreach ($links as $link) { ?>
             <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
         <?php } ?>
-        
         <!-- Bootstrap css -->
         <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
