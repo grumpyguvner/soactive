@@ -1572,6 +1572,7 @@ a.button-account:hover, input.button-account:hover {
     margin-left: -10px;
     clear: both;
     overflow: hidden;
+    position: relative;
 }
 .product-info .image-additional img {
     border: 1px solid #E7E7E7;
@@ -1581,6 +1582,10 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     margin-left: 8px;
     margin-bottom: 10px;
+    width: 116px;
+    height: 106px;
+    z-index: 1;
+        
 }
 #arrow-up{
     background-image: url('../image/arrow-up.png');
@@ -3945,11 +3950,15 @@ input.r5b {
     height: 373px;
 }
 .play-button {
-    position: relative;
+    position: absolute;
     background-image: url('../image/play_icon.png');
     background-repeat: no-repeat;
     z-index: 2;
     display: inline-block;
+    height: 35px;
+    width: 116px;
+    top: 36px;
+    left: auto;
 }
 .play-button img {
     position: relative;
