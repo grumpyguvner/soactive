@@ -5,7 +5,7 @@ html {
     background-image: url(../image/footer.png);
 }
 body {
-    background-color: #000000;
+    background-color: #ffffff;
     color: #000000;
     font-family: Arial, sans-serif, Helvetica  !important;
     margin:0px;
@@ -224,6 +224,7 @@ label {
 #header #logo {
     margin-top: 15px;
     margin-bottom: 20px;
+    float: left;
 }
 
 #language {
@@ -260,7 +261,6 @@ label {
     text-decoration: none;
 }
 #header #cart {
-	position: absolute;
 	top: 0px;
 	/*right: 145px;*/
 	z-index: 9;
@@ -272,7 +272,6 @@ label {
 	background: #000000;
 	position: relative;
 	z-index: 1;
-        width: 129px;
 }
 #header #cart .heading h4 {
 	color: #333333;
@@ -284,10 +283,6 @@ label {
 #header #cart .heading a {
 	color: #38B0E3;
 	text-decoration: none;
-}
-#header #cart .heading a span {
-	
-	padding-right: 10px;
 }
 #header #cart .content {
 	clear: both;
@@ -380,7 +375,7 @@ label {
 	text-align: center;
 }
 .rlink {
-    margin-right: 137px;
+    margin-right: 158px;
 }
 #table-price, #table-price td {
     -webkit-border-radius: 0px 0px 0px 0px;
@@ -393,8 +388,6 @@ label {
 #header #search {
     position: relative;
     float:right;
-
-
 }
 #header .button-search {
     position: relative;
@@ -2602,8 +2595,7 @@ a.button-account:hover, input.button-account:hover {
     display:block;
     border: 1px solid #000000;
     white-space:nowrap;
-    margin:0;
-    padding: 0.3em;
+    padding: 6px 10px;
     font-weight: bolder;
     color: grey !important;
 }
@@ -2625,6 +2617,7 @@ a.button-account:hover, input.button-account:hover {
     background-image: url(../image/navdown_white.gif);
     background-position: right center;
     background-repeat: no-repeat;
+    padding-right: 20px;
 }
 #menuh a.parent, #menuh a.parent:hover /* attaches side-arrow to all parents */
 {
@@ -2638,9 +2631,10 @@ a.button-account:hover, input.button-account:hover {
     list-style:none;
     margin:0;
     padding:0;
-    float:left;
     font-family: Arial;
     font-size: 14px;
+    position: relative;
+    display: block;
 }
 
 #menuh li
@@ -2650,6 +2644,7 @@ a.button-account:hover, input.button-account:hover {
     position:relative;
     min-height: 1px;	
     vertical-align: bottom;	
+    display: table-cell;
 }
 
 #menuh ul ul
@@ -2660,6 +2655,10 @@ a.button-account:hover, input.button-account:hover {
     display:none;
     padding: 13px;
     margin:-13px 0 0 -14px;
+}
+#menuh ul ul li
+{
+    display: block;
 }
 
 #menuh ul ul ul
