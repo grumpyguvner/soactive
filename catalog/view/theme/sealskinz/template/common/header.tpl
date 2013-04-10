@@ -16,15 +16,16 @@
         <?php foreach ($links as $link) { ?>
             <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
         <?php } ?>
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet.css" />
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-480.css" />
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-767.css" />
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-768-979.css" />
+        
         <!-- Bootstrap css -->
         <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
         <!-- End css Bootstrap css -->
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet.css" />
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-480.css" />
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-767.css" />
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-768-979.css" />
         <?php foreach ($styles as $style) { ?>
             <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
         <?php } ?>

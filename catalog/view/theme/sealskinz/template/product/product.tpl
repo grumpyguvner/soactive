@@ -41,7 +41,7 @@
                                             <?php if (empty($image['video'])) { ?>
                                             <a href="<?php echo $image['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $image['main']; ?>"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
                                             <?php } else { ?>
-                                            <a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank"><span class="play-button" style="height:106px;width:116px;"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></span></a>
+                                            <a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank"><span class="play-button"></span><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></a>
                                                 <?php
                                                 $count++;
                                             }
