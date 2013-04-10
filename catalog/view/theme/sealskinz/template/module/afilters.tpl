@@ -7,7 +7,7 @@ if ($attributes) {
     }
     $cnt = 0;
     ?>
-    <div class="box">
+    <div class="aFilterbox box">
         <div class="box-heading"><?php echo $heading_title; ?></div>
         <div class="box-content">
             <div class="box-category">
@@ -22,9 +22,7 @@ if ($attributes) {
                             ?>
                                     <div class="accordion-group" id="accordion<?php echo++$cnt; ?>">
                                         <div class="accordion-heading">
-                                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">
-                                                <?php echo $category_group['name']; ?>
-                                            </a>
+                                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $category_group['name']; ?></a>
                                         </div>
                                         <div class="accordion-body in collapse" id="collapse<?php echo $cnt; ?>">
                                             <div class="accordion-inner">
@@ -34,9 +32,9 @@ if ($attributes) {
                                                             <?php foreach ($category_group['children'] as $category) { ?>
                                                                 <?php if ($cat_id != $category['category_id']) { ?>
                                                                     <?php if (isset($afilters[0]) && in_array($category['category_id'], $afilters[0])) { ?> 
-                                                                        <li><label><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" checked="checked" /> <span><?php echo $category['name']; ?></span></label></li>
+                                                                        <li><label class="checkbox"><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" checked="checked" /> <?php echo $category['name']; ?></label></li>
                                                                     <?php } else { ?>
-                                                                        <li><label><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" /> <span><?php echo $category['name']; ?></span></label></li>
+                                                                        <li><label class="checkbox"><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" /> <?php echo $category['name']; ?></label></li>
                                                                     <?php } ?>
                                                                 <?php } ?>
                                                             <?php } ?>
@@ -56,9 +54,7 @@ if ($attributes) {
                                 ?>
                                 <div class="accordion-group" id="accordion<?php echo++$cnt; ?>">
                                     <div class="accordion-heading">
-                                        <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">
-                                            <?php echo $attribute['type_name']; ?><div id="arrow-up"></div>
-                                        </a>
+                                        <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $attribute['type_name']; ?></a>
                                     </div>
                                     <div class="accordion-body in collapse" id="collapse<?php echo $cnt; ?>">
                                         <div class="accordion-inner">
@@ -67,13 +63,13 @@ if ($attributes) {
                                                     <ul>
                                                         <?php
                                                         if ($attribute['type_name'] == 'Thermal Rating') {
-                                                            echo '<li>';
+                                                            echo '<li class="thermal">';
                                                             foreach ($attribute['types'] as $value) {
                                                                 if (isset($afilters[$attribute['type_id']]) && in_array($value, $afilters[$attribute['type_id']])) {
                                                                     ?>
-                                                                    <input type="image" class="thermalBig r<?php echo $value; ?>b" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" /> 
+                                                                    <label class="therm<?php echo $value; ?> thermalChecked"><input type="checkbox" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" checked="checked" /><?php echo $value; ?></label>
                                                                 <?php } else { ?>
-                                                                    <input type="image" class="thermal r<?php echo $value; ?>" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" />  
+                                                                    <label class="therm<?php echo $value; ?>"><input type="checkbox" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" /><?php echo $value ?></label>
                                                                     <?php
                                                                 }
                                                             }
@@ -83,10 +79,10 @@ if ($attributes) {
 
                                                                 if (isset($afilters[$attribute['type_id']]) && in_array($value, $afilters[$attribute['type_id']])) {
                                                                     ?>
-                                                                    <li><label><input type="checkbox" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" checked="checked" /> <span><?php echo $value; ?></span></label></li>
+                                                                    <li><label class="checkbox"><input type="checkbox" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" checked="checked" /> <?php echo $value; ?></label></li>
                                                                 <?php } else { ?>
 
-                                                                    <li><label><input type="checkbox" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" /> <span><?php echo $value ?></span></label></li>
+                                                                    <li><label class="checkbox"><input type="checkbox" name="att_filters[<?php echo $attribute['type_id']; ?>][]" value="<?php echo $value; ?>" /> <?php echo $value ?></label></li>
                                                                     <?php
                                                                 }
                                                             }
@@ -109,8 +105,24 @@ if ($attributes) {
     </div>
 <?php } ?>
 <script type="text/javascript">
-    
+    $('#afilter .thermal input').change(function () {
+        if ($(this).is(':checked'))
+        {
+            $(this).parent('label').addClass('thermalChecked');
+        } else {
+            $(this).parent('label').removeClass('thermalChecked');
+        }
+    });
+    $('#afilter .thermal label').click(function () {
+        if ($(this).find('input').is(':checked'))
+        {
+            $(this).find('input').attr('checked', false);
+        } else {
+            $(this).find('input').attr('checked', 'checked');
+        }
+        $(this).find('input').trigger('change');
+    });
     $('#afilter input').change(function () {
         $('#afilter').trigger('submit');
-    })
+    });
 </script>

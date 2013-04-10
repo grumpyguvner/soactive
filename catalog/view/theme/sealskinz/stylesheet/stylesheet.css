@@ -499,6 +499,8 @@ width: 10px;
 height: 10px;
 background-color: #67653C;
 background-color: rgba(255,255,255,0.25);
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
 border-radius: 8px;
 border: 3px solid #969674;
 }
@@ -970,10 +972,13 @@ a.button-account:hover, input.button-account:hover {
     padding-left: 20px;
     padding-right: 20px;
 }
+.aFilterbox {
+    margin-right: -1px;
+    position: relative;
+    border-right: 1px solid #CCc;
+}
 
 .box .box-heading {
-    border-left: 1px solid #DDDDDD;
-    border-right: 1px solid #DDDDDD;
     background-color: #9fcf67;
     padding: 15px 0px 15px 20px;
     font-family: Arial, Helvetica, sans-serif;
@@ -1068,10 +1073,11 @@ a.button-account:hover, input.button-account:hover {
     padding: 0;
 }
 .box-category > ul > li {
-    padding: 8px 8px 8px 12px;
+    padding: 8px 8px 3px 12px;
 }
 .box-category > ul > li + li {
-    border-top: 1px solid #EEEEEE;
+    border-top: 1px solid #DDD;
+ 
 }
 .box-category > ul > li > a {
     text-decoration: none;
@@ -1106,27 +1112,33 @@ a.button-account:hover, input.button-account:hover {
 #afilter .accordion-heading {
     border-bottom: 0 none;
     background-color: #403c3d;
-
+    margin-right: -1px;
 }
 #afilter .accordion-heading a {
     color: white !important;
     font-weight: bold;
     background: transparent url('../image/arrow-up.png') no-repeat right center;
+    border-bottom: 1px solid #DDD;
+    margin-bottom: -1px;
+    position: relative;
 }
 #afilter .accordion-heading a.collapsed {
     background-image: url('../image/arrow-down.png');
 }
 #afilter .accordion-heading a:hover {
-    color: #74964a !important;
+    
 }
 #afilter .accordion-group {
-    border-radius: 0px 0px 0px 0px  !important;
-    margin: 0px !important;
-    border-top: 0px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    margin: 0;
+    border: 0;
 }
 #afilter .accordion-inner {
     height: auto;
     padding: 0 0 9px;
+    
 }
 #content-in {
     box-shadow: 0 2px 2px #ffffff;
@@ -3626,52 +3638,51 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-weight: normal;
     font-family: Arial;
 }
-input.thermal {
-    background: transparent url('../image/product/1r.png') no-repeat top left;
-    padding: 1px 6px 3px 6px;
-    color: white;
-    height: 20px;
+.thermal input {
+    display: none;
+}
+.thermal label {
+    display: inline-block;
+    vertical-align: middle;
+    color: #fff;
+    cursor: pointer;
+    line-height: 20px;
+    text-align: center;
     width: 20px;
-    margin-right: 4px;
-}
-input.thermalBig {
-    background: transparent url('../image/product/1r-big.png') no-repeat top left;
-    padding: 6px 10px 14px 14px;
-    color: white;
     height: 20px;
-    width: 20px;
-    margin-right: 4px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 2px solid #DDD;
+    margin: 5px 0 5px 5px;
+    
 }
-input.r1 {
-    background-image: url('../image/product/1r.png');
+.thermal label.thermalChecked {
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    border: 2px solid #DDD;
+    margin: 0;
 }
-input.r2 {
-    background-image: url('../image/product/2r.png');
+.thermal label.therm1 {
+    background: #FFDD00;
 }
-input.r3 {
-    background-image: url('../image/product/3r.png');
+.thermal label.therm2 {
+    background: #FEB811;
 }
-input.r4 {
-    background-image: url('../image/product/4r.png');
+.thermal label.therm3 {
+    background: #F7931C;
 }
-input.r5 {
-    background-image: url('../image/product/5r.png');
+.thermal label.therm4 {
+    background: #F0641F;
 }
-input.r1b {
-    background-image: url('../image/product/1r-big.png');
+.thermal label.therm5 {
+    background: #EE2024;
 }
-input.r2b {
-    background-image: url('../image/product/2r-big.png');
-}
-input.r3b {
-    background-image: url('../image/product/3r-big.png');
-}
-input.r4b {
-    background-image: url('../image/product/4r-big.png');
-}
-input.r5b {
-    background-image: url('../image/product/5r-big.png');
-}
+
 .account {
     background-image: url('../image/account/account.png');
     height: 400px;
