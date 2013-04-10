@@ -1,21 +1,29 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-    <div class="breadline">
-        <div class="container">
-            <div class="row"> 
-                <div class="span12">
-                    <div id="container-in">
-                        <div class="breadcrumb">
-                            <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                                <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                            <?php } ?>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<?php echo $header; ?>
+<div id="breadcrumb">
+    <div class="container">
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php }
+if ($attention) { ?>
+<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<?php 
+}
+?>
+</div>
+<?php echo $column_left; ?><?php echo $column_right; ?>
+<div id="content"><?php echo $content_top; ?>
     <div id="content-back">
         <div class="green-bar">  
             <div id="container-in" class="content-in">
