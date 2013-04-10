@@ -1531,6 +1531,21 @@ a.button-account:hover, input.button-account:hover {
     padding-top: 24px;
     display: table-cell;
 }
+
+#productTab {
+    margin-bottom: 0;
+}
+
+#productTab {
+    margin-bottom: 0;
+}
+
+#productTab > li > a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
 .content-left {
     float: left;
 }
@@ -1607,7 +1622,7 @@ a.button-account:hover, input.button-account:hover {
     max-width: 170px;
 }
 .product-info .product-price {
-    color: #74964a !important;
+    color: #74964a;
 }
 .product-price h1{
     font-family: Arial;
@@ -1615,6 +1630,7 @@ a.button-account:hover, input.button-account:hover {
     font-weight: bold;
     margin-top: 0px;
     margin-left: 8px;
+    color: #74964a
 }
 .product-info .price-old {
     color: #F00;
@@ -1692,6 +1708,9 @@ a.button-account:hover, input.button-account:hover {
 .product-info .review > div {
     padding: 8px;
     line-height: 20px;
+}
+.product-info .review * {
+    vertical-align: middle;
 }
 .product-info .review > div > span {
     color: #38B0E3;
@@ -2831,6 +2850,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     width: 30%;
     float: right;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 #box-title {
     padding: 15px;
@@ -2841,8 +2861,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 #press-tab {
     background-color: #96c462;
     color: white !important;
-    width: 110px;
-    border-radius: 0 0 0 0;
+    border-radius: 0;
 }
 #description-info {
     padding: 0 !important;
