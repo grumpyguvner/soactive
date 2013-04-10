@@ -495,6 +495,48 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><?php echo $entry_coupon_code; ?></td>
+              <td><?php if ($config_coupon_code) { ?>
+                <input type="radio" name="config_coupon_code" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_coupon_code" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_coupon_code" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_coupon_code" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_gift_voucher; ?></td>
+              <td><?php if ($config_gift_voucher) { ?>
+                <input type="radio" name="config_gift_voucher" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_gift_voucher" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_gift_voucher" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_gift_voucher" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_estimate_shipping; ?></td>
+              <td><?php if ($config_estimate_shipping) { ?>
+                <input type="radio" name="config_estimate_shipping" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_estimate_shipping" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_estimate_shipping" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_estimate_shipping" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_checkout; ?></td>
               <td><select name="config_checkout_id">
                   <option value="0"><?php echo $text_none; ?></option>

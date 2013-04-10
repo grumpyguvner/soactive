@@ -184,7 +184,7 @@ class ControllerCheckoutCart extends Controller {
 			} else {
 				$this->data['weight'] = '';
 			}
-						 
+			
 			$this->load->model('tool/image');
 			
       		$this->data['products'] = array();
@@ -276,7 +276,12 @@ class ControllerCheckoutCart extends Controller {
 			} else {
 				$this->data['next'] = '';
 			}
-						 
+                        
+			
+                        $this->data['config_coupon_code'] = $this->config->get('config_coupon_code');
+                        $this->data['config_gift_voucher'] = $this->config->get('config_gift_voucher');
+                        $this->data['config_estimate_shipping'] = $this->config->get('config_estimate_shipping');
+                        
 			$this->data['coupon_status'] = $this->config->get('coupon_status');
 			
 			if (isset($this->request->post['coupon'])) {

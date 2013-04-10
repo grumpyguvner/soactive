@@ -444,6 +444,36 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_coupon_code; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_coupon_code', $config_coupon_code); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_coupon_code', $config_coupon_code); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_gift_voucher; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_gift_voucher', $config_gift_voucher); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_gift_voucher', $config_gift_voucher); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_estimate_shipping; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_estimate_shipping', $config_estimate_shipping); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_estimate_shipping', $config_estimate_shipping); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label"><?php echo $entry_checkout; ?></label>
                                         <div class="controls">
                                             <select name="config_checkout_id" class="i-medium input-block-level">

@@ -61,97 +61,78 @@
     <body>
 
         <div id="header">
-
             <div id="background">
                 <div class="container">
-                    <div class="row">
-                        <div class="margin-30">
-                            <div id="container-in">
-                                <div id="menuh">
-                                    <div id="left">
-                                        <ul style="width: 70px;">
-                                            <li><a href="#" class="top_parent" onclick="return false;"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK</a>
-                                                <ul>
-                                                    <li style="width: 68px;"><a href="#"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
-                                                    <li style="width: 68px;"><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/US/"><img src="/image/flags/us.png" alt="English" />&nbsp US</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <?php
-                                        if ($currency) {
-                                        ?>
-                                        <ul style="width: 88px;">	
-                                          <?php if ($currency != '') { ?>
-                                            <li>
-                                                <?php echo $currency; ?>
-                                            </li>
-                                            <?php } ?>
-                                        </ul>
-                                        <?php
-                                        }
-                                        ?>
-                                        <ul>
-                                            <li><a href="free-uk-delivery">Free UK Delivery</a>
-                                            </li>
-                                        </ul>
-                                        <ul>	
-                                            <li><a href="free-uk-returns">Free UK Returns</a></li>
-                                        </ul>
-                                    </div>
-                                    <div id="right" class="rlink">
-                                        <ul>
-                                            <?php if (!$logged) { ?>
-                                                <li>
-                                                    <a href="<?php echo $login; ?>"><?php echo $text_login; ?></a>
-                                                </li>
-                                            <?php } else { ?>
-                                                <li style="width: 120px;">
-                                                    <?php echo $text_logged; ?>
-                                                </li>
-                                            <?php } ?>
+                    <div id="menuh">
+                        
+                            <ul id="left">
+                                <li><a href="#" class="top_parent" onclick="return false;"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK </a>
+                                    <ul>
+                                        <li><a href="#"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
+                                        <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/US/"><img src="/image/flags/us.png" alt="English" />&nbsp US</a></li>
+                                    </ul>
+                                </li>
+                            
+                            <?php
+                            if ($currency) {
+                            ?>
+                           	
+                              <?php if ($currency != '') { ?>
+                                <li>
+                                    <?php echo $currency; ?>
+                                </li>
+                                <?php } ?>
+                            
+                            <?php
+                            }
+                            ?>
+                            
+                                <li><a href="free-uk-delivery">Free UK Delivery</a>
+                                </li>
+                           
+                           	
+                                <li><a href="free-uk-returns">Free UK Returns</a></li>
+                            </ul>
+                        
+                        
+                            <ul id="right">
+                                <?php if (!$logged) { ?>
+                                    <li>
+                                        <a href="<?php echo $login; ?>"><?php echo $text_login; ?></a>
+                                    </li>
+                                <?php } else { ?>
+                                    <li>
+                                        <?php echo $text_logged; ?>
+                                    </li>
+                                <?php } ?>
 
 
-                                        </ul>
-                                        <ul>	
-                                            <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
-                                        </ul>
-                                        <ul>
-                                            <li><?php echo $cart; ?></li>
-                                        </ul> 
-                                    </div>
-                                </div> <!-- end the menuh-container div -->  
-                            </div>	<!-- end the menuh div --> 
-                        </div>
-                    </div>
+                            	
+                                <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
+                           
+                                <li><?php echo $cart; ?></li>
+                            </ul> 
+                        
+                    </div> 
                 </div>
             </div>
             <div class="gradiente">
                 <div class="container">
-                    <div class="row">
-                        <div class="margin-30">
-                            <div id="container-in">
-                                <div style="width: 100%">
-                                    <div id="logo" style="float: left">
-                                        <?php if ($logo) { ?>
-                                            <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a>
-                                        <?php } ?>
-                                    </div>
-                                    <div id="search" style="float: right">
-                                        <div class="navbar-search">
-                                            <div class="button-search"></div>
-                                            <?php if ($filter_name) { ?>
+                    <div id="logo">
+                        <?php if ($logo) { ?>
+                            <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a>
+                        <?php } ?>
+                    </div>
+                    <div id="search">
+                        <div class="navbar-search">
+                            <div class="button-search"></div>
+                            <?php if ($filter_name) { ?>
+                                <input type="text" class="search-query" placeholder="Search Store.." name="filter_name" value="<?php echo $filter_name; ?>" />
 
-                                                <input type="text" class="search-query" placeholder="Search Store.." name="filter_name" value="<?php echo $filter_name; ?>" />
+                            <?php } else { ?>
+                                <input type="text" class="search-query" placeholder="Search Store.." name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
 
-                                            <?php } else { ?>
-
-                                                <input type="text" class="search-query" placeholder="Search Store.." name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
-
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

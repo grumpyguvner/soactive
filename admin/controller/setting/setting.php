@@ -88,6 +88,10 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
+                $this->data['entry_coupon_code'] = $this->language->get('entry_coupon_code');
+                $this->data['entry_gift_voucher'] = $this->language->get('entry_gift_voucher');
+                $this->data['entry_estimate_shipping'] = $this->language->get('entry_estimate_shipping');
+                
 		$this->data['entry_checkout'] = $this->language->get('entry_checkout');		
 		$this->data['entry_order_edit'] = $this->language->get('entry_order_edit');
 		$this->data['entry_invoice_prefix'] = $this->language->get('entry_invoice_prefix');
@@ -606,6 +610,24 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_guest_checkout'] = $this->request->post['config_guest_checkout'];
 		} else {
 			$this->data['config_guest_checkout'] = $this->config->get('config_guest_checkout');		
+		}
+                
+                if (isset($this->request->post['config_coupon_code'])) {
+			$this->data['config_coupon_code'] = $this->request->post['config_coupon_code'];
+		} else {
+			$this->data['config_coupon_code'] = $this->config->get('config_coupon_code');
+		}
+                
+                if (isset($this->request->post['config_gift_voucher'])) {
+			$this->data['config_gift_voucher'] = $this->request->post['config_gift_voucher'];
+		} else {
+			$this->data['config_gift_voucher'] = $this->config->get('config_gift_voucher');
+		}
+                
+                if (isset($this->request->post['config_estimate_shipping'])) {
+			$this->data['config_estimate_shipping'] = $this->request->post['config_estimate_shipping'];
+		} else {
+			$this->data['config_estimate_shipping'] = $this->config->get('config_estimate_shipping');
 		}
 
 		if (isset($this->request->post['config_checkout_id'])) {
