@@ -7,7 +7,7 @@ html {
 body {
     background-color: #ffffff;
     color: #000000;
-    font-family: Arial, sans-serif, Helvetica  !important;
+    font-family: 'Roboto Condensed', 'Myriad Pro', 'trebuchet', Helvetica, Arial, sans-serif;
     margin:0px;
     padding: 0px;
     width:100% !important;
@@ -96,7 +96,6 @@ a:hover {
     padding-bottom: 4px;
 }
 .related-title h3 {
-    font-family: Arial;
     font-size: 16px;
     font-weight: normal;
     margin: 0px;
@@ -725,17 +724,10 @@ table.radio tr.highlight:hover td {
     cursor: pointer;
 }
 .pagination {
-
-    padding-top: 8px;
-    display: inline-block;
-    width: 94%;
-    margin-bottom: 10px;
-    margin-left: 14px !important;
+    margin: 20px 10px;
     line-height: 20px;
 }
 .pagination .links {
-    float: left;
-    margin-left: 16px;
 }
 .pagination .links a {
     display: inline-block;
@@ -763,18 +755,11 @@ table.radio tr.highlight:hover td {
     float: right;
     padding-top: 3px;
 }
-.pagination-text {
-    padding-top: 3px;
-    padding-right: 10px;
-    float: right;
-    line-height: 20px;
-}
 /* button */
 a.button, input.button {
     cursor: pointer;
     color: #FFFFFF !important;
     line-height: 12px;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     font-weight: bold;
     background-color: #9bc866;
@@ -807,7 +792,6 @@ a.button-account, input.button-account {
     cursor: pointer;
     color: #FFFFFF !important;
     line-height: 12px;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: bold;
     background-color: #9bc866;
@@ -867,7 +851,6 @@ a.button-account:hover, input.button-account:hover {
     background: #FFFFFF url('../image/tab.png') repeat-x;
     padding: 7px 15px 6px 15px;
     float: left;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: bold;
     text-align: center;
@@ -936,7 +919,6 @@ a.button-account:hover, input.button-account:hover {
     border-right: 1px solid #DDDDDD;
     background-color: #9fcf67;
     padding: 15px 0px 15px 20px;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-weight: bold;
     color: #333;
@@ -978,7 +960,6 @@ a.button-account:hover, input.button-account:hover {
 .box .box-heading {
     background-color: #9fcf67;
     padding: 15px 0px 15px 20px;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-weight: bold;
     color: #333;
@@ -1084,7 +1065,6 @@ a.button-account:hover, input.button-account:hover {
     text-decoration: none;
     color: #777777 !important;
     font-weight: normal;
-    font-family: Arial;
     font-size: 13px;
 }
 .box-category > ul > li ul {
@@ -1216,31 +1196,19 @@ a.button-account:hover, input.button-account:hover {
 /* product */
 .product-filter {
     background-color: #9FCF67;
-    padding-top: 10px;
-    height: 40px;
-    margin-left: 18px;
-}
-.product-filter .display {
-    margin-right: 15px;
-    float: left;
-    padding-top: 4px;
-    color: #333;
-}
-.product-filter .display a {
-    font-weight: bold;
-}
-.product-filter .sort {
-    float: left;
-    color: #333;
-    margin-left: 10px;
+    padding: 5px 20px 0;
+    font-size: 14px;
+    text-align: left;
+    line-height: 30px;
+    height: 44px;
 }
 .product-filter .sort select {
-    width: 193px;
+    margin-top: 5px;
 }
-.product-filter .limit {
-    margin-left: 1px; 
+.pagination-text {
     float: right;
-    color: #333;
+    text-align: right;
+    line-height: 39px;
 }
 .product-compare {
     padding-top: 6px;
@@ -1285,13 +1253,11 @@ a.button-account:hover, input.button-account:hover {
     color: #4D4D4D;
 }
 #description p {
-    font-family: Arial;
     font-weight: bold;
     font-size: 13px;
     line-height: 14px;
 }
 #description ul > li {
-    font-family: Arial;
     font-weight: normal;
     font-size: 13px;
 
@@ -1356,21 +1322,18 @@ a.button-account:hover, input.button-account:hover {
     text-align: center;
 }
 .product-grid .productItem .name {
-    height: 84px;
-    line-height: 84px;
-    padding: 0 10px;
+    height: 54px;
+    padding: 20px 10px 0;
 }
 .product-grid .productItem .name a {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 20px;
     color: #000;
 }
 .product-grid .productItem .name a:hover {
     text-decoration: none;
 }
 .product-grid .productItem .image {
-    padding-bottom: 30px;
+    height: 136px;
+    padding: 10px 10px 30px;
 }
 .product-grid .productItem .bar {
     background: #9CC967;
@@ -1621,7 +1584,6 @@ a.button-account:hover, input.button-account:hover {
     color: #74964a;
 }
 .product-price h1{
-    font-family: Arial;
     font-size: 39px !important;
     font-weight: bold;
     margin-top: 0px;
@@ -1656,7 +1618,6 @@ a.button-account:hover, input.button-account:hover {
     color: #000000;
 }
 .options h4 {
-    font-family: Arial;
     font-size: 14px;
     font-weight: normal;
     color: #747271;
@@ -2162,20 +2123,17 @@ a.button-account:hover, input.button-account:hover {
 }
 .contact-info h3 {
     color: #74964b;
-    font-family: Arial;
     font-weight: normal;
     font-size: 17px;
 }
 .contact-info span {
     color: #777777;
-    font-family: Arial;
     font-weight: normal;
     font-size: 14px;
 }
 
 .contact-info p {
     color: #777777;
-    font-family: Arial;
     font-weight: normal;
     font-size: 14px;
 }
@@ -2208,7 +2166,6 @@ a.button-account:hover, input.button-account:hover {
     background: transparent;  
 }
 #footer ul {
-    font-family: Arial;
     font-size: 13px;
 }
 .footer-wrap {
@@ -2231,7 +2188,6 @@ a.button-account:hover, input.button-account:hover {
     font-weight: bolder;
     margin-top: 0px;
     border-bottom: 1px solid;
-    font-family: Arial;
     padding-bottom: 10px;
 }
 #footer .column {
@@ -2382,7 +2338,6 @@ a.button-account:hover, input.button-account:hover {
     -moz-box-shadow: 0 1px 2px rgba(2, 2, 2, .25), inset 0 1px 1px rgba(255, 255, 255, .15);
     -ms-box-shadow: 0 1px 2px rgba(2, 2, 2, .25), inset 0 1px 1px rgba(255, 255, 255, .15);
     box-shadow: 0 1px 2px rgba(2, 2, 2, .25), inset 0 1px 1px rgba(255, 255, 255, .15);
-    font-family: Arial;
     font-size: 14px;
 
 }
@@ -2631,7 +2586,6 @@ a.button-account:hover, input.button-account:hover {
     list-style:none;
     margin:0;
     padding:0;
-    font-family: Arial;
     font-size: 14px;
     position: relative;
     display: block;
@@ -2715,7 +2669,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .info-title h1 {
     margin-left: 20px;
-    font-family: Arial;
     font-weight: bold;
     font-size: 34px !important;
 }
@@ -2769,7 +2722,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     width: 492px;
 }
 .review-in h3 {
-    font-family: Arial;
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -2779,14 +2731,12 @@ input[type="color"]:focus, .uneditable-input:focus {
     width: 492px;
 }
 .newsletter-in h3 {
-    font-family: Arial;
     font-size: 20px;
     font-weight: bold;
     color: white;
     margin-bottom: 2px;
 }
 .newsletter-in p {
-    font-family: Arial;
     font-size: 16px;
     color: #597539;
 }
@@ -2801,13 +2751,11 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin-left: 0;
 }
 .sections h3 {
-    font-family: Arial;
     font-size: 16px !important;
     font-weight: bold;
     color: #74964a;
 }
 .sections p {
-    font-family: Arial;
     font-size: 14px;
     color: grey;
 }
@@ -2874,7 +2822,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 #description-info h2 {
     color: white;
     text-align: center;
-    font-family: Arial;
     font-size: 23px !important;
     font-weight: bold;
 }
@@ -2891,7 +2838,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 #description-info #info-desc {
     width: 624px;
     padding: 8px;
-    font-family: Arial;
     font-size: 14px;
     font-weight: normal;
     line-height: 16px;
@@ -2906,7 +2852,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .contact-name p {
     margin-bottom: 0;
     color: black;
-    font-family: Arial;
     font-size: 13px;
     font-weight: bold;
 }
@@ -2922,7 +2867,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .contact-email p {
     margin-bottom: 0;
     color: black;
-    font-family: Arial;
     font-size: 13px;
     font-weight: bold;
 }
@@ -2933,7 +2877,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .contact-message p {
     margin-bottom: 0;
     color: black;
-    font-family: Arial;
     font-size: 13px;
     font-weight: bold;
 }
@@ -2946,7 +2889,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .contact-captcha p {
     margin-bottom: 0;
     color: black;
-    font-family: Arial;
     font-size: 13px;
     font-weight: bold;
 }
@@ -2958,12 +2900,10 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: #74964b;
     font-weight: normal;
     font-size: 17px;
-    font-family: Arial;
 }
 #text-cont {
     font-weight: normal;
     font-size: 14px;
-    font-family: Arial;
     color: #777777;
 }
 .option-buy input.button {
@@ -2987,7 +2927,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: 0 !important;
 }
 .table-price h5 {
-    font-family: Arial;
     font-weight: normal;
     font-size: 13px;
     margin: 0 !important;
@@ -3006,7 +2945,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: 0 !important;
 }
 .table-info a>h5 {
-    font-family: Arial;
     font-weight: normal;
     font-size: 13px;
     margin: 0 !important;
@@ -3029,7 +2967,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin-top: -38px;
     max-width: 128px;
     position: absolute;
-    font-family: Arial;
     font-weight: normal;
 }
 .design-tab {
@@ -3324,7 +3261,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .how-they-work.first h3 {
     background: url("../image/technology/number1.gif") no-repeat scroll left top transparent;
     color: #000000;
-    font-family: arial,sans-serif;
     padding: 12px 0 5px 40px;
 }
 .how-they-work {
@@ -3340,7 +3276,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .how-they-work.middle h3 {
     background: url("../image/technology/number2.gif") no-repeat scroll left top transparent;
     color: #FFFFFF;
-    font-family: arial,sans-serif;
     padding: 12px 0 5px 40px;
 }
 .how-they-work {
@@ -3359,7 +3294,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .how-they-work.last h3 {
     background: url("../image/technology/number3.gif") no-repeat scroll left top transparent;
     color: #FFFFFF;
-    font-family: arial,sans-serif;
     padding: 12px 0 5px 40px;
 }
 .how-they-work {
@@ -3435,7 +3369,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     text-align: center;
 }
 .grid-wrap h5{
-    font-family: Arial;
     font-size: 14px !important;
     font-weight: normal;
 }
@@ -3612,7 +3545,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .p-name h1 {
     color: #aca5a4;
-    font-family: Arial;
     font-size: 39px !important;
     font-weight: normal;
 }
@@ -3620,7 +3552,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     line-height: 20px;
     font-size: 17px !important;
     font-weight: normal;
-    font-family: Arial;
 }
 .thermal input {
     display: none;

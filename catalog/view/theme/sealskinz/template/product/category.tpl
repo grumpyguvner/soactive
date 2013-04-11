@@ -61,8 +61,9 @@
       <?php } */ ?>
                       </select>
                     </div-->
-                    <div class="sort"><?php echo $text_sort; ?>
-                        <select onchange="location = this.value;">
+                    <div class="pagination-text"><?php echo $pagination2; ?></div>
+                    <div class="sort"><label><?php echo $text_sort; ?>&nbsp;
+                        <select onchange="window.location = this.value;">
                             <?php foreach ($sorts as $sorts) { ?>
                                 <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
                                     <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
@@ -70,9 +71,8 @@
                                     <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
                                 <?php } ?>
                             <?php } ?>
-                        </select>
+                        </select></label>
                     </div>
-                    <div class="pagination-text"><?php echo $pagination2; ?></div>
                 </div>
                 <?php if ($products) { ?>
                     <div class="product-grid">
