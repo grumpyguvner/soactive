@@ -426,11 +426,7 @@ class ControllerProductCategory extends Controller {
 		
 			$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/category.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/product/category.tpl';
-			} else {
-				$this->template = 'default/template/product/category.tpl';
-			}
+			$this->setTemplate('product/category.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -486,11 +482,7 @@ class ControllerProductCategory extends Controller {
 
       		$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',

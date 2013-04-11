@@ -1,21 +1,27 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-    <div class="breadline">
-        <div class="container">
-            <div class="row"> 
-                <div class="span12">
-                    <div id="container-in">
-                        <div class="breadcrumb">
-                            <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                                <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                            <?php } ?>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<?php echo $header; ?>
+<div id="breadcrumb">
+    <div class="container">
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php }
+if ($attention) { ?>
+<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<?php 
+}
+?>
+</div>
     <?php if (isset($news_info)) { ?>
         <div id="content-back">
             <div class="green-bar">  
@@ -132,7 +138,7 @@
                                         <div class="wrap-rarticles">
                                     <?php for ($i=0; $i < count($rarticles) && $i < 4; $i++) { ?>
                                         <div class="rarticles">
-                                            <div class="image"><a href="<?php echo $rarticles[$i]['href'] ?>"><img src="<?php echo $rarticles[$i]['thumb'] ?>" alt="<?php echo $rarticles[$i]['name'] ?>" /></a></div>
+                                            <div class="image"><a href="<?php echo $rarticles[$i]['href'] ?>"><img src="<?php echo $rarticles[$i]['thumb'] ?>" alt="<?php echo $rarticles[$i]['name'] ?>" width="136" height="136" /></a></div>
                                             <div class="name"><a href="<?php echo $rarticles[$i]['href'] ?>"><?php echo $rarticles[$i]['name'] ?></a></div>
                                             <div class="description"><p><?php echo $rarticles[$i]['description']; ?></p></div>
                                             <div class="readmore"><a class="button" href="<?php echo $rarticles[$i]['href']; ?>"><span><?php echo $button_more; ?></span></a></div>
@@ -150,7 +156,7 @@
                                         <div id="right">
                                             <table>
                                                 <tr>
-                                                    <td align="right"><a onclick="location='<?php echo $news; ?>'" class="button-account"><span><?php echo $button_news; ?></span></a></td>
+                                                    <td align="right"><a href="press" class="button-account"><span><?php echo $button_news; ?></span></a></td>
                                                 </tr>
                                             </table>
                                         </div>

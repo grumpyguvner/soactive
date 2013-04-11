@@ -1,24 +1,30 @@
 <?php echo $header; ?>
-<div class="breadline">
+<div id="breadcrumb">
     <div class="container">
-      <div class="row"> 
-          <div class="span12">
-              <div id="container-in">
-                <div class="breadcrumb">
-                    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                    <?php } ?>
-                </div>
-              </div>
-            </div>
-      </div>
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
-  </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php } 
+?>
+</div>
 <div id="content-back">
     <div class="green-bar">
         <div id="container-in" class="content-in">
     <?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><div class="row"><?php echo $content_top; ?>
+<div id="content"><div class="row">
+    <div class="content-account">
+    <?php echo $content_top; ?>
   
   <h1><?php echo $heading_title; ?></h1>
   <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
@@ -45,7 +51,9 @@
       <div class="right"><input type="submit" value="<?php echo $button_continue; ?>" class="button" /></div>
     </div>
   </form>
-  <?php echo $content_bottom; ?></div></div>
+  <?php echo $content_bottom; ?>
+    </div>
+    </div></div>
         </div>
     </div>
 </div>

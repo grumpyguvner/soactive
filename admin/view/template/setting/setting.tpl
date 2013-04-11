@@ -124,6 +124,18 @@
                                 <div class="controls" id="template"></div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label"><?php echo $entry_base_template; ?></label>
+                                <div class="controls">
+                                    <select name="config_template" class="span3 i-large" onchange="$('#base_template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent(this.value));">
+                                        <?php echo p3html::oc_template_options($templates, $config_base_template); ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                <div class="controls" id="base_template"></div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label"><?php echo $entry_layout; ?></label>
                                 <div class="controls">
                                     <select name="config_layout_id" class="span3 i-large">
@@ -428,6 +440,36 @@
                                                 <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_guest_checkout', $config_guest_checkout); ?>
                                             <?php } else { ?>
                                                 <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_guest_checkout', $config_guest_checkout); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_coupon_code; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_coupon_code', $config_coupon_code); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_coupon_code', $config_coupon_code); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_gift_voucher; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_gift_voucher', $config_gift_voucher); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_gift_voucher', $config_gift_voucher); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_estimate_shipping; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_estimate_shipping', $config_estimate_shipping); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_estimate_shipping', $config_estimate_shipping); ?>
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -979,6 +1021,8 @@
 
 <script>
     $('#template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name="config_template"]').attr('value')));
+    $('#base_template').load('index.php?route=setting/setting/template&token=<?php echo $token; ?>&template=' + encodeURIComponent($('select[name="config_base_template"]').attr('value')));
+
 </script>
 <script type="text/javascript">
     $(document).ready(function(){

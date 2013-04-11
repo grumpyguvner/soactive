@@ -1,20 +1,27 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadline">
+<?php echo $header; ?>
+<div id="breadcrumb">
     <div class="container">
-      <div class="row"> 
-          <div class="span12">
-              <div id="container-in">
-                <div class="breadcrumb">
-                    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                    <?php } ?>
-                </div>
-              </div>
-            </div>
-      </div>
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
-  </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php }
+if ($attention) { ?>
+<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<?php 
+}
+?>
+</div>
 <div id="content-back">
     <div class="green-bar">
         <div id="container-in" class="content-in">
@@ -45,26 +52,47 @@
                               </td>
                               <td width="40%" valign="top">
                                   <table class="prod">
+                                      <?php if (!empty($Location['Address'])) { ?>
                                       <tr>
                                           <td style="width:50px;vertical-align:top;font-weight:bold;"><?php echo $store_loc_address ?></td>
                                           <td><?php echo $Location['Address']; ?></td>
                                       </tr>
+                                      <?php } ?>
+                                      
+                                      <?php if (!empty($Location['Website'])) { ?>
+                                      <tr>
+                                          <td style="width:50px;vertical-align:top;font-weight:bold;"><?php echo $store_loc_website ?></td>
+                                          <td><a href="http://<?php echo $Location['Website']; ?>" TARGET="_blank"><?php echo $Location['Website']; ?></a></td>
+                                      </tr>
+                                      <?php } ?>
+                                      
+                                      <?php if (!empty($Location['SpecialOffers'])) { ?>
                                       <tr>
                                           <td style="width:50px;vertical-align:top;font-weight:bold;"><?php echo $store_loc_offers ?></td>
                                           <td><?php echo $Location['SpecialOffers']; ?></td>
                                       </tr>
+                                      <?php } ?>
+                                      
+                                      <?php if (!empty($Location['Timing'])) { ?>
                                       <tr>
                                           <td style="width:50px;vertical-align:top;font-weight:bold;"><?php echo $store_loc_timing ?></td>
                                           <td><?php echo $Location['Timing']; ?></td>
                                       </tr>
+                                      <?php } ?>
+                                      
+                                      <?php if (!empty($Location['Phone'])) { ?>
                                       <tr>
                                           <td style="width:50px;vertical-align:top;font-weight:bold;"><?php echo $store_loc_phone ?></td>
                                           <td><?php echo $Location['Phone']; ?></td>
                                       </tr>
+                                      <?php } ?>
+                                      
+                                      <?php if (!empty($Location['Email'])) { ?>
                                        <tr>
                                           <td style="width:50px;vertical-align:top;font-weight:bold;"><?php echo $store_loc_email ?></td>
                                           <td><a href="mailto:<?php echo $Location['Email']; ?>"><?php echo $Location['Email']; ?></a></td>
                                       </tr>
+                                      <?php } ?>
                                   </table>
                               </td>
                           </tr>

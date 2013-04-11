@@ -1,22 +1,23 @@
 <?php echo $header; ?>
-<?php if ($success) { ?>
-<div class="success"><?php echo $success; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
-<?php } ?>
-<div class="breadline">
+<div id="breadcrumb">
     <div class="container">
-      <div class="row"> 
-          <div class="span12">
-              <div id="container-in">
-                <div class="breadcrumb">
-                    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                    <?php } ?>
-                </div>
-              </div>
-            </div>
-      </div>
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
-  </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php } 
+?>
+</div>
 
 <div id="content-back">
     <div class="green-bar">
@@ -24,13 +25,13 @@
 
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><div class="row"><?php echo $content_top; ?>
-   <div class="margin-95" id="margin-t33"> 
+   <div class="content-account"> 
        <h1><?php echo $heading_title; ?></h1>
-   </div>
+  
   <?php if ($products) { ?>
     
             <div class="wishlist-info">
-             <div class="margin-95">    
+            
               <table>
                 <thead>
                   <tr>
@@ -65,24 +66,25 @@
                 </tbody>
                 <?php } ?>
               </table>
-             </div>   
+               
             </div>
         
     
   <div class="buttons">
-    <div id="margin-r50" class="margin-65">  
+      
         <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
-    </div>
+    
   </div>
   <?php } else { ?>
   <div class="content"><?php echo $text_empty; ?></div>
   <div class="buttons">
-    <div id="margin-r50" class="margin-65">
+   
         <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
-    </div>
+    
   </div>
   <?php } ?>
   <?php echo $content_bottom; ?>
+    </div>
 </div>
 </div>
 </div>

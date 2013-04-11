@@ -99,14 +99,7 @@ class ControllerModuleCart extends Controller {
 				$total = false;
 			}
                         
-                        $idcategory = $this ->model_catalog_product->getCategories($product['product_id']);
-                                
-                                foreach ($idcategory as $categoryid) {
-                                    if ($categoryid['category_id']) {
-                                        $idcat = $categoryid['category_id'];
-                                    }
-                                }
-													
+                        													
 			$this->data['products'][] = array(
 				'key'      => $product['key'],
 				'thumb'    => $image,
@@ -116,7 +109,7 @@ class ControllerModuleCart extends Controller {
 				'quantity' => $product['quantity'],
 				'price'    => $price,	
 				'total'    => $total,	
-				'href'     => $this->url->link('product/product', 'path=' . $idcat . '&product_id=' . $product['product_id'])		
+				'href'     => $this->url->link('product/product', '&product_id=' . $product['product_id'])		
 			);
 		}
 		
@@ -137,11 +130,7 @@ class ControllerModuleCart extends Controller {
 						
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
 	
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/cart.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/cart.tpl';
-		} else {
-			$this->template = 'default/template/module/cart.tpl';
-		}
+		$this->setTemplate('module/cart.tpl');
 				
 		$this->response->setOutput($this->render());		
 	}

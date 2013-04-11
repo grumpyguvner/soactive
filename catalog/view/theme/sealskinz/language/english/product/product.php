@@ -36,7 +36,8 @@ $_['text_termal_rating']= 'Termal Rating';
 $_['text_gender']       = 'Gender';
 $_['text_activity']     = 'Activity';
 $_['text_filter']       = 'Filter';
-$_['text_option_details'] = 'Our best selling, totally waterproof, windproof and breathable knitted beanie hat';
+$_['text_option_details'] = '';
+$_['text_write_review'] = 'WRITE REVIEW';
 
 // Entry
 $_['entry_name']        = 'Your Name:';

@@ -86,11 +86,7 @@ class ControllerCommonContentBottom extends Controller {
 			}
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/content_bottom.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/content_bottom.tpl';
-		} else {
-			$this->template = 'default/template/common/content_bottom.tpl';
-		}
+		$this->setTemplate('common/content_bottom.tpl');
 								
 		$this->render();
 	}

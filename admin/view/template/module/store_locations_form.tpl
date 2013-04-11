@@ -35,6 +35,10 @@
           <td><textarea id="Address" name="Address" cols="20" rows="3"><?php echo $Address; ?></textarea><span><input type="checkbox" name="gCodeReq" id="gCodeReq" <?php echo $edit; ?>  />&nbsp;<?php echo $store_loc_gcode_req ?></span></td>
         </tr>
         <tr>
+          <td><?php echo $store_loc_website; ?></td>
+          <td><input type="text" id="Website" name="Website" value="<?php echo $Website ?>" style="width:180px" /></td>
+        </tr>
+        <tr>
           <td><?php echo $store_loc_latlon; ?></td>
           <td><?php echo $lat; ?>, <?php echo $lon; ?></td>
         </tr>

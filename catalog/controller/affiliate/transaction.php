@@ -84,11 +84,7 @@ class ControllerAffiliateTransaction extends Controller {
 		
 		$this->data['continue'] = $this->url->link('affiliate/account', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/transaction.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/affiliate/transaction.tpl';
-		} else {
-			$this->template = 'default/template/affiliate/transaction.tpl';
-		}
+		$this->setTemplate('affiliate/transaction.tpl');
 		
 		$this->children = array(
 			'common/column_left',

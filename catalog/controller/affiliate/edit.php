@@ -242,11 +242,7 @@ class ControllerAffiliateEdit extends Controller {
 
 		$this->data['back'] = $this->url->link('affiliate/account', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/edit.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/affiliate/edit.tpl';
-		} else {
-			$this->template = 'default/template/affiliate/edit.tpl';
-		}
+		$this->setTemplate('affiliate/edit.tpl');
 		
 		$this->children = array(
 			'common/column_left',

@@ -179,11 +179,7 @@ class ControllerCommonHeader extends Controller {
                         'common/content_banner'
 		);
 				
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/header.tpl';
-		} else {
-			$this->template = 'default/template/common/header.tpl';
-		}
+		$this->setTemplate('common/header.tpl');
 		
     	$this->render();
 	} 	

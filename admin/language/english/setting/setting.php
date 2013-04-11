@@ -32,6 +32,7 @@ $_['entry_title']                  = 'Title:';
 $_['entry_meta_description']       = 'Meta Tag Description:';
 $_['entry_layout']                 = 'Default Layout:';
 $_['entry_template']               = 'Template:';
+$_['entry_base_template']          = 'Base Template:';
 $_['entry_country']                = 'Country:';
 $_['entry_zone']                   = 'Region / State:';
 $_['entry_language']               = 'Language:';
@@ -60,6 +61,9 @@ $_['entry_customer_price']         = 'Login Display Prices:<br /><span class="he
 $_['entry_account']                = 'Account Terms:<br /><span class="help">Forces people to agree to terms before an account can be created.</span>';
 $_['entry_cart_weight']            = 'Display Weight on Cart Page:<br /><span class="help">Show the cart weight on the cart page</span>';
 $_['entry_guest_checkout']         = 'Guest Checkout:<br /><span class="help">Allow customers to checkout without creating an account. This will not be available when a downloadable product is in the shopping cart.</span>';
+$_['entry_coupon_code']            = 'Display coupon code:<br /><span class="help">Allow customers to use coupon code.</span>';
+$_['entry_gift_voucher']           = 'Display gift voucher:<br /><span class="help">Allow customers to use gift voucher.</span>';
+$_['entry_estimate_shipping']      = 'Display estimate shipping:<br /><span class="help">Allow customers to use estimate shipping.</span>';
 $_['entry_checkout']               = 'Checkout Terms:<br /><span class="help">Forces people to agree to terms before an a customer can checkout.</span>';
 $_['entry_order_edit']             = 'Order Editing:<br /><span class="help">Number of days allowed to edit an order. This is required because prices and discounts may change over time corrupting the order if it\'s edited.</span>';
 $_['entry_invoice_prefix']         = 'Invoice Prefix:<br /><span class="help">Set the invoice prefix (e.g. INV-2011-00). Invoice ID\'s will start at 1 for each unique prefix</span>';

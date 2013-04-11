@@ -163,6 +163,7 @@ class ControllerProductProduct extends Controller {
                         $this->data['text_activity'] = $this->language->get('text_activity');
                         $this->data['text_filter'] = $this->language->get('text_filter');
                         $this->data['text_option_details'] = $this->language->get('text_option_details');
+                        $this->data['text_write_review'] = $this->language->get('text_write_review');
 			
 			$this->data['entry_name'] = $this->language->get('entry_name');
 			$this->data['entry_review'] = $this->language->get('entry_review');
@@ -207,18 +208,17 @@ class ControllerProductProduct extends Controller {
 			}
 			
 			$this->load->model('tool/image');
-
-			if ($product_info['image']) {
-				$this->data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
-			} else {
-				$this->data['popup'] = '';
-			}
                         
                         if ($product_info['image']) {
-				$this->data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
+                            $this->data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+                            $this->data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
+                            $this->data['additional'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
 			} else {
+				$this->data['popup'] = '';
 				$this->data['thumb'] = '';
+				$this->data['additional'] = '';
 			}
+                        
 			
 			$this->data['images'] = array();
 			
@@ -228,7 +228,8 @@ class ControllerProductProduct extends Controller {
 				$this->data['images'][] = array(
 					'popup' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height')),
                                         'video' => $result['video'],
-					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))
+					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height')),
+                                        'main' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'))
 				);
 			}	
 						
@@ -466,11 +467,7 @@ class ControllerProductProduct extends Controller {
 			
 			$this->model_catalog_product->updateViewed($this->request->get['product_id']);
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/product.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/product/product.tpl';
-			} else {
-				$this->template = 'default/template/product/product.tpl';
-			}
+			$this->setTemplate('product/product.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -526,11 +523,7 @@ class ControllerProductProduct extends Controller {
       		$this->data['continue'] = $this->url->link('common/home');
                 
                 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -584,11 +577,7 @@ class ControllerProductProduct extends Controller {
 			
 		$this->data['pagination'] = $pagination->render();
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/review.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/product/review.tpl';
-		} else {
-			$this->template = 'default/template/product/review.tpl';
-		}
+		$this->setTemplate('product/review.tpl');
 		
 		$this->response->setOutput($this->render());
 	}

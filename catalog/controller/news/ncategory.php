@@ -140,7 +140,8 @@ class Controllernewsncategory extends Controller {
 					'name'        => $result['title'],
 					'acom'        => $result['acom'],
 					'thumb'       => $image,
-					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 500) . '..',
+					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 200) . '..',
+                                        'fullhtml'    => utf8_substr(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'), 0),
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'total_comments' => $this->model_catalog_ncomments->getTotalNcommentsByNewsId($result['news_id']),
 					'href'        => $this->url->link('news/article', 'ncat=' . $this->request->get['ncat'] . '&news_id=' . $result['news_id'])
@@ -158,11 +159,7 @@ class Controllernewsncategory extends Controller {
 		
 			$this->data['pagination'] = $pagination->render();
 			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/news/ncategory.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/news/ncategory.tpl';
-			} else {
-				$this->template = 'default/template/news/ncategory.tpl';
-			}
+			$this->setTemplate('news/ncategory.tpl');
 			
 			$this->children = array(
 				'common/column_left',
@@ -202,11 +199,7 @@ class Controllernewsncategory extends Controller {
 
       		$this->data['continue'] = $this->url->link('common/home');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-			} else {
-				$this->template = 'default/template/error/not_found.tpl';
-			}
+			$this->setTemplate('error/not_found.tpl');
 			
 			$this->children = array(
 				'common/column_left',

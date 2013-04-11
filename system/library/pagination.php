@@ -34,7 +34,7 @@ class Pagination {
         $output = '';
        
         if ($page > 1) {
-            $output .= ' <a href="' . str_replace('{page}', 1, $this->url) . '">' . $this->text_first . '</a> <a href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a> ';
+            $output .= ' <a href="' . str_replace('{page}', 1, $this->url) . '" class="first">' . $this->text_first . '</a> <a href="' . str_replace('{page}', $page - 1, $this->url) . '" class="prev">' . $this->text_prev . '</a> ';
         }
 
         if ($num_pages > 1) {
@@ -74,7 +74,7 @@ class Pagination {
         }
        
            if ($page < $num_pages) {
-            $output .= ' <a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a> <a href="' . str_replace('{page}', $num_pages, $this->url) . '">' . $this->text_last . '</a> ';
+            $output .= ' <a href="' . str_replace('{page}', $page + 1, $this->url) . '" class="next">' . $this->text_next . '</a> <a href="' . str_replace('{page}', $num_pages, $this->url) . '" class="last">' . $this->text_last . '</a> ';
         }
        
         $find = array(

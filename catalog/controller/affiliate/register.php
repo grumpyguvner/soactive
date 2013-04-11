@@ -324,11 +324,7 @@ class ControllerAffiliateRegister extends Controller {
 			$this->data['agree'] = false;
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/register.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/affiliate/register.tpl';
-		} else {
-			$this->template = 'default/template/affiliate/register.tpl';
-		}
+		$this->setTemplate('affiliate/register.tpl');
 		
 		$this->children = array(
 			'common/column_left',

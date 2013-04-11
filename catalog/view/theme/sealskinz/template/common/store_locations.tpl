@@ -1,20 +1,27 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadline">
+<?php echo $header; ?>
+<div id="breadcrumb">
     <div class="container">
-      <div class="row"> 
-          <div class="span12">
-              <div id="container-in">
-                <div class="breadcrumb">
-                    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                    <?php } ?>
-                </div>
-              </div>
-            </div>
-      </div>
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
-  </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php }
+if ($attention) { ?>
+<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<?php 
+}
+?>
+</div>
 <div id="content-back">
     <div class="green-bar">
         <div id="container-in" class="content-in">
@@ -76,23 +83,12 @@
                                </li>
                            </ul>
                     <?php } ?>
-                   </div> 
-                         <table class="margin-7">
-                              <tr>
-                                  <td colspan="2">
-                         <?php for($i=0;$i<$noOfPages;$i++) { ?>
-                                          <span class="content"><a href="<?php echo $pageLink; echo '&pno='; echo $i+1; ?>" title="Page No <?php echo $i+1; ?>"><?php echo $i+1; ?></a></span>
-                                      <?php } ?>
-                                  </td>
-                             </tr>
-                        <?php } 
+                   </div>   
+                   <div class="pagination" style="margin-left: 0 !important;"><?php echo $pagination; ?></div>
+                   <?php } 
                           else {
                         ?>
-                       <tr>
-                          <td colspan="2" style="text-align:center">
                               <div style="font-weight:bold;padding-top:10px;"><?php echo $store_loc_no_store; ?></div>
-                          </td>
-                     
                       <?php } ?>
                      </table>
                 </div>

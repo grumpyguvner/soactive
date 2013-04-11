@@ -46,16 +46,16 @@ class ControllerErrorNotFound extends Controller {
 		$this->data['text_error'] = $this->language->get('text_error');
 		
 		$this->data['button_continue'] = $this->language->get('button_continue');
+                $this->data['button_error_home'] = $this->language->get('button_error_home');
+                $this->data['button_error_back'] = $this->language->get('button_error_back');
+                $this->data['button_back'] = $this->language->get('button_back');
 		
 		$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . '/1.1 404 Not Found');
 		
+                $this->data['home'] = $this->url->link('common/home');
 		$this->data['continue'] = $this->url->link('common/home');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/error/not_found.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/error/not_found.tpl';
-		} else {
-			$this->template = 'default/template/error/not_found.tpl';
-		}
+		$this->setTemplate('error/not_found.tpl');
 		
 		$this->children = array(
 			'common/column_left',

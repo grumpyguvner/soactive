@@ -86,11 +86,7 @@ class ControllerAffiliateForgotten extends Controller {
  
 		$this->data['back'] = $this->url->link('affiliate/login', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/forgotten.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/affiliate/forgotten.tpl';
-		} else {
-			$this->template = 'default/template/affiliate/forgotten.tpl';
-		}
+		$this->setTemplate('affiliate/forgotten.tpl');
 		
 		$this->children = array(
 			'common/column_left',

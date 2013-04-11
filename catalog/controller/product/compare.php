@@ -145,11 +145,7 @@ class ControllerProductCompare extends Controller {
 		
 		$this->data['continue'] = $this->url->link('common/home');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/compare.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/product/compare.tpl';
-		} else {
-			$this->template = 'default/template/product/compare.tpl';
-		}
+		$this->setTemplate('product/compare.tpl');
 		
 		$this->children = array(
 			'common/column_left',

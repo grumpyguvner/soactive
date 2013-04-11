@@ -13,6 +13,7 @@ class ControllerModuleStoreLocations extends Controller {
 		$this->load->model('module/store_locations');
 
 		$Locations = $this->model_module_store_locations->getList(0,$this->config->get('store_locations_per_page'));
+                
 		$this->data['Locations'] = array();
 		$ctr = 0;
 		foreach($Locations as $Location) {
@@ -23,13 +24,9 @@ class ControllerModuleStoreLocations extends Controller {
 		 		
 		$this->data['txt_All_Locations'] = $this->language->get('txt_All_Locations');
 		$this->data['link_all_locations'] = $this->url->link('common/store_locations');
-
+                
 		//Choose which template to display this module with
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/store_locations.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/store_locations.tpl';
-		} else {
-			$this->template = 'default/template/module/store_locations.tpl';
-		}
+		$this->setTemplate('module/store_locations.tpl');
 
 		//Render the page with the chosen template
 		$this->render();

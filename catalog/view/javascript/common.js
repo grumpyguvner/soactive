@@ -26,7 +26,7 @@ $(document).ready(function() {
 		}
 	});
     
-    $('form#newsletter_form').submit(function() {
+    $('form.newsletter-form').submit(function() {
         $('.success, .warning, .attention, .information, .error').remove();
         
         $.ajax({
@@ -58,6 +58,11 @@ $(document).ready(function() {
             }
         });
       return false;
+    });
+    
+    $('form.newsletter-form .submit, form.newsletter-form .action').click(function () {
+        $(this).parents('form').trigger('submit');
+        return false;
     });
 	
 	/* Ajax Cart */

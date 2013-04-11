@@ -61,11 +61,7 @@ class ControllerModuleLanguage extends Controller {
 			$this->data['redirect'] = $this->url->link($route, $url, $connection);
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/language.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/language.tpl';
-		} else {
-			$this->template = 'default/template/module/language.tpl';
-		}
+		$this->setTemplate('module/language.tpl');
 		
 		$this->render();
 	}

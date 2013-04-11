@@ -86,11 +86,7 @@ class ControllerAccountReward extends Controller {
 		
 		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/reward.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/reward.tpl';
-		} else {
-			$this->template = 'default/template/account/reward.tpl';
-		}
+		$this->setTemplate('account/reward.tpl');
 		
 		$this->children = array(
 			'common/column_left',

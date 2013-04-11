@@ -59,11 +59,7 @@ class ControllerModuleSpecial extends Controller {
 			);
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/special.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/special.tpl';
-		} else {
-			$this->template = 'default/template/module/special.tpl';
-		}
+		$this->setTemplate('module/special.tpl');
 
 		$this->render();
 	}

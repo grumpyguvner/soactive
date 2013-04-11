@@ -44,11 +44,7 @@ class ControllerAffiliateTracking extends Controller {
 		
 		$this->data['continue'] = $this->url->link('affiliate/account', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/tracking.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/affiliate/tracking.tpl';
-		} else {
-			$this->template = 'default/template/affiliate/tracking.tpl';
-		}
+		$this->setTemplate('affiliate/tracking.tpl');
 		
 		$this->children = array(
 			'common/column_left',

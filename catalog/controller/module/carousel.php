@@ -33,11 +33,7 @@ class ControllerModuleCarousel extends Controller {
 		
 		$this->data['module'] = $module++; 
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/carousel.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/carousel.tpl';
-		} else {
-			$this->template = 'default/template/module/carousel.tpl';
-		}
+		$this->setTemplate('module/carousel.tpl');
 		
 		$this->render(); 
 	}

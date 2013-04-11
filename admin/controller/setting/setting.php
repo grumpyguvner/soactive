@@ -59,6 +59,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_template'] = $this->language->get('entry_template');
+		$this->data['entry_base_template'] = $this->language->get('entry_base_template');
 		$this->data['entry_country'] = $this->language->get('entry_country');
 		$this->data['entry_zone'] = $this->language->get('entry_zone');		
 		$this->data['entry_language'] = $this->language->get('entry_language');
@@ -71,7 +72,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
 		$this->data['entry_review'] = $this->language->get('entry_review');
-                $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
+        $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
 		$this->data['entry_download'] = $this->language->get('entry_download');
 		$this->data['entry_upload_allowed'] = $this->language->get('entry_upload_allowed');
 		$this->data['entry_voucher_min'] = $this->language->get('entry_voucher_min');
@@ -87,6 +88,10 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
+                $this->data['entry_coupon_code'] = $this->language->get('entry_coupon_code');
+                $this->data['entry_gift_voucher'] = $this->language->get('entry_gift_voucher');
+                $this->data['entry_estimate_shipping'] = $this->language->get('entry_estimate_shipping');
+                
 		$this->data['entry_checkout'] = $this->language->get('entry_checkout');		
 		$this->data['entry_order_edit'] = $this->language->get('entry_order_edit');
 		$this->data['entry_invoice_prefix'] = $this->language->get('entry_invoice_prefix');
@@ -394,6 +399,12 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_template'] = $this->config->get('config_template');
 		}
+        
+		if (isset($this->request->post['config_base_template'])) {
+			$this->data['config_base_template'] = $this->request->post['config_base_template'];
+		} else {
+			$this->data['config_base_template'] = $this->config->get('config_base_template');
+		}
 		
 		$this->data['templates'] = array();
 
@@ -599,6 +610,24 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_guest_checkout'] = $this->request->post['config_guest_checkout'];
 		} else {
 			$this->data['config_guest_checkout'] = $this->config->get('config_guest_checkout');		
+		}
+                
+                if (isset($this->request->post['config_coupon_code'])) {
+			$this->data['config_coupon_code'] = $this->request->post['config_coupon_code'];
+		} else {
+			$this->data['config_coupon_code'] = $this->config->get('config_coupon_code');
+		}
+                
+                if (isset($this->request->post['config_gift_voucher'])) {
+			$this->data['config_gift_voucher'] = $this->request->post['config_gift_voucher'];
+		} else {
+			$this->data['config_gift_voucher'] = $this->config->get('config_gift_voucher');
+		}
+                
+                if (isset($this->request->post['config_estimate_shipping'])) {
+			$this->data['config_estimate_shipping'] = $this->request->post['config_estimate_shipping'];
+		} else {
+			$this->data['config_estimate_shipping'] = $this->config->get('config_estimate_shipping');
 		}
 
 		if (isset($this->request->post['config_checkout_id'])) {

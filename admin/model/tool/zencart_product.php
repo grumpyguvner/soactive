@@ -6,7 +6,18 @@ class ModelToolZencartProduct extends ModelToolZencart {
     function import() {
         $this->debugMode = $this->config->get('zencart_products_debug');
         
-        if ($this->config->get('zencart_orders_truncate')) {
+        $this->truncate();
+
+        if (!$this->cacheZencartData())
+            return false;
+
+        $this->debug("Import Complete");
+        return true;
+    }
+
+    function truncate() {
+        
+        if ($this->config->get('zencart_products_truncate')) {
             
             $this->debug("truncating tables");
             
@@ -43,12 +54,6 @@ class ModelToolZencartProduct extends ModelToolZencart {
             
             $this->db->query("TRUNCATE `" . DB_PREFIX . "url_alias`");
         }
-
-        if (!$this->cacheZencartData())
-            return false;
-
-        $this->debug("Import Complete");
-        return true;
     }
 
     function cacheZencartData($forceRefresh = false) {
@@ -72,6 +77,41 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 $type = "";
                 $myCategory = "";
                 $myCategoryIds = array();
+                                
+                // Always add product to "Type" Category
+                $category = seoUrl((string) "Type");
+                $category_item = array (
+                    "name" => (string) "Type",
+                    "description" => "All types"
+                );
+                if ($myCategory != $category) {
+                    $myCategory = $category;
+                    $parent_type_id = $this->createCategory($category, $category_item, 0);
+                }
+                if ($parent_type_id) {
+                    if (!in_array($parent_type_id, $myCategoryIds))
+                        $myCategoryIds[] = $parent_type_id;
+                } else {
+                    $error = true;
+                }
+                                
+                // Always add product to "Activity" Category
+                $category = seoUrl((string) "Activity");
+                $category_item = array (
+                    "name" => (string) "Activity",
+                    "description" => "All activities"
+                );
+                if ($myCategory != $category) {
+                    $myCategory = $category;
+                    $parent_activity_id = $this->createCategory($category, $category_item, 0);
+                }
+                if ($parent_activity_id) {
+                    if (!in_array($parent_activity_id, $myCategoryIds))
+                        $myCategoryIds[] = $parent_activity_id;
+                } else {
+                    $error = true;
+                }
+
                 if ($aCategory->RecordCount() > 0) {
                     while (!$aCategory->EOF) {
                         $this->debug("");
@@ -81,8 +121,23 @@ class ModelToolZencartProduct extends ModelToolZencart {
                             case "Socks":
                             case "Hats":
                             case "Gloves":
-                                //Save these as attribute instead of category
-                                $type = (string) $aCategory->fields['categories_name'];
+                                //initialise category variables
+                                $category = seoUrl((string) $aCategory->fields['categories_name']);
+                                $category_item = array (
+                                    "name" => (string) $aCategory->fields['categories_name'],
+                                    "description" => $aCategory->fields['categories_description']
+                                );
+
+                                if ($myCategory != $category) {
+                                    $myCategory = $category;
+                                    $category_id = $this->createCategory($category, $category_item, $parent_type_id);
+                                }
+                                if ($category_id) {
+                                    if (!in_array($category_id, $myCategoryIds))
+                                        $myCategoryIds[] = $category_id;
+                                } else {
+                                    $error = true;
+                                }
                                 break;
                             default:
                                 //initialise category variables
@@ -94,7 +149,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
 
                                 if ($myCategory != $category) {
                                     $myCategory = $category;
-                                    $category_id = $this->createCategory($category, $category_item);
+                                    $category_id = $this->createCategory($category, $category_item, $parent_activity_id);
                                 }
                                 if ($category_id) {
                                     if (!in_array($category_id, $myCategoryIds))
@@ -118,6 +173,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                         //initialise sku variables
                         $size = "ONE SIZE";
                         $colour = "";
+                        $therm = "";
                         //We will be updating the quantity via Sage Interface
                         $quantity = (float) $aStock->fields['quantity'];
 //                        $quantity = 0;
@@ -135,6 +191,9 @@ class ModelToolZencartProduct extends ModelToolZencart {
                                         case "Product Code":
                                             $colour = substr((string) $aOptions->fields['products_options_values_name'], 5);
                                             break;
+                                        case "Thermal Rating":
+                                            $therm = (string) $aOptions->fields['products_options_values_name'];
+                                            break;
                                         default:
                                             //ignore
                                             break;
@@ -143,6 +202,22 @@ class ModelToolZencartProduct extends ModelToolZencart {
                                 }
                             }
                         }
+                        
+                        $aOptions = $this->dbQF->Execute('SELECT * FROM products_attributes JOIN products_options ON (products_attributes.options_id = products_options.products_options_id AND products_options.language_id = 1) JOIN products_options_values ON (products_attributes.options_values_id = products_options_values.products_options_values_id AND products_options_values.language_id = 1) WHERE products_attributes.products_id = '.$aProduct->fields['products_id'].' AND products_attributes.options_id = 7');
+                        if ($aOptions->RecordCount() > 0) {
+                            while (!$aOptions->EOF) {
+                                switch ($aOptions->fields['products_options_name']) {
+                                    case "Thermal Rating":
+                                        $therm = (string) $aOptions->fields['products_options_values_name'];
+                                        break;
+                                    default:
+                                        //ignore
+                                        break;
+                                }
+                                $aOptions->MoveNext();
+                            }
+                        }
+                        
                         // The product model is obtained from the first 5 characters of the SKU code
                         // the main model cant be used because different colours have different models
                         $model = substr((string) $aStock->fields['sku'], 0, 5);
@@ -153,7 +228,8 @@ class ModelToolZencartProduct extends ModelToolZencart {
                             "image" => (string) $aProduct->fields['products_image'],
                             "status" => (int) $aProduct->fields['products_status'],
                             "price" => (float) $aProduct->fields['products_price'],
-                            "type" => (string) $type,
+//                            "type" => (string) $type,
+                            "therm" => (string) $therm,
                             "sku" => (string) $aStock->fields['sku'],
                             "size" => $size,
                             "quantity" => $quantity,
@@ -188,7 +264,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
         return true;
     }
 
-    function createCategory($category, $category_item) {
+    function createCategory($category, $category_item, $parent_id = 0) {
         if (!is_array($category_item) || !array_key_exists("name", $category_item))
             return false;
         
@@ -197,7 +273,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
         $this->load->model('catalog/category');
         $category_info = $this->model_catalog_category->getCategoryByKeyword($category);
         $data = array(
-            "parent_id" => (int) 0,
+            "parent_id" => (int) $parent_id,
             "top" => (int) 1,
             "column" => (int) 1,
             "sort_order" => (int) 999,
@@ -210,7 +286,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                     'description' => (string) $category_item['description']
             )),
             'keyword' => $category,
-            'product_store' => array(0)
+            'category_store' => $this->config->get('zencart_products_store')
         );
 
         if (!$category_info) {
@@ -246,6 +322,27 @@ class ModelToolZencartProduct extends ModelToolZencart {
         
         $image = (file_exists($saveto) ? 'data/products/' . $model . '.jpg' : "");
         $this->debug("using ".$image." as image");
+        
+        
+        $attribute = array();
+//        if (!empty($stock_item['type']))
+//        {
+//            $attribute[] = array(
+//                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Type')), 
+//                'product_attribute_description' => array(
+//                    $this->languageId => array(
+//                        'text' => (string) $stock_item['type']
+//                )));
+//        };
+        if (!empty($stock_item['therm']))
+        {
+            $attribute[] = array(
+                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Thermal Rating')), 
+                'product_attribute_description' => array(
+                    $this->languageId => array(
+                        'text' => (string) $stock_item['therm']
+                )));
+        };
         
         //We only create a new product the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
@@ -288,16 +385,10 @@ class ModelToolZencartProduct extends ModelToolZencart {
                     'description' => (string) $stock_item['description'],
                     'tag' => NULL
             )),
-            'product_attribute' => ((string) $stock_item['type']=="" ? NULL : array( array(
-                'attribute_id' => 1, //TODO: lookup "TYPE" Attribute code instead of hard code
-                'product_attribute_description' => array(
-                    $this->languageId => array(
-                        'text' => (string) $stock_item['type']
-                ))
-            ))),
+            'product_attribute' => $attribute,
             'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
             'product_category' => $stock_item['categories'],
-            'product_store' => array(0)
+            'product_store' => $this->config->get('zencart_products_store')
         );
 
         if (!$product_info) {
@@ -367,7 +458,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 // if size option doesn't exist then create it
                 $data = array(
                     'option_id' => NULL,
-                    'type' => "select",
+                    'type' => "radio",
                     'sort_order' => 0,
                     'option_description' => array(1 => array('name' => "Size"))
                 );

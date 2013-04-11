@@ -13,6 +13,7 @@ $_['text_category']                    = 'Categories';
 $_['text_confirm']                     = 'Delete/Uninstall cannot be undone! Are you sure you want to do this?';
 $_['text_country']                     = 'Countries';
 $_['text_coupon']                      = 'Coupons';
+$_['text_cms']                         = 'CMS';
 $_['text_advanced_coupon']             = 'Advanced Coupons';
 $_['text_currency']                    = 'Currencies';
 $_['text_customer']                    = 'Customers';
@@ -27,7 +28,7 @@ $_['text_feed']                        = 'Product Feeds';
 $_['text_front']                       = 'Store Front';
 $_['text_geo_zone']                    = 'Geo Zones';
 $_['text_help']                        = 'Help';
-$_['text_information']                 = 'Information';
+$_['text_information']                 = 'Pages';
 $_['text_language']                    = 'Languages';
 $_['text_layout']                      = 'Layouts';
 $_['text_localisation']                = 'Localisation';
@@ -83,6 +84,10 @@ $_['text_weight_class']                = 'Weight Classes';
 $_['text_length_class']                = 'Length Classes';
 $_['text_zencart']                     = 'Zencart Import';
 $_['text_zone']                        = 'Zones';
+
+$_['text_welcome']                     = 'Blocks';
+$_['text_store_locations']             = 'Store locations';
+$_['text_news']                        = 'News / Blog';
 
 ### Event Calendar - Start ###
 $_['text_event']              = 'Events';

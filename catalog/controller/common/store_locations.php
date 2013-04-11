@@ -102,6 +102,19 @@ class ControllerCommonStoreLocations extends Controller {
 		$this->data['noOfPages'] = $noOfPages;
 		$this->data['pageLink'] = $this->url->link('common/store_locations&address=' . $this->data['address'] . '&distance=' . $this->data['distance']);
 		
+                if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else { 
+			$page = 1;
+		}
+                                
+                $pagination = new Pagination();
+                $pagination->total = $total;
+                $pagination->page = $pageNo;
+                $pagination->limit = $perPage;
+                $pagination->url = $this->url->link('common/store_locations&address=' . $this->data['address'] . '&distance=' . $this->data['distance'] . '&pno={page}');
+                $this->data['pagination'] = $pagination->render();
+                
 		$this->data['Locations'] = array();
 		
 		if (count($cords) > 0) {
@@ -137,11 +150,7 @@ class ControllerCommonStoreLocations extends Controller {
      	//End - google map code
 		
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/store_locations.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/store_locations.tpl';
-		} else {
-			$this->template = 'default/template/common/store_locations.tpl';
-		}
+		$this->setTemplate('common/store_locations.tpl');
 			
 		$this->children = array(
 				'common/column_left',

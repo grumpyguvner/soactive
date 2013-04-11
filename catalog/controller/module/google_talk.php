@@ -11,11 +11,7 @@ class ControllerModuleGoogleTalk extends Controller {
 			$this->data['code'] = html_entity_decode($this->config->get('google_talk_code'));
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/google_talk.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/google_talk.tpl';
-		} else {
-			$this->template = 'default/template/module/google_talk.tpl';
-		}
+		$this->setTemplate('module/google_talk.tpl');
 		
 		$this->render();
 	}

@@ -46,6 +46,7 @@ $_['store_loc_address'] = 'Adress:';
 $_['store_loc_latlon'] = 'Geo-Coded Lat/Log:';
 $_['store_loc_gcode_req'] = 're-geocoding Required';
 $_['store_loc_email'] = 'eMail:';
+$_['store_loc_website'] = 'Website:';
 $_['store_loc_phone'] = 'Phone:';
 $_['store_loc_offers'] = 'Special Offers:';
 $_['store_loc_image'] = 'Image:';

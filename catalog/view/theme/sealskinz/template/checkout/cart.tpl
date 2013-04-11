@@ -1,34 +1,33 @@
 <?php echo $header; ?>
-<?php if ($attention) { ?>
-<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
-<?php } ?>
-<?php if ($success) { ?>
-<div class="success"><?php echo $success; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
-<?php } ?>
-<?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
-<?php } ?>
-<div class="breadline">
+<div id="breadcrumb">
     <div class="container">
-      <div class="row"> 
-          <div class="span12">
-           <div id="container-in">
-                <div class="breadcrumb">
-                    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-                    <?php } ?>
-                </div>
-           </div>
-            </div>
-      </div>
+        <?php
+        foreach ($breadcrumbs as $breadcrumb) {
+            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
+        } 
+        ?>
     </div>
-  </div>
+</div>
+<div id="notification">
+<?php
+if ($success) { ?>
+<div class="success"><?php echo $success; ?></div>
+<?php } 
+if ($error_warning) { ?>
+<div class="warning"><?php echo $error_warning; ?></div>
+<?php }
+if ($attention) { ?>
+<div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+<?php 
+}
+?>
+</div>
 
 <div id="container-in">
     
 <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
-    <table>
+    <table id="shipping-head">
      <tr>
          <td><h1><?php echo $heading_title; ?></h1></td>
          <td><h4><?php if ($weight) { ?>
@@ -123,21 +122,24 @@
     </table>
   </div>
   <?php if ($coupon_status || $advanced_coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
-  <h2><?php echo $text_next; ?></h2>
-  <div class="content">
+  
+  <div class="content" <?php if ($config_coupon_code == 0 && $config_gift_voucher == 0 && $config_estimate_shipping == 0) { ?> style="display: none;" <?php } ?>>
+      <h2><?php echo $text_next; ?></h2>
       <div class="row">
           <div class="span12">  
     <p><?php echo $text_next_choice; ?></p>
     <table class="radio">
-      <?php if ($coupon_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'coupon') { ?>
-          <input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="coupon" id="use_coupon" />
-          <?php } ?></td>
-        <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
-      </tr>
+      <?php if ($config_coupon_code == 1) { ?>
+        <?php if ($coupon_status) { ?>
+        <tr class="highlight">
+          <td><?php if ($next == 'coupon') { ?>
+            <input type="radio" name="next" value="coupon" id="use_coupon" checked="checked" />
+            <?php } else { ?>
+            <input type="radio" name="next" value="coupon" id="use_coupon" />
+            <?php } ?></td>
+          <td><label for="use_coupon"><?php echo $text_use_coupon; ?></label></td>
+        </tr>
+        <?php } ?>
       <?php } ?>
       <?php if ($advanced_coupon_status) { ?>
      	 		<tr class="highlight">
@@ -145,15 +147,17 @@
         		<td><label for="use_advanced_coupon"><?php echo $text_use_advanced_coupon; ?></label></td>
       			</tr>
       		<?php } ?>
-      <?php if ($voucher_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'voucher') { ?>
-          <input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="voucher" id="use_voucher" />
-          <?php } ?></td>
-        <td><label for="use_voucher"><?php echo $text_use_voucher; ?></label></td>
-      </tr>
+      <?php if ($config_gift_voucher == 1) { ?>
+        <?php if ($voucher_status) { ?>
+        <tr class="highlight">
+          <td><?php if ($next == 'voucher') { ?>
+            <input type="radio" name="next" value="voucher" id="use_voucher" checked="checked" />
+            <?php } else { ?>
+            <input type="radio" name="next" value="voucher" id="use_voucher" />
+            <?php } ?></td>
+          <td><label for="use_voucher"><?php echo $text_use_voucher; ?></label></td>
+        </tr>
+        <?php } ?>
       <?php } ?>
       <?php if ($reward_status) { ?>
       <tr class="highlight">
@@ -165,21 +169,23 @@
         <td><label for="use_reward"><?php echo $text_use_reward; ?></label></td>
       </tr>
       <?php } ?>
-      <?php if ($shipping_status) { ?>
-      <tr class="highlight">
-        <td><?php if ($next == 'shipping') { ?>
-          <input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
-          <?php } else { ?>
-          <input type="radio" name="next" value="shipping" id="shipping_estimate" />
-          <?php } ?></td>
-        <td><label for="shipping_estimate"><?php echo $text_shipping_estimate; ?></label></td>
-      </tr>
+      <?php if ($config_estimate_shipping == 1) { ?>
+        <?php if ($shipping_status) { ?>
+        <tr class="highlight">
+          <td><?php if ($next == 'shipping') { ?>
+            <input type="radio" name="next" value="shipping" id="shipping_estimate" checked="checked" />
+            <?php } else { ?>
+            <input type="radio" name="next" value="shipping" id="shipping_estimate" />
+            <?php } ?></td>
+          <td><label for="shipping_estimate"><?php echo $text_shipping_estimate; ?></label></td>
+        </tr>
+        <?php } ?>
       <?php } ?>
     </table>
       </div>
   </div>
   </div>
-  <div class="cart-module">
+    <div class="cart-module">
     <div id="coupon" class="content" style="display: <?php echo ($next == 'coupon' ? 'block' : 'none'); ?>;">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
         <?php echo $entry_coupon; ?>&nbsp;

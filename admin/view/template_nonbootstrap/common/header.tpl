@@ -88,6 +88,16 @@ ob_start("fixMenu");
 ?>
     <ul class="left" style="display: none;">
       <li id="dashboard"><a href="<?php echo $home; ?>" class="top"><?php echo $text_dashboard; ?></a></li>
+      <li id="cms"><a class="top"><?php echo $text_cms; ?></a>
+        <ul>
+          <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+          <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
+          <li><a href="<?php echo $welcome; ?>"><?php echo $text_welcome; ?></a></li>	
+          <li><a href="<?php echo $news; ?>"><?php echo $text_news; ?></a></li>	
+          <li><a href="<?php echo $store_locations; ?>"><?php echo $text_store_locations; ?></a></li>	
+          <li><a href="<?php echo $event; ?>"><?php echo $text_event; ?></a></li>	
+        </ul>
+      </li>
       <li id="catalog"><a class="top"><?php echo $text_catalog; ?></a>
         <ul>
           <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
@@ -102,8 +112,6 @@ ob_start("fixMenu");
           <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
           <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
           <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
-          <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
-          <li><a href="<?php echo $event; ?>"><?php echo $text_event; ?></a></li>	
         </ul>
       </li>
       <li id="extension"><a class="top"><?php echo $text_extension; ?></a>
@@ -141,12 +149,7 @@ ob_start("fixMenu");
       <li id="system"><a class="top"><?php echo $text_system; ?></a>
         <ul>
           <li><a href="<?php echo $setting; ?>"><?php echo $text_setting; ?></a></li>
-          <li><a class="parent"><?php echo $text_design; ?></a>
-            <ul>
-              <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
-              <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
-            </ul>
-          </li>
+          <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
           <li><a class="parent"><?php echo $text_users; ?></a>
             <ul>
               <li><a href="<?php echo $user; ?>"><?php echo $text_user; ?></a></li>

@@ -147,11 +147,7 @@ class ControllerAccountEdit extends Controller {
 
 		$this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/edit.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/edit.tpl';
-		} else {
-			$this->template = 'default/template/account/edit.tpl';
-		}
+		$this->setTemplate('account/edit.tpl');
 		
 		$this->children = array(
 			'common/column_left',

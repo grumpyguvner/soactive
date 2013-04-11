@@ -459,11 +459,7 @@ class ControllerProductSearch extends Controller {
 		$this->data['order'] = $order;
 		$this->data['limit'] = $limit;
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/search.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/product/search.tpl';
-		} else {
-			$this->template = 'default/template/product/search.tpl';
-		}
+		$this->setTemplate('product/search.tpl');
 		
 		$this->children = array(
 			'common/column_left',

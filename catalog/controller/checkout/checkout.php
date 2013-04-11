@@ -61,11 +61,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->data['logged'] = $this->customer->isLogged();
 		$this->data['shipping_required'] = $this->cart->hasShipping();	
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/checkout/checkout.tpl';
-		} else {
-			$this->template = 'default/template/checkout/checkout.tpl';
-		}
+		$this->setTemplate('checkout/checkout.tpl');
 		
 		$this->children = array(
 			'common/column_left',

@@ -25,11 +25,7 @@ class ControllerModuleInformation extends Controller {
                 $this->data['sitemap'] = $this->url->link('information/sitemap');
                 $this->data['stockist'] = $this->url->link('common/store_locations', '', 'SSL');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/information.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/information.tpl';
-		} else {
-			$this->template = 'default/template/module/information.tpl';
-		}
+		$this->setTemplate('module/information.tpl');
 		
 		$this->render();
 	}
