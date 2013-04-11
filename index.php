@@ -184,7 +184,7 @@ $config->set('config_language_id', $languages[$code]['language_id']);
 $config->set('config_language', $languages[$code]['code']);
 
 // Language	
-$language = new Language($languages[$code]['directory'], $config->get("config_template"));
+$language = new Language($languages[$code]['directory'], $registry);
 $language->load($languages[$code]['filename']);	
 $registry->set('language', $language); 
 

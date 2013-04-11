@@ -645,7 +645,7 @@ class ModelSaleOrder extends Model {
 		}
 
       	if ($data['notify']) {
-			$language = new Language($order_info['language_directory']);
+			$language = new Language($order_info['language_directory'], $registry);
 			$language->load($order_info['language_filename']);
 			$language->load('mail/order');
 

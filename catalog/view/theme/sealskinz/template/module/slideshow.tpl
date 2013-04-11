@@ -3,7 +3,7 @@ if (!empty($banners))
 {
 ?>
     <div class="carousel slide" id="myCarousel">
-        <img src="/catalog/view/theme/<?php echo $this->config->get('config_template') ?>/image/carouselSpacer.png" alt="" />
+        <img src="/catalog/view/theme/sealskinz/image/carouselSpacer.png" alt="" />
         <div class="carouselBasebarContainer">
             <div class="container">
                 <div class="imgGreat">
