@@ -86,8 +86,7 @@
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
         <?php } else if ($information['sort_order'] == '13') { ?>
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-        <?php } else if ($information['sort_order'] == '14') { ?>
-            <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
+            <li><a href="testimonials"><?php echo $text_testimonials; ?></a></li>
         <?php } else if ($information['sort_order'] == '16') { ?>
             <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
         <?php } ?>

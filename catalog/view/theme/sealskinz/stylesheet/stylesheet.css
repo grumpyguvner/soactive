@@ -965,7 +965,7 @@ a.button-account:hover, input.button-account:hover {
     color: #333;
 }
 .box-green {
-    height: 516px;
+    height: 518px;
     border-left: 1px solid #DDDDDD;
     border-right: 1px solid #DDDDDD;
     background-color: #9fcf67;
@@ -2119,7 +2119,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .contact-info {
     overflow: auto;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
 }
 .contact-info h3 {
     color: #74964b;
@@ -2662,15 +2662,17 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .info-title {
     width: 100%;
-    background-color: #000000 !important;
-    margin: 0; padding-top: 14px;
-    padding-bottom: 14px;
+    background-color: #000000;
+    margin: 0; 
     color: #9cc967;
 }
 .info-title h1 {
     margin-left: 20px;
     font-weight: bold;
-    font-size: 34px !important;
+    font-size: 34px;
+    color: #9cc967;
+    margin: 0; 
+    padding: 25px 20px;
 }
 #background {
     width: 100%;
@@ -2827,8 +2829,8 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 #description-info #info-date {
     background-image: url('../image/years.png');
+    background-repeat: no-repeat;
     width: 145px;
-    height: 81px;
 }
 #description-info tr {
     width: 769px;
@@ -2836,11 +2838,11 @@ input[type="color"]:focus, .uneditable-input:focus {
     border-bottom: 1px dotted green;
 }
 #description-info #info-desc {
-    width: 624px;
-    padding: 8px;
+    padding: 20px;
     font-size: 14px;
     font-weight: normal;
     line-height: 16px;
+    color: #999999;
 }
 #description-info table {
     width: 769px;
@@ -3188,17 +3190,15 @@ input[type="color"]:focus, .uneditable-input:focus {
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 
     .our-history {
-        margin-top: -9px;
-        padding-top: 15px;
+        margin-top: -10px;
     }
 
 }
 .our-history {
     background-image: url('../image/information/history-back.png');
     background-repeat: no-repeat;
-    background-position: bottom left;
     margin-left: 0;
-    height: 1101px;
+    height: 1066px;
 }
 .our-factory {
     background-image: url('../image/information/customer-service.png');
@@ -3218,10 +3218,10 @@ input[type="color"]:focus, .uneditable-input:focus {
 .registration {
     background-image: url('../image/information/customer-service.png');
     background-repeat: no-repeat;
-    background-position: bottom left;
     margin-left: 0;
     height: 677px;
 }
+
 .privacy-policy {
     /*background-image: url('../image/information/customer-service.png');*/
     background-repeat: no-repeat;
@@ -3302,15 +3302,23 @@ input[type="color"]:focus, .uneditable-input:focus {
     height: 316px;
     width: 182px;
 }
+.iRow {
+    display: block;
+}
+.iRows {
+    background: url('../image/backgrounds/quote.jpg') no-repeat scroll left top transparent;
+    border: 1px solid #EFEFEF;
+    clear: left;
+    display: block;
+    margin-bottom: 5px;
+    padding: 20px 10px 10px 50px;
+}
+#testimonials {
+    margin: 5px 15px;
+}
 #pageDetail .iRow.international .iBlock p {
     margin: 0;
     padding: 5px;
-}
-#pageDetail {
-    background: none repeat scroll 0 0 #FFFFFF;
-    float: left;
-
-    width: 592px;
 }
 #pageDetail .iRow.international .iBlock {
     border: 1px solid #DDDDDD;
@@ -3323,6 +3331,8 @@ input[type="color"]:focus, .uneditable-input:focus {
 #pageDetail .iRow {
 
     width: 584px;
+}
+#pageDetail .iRows {
 }
 .error-wrap {
     margin-left: 30px;
@@ -3468,7 +3478,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     background-repeat: no-repeat;
     background-position: bottom left;
     margin-left: 0;
-    height: 774px;
+    height: 792px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 
@@ -3797,6 +3807,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .headlines .name a{
     font-size: 18px;
+    color: #96C462;
 }
 .headlines .name p{
     font-size: 14px;
@@ -3857,14 +3868,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     background-repeat: no-repeat;
     width: 208px;
     height: 38px;
-}
-.iRow {
-    background: url('../image/backgrounds/quote.jpg') no-repeat scroll left top transparent;
-    border: 1px solid #EFEFEF;
-    clear: left;
-    display: block;
-    margin: 5px 20px;
-    padding: 20px 10px 10px 50px;
 }
 .quote {
     color: #4D4D4D;

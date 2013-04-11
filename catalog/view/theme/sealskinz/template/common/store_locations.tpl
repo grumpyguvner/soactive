@@ -84,7 +84,7 @@ if ($attention) { ?>
                            </ul>
                     <?php } ?>
                    </div>   
-                   <div class="pagination" style="margin-left: 0 !important;"><?php echo $pagination; ?></div>
+                   <div class="pagination"><?php echo $pagination; ?></div>
                    <?php } 
                           else {
                         ?>

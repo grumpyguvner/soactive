@@ -29,7 +29,7 @@ if ($attention) { ?>
       
     <div id="content"><?php echo $content_top; ?>
         <div class="info-title">
-            <h1 style="margin-left: 20px;"><?php echo $text_linecontact ?></h1>
+            <h1><?php echo $text_linecontact ?></h1>
         </div> 
         <div class="row" style="margin-left: 0;"> 
                 

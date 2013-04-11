@@ -7,6 +7,8 @@ class ControllerModuleInformation extends Controller {
 		$this->data['text_contact'] = $this->language->get('text_contact');
                 $this->data['text_sitemap'] = $this->language->get('text_sitemap');
                 $this->data['text_stockist'] = $this->language->get('text_stockist');
+                $this->data['text_testimonials'] = $this->language->get('text_testimonials');
+                
                 $this->data['seo'] = $this->request->get['_route_'];
 		
 		$this->load->model('catalog/information');
