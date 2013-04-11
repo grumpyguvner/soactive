@@ -42,8 +42,13 @@ class Currency {
     	}
 
     	if (!isset($this->request->cookie['currency']) || ($this->request->cookie['currency'] != $currency)) {
-	  		setcookie('currency', $currency, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
-    	}
+            if (defined('SITE_REGION'))
+            {
+                setcookie('currency', $currency, time() + 60 * 60 * 24 * 30, '/' . SITE_REGION . '/', $this->request->server['HTTP_HOST']);
+            } else {
+                setcookie('currency', $currency, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
+            }
+        }
   	}
 
   	public function format($number, $currency = '', $value = '', $format = true) {
