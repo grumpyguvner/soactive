@@ -102,8 +102,7 @@ if ($attributes) {
                 </form>
             </div>
         </div>
-    </div>
-<?php } ?>
+    </div><?php } ?>
 <script type="text/javascript">
     $('#afilter .thermal input').change(function () {
         if ($(this).is(':checked'))

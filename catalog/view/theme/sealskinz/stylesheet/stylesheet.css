@@ -75,37 +75,7 @@ a:hover {
 #title {
     border-bottom: 1px solid #CCCCCC;
 }
-#related{
-    margin-left: 28px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    width: 769px;
-    margin-top: 30px;
-    line-height: 0;
-}
-#related .name {
-    text-align: center;
-}
-#related .related-title{
-    background-color: #96c462;
-    border-top: 1px solid #CCCCCC;
-    border-bottom: 1px solid #CCCCCC;
-    padding-left: 22px;
-    height: 42px;
-    padding-top: 5px;
-    padding-bottom: 4px;
-}
-.related-title h3 {
-    font-size: 16px;
-    font-weight: normal;
-    margin: 0px;
-    color: white
-}
 
-#related .related-image{
-    text-align: center;
-    border: none;
-}
 form {
     padding: 0;
     margin: 0;
@@ -1193,7 +1163,7 @@ a.button-account:hover, input.button-account:hover {
     opacity:0.8;
     filter:alpha(opacity=80); /* For IE8 and earlier */
 }
-/* product */
+/* category */
 .product-filter {
     background-color: #9FCF67;
     padding: 5px 20px 0;
@@ -1479,9 +1449,29 @@ a.button-account:hover, input.button-account:hover {
     background: url('../image/add.png') left center no-repeat;
 }
 /* Product */
+
+#relatedProducts {
+    padding-bottom: 20px;
+}
+
+#relatedProducts .related-title{
+    background-color: #96c462;
+    padding-left: 22px;
+}
+#relatedProducts .related-title h3 {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0px;
+    color: white
+}
+
+#relatedProducts .related-image{
+    text-align: center;
+    border: none;
+}
+
 .product-info {
     overflow: visible;
-    border: 1px solid #CCCCCC;
     padding-top: 24px;
     display: table-cell;
 }
