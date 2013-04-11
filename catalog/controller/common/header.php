@@ -86,6 +86,11 @@ class ControllerCommonHeader extends Controller {
         $this->data['text_stockist'] = $this->language->get('text_stockist');
         $this->data['text_activity'] = $this->language->get('text_activity');
         $this->data['text_activities'] = $this->language->get('text_activities');
+        $this->data['text_free_delivery'] = $this->language->get('text_free_delivery');
+        $this->data['text_free_returns'] = $this->language->get('text_free_returns');
+        $this->data['text_blog'] = $this->language->get('text_blog');
+        $this->data['text_product_registration'] = $this->language->get('text_product_registration');
+        $this->data['text_follow_us'] = $this->language->get('text_follow_us');
 
         $this->data['home'] = $this->url->link('common/home');
         $this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');

@@ -1217,8 +1217,8 @@ a.button-account:hover, input.button-account:hover {
 .product-filter {
     background-color: #9FCF67;
     padding-top: 10px;
-    margin-left: 18px;
     height: 40px;
+    margin-left: 18px;
 }
 .product-filter .display {
     margin-right: 15px;
@@ -2593,11 +2593,11 @@ a.button-account:hover, input.button-account:hover {
 {
     text-align: left;
     display:block;
-    border: 1px solid #000000;
     white-space:nowrap;
     padding: 6px 10px;
     font-weight: bolder;
     color: grey !important;
+    height: 21px;
 }
 #menuh a:link, #menuh a:visited, #menuh a:active	/* menu at rest */
 {
@@ -2640,7 +2640,6 @@ a.button-account:hover, input.button-account:hover {
 #menuh li
 {
     border-left: 1px solid grey;
-    border-right: 1px solid grey;
     position:relative;
     min-height: 1px;	
     vertical-align: bottom;	
@@ -3959,4 +3958,10 @@ input[type="color"]:focus, .uneditable-input:focus {
 .play-button img {
     position: relative;
     z-index: 1;
+}
+#cssmenu li#socialn {
+    float: right;
+    padding: 12px 18px;
+    border-left: 1px solid #434245;
+    border-right: 1px solid #434245;
 }

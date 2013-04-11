@@ -63,7 +63,6 @@
             <div id="background">
                 <div class="container">
                     <div id="menuh">
-                        
                             <ul id="left">
                                 <li><a href="#" class="top_parent" onclick="return false;"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK </a>
                                     <ul>
@@ -71,7 +70,6 @@
                                         <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/US/"><img src="/image/flags/us.png" alt="English" />&nbsp US</a></li>
                                     </ul>
                                 </li>
-                            
                             <?php
                             if ($currency) {
                             ?>
@@ -85,15 +83,9 @@
                             <?php
                             }
                             ?>
-                            
-                                <li><a href="free-uk-delivery">Free UK Delivery</a>
-                                </li>
-                           
-                           	
-                                <li><a href="free-uk-returns">Free UK Returns</a></li>
+                                <li><a href="free-uk-delivery"><?php echo $text_free_delivery; ?></a></li>
+                                <li><a href="free-uk-returns" style="border-right: 1px solid grey;"><?php echo $text_free_returns; ?></a></li>
                             </ul>
-                        
-                        
                             <ul id="right">
                                 <?php if (!$logged) { ?>
                                     <li>
@@ -104,14 +96,9 @@
                                         <?php echo $text_logged; ?>
                                     </li>
                                 <?php } ?>
-
-
-                            	
                                 <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
-                           
                                 <li><?php echo $cart; ?></li>
                             </ul> 
-                        
                     </div> 
                 </div>
             </div>
@@ -192,10 +179,10 @@
                                             <?php } ?>
                                         </li>
                                         <li><a href="our-history"><span>Brand Story</span></a></li>
-                                        <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span>Blog</span></a></li>
+                                        <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span><?php echo $text_blog ?></span></a></li>
                                         <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
-                                        <li><a href="registration"><span>Product Registration</span></a></li>
-                                        <li style="float: right; padding: 12px 18px;"><span>Follow us</span>&nbsp<span><a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
+                                        <li><a href="registration"><span><?php echo $text_product_registration ?></span></a></li>
+                                        <li id="socialn"><span><?php echo $text_follow_us ?></span>&nbsp<span><a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
                                     </ul>
                                 </div>
                             </div>
