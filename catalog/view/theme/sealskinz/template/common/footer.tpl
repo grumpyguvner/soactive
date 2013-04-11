@@ -73,11 +73,12 @@
                             <li><a href="product-care"><?php echo $text_product_care ?></a></li>
                             <?php if ($ncategories) { ?>
                                 <?php foreach ($ncategories as $ncategory) { ?>
-                                    <?php if ($ncategory['name'] == 'Testimonial') { ?>
+                                    <?php if ($ncategory['name'] == 'Testimonials') { ?>
                                         <li><a href="<?php echo $ncategory['href']; ?>"><?php echo $text_testimonials ?></a></li>
                                     <?php } ?>
                                 <?php } ?>
                             <?php } ?>
+                            <li><a href="international"><?php echo $text_international ?></a></li>            
                             <li><a href="<?php echo $stockist ?>"><?php echo $text_stockist ?></a></li>
                         </ul>
                     </div>

@@ -62,10 +62,10 @@ if ($attention) { ?>
                             </div>
                         <?php } ?>
                         <?php if ($article) { ?>
-                           <?php if ($heading_title == 'Testimonial') { ?> 
-                            <div class="product-list">
+                           <?php if ($heading_title == 'Testimonials') { ?> 
+                            
                                 <?php foreach ($article as $articles) { ?>
-                                    <div class="iRow">
+                                    <div class="iRows" id="testimonials">
                                       <div class="iBlock last"> 
                                           
                                         <?php if ($articles['thumb']) { ?>
@@ -77,11 +77,11 @@ if ($attention) { ?>
                                             <span style="font-style: italic; color: #777;"><?php echo $articles['total_comments']; ?> <?php echo $text_comments; ?></span>
                                         <?php } ?>
                                         </div>
-                                        <div class="source"><strong><div class="name"><a href="<?php echo $articles['href']; ?>"><?php echo $articles['name']; ?></a> <span style="color: #777;"></span></div></strong></div>
+                                        <div class="source"><strong><div class="name"><?php echo $articles['name']; ?> <span style="color: #777;"></span></div></strong></div>
                                       </div>
                                     </div>
                                 <?php } ?>
-                            </div>
+                            
                             <div class="pagination"><?php echo $pagination; ?></div>
                           <?php } else { ?>
                                 <div class="product-list">
