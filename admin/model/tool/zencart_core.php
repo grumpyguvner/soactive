@@ -246,7 +246,7 @@ class queryFactory extends base {
             if (sizeof($zp_result_array) > 0) {
                 $obj->EOF = false;
                 while (list($key, $value) = each($zp_result_array[0])) {
-                    $obj->fields[$key] = $value;
+                    $obj->fields[$key] = utf8_encode($value);
                 }
                 return $obj;
             } else {
@@ -290,7 +290,7 @@ class queryFactory extends base {
                 }
                 while (list($key, $value) = each($obj->result[$obj->cursor])) {
                     if (!preg_match('/^[0-9]/', $key)) {
-                        $obj->fields[$key] = $value;
+                        $obj->fields[$key] = utf8_encode($value);
                     }
                 }
                 $obj->EOF = false;
@@ -325,7 +325,7 @@ class queryFactory extends base {
                 if ($zp_result_array) {
                     while (list($key, $value) = each($zp_result_array)) {
                         if (!preg_match('/^[0-9]/', $key)) {
-                            $obj->fields[$key] = $value;
+                            $obj->fields[$key] = utf8_encode($value);
                         }
                     }
                     $obj->EOF = false;
@@ -394,7 +394,7 @@ class queryFactory extends base {
             }
             while (list($key, $value) = each($obj->result[$zp_ptr])) {
                 if (!preg_match('/^[0-9]/', $key)) {
-                    $obj->fields[$key] = $value;
+                    $obj->fields[$key] = utf8_encode($value);
                 }
             }
             $obj->EOF = false;
@@ -562,7 +562,7 @@ class queryFactoryResult {
                 $this->EOF = true;
             } else {
                 while (list($key, $value) = each($this->result[$this->cursor])) {
-                    $this->fields[$key] = $value;
+                    $this->fields[$key] = utf8_encode($value);
                 }
             }
         } else {
@@ -572,7 +572,7 @@ class queryFactoryResult {
             } else {
                 while (list($key, $value) = each($zp_result_array)) {
                     if (!preg_match('/^[0-9]/', $key)) {
-                        $this->fields[$key] = $value;
+                        $this->fields[$key] = utf8_encode($value);
                     }
                 }
             }
@@ -585,7 +585,7 @@ class queryFactoryResult {
             $zp_result_array = $this->result[$this->result_random[$this->cursor]];
             while (list($key, $value) = each($zp_result_array)) {
                 if (!preg_match('/^[0-9]/', $key)) {
-                    $this->fields[$key] = $value;
+                    $this->fields[$key] = utf8_encode($value);
                 }
             }
         } else {
@@ -602,7 +602,7 @@ class queryFactoryResult {
         if (@mysql_data_seek($this->resource, $zp_row)) {
             $zp_result_array = @mysql_fetch_array($this->resource);
             while (list($key, $value) = each($zp_result_array)) {
-                $this->fields[$key] = $value;
+                $this->fields[$key] = utf8_encode($value);
             }
             @mysql_data_seek($this->resource, $zp_row);
             $this->EOF = false;
