@@ -21,6 +21,13 @@ body {
     z-index: 2;
     margin-bottom: 0;
 }
+#notification {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 2;
+    margin-bottom: 0;
+}
 body, td, th, input, textarea, select {
     font-size: 12px;
 }

@@ -8,7 +8,7 @@
         ?>
     </div>
 </div>
-<div id="error_environment" class="alert-success" style="margin-bottom: 40px; width: 450px;">
+<div id="notification" class="alert-success">
     <?php if ($success) { ?>
         <div class="success"><?php echo $success; ?></div>
         <?php
@@ -497,6 +497,7 @@
         </div>
     </div>
 </div> 
+   
 <script type="text/javascript"><!--
     $('.button-cart').bind('click', function() {
         
@@ -518,7 +519,7 @@
                 } 
     			
                 if (json['success']) {
-                    $('.alert-success').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
+                    $('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
     					
                     $('.success').fadeIn('slow').delay(3000).fadeOut();
     					
