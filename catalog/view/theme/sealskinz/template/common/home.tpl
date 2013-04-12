@@ -13,10 +13,6 @@ if ($attention) { ?>
 }
 ?>
 </div>
-<?php echo $column_left; ?>
-<?php echo $column_right; ?>
-<div id="content">
-    <?php echo $content_top; ?>
-    <?php echo $content_bottom; ?>
-</div>
+<?php echo $content_top; ?>
+<?php echo $content_bottom; ?>
 <?php echo $footer; ?>

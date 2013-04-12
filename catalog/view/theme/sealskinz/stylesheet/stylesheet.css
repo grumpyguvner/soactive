@@ -1,3 +1,4 @@
+/* Standard Element Styling */
 html {
     overflow: -moz-scrollbars-vertical;
     margin: 0;
@@ -12,43 +13,45 @@ body {
     padding: 0px;
     width:100% !important;
     height:100%;
-
-}
-#error_environment {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 2;
-    margin-bottom: 0;
-}
-#notification {
-    position: fixed;
-    bottom: 60px;
-    right: 20px;
-    z-index: 2;
-    margin-bottom: 0;
 }
 body, td, th, input, textarea, select {
     font-size: 12px;
 }
-
+form {
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+input[type='text'], input[type='password'] {
+    background: #F8F8F8;
+    border: 2px solid #CCCCCC !important;
+    padding: 3px;
+    margin-left: 0px;
+    margin-right: 0px;
+    max-width: 195px;
+}
+select {
+    background: #F8F8F8;
+    border: 1px solid #CCCCCC;
+    padding: 2px;
+}
+label {
+    cursor: pointer;
+}
+h1{font-size:34px}
 h1, .welcome {
     color: #636E75;
-    font: Verdana;
     margin-top: 0px;
     margin-bottom: 20px;
     font-size: 32px;
     font-weight: normal;
     text-shadow: 0 0 1px rgba(0, 0, 0, .01);
 }
-
-
-h1{font-size:34px !important}
-h2{font-size:22px !important }
-h3, legend{font-size:16px !important }
-h4{font-size:12px !important}
-h5{font-size:11px !important}
-h6{font-size:10px !important}
+h2{font-size:22px}
+h3, legend{font-size:16px}
+h4{font-size:12px}
+h5{font-size:11px}
+h6{font-size:10px}
 
 p {
     margin-top: 0px;
@@ -60,6 +63,48 @@ a, a:link, a:visited {
 a:hover {
     text-decoration: underline;
     color: #74964a;
+}
+
+/* Core Template Elements */
+#error_environment {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    margin-bottom: 0;
+}
+.container {
+    width: 984px;
+    margin: 0 auto;
+    position: relative;
+}
+#content, #column-left, #column-right {
+    display: inline-block; zoom: 1; *display: inline;
+    vertical-align: top;
+}
+#content {
+    width: 984px;
+    min-height: 400px;
+    background: #fff;
+}
+#column-left + #column-right + #content, #column-left + #content {
+    width: 554px;
+}
+#column-right + #content, #column-left + #content {
+    width: 769px;
+}
+#column-right, #column-left {
+    width: 215px;
+}
+#mainContainer {
+    background: #fff;
+}
+
+/* ********************* */
+
+.navbar-header{
+    width: 100%;
+    background: #000000;
 }
 .content a{
     color: #96c462;
@@ -113,53 +158,8 @@ a:hover {
     text-align: center;
     border: none;
 }
-form {
-    padding: 0;
-    margin: 0;
-    display: inline;
-}
-input[type='text'], input[type='password'] {
-    background: #F8F8F8;
-    border: 2px solid #CCCCCC !important;
-    padding: 3px;
-    margin-left: 0px;
-    margin-right: 0px;
-    max-width: 195px;
-}
-select {
-    background: #F8F8F8;
-    border: 1px solid #CCCCCC;
-    padding: 2px;
-}
-label {
-    cursor: pointer;
-}
-/* layout */
-.container {
-    width: 984px !important;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
-.navbar-header{
-    width: 100%;
-    background: #000000;
-}
-#column-left {
-    float: left;
-    width: 215px;
-}
-#column-right {
-    float: right;
-    width: 215px;
-}
-#content {
-    min-height: 400px;
-    background: #fff;
-}
-#mainContainer {
-    background: #fff;
-}
+
+
 .waterproof {
     max-width: 145px;
     padding: 17px;
@@ -212,12 +212,6 @@ label {
 .text-info span {
     color: #777777;
 }
-#column-left + #column-right + #content, #column-left + #content {
-    margin-left: 215px;
-}
-#column-right + #content {
-    margin-right: 215px;
-}
 /* header */
 #header {
     min-height: 90px;
@@ -226,7 +220,6 @@ label {
 
 
 }
-
 #header #logo {
     margin-top: 15px;
     margin-bottom: 20px;
@@ -395,7 +388,7 @@ label {
     position: relative;
     float:right;
 }
-#header .button-form-search {
+#header .button-search {
     position: relative;
     left: 216px;
     background: url('../image/button-search.png') center center no-repeat;
@@ -1093,6 +1086,10 @@ a.button-account:hover, input.button-account:hover {
 .box-category > ul > li ul > li > a.active {
     font-weight: bold;
 }
+#afilter .accordion {
+    margin-bottom: 0;
+    
+}
 #afilter .accordion-heading {
     border-bottom: 0 none;
     background-color: #403c3d;
@@ -1312,6 +1309,9 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     background: url('../image/add.png') left 60% no-repeat;
 }
+
+
+
 .product-grid .productItem {
     width: 255px;
     vertical-align: top;
@@ -1324,9 +1324,6 @@ a.button-account:hover, input.button-account:hover {
     font-weight: normal;
     background: #fff;
     text-align: center;
-}
-.product-grid4 .productItem {
-    width: 245px;
 }
 .product-grid .productItem .name {
     height: 54px;
@@ -2959,12 +2956,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: 0 !important;
 }
 .navbar-search .search-query {
-    border-radius: 10px 10px 10px 10px !important;
-    -webkit-border-radius: 10px 10px 10px 10px;
-    -moz-border-radius: 10px 10px 10px 10px;
-    -khtml-border-radius: 10px 10px 10px 10px;
-}
-.navbar-search .search-form {
     border-radius: 10px 10px 10px 10px !important;
     -webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;

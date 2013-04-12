@@ -25,12 +25,10 @@
     }
     ?>
 </div>
-
 <div id="content-back">
-    <div class="green-bar">
-        <div id="container-in" class="content-in">
-            <?php echo $column_left; ?><?php echo $column_right; ?>
-            <div id="content">
+    <div class="green-bar">  
+        <div id="mainContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
+                <?php echo $content_top; ?>
                 <div class="product-info">
                     <div class="product-img">
                         <!----------------------------------------- Image + Image add ----------------------------------------->
@@ -470,29 +468,29 @@
                     <?php } ?>
                     <!----------------------------------------- End Press ----------------------------------------->
 
-                       
+
                 </div>
                 <?php if (isset($products) && !empty($products)) { ?> 
-                        <div id="relatedProducts">
-                            <div class="related-title" >
-                                <h3><?php echo $tab_related ?></h3>
-                            </div>
-                            <div class="product-grid">
-                                <?php foreach ($products as $product) {
-                                    ?><div class="productItem"> 
-                                        <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
-                                        <div class="image"><?php if ($product['thumb']) { ?>
-                                                <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
-                                            <?php } ?>
-                                        </div>
-                                        <div class="bar">
-                                            <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>">VIEW PRODUCT INFO</a>
-                                        </div>
-                                    </div><?php }
-                                        ?>
-                            </div>
-                        </div>  
-                    <?php } ?>
+                    <div id="relatedProducts">
+                        <div class="related-title" >
+                            <h3><?php echo $tab_related ?></h3>
+                        </div>
+                        <div class="product-grid">
+                            <?php foreach ($products as $product) {
+                                ?><div class="productItem"> 
+                                    <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
+                                    <div class="image"><?php if ($product['thumb']) { ?>
+                                            <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="bar">
+                                        <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>">VIEW PRODUCT INFO</a>
+                                    </div>
+                                </div><?php }
+                                    ?>
+                        </div>
+                    </div>  
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -547,19 +545,19 @@
                     },
                     onComplete: function(file, json) {
                         $('#button-option-<?php echo $option['product_option_id']; ?>').attr('disabled', false);
-                                                                                                                            		
+                                                                                                                                                    		
                         $('.error').remove();
-                                                                                                                            		
+                                                                                                                                                    		
                         if (json['success']) {
                             alert(json['success']);
-                                                                                                                            			
+                                                                                                                                                    			
                             $('input[name=\'option[<?php echo $option['product_option_id']; ?>]\']').attr('value', json['file']);
                         }
-                                                                                                                            		
+                                                                                                                                                    		
                         if (json['error']) {
                             $('#option-<?php echo $option['product_option_id']; ?>').after('<span class="error">' + json['error'] + '</span>');
                         }
-                                                                                                                            		
+                                                                                                                                                    		
                         $('.loading').remove();	
                     }
                 });
