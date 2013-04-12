@@ -9,13 +9,11 @@ body {
     background-color: #ffffff;
     color: #000000;
     font-family: 'Roboto Condensed', 'Myriad Pro', 'trebuchet', Helvetica, Arial, sans-serif;
-    margin:0px;
+    margin: 0;
     padding: 0px;
-    width:100% !important;
+    min-width: 1004px;
     height:100%;
-}
-body, td, th, input, textarea, select {
-    font-size: 12px;
+    
 }
 form {
     padding: 0;
@@ -38,11 +36,8 @@ select {
 label {
     cursor: pointer;
 }
-h1{font-size:34px}
 h1, .welcome {
     color: #636E75;
-    margin-top: 0px;
-    margin-bottom: 20px;
     font-size: 32px;
     font-weight: normal;
     text-shadow: 0 0 1px rgba(0, 0, 0, .01);
@@ -99,6 +94,9 @@ a:hover {
 #mainContainer {
     background: #fff;
 }
+#accountContainer {
+    background: #BBB url('../image/account/account-image.png') no-repeat top left;
+}
 
 /* ********************* */
 
@@ -108,6 +106,26 @@ a:hover {
 }
 .content a{
     color: #96c462;
+}
+
+.contentTopBar {
+    background-color: #9FCF67;
+    padding: 5px 20px 0;
+    font-size: 14px;
+    text-align: left;
+    line-height: 30px;
+    height: 44px;
+}
+.contentTopBar select {
+    margin-top: 5px;
+}
+.contentTopBar .pagination-text {
+    float: right;
+    text-align: right;
+    line-height: 39px;
+}
+.contentTopBar h1 {
+    margin: 0;
 }
 
 .content a:visited, .content a:hover, a b {
@@ -127,38 +145,6 @@ a:hover {
 #title {
     border-bottom: 1px solid #CCCCCC;
 }
-#related{
-    margin-left: 28px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    width: 769px;
-    margin-top: 30px;
-    line-height: 0;
-}
-#related .name {
-    text-align: center;
-}
-#related .related-title{
-    background-color: #96c462;
-    border-top: 1px solid #CCCCCC;
-    border-bottom: 1px solid #CCCCCC;
-    padding-left: 22px;
-    height: 42px;
-    padding-top: 5px;
-    padding-bottom: 4px;
-}
-.related-title h3 {
-    font-size: 16px;
-    font-weight: normal;
-    margin: 0px;
-    color: white
-}
-
-#related .related-image{
-    text-align: center;
-    border: none;
-}
-
 
 .waterproof {
     max-width: 145px;
@@ -388,7 +374,7 @@ a:hover {
     position: relative;
     float:right;
 }
-#header .button-search {
+#header .button-form-search {
     position: relative;
     left: 216px;
     background: url('../image/button-search.png') center center no-repeat;
@@ -646,7 +632,6 @@ background-color: #8BAE5C;
     color: #999;
     font-size: 10px;
     font-weight: normal;
-    font-family: Verdana, Geneva, sans-serif;
     display: block;
 }
 table.form {
@@ -895,20 +880,6 @@ a.button-account:hover, input.button-account:hover {
     margin-bottom: 0;
     min-height: 515px;
 }
-.img-account {
-    background-image: url('../image/account/account.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    height: 549px;
-
-}
-.img-account-address {
-    background-image: url('../image/account/account.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    height: 697px;
-
-}
 .box-account {
     margin-bottom: 0;
     min-height: 564px;
@@ -995,8 +966,7 @@ a.button-account:hover, input.button-account:hover {
     padding: 5px 20px;
 }
 .box .box-infocontent a {
-    color: #777777 !important;
-    font-family: sans !important;
+    color: #777777;
 
 }
 /* box products */
@@ -1198,22 +1168,6 @@ a.button-account:hover, input.button-account:hover {
     filter:alpha(opacity=80); /* For IE8 and earlier */
 }
 /* product */
-.product-filter {
-    background-color: #9FCF67;
-    padding: 5px 20px 0;
-    font-size: 14px;
-    text-align: left;
-    line-height: 30px;
-    height: 44px;
-}
-.product-filter .sort select {
-    margin-top: 5px;
-}
-.pagination-text {
-    float: right;
-    text-align: right;
-    line-height: 39px;
-}
 .product-compare {
     padding-top: 6px;
     margin-bottom: 25px;
@@ -1324,6 +1278,9 @@ a.button-account:hover, input.button-account:hover {
     font-weight: normal;
     background: #fff;
     text-align: center;
+}
+.product-grid4 .productItem {
+    width: 245px;
 }
 .product-grid .productItem .name {
     height: 54px;
@@ -1482,6 +1439,20 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     background: url('../image/add.png') left center no-repeat;
 }
+#relatedProducts {
+    margin-bottom: 20px;
+}
+
+#relatedProducts h3 {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0px;
+    color: white;
+    background-color: #9FCF67;
+    padding: 5px 20px;
+    line-height: 30px;
+}
+
 /* Product */
 .product-info {
     overflow: visible;
@@ -2927,7 +2898,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     padding: 0 !important;
 }
 .table-price h4 {
-    font-family: Arial;
     font-weight: normal;
     font-size: 15px;
     margin: 0 !important;
@@ -2945,7 +2915,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     vertical-align: middle !important;
 }
 .table-info h4{
-    font-family: Arial;
     font-weight: normal;
     font-size: 15px;
     margin: 0 !important;
@@ -3341,10 +3310,8 @@ input[type="color"]:focus, .uneditable-input:focus {
 .error-wrap {
     margin-left: 30px;
 }
-.wrong {
-    background-image: url('../image/error_page.jpg');
-    background-repeat: no-repeat;
-    height: 516px;
+#content.wrong {
+    background: #fff url('../image/error_page.jpg') no-repeat center top;
 }
 #green-bar {
     background-image: url("../image/bar-transp.png");
@@ -3612,16 +3579,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     background: #EE2024;
 }
 
-.account {
-    background-image: url('../image/account/account.png');
-    height: 400px;
-    width: 215px;
-}
-.register-account {
-    background-image: url('../image/account/account-image.png');
-    height: 1057px;
-    width: 215px;
-}
 .form-register h3 {
     line-height: 18px;
 }
