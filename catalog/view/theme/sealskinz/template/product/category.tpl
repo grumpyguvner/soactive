@@ -49,18 +49,6 @@
             <?php echo $column_left; ?><?php echo $column_right; ?>
             <div id="content"> 
                 <div class="product-filter">
-                        <!--div class="display"><b><?php /* echo $text_display; ?></b> <?php echo $text_grid; ?> <b>/</b> <a onclick="display('list');"><?php echo $text_list; */ ?></a></div-->
-                    <!--div class="limit"><?php /* echo $text_limit; ?>
-      <select onchange="location = this.value;">
-      <?php foreach ($limits as $limits) { ?>
-      <?php if ($limits['value'] == $limit) { ?>
-      <option value="<?php echo $limits['href']; ?>" selected="selected"><?php echo $limits['text']; ?></option>
-      <?php } else { ?>
-      <option value="<?php echo $limits['href']; ?>"><?php echo $limits['text']; ?></option>
-      <?php } ?>
-      <?php } */ ?>
-                      </select>
-                    </div-->
                     <div class="pagination-text"><?php echo $pagination2; ?></div>
                     <div class="sort"><label><?php echo $text_sort; ?>&nbsp;
                         <select onchange="window.location = this.value;">

@@ -40,20 +40,31 @@ $_['entry_add']           = 'Add new:<br/><span class="help">Enter an email addr
 $_['entry_delete']        = 'Delete email:<br/><span class="help">Enter an email address to delete</span>';
 
 // Mailchimp
-$_['mailchimp_enabled']   = 'Enable MailChimp:';
-$_['mailchimp_apikey']    = 'API Key:'; 
-$_['mailchimp_listid']    = 'List ID:';
-$_['mailchimp_lists']     = 'List:';
-$_['mailchimp_double_optin']     = 'Double Opt-in:';
-$_['mailchimp_update_existing']  = 'Update Existing Record:';
-$_['mailchimp_send_welcome']     = 'Send Welcome Email:';
+$_['mailchimp_enabled']         = 'Enable MailChimp:';
+$_['mailchimp_apikey']          = 'API Key:'; 
+$_['mailchimp_listid']          = 'Main List ID:';
+$_['mailchimp_account_listid']  = 'Account List ID:';
+$_['mailchimp_account_optin']   = 'Account Opt-in:';
+$_['mailchimp_checkout_listid'] = 'Checkout List ID:';
+$_['mailchimp_checkout_optin']  = 'Checkout Opt-in:';
+$_['mailchimp_lists']           = 'List:';
+$_['mailchimp_account_lists']   = 'Account List:';
+$_['mailchimp_checkout_lists']  = 'checkout List:';
+$_['mailchimp_double_optin']    = 'Double Opt-in:';
+$_['mailchimp_update_existing'] = 'Update Existing Record:';
+$_['mailchimp_send_welcome']    = 'Send Welcome Email:';
 
 // Mailcampaign
 $_['mailcampaign_enabled']          = 'Enable MailCampaign:';
 $_['mailcampaign_apikey']           = 'API Key:'; 
-$_['mailcampaign_listid']           = 'List ID:';
+$_['mailcampaign_listid']           = 'Main List ID:';
+$_['mailcampaign_account_listid']   = 'Account List ID:';
+$_['mailcampaign_account_optin']    = 'Account Opt-in:';
+$_['mailcampaign_checkout_listid']  = 'Checkout List ID:';
+$_['mailcampaign_checkout_optin']   = 'Checkout Opt-in:';
 $_['mailcampaign_client_id']        = 'Client ID:';
 $_['mailcampaign_lists']            = 'List:';
+$_['mailcampaign_account_lists']    = 'Account List:';
 $_['mailcampaign_double_optin']     = 'Double Opt-in:';
 $_['mailcampaign_update_existing']  = 'Update Existing Record:';
 $_['mailcampaign_send_welcome']     = 'Send Welcome Email:';

@@ -29,31 +29,20 @@ if ($attention) { ?>
     <div id="content"><?php echo $content_top; ?>
     
   <?php if ($products) { ?>
-  <div class="product-filter">
-    <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
-    <div class="limit"><?php echo $text_limit; ?>
-      <select onchange="location = this.value;">
-        <?php foreach ($limits as $limits) { ?>
-        <?php if ($limits['value'] == $limit) { ?>
-        <option value="<?php echo $limits['href']; ?>" selected="selected"><?php echo $limits['text']; ?></option>
-        <?php } else { ?>
-        <option value="<?php echo $limits['href']; ?>"><?php echo $limits['text']; ?></option>
-        <?php } ?>
-        <?php } ?>
-      </select>
+    <div class="product-filter">
+        <div class="pagination-text"><?php echo $pagination2; ?></div>
+        <div class="sort"><label><?php echo $text_sort; ?>&nbsp;
+            <select onchange="window.location = this.value;">
+                <?php foreach ($sorts as $sorts) { ?>
+                    <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
+                        <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+                    <?php } else { ?>
+                        <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+                    <?php } ?>
+                <?php } ?>
+            </select></label>
+        </div>
     </div>
-    <div class="sort"><?php echo $text_sort; ?>
-      <select onchange="location = this.value;">
-        <?php foreach ($sorts as $sorts) { ?>
-        <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-        <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
-        <?php } else { ?>
-        <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
-        <?php } ?>
-        <?php } ?>
-      </select>
-    </div>
-  </div>
     <div class="product-grid product-grid4">
         <?php foreach ($products as $product) {
             ?><div class="productItem"> 
