@@ -18,7 +18,7 @@ class ModelAccountCustomer extends Model {
                     $this->load->model('account/newsletter');
                         if ($data['newsletter'] == 1)
                         {
-                            $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname']);   
+                            $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname'], 'account');   
                         } else {
                             $this->model_account_newsletter->unsubscribe($data['email']);
                         }

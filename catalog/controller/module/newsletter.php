@@ -80,8 +80,11 @@ class ControllerModuleNewsletter extends Controller {
         if (is_null($error))
         {
             if ($this->request->get['subscribe']) {
-                $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2']);
-                
+                if ($this->customer->isLogged()) {
+                    $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2'], 'account');
+                } else {
+                    $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2']);
+                }
                 if ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_double_optin'))
                 {
                     $success = $this->language->get('text_subscribed_optin');
