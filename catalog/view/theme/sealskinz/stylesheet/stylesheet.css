@@ -395,7 +395,7 @@ label {
     position: relative;
     float:right;
 }
-#header .button-search {
+#header .button-form-search {
     position: relative;
     left: 216px;
     background: url('../image/button-search.png') center center no-repeat;
@@ -1312,9 +1312,6 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     background: url('../image/add.png') left 60% no-repeat;
 }
-
-
-
 .product-grid .productItem {
     width: 255px;
     vertical-align: top;
@@ -1327,6 +1324,9 @@ a.button-account:hover, input.button-account:hover {
     font-weight: normal;
     background: #fff;
     text-align: center;
+}
+.product-grid4 .productItem {
+    width: 245px;
 }
 .product-grid .productItem .name {
     height: 54px;
@@ -2959,6 +2959,12 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: 0 !important;
 }
 .navbar-search .search-query {
+    border-radius: 10px 10px 10px 10px !important;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -khtml-border-radius: 10px 10px 10px 10px;
+}
+.navbar-search .search-form {
     border-radius: 10px 10px 10px 10px !important;
     -webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
