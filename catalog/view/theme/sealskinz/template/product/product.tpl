@@ -472,9 +472,7 @@
                 </div>
                 <?php if (isset($products) && !empty($products)) { ?> 
                     <div id="relatedProducts">
-                        <div class="related-title" >
-                            <h3><?php echo $tab_related ?></h3>
-                        </div>
+                        <h3><?php echo $tab_related ?></h3>
                         <div class="product-grid">
                             <?php foreach ($products as $product) {
                                 ?><div class="productItem"> 

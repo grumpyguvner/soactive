@@ -14,9 +14,6 @@ body {
     width:100% !important;
     height:100%;
 }
-body, td, th, input, textarea, select {
-    font-size: 12px;
-}
 form {
     padding: 0;
     margin: 0;
@@ -110,6 +107,23 @@ a:hover {
     color: #96c462;
 }
 
+.contentTopBar {
+    background-color: #9FCF67;
+    padding: 5px 20px 0;
+    font-size: 14px;
+    text-align: left;
+    line-height: 30px;
+    height: 44px;
+}
+.contentTopBar select {
+    margin-top: 5px;
+}
+.contentTopBar .pagination-text {
+    float: right;
+    text-align: right;
+    line-height: 39px;
+}
+
 .content a:visited, .content a:hover, a b {
     color: #74964a;
     text-decoration: underline;
@@ -127,38 +141,6 @@ a:hover {
 #title {
     border-bottom: 1px solid #CCCCCC;
 }
-#related{
-    margin-left: 28px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    width: 769px;
-    margin-top: 30px;
-    line-height: 0;
-}
-#related .name {
-    text-align: center;
-}
-#related .related-title{
-    background-color: #96c462;
-    border-top: 1px solid #CCCCCC;
-    border-bottom: 1px solid #CCCCCC;
-    padding-left: 22px;
-    height: 42px;
-    padding-top: 5px;
-    padding-bottom: 4px;
-}
-.related-title h3 {
-    font-size: 16px;
-    font-weight: normal;
-    margin: 0px;
-    color: white
-}
-
-#related .related-image{
-    text-align: center;
-    border: none;
-}
-
 
 .waterproof {
     max-width: 145px;
@@ -388,7 +370,7 @@ a:hover {
     position: relative;
     float:right;
 }
-#header .button-search {
+#header .button-form-search {
     position: relative;
     left: 216px;
     background: url('../image/button-search.png') center center no-repeat;
@@ -1198,22 +1180,6 @@ a.button-account:hover, input.button-account:hover {
     filter:alpha(opacity=80); /* For IE8 and earlier */
 }
 /* product */
-.product-filter {
-    background-color: #9FCF67;
-    padding: 5px 20px 0;
-    font-size: 14px;
-    text-align: left;
-    line-height: 30px;
-    height: 44px;
-}
-.product-filter .sort select {
-    margin-top: 5px;
-}
-.pagination-text {
-    float: right;
-    text-align: right;
-    line-height: 39px;
-}
 .product-compare {
     padding-top: 6px;
     margin-bottom: 25px;
@@ -1324,6 +1290,9 @@ a.button-account:hover, input.button-account:hover {
     font-weight: normal;
     background: #fff;
     text-align: center;
+}
+.product-grid4 .productItem {
+    width: 245px;
 }
 .product-grid .productItem .name {
     height: 54px;
@@ -1482,6 +1451,20 @@ a.button-account:hover, input.button-account:hover {
     display: block;
     background: url('../image/add.png') left center no-repeat;
 }
+#relatedProducts {
+    margin-bottom: 20px;
+}
+
+#relatedProducts h3 {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0px;
+    color: white;
+    background-color: #9FCF67;
+    padding: 5px 20px;
+    line-height: 30px;
+}
+
 /* Product */
 .product-info {
     overflow: visible;

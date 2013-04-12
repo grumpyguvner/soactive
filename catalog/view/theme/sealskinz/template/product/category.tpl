@@ -46,7 +46,7 @@
 <div id="content-back">
     <div class="green-bar">
         <div id="mainContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content"> 
-                <div class="product-filter">
+                <div class="contentTopBar">
                     <div class="pagination-text"><?php echo $pagination2; ?></div>
                     <div class="sort"><label><?php echo $text_sort; ?>&nbsp;
                         <select onchange="window.location = this.value;">
