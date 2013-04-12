@@ -11,7 +11,7 @@ body {
     font-family: 'Roboto Condensed', 'Myriad Pro', 'trebuchet', Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0px;
-    min-width: 1024px;
+    min-width: 1004px;
     height:100%;
     
 }
@@ -36,11 +36,8 @@ select {
 label {
     cursor: pointer;
 }
-h1{font-size:34px}
 h1, .welcome {
     color: #636E75;
-    margin-top: 0px;
-    margin-bottom: 20px;
     font-size: 32px;
     font-weight: normal;
     text-shadow: 0 0 1px rgba(0, 0, 0, .01);
@@ -97,6 +94,9 @@ a:hover {
 #mainContainer {
     background: #fff;
 }
+#accountContainer {
+    background: #BBB url('../image/account/account-image.png') no-repeat top left;
+}
 
 /* ********************* */
 
@@ -123,6 +123,9 @@ a:hover {
     float: right;
     text-align: right;
     line-height: 39px;
+}
+.contentTopBar h1 {
+    margin: 0;
 }
 
 .content a:visited, .content a:hover, a b {
@@ -876,20 +879,6 @@ a.button-account:hover, input.button-account:hover {
 .box {
     margin-bottom: 0;
     min-height: 515px;
-}
-.img-account {
-    background-image: url('../image/account/account.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    height: 549px;
-
-}
-.img-account-address {
-    background-image: url('../image/account/account.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    height: 697px;
-
 }
 .box-account {
     margin-bottom: 0;
@@ -3321,10 +3310,8 @@ input[type="color"]:focus, .uneditable-input:focus {
 .error-wrap {
     margin-left: 30px;
 }
-.wrong {
-    background-image: url('../image/error_page.jpg');
-    background-repeat: no-repeat;
-    height: 516px;
+#content.wrong {
+    background: #fff url('../image/error_page.jpg') no-repeat center top;
 }
 #green-bar {
     background-image: url("../image/bar-transp.png");
@@ -3592,16 +3579,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     background: #EE2024;
 }
 
-.account {
-    background-image: url('../image/account/account.png');
-    height: 400px;
-    width: 215px;
-}
-.register-account {
-    background-image: url('../image/account/account-image.png');
-    height: 1057px;
-    width: 215px;
-}
 .form-register h3 {
     line-height: 18px;
 }

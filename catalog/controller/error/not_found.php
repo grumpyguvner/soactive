@@ -2,8 +2,6 @@
 class ControllerErrorNotFound extends Controller {
     public function index() {
         
-        $this->request->get['route'] = 'error/not_found';
-        
         $this->language->load('error/not_found');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -15,6 +13,8 @@ class ControllerErrorNotFound extends Controller {
             'href' => $this->url->link('common/home'),
             'separator' => false
         );
+        
+        $route = '';
 
         if (isset($this->request->get['route'])) {
             $data = $this->request->get;
@@ -69,7 +69,17 @@ class ControllerErrorNotFound extends Controller {
             'common/header'
         );
 
+       $this->request->get['route'] = 'error/not_found';
+        
         $this->response->setOutput($this->render());
+        
+        if ($route)
+        {
+            $this->request->get['route'] = $route; 
+        } else {
+            unset($this->request->get['route']);
+        }
+        
     }
 
 }

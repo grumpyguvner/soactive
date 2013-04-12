@@ -28,7 +28,7 @@
     <div class="green-bar">
         <div id="mainContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content" class="wrong">
                 <?php echo $content_top; ?>
-                <div class="title-bar">
+                <div class="contentTopBar">
                     <h1><?php echo $text_error; ?></h1>
                 </div>
                 <div class="buttons-error">
