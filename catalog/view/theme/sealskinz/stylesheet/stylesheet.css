@@ -9,10 +9,11 @@ body {
     background-color: #ffffff;
     color: #000000;
     font-family: 'Roboto Condensed', 'Myriad Pro', 'trebuchet', Helvetica, Arial, sans-serif;
-    margin:0px;
+    margin: 0;
     padding: 0px;
-    width:100% !important;
+    min-width: 1024px;
     height:100%;
+    
 }
 form {
     padding: 0;
@@ -628,7 +629,6 @@ background-color: #8BAE5C;
     color: #999;
     font-size: 10px;
     font-weight: normal;
-    font-family: Verdana, Geneva, sans-serif;
     display: block;
 }
 table.form {
@@ -977,8 +977,7 @@ a.button-account:hover, input.button-account:hover {
     padding: 5px 20px;
 }
 .box .box-infocontent a {
-    color: #777777 !important;
-    font-family: sans !important;
+    color: #777777;
 
 }
 /* box products */
@@ -2910,7 +2909,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     padding: 0 !important;
 }
 .table-price h4 {
-    font-family: Arial;
     font-weight: normal;
     font-size: 15px;
     margin: 0 !important;
@@ -2928,7 +2926,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     vertical-align: middle !important;
 }
 .table-info h4{
-    font-family: Arial;
     font-weight: normal;
     font-size: 15px;
     margin: 0 !important;
