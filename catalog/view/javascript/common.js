@@ -26,6 +26,40 @@ $(document).ready(function() {
 		}
 	});
     
+    $('.button-form-search').bind('click', function() {
+        url = $('base').attr('href') + 'index.php?route=product/search';
+				 
+		var filter_name = $('input[name=\'filter_name\']').attr('value');
+                var filter_sub_category = $('input[name=\'filter_sub_category\']').attr('value');
+                var filter_description = $('input[name=\'filter_description\']').attr('value');
+		
+		if (filter_name) {
+			url += '&filter_name=' + encodeURIComponent(filter_name);
+                        url += '&filter_sub_category=' + encodeURIComponent(filter_sub_category);
+                        url += '&filter_description=' + encodeURIComponent(filter_description);
+		}
+		
+		location = url;
+    });
+    
+    $('#header .wrap-form input[name=\'filter_name\']').bind('keydown', function(e) {
+		if (e.keyCode == 13) {
+			url = $('base').attr('href') + 'index.php?route=product/search';
+			 
+			var filter_name = $('input[name=\'filter_name\']').attr('value');
+                        var filter_sub_category = $('input[name=\'filter_sub_category\']').attr('value');
+                        var filter_description = $('input[name=\'filter_description\']').attr('value');
+			
+			if (filter_name) {
+				url += '&filter_name=' + encodeURIComponent(filter_name);
+                                url += '&filter_sub_category=' + encodeURIComponent(filter_sub_category);
+                                url += '&filter_description=' + encodeURIComponent(filter_description);
+			}
+			
+			location = url;
+		}
+	});
+        
     $('form.newsletter-form').submit(function() {
         $('.success, .warning, .attention, .information, .error').remove();
         
