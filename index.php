@@ -176,8 +176,13 @@ if (!isset($session->data['language']) || $session->data['language'] != $code) {
 	$session->data['language'] = $code;
 }
 
-if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {	  
-	setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
+if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {	 
+    if (defined('SITE_REGION'))
+    {
+        setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/' . SITE_REGION . '/', $request->server['HTTP_HOST']);
+    } else {
+        setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
+    }
 }			
 
 $config->set('config_language_id', $languages[$code]['language_id']);
@@ -198,7 +203,12 @@ $registry->set('customer', new Customer($registry));
 $registry->set('affiliate', new Affiliate($registry));
 
 if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
-	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
+    if (defined('SITE_REGION'))
+    {
+        setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/' . SITE_REGION . '/');
+    } else {
+        setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
+    }
 }
 		
 // Currency
