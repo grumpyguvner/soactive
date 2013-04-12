@@ -1,5 +1,5 @@
 <div class="footer-wrap">
-    <div id="container-in">
+    <div class="container">
         <div id="footer">
 
             <div class="column" id="margin-r46">

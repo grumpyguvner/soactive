@@ -45,9 +45,7 @@
 </div>
 <div id="content-back">
     <div class="green-bar">
-        <div id="mainContainer" class="container">
-            <?php echo $column_left; ?><?php echo $column_right; ?>
-            <div id="content"> 
+        <div id="mainContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content"> 
                 <div class="product-filter">
                         <!--div class="display"><b><?php /* echo $text_display; ?></b> <?php echo $text_grid; ?> <b>/</b> <a onclick="display('list');"><?php echo $text_list; */ ?></a></div-->
                     <!--div class="limit"><?php /* echo $text_limit; ?>
