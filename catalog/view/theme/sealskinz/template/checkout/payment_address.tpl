@@ -20,8 +20,8 @@
            
         
                 <p>
-                  <input type="radio" name="payment_address" value="new" id="payment-address-new" />
-                  <label for="payment-address-new"><?php echo $text_address_new; ?></label>
+                  <label for="payment-address-new" class="radio"><input type="radio" name="payment_address" value="new" id="payment-address-new" />
+                  <?php echo $text_address_new; ?></label>
                 </p>
             
         <?php } ?>

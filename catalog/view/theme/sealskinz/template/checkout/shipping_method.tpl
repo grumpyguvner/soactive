@@ -31,13 +31,13 @@
         </table>
         <br />
         <?php } ?>
-        <div class="comments">
+<!--        <div class="comments">
         <b><?php echo $text_comments; ?></b>
         <br/>
         <textarea name="comment" rows="8"><?php echo $comment; ?></textarea>
-        </div>
-        <br />
-        <br />
+        </div><br />
+        <br />-->
+        
         <div class="buttons">
           <div class="right">
             <input type="button" value="<?php echo $button_continue; ?>" id="button-shipping-method" class="button" />

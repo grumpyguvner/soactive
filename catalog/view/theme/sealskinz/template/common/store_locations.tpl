@@ -11,11 +11,13 @@
 <div id="notification">
     <?php if ($success) { ?>
         <div class="success"><?php echo $success; ?></div>
-    <?php }
+    <?php
+    }
     if ($error_warning) {
         ?>
         <div class="warning"><?php echo $error_warning; ?></div>
-    <?php }
+    <?php
+    }
     if ($attention) {
         ?>
         <div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
@@ -26,12 +28,13 @@
 <div id="content-back">
     <div class="green-bar">
         <div class="container">
+            <div id="content">
             <!--h1><?php /* echo $heading_title; */ ?></h1-->
             <div class="middle">
                 <div>
                     <table class="prods" width="100%">
 
-<?php if (sizeof($Locations) > 0) { ?>
+                                <?php if (sizeof($Locations) > 0) { ?>
                             <tr>
                                 <td colspan="2">
                                     <?php
@@ -74,7 +77,7 @@
                                         <span class="sAddress">
                                             <?php $loc_address = explode(",", $sLocation['Address']); ?>
                                             <?php foreach ($loc_address as $loc) { ?>
-                                                <?php echo $loc ?><br />
+            <?php echo $loc ?><br />
         <?php } ?>
                                         </span>
                                         <span class="sInfo"><?php echo substr(html_entity_decode($sLocation['Details']), 0, 80) ?></span>
@@ -82,10 +85,10 @@
                                         <span class="rMore"><a href="<?php echo $sLocation['href'] ?>" >read more...</a></span>
                                     </li>
                                 </ul>
-    <?php } ?>
+                        <?php } ?>
                         </div>   
                         <div class="pagination"><?php echo $pagination; ?></div>
-                    <?php
+                        <?php
                     } else {
                         ?>
                         <div style="font-weight:bold;padding-top:10px;"><?php echo $store_loc_no_store; ?></div>
@@ -124,12 +127,12 @@
                     alert('unable to detect your location');
                 }
 	
-<?php echo $detectLoc; ?>
+            <?php echo $detectLoc; ?>
 	
             </script>
 <?php echo $content_bottom; ?>
         </div>
     </div>
-</div>
+    </div>
 </div>
 <?php echo $footer; ?>

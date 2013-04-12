@@ -19,20 +19,21 @@
         </table>
         <br />
         <?php } ?>
-        <div class="comments">
+<!--        <div class="comments">
         <b><?php echo $text_comments; ?></b>
         <textarea name="comment" rows="8"><?php echo $comment; ?></textarea>
         </div>
         <br />
-        <br />
+        <br />-->
         <?php if ($text_agree) { ?>
         <div class="buttons">
-          <div class="right"><?php echo $text_agree; ?>
+          <div class="right"><label class="checkbox"><?php echo $text_agree; ?>
             <?php if ($agree) { ?>
             <input type="checkbox" name="agree" value="1" checked="checked" />
             <?php } else { ?>
             <input type="checkbox" name="agree" value="1" />
             <?php } ?>
+              </label>
             <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-method" class="button" />
           </div>
         </div>

@@ -3,7 +3,7 @@
         <div class="left">
           <h2><?php echo $text_new_customer; ?></h2>
           <p style="color: #777777"><?php echo $text_checkout; ?></p>
-          <label for="register">
+          <label for="register" class="radio">
             <?php if ($account == 'register') { ?>
             <input type="radio" name="account" value="register" id="register" checked="checked" />
             <?php } else { ?>
@@ -12,7 +12,7 @@
             <b><?php echo $text_register; ?></b></label>
           
           <?php if ($guest_checkout) { ?>
-          <label for="guest">
+          <label for="guest" class="radio">
             <?php if ($account == 'guest') { ?>
             <input type="radio" name="account" value="guest" id="guest" checked="checked" />
             <?php } else { ?>

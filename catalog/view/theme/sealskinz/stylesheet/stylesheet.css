@@ -878,11 +878,9 @@ a.button-account:hover, input.button-account:hover {
 /* box */
 .box {
     margin-bottom: 0;
-    min-height: 515px;
 }
 .box-account {
     margin-bottom: 0;
-    min-height: 564px;
 }
 .box-account .box-heading {
 
@@ -1988,13 +1986,16 @@ a.button-account:hover, input.button-account:hover {
 .cart-info tbody .name, .cart-info tbody .model, .cart-info tbody .quantity {
     text-align: left;
 }
+.cart-info tbody .quantity {
+    text-align: center;
+}
 .cart-info tbody .quantity input[type='image'], .cart-info tbody .quantity img {
     position: relative;
     top: -4px;
     cursor: pointer;
 }
 .cart-info tbody .price, .cart-info tbody .total {
-    text-align: left;
+    text-align: right;
 }
 .cart-info tbody span.stock {
     color: #F00;

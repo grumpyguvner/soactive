@@ -166,12 +166,12 @@
 </div>
 <?php if ($shipping_required) { ?>
 <div style="clear: both; padding-top: 15px; border-top: 1px solid #DDDDDD;">
-  <?php if ($shipping_address) { ?>
+  <label for="shipping" class="checkbox"><?php if ($shipping_address) { ?>
   <input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
   <?php } else { ?>
   <input type="checkbox" name="shipping_address" value="1" id="shipping" />
   <?php } ?>
-  <label for="shipping"><?php echo $entry_shipping; ?></label>
+  <?php echo $entry_shipping; ?></label>
  
 </div>
 <?php } ?>

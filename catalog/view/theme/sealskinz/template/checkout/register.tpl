@@ -87,27 +87,8 @@
         <?php } ?>
         <br />
       </div>
-        
-       <div class="payform-right">
-            <div id="left"> 
-                <div id="company-id-display">
-                    <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
-                </div>
-            </div>
-           <div id="right">  
-                <input type="text" name="company_id" value="" class="large-field" />
-           </div>
-       </div>
-       <div class="payform-right">
-            <div id="left">
-                <div id="tax-id-display">
-                    <span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?>
-                </div>
-            </div>
-            <div id="right">
-                <input type="text" name="tax_id" value="" class="large-field" />
-            </div>
-       </div>
+        <input type="hidden" name="company_id" value="" />
+        <input type="hidden" name="tax_id" value="" />
       <div class="payform-right">
             <div id="left">  
                 <span class="required">*</span> <?php echo $entry_address_1; ?>
@@ -169,12 +150,12 @@
     </div>
 </div>
 <div style="clear: both; padding-top: 15px; border-top: 1px solid #EEEEEE;">
-  <input type="checkbox" name="newsletter" value="1" id="newsletter" />
-  <label for="newsletter"><?php echo $entry_newsletter; ?></label>
+  <label for="newsletter" class="checkbox"><input type="checkbox" name="newsletter" value="1" id="newsletter" />
+  <?php echo $entry_newsletter; ?></label>
   <br />
   <?php if ($shipping_required) { ?>
-  <input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
-  <label for="shipping"><?php echo $entry_shipping; ?></label>
+  <label for="shipping" class="checkbox"><input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
+  <?php echo $entry_shipping; ?></label>
   <br />
   <?php } ?>
   <br />
@@ -182,8 +163,8 @@
 </div>
 <?php if ($text_agree) { ?>
 <div class="buttons">
-  <div class="right"><?php echo $text_agree; ?>
-    <input type="checkbox" name="agree" value="1" />
+  <div class="right"><label> class="checkbox"<?php echo $text_agree; ?>
+    <input type="checkbox" name="agree" value="1" /></label>
     <input type="button" value="<?php echo $button_continue; ?>" id="button-register" class="button" />
   </div>
 </div>
