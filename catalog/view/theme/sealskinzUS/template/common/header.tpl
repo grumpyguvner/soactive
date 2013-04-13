@@ -65,9 +65,9 @@
                 <div class="container">
                     <div id="menuh">
                             <ul id="left">
-                                <li><a href="#" class="top_parent" onclick="return false;"><img src="/image/flags/us.png" alt="UK" />&nbsp US </a>
+                                <li><a href="#" class="top_parent" onclick="return false;"><img src="image/flags/us.png" alt="UK" />&nbsp US </a>
                                     <ul>
-                                        <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/UK/"><img src="/image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
+                                        <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/UK/"><img src="image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
                                         <li><a href="#"><img src="/image/flags/us.png" alt="US" />&nbsp US</a></li>
                                     </ul>
                                 </li>
