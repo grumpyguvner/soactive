@@ -16,9 +16,13 @@ Options -Indexes
 # SEO URL Settings
 RewriteBase /
 
-RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
-RewriteRule ^googlebase.xml$ index.php?route=feed/google_base [L]
+# Sealskinz rewrite for multiregion
+#RewriteRule ^(UK|US)/image/(.*) image/$1/$2 [L,QSA]
+#RewriteRule ^(UK|US)(/.*|$) $2 [L,QSA]
+
+RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap
+RewriteRule ^googlebase.xml$ index.php?route=feed/google_base
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
-RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
+RewriteRule ^([^?]*) index.php?_route_=$1 [QSA]
