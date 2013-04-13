@@ -101,7 +101,31 @@ class ControllerModuleNewsletter extends Controller {
 		} else {
 			$this->data[$this->name . '_mailchimp_listid'] = $this->config->get($this->name . '_mailchimp_listid');
 		}
-        
+                
+                if (isset($this->request->post[$this->name . '_mailchimp_account_listid'])) {
+			$this->data[$this->name . '_mailchimp_account_listid'] = $this->request->post[$this->name . '_mailchimp_account_listid'];
+		} else {
+			$this->data[$this->name . '_mailchimp_account_listid'] = $this->config->get($this->name . '_mailchimp_account_listid');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailchimp_account_optin'])) {
+			$this->data[$this->name . '_mailchimp_account_optin'] = $this->request->post[$this->name . '_mailchimp_account_optin'];
+		} else {
+			$this->data[$this->name . '_mailchimp_account_optin'] = $this->config->get($this->name . '_mailchimp_account_optin');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailchimp_checkout_listid'])) {
+			$this->data[$this->name . '_mailchimp_checkout_listid'] = $this->request->post[$this->name . '_mailchimp_checkout_listid'];
+		} else {
+			$this->data[$this->name . '_mailchimp_checkout_listid'] = $this->config->get($this->name . '_mailchimp_checkout_listid');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailchimp_checkout_optin'])) {
+			$this->data[$this->name . '_mailchimp_checkout_optin'] = $this->request->post[$this->name . '_mailchimp_checkout_optin'];
+		} else {
+			$this->data[$this->name . '_mailchimp_checkout_optin'] = $this->config->get($this->name . '_mailchimp_checkout_optin');
+		}
+                
 		if (isset($this->request->post[$this->name . '_mailchimp_double_optin'])) {
 			$this->data[$this->name . '_mailchimp_double_optin'] = $this->request->post[$this->name . '_mailchimp_double_optin'];
 		} else {
@@ -164,6 +188,30 @@ class ControllerModuleNewsletter extends Controller {
 			$this->data[$this->name . '_mailcampaign_listid'] = $this->request->post[$this->name . '_mailcampaign_listid'];
 		} else {
 			$this->data[$this->name . '_mailcampaign_listid'] = $this->config->get($this->name . '_mailcampaign_listid');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailcampaign_account_listid'])) {
+			$this->data[$this->name . '_mailcampaign_account_listid'] = $this->request->post[$this->name . '_mailcampaign_account_listid'];
+		} else {
+			$this->data[$this->name . '_mailcampaign_account_listid'] = $this->config->get($this->name . '_mailcampaign_account_listid');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailcampaign_account_optin'])) {
+			$this->data[$this->name . '_mailcampaign_account_optin'] = $this->request->post[$this->name . '_mailcampaign_account_optin'];
+		} else {
+			$this->data[$this->name . '_mailcampaign_account_optin'] = $this->config->get($this->name . '_mailcampaign_account_optin');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailcampaign_checkout_listid'])) {
+			$this->data[$this->name . '_mailcampaign_checkout_listid'] = $this->request->post[$this->name . '_mailcampaign_checkout_listid'];
+		} else {
+			$this->data[$this->name . '_mailcampaign_checkout_listid'] = $this->config->get($this->name . '_mailcampaign_checkout_listid');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailcampaign_checkout_optin'])) {
+			$this->data[$this->name . '_mailcampaign_checkout_optin'] = $this->request->post[$this->name . '_mailcampaign_checkout_optin'];
+		} else {
+			$this->data[$this->name . '_mailcampaign_checkout_optin'] = $this->config->get($this->name . '_mailcampaign_checkout_optin');
 		}
                 
                 if (isset($this->request->post[$this->name . '_mailcampaign_client_id'])) {
