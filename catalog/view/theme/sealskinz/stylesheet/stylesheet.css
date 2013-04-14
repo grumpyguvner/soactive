@@ -2471,7 +2471,7 @@ a.button-account:hover, input.button-account:hover {
     background-image: -webkit-linear-gradient(top, #96c462 52%, #a5d170 72%);
     /* W3C Markup, IE10 Release Preview */ 
     background-image: linear-gradient(to bottom right, #96c462 52%, #a5d170 72%);
-
+    border-bottom: 6px solid #74964a;
 }
 .menu-gradient{
     /* IE10 Consumer Preview */ 

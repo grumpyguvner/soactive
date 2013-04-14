@@ -122,13 +122,6 @@
                     </div>
                 </div>
             </div>
-            <div class="linegreen">
-                <div class="row">
-                    <div class="margin-30">
-
-                    </div>
-                </div>
-            </div>
 
             <!-- Start Menu inferiore -->
             <div class="menu-gradient">

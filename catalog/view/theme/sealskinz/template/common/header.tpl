@@ -112,26 +112,15 @@
                     </div>
                     <div id="search">
                         <div class="navbar-search">
-                            <div class="button-form-search"></div>
-                            <div class="wrap-form">
-                                <?php if ($filter_name) { ?>
-                                    <input type="text" class="search-form" placeholder="Search Store.." name="filter_name" value="<?php echo $filter_name; ?>" />
-                                    <input type="hidden" name="filter_sub_category" value="1" />
-                                    <input type="hidden" name="filter_description" value="1" />
-                                <?php } else { ?>
-                                    <input type="text" class="search-form" placeholder="Search Store.." name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
-                                    <input type="hidden" name="filter_sub_category" value="1" />
-                                    <input type="hidden" name="filter_description" value="1" />
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="linegreen">
-                <div class="row">
-                    <div class="margin-30">
+                            <div class="button-search"></div>
+                            <?php if ($filter_name) { ?>
+                                <input type="text" class="search-query" placeholder="Search Store.." name="filter_name" value="<?php echo $filter_name; ?>" />
 
+                            <?php } else { ?>
+                                <input type="text" class="search-query" placeholder="Search Store.." name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
+
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
