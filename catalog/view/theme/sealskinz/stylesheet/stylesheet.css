@@ -2939,7 +2939,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-size: 13px;
     margin: 0 !important;
 }
-.navbar-search .search-query {
+.navbar-search .search-query, .navbar-search .search-form {
     border-radius: 10px 10px 10px 10px !important;
     -webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
