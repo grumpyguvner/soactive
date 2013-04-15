@@ -73,7 +73,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                 $this->debug("processing product ".$aProduct->fields['products_model']." ".$aProduct->fields['products_name']."");
 
                 $this->debug("initializing category array");
-                $aCategory = $this->dbQF->Execute('SELECT c.* FROM products_to_categories pc JOIN categories_description c ON pc.categories_id = c.categories_id WHERE pc.products_id = '.$aProduct->fields['products_id']);
+                $aCategories = $this->dbQF->Execute('SELECT c.* FROM products_to_categories pc JOIN categories c ON pc.categories_id = c.categories_id WHERE pc.products_id = '.$aProduct->fields['products_id']);
                 $type = "";
                 $myCategory = "";
                 $myCategoryIds = array();
@@ -112,20 +112,23 @@ class ModelToolZencartProduct extends ModelToolZencart {
                     $error = true;
                 }
 
-                if ($aCategory->RecordCount() > 0) {
-                    while (!$aCategory->EOF) {
+                if ($aCategories->RecordCount() > 0) {
+                    while (!$aCategories->EOF) {
                         $this->debug("");
+                        $aCategory = $this->dbQF->Execute('SELECT c.* FROM categories_description c WHERE c.categories_id = ' . ((int) $aCategories->fields['parent_id'] > 0 ? $aCategories->fields['parent_id'] : $aCategories->fields['categories_id']));
                         $this->debug("processing category ".$aCategory->fields['categories_name']."");
+                        $myName = (string) $aCategory->fields['categories_name'];
+                        $myDesc = $aCategory->fields['categories_description'];
                         
-                        switch ((string) $aCategory->fields['categories_name']) {
+                        switch ($myName) {
                             case "Socks":
                             case "Hats":
                             case "Gloves":
                                 //initialise category variables
-                                $category = seoUrl((string) $aCategory->fields['categories_name']);
+                                $category = seoUrl($myName);
                                 $category_item = array (
-                                    "name" => (string) $aCategory->fields['categories_name'],
-                                    "description" => $aCategory->fields['categories_description']
+                                    "name" => $myName,
+                                    "description" => $myDesc
                                 );
 
                                 if ($myCategory != $category) {
@@ -141,10 +144,10 @@ class ModelToolZencartProduct extends ModelToolZencart {
                                 break;
                             default:
                                 //initialise category variables
-                                $category = seoUrl((string) $aCategory->fields['categories_name']);
+                                $category = seoUrl($myName);
                                 $category_item = array (
-                                    "name" => (string) $aCategory->fields['categories_name'],
-                                    "description" => $aCategory->fields['categories_description']
+                                    "name" => $myName,
+                                    "description" => $myDesc
                                 );
 
                                 if ($myCategory != $category) {
@@ -159,7 +162,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
                                 }
                         }
                         
-                        $aCategory->MoveNext();
+                        $aCategories->MoveNext();
                         
                     }
                 }

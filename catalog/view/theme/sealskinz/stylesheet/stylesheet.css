@@ -1268,7 +1268,7 @@ a.button-account:hover, input.button-account:hover {
 
 
 .product-grid .productItem {
-    width: 255px;
+    width: 245px;
     vertical-align: top;
     border: 1px solid #CCCCCC;
     line-height: 20px;
@@ -1280,8 +1280,8 @@ a.button-account:hover, input.button-account:hover {
     background: #fff;
     text-align: center;
 }
-.product-grid4 .productItem {
-    width: 245px;
+#column-right + #content .productItem, #column-left + #content .productItem {
+    width: 255px;
 }
 .product-grid .productItem .name {
     height: 54px;
@@ -1492,31 +1492,42 @@ a.button-account:hover, input.button-account:hover {
 .product-info > .left + .right {
     margin-left: 265px;
 }
-.product-info .image {
+.product-img {
+    width: 374px;
+    margin-bottom: 20px;
+}
+.product-img .image {
     border: 1px solid #E7E7E7;
-    float: left;
     margin-bottom: 20px;
     text-align: center;
+    width: 372px;
+    height: 372px;
 }
-.product-info .image-additional {
+.product-img .image-additional {
     margin-left: -10px;
     clear: both;
     overflow: hidden;
-    position: relative;
 }
-.product-info .image-additional img {
-    border: 1px solid #E7E7E7;
-}
-.product-info .image-additional a {
-    float: left;
-    display: block;
-    margin-left: 8px;
+.product-img .image-additional a {
+    display: inline-block;
+    margin-left:10px;
     margin-bottom: 10px;
-    width: 116px;
-    height: 106px;
     z-index: 1;
-        
+    background:#000;
+    border: 1px solid #E7E7E7;
+    position: relative;
+    vertical-align: middle;
 }
+.product-img .image-additional a .play-button {
+    display: block;
+    background: transparent url('../image/play_icon.png')  no-repeat center center;
+    background-color: rgba(255, 255, 255, .2);
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+}
+
 #arrow-up{
     background-image: url('../image/arrow-up.png');
     background-repeat: no-repeat;
@@ -3830,25 +3841,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: #4D4D4D;
     line-height: 20px;
     margin-bottom: 5px;
-}
-#wrap-image {
-    width: 366px;
-    height: 373px;
-}
-.play-button {
-    position: absolute;
-    background-image: url('../image/play_icon.png');
-    background-repeat: no-repeat;
-    z-index: 2;
-    display: inline-block;
-    height: 35px;
-    width: 116px;
-    top: 36px;
-    left: auto;
-}
-.play-button img {
-    position: relative;
-    z-index: 1;
 }
 #cssmenu li#socialn {
     float: right;

@@ -2,15 +2,18 @@
 <div class="banner">
     <?php
     echo $content_top;
-    if ($thumb || $description) {
+    if ($thumb && $description) {
         if ($thumb) {
             ?>
-            <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
+            <div class="image" style="position: relative;">
+                <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
+                <?php
+                if ($description) { ?>
+                  <?php echo $description; ?></div>
+                <?php } ?>
+            </div>
             <?php
         }
-        /* if ($description) { ?>
-          <?php echo $description; ?>
-          <?php } */
     }
     ?>
 </div>
