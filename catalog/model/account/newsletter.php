@@ -11,89 +11,71 @@ class ModelAccountNewsletter extends Model {
 
     public function subscribe($email = '', $name = '', $name2 = '', $listType = '') {
 
-        if (!$email)
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))
             return;
 
         if ($this->config->get('newsletter_mailcampaign_enabled')) {
-            if($listType == '') {
-                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
-                $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $name,
-                    'Resubscribe' => true
-                        ));
-
-                if ($result->was_successful()) {
-                    //echo "Subscribed with code ".$result->http_status_code;
-                } else {
-                    //echo 'Failed with code '.$result->http_status_code."\n<br /><pre>";
-                    //var_dump($result->response);
-                    //echo '</pre>';
-                }
-            } elseif ($listType == 'account' && isset($this->config->get('newsletter_mailcampaign_account_listid'))) {
-                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_account_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
-                $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $name,
-                'Resubscribe' => true
-                    ));
-
-                if ($result->was_successful()) {
-                    //echo "Subscribed with code ".$result->http_status_code;
-                } else {
-                    //echo 'Failed with code '.$result->http_status_code."\n<br /><pre>";
-                    //var_dump($result->response);
-                    //echo '</pre>';
-                } 
-            } elseif ($listType == 'checkout' && isset($this->config->get('newsletter_mailcampaign_checkout_listid'))) {
-                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_checkout_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
-                $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $name,
-                'Resubscribe' => true
-                    ));
-
-                if ($result->was_successful()) {
-                    //echo "Subscribed with code ".$result->http_status_code;
-                } else {
-                    //echo 'Failed with code '.$result->http_status_code."\n<br /><pre>";
-                    //var_dump($result->response);
-                    //echo '</pre>';
-                } 
+            $listID = $this->config->get('newsletter_mailcampaign_listid');
+            
+            switch ($listType)
+            {
+                case 'account':
+                    if ($this->config->get('newsletter_mailcampaign_account_listid'))
+                    {
+                        $listId = $this->config->get('newsletter_mailcampaign_account_listid');
+                    }
+                    break;
+                case 'checkout':
+                    if ($this->config->get('newsletter_mailcampaign_checkout_listid'))
+                    {
+                        $listId = $this->config->get('newsletter_mailcampaign_checkout_listid');
+                    }
+                    break;
             }
+            
+            $mailcampaign = new CS_REST_Subscribers($listID, $this->config->get('newsletter_mailcampaign_apikey'));
+            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $name,
+            'Resubscribe' => true
+                ));
+
+            if ($result->was_successful()) {
+                //echo "Subscribed with code ".$result->http_status_code;
+            } else {
+                //echo 'Failed with code '.$result->http_status_code."\n<br /><pre>";
+                //var_dump($result->response);
+                //echo '</pre>';
+            } 
         }
 
         if ($this->config->get('newsletter_mailchimp_enabled')) {
-            if($listType == '') {
-                $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+            $listID = $this->config->get('newsletter_mailchimp_listid');
+            
+            switch ($listType)
+            {
+                case 'account':
+                    if ($this->config->get('newsletter_mailchimp_account_listid'))
+                    {
+                        $listId = $this->config->get('newsletter_mailchimp_account_listid');
+                    }
+                    break;
+                case 'checkout':
+                    if ($this->config->get('newsletter_mailchimp_checkout_listid'))
+                    {
+                        $listId = $this->config->get('newsletter_mailchimp_checkout_listid');
+                    }
+                    break;
+            }
+            
+            $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
 
-                $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_listid'), $email, array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
+            $retval = $mailchimp->listSubscribe($listID, $email, array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
 
-                if ($mailchimp->errorCode) {
-                    //echo "Unable to load listSubscribe()!\n";
-                    //echo "\tCode=".$api->errorCode."\n";
-                    //echo "\tMsg=".$api->errorMessage."\n";
-                } else {
-                    //echo "Subscribed - look for the confirmation email!\n";
-                }
-            } elseif ($listType == 'account' && isset($this->config->get('newsletter_mailchimp_account_listid'))) {
-                $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
-
-                $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_account_listid'), $email, array(), 'html', $this->config->get('newsletter_mailchimp_account_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
-
-                if ($mailchimp->errorCode) {
-                    //echo "Unable to load listSubscribe()!\n";
-                    //echo "\tCode=".$api->errorCode."\n";
-                    //echo "\tMsg=".$api->errorMessage."\n";
-                } else {
-                    //echo "Subscribed - look for the confirmation email!\n";
-                }
-            } elseif ($listType == 'checkout' && isset($this->config->get('newsletter_mailchimp_checkout_listid'))) {
-                $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
-
-                $retval = $mailchimp->listSubscribe($this->config->get('newsletter_mailchimp_checkout_listid'), $email, array(), 'html', $this->config->get('newsletter_mailchimp_checkout_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
-
-                if ($mailchimp->errorCode) {
-                    //echo "Unable to load listSubscribe()!\n";
-                    //echo "\tCode=".$api->errorCode."\n";
-                    //echo "\tMsg=".$api->errorMessage."\n";
-                } else {
-                    //echo "Subscribed - look for the confirmation email!\n";
-                }
+            if ($mailchimp->errorCode) {
+                //echo "Unable to load listSubscribe()!\n";
+                //echo "\tCode=".$api->errorCode."\n";
+                //echo "\tMsg=".$api->errorMessage."\n";
+            } else {
+                //echo "Subscribed - look for the confirmation email!\n";
             }
         }
 
@@ -169,10 +151,6 @@ class ModelAccountNewsletter extends Model {
     }
 
     public function unsubscribe($email = '') {
-
-        if (!$email)
-            return;
-
         if ($this->config->get('newsletter_mailcampaign_enabled')) {
             $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
             $result = $mailcampaign->unsubscribe($email);
@@ -183,6 +161,17 @@ class ModelAccountNewsletter extends Model {
                 // echo 'Failed with code '.$result->http_status_code."\n<br /><pre>";
                 // var_dump($result->response);
                 // echo '</pre>';
+            }
+            
+            if ($this->config->get('newsletter_mailcampaign_account_listid'))
+            {
+                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_account_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
+                $result = $mailcampaign->unsubscribe($email);
+            }
+            if ($this->config->get('newsletter_mailcampaign_checkout_listid'))
+            {  
+                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_checkout_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
+                $result = $mailcampaign->unsubscribe($email);
             }
         }
 
@@ -198,6 +187,16 @@ class ModelAccountNewsletter extends Model {
             } else {
                 //echo "Returned: ".$retval."\n";
             }
+            
+            if ($this->config->get('newsletter_mailchimp_account_listid'))
+            {
+                $retval = $mailchimp->listUnsubscribe($this->config->get('newsletter_mailchimp_account_listid'), $email);
+            }
+            
+            if ($this->config->get('newsletter_mailchimp_checkout_listid'))
+            {
+                $retval = $mailchimp->listUnsubscribe($this->config->get('newsletter_mailchimp_checkout_listid'), $email);
+            }
         }
 
         if ($this->config->get('newsletter_mailchimp_enabled') || $this->config->get('newsletter_mailcampaign_enabled')) {
@@ -210,30 +209,45 @@ class ModelAccountNewsletter extends Model {
             $query = $this->db->query("SELECT DISTINCT email FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int) $customer_id . "'");
             if ($query->row['email'] == $email) {
                 $query = $this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter = 0 WHERE email = '" . $this->db->escape($email) . "'");
-            } else {
-                $query = $this->db->query("DELETE FROM " . DB_PREFIX . "newsletter WHERE email = '" . $this->db->escape($email) . "'");
             }
-        } else {
-            $query = $this->db->query("DELETE FROM " . DB_PREFIX . "newsletter WHERE email = '" . $this->db->escape($email) . "'");
         }
+        
+        $query = $this->db->query("DELETE FROM " . DB_PREFIX . "newsletter WHERE email = '" . $this->db->escape($email) . "'");
     }
 
     public function getTotalNewsletterByEmail($email) {
         $flag = false;
 
-        if ($this->config->get('newsletter_mailcampaing_enabled')) {
-            if ($flag === false)
-                $flag = 0;
-            $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaing_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
+        if ($this->config->get('newsletter_mailcampaign_enabled')) {
+            if ($flag === false) $flag = 0;
+            $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
             $retval_campaing = $mailcampaign->get($email);
             if ($retval_campaing->was_successful()) {
                 $flag += 1;
             }
+            
+            if ($this->config->get('newsletter_mailcampaign_account_listid'))
+            {
+                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_account_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
+                $retval_campaing = $mailcampaign->get($email);
+                if ($retval_campaing->was_successful()) {
+                    $flag += 1;
+                }
+            }
+            
+            if ($this->config->get('newsletter_mailcampaign_checkout_listid'))
+            {
+                $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_checkout_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
+                $retval_campaing = $mailcampaign->get($email);
+                if ($retval_campaing->was_successful()) {
+                    $flag += 1;
+                }
+            }
         }
 
         if ($this->config->get('newsletter_mailchimp_enabled')) {
-            if ($flag === false)
-                $flag = 0;
+            if ($flag === false) $flag = 0;
+            
             $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
 
             $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $email);
@@ -241,6 +255,26 @@ class ModelAccountNewsletter extends Model {
             if (!$mailchimp->errorCode) {
                 if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed')
                     $flag += 1;
+            }
+            
+            if ($this->config->get('newsletter_mailchimp_account_listid'))
+            {
+                $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_account_listid'), $email);
+
+                if (!$mailchimp->errorCode) {
+                    if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed')
+                        $flag += 1;
+                }
+            }
+            
+            if ($this->config->get('newsletter_mailcampaign_checkout_listid'))
+            {
+                $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailcampaign_checkout_listid'), $email);
+
+                if (!$mailchimp->errorCode) {
+                    if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed')
+                        $flag += 1;
+                }
             }
         }
 
