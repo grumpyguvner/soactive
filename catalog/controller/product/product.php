@@ -334,7 +334,7 @@ class ControllerProductProduct extends Controller {
                                     break;
                                 case "Product Tabs":
                                     foreach ($attGroup['attribute'] as $tab)
-                                        if (substr ($tab['text'],0,15) = "information_id=") {
+                                        if (substr($tab['text'],0,15) == "information_id=") {
                                             $this->load->model('catalog/information');
                                             $information_id = substr ($tab['text'],16);
                                             $information_data = $this->model_catalog_information->getInformation($information_id);
