@@ -192,7 +192,7 @@ class ModelCatalogNews extends Model {
 				$query .= " LEFT JOIN " . DB_PREFIX . "news_to_ncategory n2n ON (n.news_id = n2n.news_id) LEFT JOIN " . DB_PREFIX . "ncategory_description ncd ON (n2n.ncategory_id = ncd.ncategory_id)";			
 			
 			
-		$query .= " WHERE ncd.name <> 'Testimonial' AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "'"; 
+		$query .= " WHERE ncd.name <> 'Testimonials' AND nd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND n.status = '1' AND n2s.store_id = '" . (int)$this->config->get('config_store_id') . "'"; 
 		
 		if (!empty($data['filter_ncategory_id'])) {
 				if (!empty($data['filter_sub_ncategory'])) {

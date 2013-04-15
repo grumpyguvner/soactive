@@ -61,11 +61,9 @@
                         </div>
                     </div>
                     <?php if ($products) { ?>
-                        <div class="news-title">
-                            <?php echo $news_prelated; ?></div>
-                        <div class="tab-content-pnews">
-                            <div class="box-product" style="margin-bottom: 20px;">
-
+                       <div id="relatedProducts">
+                        <h3><?php echo $news_prelated; ?></h3>
+                       <div class="box-product">
                                 <?php foreach ($products as $product) { ?>
                                     <div class="nimage">
                                         <div class="grid-wrap"> 
@@ -100,6 +98,8 @@
                                 <?php } ?>
 
                             </div>
+                        <div class="tab-content-pnews">
+                            
                         <?php } ?>
                         <?php if ($acom != 0) { ?>
                             <div style="font-size: 16px; font-weight: bold; text-decoration: none; font-style: italic; margin-bottom: 7px; margin-left: 5px;">
@@ -135,10 +135,8 @@
                         <?php } ?>
 
                         <?php if ($rarticles) { ?>
-                            <div class="wrapper-rnews">    
-                                <div class="news-title">
-                                    <?php echo $news_recent; ?>
-                                </div>
+                            <div class="wrapper-rnews"> 
+                                    <h3><?php echo $news_recent; ?></h3>
                                 <div class="wrap-rarticles">
                                     <?php for ($i = 0; $i < count($rarticles) && $i < 4; $i++) { ?>
                                         <div class="rarticles">
@@ -168,6 +166,8 @@
                         </div>     
 
                     </div>
+                       </div>
+                        
                     <script type="text/javascript"><!--
                         $('.colorbox').colorbox({
                             overlayClose: true,
