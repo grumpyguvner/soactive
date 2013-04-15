@@ -191,6 +191,9 @@ a:hover {
 .text-info h3 {
     color: #74964B;
 }
+.text-info h4 {
+    color: #74964B;
+}
 .text-info #examples {
     color: #74964B;
     font-weight: bold;
@@ -3172,13 +3175,15 @@ input[type="color"]:focus, .uneditable-input:focus {
     background-image: url('../image/information/history-back.png');
     background-repeat: no-repeat;
     margin-left: 0;
-    height: 1066px;
+    margin-top: 373px;
+    height: 1064px;
 }
 .our-factory {
     background-image: url('../image/information/customer-service.png');
     background-repeat: no-repeat;
     background-position: bottom left;
     margin-left: 0;
+    margin-top: 373px;
     height: 588px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
@@ -3193,7 +3198,8 @@ input[type="color"]:focus, .uneditable-input:focus {
     background-image: url('../image/information/customer-service.png');
     background-repeat: no-repeat;
     margin-left: 0;
-    height: 677px;
+    height: 941.5px;
+    background-color: #d3d3d3;
 }
 
 .privacy-policy {
@@ -3438,6 +3444,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     background-repeat: no-repeat;
     background-position: bottom left;
     margin-left: 0;
+    margin-top: 247px;
     height: 792px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
@@ -3848,4 +3855,29 @@ input[type="color"]:focus, .uneditable-input:focus {
     padding: 12px 18px;
     border-left: 1px solid #434245;
     border-right: 1px solid #434245;
+}
+#rp-form {
+    line-height: 25px;  
+    margin-bottom: 70px; 
+}
+#rp-form b {
+    color: #000000;
+}
+#rp-form a {
+    padding: 12px;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+#rp-form a span {
+    color: #FFFFFF;
+}
+#rp-form span {
+    color: #000000;
+}
+#info-size tr td{
+    color: #777777;
+    text-align: center;
+}
+#info-size tr th{
+    color: #777777;
 }
