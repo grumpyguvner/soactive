@@ -52,7 +52,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
             $this->db->query("TRUNCATE `" . DB_PREFIX . "option_value`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "option_value_description`");
             
-            $this->db->query("TRUNCATE `" . DB_PREFIX . "url_alias`");
+            $this->db->query('DELETE FROM `' . DB_PREFIX . 'url_alias` WHERE query LIKE "product_id=%" OR query LIKE "category_id=%"');
         }
     }
 
