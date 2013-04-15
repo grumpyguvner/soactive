@@ -40,21 +40,18 @@
                                 <?php } ?>
                             </div>
                             <?php if ($images) { ?>
-                                <?php $count = 0; ?>
                                 <div class="image-additional">
-                                    <?php if ($additional) { ?>
-                                        <a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/>
-                                        <?php } ?>
-                                        <?php foreach ($images as $image) { ?>
-                                            <?php if (empty($image['video'])) { ?>
-                                                <a href="<?php echo $image['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $image['main']; ?>"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
-                                            <?php } else { ?>
-                                                <a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank"><span class="play-button" style="height:106px;width:116px;"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" height="106px" width="116px" class="thumbVideo" /></span></a>
-                                                <?php
-                                                $count++;
-                                            }
-                                            ?>
-                                        <?php } ?>
+                                    <?php
+                                    if ($additional) {
+                                        ?><a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/><?php
+                                    }
+                                    foreach ($images as $image) {
+                                        if (empty($image['video'])) {
+                                            ?><a href="<?php echo $image['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $image['main']; ?>"><img src="<?php echo $image['thumb']; ?>" alt="" /></a><?php
+                                        } else {
+                                            ?><a href="http://www.youtube.com/watch?v=<?php echo $image['video']; ?>" class="videoAdditional" data-video="<?php echo $image['video']; ?>" target="_blank" style="line-height:<?php echo $additionalHeight; ?>px;height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"><img src="http://img.youtube.com/vi/<?php echo $image['video']; ?>/0.jpg" alt="" /><span class="play-button" style="height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"></span></a><?php
+                                        }
+                                    } ?>
                                 </div>
                             <?php } ?>
                         <?php } ?>
@@ -633,23 +630,23 @@
     $(document).ready(function () {
             
         $('.image-additional').delegate('a.videoAdditional','click', function(){
-            $('#wrap-image').html('<iframe id="playingMovie" width="366" height="373" src="http://www.youtube.com/embed/' + $(this).data('video') + '?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>');
+            $('.product-img .image').html('<iframe id="playingMovie" width="374" height="374" src="http://www.youtube.com/embed/' + $(this).data('video') + '?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>');
             return false;
         });
             
         $('.image-additional').delegate('a.imageAdditional','click', function(){
-            $('#wrap-image').html('<img src="' + $(this).data('main') + '" alt="" />');
+            $('.product-img .image').html('<img src="' + $(this).data('main') + '" alt="" />');
             return false;
         });
             
-        $('#wrap-image').delegate('img','click', function(){
+        $('.product-img .image').delegate('img','click', function(){
             $('.colorbox').colorbox({
                 overlayClose: true,
                 opacity: 0.5,
                 open: true
             });
         });
-            
+        
     });
         
 </script>

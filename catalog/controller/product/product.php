@@ -213,11 +213,15 @@ class ControllerProductProduct extends Controller {
                             $this->data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
                             $this->data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));
                             $this->data['additional'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
+                            
 			} else {
 				$this->data['popup'] = '';
 				$this->data['thumb'] = '';
 				$this->data['additional'] = '';
 			}
+                        
+                        $this->data['additionalHeight'] = $this->config->get('config_image_additional_height');
+                        $this->data['additionalWidth'] = $this->config->get('config_image_additional_width');
                         
 			
 			$this->data['images'] = array();
