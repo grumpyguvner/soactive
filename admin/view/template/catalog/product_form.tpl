@@ -487,6 +487,7 @@
                                                     <tr>
                                                         <th class="column-name"><?php echo $entry_option_value; ?></th>
                                                         <th class="column-name"><?php echo $entry_sku; ?></th>
+                                                        <th class="column-name"><?php echo $entry_ean; ?></th>
                                                         <th class="column-number"><?php echo $entry_quantity; ?></th>
                                                         <th class="column-number"><?php echo $entry_subtract; ?></th>
                                                         <th class="column-number"><?php echo $entry_price; ?></th>
@@ -510,6 +511,10 @@
                                                             <td class="column-number">
                                                                 <label class="visible-480"><?php echo $entry_sku; ?></label>
                                                                 <input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][sku]" value="<?php echo $product_option_value['sku']; ?>" class="span1 i-mini">
+                                                            </td>
+                                                            <td class="column-number">
+                                                                <label class="visible-480"><?php echo $entry_ean; ?></label>
+                                                                <input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][ean]" value="<?php echo $product_option_value['ean']; ?>" class="span1 i-mini">
                                                             </td>
                                                             <td class="column-number">
                                                                 <label class="visible-480"><?php echo $entry_quantity; ?></label>
