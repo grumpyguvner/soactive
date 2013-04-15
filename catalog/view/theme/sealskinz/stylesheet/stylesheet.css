@@ -167,9 +167,9 @@ a:hover {
     text-align: center;
 }
 .text-info {
-    width: 582px;
+    width: 575px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 25px;
     padding-top: 20px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
@@ -2471,7 +2471,7 @@ a.button-account:hover, input.button-account:hover {
     background-image: -webkit-linear-gradient(top, #96c462 52%, #a5d170 72%);
     /* W3C Markup, IE10 Release Preview */ 
     background-image: linear-gradient(to bottom right, #96c462 52%, #a5d170 72%);
-
+    border-bottom: 6px solid #74964a;
 }
 .menu-gradient{
     /* IE10 Consumer Preview */ 
@@ -3241,7 +3241,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     border: 1px solid #DDDDDD;
     float: left;
     height: 316px;
-    width: 182px;
+    width: 178px;
 }
 .how-they-work.middle {
     background-color: #000000;
@@ -3251,12 +3251,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     background: url("../image/technology/number2.gif") no-repeat scroll left top transparent;
     color: #FFFFFF;
     padding: 12px 0 5px 40px;
-}
-.how-they-work {
-    border: 1px solid #DDDDDD;
-    float: left;
-    height: 316px;
-    width: 182px;   
 }
 .how-they-work.last {
     background-color: #0188D3;
@@ -3269,12 +3263,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     background: url("../image/technology/number3.gif") no-repeat scroll left top transparent;
     color: #FFFFFF;
     padding: 12px 0 5px 40px;
-}
-.how-they-work {
-    border: 1px solid #DDDDDD;
-    float: left;
-    height: 316px;
-    width: 182px;
 }
 .iRow {
     display: block;

@@ -214,6 +214,10 @@
 
                             </div>
                         </div>
+                        <?php
+                        if ($show_newsletter)
+                        {
+                        ?>
                         <h3><?php echo $text_newsletter; ?></h3>
                         <div class="content">
                             <div class="row">
@@ -235,6 +239,13 @@
                                 </div>
                             </div>    
                         </div>
+                        <?php
+                        } else {
+                        ?>
+                        <input type="hidden" name="newsletter" value="1" />
+                        <?php
+                        }
+                        ?>
                         <?php if ($text_agree) { ?>
                             <div class="buttons">
 

@@ -258,6 +258,14 @@ class ControllerCheckoutGuest extends Controller {
 			$this->session->data['guest']['email'] = $this->request->post['email'];
 			$this->session->data['guest']['telephone'] = $this->request->post['telephone'];
 			$this->session->data['guest']['fax'] = $this->request->post['fax'];
+                        
+                        if (($this->config->get('newsletter_mailcampaign_enabled') && !$this->config->get('newsletter_mailcampaign_account_optin')) ||
+                            ($this->config->get('newsletter_mailchimp_enabled') && !$this->config->get('newsletter_mailchimp_account_optin')))
+                        {
+                            $this->session->data['guest']['newsletter'] = true;
+                        } else {
+                            $this->session->data['guest']['newsletter'] = false;
+                        }
 			
 			$this->session->data['guest']['payment']['firstname'] = $this->request->post['firstname'];
 			$this->session->data['guest']['payment']['lastname'] = $this->request->post['lastname'];				
