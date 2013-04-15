@@ -329,11 +329,20 @@ class ControllerProductProduct extends Controller {
                             //TODO: Amend attribute groups to have a "Do not display" flag
                             switch ($attGroup['name']){
                                 case "Menu Filters":
+                                case "Filter":
                                     //ignore menu filters
                                     break;
                                 case "Product Tabs":
                                     foreach ($attGroup['attribute'] as $tab)
-                                        $this->data['product_tabs'][] = array('name'=>$tab['name'],'text'=>html_entity_decode($tab['text']));
+                                        if (substr($tab['text'],0,15) == "information_id=") {
+                                            $this->load->model('catalog/information');
+                                            $information_id = substr ($tab['text'],16);
+                                            $information_data = $this->model_catalog_information->getInformation($information_id);
+                                            $text = $information_data['description'];
+                                        } else {
+                                            $text = $tab['text'];
+                                        }
+                                        $this->data['product_tabs'][] = array('name'=>$tab['name'],'text'=>html_entity_decode($text));
                                     break;
                                 default:
                                     $this->data['attribute_groups'][] = $attGroup;
