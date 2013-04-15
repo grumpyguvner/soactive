@@ -50,12 +50,20 @@
           <tbody id="image-row<?php echo $image_row; ?>">
             <tr>
               <td class="left"><?php foreach ($languages as $language) { ?>
-                <input type="text" name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][title]" value="<?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['title'] : ''; ?>" />
-                <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
-                <?php if (isset($error_banner_image[$image_row][$language['language_id']])) { ?>
-                <span class="error"><?php echo $error_banner_image[$image_row][$language['language_id']]; ?></span>
+                    <input type="text" name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][title]" value="<?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['title'] : ''; ?>" />
+                    <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
+                    <?php if (isset($error_banner_image[$image_row][$language['language_id']])) { ?>
+                    <span class="error"><?php echo $error_banner_image[$image_row][$language['language_id']]; ?></span>
+                    <?php } ?>
+                    <br/>
+                    <b><?php echo $entry_description; ?></b>
+                    <br/><br/>
+                    <textarea name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['description'] : ''; ?></textarea>
+                    <?php if (isset($error_banner_image[$image_row][$language['language_id']])) { ?>
+                    <span class="error"><?php echo $error_banner_image[$image_row][$language['language_id']]; ?></span>
+                    <?php } ?>
                 <?php } ?>
-                <?php } ?></td>
+              </td>
               <td class="left"><input type="text" name="banner_image[<?php echo $image_row; ?>][link]" value="<?php echo $banner_image['link']; ?>" /></td>
               <td class="left"><div class="image"><img src="<?php echo $banner_image['thumb']; ?>" alt="" id="thumb<?php echo $image_row; ?>" />
                   <input type="hidden" name="banner_image[<?php echo $image_row; ?>][image]" value="<?php echo $banner_image['image']; ?>" id="image<?php echo $image_row; ?>"  />
@@ -77,6 +85,19 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"><!--
+<?php foreach ($languages as $language) { ?>
+CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
+	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+});
+<?php } ?>
+//--></script>
 <script type="text/javascript"><!--
 var image_row = <?php echo $image_row; ?>;
 

@@ -291,6 +291,7 @@ CREATE TABLE `oc_banner_image_description` (
   `language_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
   `title` varchar(64) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`banner_image_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
