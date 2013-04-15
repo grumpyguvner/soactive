@@ -1,70 +1,68 @@
 <?php
-require_once(DIR_SYSTEM . 'library/mailchimp.php');
-
 class ControllerModuleNewsletter extends Controller {
 
-	protected function index($setting) {
-		$this->name = basename(__FILE__, '.php');
+    protected function index($setting) {
+        $this->name = basename(__FILE__, '.php');
 
-		if ($setting['store_id'] == $this->config->get('config_store_id')) {
+        if ($setting['store_id'] == $this->config->get('config_store_id')) {
 
-			$this->session->data['newsletter_name_required'] = $setting['name'];
-			$this->data = array_merge($this->data, $this->load->language('module/' . $this->name));
-      		$this->data['heading_title'] = $setting['language_id'][$this->config->get('config_language_id')];
+            $this->session->data['newsletter_name_required'] = $setting['name'];
+            $this->data = array_merge($this->data, $this->load->language('module/' . $this->name));
+            $this->data['heading_title'] = $setting['language_id'][$this->config->get('config_language_id')];
 
-			if ($setting['name'] != 'off') {
-        		$this->data['name'] = $setting['name'];
-			} else {
-				$this->data['name'] = 'off';
-			}
+            if ($setting['name'] != 'off') {
+                $this->data['name'] = $setting['name'];
+            } else {
+                $this->data['name'] = 'off';
+            }
 
-	        if (isset($this->request->get['route'])) {
-        		$this->data['action'] = (HTTP_SERVER . 'index.php?route=' . $this->request->get['route']);
-			} else {
-				$this->data['action'] = HTTP_SERVER;
-			}
+            if (isset($this->request->get['route'])) {
+                $this->data['action'] = (HTTP_SERVER . 'index.php?route=' . $this->request->get['route']);
+            } else {
+                $this->data['action'] = HTTP_SERVER;
+            }
 
-			$this->setTemplate('module/'.$this->name.'.tpl');
+            $this->setTemplate('module/' . $this->name . '.tpl');
 
 
-			$this->render();
-		}
-  	}
+            $this->render();
+        }
+    }
 
-  	public function callback() {
+    public function callback() {
 
-		$this->language->load('module/newsletter');
-
-		if (!isset($this->request->get['subscribe'])) {
-			$this->request->get['subscribe'] = true;
-		}
+        $this->language->load('module/newsletter');
         
+        $this->load->model('account/newsletter');
+
+        if (!isset($this->request->get['subscribe'])) {
+            $this->request->get['subscribe'] = true;
+        }
+
         $success = null;
         $error = null;
 
-		if (!$this->request->get['email'] || !filter_var($this->request->get['email'], FILTER_VALIDATE_EMAIL)) {
-			$error = $this->language->get('error_email');
-		}
+        if (!$this->request->get['email'] || !filter_var($this->request->get['email'], FILTER_VALIDATE_EMAIL)) {
+            $error = $this->language->get('error_email');
+        }
 
-    	if (empty($this->session->data['newsletter_name_required'])) {
-			$this->session->data['newsletter_name_required'] = 'optional';
-		}
+        if (empty($this->session->data['newsletter_name_required'])) {
+            $this->session->data['newsletter_name_required'] = 'optional';
+        }
 
-		if (empty($this->request->get['name'])) {
-			$this->request->get['name'] = '';
-		}
+        if (empty($this->request->get['name'])) {
+            $this->request->get['name'] = '';
+        }
 
-		if (empty($this->request->get['name2'])) {
-			$this->request->get['name2'] = '';
-		}
+        if (empty($this->request->get['name2'])) {
+            $this->request->get['name2'] = '';
+        }
 
 //		if ($this->session->data['newsletter_name_required'] == 'required' && !$this->request->get['name']) {
 //			$this->response->setOutput($this->language->get('error_name'), $this->config->get('config_compression'));
 //			return;
 //		}
-        if (is_null($error))
-        {
-            $this->load->model('account/newsletter');
+        if (is_null($error)) {
             $this->load->model('account/customer');
             $total = $this->model_account_newsletter->getTotalNewsletterByEmail($this->request->get['email']);
 
@@ -77,16 +75,14 @@ class ControllerModuleNewsletter extends Controller {
             }
         }
 
-        if (is_null($error))
-        {
+        if (is_null($error)) {
             if ($this->request->get['subscribe']) {
                 if ($this->customer->isLogged()) {
                     $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2'], 'account');
                 } else {
                     $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2']);
                 }
-                if ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_double_optin'))
-                {
+                if ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_double_optin')) {
                     $success = $this->language->get('text_subscribed_optin');
                 } else {
                     $success = $this->language->get('text_subscribed');
@@ -96,12 +92,11 @@ class ControllerModuleNewsletter extends Controller {
                 $success = $this->language->get('text_unsubscribed');
             }
         }
-        
+
         $success = sprintf($success, $this->request->get['email']);
         $error = sprintf($error, $this->request->get['email']);
-        
-        if (isset($this->request->get['ajax']))
-        {
+
+        if (isset($this->request->get['ajax'])) {
             $ajax = array('success' => $success, 'error' => $error);
             $this->response->setOutput(json_encode($ajax), $this->config->get('config_compression'));
         } elseif ($error) {
@@ -109,7 +104,8 @@ class ControllerModuleNewsletter extends Controller {
         } else {
             $this->response->setOutput($success, $this->config->get('config_compression'));
         }
-	}
+    }
 
 }
+
 ?>
