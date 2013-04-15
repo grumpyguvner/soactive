@@ -174,7 +174,7 @@ if ($show_newsletter)
 </div>
 <?php if ($text_agree) { ?>
 <div class="buttons">
-  <div class="right"><label> class="checkbox"<?php echo $text_agree; ?>
+  <div class="right"><label class="checkbox"><?php echo $text_agree; ?>
     <input type="checkbox" name="agree" value="1" /></label>
     <input type="button" value="<?php echo $button_continue; ?>" id="button-register" class="button" />
   </div>
