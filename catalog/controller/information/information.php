@@ -117,7 +117,6 @@ class ControllerInformationInformation extends Controller {
 			$output .= '  <meta name="robots" content="noindex">' . "\n";
 			$output .= '</head>' . "\n";
 			$output .= '<body>' . "\n";
-			$output .= '  <h1>' . $information_info['title'] . '</h1>' . "\n";
 			$output .= html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8') . "\n";
 			$output .= '  </body>' . "\n";
 			$output .= '</html>' . "\n";			
