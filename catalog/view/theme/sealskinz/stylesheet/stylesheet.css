@@ -1685,6 +1685,15 @@ a.button-account:hover, input.button-account:hover {
     -moz-border-radius: 0;
     border-radius: 0;
 }
+.rating-top {
+    background: transparent url('../image/product/line-rating.png') repeat-x center left;
+    margin: 15px 0 0;
+    padding-right: 5px;
+    display: inline-block; zoom: 1; *display: inline;
+}
+.thermal.rating-top .thermalChecked {
+    margin-left: 5px;
+}
 
 .review-list {
     padding: 10px;
@@ -2954,202 +2963,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: auto;
     text-align: center;
 }
-.rating-top-1 {
-    background-image: url('../image/product/1.png');
-    position: absolute;
-    margin-left: -10px;
-    margin-top: -20px;
-    width: 20px;
-    height: 20px;
-}
-.rating-top-2 {
-    background-image: url('../image/product/2.png');
-    position: absolute;
-    margin-left: 18px;
-    margin-top: -20px;
-    width: 20px;
-    height: 20px;
-}
-.rating-top-3 {
-    background-image: url('../image/product/3.png');
-    position: absolute;
-    margin-left: 47px;
-    margin-top: -20px;
-    width: 20px;
-    height: 20px;
-}
-.rating-top-4 {
-    background-image: url('../image/product/4.png');
-    position: absolute;
-    margin-left: 77px;
-    margin-top: -20px;
-    width: 20px;
-    height: 20px;
-}
-.rating-top-5 {
-    background-image: url('../image/product/5.png');
-    position: absolute;
-    margin-left: 106px;
-    margin-top: -20px;
-    width: 20px;
-    height: 20px;
-}
-.rating-top-1big {
-    background-image: url('../image/product/1-big.png');
-    position: absolute;
-    margin-left: -19px;
-    margin-top: -26px;
-    width: 20px;
-    height: 20px;
-    padding: 6px;
-}
-.rating-top-1big span {
-    font-size: 16px;
-}
-.rating-top-2big {
-    background-image: url('../image/product/2-big.png');
-    position: absolute;
-    margin-left: 12px;
-    margin-top: -26px;
-    width: 20px;
-    height: 20px;
-    padding: 6px;
-}
-.rating-top-2big span {
-    font-size: 16px;
-}
-.rating-top-3big {
-    background-image: url('../image/product/3-big.png');
-    position: absolute;
-    margin-left: 41px;
-    margin-top: -26px;
-    width: 21px;
-    height: 20px;
-    padding: 6px;
-}
-.rating-top-3big span {
-    font-size: 16px;
-}
-.rating-top-4big {
-    background-image: url('../image/product/4-big.png');
-    position: absolute;
-    margin-left: 71px;
-    margin-top: -26px;
-    width: 21px;
-    height: 22px;
-    padding: 5px;
-}
-.rating-top-4big span {
-    font-size: 16px;
-}
-.rating-top-5big {
-    background-image: url('../image/product/5-big.png');
-    position: absolute;
-    margin-left: 103px;
-    margin-top: -26px;
-    width: 20px;
-    height: 20px;
-    padding: 6px;
-}
-.rating-top-5big span {
-    font-size: 16px;
-}
-.rating-1 {
-    background-image: url('../image/product/1.png');
-    position: absolute;
-    margin-left: 102px;
-    margin-top: -20px;
-    width: 20px;
-}
-.rating-2 {
-    background-image: url('../image/product/2.png');
-    position: absolute;
-    margin-left: 131px;
-    margin-top: -20px;
-    width: 20px;
-}
-.rating-3 {
-    background-image: url('../image/product/3.png');
-    position: absolute;
-    margin-left: 160px;
-    margin-top: -20px;
-    width: 20px;
-}
-.rating-4 {
-    background-image: url('../image/product/4.png');
-    position: absolute;
-    margin-left: 191px;
-    margin-top: -20px;
-    width: 20px;
-}
-.rating-5 {
-    background-image: url('../image/product/5.png');
-    position: absolute;
-    margin-left: 220px;
-    margin-top: -20px;
-    width: 20px;
-}
-.rating-1big {
-    background-image: url('../image/product/1-big.png');
-    position: absolute;
-    margin-left: 93px;
-    margin-top: -26px;
-    height: 20px;
-    width: 20px;
-    padding: 6px;
-}
-.rating-2big {
-    background-image: url('../image/product/2-big.png');
-    position: absolute;
-    margin-left: 125px;
-    margin-top: -26px;
-    height: 20px;
-    width: 20px;
-    padding: 6px;
-}
-.rating-3big {
-    background-image: url('../image/product/3-big.png');
-    position: absolute;
-    margin-left: 155px;
-    margin-top: -26px;
-    height: 20px;
-    width: 20px;
-    padding: 6px;
-}
-.rating-4big {
-    background-image: url('../image/product/4-big.png');
-    position: absolute;
-    margin-left: 185px;
-    margin-top: -26px;
-    height: 22px;
-    width: 21px;
-    padding: 5px;
-}
-.rating-5big {
-    background-image: url('../image/product/5-big.png');
-    position: absolute;
-    margin-left: 218px;
-    margin-top: -26px;
-    height: 20px;
-    width: 20px;
-    padding: 6px;
-}
-.rating-top {
-    width: 130px;
-    height: 24px;
-    margin-left: 10px;
-}
-.rating-top span {
-    color: white;
-    margin-left: 6px;
-}
-.rating {
-
-}
-.rating-big span {
-    font-size: 16px;
-    color: white;
-}
 .compare-wrap {
     margin-left: 30px;
 }
@@ -3509,10 +3322,11 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-size: 17px !important;
     font-weight: normal;
 }
+
 .thermal input {
     display: none;
 }
-.thermal label {
+.thermal label, .thermal .therm {
     display: inline-block;
     vertical-align: middle;
     color: #fff;
@@ -3526,9 +3340,11 @@ input[type="color"]:focus, .uneditable-input:focus {
     border-radius: 20px;
     border: 2px solid #DDD;
     margin: 5px 0 5px 5px;
-    
 }
-.thermal label.thermalChecked {
+.thermal label {
+    cursor: pointer;
+}
+.thermal .thermalChecked {
     line-height: 30px;
     width: 30px;
     height: 30px;
@@ -3538,19 +3354,19 @@ input[type="color"]:focus, .uneditable-input:focus {
     border: 2px solid #DDD;
     margin: 0;
 }
-.thermal label.therm1 {
+.thermal .therm1 {
     background: #FFDD00;
 }
-.thermal label.therm2 {
+.thermal .therm2 {
     background: #FEB811;
 }
-.thermal label.therm3 {
+.thermal .therm3 {
     background: #F7931C;
 }
-.thermal label.therm4 {
+.thermal .therm4 {
     background: #F0641F;
 }
-.thermal label.therm5 {
+.thermal .therm5 {
     background: #EE2024;
 }
 

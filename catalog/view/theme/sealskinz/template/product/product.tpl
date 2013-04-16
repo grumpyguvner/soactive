@@ -223,30 +223,17 @@
                                         <br />
                                     <?php } ?>
                                 <?php } ?>
-                                <?php if ($attribute_groups) { ?>
-                                <div class="rating-top">
-                                        <img src="catalog/view/theme/sealskinz/image/product/line-rating.png" alt="Rating" class="line-rating" />
-                                        <div class="rating-top-1"><span><?php echo $text_rating1 ?></span></div>
-                                        <div class="rating-top-2"><span><?php echo $text_rating2 ?></span></div>
-                                        <div class="rating-top-3"><span><?php echo $text_rating3 ?></span></div>
-                                        <div class="rating-top-4"><span><?php echo $text_rating4 ?></span></div>
-                                        <div class="rating-top-5"><span><?php echo $text_rating5 ?></span></div>
-                                        <?php foreach ($attribute_groups as $attribute_group) { ?>
-                                            <?php foreach ($attribute_group['attribute'] as $attribute) { ?>
-
-                                                <?php if ($attribute['text'] == '1') { ?>
-                                                    <div class="rating-top-1big"><span><?php echo $text_rating1 ?></span></div>
-                                                <?php } else if (($attribute['text'] == '2')) { ?>        
-                                                    <div class="rating-top-2big"><span><?php echo $text_rating2 ?></span></div>
-                                                <?php } else if (($attribute['text'] == '3')) { ?>      
-                                                    <div class="rating-top-3big"><span><?php echo $text_rating3 ?></span></div>
-                                                <?php } else if (($attribute['text'] == '4')) { ?>
-                                                    <div class="rating-top-4big"><span><?php echo $text_rating4 ?></span></div>
-                                                <?php } else if (($attribute['text'] == '5')) { ?>
-                                                    <div class="rating-top-5big"><span><?php echo $text_rating5 ?></span></div>
-                                                <?php } ?>  
-                                            <?php } ?>
-                                        <?php } ?>
+                                <?php if (isset($attribute_groups['Filter'])) { ?>
+                                <div class="rating-top thermal">
+                                    <?php
+                                    $therm = array();
+                                    foreach ($attribute_groups['Filter'] as $attribute_group) {
+                                        foreach ($attribute_group['attribute'] as $attribute) {
+                                            $therm[] = $attribute['text'];
+                                        }
+                                    }
+                                    for ($i = 1; $i <= 5; $i++) {
+                                    ?><div class="therm therm<?php echo $i; if (in_array($i, $therm)) echo ' thermalChecked' ?>"><?php echo $i ?></span></div><?php } ?>
                                 </div>
                                 <?php } ?>
                             </div>
