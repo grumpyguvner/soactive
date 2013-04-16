@@ -9,7 +9,7 @@
                 <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
                 <?php
                 if ($description) { ?>
-                  <?php echo $description; ?></div>
+                  <?php echo $description; ?>
                 <?php } ?>
             </div>
             <?php
