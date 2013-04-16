@@ -183,6 +183,8 @@ class ControllerProductProduct extends Controller {
 			$this->data['button_continue'] = $this->language->get('button_continue');
 			
 			$this->load->model('catalog/review');
+                        
+			$this->data['login'] = $this->url->link('account/login', '');
 
 			$this->data['tab_description'] = $this->language->get('tab_description');
 			$this->data['tab_attribute'] = $this->language->get('tab_attribute');

@@ -242,7 +242,7 @@
                         <?php if ($review_status) { ?>
                             <div class="review">
                                 <div class="tools">
-                                    <img src="catalog/view/theme/sealskinz/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');">(<?php echo $reviews; ?>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <img src="catalog/view/theme/sealskinz/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('#tab-review').trigger('click');">(<?php echo $reviews; ?>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                     <!-- <a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp; --><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a>
                                 </div>
                                 <div class="share"><!-- AddThis Button BEGIN -->
@@ -256,10 +256,10 @@
                         <ul class="nav nav-tabs" id="productTab">
                             <li class="active"><a href="#productTabDesc"><?php echo $tab_description; ?></a></li>
                             <?php
-                            foreach ($attribute_groups as $key => $attribute_group) {
-                                if ($attribute_group['name'] != 'Filter') {
-                                    echo '<li><a href="#productTabAttr' . $key . '">' . $attribute_group['name'] . '</a></li>';
-                                }
+                            if ($product_tabs) {
+                                foreach ($product_tabs as $key => $tab) {
+                                        echo '<li><a href="#productTabAttr' . $key . '">' . $tab['name'] . '</a></li>';
+                                    }
                             }
                             if ($review_status)
                                 echo '<li><a href="#productTabReview" id="tab-review">' . $tab_review . '</a></li>';
@@ -268,66 +268,27 @@
                         <div class="tab-content">
                             <div id="productTabDesc" class="tab-pane active">
                                 <p><?php echo $description; ?></p>
+                                <p>
                                 <?php
                                 if ($review_anonymous_status == '1' || $logged) {
                                     ?>
-                                    <br/>
-                                    <a class="button" onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write_review ?></a>
+                                    <a class="button-account" onclick="$('#tab-review').trigger('click');"><?php echo $text_write_review ?></a>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <p><a class="button-account" href="<?php echo $login ?>"><?php echo $text_write_review ?></a>
                                     <?php
                                 }
-                                ?>
+                                ?>&nbsp; <img src="catalog/view/theme/sealskinz/image/great-british-company.png" alt="Designed by a great British company" style="height:36px"></p>
                             </div>
                             <?php
-                            if ($attribute_groups) {
-                                foreach ($attribute_groups as $key => $attribute_group) {
-                                    if ($attribute_group['name'] != 'Filter') {
+                            if ($product_tabs) {
+                                foreach ($product_tabs as $key => $tab) {
                                         ?>
                                         <div id="productTabAttr<?php echo $key; ?>" class="tab-pane">
-                                            <table class="attribute">
-                                                <thead>
-                                                    <tr>
-                                                        <td colspan="2"><?php echo $attribute_group['name']; ?></td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($attribute_group['attribute'] as $attribute) { ?>
-                                                        <tr>
-                                                            <?php if ($attribute['name'] == 'Thermal Rating') { ?>
-                                                                <td><?php echo $attribute['name']; ?></td>
-                                                                <td>
-                                                                    <div class="rating">
-                                                                        <img src="catalog/view/theme/sealskinz/image/product/line-rating.png" alt="Rating" class="line-rating" />
-                                                                        <div class="rating-1"><span style="color: white;">1</span></div>
-                                                                        <div class="rating-2"><span style="color: white;">2</span></div>
-                                                                        <div class="rating-3"><span style="color: white;">3</span></div>
-                                                                        <div class="rating-4"><span style="color: white;">4</span></div>
-                                                                        <div class="rating-5"><span style="color: white;">5</span></div>
-                                                                        <div class="rating-big">
-                                                                            <?php if ($attribute['text'] == '1') { ?>
-                                                                                <div class="rating-1big"><span><?php echo $text_rating1 ?></span></div>
-                                                                            <?php } else if (($attribute['text'] == '2')) { ?>        
-                                                                                <div class="rating-2big"><span><?php echo $text_rating2 ?></span></div>
-                                                                            <?php } else if (($attribute['text'] == '3')) { ?>      
-                                                                                <div class="rating-3big"><span><?php echo $text_rating3 ?></span></div>
-                                                                            <?php } else if (($attribute['text'] == '4')) { ?>
-                                                                                <div class="rating-4big"><span><?php echo $text_rating4 ?></span></div>
-                                                                            <?php } else if (($attribute['text'] == '5')) { ?>
-                                                                                <div class="rating-5big"><span><?php echo $text_rating5 ?></span></div>
-                                                                            <?php } ?>  
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            <?php } else { ?>  
-                                                                <td><?php echo $attribute['name']; ?></td>
-                                                                <td><?php echo $attribute['text']; ?></td>
-                                                            <?php } ?>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
+                                            <?php echo $tab['text']; ?>
                                         </div>
                                         <?php
-                                    }
                                 }
                             }
                             ?>
@@ -343,7 +304,6 @@
                                     <br />
                                     <b><?php echo $entry_review; ?></b>
                                     <textarea name="text" cols="40" rows="8" style="width: 98%;"></textarea>
-                                    <span style="font-size: 11px;"><?php echo $text_note; ?></span><br />
                                     <br />
                                     <b><?php echo $entry_rating; ?></b> <span><?php echo $entry_bad; ?></span>&nbsp;
                                     <input type="radio" name="rating" value="1" />
