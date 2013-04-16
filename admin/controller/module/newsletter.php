@@ -243,7 +243,7 @@ class ControllerModuleNewsletter extends Controller {
         
         
         if ($this->data[$this->name . '_mailcampaign_apikey']) {
-        $mailc_general = new CS_REST_General($this->data[$this->name . '_mailcampaign_apikey']);
+            $mailc_general = new CS_REST_General($this->data[$this->name . '_mailcampaign_apikey']);
              $clients = $mailc_general->get_clients();
                if ($clients->was_successful())
                 {
