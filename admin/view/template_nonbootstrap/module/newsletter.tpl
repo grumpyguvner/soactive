@@ -358,6 +358,33 @@
           </td>
         </tr>
         <?php 
+        if (is_array($newsletter_mailcampaign_clients) && $this->user->isSuperuser())
+        {
+        ?>
+        <tr>
+          <td><?php echo $mailcampaign_client_id; ?></td>
+          <td>
+            <select name="newsletter_mailcampaign_client_id">
+            <?php
+            foreach ($newsletter_mailcampaign_clients as $ctlistid => $listname)
+            {
+              echo '<option value="'.$ctlistid.'"'.($ctlistid == $newsletter_mailcampaign_client_id ? ' selected="selected"' : '').'>'.$listname.'</option>';
+            }
+            ?>
+            </select>
+          </td>
+        </tr>
+        <?php
+        } else {
+        ?>
+        <tr>
+          <td><?php echo $mailcampaign_client_id; ?></td>
+          <td><input type="text" name="newsletter_mailcampaign_client_id" value="<?php echo $newsletter_mailcampaign_client_id; ?>" size="10" /></td>
+        </tr>
+        <?php
+        } // end if
+        ?>
+        <?php 
         if (is_array($newsletter_mailcampaign_lists))
         {
         ?>
@@ -384,9 +411,6 @@
         <?php
         } // end if
         ?>
-        
-<!---------------------------------------- Added AV 12/04/2013 ------------------------------------------------->
-
         <?php 
         if (is_array($newsletter_mailcampaign_lists))
         {
@@ -473,75 +497,7 @@
                 <?php } ?></td>
         </tr>
 <!---------------------------------------- End AV 12/04/2013 --------------------------------------------------->
-        <?php 
-        if (is_array($newsletter_mailcampaign_clients))
-        {
-        ?>
-        <tr>
-          <td><?php echo $mailcampaign_client_id; ?></td>
-          <td>
-            <select name="newsletter_mailcampaign_client_id">
-            <?php
-            foreach ($newsletter_mailcampaign_clients as $ctlistid => $listname)
-            {
-              echo '<option value="'.$ctlistid.'"'.($ctlistid == $newsletter_mailcampaign_client_id ? ' selected="selected"' : '').'>'.$listname.'</option>';
-            }
-            ?>
-            </select>
-          </td>
-        </tr>
-        <?php
-        } else {
-        ?>
-        <tr>
-          <td><?php echo $mailcampaign_client_id; ?></td>
-          <td><input type="text" name="newsletter_mailcampaign_client_id" value="<?php echo $newsletter_mailcampaign_client_id; ?>" size="10" /></td>
-        </tr>
-        <?php
-        } // end if
-        ?>
-        <!--tr>
-          <td><?php /* echo $mailcampaign_double_optin; ?></td>
-          <td><?php if ($newsletter_mailcampaign_double_optin) { ?>
-                <input type="radio" name="newsletter_mailcampaign_double_optin" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="newsletter_mailcampaign_double_optin" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="newsletter_mailcampaign_double_optin" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="newsletter_mailcampaign_double_optin" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } */?></td>
-        </tr-->
-        <!--tr>
-          <td><?php /* echo $mailcampaign_update_existing; ?></td>
-          <td><?php if ($newsletter_mailcampaign_update_existing) { ?>
-                <input type="radio" name="newsletter_mailcampaign_update_existing" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="newsletter_mailcampaign_update_existing" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="newsletter_mailcampaign_update_existing" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="newsletter_mailcampaign_update_existing" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } ?></td>
-        </tr>
-        <tr>
-          <td><?php echo $mailcampaign_send_welcome; ?></td>
-          <td><?php if ($newsletter_mailcampaign_send_welcome) { ?>
-                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="0" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="1" />
-                <?php echo $text_yes; ?>
-                <input type="radio" name="newsletter_mailcampaign_send_welcome" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } */?></td>
-          </tr-->
+        
       </table>
 	  </div>
         <!------------------- End tab Campaign ------------------------>

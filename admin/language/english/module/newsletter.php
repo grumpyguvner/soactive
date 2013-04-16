@@ -65,6 +65,7 @@ $_['mailcampaign_checkout_optin']   = 'Checkout Opt-in:';
 $_['mailcampaign_client_id']        = 'Client ID:';
 $_['mailcampaign_lists']            = 'List:';
 $_['mailcampaign_account_lists']    = 'Account List:';
+$_['mailcampaign_checkout_lists']   = 'Checkout List:';
 $_['mailcampaign_double_optin']     = 'Double Opt-in:';
 $_['mailcampaign_update_existing']  = 'Update Existing Record:';
 $_['mailcampaign_send_welcome']     = 'Send Welcome Email:';
