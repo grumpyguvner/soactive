@@ -27,8 +27,9 @@ class ControllerModuleSlideshow extends Controller {
 					$this->data['banners'][] = array(
 						'title' => $result['title'],
 						'link'  => $result['link'],
-                        'width' => $setting['width'],
-                        'height' => $setting['height'],
+                                                'width' => $setting['width'],
+                                                'height' => $setting['height'],
+                                                'description' => html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'),
 						'image' => $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height'])
 					);
 				}

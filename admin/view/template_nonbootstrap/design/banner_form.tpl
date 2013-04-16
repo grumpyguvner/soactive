@@ -58,7 +58,7 @@
                     <br/>
                     <b><?php echo $entry_description; ?></b>
                     <br/><br/>
-                    <textarea name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['description'] : ''; ?></textarea>
+                    <textarea name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id'] . '-' . $image_row; ?>"><?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['description'] : ''; ?></textarea>
                     <?php if (isset($error_banner_image[$image_row][$language['language_id']])) { ?>
                     <span class="error"><?php echo $error_banner_image[$image_row][$language['language_id']]; ?></span>
                     <?php } ?>
@@ -87,16 +87,21 @@
 </div>
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"><!--
-<?php foreach ($languages as $language) { ?>
-CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-});
-<?php } ?>
+<?php $image_row = 0; ?>
+   <?php foreach ($banner_images as $banner_image) { ?>    
+    <?php foreach ($languages as $language) { ?>
+    CKEDITOR.replace('description<?php echo $language['language_id']; ?>-<?php echo $image_row; ?>', {
+            filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+            filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+            filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+            filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+            filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+            filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
+    });
+    <?php } ?>
+    <?php $image_row++; ?>
+  <?php } ?>
+      
 //--></script>
 <script type="text/javascript"><!--
 var image_row = <?php echo $image_row; ?>;
