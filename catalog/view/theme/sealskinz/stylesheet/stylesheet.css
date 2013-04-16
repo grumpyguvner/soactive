@@ -471,6 +471,15 @@ a:hover {
     top: 0;
     left: 0;
 }
+#myCarousel .carousel-inner #text {
+    position: absolute;
+    z-index: 0;
+    top:30px;
+    left:30px;
+    color:#9cc663;
+    font-size: 52px;
+    font-weight: bold;
+}
 #myCarousel img {
     width: 100%;
 }
