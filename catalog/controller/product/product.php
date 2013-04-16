@@ -183,6 +183,8 @@ class ControllerProductProduct extends Controller {
 			$this->data['button_continue'] = $this->language->get('button_continue');
 			
 			$this->load->model('catalog/review');
+                        
+			$this->data['login'] = $this->url->link('account/login', '');
 
 			$this->data['tab_description'] = $this->language->get('tab_description');
 			$this->data['tab_attribute'] = $this->language->get('tab_attribute');
@@ -329,9 +331,9 @@ class ControllerProductProduct extends Controller {
                             switch ($attGroup['name']){
                                 case "Product Tabs":
                                     foreach ($attGroup['attribute'] as $tab)
-                                        if (substr($tab['text'],0,15) == "information_id=") {
+                                        if (preg_match('%^information_id=(\d+)%', $tab['text'])) {
                                             $this->load->model('catalog/information');
-                                            $information_id = substr ($tab['text'],16);
+                                            $information_id = preg_replace('%^information_id=(\d+)%', '\\1', $tab['text']);
                                             $information_data = $this->model_catalog_information->getInformation($information_id);
                                             $text = $information_data['description'];
                                         } else {
