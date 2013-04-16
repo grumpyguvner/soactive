@@ -39,6 +39,7 @@ class ModelToolZencartProduct extends ModelToolZencart {
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_description`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_image`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_option`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "product_option_value`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_related`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_reward`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_special`");
