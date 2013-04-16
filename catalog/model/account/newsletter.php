@@ -11,7 +11,7 @@ class ModelAccountNewsletter extends Model {
 
     public function subscribe($email = '', $name = '', $name2 = '', $listType = '') {
 
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             return;
 
         if ($this->config->get('newsletter_mailcampaign_enabled')) {
@@ -79,7 +79,7 @@ class ModelAccountNewsletter extends Model {
             }
         }
 
-        if (!$this->config->get('newsletter_mailchimp_enabled') && !$this->config->get('newsletter_mailcampaign_enabled')) {
+        if ($this->config->get('newsletter_mailchimp_enabled') || $this->config->get('newsletter_mailcampaign_enabled')) {
             return;
         }
 
@@ -253,7 +253,7 @@ class ModelAccountNewsletter extends Model {
             $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_listid'), $email);
 
             if (!$mailchimp->errorCode) {
-                if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed')
+                if ($retval['success'] && $retval['data'][0]['status'] == 'subscribed')
                     $flag += 1;
             }
             
@@ -262,7 +262,7 @@ class ModelAccountNewsletter extends Model {
                 $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailchimp_account_listid'), $email);
 
                 if (!$mailchimp->errorCode) {
-                    if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed')
+                    if ($retval['success'] && $retval['data'][0]['status'] == 'subscribed')
                         $flag += 1;
                 }
             }
@@ -272,7 +272,7 @@ class ModelAccountNewsletter extends Model {
                 $retval = $mailchimp->listMemberInfo($this->config->get('newsletter_mailcampaign_checkout_listid'), $email);
 
                 if (!$mailchimp->errorCode) {
-                    if ($retval['success'] && $retval['data'][0]['status'] != 'unsubscribed')
+                    if ($retval['success'] && $retval['data'][0]['status'] == 'subscribed')
                         $flag += 1;
                 }
             }

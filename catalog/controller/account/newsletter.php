@@ -8,11 +8,17 @@ class ControllerAccountNewsletter extends Controller {
         }
 
         $this->language->load('account/newsletter');
+        
+        $this->load->model('account/newsletter');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
         if ($this->request->server['REQUEST_METHOD'] == 'POST') {
-            $this->model_account_newsletter->subscribe($this->customer->getEmail(), $this->customer->getFirstName(), $this->customer->getLastName(), 'account');
+            if ($this->data['newsletter'] == '0') {
+                $this->model_account_newsletter->subscribe($this->customer->getEmail(), $this->customer->getFirstName(), $this->customer->getLastName(), 'account');
+            } else {
+                $this->model_account_newsletter->unsubscribe($this->customer->getEmail());
+            }
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -50,8 +56,8 @@ class ControllerAccountNewsletter extends Controller {
         $this->data['button_back'] = $this->language->get('button_back');
 
         $this->data['action'] = $this->url->link('account/newsletter', '', 'SSL');
-
-        $this->data['newsletter'] = $this->model_account_newsletter->getTotalNewsletterByEmail($this->customer->getEmail()) ? true : false;
+        
+        $this->data['newsletter'] = $this->model_account_newsletter->getTotalNewsletterByEmail($this->customer->getEmail());
 
         $this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
