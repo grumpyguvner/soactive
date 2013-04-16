@@ -18,8 +18,11 @@ if (!empty($banners))
                 ?>
                 
                 <div class="item<?php if ($key == 0) echo ' active'; ?>">
-                    <?php if ($banner['link']) echo '<a href="' . $banner['link'] . '">'; ?><img src="<?php echo $banner['image']; ?>" width="<?php echo $banner['width']; ?>" height="<?php echo $banner['height']; ?>" /><div id="text"><?php echo $banner['description']; ?></div><?php if ($banner['link']) echo '</a>'; ?>
-                    
+                    <?php if ($banner['link']) echo '<a href="' . $banner['link'] . '">'; ?><img src="<?php echo $banner['image']; ?>" width="<?php echo $banner['width']; ?>" height="<?php echo $banner['height']; ?>" /><?php if ($banner['link']) echo '</a>'; ?>
+                    <?php
+                    if ($banner['description']) { ?>
+                      <?php echo $banner['description']; ?>
+                    <?php } ?>
                 </div>
                 <?php
                 $indicators .= '<li data-target="#myCarousel" data-slide-to="' . $key . '" class="' . ($key == 0 ? ' active' : '') . '"></li>';
