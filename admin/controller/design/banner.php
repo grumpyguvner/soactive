@@ -196,7 +196,7 @@ class ControllerDesignBanner extends Controller {
 		
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_status'] = $this->language->get('column_status');
-		$this->data['column_action'] = $this->language->get('column_action');	
+		$this->data['column_action'] = $this->language->get('column_action');
 
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
@@ -276,6 +276,7 @@ class ControllerDesignBanner extends Controller {
 		$this->data['entry_link'] = $this->language->get('entry_link');
 		$this->data['entry_image'] = $this->language->get('entry_image');		
 		$this->data['entry_status'] = $this->language->get('entry_status');
+                $this->data['entry_description'] = $this->language->get('entry_description');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -362,7 +363,7 @@ class ControllerDesignBanner extends Controller {
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
 		
-		$this->load->model('tool/image');
+                $this->load->model('tool/image');
 	
 		if (isset($this->request->post['banner_image'])) {
 			$banner_images = $this->request->post['banner_image'];

@@ -291,6 +291,7 @@ CREATE TABLE `oc_banner_image_description` (
   `language_id` int(11) NOT NULL,
   `banner_id` int(11) NOT NULL,
   `title` varchar(64) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`banner_image_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -2171,6 +2172,7 @@ CREATE TABLE `oc_product_option_value` (
   `option_id` int(11) NOT NULL,
   `option_value_id` int(11) NOT NULL,
   `sku` varchar(64) COLLATE utf8_bin NOT NULL,
+  `ean` varchar(64) COLLATE utf8_bin NOT NULL,
   `quantity` int(3) NOT NULL,
   `subtract` tinyint(1) NOT NULL,
   `price` decimal(15,4) NOT NULL,
