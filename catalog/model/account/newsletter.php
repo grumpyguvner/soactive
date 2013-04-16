@@ -22,13 +22,13 @@ class ModelAccountNewsletter extends Model {
                 case 'account':
                     if ($this->config->get('newsletter_mailcampaign_account_listid'))
                     {
-                        $listId = $this->config->get('newsletter_mailcampaign_account_listid');
+                        $listID = $this->config->get('newsletter_mailcampaign_account_listid');
                     }
                     break;
                 case 'checkout':
                     if ($this->config->get('newsletter_mailcampaign_checkout_listid'))
                     {
-                        $listId = $this->config->get('newsletter_mailcampaign_checkout_listid');
+                        $listID = $this->config->get('newsletter_mailcampaign_checkout_listid');
                     }
                     break;
             }
@@ -55,13 +55,13 @@ class ModelAccountNewsletter extends Model {
                 case 'account':
                     if ($this->config->get('newsletter_mailchimp_account_listid'))
                     {
-                        $listId = $this->config->get('newsletter_mailchimp_account_listid');
+                        $listID = $this->config->get('newsletter_mailchimp_account_listid');
                     }
                     break;
                 case 'checkout':
                     if ($this->config->get('newsletter_mailchimp_checkout_listid'))
                     {
-                        $listId = $this->config->get('newsletter_mailchimp_checkout_listid');
+                        $listID = $this->config->get('newsletter_mailchimp_checkout_listid');
                     }
                     break;
             }
