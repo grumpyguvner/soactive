@@ -183,6 +183,8 @@ class ControllerProductProduct extends Controller {
 			$this->data['button_continue'] = $this->language->get('button_continue');
 			
 			$this->load->model('catalog/review');
+                        
+			$this->data['login'] = $this->url->link('account/login', '');
 
 			$this->data['tab_description'] = $this->language->get('tab_description');
 			$this->data['tab_attribute'] = $this->language->get('tab_attribute');
@@ -326,12 +328,7 @@ class ControllerProductProduct extends Controller {
                         $this->data['attribute_groups'] = array();
                         $this->data['product_tabs'] = array();
                         foreach ($attGroups as $attGroup){
-                            //TODO: Amend attribute groups to have a "Do not display" flag
                             switch ($attGroup['name']){
-                                case "Menu Filters":
-                                case "Filter":
-                                    //ignore menu filters
-                                    break;
                                 case "Product Tabs":
                                     foreach ($attGroup['attribute'] as $tab)
                                         if (substr($tab['text'],0,15) == "information_id=") {
@@ -345,7 +342,7 @@ class ControllerProductProduct extends Controller {
                                         $this->data['product_tabs'][] = array('name'=>$tab['name'],'text'=>html_entity_decode($text));
                                     break;
                                 default:
-                                    $this->data['attribute_groups'][] = $attGroup;
+                                    $this->data['attribute_groups'][$attGroup['name']][] = $attGroup;
                             }
                         }
 			
