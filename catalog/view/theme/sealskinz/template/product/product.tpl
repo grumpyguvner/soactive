@@ -108,8 +108,8 @@
                                     <?php } ?>
                                     <?php if ($option['type'] == 'radio') { ?>
                                         <div id="option-<?php echo $option['product_option_id']; ?>" class="option-buy">
-                                            <input type="hidden" name="quantity" size="2" value="<?php echo $minimum; ?>" class="s" />
-                                            <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
+                                            <input type="hidden" name="quantity" size="2" value="<?php echo $minimum; ?>" class="submit-value" />
+                                            <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" class="submit-value" />
                                             <?php foreach ($option['option_value'] as $option_value) { ?>
                                                 <label><span><?php echo $option_value['name']; ?>
                                                     <?php if ($option_value['price']) { ?>
@@ -437,7 +437,7 @@
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',
-            data: $('#' + $(this).siblings('input').attr('id') + ', .product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
+            data: $('#' + $(this).siblings('input').attr('id') + ', .product-info .submit-value'),
             dataType: 'json',
             success: function(json) {
                 $('.success, .warning, .attention, information, .error').remove();
