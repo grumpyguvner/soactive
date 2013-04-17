@@ -26,7 +26,7 @@
           <div id="language<?php echo $language['language_id']; ?>">
             <table class="form">
               <tr>
-                <td><span class="required">*</span> <?php echo $entry_category; ?></td>
+                <td><?php echo $entry_category; ?></td>
                 <td><input type="text" name="information_description[<?php echo $language['language_id']; ?>][category]" size="100" value="<?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['category'] : ''; ?>" />
                   <?php if (isset($error_category[$language['language_id']])) { ?>
                   <span class="error"><?php echo $error_category[$language['language_id']]; ?></span>

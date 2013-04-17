@@ -296,12 +296,6 @@ class ControllerCatalogInformation extends Controller {
 			$this->data['error_warning'] = '';
 		}
                 
-                if (isset($this->error['category'])) {
-			$this->data['error_category'] = $this->error['category'];
-		} else {
-			$this->data['error_category'] = array();
-		}
-
  		if (isset($this->error['title'])) {
 			$this->data['error_title'] = $this->error['title'];
 		} else {
@@ -468,9 +462,6 @@ class ControllerCatalogInformation extends Controller {
 		}
 
 		foreach ($this->request->post['information_description'] as $language_id => $value) {
-                        if ((utf8_strlen($value['category']) < 3) || (utf8_strlen($value['category']) > 64)) {
-				$this->error['category'][$language_id] = $this->language->get('error_category');
-			}
                         
 			if ((utf8_strlen($value['title']) < 3) || (utf8_strlen($value['title']) > 64)) {
 				$this->error['title'][$language_id] = $this->language->get('error_title');
