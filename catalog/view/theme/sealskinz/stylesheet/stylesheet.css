@@ -442,6 +442,7 @@ a:hover {
     margin-bottom: 0;
     background: #000;
     position: relative;
+    overflow: hidden;
 }
 #myCarousel .carouselBasebarContainer {
     position: absolute;
