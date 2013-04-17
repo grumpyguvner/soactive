@@ -78,7 +78,7 @@
           <?php } ?>
           <tfoot>
             <tr>
-              <td colspan="3"></td>
+              <td colspan="4"></td>
               <td class="left"><a onclick="addImage();" class="button"><?php echo $button_add_banner; ?></a></td>
             </tr>
           </tfoot>
@@ -118,7 +118,8 @@ function addImage() {
 	html += '</td>';	
 	html += '<td class="left"><input type="text" name="banner_image[' + image_row + '][link]" value="" /></td>';	
 	html += '<td class="left"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + image_row + '" /><input type="hidden" name="banner_image[' + image_row + '][image]" value="" id="image' + image_row + '" /><br /><a onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div></td>';
-	html += '<td class="left"><a onclick="$(\'#image-row' + image_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+	html += '<td><input type="text" name="banner_image[' + image_row + '][sort_order]" value="" size="2" /></td>';
+        html += '<td class="left"><a onclick="$(\'#image-row' + image_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
 	html += '</tr>';
 	html += '</tbody>'; 
 	
