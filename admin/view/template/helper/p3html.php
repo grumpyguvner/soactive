@@ -658,9 +658,11 @@ class p3html
 		$buttons = array();
 		if (isset($item['action'])) {
 			foreach ($item['action'] as $action) {
+                            if ($action['href'] != '') {
 				$btnSize = isset($action['size']) ? $action['size'] : $size;
 				$btnType = isset($action['type']) ? $action['type'] : $type;
 				$buttons[] = self::tb_action_button($action, $btnSize, $btnType, $language);
+                            }
 			}
     }
 		else {

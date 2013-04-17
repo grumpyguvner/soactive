@@ -15,7 +15,7 @@
     <div class="heading">
       <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
     </div>
-    <div class="content">
+      <div class="content">
       <table class="list">
         <thead>
           <tr>
@@ -26,12 +26,18 @@
         <tbody>
           <?php if ($extensions) { ?>
           <?php foreach ($extensions as $extension) { ?>
-          <tr>
-            <td class="left"><?php echo $extension['name']; ?></td>
-            <td class="right"><?php foreach ($extension['action'] as $action) { ?>
-              [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
-              <?php } ?></td>
-          </tr>
+            <?php if ($extension['action'][1] != '' || $superuser) { ?> 
+                <tr>
+                  <td class="left"><?php echo $extension['name']; ?></td>
+                  <td class="right">
+                    <?php foreach ($extension['action'] as $action) { ?>
+                      <?php if (!empty($action['text']))  {?>
+                        [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+                      <?php } ?>
+                   <?php } ?>
+                 </td>
+               </tr>
+           <?php } ?>
           <?php } ?>
           <?php } else { ?>
           <tr>
