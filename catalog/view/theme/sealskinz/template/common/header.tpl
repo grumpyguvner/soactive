@@ -154,20 +154,17 @@
                                             <div class="activities"><b><?php echo $categories[0]['name'] ?></b></div>
                                             <?php $children = $categories[0]['children']; ?>
                                             <?php if ($children) { ?>
+                                            <?php while (count($children) < 16) {
+                                                    $children[] = array('name' => "&nbsp;", 'href' => "");
+                                                  } 
+                                                  $children = array_slice($children, 0, 16); ?>
                                                 <div id="left" class="menu-column-left">
-                                                    <?php for ($i = 0; $i < count($children) && $i < 8; $i++) { ?>
-                                                        <li><a href="<?php echo $children[$i]['href']; ?>"><?php echo $children[$i]['name']; ?></a></li>
-                                                    <?php } ?>
+                                                    <?php foreach ($children as $child) { ?>
+                                                    <?php   if (++$count == 9) { ?>
                                                 </div>   
                                                 <div id="right" class="menu-column-right">
-                                                    <?php $count = 0; ?>
-                                                    <?php for ($i = 9; $i < count($children); $i++) { ?>
-                                                        <li style="border-left: none !important;"><a href="<?php echo $children[$i]['href']; ?>"><?php echo $children[$i]['name']; ?></a></li>
-                                                        <?php $count = $count + 1; ?>
-                                                    <?php } ?>
-                                                    <?php $ncat = 8 - $count; ?>
-                                                    <?php for ($c = 0; $c < $ncat; $c++) { ?>
-                                                        <li style="border-left: none !important;">&nbsp</li>
+                                                    <?php   } ?>
+                                                        <li <?php echo ($count > 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
                                                     <?php } ?>
                                                 </div>
                                             <?php } ?>
