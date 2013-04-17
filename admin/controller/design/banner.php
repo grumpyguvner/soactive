@@ -277,7 +277,8 @@ class ControllerDesignBanner extends Controller {
 		$this->data['entry_image'] = $this->language->get('entry_image');		
 		$this->data['entry_status'] = $this->language->get('entry_status');
                 $this->data['entry_description'] = $this->language->get('entry_description');
-		
+		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
+                
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		$this->data['button_add_banner'] = $this->language->get('button_add_banner');
@@ -358,13 +359,21 @@ class ControllerDesignBanner extends Controller {
 		} else {
 			$this->data['status'] = true;
 		}
+                
+                if (isset($this->request->post['sort_order'])) {
+                    $this->data['sort_order'] = $this->request->post['sort_order'];
+                } elseif (!empty($banner_info)) {
+                    $this->data['sort_order'] = $banner_info['sort_order'];
+                } else {
+                    $this->data['sort_order'] = 1;
+                }
 
 		$this->load->model('localisation/language');
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
 		
                 $this->load->model('tool/image');
-	
+                
 		if (isset($this->request->post['banner_image'])) {
 			$banner_images = $this->request->post['banner_image'];
 		} elseif (isset($this->request->get['banner_id'])) {
@@ -386,7 +395,8 @@ class ControllerDesignBanner extends Controller {
 				'banner_image_description' => $banner_image['banner_image_description'],
 				'link'                     => $banner_image['link'],
 				'image'                    => $image,
-				'thumb'                    => $this->model_tool_image->resize($image, 100, 100)
+				'thumb'                    => $this->model_tool_image->resize($image, 100, 100),
+                                'sort_order'               => $banner_image['sort_order']
 			);	
 		} 
 	

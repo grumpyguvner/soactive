@@ -389,3 +389,5 @@ ALTER TABLE `oc_product_image` ADD `video` varchar(255) COLLATE utf8_bin DEFAULT
 ALTER TABLE `oc_product_option_value` ADD `ean` varchar(64) COLLATE utf8_bin NOT NULL AFTER `sku`;
 
 ALTER TABLE `oc_banner_image_description` ADD `description` text COLLATE utf8_bin NOT NULL AFTER `title`;
+
+ALTER TABLE `oc_banner_image` ADD `sort_order` int(3) NOT NULL AFTER `image`;

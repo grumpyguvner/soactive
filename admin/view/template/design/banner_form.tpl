@@ -46,6 +46,7 @@
               <th class="column-name"><?php echo $entry_title; ?></th>
               <th class="column-url"><?php echo $entry_link; ?></th>
               <th class="column-image"><?php echo $entry_image; ?></th>
+              <th class="column-sort"><?php echo $entry_sort_order; ?></th>
               <th class="column-action"></th>
             </tr>
           </thead>
@@ -76,6 +77,9 @@
 									<a class="btn" title="<?php echo $text_clear; ?>" onclick="$('#thumb<?php echo $image_row; ?>').attr('src', '<?php echo $no_image; ?>'); $('#image<?php echo $image_row; ?>').attr('value', '');"><i class="icon-trash"></i><span class="hidden-phone"> <?php echo $text_clear; ?></span></a>
 								</div>
 							</td>
+              <td class="column-sort">
+                    <input type="text" name="banner_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $banner_image['sort_order']; ?>" class="input-mini">
+              </td>
               <td class="column-action">
 								<a onclick="$('#image-row<?php echo $image_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a>
 							</td>
