@@ -26,6 +26,13 @@
           <div id="language<?php echo $language['language_id']; ?>">
             <table class="form">
               <tr>
+                <td><span class="required">*</span> <?php echo $entry_category; ?></td>
+                <td><input type="text" name="information_description[<?php echo $language['language_id']; ?>][category]" size="100" value="<?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['category'] : ''; ?>" />
+                  <?php if (isset($error_category[$language['language_id']])) { ?>
+                  <span class="error"><?php echo $error_category[$language['language_id']]; ?></span>
+                  <?php } ?></td>
+              </tr>
+              <tr>
                 <td><span class="required">*</span> <?php echo $entry_title; ?></td>
                 <td><input type="text" name="information_description[<?php echo $language['language_id']; ?>][title]" size="100" value="<?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['title'] : ''; ?>" />
                   <?php if (isset($error_title[$language['language_id']])) { ?>
@@ -81,6 +88,14 @@
               <td valign="top"><div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" />
                 <input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
                 <br /><a onclick="image_upload('image', 'thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_menu; ?></td>
+              <td><?php if ($menu) { ?>
+                <input type="checkbox" name="menu" value="1" checked="checked" />
+                <?php } else { ?>
+                <input type="checkbox" name="menu" value="1" />
+                <?php } ?></td>
             </tr>
             <tr>
               <td><?php echo $entry_bottom; ?></td>

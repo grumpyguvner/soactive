@@ -1165,6 +1165,7 @@ INSERT INTO `oc_geo_zone` (`geo_zone_id`, `name`, `description`, `date_modified`
 DROP TABLE IF EXISTS `oc_information`;
 CREATE TABLE `oc_information` (
   `information_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu` int(1) NOT NULL DEFAULT '0',
   `bottom` int(1) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -1176,11 +1177,11 @@ CREATE TABLE `oc_information` (
 -- Dumping data for table `oc_information`
 --
 
-INSERT INTO `oc_information` (`information_id`, `bottom`, `sort_order`, `status`, `image`) VALUES
-(3, 1, 3, 1, NULL),
-(4, 1, 1, 1, NULL),
-(5, 1, 4, 1, NULL),
-(6, 1, 2, 1, NULL);
+INSERT INTO `oc_information` (`information_id`, `menu`, `bottom`, `sort_order`, `status`, `image`) VALUES
+(3, 1, 1, 3, 1, NULL),
+(4, 1, 1, 1, 1, NULL),
+(5, 1, 1, 4, 1, NULL),
+(6, 1, 1, 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1192,6 +1193,7 @@ DROP TABLE IF EXISTS `oc_information_description`;
 CREATE TABLE `oc_information_description` (
   `information_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
+  `category` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `title` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `description` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`information_id`,`language_id`)
@@ -1201,11 +1203,11 @@ CREATE TABLE `oc_information_description` (
 -- Dumping data for table `oc_information_description`
 --
 
-INSERT INTO `oc_information_description` (`information_id`, `language_id`, `title`, `description`) VALUES
-(4, 1, 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
-(5, 1, 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
-(3, 1, 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
-(6, 1, 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
+INSERT INTO `oc_information_description` (`information_id`, `language_id`, `category`, `title`, `description`) VALUES
+(4, 1, '', 'About Us', '&lt;p&gt;\r\n	About Us&lt;/p&gt;\r\n'),
+(5, 1, '', 'Terms &amp; Conditions', '&lt;p&gt;\r\n	Terms &amp;amp; Conditions&lt;/p&gt;\r\n'),
+(3, 1, '', 'Privacy Policy', '&lt;p&gt;\r\n	Privacy Policy&lt;/p&gt;\r\n'),
+(6, 1, '', 'Delivery Information', '&lt;p&gt;\r\n	Delivery Information&lt;/p&gt;\r\n');
 
 -- --------------------------------------------------------
 
