@@ -14,6 +14,8 @@ class ControllerAccountRegister extends Controller {
         $this->document->setTitle($this->language->get('heading_title'));
 
         $this->load->model('account/customer');
+        
+        $this->load->model('module/postcode_anywhere');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             $this->model_account_customer->addCustomer($this->request->post);
@@ -69,6 +71,7 @@ class ControllerAccountRegister extends Controller {
         $this->data['text_no'] = $this->language->get('text_no');
         $this->data['text_select'] = $this->language->get('text_select');
         $this->data['text_none'] = $this->language->get('text_none');
+        $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
 
         $this->data['entry_firstname'] = $this->language->get('entry_firstname');
         $this->data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -88,8 +91,14 @@ class ControllerAccountRegister extends Controller {
         $this->data['entry_newsletter'] = $this->language->get('entry_newsletter');
         $this->data['entry_password'] = $this->language->get('entry_password');
         $this->data['entry_confirm'] = $this->language->get('entry_confirm');
+        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
+        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
 
+        $this->data['button_find_address'] = $this->language->get('button_find_address');
+        $this->data['button_select_address'] = $this->language->get('button_select_address');
         $this->data['button_continue'] = $this->language->get('button_continue');
+        
+        
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -143,6 +152,12 @@ class ControllerAccountRegister extends Controller {
             $this->data['error_tax_id'] = $this->error['tax_id'];
         } else {
             $this->data['error_tax_id'] = '';
+        }
+
+        if (isset($this->error['postcode_lookup'])) {
+            $this->data['error_postcode_lookup'] = $this->error['postcode_lookup'];
+        } else {
+            $this->data['error_postcode_lookup'] = '';
         }
 
         if (isset($this->error['address_1'])) {
@@ -227,6 +242,22 @@ class ControllerAccountRegister extends Controller {
             }
         }
 
+        $this->data['use_postcode_anywhere'] = $this->model_module_postcode_anywhere->isAvailable();
+        
+        if (isset($this->request->post['postcode_lookup'])) {
+            $this->data['postcode_lookup'] = $this->request->post['postcode_lookup'];
+        } else {
+            $this->data['postcode_lookup'] = '';
+        }
+        
+        if (isset($this->request->post['postcode_lookup_country_id'])) {
+            $this->data['postcode_lookup_country_id'] = $this->request->post['postcode_lookup_country_id'];
+        } else {
+            $this->data['postcode_lookup_country_id'] = $this->config->get('config_country_id');
+        }
+        
+        // $this->data['addresses'] set in validate
+       
         if (isset($this->request->post['customer_group_id'])) {
             $this->data['customer_group_id'] = $this->request->post['customer_group_id'];
         } else {
@@ -354,6 +385,60 @@ class ControllerAccountRegister extends Controller {
     }
 
     private function validate() {
+        
+        if (isset($this->request->post['lookup']))
+        {
+            if ($this->model_module_postcode_anywhere->isAvailable())
+            {
+                
+                if (empty($this->request->post['postcode_lookup']) && empty($this->request->post['postcode']))
+                {
+                    $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_empty');
+                } else {
+                    if (!$this->request->post['postcode_lookup'])
+                    {
+                        $this->request->post['postcode_lookup'] = $this->request->post['postcode'];
+                        $this->request->post['postcode_lookup_country_id'] = $this->request->post['country_id'];
+                    }
+                    $this->data['addresses'] = $this->model_module_postcode_anywhere->getAddressesByPostcode($this->request->post['postcode_lookup'], $this->request->post['postcode_lookup_country_id']);
+                    
+                    if (empty($this->data['addresses']))
+                    {
+                       $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses'); 
+                    }
+                }
+                $this->request->post['address_1'] = '';
+                $this->request->post['postcode'] = '';
+            }
+            return false;
+        }
+        if (isset($this->request->post['address_select'])) {
+            if ($this->model_module_postcode_anywhere->isAvailable())
+            {
+                if (empty($this->request->post['address_dropdown']))
+                {
+                    $this->error['postcode_lookup'] = $this->language->get('error_address_lookup_empty');
+                } else {
+                    $address = $this->model_module_postcode_anywhere->getAddressById($this->request->post['address_dropdown'], $this->request->post['postcode_lookup_country_id']);
+                    
+                    if (empty($address))
+                    {
+                       $this->error['postcode_lookup'] = $this->language->get('error_address_lookup_empty'); 
+                    } else {
+                        $this->request->post['postcode_lookup']    = '';
+                        $this->request->post['company']    = $address['company'];
+                        $this->request->post['address_1']  = $address['address_1'];
+                        $this->request->post['address_2']  = $address['address_2'];
+                        $this->request->post['postcode']   = $address['postcode'];
+                        $this->request->post['city']       = $address['city'];
+                        $this->request->post['country_id'] = $address['country_id'];
+                        $this->request->post['zone_id']    = $address['zone_id'];
+                    }
+                }
+            }
+            return false;
+        }
+        
         if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
             $this->error['firstname'] = $this->language->get('error_firstname');
         }
@@ -399,6 +484,7 @@ class ControllerAccountRegister extends Controller {
 
         if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
             $this->error['address_1'] = $this->language->get('error_address_1');
+            $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses');
         }
 
         if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
@@ -412,6 +498,7 @@ class ControllerAccountRegister extends Controller {
         if ($country_info) {
             if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
                 $this->error['postcode'] = $this->language->get('error_postcode');
+                $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses');
             }
 
             // VAT Validation
