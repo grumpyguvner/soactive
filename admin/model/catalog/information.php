@@ -37,7 +37,7 @@ class ModelCatalogInformation extends Model {
 	}
 	
 	public function editInformation($information_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', menu = '" . (isset($data['menu']) ? (int)$data['menu'] : 0) . "', menu = '" . (isset($data['menu']) ? (int)$data['menu'] : 0) . "', status = '" . (int)$data['status'] . "' WHERE information_id = '" . (int)$information_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "information SET sort_order = '" . (int)$data['sort_order'] . "', menu = '" . (isset($data['menu']) ? (int)$data['menu'] : 0) . "', bottom = '" . (isset($data['bottom']) ? (int)$data['bottom'] : 0) . "', status = '" . (int)$data['status'] . "' WHERE information_id = '" . (int)$information_id . "'");
 		
                 /************************ Added Antonio 04/02/2013 **********************/
                 if (isset($data['image'])) {

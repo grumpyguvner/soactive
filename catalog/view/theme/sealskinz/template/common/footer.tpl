@@ -1,7 +1,6 @@
 <div class="footer-wrap">
     <div class="container">
         <div id="footer">
-
             <div class="column" id="margin-r46">
                 <h4><?php echo $text_categories; ?></h4>
                 <div id="left">
@@ -45,41 +44,63 @@
                         </ul>
                     </div>
                     <div id="right" class="wrap1-right">
-                        <h4><?php echo $text_customerservice; ?></h4>
-                        <ul>
-                            <li><a href="about-us"><?php echo $text_about_us ?></a></li>
-                            <li><a href="terms-conditions"><?php echo $text_term_conditions ?></a></li>
-                            <li><a href="delivery"><?php echo $text_delivery ?></a></li>
-                            <li><a href="returns"><?php echo $text_returns ?></a></li>
-                            <li><a href="privacy-policy"><?php echo $text_privacy_policy ?></a></li>
-                            <li><a href="faqs"><?php echo $text_faqs ?></a></li>
-                            <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-                        </ul>
+                        <?php 
+                        $category = false;
+
+                        foreach ($informations as $key => $information) {
+                            if (strtolower($category) !== strtolower($information['category'])) {
+
+                              if ($key > 0)
+                              {
+                                  echo '<li><a href="faqs">FAQ s</a></li><li><a href="http://storm.sealskinz.com/UK/index.php?route=information/contact">Contact Us</a></li></ul>';
+                                  break;
+                              }   
+
+                             echo '<h4>' . $information['category'] . '</h4><ul>'; 
+
+                            }
+
+                            echo '<li><a href="' . $information['href'] . '">' . $information['title'] . '</a></li>';
+
+                            if ($key+1 == count($informations)) echo '</ul>';
+
+                             $category = $information['category'];
+                        }
+                        ?>
+                        
                     </div>
                 </div>
                 <div class="wrap2">
                     <div id="left" class="wrap2-left">
-                        <h4><?php echo $text_sizeguide; ?></h4>
-                        <ul>
-                            <li><a href="socks-size-guides"><?php echo $text_socks ?></a></li>
-                            <li><a href="gloves-size-guides"><?php echo $text_gloves ?></a></li>
-                            <li><a href="hats-size-guides"><?php echo $text_hats ?></a></li>
-                        </ul>
+                        <?php 
+                        $category = false;
+                        echo '<h4>SIZE GUIDES</h4><ul>'; 
+                        foreach ($informations as $key => $information) {
+                            if (strtolower('Size Guides') == strtolower($information['category'])) {
+
+                              echo '<li><a href="' . $information['href'] . '">' . $information['title'] . '</a></li>';
+
+                            }
+                        }
+                        echo '</ul>';
+                        ?>
+                        
                     </div>
                     <div id="right" class="wrap2-right">
-                        <h4><?php echo $text_moreinformation; ?></h4>
-                        <ul>
-                            <li><a href="how-it-works"><?php echo $text_how_works ?></a></li>
-                            <li><a href="product-care"><?php echo $text_product_care ?></a></li>
-                            <?php if ($ncategories) { ?>
-                                <?php foreach ($ncategories as $ncategory) { ?>
-                                    <?php if ($ncategory['name'] == 'Testimonials') { ?>
-                                        <li><a href="<?php echo $ncategory['href']; ?>"><?php echo $text_testimonials ?></a></li>
-                                    <?php } ?>
-                                <?php } ?>
-                            <?php } ?>
-                            <li><a href="international"><?php echo $text_international ?></a></li>            
-                            <li><a href="<?php echo $stockist ?>"><?php echo $text_stockist ?></a></li>
+                        
+                        <?php 
+                        $category = false;
+                        echo '<h4>MORE INFORMATION</h4><ul>'; 
+                        foreach ($informations as $key => $information) {
+                            if (strtolower('More Information') == strtolower($information['category'])) {
+ 
+                             echo '<li><a href="' . $information['href'] . '">' . $information['title'] . '</a></li>';
+
+                            }
+                        }
+                        echo '<li><a href="testimonials">' . $text_testimonials . '</a></li><li><a href="international">' . $text_international . '</a></li><li><a href="' . $stockist . '">' . $text_stockist . '</a></li></ul>';
+                        ?>
+                        
                         </ul>
                     </div>
                 </div>
@@ -88,14 +109,14 @@
             <div class="column" id="margin-l46">
                 <h4><?php echo $text_connect; ?></h4>
                 <ul>
-                    <li style="padding: 12px 0;"><span><a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
+                    <li style="padding: 12px 0;"><span><?php echo $fb ?></a></span><?php echo $tw ?><span></span><?php echo $yb ?><span></span><?php echo $pt ?><span></span><span><?php echo $gp ?></span></li>
                     <li style="color:gray"><?php echo $store; ?> <?php echo $text_ltd; ?></li>
                     <li style="color:gray"><?php echo $address; ?></li>
                     <li style="color:gray"><?php echo $text_nation; ?></li>
                 </ul>
                 <br />
-                <span>
-                    <img src="catalog/view/theme/sealskinz/image/credit-cards.png" alt="Credit Card" />
+                <span><?php echo $card ?>
+                    
                 </span>
             </div>
         </div>

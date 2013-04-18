@@ -9,6 +9,7 @@ class ControllerInformationInformation extends Controller {
 		
                 $this->load->model('tool/image'); 
                 
+                
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
 			'href'      => $this->url->link('common/home'),
@@ -26,6 +27,10 @@ class ControllerInformationInformation extends Controller {
 		if ($information_info) {
 	  		$this->document->setTitle($information_info['title']);
                         
+                        
+                $this->data['seoClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($this->request->get['_route_'])));
+                $this->data['catClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($information_info['category'])));
+;                        
 
       		$this->data['breadcrumbs'][] = array(
         		'text'      => $information_info['title'],
