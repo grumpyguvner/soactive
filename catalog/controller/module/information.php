@@ -12,15 +12,29 @@ class ControllerModuleInformation extends Controller {
                 $this->data['seo'] = $this->request->get['_route_'];
 		
 		$this->load->model('catalog/information');
-		
+                
+                if (isset($this->request->get['information_id']))
+                {
+                    $information_info = $this->model_catalog_information->getInformation($this->request->get['information_id']);
+                    
+                    $category = ($information_info) ? $information_info['category'] : false;
+                    
+                    $this->data['category'] = $category;
+                } else {
+                    $category = false;
+                }
+                
 		$this->data['informations'] = array();
 
-		foreach ($this->model_catalog_information->getInformations() as $result) {
-      		$this->data['informations'][] = array(
-        		'title'      => $result['title'],
-                        'sort_order' => $result['sort_order'],
-	    		'href'       => $this->url->link('information/information', 'information_id=' . $result['information_id'])
-      		);
+		foreach ($this->model_catalog_information->getInformations($category) as $result) {
+                    if ($result['menu']) {
+                        $this->data['informations'][] = array(
+                                'category'   => $result['category'],
+                                'title'      => $result['title'],
+                                'sort_order' => $result['sort_order'],
+                                'href'       => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+                        );
+                    }
     	}
 
 		$this->data['contact'] = $this->url->link('information/contact');

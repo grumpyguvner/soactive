@@ -272,10 +272,12 @@ class ControllerCatalogInformation extends Controller {
                 $this->data['text_clear'] = $this->language->get('text_clear');	
 		
 		$this->data['entry_title'] = $this->language->get('entry_title');
+                $this->data['entry_category'] = $this->language->get('entry_category');
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
                 $this->data['entry_image'] = $this->language->get('entry_image');
+                $this->data['entry_menu'] = $this->language->get('entry_menu');
 		$this->data['entry_bottom'] = $this->language->get('entry_bottom');
 		$this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
@@ -293,7 +295,7 @@ class ControllerCatalogInformation extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}
-
+                
  		if (isset($this->error['title'])) {
 			$this->data['error_title'] = $this->error['title'];
 		} else {
@@ -401,6 +403,13 @@ class ControllerCatalogInformation extends Controller {
 		
 		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
                 /************************ Added Antonio 04/02/2013 **********************/
+                if (isset($this->request->post['menu'])) {
+			$this->data['menu'] = $this->request->post['menu'];
+		} elseif (!empty($information_info)) {
+			$this->data['menu'] = $information_info['menu'];
+		} else {
+			$this->data['menu'] = 0;
+		}
                 
 		if (isset($this->request->post['bottom'])) {
 			$this->data['bottom'] = $this->request->post['bottom'];
@@ -453,6 +462,7 @@ class ControllerCatalogInformation extends Controller {
 		}
 
 		foreach ($this->request->post['information_description'] as $language_id => $value) {
+                        
 			if ((utf8_strlen($value['title']) < 3) || (utf8_strlen($value['title']) > 64)) {
 				$this->error['title'][$language_id] = $this->language->get('error_title');
 			}

@@ -25,7 +25,7 @@
 </div>
 <div id="content-back">
     <div class="green-bar">  
-        <div id="mainContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
+        <div id="mainContainer" class="container<?php if ($catClass) echo ' cat' . $catClass ?><?php if ($seoClass) echo ' seo' . $seoClass ?>"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
             <?php echo $content_top; ?>
             <div class="content" id="description-info">
                 <?php if ($thumb || $description) { ?>

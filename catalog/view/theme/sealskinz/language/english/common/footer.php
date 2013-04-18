@@ -38,4 +38,11 @@ $_['text_socks']           = 'Socks';
 $_['text_gloves']         = 'Gloves';
 $_['text_hats']           = 'Hats';
 
+$_['fb']                  = '<a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" />';
+$_['tw']                  = '<a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a>';
+$_['yb']                  = '<a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a>';
+$_['pt']                  = '<a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a>';
+$_['gp']                  = '<a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a>';
+$_['card']                = '<img src="catalog/view/theme/sealskinz/image/credit-cards.png" alt="Credit Card" />';
+
 ?>

@@ -55,6 +55,8 @@ class ControllerExtensionModule extends Controller {
 			}
 		}
 		
+                $this->data['superuser'] = $this->user->isSuperuser();
+                
 		$this->data['extensions'] = array();
 						
 		$files = glob(DIR_APPLICATION . 'controller/module/*.php');
@@ -68,20 +70,34 @@ class ControllerExtensionModule extends Controller {
 				$action = array();
 				
 				if (!in_array($extension, $extensions)) {
+                                    if ($this->user->isSuperuser()) {
 					$action[] = array(
 						'text' => $this->language->get('text_install'),
 						'href' => $this->url->link('extension/module/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL')
 					);
+                                    } else {
+                                        $action[] = array(
+                                                'text' => '',
+						'href' => ''
+                                                        );
+                                    }
+                                    
 				} else {
 					$action[] = array(
 						'text' => $this->language->get('text_edit'),
 						'href' => $this->url->link('module/' . $extension . '', 'token=' . $this->session->data['token'], 'SSL')
 					);
-								
-					$action[] = array(
+					if ($this->user->isSuperuser()) {			
+                                            $action[] = array(
 						'text' => $this->language->get('text_uninstall'),
 						'href' => $this->url->link('extension/module/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL')
-					);
+                                            );
+                                        } else {
+                                            $action[] = array(
+						'text' => '',
+						'href' => ''
+                                            );
+                                        }
 				}
 												
 				$this->data['extensions'][] = array(
@@ -90,7 +106,8 @@ class ControllerExtensionModule extends Controller {
 				);
 			}
 		}
-
+                
+                
 		$this->template = 'extension/module.tpl';
 		$this->children = array(
 			'common/header',

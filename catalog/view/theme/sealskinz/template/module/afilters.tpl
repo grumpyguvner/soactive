@@ -36,6 +36,8 @@ if ($attributes) {
                                                                     <?php } else { ?>
                                                                         <li><label class="checkbox"><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" /> <?php echo $category['name']; ?></label></li>
                                                                     <?php } ?>
+                                                                <?php } else { ?>
+                                                                        <li><label class="checkbox"><input type="checkbox" name="att_filters[0][]" value="<?php echo $category['category_id']; ?>" checked="checked" disabled /> <?php echo $category['name']; ?></label></li>
                                                                 <?php } ?>
                                                             <?php } ?>
                                                         </ul>

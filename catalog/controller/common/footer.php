@@ -43,6 +43,14 @@ class ControllerCommonFooter extends Controller {
         $this->data['text_socks'] = $this->language->get('text_socks');
         $this->data['text_gloves'] = $this->language->get('text_gloves');
         $this->data['text_hats'] = $this->language->get('text_hats');
+        
+        $this->data['fb'] = $this->language->get('fb');
+        $this->data['tw'] = $this->language->get('tw');
+        $this->data['yb'] = $this->language->get('yb');
+        $this->data['pt'] = $this->language->get('pt');
+        $this->data['gp'] = $this->language->get('gp');
+        $this->data['card'] = $this->language->get('card');
+        
 
         /* Added for Sailskinz */
 
@@ -91,18 +99,32 @@ class ControllerCommonFooter extends Controller {
         /* End added for Sailskinz */
 
         $this->load->model('catalog/information');
+        
+        if (isset($this->request->get['information_id']))
+                {
+                    $information_info = $this->model_catalog_information->getInformation($this->request->get['information_id']);
+                    
+                    $category = ($information_info) ? $information_info['category'] : false;
+                    
+                    $this->data['category'] = $category;
+                } else {
+                    $category = false;
+                }
 
         $this->data['informations'] = array();
 
         foreach ($this->model_catalog_information->getInformations() as $result) {
             if ($result['bottom']) {
                 $this->data['informations'][] = array(
-                    'title' => $result['title'],
-                    'href' => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+                    'category'   => $result['category'],
+                    'title'      => $result['title'],
+                    'sort_order' => $result['sort_order'],
+                    'href'       => $this->url->link('information/information', 'information_id=' . $result['information_id'])
                 );
             }
         }
-
+        
+        
         $this->data['contact'] = $this->url->link('information/contact');
         $this->data['return'] = $this->url->link('account/return/insert', '', 'SSL');
         $this->data['sitemap'] = $this->url->link('information/sitemap');

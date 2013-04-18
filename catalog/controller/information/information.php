@@ -9,6 +9,7 @@ class ControllerInformationInformation extends Controller {
 		
                 $this->load->model('tool/image'); 
                 
+                
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
 			'href'      => $this->url->link('common/home'),
@@ -26,6 +27,10 @@ class ControllerInformationInformation extends Controller {
 		if ($information_info) {
 	  		$this->document->setTitle($information_info['title']);
                         
+                        
+                $this->data['seoClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($this->request->get['_route_'])));
+                $this->data['catClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($information_info['category'])));
+;                        
 
       		$this->data['breadcrumbs'][] = array(
         		'text'      => $information_info['title'],
@@ -47,22 +52,10 @@ class ControllerInformationInformation extends Controller {
 			}
                  
 		/************************** End Added Antonio 05/02/2013 **********************/	
-   		
-			$description = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
-                        $pattern = "/\[information_id=(.*)\]/i";
                         
-                        while (preg_match($pattern, $description, $matches)) {
-                            $embed_id = $matches[1];
-                            $embed_info = $this->model_catalog_information->getInformation($embed_id);
-                            if ($embed_info)
-                                $replace_text = html_entity_decode($embed_info['description'], ENT_QUOTES, 'UTF-8');
-                            else
-                                $replace_text = "INFORMATION ID " . $embed_id . " NOT FOUND";
-                            $replace_pattern = "/\[information_id=" . $embed_id . "\]/i";
-                            $description = preg_replace($replace_pattern, $replace_text, $description);
-                        }
                         
-			$this->data['description'] = $description;
+                        $this->data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+                        
       		
 			$this->data['continue'] = $this->url->link('common/home');
 
