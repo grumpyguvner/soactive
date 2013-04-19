@@ -141,9 +141,14 @@ class ControllerCommonSeoUrl extends Controller {
                 if ($data) {
                     foreach ($data as $key => $value) {
                         $query .= '&' . $key . '=' . $value;
-                        if ($key == 'att_filters') {
+                        if ($key == 'cat_filters' || $key == 'att_filters') {
                             foreach ($value as $kez => $valz) {
-                                $query .= '&' . $key . '[' . $kez . ']=' . $valz;
+                                if (!is_array($valz)) {
+                                    $query .= '&' . $key . '[' . $kez . ']=' . urlencode($valz);
+                                } else {
+                                    foreach ($valz as $valzz)
+                                        $query .= '&' . $key . '[' . $kez . '][]=' . urlencode($valzz);
+                                }
                             }
                         }
                     }

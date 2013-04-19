@@ -9,7 +9,12 @@
                 <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
                 <?php
                 if ($description) { ?>
-                  <?php echo $description; ?>
+                <div class="bannerWrapper">
+                    <div class="container">
+                        <?php echo $description; ?>
+                    </div>
+                </div>
+                    
                 <?php } ?>
             </div>
             <?php
@@ -17,6 +22,42 @@
     }
     ?>
 </div>
+<script type="text/javascript">
+    (function($){
+	$.fn.responsiveText = function(options){
+		var _this = this;
+		var settings = $.extend({
+			"max":	27,
+			"min":	11,
+			"step": 50
+		}, options);
+		
+		$(window).resize(function(){
+			var size = $('body').innerWidth() / settings.step;
+                        
+			if(size > settings.max){
+				size = settings.max;
+			}
+			
+			if(size < settings.min){
+				size = settings.min;
+			}
+			
+			$(_this).css("font-size", size + "px");
+                        
+			var bheight = $('.banner').innerHeight();
+                        var dheight = $('.banner .image .bannerWrapper .container > div').innerHeight();
+                        var padding = (bheight - dheight);
+                        if (padding > 0) padding = padding / 2;
+                        
+			$('.banner .image .bannerWrapper .container').css("padding-top", padding + "px");
+		}).trigger("resize");
+	};
+    })(jQuery);
+		
+    $('.banner .image .bannerWrapper .container > div').responsiveText();
+       
+</script>
 <div id="breadcrumb">
     <div class="container">
         <div class="imgGreat">

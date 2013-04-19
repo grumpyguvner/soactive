@@ -28,6 +28,7 @@ require_once(DIR_SYSTEM . 'library/currency.php');
 require_once(DIR_SYSTEM . 'library/user.php');
 require_once(DIR_SYSTEM . 'library/weight.php');
 require_once(DIR_SYSTEM . 'library/length.php');
+require_once(DIR_SYSTEM . 'library/extensions.php');
 
 // Registry
 $registry = new Registry();
@@ -133,6 +134,9 @@ $registry->set('language', $language);
 
 // Document
 $registry->set('document', new Document()); 		
+
+// Extensions
+$registry->set('extensions', new Extensions($registry));
 		
 // Currency
 $registry->set('currency', new Currency($registry));		

@@ -28,6 +28,8 @@ require_once(DIR_SYSTEM . 'library/tax.php');
 require_once(DIR_SYSTEM . 'library/weight.php');
 require_once(DIR_SYSTEM . 'library/length.php');
 require_once(DIR_SYSTEM . 'library/cart.php');
+require_once(DIR_SYSTEM . 'library/extensions.php');
+require_once(DIR_SYSTEM . 'library/category.php');
 
 // Registry
 $registry = new Registry();
@@ -194,6 +196,9 @@ $registry->set('language', $language);
 // Document
 $registry->set('document', new Document());
 
+// Extensions
+$registry->set('extensions', new Extensions($registry));
+
 // Customer
 $registry->set('customer', new Customer($registry));
 
@@ -222,6 +227,9 @@ $registry->set('length', new Length($registry));
 
 // Cart
 $registry->set('cart', new Cart($registry));
+
+// Category
+$registry->set('category', new Category($registry));
 
 //  Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
