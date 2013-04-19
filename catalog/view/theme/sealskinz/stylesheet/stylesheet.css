@@ -2303,7 +2303,37 @@ a.button-account:hover, input.button-account:hover {
 .banner div img {
     width: 100%;
 }
-
+.banner .image .bannerWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.banner .image .bannerWrapper .container{
+    width: 984px;
+    padding-top: 20px; 
+}
+.banner .image .bannerWrapper .container > div {
+    width: 25em;
+    text-align: left;
+    font-size: 27px;
+    color: #fff;
+}
+.banner .image .bannerWrapper .container > div h1 {
+    color: #9dc96a;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 2px 2px 3px #696d6c;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+.banner .image .bannerWrapper .container > div p {
+    text-shadow: 2px 2px 3px #afb4b8;
+    line-height: 1.1em;
+}
+.banner .image .bannerRight {
+    float: right;
+}
 /******* Start Menu nuovo ******************************************************/
 /* Menu CSS */ 
 #cssmenu{
