@@ -7,14 +7,13 @@
             ?>
             <div class="image" style="position: relative;">
                 <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
-                <?php
-                if ($description) { ?>
-                <div class="bannerWrapper">
-                    <div class="container">
-                        <?php echo $description; ?>
+                <?php if ($description) { ?>
+                    <div class="bannerWrapper">
+                        <div class="container">
+                            <?php echo $description; ?>
+                        </div>
                     </div>
-                </div>
-                    
+
                 <?php } ?>
             </div>
             <?php
@@ -23,40 +22,39 @@
     ?>
 </div>
 <script type="text/javascript">
-    (function($){
-	$.fn.responsiveText = function(options){
-		var _this = this;
-		var settings = $.extend({
-			"max":	27,
-			"min":	11,
-			"step": 50
-		}, options);
-		
-		$(window).resize(function(){
-			var size = $('body').innerWidth() / settings.step;
+    if ($('.banner').length)
+    {
+        $(window).resize(function () {
+
+            var settings = {
+                "max":	27,
+                "min":	11,
+                "step": 50
+            };
+                    
+            var size = $('.banner:first').innerWidth() / settings.step;
                         
-			if(size > settings.max){
-				size = settings.max;
-			}
+            if(size > settings.max){
+                size = settings.max;
+            }
 			
-			if(size < settings.min){
-				size = settings.min;
-			}
+            if(size < settings.min){
+                size = settings.min;
+            }
 			
-			$(_this).css("font-size", size + "px");
+            $('.banner .container > div').css("font-size", size + "px");
                         
-			var bheight = $('.banner').innerHeight();
-                        var dheight = $('.banner .image .bannerWrapper .container > div').innerHeight();
-                        var padding = (bheight - dheight);
-                        if (padding > 0) padding = padding / 2;
+            var bheight = $('.banner:first').innerHeight();
+            var dheight = $('.banner:first .container > div').innerHeight();
+            var padding = (bheight - dheight);
+            if (padding > 0) padding = padding / 2;
                         
-			$('.banner .image .bannerWrapper .container').css("padding-top", padding + "px");
-		}).trigger("resize");
-	};
-    })(jQuery);
-		
-    $('.banner .image .bannerWrapper .container > div').responsiveText();
-       
+            $('.banner:first .container > div').css("padding-top", padding + "px");
+        }).trigger('resize');
+        $('.banner img').load(function () {
+           $(window).trigger('resize');
+        });
+    }
 </script>
 <div id="breadcrumb">
     <div class="container">
@@ -93,15 +91,15 @@
                 <div class="contentTopBar">
                     <div class="pagination-text"><?php echo $pagination2; ?></div>
                     <div class="sort"><label><?php echo $text_sort; ?>&nbsp;
-                        <select onchange="window.location = this.value;">
-                            <?php foreach ($sorts as $sorts) { ?>
-                                <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-                                    <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
-                                <?php } else { ?>
-                                    <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+                            <select onchange="window.location = this.value;">
+                                <?php foreach ($sorts as $sorts) { ?>
+                                    <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
+                                        <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+                                    <?php } else { ?>
+                                        <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+                                    <?php } ?>
                                 <?php } ?>
-                            <?php } ?>
-                        </select></label>
+                            </select></label>
                     </div>
                 </div>
                 <?php if ($products) { ?>
@@ -116,8 +114,8 @@
                                 <div class="bar">
                                     <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>"><?php echo $text_pview; ?></a>
                                 </div>
-                            </div><?php
-                        } ?>
+                            </div><?php }
+                                ?>
                     </div>
                     <div class="pagination"><?php echo $pagination; ?></div>
                 <?php } else { ?>
