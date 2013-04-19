@@ -2,20 +2,20 @@
 
 class ControllerModulePostcodeAnywhere extends Controller {
 
-    protected function index() {
-        $this->language->load('module/google_talk');
+    public function postcode() {
+        
+        $json = array();
+        
+        $this->load->model('module/postcode_anywhere');
+        if ($this->model_module_postcode_anywhere->isAvailable())
+        {
+            if (!empty($this->request->get['postcode']) && !empty($this->request->get['country_id'])) {
 
-        $this->data['heading_title'] = $this->language->get('heading_title');
-
-        if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
-            $this->data['code'] = str_replace('http', 'https', html_entity_decode($this->config->get('google_talk_code')));
-        } else {
-            $this->data['code'] = html_entity_decode($this->config->get('google_talk_code'));
+                $json['addresses'] = $this->model_module_postcode_anywhere->getAddressesByPostcode($this->request->get['postcode'], $this->request->get['country_id']);
+            }
         }
 
-        $this->setTemplate('module/google_talk.tpl');
-
-        $this->render();
+        $this->response->setOutput(json_encode($json));
     }
 
     public function address() {

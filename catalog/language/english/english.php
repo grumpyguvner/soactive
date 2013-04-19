@@ -49,8 +49,6 @@ $_['button_voucher']        = 'Apply Voucher';
 $_['button_upload']         = 'Upload File';
 $_['button_reward']         = 'Apply Points';
 $_['button_quote']          = 'Get Quotes';
-$_['button_find_address']   = 'Find Address';
-$_['button_select_address'] = 'Select Address';
 
 // Error
 $_['error_upload_1']        = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';

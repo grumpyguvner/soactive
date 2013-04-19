@@ -15,6 +15,7 @@ class ControllerAccountRegister extends Controller {
 
         $this->load->model('account/customer');
         
+        $this->language->load('module/postcode_anywhere');
         $this->load->model('module/postcode_anywhere');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -484,7 +485,7 @@ class ControllerAccountRegister extends Controller {
 
         if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
             $this->error['address_1'] = $this->language->get('error_address_1');
-            $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses');
+            $this->error['postcode_lookup'] = $this->language->get('error_postcode');
         }
 
         if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
@@ -498,7 +499,7 @@ class ControllerAccountRegister extends Controller {
         if ($country_info) {
             if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
                 $this->error['postcode'] = $this->language->get('error_postcode');
-                $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses');
+                $this->error['postcode_lookup'] = $this->language->get('error_postcode');
             }
 
             // VAT Validation

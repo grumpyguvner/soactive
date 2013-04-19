@@ -2219,6 +2219,7 @@ a.button-account:hover, input.button-account:hover {
     margin-top: 0px;
     border-bottom: 1px solid;
     padding-bottom: 10px;
+    text-transform: uppercase;
 }
 #footer .column {
     float: left;

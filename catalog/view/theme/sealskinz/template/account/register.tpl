@@ -85,7 +85,7 @@
                         ?>
                         <div id="address_lookup_content" class="content" style="display: none;">
                             <div class="row">
-                                <div class="span2"><span id="postcode-required" class="required">*</span> Search Address:</div>
+                                <div class="span2"><span class="required">*</span> <?php echo $entry_search_address; ?></div>
                                  <div class="span5">
                                     <select name="postcode_lookup_country_id">
                                         <?php foreach ($countries as $country) { ?>
@@ -111,7 +111,7 @@
                         <div id="address_select_content" class="content" style="display: none;">
                             <div class="row">
                                 <div class="span2">
-                                    <span id="postcode-required" class="required">*</span> Select Address:
+                                    <span class="required">*</span> <?php echo $entry_select_address; ?>
                                 </div>
                                 <div class="span5">
                                         <select name="address_dropdown"<?php if ($addresses) echo ' size="' . (count($addresses) > 9 ? 10 : count($addresses)) . '"'; ?>>
@@ -363,19 +363,6 @@
         $('#address_lookup_content').hide();
         $('#address_select_content').hide();
         $('#address_content').show();
-        return false;
-    });
-    $('.internationalAddress').click(function ()
-    {
-        $('.internationalAddress').hide();
-        $('select[name=postcode_lookup_country_id]').show();
-        return false;
-    });
-    $('.searchAgain').click(function ()
-    {
-        $('#address_lookup_content').show();
-        $('#address_select_content').hide();
-        $('#address_content').hide();
         return false;
     });
     //--></script> 

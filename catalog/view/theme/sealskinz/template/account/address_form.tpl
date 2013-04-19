@@ -49,6 +49,65 @@
                                         <span class="error"><?php echo $error_lastname; ?></span>
                                     <?php } ?>
                                 </div>
+                            </div>
+                        </div>
+                        <?php
+                        if ($use_postcode_anywhere)
+                        {
+                        ?>
+                        <div id="address_lookup_content" class="content" style="display: none;">
+                            <div class="row">
+                                <div class="span2"><span class="required">*</span> <?php echo $entry_search_address; ?></div>
+                                 <div class="span5">
+                                    <select name="postcode_lookup_country_id">
+                                        <?php foreach ($countries as $country) { ?>
+                                            <?php if ($country['country_id'] == $postcode_lookup_country_id) { ?>
+                                                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="span2"></div>
+                                <div class="span5">
+                                        <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
+                                        <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
+                                    <?php if ($error_postcode_lookup) { ?>
+                                        <span class="error"><?php echo $error_postcode_lookup; ?></span>
+                                        <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="address_select_content" class="content" style="display: none;">
+                            <div class="row">
+                                <div class="span2"><span class="required">*</span> <?php echo $entry_select_address; ?></div>
+                                <div class="span5">
+                                        <select name="address_dropdown"<?php if ($addresses) echo ' size="' . (count($addresses) > 9 ? 10 : count($addresses)) . '"'; ?>>
+                                            <?php
+                                            if ($addresses)
+                                            {
+                                                foreach ($addresses as $address_info)
+                                                {
+                                                    echo "<option value='" . $address_info['value'] . "'";
+                                                    if ($address_dropdown == $address_info['value']) echo ' selected="selected"';
+                                                    echo '>' . $address_info['text'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                        <button class="btn" name="address_select" type="submit"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                        <div id="address_content" class="content">
+
+                            <div class="row"> 
+                                
                                 <div class="span2">
                                     <?php echo $entry_company; ?>
                                 </div>
@@ -155,8 +214,7 @@
                                         <?php echo $text_no; ?>
                                     <?php } ?>
                                 </div>
-
-                            </div>
+                            </div>    
                         </div>
 
                         <div class="buttons">
@@ -174,6 +232,31 @@
         </div>
     </div>
 </div>
+<?php
+if ($use_postcode_anywhere)
+{
+?>
+<script type="text/javascript"><!--
+if (!$('input[name=postcode]').val() && !$('input[name=address1]').val())
+{
+    $('#address_lookup_content').show();
+    if ($('select[name=address_dropdown] option').length)
+    {
+        $('#address_select_content').show();
+    }
+    $('#address_content').hide();
+}
+$('.manualAddress').click(function ()
+{
+    $('#address_lookup_content').hide();
+    $('#address_select_content').hide();
+    $('#address_content').show();
+    return false;
+});
+//--></script> 
+<?php
+}
+?>
 <script type="text/javascript"><!--
     $('select[name=\'country_id\']').bind('change', function() {
         $.ajax({
