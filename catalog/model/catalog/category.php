@@ -42,26 +42,13 @@ class ModelCatalogCategory extends Model {
             return $query-> rows;
         }
         
-        public function getCategoryAttributes($category_id = 0, $att_filters = null) {
+        public function getCategoryAttributes($category_id = 0) {
         // Get all attributes for current category
         
         $data = array();
 
-        if (isset($att_filters) && (is_array($att_filters))) {
-
-            foreach (array_keys($att_filters) as $filter_att) {
-
-                $data['afilters'][$filter_att] = $att_filters[$filter_att];
-            }
-        }
-
-        if (isset($data['afilters'])) {
-            $myafilters = $data['afilters'];
-        } else {
-            $myafilters = array();
-        }
-
         $data['filter_category_id'] = $category_id;
+        $data['filters'] = $this->category->getFilterData();
 
         $results = $this->model_catalog_product->getProductsAFiltered($data);
 
