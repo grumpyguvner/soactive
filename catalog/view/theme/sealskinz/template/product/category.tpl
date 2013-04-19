@@ -17,7 +17,11 @@
                     
                 <?php } ?>
             </div>
-    
+            <?php
+        }
+    }
+    ?>
+</div>
 <script type="text/javascript">
     (function($){
 	$.fn.responsiveText = function(options){
@@ -54,11 +58,6 @@
     $('.banner .image .bannerWrapper .container > div').responsiveText();
        
 </script>
-            <?php
-        }
-    }
-    ?>
-</div>
 <div id="breadcrumb">
     <div class="container">
         <div class="imgGreat">
