@@ -3412,6 +3412,13 @@ input[type="color"]:focus, .uneditable-input:focus {
 .form-register h3 {
     line-height: 18px;
 }
+#address_content .btn, #address_lookup_content .btn, #address_select_content  .btn {
+    margin-bottom: 10px;
+}
+select[size] {
+    width: auto;
+    display: block;
+}
 #listing {
     margin: 0 10px 10px;
     padding-bottom: 10px;

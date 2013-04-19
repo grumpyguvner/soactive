@@ -18,6 +18,18 @@ class ModelLocalisationZone extends Model {
 		}
 	
 		return $zone_data;
+	}	
+	
+	public function getZoneByName($name, $country_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone WHERE name = '" . $this->db->escape($name) . "' and country_id = '" . (int)$country_id . "' AND status = '1' ORDER BY name");
+	
+		return $query->row;
+	}
+	
+	public function getZoneByCode($code, $country_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone WHERE code = '" . $this->db->escape($code) . "' and country_id = '" . (int)$country_id . "' AND status = '1' ORDER BY name");
+	
+		return $query->row;
 	}
 }
 ?>
