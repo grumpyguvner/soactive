@@ -76,7 +76,7 @@ if (filesize('../' . FILE_CONFIG) > 0) {
     $file = file(DIR_OPENCART . FILE_CONFIG);
 
     foreach ($file as $num => $line) {
-        if (strpos(strtoupper($line), '$site_region') !== false) {
+        if (strpos(strtoupper($line), 'DB_') !== false) {
             eval($line);
         }
     }
