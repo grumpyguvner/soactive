@@ -386,6 +386,7 @@ CREATE TABLE `oc_category_description` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `description` text COLLATE utf8_bin NOT NULL,
+  `meta_title` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`category_id`,`language_id`),
@@ -1196,6 +1197,9 @@ CREATE TABLE `oc_information_description` (
   `category` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `title` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `description` text COLLATE utf8_bin NOT NULL,
+  `meta_title` varchar(255) COLLATE utf8_bin NOT NULL,
+  `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
+  `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`information_id`,`language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -1981,6 +1985,7 @@ CREATE TABLE `oc_product_description` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `description` text COLLATE utf8_bin NOT NULL,
+  `meta_title` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
   `tag` text COLLATE utf8_bin NOT NULL,
@@ -7167,6 +7172,7 @@ CREATE TABLE IF NOT EXISTS `oc_ncategory_description` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
   `description` text COLLATE utf8_bin NOT NULL,
+  `meta_title` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`ncategory_id`,`language_id`),
@@ -7218,6 +7224,7 @@ CREATE TABLE IF NOT EXISTS `oc_news_description` (
   `language_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `meta_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `meta_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `meta_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`news_id`,`language_id`)

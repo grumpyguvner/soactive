@@ -32,7 +32,15 @@
                   <?php } ?>
                </td>
         </tr>
-		
+		<tr>
+          <td width="25%"><?php echo $entry_meta_title; ?></td>
+          <td><input name="news_description[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset( $news_description[$language['language_id']]['meta_title']) ? $news_description[$language['language_id']]['meta_title'] : ''; ?>" />
+            <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
+			<?php if (isset($error_title[$language['language_id']])) { ?>
+                  <span class="error"><?php echo $error_title[$language['language_id']]; ?></span>
+                  <?php } ?>
+               </td>
+        </tr>
       <tr>
           <td><span class="required">*</span> <?php echo $entry_description; ?></td>
           <td><textarea name="news_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset( $news_description[$language['language_id']]['description']) ? $news_description[$language['language_id']]['description'] : ''; ?></textarea>

@@ -12,7 +12,7 @@ class ModelCatalogInformation extends Model {
 		/************************ End Added Antonio 04/02/2013 **********************/
                 
 		foreach ($data['information_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', category = '" . $this->db->escape($value['category']) . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', category = '" . $this->db->escape($value['category']) . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "'");
 		}
 		
 		if (isset($data['information_store'])) {
@@ -48,7 +48,7 @@ class ModelCatalogInformation extends Model {
                 $this->db->query("DELETE FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
 					
 		foreach ($data['information_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', category = '" . $this->db->escape($value['category']) . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "information_description SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', category = '" . $this->db->escape($value['category']) . "', title = '" . $this->db->escape($value['title']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "'");
 		}
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "information_to_store WHERE information_id = '" . (int)$information_id . "'");
@@ -154,7 +154,10 @@ class ModelCatalogInformation extends Model {
 			$information_description_data[$result['language_id']] = array(
                                 'category'    => $result['category'],
 				'title'       => $result['title'],
-				'description' => $result['description']
+				'description' => $result['description'],
+				'meta_title'       => $result['meta_title'],
+				'meta_description' => $result['meta_description'],
+				'meta_keywords' => $result['meta_keywords']
 			);
 		}
 		

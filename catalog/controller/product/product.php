@@ -126,7 +126,7 @@ class ControllerProductProduct extends Controller {
 				'separator' => $this->language->get('text_separator')
 			);			
 			
-			$this->document->setTitle($product_info['name']);
+			$this->document->setTitle($product_info['meta_title'] ? $product_info['meta_title'] : $product_info['name']);
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
 			$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');
