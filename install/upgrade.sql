@@ -395,3 +395,14 @@ ALTER TABLE `oc_banner_image` ADD `sort_order` int(3) NOT NULL AFTER `image`;
 ALTER TABLE `oc_information_description` ADD `category` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `language_id`;
 
 ALTER TABLE `oc_information` ADD `menu` int(1) NOT NULL DEFAULT '0' AFTER `information_id`; 
+
+#### Start 1.5.4:BC1.2
+
+ALTER TABLE `oc_category_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
+ALTER TABLE `oc_product_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
+ALTER TABLE `oc_ncategory_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
+ALTER TABLE `oc_news_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_key`;
+
+ALTER TABLE `oc_information_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `description`;
+ALTER TABLE `oc_information_description` ADD `meta_description` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_title`;
+ALTER TABLE `oc_information_description` ADD `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_description`;

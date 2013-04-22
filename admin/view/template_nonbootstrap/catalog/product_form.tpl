@@ -33,6 +33,13 @@
                   <?php } ?></td>
               </tr>
               <tr>
+                <td><?php echo $entry_meta_title; ?></td>
+                <td><input type="text" name="product_description[<?php echo $language['language_id']; ?>][meta_title]" size="100" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : ''; ?>" />
+                  <?php if (isset($error_name[$language['language_id']])) { ?>
+                  <span class="error"><?php echo $error_name[$language['language_id']]; ?></span>
+                  <?php } ?></td>
+              </tr>
+              <tr>
                 <td><?php echo $entry_meta_description; ?></td>
                 <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea></td>
               </tr>

@@ -3,6 +3,7 @@ class Category {
 	private $category_id;
 	private $name;
 	private $description;
+	private $meta_title;
 	private $meta_description;
 	private $meta_keyword;
 	private $image;
@@ -34,6 +35,7 @@ class Category {
                         $this->category_id = $category_query->row['category_id'];
                         $this->name = $category_query->row['name'];
                         $this->description = $category_query->row['description'];
+                        $this->meta_title = $category_query->row['meta_title'];
                         $this->meta_description = $category_query->row['meta_description'];
                         $this->meta_keyword = $category_query->row['meta_keyword'];
                         $this->image = $category_query->row['image'];
@@ -52,6 +54,7 @@ class Category {
 		$this->category_id = '';
 		$this->name = '';
 		$this->description = '';
+		$this->meta_title = '';
 		$this->meta_description = '';
 		$this->meta_keyword = '';
 		$this->image = '';
@@ -64,6 +67,10 @@ class Category {
       
   	public function getName() {
 		return $this->name;
+  	}
+        
+  	public function getMetaTitle() {
+		return $this->meta_title;
   	}
   
   	public function getDescription() {

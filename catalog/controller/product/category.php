@@ -22,7 +22,7 @@ class ControllerProductCategory extends Controller {
                 $page = $this->category->getPage();
                 $limit = $this->category->getLimit();
 	
-                $this->document->setTitle($this->category->getName());
+                $this->document->setTitle($this->category->getMetaTitle() ? $this->category->getMetaTitle() : $this->category->getName());
                 $this->document->setDescription($this->category->getMetaDescription());
                 $this->document->setKeywords($this->category->getMetaKeyword());
 			

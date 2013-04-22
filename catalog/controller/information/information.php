@@ -25,7 +25,9 @@ class ControllerInformationInformation extends Controller {
 		$information_info = $this->model_catalog_information->getInformation($information_id);
                 
 		if ($information_info) {
-	  		$this->document->setTitle($information_info['title']);
+	  		$this->document->setTitle($information_info['meta_title'] ? $information_info['meta_title'] : $information_info['title']);
+			$this->document->setDescription($information_info['meta_description']);
+			$this->document->setKeywords($information_info['meta_keyword']);
                         
                         
                 $this->data['seoClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($this->request->get['_route_'])));

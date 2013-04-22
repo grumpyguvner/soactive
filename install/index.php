@@ -9,15 +9,11 @@ define('ALLOW_UPGRADE', true);
 
 // Define application environment
 defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : die('Warning: You must set an environment variable <em>APPLICATION_ENV</em>')));
-
-// set config fiel name which we will write to
-defined('FILE_CONFIG')
-    || define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
+        || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : die('Warning: You must set an environment variable <em>APPLICATION_ENV</em>')));
 
 // HTTP
 define('HTTP_SERVER', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/');
-define('HTTP_OPENCART', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(rtrim(dirname($_SERVER['SCRIPT_NAME']), 'install'), '/.\\'). '/');
+define('HTTP_OPENCART', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(rtrim(dirname($_SERVER['SCRIPT_NAME']), 'install'), '/.\\') . '/');
 
 // DIR
 define('DIR_APPLICATION', str_replace('\'', '/', realpath(dirname(__FILE__))) . '/');
@@ -28,18 +24,41 @@ define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');
 
+defined('CONFIG_OVERRIDE')
+        || define('CONFIG_OVERRIDE', (getenv('CONFIG_OVERRIDE') ? getenv('CONFIG_OVERRIDE') : false));
+
+if (!defined('FILE_CONFIG') && CONFIG_OVERRIDE)
+{
+    $file = (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php';
+    $file = file(DIR_OPENCART . $file);
+
+    foreach ($file as $num => $line) {
+        if (strpos($line, '$sub_config_file') !== false) {
+            eval($line);
+            break;
+        }
+    }
+    if (isset($sub_config_file))
+    {
+        define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config_' . $sub_config_file . '.php' : 'config_' . $sub_config_file . '_' . APPLICATION_ENV . '.php');
+    }
+}
+
+// set config file name which we will write to
+defined('FILE_CONFIG')
+    || define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
+
+
 // Upgrade
 $upgrade = false;
 
-if (!is_file('../' . FILE_CONFIG))
-{
+if (!is_file('../' . FILE_CONFIG)) {
     if ($file = @fopen('../' . FILE_CONFIG, 'w')) {
         chmod('../' . FILE_CONFIG, '0755');
         fclose($file);
     }
 }
-if (!is_file('../admin/' . FILE_CONFIG))
-{
+if (!is_file('../admin/' . FILE_CONFIG)) {
     if ($file = @fopen('../admin/' . FILE_CONFIG, 'w')) {
         chmod('../admin/' . FILE_CONFIG, '0755');
         fclose($file);
@@ -47,21 +66,20 @@ if (!is_file('../admin/' . FILE_CONFIG))
 }
 
 if (filesize('../' . FILE_CONFIG) > 0) {
-    if (!ALLOW_UPGRADE)
-    {
+    if (!ALLOW_UPGRADE) {
         header('Location: ../');
         exit();
     }
-    
-	$upgrade = true;
-	
-	$file = file(DIR_OPENCART . FILE_CONFIG);
-	
-	foreach ($file as $num => $line) {
-		if (strpos(strtoupper($line), 'DB_') !== false) {
-			eval($line);
-		}
-	}
+
+    $upgrade = true;
+
+    $file = file(DIR_OPENCART . FILE_CONFIG);
+
+    foreach ($file as $num => $line) {
+        if (strpos(strtoupper($line), 'DB_') !== false) {
+            eval($line);
+        }
+    }
 }
 
 defined('VERSION') || define('VERSION', BASE_VERSION);
@@ -94,11 +112,11 @@ $controller = new Front($registry);
 
 // Router
 if (isset($request->get['route'])) {
-	$action = new Action($request->get['route']);
+    $action = new Action($request->get['route']);
 } elseif ($upgrade) {
-	$action = new Action('upgrade');
+    $action = new Action('upgrade');
 } else {
-	$action = new Action('step_1');
+    $action = new Action('step_1');
 }
 
 // Dispatch

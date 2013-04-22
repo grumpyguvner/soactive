@@ -73,7 +73,7 @@ class ControllerNewsArticle extends Controller {
 			$news_info = $this->model_catalog_news->getNewsStory($this->request->get['news_id']);
 			
 			if ($news_info) {
-				$this->document->setTitle($news_info['title']); 
+				$this->document->setTitle($news_info['meta_title'] ? $news_info['meta_title'] : $news_info['title']); 
 				$this->document->setDescription($news_info['meta_desc']);
                                 $this->document->setKeywords($news_info['meta_key']);
 				
