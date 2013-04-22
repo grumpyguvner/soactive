@@ -33,7 +33,7 @@ if (!defined('FILE_CONFIG') && CONFIG_OVERRIDE)
     $file = file(DIR_OPENCART . $file);
 
     foreach ($file as $num => $line) {
-        if (strpos(strtoupper($line), '$sub_config_file') !== false) {
+        if (strpos($line, '$sub_config_file') !== false) {
             eval($line);
             break;
         }
