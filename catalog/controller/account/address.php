@@ -295,15 +295,15 @@ class ControllerAccountAddress extends Controller {
         $this->data['entry_country'] = $this->language->get('entry_country');
         $this->data['entry_zone'] = $this->language->get('entry_zone');
         $this->data['entry_default'] = $this->language->get('entry_default');
-        
-        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
-        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
-
-        $this->data['button_find_address'] = $this->language->get('button_find_address');
-        $this->data['button_select_address'] = $this->language->get('button_select_address');
 
         $this->data['button_continue'] = $this->language->get('button_continue');
         $this->data['button_back'] = $this->language->get('button_back');
+        
+        $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
+        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
+        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
+        $this->data['button_find_address'] = $this->language->get('button_find_address');
+        $this->data['button_select_address'] = $this->language->get('button_select_address');
 
         if (isset($this->error['firstname'])) {
             $this->data['error_firstname'] = $this->error['firstname'];
@@ -357,6 +357,12 @@ class ControllerAccountAddress extends Controller {
             $this->data['error_zone'] = $this->error['zone'];
         } else {
             $this->data['error_zone'] = '';
+        }
+        
+        if (isset($this->error['postcode_lookup'])) {
+            $this->data['error_postcode_lookup'] = $this->error['postcode_lookup'];
+        } else {
+            $this->data['error_postcode_lookup'] = '';
         }
 
         if (!isset($this->request->get['address_id'])) {

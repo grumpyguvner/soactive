@@ -2,6 +2,15 @@
 class ControllerCheckoutGuestShipping extends Controller {
   	public function index() {	
 		$this->language->load('checkout/checkout');
+                
+                $this->language->load('module/postcode_anywhere');
+                $this->load->model('module/postcode_anywhere');
+                
+                $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
+                $this->data['entry_search_address'] = $this->language->get('entry_search_address');
+                $this->data['entry_select_address'] = $this->language->get('entry_select_address');
+                $this->data['button_find_address'] = $this->language->get('button_find_address');
+                $this->data['button_select_address'] = $this->language->get('button_select_address');
 		
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
@@ -81,6 +90,22 @@ class ControllerCheckoutGuestShipping extends Controller {
 		$this->load->model('localisation/country');
 		
 		$this->data['countries'] = $this->model_localisation_country->getCountries();
+                
+                $this->data['use_postcode_anywhere'] = $this->model_module_postcode_anywhere->isAvailable();
+
+                if (isset($this->request->post['postcode_lookup'])) {
+                    $this->data['postcode_lookup'] = $this->request->post['postcode_lookup'];
+                } else {
+                    $this->data['postcode_lookup'] = '';
+                }
+
+                if (isset($this->request->post['postcode_lookup_country_id'])) {
+                    $this->data['postcode_lookup_country_id'] = $this->request->post['postcode_lookup_country_id'];
+                } else {
+                    $this->data['postcode_lookup_country_id'] = $this->config->get('config_country_id');
+                }
+
+                // $this->data['paAddresses'] set in validate
 		
 		$this->setTemplate('checkout/guest_shipping.tpl');		
 		

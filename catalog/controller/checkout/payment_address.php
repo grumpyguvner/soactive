@@ -2,10 +2,16 @@
 class ControllerCheckoutPaymentAddress extends Controller {
 	public function index() {
 		$this->language->load('checkout/checkout');
+                
 		$this->language->load('module/postcode_anywhere');
-        
                 $this->load->model('module/postcode_anywhere');
-		
+                
+                $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
+                $this->data['entry_search_address'] = $this->language->get('entry_search_address');
+                $this->data['entry_select_address'] = $this->language->get('entry_select_address');
+                $this->data['button_find_address'] = $this->language->get('button_find_address');
+                $this->data['button_select_address'] = $this->language->get('button_select_address');
+                
 		$this->data['text_address_existing'] = $this->language->get('text_address_existing');
 		$this->data['text_address_new'] = $this->language->get('text_address_new');
 		$this->data['text_select'] = $this->language->get('text_select');
@@ -30,12 +36,6 @@ class ControllerCheckoutPaymentAddress extends Controller {
 	
 		$this->data['button_continue'] = $this->language->get('button_continue');
         
-                $this->data['entry_search_address'] = $this->language->get('entry_search_address');
-                $this->data['entry_select_address'] = $this->language->get('entry_select_address');
-
-                $this->data['button_find_address'] = $this->language->get('button_find_address');
-                $this->data['button_select_address'] = $this->language->get('button_select_address');
-
 		if (isset($this->session->data['payment_address_id'])) {
 			$this->data['address_id'] = $this->session->data['payment_address_id'];
 		} else {
@@ -48,23 +48,6 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		
 		$this->data['addresses'] = $this->model_account_address->getAddresses();
                 
-                
-                $this->data['use_postcode_anywhere'] = $this->model_module_postcode_anywhere->isAvailable();
-
-                if (isset($this->request->post['postcode_lookup'])) {
-                    $this->data['postcode_lookup'] = $this->request->post['postcode_lookup'];
-                } else {
-                    $this->data['postcode_lookup'] = '';
-                }
-
-                if (isset($this->request->post['postcode_lookup_country_id'])) {
-                    $this->data['postcode_lookup_country_id'] = $this->request->post['postcode_lookup_country_id'];
-                } else {
-                    $this->data['postcode_lookup_country_id'] = $this->config->get('config_country_id');
-                }
-
-                // $this->data['paAddresses'] set in validate
-		
 		$this->load->model('account/customer_group');
 		
 		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($this->customer->getCustomerGroupId());
@@ -108,6 +91,22 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		$this->load->model('localisation/country');
 		
 		$this->data['countries'] = $this->model_localisation_country->getCountries();
+                
+                $this->data['use_postcode_anywhere'] = $this->model_module_postcode_anywhere->isAvailable();
+
+                if (isset($this->request->post['postcode_lookup'])) {
+                    $this->data['postcode_lookup'] = $this->request->post['postcode_lookup'];
+                } else {
+                    $this->data['postcode_lookup'] = '';
+                }
+
+                if (isset($this->request->post['postcode_lookup_country_id'])) {
+                    $this->data['postcode_lookup_country_id'] = $this->request->post['postcode_lookup_country_id'];
+                } else {
+                    $this->data['postcode_lookup_country_id'] = $this->config->get('config_country_id');
+                }
+
+                // $this->data['paAddresses'] set in validate
 	
 		$this->setTemplate('checkout/payment_address.tpl');
 	

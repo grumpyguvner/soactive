@@ -11,7 +11,8 @@
 <div id="notification">
     <?php if ($success) { ?>
         <div class="success"><?php echo $success; ?></div>
-    <?php }
+        <?php
+    }
     if ($error_warning) {
         ?>
         <div class="warning"><?php echo $error_warning; ?></div>
@@ -79,198 +80,178 @@
                         </div>
 
                         <h3><?php echo $text_your_address; ?></h3>
-                        <?php
-                        if ($use_postcode_anywhere)
-                        {
-                        ?>
-                        <div id="address_lookup_content" class="content" style="display: none;">
-                            <div class="row">
-                                <div class="span2"><span class="required">*</span> <?php echo $entry_search_address; ?></div>
-                                 <div class="span5">
-                                    <select name="postcode_lookup_country_id">
-                                        <?php foreach ($countries as $country) { ?>
-                                            <?php if ($country['country_id'] == $postcode_lookup_country_id) { ?>
-                                                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                                            <?php } else { ?>
-                                                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="span2"></div>
-                                <div class="span5">
-                                        <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
-                                        <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
-                                    <?php if ($error_postcode_lookup) { ?>
-                                        <span class="error"><?php echo $error_postcode_lookup; ?></span>
-                                        <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="address_select_content" class="content" style="display: none;">
-                            <div class="row">
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_select_address; ?>
-                                </div>
-                                <div class="span5">
-                                        <select name="address_dropdown"<?php if ($addresses) echo ' size="' . (count($addresses) > 9 ? 10 : count($addresses)) . '"'; ?>>
-                                            <?php
-                                            if ($addresses)
-                                            {
-                                                foreach ($addresses as $address_info)
-                                                {
-                                                    echo "<option value='" . $address_info['value'] . "'";
-                                                    if ($address_dropdown == $address_info['value']) echo ' selected="selected"';
-                                                    echo '>' . $address_info['text'] . '</option>';
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                        <button class="btn" name="address_select" type="submit"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                        }
-                        ?>
-                        <div id="address_content" class="content">
-                            <div class="row">
-                                <div class="span2">
-                                    <?php echo $entry_company; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="company" value="<?php echo $company; ?>" />
-                                </div>
 
-                                <table class="form" style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
-
-                                    <tr >
-                                        <td><?php echo $entry_customer_group; ?></td>
-                                        <td><?php foreach ($customer_groups as $customer_group) { ?>
-                                                <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
-                                                    <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
-                                                    <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
-                                                    <br />
-                                                <?php } else { ?>
-                                                    <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" />
-                                                    <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
-                                                    <br />
+                        <div class="postcodeAnywhereContainer">
+                            <?php
+                            if ($use_postcode_anywhere) {
+                                ?>
+                                <div class="paLookup content">
+                                    <div class="row">
+                                        <div class="span2"><span class="paLookup_required required">*</span> <?php echo $entry_search_address; ?></div>
+                                        <div class="span5">
+                                            <select name="postcode_lookup_country_id">
+                                                <?php foreach ($countries as $country) { ?>
+                                                    <?php if ($country['country_id'] == $postcode_lookup_country_id) { ?>
+                                                        <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                                                    <?php } else { ?>
+                                                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                                                    <?php } ?>
                                                 <?php } ?>
-                                            <?php } ?></td>
-                                    </tr>
-                                </table>
-
-                                <div id="company-id-display">
-                                <div class="span2">
-                                    <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="company_id" value="<?php echo $company_id; ?>" />
-                                    <?php if ($error_company_id) { ?>
-                                        <span class="error"><?php echo $error_company_id; ?></span>
-                                    <?php } ?>
-                                </div>
-                                </div>
-                                <div id="tax-id-display">
-                                <div class="span2">
-                                    <span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
-                                    <?php if ($error_tax_id) { ?>
-                                        <span class="error"><?php echo $error_tax_id; ?></span>
-                                    <?php } ?>
-                                </div>
-                                </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_address_1; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
-                                    <?php if ($error_address_1) { ?>
-                                        <span class="error"><?php echo $error_address_1; ?></span>
-                                    <?php } ?>
-                                </div>
-                                <div class="span2">
-                                    <?php echo $entry_address_2; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
-                                </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_city; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="city" value="<?php echo $city; ?>" />
-                                    <?php if ($error_city) { ?>
-                                        <span class="error"><?php echo $error_city; ?></span>
-                                    <?php } ?>
-                                </div>
-                                <div class="span2">
-                                    <span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
-                                </div>
-                                <div class="span5">
-                                    <input type="text" name="postcode" class="span2" value="<?php echo $postcode; ?>" />
-                                    <?php
-                                    if ($use_postcode_anywhere)
-                                    {
-                                    ?>
-                                    <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
-                                    <?php 
-                                    }
-                                    if ($error_postcode) { ?>
-                                        <span class="error"><?php echo $error_postcode; ?></span>
-                                    <?php } ?>
-                                </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_country; ?>
-                                </div>
-                                <div class="span5">
-                                    <select name="country_id">
-                                        <option value=""><?php echo $text_select; ?></option>
-                                        <?php foreach ($countries as $country) { ?>
-                                            <?php if ($country['country_id'] == $country_id) { ?>
-                                                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                                            <?php } else { ?>
-                                                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                                            </select>
+                                            <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
+                                            <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
+                                            <?php if ($error_postcode_lookup) { ?>
+                                                <span class="error"><?php echo $error_postcode_lookup; ?></span>
+                                                <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                                             <?php } ?>
-                                        <?php } ?>
-                                    </select>
-                                    <?php if ($error_country) { ?>
-                                        <span class="error"><?php echo $error_country; ?></span>
-                                    <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_zone; ?>
+                                <div class="paSelect content">
+                                    <div class="row">
+                                        <div class="span2">
+                                            <span class="paSelect_required required">*</span> <?php echo $entry_select_address; ?>
+                                        </div>
+                                        <div class="span5">
+                                            <select name="address_dropdown"<?php if ($addresses) echo ' size="' . (count($addresses) > 9 ? 10 : count($addresses)) . '"'; ?>>
+                                                <?php
+                                                if ($addresses) {
+                                                    foreach ($addresses as $address_info) {
+                                                        echo "<option value='" . $address_info['value'] . "'";
+                                                        if ($address_dropdown == $address_info['value'])
+                                                            echo ' selected="selected"';
+                                                        echo '>' . $address_info['text'] . '</option>';
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                            <button class="btn" name="address_select" type="submit"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="span5">
-                                    <select name="zone_id">
-                                    </select>
-                                    <?php if ($error_zone) { ?>
-                                        <span class="error"><?php echo $error_zone; ?></span>
-                                    <?php } ?>
-                                </div>
-                            </div>    
-                        </div>
-                        <?php
-                        if ($use_postcode_anywhere)
-                        {
-                        ?>
-                        <script type="text/javascript"><!--
-                        if (!$('input[name=postcode]').val() && !$('input[name=address1]').val())
-                        {
-                            $('#address_lookup_content').show();
-                            if ($('select[name=address_dropdown] option').length)
-                            {
-                                $('#address_select_content').show();
+                                <?php
                             }
-                            $('#address_content').hide();
-                        }
-                        //--></script> 
-                        <?php
-                        }
-                        ?>
+                            ?>
+                            <div class="paAddress content">
+                                <div class="row">
+                                    <div class="span2">
+                                        <?php echo $entry_company; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <input type="text" name="company" value="<?php echo $company; ?>" />
+                                    </div>
+
+                                    <table class="form" style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
+
+                                        <tr >
+                                            <td><?php echo $entry_customer_group; ?></td>
+                                            <td><?php foreach ($customer_groups as $customer_group) { ?>
+                                                    <?php if ($customer_group['customer_group_id'] == $customer_group_id) { ?>
+                                                        <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" checked="checked" />
+                                                        <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
+                                                        <br />
+                                                    <?php } else { ?>
+                                                        <input type="radio" name="customer_group_id" value="<?php echo $customer_group['customer_group_id']; ?>" id="customer_group_id<?php echo $customer_group['customer_group_id']; ?>" />
+                                                        <label for="customer_group_id<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></label>
+                                                        <br />
+                                                    <?php } ?>
+                                                <?php } ?></td>
+                                        </tr>
+                                    </table>
+
+                                    <div id="company-id-display">
+                                        <div class="span2">
+                                            <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
+                                        </div>
+                                        <div class="span5">
+                                            <input type="text" name="company_id" value="<?php echo $company_id; ?>" />
+                                            <?php if ($error_company_id) { ?>
+                                                <span class="error"><?php echo $error_company_id; ?></span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div id="tax-id-display">
+                                        <div class="span2">
+                                            <span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?>
+                                        </div>
+                                        <div class="span5">
+                                            <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
+                                            <?php if ($error_tax_id) { ?>
+                                                <span class="error"><?php echo $error_tax_id; ?></span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <span class="required">*</span> <?php echo $entry_address_1; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
+                                        <?php if ($error_address_1) { ?>
+                                            <span class="error"><?php echo $error_address_1; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="span2">
+                                        <?php echo $entry_address_2; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
+                                    </div>
+                                    <div class="span2">
+                                        <span class="required">*</span> <?php echo $entry_city; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <input type="text" name="city" value="<?php echo $city; ?>" />
+                                        <?php if ($error_city) { ?>
+                                            <span class="error"><?php echo $error_city; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="span2">
+                                        <span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <input type="text" name="postcode" class="span2" value="<?php echo $postcode; ?>" />
+                                        <?php
+                                        if ($use_postcode_anywhere) {
+                                            ?>
+                                            <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
+                                            <?php
+                                        }
+                                        if ($error_postcode) {
+                                            ?>
+                                            <span class="error"><?php echo $error_postcode; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="span2">
+                                        <span class="required">*</span> <?php echo $entry_country; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <select name="country_id">
+                                            <option value=""><?php echo $text_select; ?></option>
+                                            <?php foreach ($countries as $country) { ?>
+                                                <?php if ($country['country_id'] == $country_id) { ?>
+                                                    <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                                                <?php } else { ?>
+                                                    <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </select>
+                                        <?php if ($error_country) { ?>
+                                            <span class="error"><?php echo $error_country; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="span2">
+                                        <span class="required">*</span> <?php echo $entry_zone; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <select name="zone_id">
+                                        </select>
+                                        <?php if ($error_zone) { ?>
+                                            <span class="error"><?php echo $error_zone; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </div>    
+                            </div> 
+                        </div>
                         <h3><?php echo $text_your_password; ?></h3>
                         <div class="content">
                             <div class="row">
@@ -296,35 +277,34 @@
                             </div>
                         </div>
                         <?php
-                        if ($show_newsletter)
-                        {
-                        ?>
-                        <h3><?php echo $text_newsletter; ?></h3>
-                        <div class="content">
-                            <div class="row">
-                                <div class="span2">
-                                    <?php echo $entry_newsletter; ?>
-                                </div>
-                                <div class="span5">
-                                    <?php if ($newsletter) { ?>
-                                        <input type="radio" name="newsletter" value="1" checked="checked" />
-                                        <?php echo $text_yes; ?>
-                                        <input type="radio" name="newsletter" value="0" />
-                                        <?php echo $text_no; ?>
-                                    <?php } else { ?>
-                                        <input type="radio" name="newsletter" value="1" />
-                                        <?php echo $text_yes; ?>
-                                        <input type="radio" name="newsletter" value="0" checked="checked" />
-                                        <?php echo $text_no; ?>
-                                    <?php } ?>
-                                </div>
-                            </div>    
-                        </div>
-                        <?php
+                        if ($show_newsletter) {
+                            ?>
+                            <h3><?php echo $text_newsletter; ?></h3>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="span2">
+                                        <?php echo $entry_newsletter; ?>
+                                    </div>
+                                    <div class="span5">
+                                        <?php if ($newsletter) { ?>
+                                            <input type="radio" name="newsletter" value="1" checked="checked" />
+                                            <?php echo $text_yes; ?>
+                                            <input type="radio" name="newsletter" value="0" />
+                                            <?php echo $text_no; ?>
+                                        <?php } else { ?>
+                                            <input type="radio" name="newsletter" value="1" />
+                                            <?php echo $text_yes; ?>
+                                            <input type="radio" name="newsletter" value="0" checked="checked" />
+                                            <?php echo $text_no; ?>
+                                        <?php } ?>
+                                    </div>
+                                </div>    
+                            </div>
+                            <?php
                         } else {
-                        ?>
-                        <input type="hidden" name="newsletter" value="1" />
-                        <?php
+                            ?>
+                            <input type="hidden" name="newsletter" value="1" />
+                            <?php
                         }
                         ?>
                         <?php if ($text_agree) { ?>
@@ -357,15 +337,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript"><!--
-    $('.manualAddress').click(function ()
-    {
-        $('#address_lookup_content').hide();
-        $('#address_select_content').hide();
-        $('#address_content').show();
-        return false;
-    });
-    //--></script> 
 <script type="text/javascript"><!--
     $('input[name=\'customer_group_id\']:checked').live('change', function() {
         var customer_group = [];

@@ -3383,13 +3383,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 .form-register h3 {
     line-height: 18px;
 }
-#address_content .btn, #address_lookup_content .btn, #address_select_content  .btn {
-    margin-bottom: 10px;
-}
-select[size] {
-    width: auto;
-    display: block;
-}
 #listing {
     margin: 0 10px 10px;
     padding-bottom: 10px;
@@ -3673,4 +3666,34 @@ select[size] {
 }
 #info-size tr th{
     color: #777777;
+}
+
+.postcodeAnywhereContainer .paLookup, .postcodeAnywhereContainer .paSelect
+{
+    display: none;
+}
+.postcodeAnywhereContainer .paAddress button[name=lookup]
+{
+    display: none;
+}
+
+.postcodeAnywhereContainer.paCheckout .paLookup
+{
+    display: block;
+}
+.postcodeAnywhereContainer.paCheckout .paAddress button[name=lookup]
+{
+    display: block;
+}
+.postcodeAnywhereContainer.paCheckout .paAddress
+{
+    display: none;
+}
+
+.postcodeAnywhereContainer .btn {
+    margin-bottom: 10px;
+}
+.postcodeAnywhereContainer select[size] {
+    width: auto;
+    display: block;
 }

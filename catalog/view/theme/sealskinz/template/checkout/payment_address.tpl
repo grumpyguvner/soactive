@@ -79,148 +79,150 @@
             <h2><?php echo $text_your_address ?></h2>
 
 
-            <?php
-            if ($use_postcode_anywhere) {
+            <div class="postcodeAnywhereContainer paCheckout">
+                <?php
+                if ($use_postcode_anywhere) {
+                    ?>
+                    <div class="paLookup content">
+                        <div class="payform-right">
+                            <div id="left"><span class="paLookup_required required">*</span> <?php echo $entry_search_address; ?></div>
+                            <div id="right"><select name="postcode_lookup_country_id">
+                                    <?php foreach ($countries as $country) { ?>
+                                        <?php if ($country['country_id'] == $postcode_lookup_country_id) { ?>
+                                            <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                                        <?php } else { ?>
+                                            <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+
+                                <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
+                                <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
+                                <?php if ($error_postcode_lookup) { ?>
+                                    <span class="error"><?php echo $error_postcode_lookup; ?></span>
+                                    <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="paSelect content">
+                        <div class="payform-right">
+                            <div id="left"><span class="paSelect_required required">*</span> <?php echo $entry_search_address; ?></div>
+                            <div id="right">
+                                <select name="address_dropdown"<?php if ($paAddresses) echo ' size="' . (count($paAddresses) > 9 ? 10 : count($paAddresses)) . '"'; ?>>
+                                    <?php
+                                    if ($paAddresses) {
+                                        foreach ($paAddresses as $address_info) {
+                                            echo "<option value='" . $address_info['value'] . "'";
+                                            if ($address_dropdown == $address_info['value'])
+                                                echo ' selected="selected"';
+                                            echo '>' . $address_info['text'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <button class="btn" name="address_select" type="button"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
                 ?>
-                <div class="address_lookup_content content" style="display: none;">
+
+                <div class="paAddress">
+
                     <div class="payform-right">
-                        <div id="left"><span class="required">*</span> <?php echo $entry_search_address; ?></div>
-                        <div id="right"><select name="postcode_lookup_country_id">
+                        <div id="left">
+                            <?php echo $entry_company; ?>
+                        </div>
+                        <div id="right">
+                            <input type="text" name="company" value="" class="large-field" />
+                        </div>
+                    </div>
+                    <?php if ($company_id_display) { ?>
+                        <div class="payform-right">
+                            <div id="left">
+                                <?php if ($company_id_required) { ?>
+                                    <span class="required">*</span>
+                                <?php } ?>
+                                <?php echo $entry_company_id; ?>
+                                <td></td>
+                            </div>
+                            <div id="right">
+                                <input type="text" name="company_id" value="" class="large-field" />
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <?php if ($tax_id_display) { ?>
+                        <div class="payform-right">
+                            <div id="left">
+                                <?php if ($tax_id_required) { ?>
+                                    <span class="required">*</span>
+                                <?php } ?>
+                                <?php echo $entry_tax_id; ?>
+                            </div>
+                            <div id="right">
+                                <input type="text" name="tax_id" value="" class="large-field" />
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="payform-right">
+                        <div id="left">
+                            <span class="required">*</span> <?php echo $entry_address_1; ?>
+                        </div>
+                        <div id="right">
+                            <input type="text" name="address_1" value="" class="large-field" />
+                        </div>
+                    </div>
+                    <div class="payform-right">
+                        <div id="left">
+                            <?php echo $entry_address_2; ?>
+                        </div>
+                        <div id="right">
+                            <input type="text" name="address_2" value="" class="large-field" />
+                        </div>
+                    </div>
+                    <div class="payform-right">
+                        <div id="left">
+                            <span class="required">*</span> <?php echo $entry_city; ?>
+                        </div>
+                        <div id="right">
+                            <input type="text" name="city" value="" class="large-field" />
+                        </div>
+                    </div>
+                    <div class="payform-right">
+                        <div id="left">
+                            <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
+                        </div>
+                        <div id="right">
+                            <input type="text" name="postcode" value="" class="large-field" />
+                        </div>
+                    </div>
+                    <div class="payform-right">
+                        <div id="left">
+                            <span class="required">*</span> <?php echo $entry_country; ?>
+                        </div>
+                        <div id="right">
+                            <select name="country_id" class="large-field">
+                                <option value=""><?php echo $text_select; ?></option>
                                 <?php foreach ($countries as $country) { ?>
-                                    <?php if ($country['country_id'] == $postcode_lookup_country_id) { ?>
+                                    <?php if ($country['country_id'] == $country_id) { ?>
                                         <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
                                     <?php } else { ?>
                                         <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
                                     <?php } ?>
                                 <?php } ?>
                             </select>
-
-                            <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
-                            <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
-                            <?php if ($error_postcode_lookup) { ?>
-                                <span class="error"><?php echo $error_postcode_lookup; ?></span>
-                                <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
-                            <?php } ?>
                         </div>
                     </div>
-                </div>
-                <div class="address_select_content content" style="display: none;">
                     <div class="payform-right">
-                        <div id="left"><span class="required">*</span> <?php echo $entry_search_address; ?></div>
+                        <div id="left">
+                            <span class="required">*</span> <?php echo $entry_zone; ?>
+                        </div>
                         <div id="right">
-                            <select name="address_dropdown"<?php if ($paAddresses) echo ' size="' . (count($paAddresses) > 9 ? 10 : count($paAddresses)) . '"'; ?>>
-                                <?php
-                                if ($paAddresses) {
-                                    foreach ($paAddresses as $address_info) {
-                                        echo "<option value='" . $address_info['value'] . "'";
-                                        if ($address_dropdown == $address_info['value'])
-                                            echo ' selected="selected"';
-                                        echo '>' . $address_info['text'] . '</option>';
-                                    }
-                                }
-                                ?>
+                            <select name="zone_id" class="large-field">
                             </select>
-                            <button class="btn" name="address_select" type="button"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                         </div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-
-            <div class="address_content">
-
-                <div class="payform-right">
-                    <div id="left">
-                        <?php echo $entry_company; ?>
-                    </div>
-                    <div id="right">
-                        <input type="text" name="company" value="" class="large-field" />
-                    </div>
-                </div>
-                <?php if ($company_id_display) { ?>
-                    <div class="payform-right">
-                        <div id="left">
-                            <?php if ($company_id_required) { ?>
-                                <span class="required">*</span>
-                            <?php } ?>
-                            <?php echo $entry_company_id; ?>
-                            <td></td>
-                        </div>
-                        <div id="right">
-                            <input type="text" name="company_id" value="" class="large-field" />
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if ($tax_id_display) { ?>
-                    <div class="payform-right">
-                        <div id="left">
-                            <?php if ($tax_id_required) { ?>
-                                <span class="required">*</span>
-                            <?php } ?>
-                            <?php echo $entry_tax_id; ?>
-                        </div>
-                        <div id="right">
-                            <input type="text" name="tax_id" value="" class="large-field" />
-                        </div>
-                    </div>
-                <?php } ?>
-                <div class="payform-right">
-                    <div id="left">
-                        <span class="required">*</span> <?php echo $entry_address_1; ?>
-                    </div>
-                    <div id="right">
-                        <input type="text" name="address_1" value="" class="large-field" />
-                    </div>
-                </div>
-                <div class="payform-right">
-                    <div id="left">
-                        <?php echo $entry_address_2; ?>
-                    </div>
-                    <div id="right">
-                        <input type="text" name="address_2" value="" class="large-field" />
-                    </div>
-                </div>
-                <div class="payform-right">
-                    <div id="left">
-                        <span class="required">*</span> <?php echo $entry_city; ?>
-                    </div>
-                    <div id="right">
-                        <input type="text" name="city" value="" class="large-field" />
-                    </div>
-                </div>
-                <div class="payform-right">
-                    <div id="left">
-                        <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
-                    </div>
-                    <div id="right">
-                        <input type="text" name="postcode" value="" class="large-field" />
-                    </div>
-                </div>
-                <div class="payform-right">
-                    <div id="left">
-                        <span class="required">*</span> <?php echo $entry_country; ?>
-                    </div>
-                    <div id="right">
-                        <select name="country_id" class="large-field">
-                            <option value=""><?php echo $text_select; ?></option>
-                            <?php foreach ($countries as $country) { ?>
-                                <?php if ($country['country_id'] == $country_id) { ?>
-                                    <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                                <?php } else { ?>
-                                    <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                                <?php } ?>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="payform-right">
-                    <div id="left">
-                        <span class="required">*</span> <?php echo $entry_zone; ?>
-                    </div>
-                    <div id="right">
-                        <select name="zone_id" class="large-field">
-                        </select>
                     </div>
                 </div>
             </div>
@@ -235,73 +237,6 @@
     </div>
 </div>
 
-<?php
-if ($use_postcode_anywhere) {
-    ?>
-    <script type="text/javascript"><!--
-
-        $('#payment-new .address_lookup_content').show();
-        $('#payment-new .address_content').hide();
-            
-        $('#payment-new .manualAddress').click(function ()
-        {
-            $('#payment-new .address_lookup_content').hide();
-            $('#payment-new .address_select_content').hide();
-            $('#payment-new .address_content').show();
-            return false;
-        });
-        
-        $('#payment-new .manualAddress').click(function ()
-        {
-            $('#payment-new .address_lookup_content').hide();
-            $('#payment-new .address_select_content').hide();
-            $('#payment-new .address_content').show();
-            return false;
-        });
-        
-        $('#payment-new button[name=lookup]').bind('click', function ()
-        {
-            $.ajax({
-                url: 'index.php?route=module/postcode_anywhere/postcode&country_id=' + $('#payment-new select[name=postcode_lookup_country_id]').val() + '&postcode=' + $('#payment-new input[name=postcode_lookup]').val(),
-                dataType: 'json',
-                beforeSend: function() {
-                    $(this).after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-                },
-                complete: function() {
-                    $('.wait').remove();
-                },			
-                success: function(json) {
-                    if (json['postcode_required'] == '1') {
-                        $('#payment-postcode-required').show();
-                    } else {
-                        $('#payment-postcode-required').hide();
-                    }
-
-                    html = '';
-
-                    if (json['addresses'] != '') {
-                        for (i = 0; i < json['addresses'].length; i++) {
-                            html += '<option value="' + json['addresses'][i]['value'] + '"';
-
-                            html += '>' + json['addresses'][i]['text'] + '</option>';
-                        }
-                        selectSize = (json['addresses'].length > 9) ? 10 : json['addresses'].length;
-                        $('#payment-address select[name=\'address_dropdown\']').attr('size', selectSize);
-                        $('#payment-new .address_select_content').show();
-                    }
-                    $('#payment-address select[name=\'address_dropdown\']').html(html);
-                    
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-        });
-        
-        //--></script> 
-    <?php
-}
-?>
 <script type="text/javascript"><!--
     $('#payment-address input[name=\'payment_address\']').live('change', function() {
         if (this.value == 'new') {

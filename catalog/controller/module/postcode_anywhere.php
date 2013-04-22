@@ -10,7 +10,6 @@ class ControllerModulePostcodeAnywhere extends Controller {
         if ($this->model_module_postcode_anywhere->isAvailable())
         {
             if (!empty($this->request->get['postcode']) && !empty($this->request->get['country_id'])) {
-
                 $json['addresses'] = $this->model_module_postcode_anywhere->getAddressesByPostcode($this->request->get['postcode'], $this->request->get['country_id']);
             }
         }
@@ -20,11 +19,13 @@ class ControllerModulePostcodeAnywhere extends Controller {
 
     public function address() {
         $json = array();
-
-        if (!empty($this->request->get['address_id'])) {
-            $this->load->model('module/postcode_anywhere');
-
-            $json = $this->model_sale_customer->getAddress($this->request->get['address_id']);
+        
+        $this->load->model('module/postcode_anywhere');
+        if ($this->model_module_postcode_anywhere->isAvailable())
+        {
+            if (!empty($this->request->get['address']) && !empty($this->request->get['country_id'])) {
+                $json['address'] = $this->model_module_postcode_anywhere->getAddressById($this->request->get['address'], $this->request->get['country_id']);
+            }
         }
 
         $this->response->setOutput(json_encode($json));

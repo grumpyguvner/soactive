@@ -1,4 +1,6 @@
 <?php
+$_['text_enter_manually']  = 'Enter Address Manually';
+
 $_['button_find_address']   = 'Find Address';
 $_['button_select_address'] = 'Select Address';
 

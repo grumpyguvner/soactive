@@ -72,7 +72,6 @@ class ControllerAccountRegister extends Controller {
         $this->data['text_no'] = $this->language->get('text_no');
         $this->data['text_select'] = $this->language->get('text_select');
         $this->data['text_none'] = $this->language->get('text_none');
-        $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
 
         $this->data['entry_firstname'] = $this->language->get('entry_firstname');
         $this->data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -92,14 +91,13 @@ class ControllerAccountRegister extends Controller {
         $this->data['entry_newsletter'] = $this->language->get('entry_newsletter');
         $this->data['entry_password'] = $this->language->get('entry_password');
         $this->data['entry_confirm'] = $this->language->get('entry_confirm');
-        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
-        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
-
-        $this->data['button_find_address'] = $this->language->get('button_find_address');
-        $this->data['button_select_address'] = $this->language->get('button_select_address');
         $this->data['button_continue'] = $this->language->get('button_continue');
         
-        
+        $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
+        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
+        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
+        $this->data['button_find_address'] = $this->language->get('button_find_address');
+        $this->data['button_select_address'] = $this->language->get('button_select_address');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
