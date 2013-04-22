@@ -2448,7 +2448,7 @@ a.button-account:hover, input.button-account:hover {
 }
 
 #cssmenu ul > li > a{
-
+    height: 21px;
     display: block;
     text-decoration: none;
     padding: 15px 18px;
@@ -2798,21 +2798,10 @@ input[type="color"]:focus, .uneditable-input:focus {
     padding: 0 6px 0 17px;
     background-image: url('../image/input.png');
 }
-#submit-wrapper{
-    margin-left: -10px; 
-    margin-bottom: 20px;
-}
 .submit_input input{
     margin-left: 10px;
     width: 232px;
     height: 26px;
-
-}
-#submit-wrapper input[type="email"]{
-    border: 1px solid #000000;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
 }
 .submit_input a{
     position: absolute;
@@ -2822,7 +2811,25 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-size: 16px;
 }
 .review-in {
-    width: 492px;
+    width: 48%;
+}
+.review-in .win-sp {
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+    background-color: #5a7639;
+    width: 206px;
+    height: 38px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.review-in .win-sp span {
+   float: left; 
+   padding: 8px 17px;
+}
+.review-in .win-sp img {
+   float: right; 
 }
 .review-in h3 {
     font-size: 20px;
@@ -2830,8 +2837,16 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: white;
     margin-bottom: 2px;
 }
+.review-in table tr td {
+    vertical-align: top;
+}
+.review-in table p {
+    color: #74964a;
+    font-weight: bold;
+    padding-left: 10px;
+}
 .newsletter-in {
-    width: 492px;
+    width: 50%;
 }
 .newsletter-in h3 {
     font-size: 20px;
@@ -3703,12 +3718,6 @@ select[size] {
 .wrapper-rnews {
     border-top: 1px solid #CCCCCC;
     overflow: hidden;
-}
-.win-sp {
-    background-image: url('../image/button-home.png');
-    background-repeat: no-repeat;
-    width: 208px;
-    height: 38px;
 }
 .quote {
     color: #4D4D4D;
