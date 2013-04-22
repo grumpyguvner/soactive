@@ -401,7 +401,7 @@ ALTER TABLE `oc_information` ADD `menu` int(1) NOT NULL DEFAULT '0' AFTER `infor
 ALTER TABLE `oc_category_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
 ALTER TABLE `oc_product_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
 ALTER TABLE `oc_ncategory_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
-ALTER TABLE `oc_news_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_keyword`;
+ALTER TABLE `oc_news_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_key`;
 
 ALTER TABLE `oc_information_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `description`;
 ALTER TABLE `oc_information_description` ADD `meta_description` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_title`;
