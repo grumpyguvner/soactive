@@ -145,7 +145,7 @@
                                             <?php if ($children) { ?>
                                                 <?php for ($i = 0; $i < count($children) && $i < 3; $i++) { ?>
                                                     <a href="<?php echo $children[$i]['href'] ?>" alt="<?php echo $children[$i]['name'] ?>" >
-                                                        <div class="<?php echo $children[$i]['name'] ?>">&nbsp;</div>
+                                                        <div class="<?php echo $children[$i]['name'] ?>"></div>
                                                     </a>
                                                 <?php } ?>
                                             <?php } ?>
