@@ -47,7 +47,7 @@
                         <?php 
                         echo '<h4>' . $text_customerservice . '</h4><ul>'; 
                         foreach ($informations as $key => $information) {
-                            if (strtolower($text_customerservice) !== strtolower($information['category'])) {
+                            if (strtolower($text_customerservice) == strtolower($information['category'])) {
                                 echo '<li><a href="' . $information['href'] . '">' . $information['title'] . '</a></li>';
                             }
                         }
