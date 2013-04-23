@@ -3373,11 +3373,10 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .wrap-menu {
     width: 579px !important;
-    height: 352px !important;
+    height: 352px;
     margin-left: -64px !important;
-    margin-top: 2px !important;
     background-image: none !important;
-    background-color: #221e1f !important;
+    background-color: #221e1f;
 }
 .menu-list {
     height: 352px;
