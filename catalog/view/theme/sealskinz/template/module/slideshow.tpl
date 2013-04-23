@@ -43,8 +43,26 @@ if (!empty($banners)) {
         </script>
     <?php } ?>
     <script type="text/javascript">
+        $('.carousel-inner .item').each (function () {
+            if ($(this).find('a:first[href]').length) {
+                $(this).css('cursor', 'pointer').click(function () {
+                    window.location = $(this).find('a:first[href]').attr('href');
+                    return false;
+                });
+            }
+        });
+        
         function fixSlideshowBanners ()
         {
+            if ($('.carousel-inner .item').length > 1) {
+                var baseBar = $('.carouselBasebarContainer').innerHeight();
+                var indicator = $('.carousel-indicators').innerHeight();
+                var indicatorPadding = baseBar - indicator;
+                if (indicatorPadding > 0) indicatorPadding = indicatorPadding / 2;
+
+                $('#myCarousel:first .carouselBasebarContainer:first .container > ol').css("top", indicatorPadding + "px");
+            }
+            
             $('.carousel-inner .item').each(function() {
                  var settings = {
                     "max" : 27,
@@ -64,39 +82,21 @@ if (!empty($banners)) {
                 
                 $(this).find('.container > div').css("font-size", size + "px");
 
-                var bheight = $(this).innerHeight();
+                var bheight = $(this).height();
                 var dheight = $(this).find('.container > div').innerHeight();
                 var padding = (bheight - dheight);
                 if (padding > 0) padding = padding / 2;
 
-                $(this).find('.container > div').css("padding-top", padding + "px");
+                $(this).find('.container > div').css("margin-top", padding + "px");
             });
-            
-            if ($('.carousel-inner .item').length > 1) {
-                var baseBar = $('.carouselBasebarContainer').innerHeight();
-                var indicator = $('.carousel-indicators').innerHeight();
-                var indicatorPadding = baseBar - indicator;
-                if (indicatorPadding > 0) indicatorPadding = indicatorPadding / 2;
-
-                $('#myCarousel:first .carouselBasebarContainer:first .container > ol').css("top", indicatorPadding + "px");
-            }
         }
         
         $(window).resize(function () {
             fixSlideshowBanners();
-        });
+        }).trigger('resize');
         
         $('.carousel-inner img').load(function () {
             fixSlideshowBanners();
-        });
-        
-        $('.carousel-inner .item').each (function () {
-            if ($(this).find('.container > div a:first').length) {
-                $(this).css('cursor', 'pointer').click(function () {
-                    window.location = $(this).find('.container > div a:first').attr('href');
-                    return false;
-                });
-            }
         });
         
     </script>
