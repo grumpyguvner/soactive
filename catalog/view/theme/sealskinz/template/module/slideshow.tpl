@@ -55,8 +55,16 @@ if (!empty($banners))
                                 var padding = (bheight - dheight);
                                 if (padding > 0) padding = padding / 2;
 
-                                $('#myCarousel:first .container > div').css("padding-top", padding + "px");
+                                $('#myCarousel:first .bannerWrapper > .container > div').css("padding-top", padding + "px");
+                                
+                                var baseBar = $('.carouselBasebarContainer').innerHeight();
+                                var indicator = $('.carousel-indicators').innerHeight();
+                                var indicatorPadding = baseBar - indicator;
+                                if (indicatorPadding > 0) indicatorPadding = indicatorPadding / 2;
+                                
+                                $('#myCarousel:first .carouselBasebarContainer:first .container > ol').css("top", indicatorPadding + "px");
                             }).trigger('resize');
+                            
                             $('.carousel-inner img').load(function () {
                                 $(window).trigger('resize');
                              });

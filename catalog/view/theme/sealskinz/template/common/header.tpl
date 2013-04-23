@@ -137,7 +137,7 @@
                     <div id='cssmenu'>
                         <ul>
                             <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
-                            <li id="activity"><a href="#"><span><?php echo $text_activity ?></span></a>
+                            <li id="activity"><span><?php echo $text_activity ?></span>
                                 <?php if ($categories) { ?>
                                     <ul class="wrap-menu">
                                         <div id="left">
@@ -185,7 +185,7 @@
 
         </div>
 <script type="text/javascript">
-    $('#activity a').bind({
+    $('#activity span').bind({
              'click' : function() {
                 if( $('#cssmenu > ul > li > ul').is(':hidden') ) {
                     $('#cssmenu > ul > li > ul').css('visibility','hidden'); 
