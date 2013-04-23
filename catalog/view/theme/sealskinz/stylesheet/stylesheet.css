@@ -2511,19 +2511,11 @@ a.button-account:hover, input.button-account:hover {
 }
 
 #cssmenu > ul > li > ul{
-
-    opacity: 0;
+    
     visibility: hidden;
     position: absolute;
     z-index: 100;
-
-}
-
-#cssmenu > ul > li:hover > ul{
-
     opacity: 1;
-    visibility: visible;
-    position: absolute;
     border-radius: 0 0 3px 3px;
     -webkit-box-shadow: none;
     -o-box-shadow: none;
@@ -2532,6 +2524,7 @@ a.button-account:hover, input.button-account:hover {
     box-shadow: none;
 
 }
+
 
 #cssmenu > ul > li > ul{
 

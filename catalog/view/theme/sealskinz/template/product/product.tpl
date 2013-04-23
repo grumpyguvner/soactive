@@ -242,8 +242,8 @@
                         <?php if ($review_status) { ?>
                             <div class="review">
                                 <div class="tools">
-                                    <img src="catalog/view/theme/sealskinz/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('#tab-review').trigger('click');">(<?php echo $reviews; ?>)</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                    <!-- <a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp; --><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a>
+                                    <img src="catalog/view/theme/sealskinz/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('#tab-review').trigger('click');">(<?php echo $reviews; ?>)</a><!--&nbsp;&nbsp;|&nbsp;&nbsp;-->
+                                    <!-- <a onclick="addToWishList('<?php /* echo $product_id; */ ?>');"><?php /*echo $button_wishlist; */ ?></a>&nbsp;&nbsp;|&nbsp;&nbsp; ><a onclick="addToCompare('<?php /* echo $product_id; */ ?>');"><?php /* echo $button_compare; */ ?></a-->
                                 </div>
                                 <div class="share"><!-- AddThis Button BEGIN -->
                                     <div class="addthis_default_style"><a class="addthis_button_compact"><?php echo $text_share; ?></a> <a class="addthis_button_email"></a><a class="addthis_button_print"></a> <a class="addthis_button_facebook"></a> <a class="addthis_button_twitter"></a></div>
