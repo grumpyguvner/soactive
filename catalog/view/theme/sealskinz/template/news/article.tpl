@@ -63,41 +63,23 @@
                     <?php if ($products) { ?>
                        <div id="relatedProducts">
                         <h3><?php echo $news_prelated; ?></h3>
-                       <div class="box-product">
-                                <?php foreach ($products as $product) { ?>
-                                    <div class="nimage">
-                                        <div class="grid-wrap"> 
-                                            <div class="name"><a style="color: black !important;" href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
-                                            <?php if ($product['thumb']) { ?>
-                                                <div class="image" style="text-align: center;"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>
-                                            <?php } ?>
-                                            <div class="line-image"></div>
-                                        </div>
-
-                                        <table class="table table-bordered" id="table-price">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="table-price">
-
-                                                        <?php if (!$product['special']) { ?>
-                                                            <h4><?php echo $product['price']; ?></h4>
-                                                        <?php } else { ?>
-                                                            <span class="price-old"><h4><?php echo $product['price']; ?></h4></span> <span class="price-new"><?php echo $product['special']; ?></span>
-                                                        <?php } ?>
-
-                                                    </td>
-                                                    <td class="table-info"><a href="<?php echo $product['href']; ?>" style="color: white !important;"><h5>VIEW PRODUCT INFO</h5></a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                       <div id="relatedProducts">
+                        <h3><?php echo $tab_related ?></h3>
+                        <div class="product-grid">
+                            <?php foreach ($products as $product) {
+                                ?><div class="productItem"> 
+                                    <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
+                                    <div class="image"><?php if ($product['thumb']) { ?>
+                                            <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
+                                        <?php } ?>
                                     </div>
-                                    <?php if ($product['rating']) { ?>
-                                        <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
-                                    <?php } ?>
-            <!--a onclick="addToCart('<?php /* echo $product['product_id']; ?>');" class="button"><span><?php echo $button_cart; */ ?></span></a></div-->
-                                <?php } ?>
-
-                            </div>
+                                    <div class="bar">
+                                        <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>">VIEW PRODUCT INFO</a>
+                                    </div>
+                                </div><?php }
+                                    ?>
+                        </div>
+                    </div>
                         <div class="tab-content-pnews">
                             
                         <?php } ?>
