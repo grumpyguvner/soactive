@@ -2511,19 +2511,11 @@ a.button-account:hover, input.button-account:hover {
 }
 
 #cssmenu > ul > li > ul{
-
-    opacity: 0;
+    
     visibility: hidden;
     position: absolute;
     z-index: 100;
-
-}
-
-#cssmenu > ul > li:hover > ul{
-
     opacity: 1;
-    visibility: visible;
-    position: absolute;
     border-radius: 0 0 3px 3px;
     -webkit-box-shadow: none;
     -o-box-shadow: none;
@@ -2532,6 +2524,7 @@ a.button-account:hover, input.button-account:hover {
     box-shadow: none;
 
 }
+
 
 #cssmenu > ul > li > ul{
 
@@ -3373,11 +3366,10 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .wrap-menu {
     width: 579px !important;
-    height: 352px !important;
+    height: 352px;
     margin-left: -64px !important;
-    margin-top: 2px !important;
     background-image: none !important;
-    background-color: #221e1f !important;
+    background-color: #221e1f;
 }
 .menu-list {
     height: 352px;
