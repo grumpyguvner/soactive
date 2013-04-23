@@ -57,6 +57,9 @@ if (!empty($banners))
 
                                 $('#myCarousel:first .container > div').css("padding-top", padding + "px");
                             }).trigger('resize');
+                            $('.carousel-inner img').load(function () {
+                                $(window).trigger('resize');
+                             });
                         }
                     </script>
                 </div>
