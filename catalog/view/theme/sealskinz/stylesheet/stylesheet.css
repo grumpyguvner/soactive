@@ -1364,23 +1364,29 @@ a.button-account:hover, input.button-account:hover {
     font-weight: normal;
     background: #fff;
     text-align: center;
+    position: relative;
 }
 #column-right + #content .productItem, #column-left + #content .productItem {
     width: 255px;
 }
 .product-grid .productItem .name {
     height: 54px;
-    padding: 20px 10px 0;
+    width: 245px;
+    padding: 15px 10px 0;
+    position: absolute;
+    z-index: 5;
 }
 .product-grid .productItem .name a {
     color: #000;
+    display: inline-block;
+    background: rgba(255,255,255,.4);
 }
 .product-grid .productItem .name a:hover {
     text-decoration: none;
 }
 .product-grid .productItem .image {
-    height: 136px;
-    padding: 10px 10px 30px;
+    height: 220px;
+    padding: 45px 10px 20px;
 }
 .product-grid .productItem .bar {
     background: #9CC967;
@@ -3802,4 +3808,9 @@ select[size] {
 }
 #info-size tr th{
     color: #777777;
+}
+#storeMap #map {
+    height:350px;
+    position:relative;
+    border-bottom: 1px solid #CCCCCC;
 }
