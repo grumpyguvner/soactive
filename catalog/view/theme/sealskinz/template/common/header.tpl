@@ -185,28 +185,29 @@
 
         </div>
 <script type="text/javascript">
-    $('#activity span').bind({
-             'click' : function() {
+    $(document).ready(function () {
+   
+      $('#activity').hover(
+        function () {
+            $('ul', this).fadeIn(100);
+        },
+        function () {
+            $('ul', this).fadeOut(100);       
+        }
+     );
+        $('#activity').click(
+             function() {
                 if( $('#cssmenu > ul > li > ul').is(':hidden') ) {
-                    $('#cssmenu > ul > li > ul').css('visibility','hidden'); 
+                    $('#cssmenu > ul > li > ul').css('display','inline-block'); 
                 }
                 else {
-                    $('#cssmenu > ul > li > ul').css('visibility', 'visible');
+                    $('#cssmenu > ul > li > ul').css('display', 'none');
                 }
-             },
-             'mouseout' : function() {
-                 $('#cssmenu > ul > li > ul').css('visibility','hidden');
              }
-	});
-     $('.wrap-menu').bind({   
-            'mouseover': function() {
-	        $('#cssmenu > ul > li > ul').css('visibility','visible'); 
-	    },
-	
-           'mouseout': function() {
-	        $('#cssmenu > ul > li > ul').css('visibility','hidden'); 
-	    }
-	});
+             
+	);
+    });
+    
      
      
 </script>

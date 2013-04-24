@@ -442,6 +442,7 @@ a:hover {
 /* banner */
 .bannerWrapper {
     position: relative;
+    font-size: 27px;
 }
 .bannerWrapper .outerContainer {
     position: absolute;
@@ -455,7 +456,6 @@ a:hover {
 .bannerWrapper .container {
     line-height: 321px;
     height: 321px;
-    font-size: 27px;
 }
 .bannerWrapper .container .innerContainer {
     width: 100%;
@@ -485,12 +485,19 @@ a:hover {
     margin-top: 0;
 }
 .bannerWrapper .innerContainer p {
-    text-shadow: 2px 2px 3px #afb4b8;
+    text-shadow: 2px 2px 3px #696D6C;
     line-height: 1.1em;
 }
 .bannerWrapper .innerContainer a {
+    background-image: url('../image/new-home-slide-show-button.png');
+    background-repeat: no-repeat;
+    background-position: left bottom;
     text-shadow: 2px 2px 3px #000000;
     line-height: 1.1em;
+    color: #74964A;
+    padding-left: 26px;
+    font-size: 24px;
+    padding-left: 26px;
 }
 .bannerWrapper .bannerRight {
     float: right;
@@ -519,15 +526,13 @@ a:hover {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 12%;
+    height: 57px;
     background: #000;
     background: rgba(0,0,0,.6);
     z-index: 3;
 }
 #myCarousel .carouselBasebarContainer .container {
     text-align: right;
-    padding-top: 5px;
-    padding-bottom: 5px;
     position: relative;
 }
 #myCarousel .carouselBasebarContainer img {
@@ -550,6 +555,7 @@ background-color: rgba(255,255,255,0.25);
 -moz-border-radius: 8px;
 border-radius: 8px;
 border: 3px solid #969674;
+cursor: pointer;
 }
 #myCarousel .carousel-indicators .active {
 border-color: #fff;
@@ -1377,15 +1383,18 @@ a.button-account:hover, input.button-account:hover {
 }
 .product-grid .productItem .name {
     height: 54px;
-    width: 245px;
-    padding: 15px 10px 0;
+    width: 100%;
+    padding: 0;
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: 5;
 }
 .product-grid .productItem .name a {
     color: #000;
     display: inline-block;
     background: rgba(255,255,255,.4);
+    padding: 15px 10px 0;
 }
 .product-grid .productItem .name a:hover {
     text-decoration: none;
@@ -2504,6 +2513,7 @@ a.button-account:hover, input.button-account:hover {
     -moz-transition: all ease .3s;
     -ms-transition: all ease .3s;
     transition: all ease .3s;
+    cursor: pointer;
 
 }
 #cssmenu ul > li > a:hover:before{
@@ -2542,7 +2552,8 @@ a.button-account:hover, input.button-account:hover {
 
 #cssmenu > ul > li > ul{
     
-    visibility: hidden;
+    display: none;
+    /*visibility: hidden;*/
     position: absolute;
     z-index: 100;
     opacity: 1;
@@ -2552,14 +2563,7 @@ a.button-account:hover, input.button-account:hover {
     -moz-box-shadow:none;
     -ms-box-shadow: none;
     box-shadow: none;
-
-}
-
-
-#cssmenu > ul > li > ul{
-
     width: 200px;
-    position: absolute;
 
 }
 

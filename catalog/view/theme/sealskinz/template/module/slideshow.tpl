@@ -70,13 +70,20 @@ if (!empty($banners)) {
                 size = settings.min;
             }
 
-            $('#myCarousel').find('.bannerWrapper').css("font-size", size + "px");
+            $('#myCarousel .bannerWrapper').css("font-size", size + "px");
             
             if ($('#myCarousel .bannerWrapper').length > 1) {
                 $('.carouselBasebarContainer .container').css("height", $('.carouselBasebarContainer').innerHeight() + "px").css("line-height", $('.carouselBasebarContainer').innerHeight() + "px");
             }
                     
             $('#myCarousel .bannerWrapper .container').height($('#myCarousel .spacer').css('height')).css('line-height',$('#myCarousel .spacer').css('height'));
+            
+            var baseBar = $('.carouselBasebarContainer').innerHeight();
+                var indicator = $('.carousel-indicators').innerHeight();
+                var indicatorPadding = baseBar - indicator;
+                if (indicatorPadding > 0) indicatorPadding = indicatorPadding / 2;
+                
+                $('#myCarousel:first .carouselBasebarContainer:first .container > ol').css("top", indicatorPadding + "px");
         }).trigger('resize');
                 
         $(window).load(function () {
