@@ -97,6 +97,8 @@ function place_pins_on_map ()
                         bounds.extend (LatLngList[i]);
                       }
                     map.fitBounds (bounds);
+                } else {
+                    map.setZoom(4);
                 }
             });
         } 
