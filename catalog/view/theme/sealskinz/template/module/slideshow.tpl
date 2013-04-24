@@ -78,12 +78,6 @@ if (!empty($banners)) {
                     
             $('#myCarousel .bannerWrapper .container').height($('#myCarousel .spacer').innerHeight() - $('.carouselBasebarContainer').innerHeight()).css('line-height',($('#myCarousel .spacer').innerHeight()- $('.carouselBasebarContainer').innerHeight()) + "px");
             
-            var baseBar = $('.carouselBasebarContainer').innerHeight();
-                var indicator = $('.carousel-indicators').innerHeight();
-                var indicatorPadding = baseBar - indicator;
-                if (indicatorPadding > 0) indicatorPadding = indicatorPadding / 2;
-                
-                $('#myCarousel:first .carouselBasebarContainer:first .container > ol').css("top", indicatorPadding + "px");
         }).trigger('resize');
                 
         $(window).load(function () {
