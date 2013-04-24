@@ -75,27 +75,29 @@ function place_pins_on_map ()
         {
             got_pins = true;
             $.getJSON(getMarkers, function(data) {
-                var LatLngList = new Array();
-                var bounds = new google.maps.LatLngBounds ();
-                for ($i = 0; $i < data.length; $i++)
-                {
-                    var markerCoords = new google.maps.LatLng(
-                        parseFloat(data[$i].lat),
-                        parseFloat(data[$i].lon)
-                        );
-                
-                    var html = "<div class='info-blob'>" + data[$i].html + "</div>";  
-                    
-                    LatLngList[LatLngList.length] = markerCoords;
-                
-                    $('#store' + data[$i].ID).append('<p><a href="' + document.URL + '#map" onclick="GAclick(' + gmarkers.length + ');">' + text_view_on_map + '</a></p>');
-                    var marker = addMarker(html, markerCoords);
+                if (data.length) {
+                    var LatLngList = new Array();
+                    var bounds = new google.maps.LatLngBounds ();
+                    for ($i = 0; $i < data.length; $i++)
+                    {
+                        var markerCoords = new google.maps.LatLng(
+                            parseFloat(data[$i].lat),
+                            parseFloat(data[$i].lon)
+                            );
+
+                        var html = "<div class='info-blob'>" + data[$i].html + "</div>";  
+
+                        LatLngList[LatLngList.length] = markerCoords;
+
+                        $('#store' + data[$i].ID).append('<p><a href="' + document.URL + '#map" onclick="GAclick(' + gmarkers.length + ');">' + text_view_on_map + '</a></p>');
+                        var marker = addMarker(html, markerCoords);
+                    }
+                    for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
+                        //  And increase the bounds to take this point
+                        bounds.extend (LatLngList[i]);
+                      }
+                    map.fitBounds (bounds);
                 }
-                for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
-                    //  And increase the bounds to take this point
-                    bounds.extend (LatLngList[i]);
-                  }
-                map.fitBounds (bounds);
             });
         } 
     }
