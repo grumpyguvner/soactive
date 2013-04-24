@@ -185,29 +185,39 @@
 
         </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+$(document).ready(function () {
    
-      $('#activity').hover(
+    $('#activity').hover(
+          function () {
+              $('ul', this).fadeIn(100);
+          },
+          function () {
+              $('ul', this).fadeOut(100);       
+          }
+    );
+        
+    $('.wrap-menu').click(
+         function() {
+            if( $('#cssmenu > ul > li > ul').is(':hidden') ) {
+                $('#cssmenu > ul > li > ul').css('display','inline-block'); 
+            }
+            else {
+                $('#cssmenu > ul > li > ul').css('display', 'none');
+            }
+         }
+    );
+        
+    $('#activity').mouseover(
         function () {
-            $('ul', this).fadeIn(100);
-        },
-        function () {
-            $('ul', this).fadeOut(100);       
+            $('#cssmenu ul > li#activity > span').css('background','#74964a');
         }
-     );
-        $('#activity').click(
-             function() {
-                if( $('#cssmenu > ul > li > ul').is(':hidden') ) {
-                    $('#cssmenu > ul > li > ul').css('display','inline-block'); 
-                }
-                else {
-                    $('#cssmenu > ul > li > ul').css('display', 'none');
-                }
-             }
-             
-	);
-    });
-    
-     
-     
+    );
+        
+    $('#activity').mouseout(
+        function () {
+            $('#cssmenu ul > li#activity > span').css('background','none');
+        }
+    );
+        
+});
 </script>

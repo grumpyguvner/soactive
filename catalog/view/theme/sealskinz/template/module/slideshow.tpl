@@ -76,7 +76,7 @@ if (!empty($banners)) {
                 $('.carouselBasebarContainer .container').css("height", $('.carouselBasebarContainer').innerHeight() + "px").css("line-height", $('.carouselBasebarContainer').innerHeight() + "px");
             }
                     
-            $('#myCarousel .bannerWrapper .container').height($('#myCarousel .spacer').css('height')).css('line-height',$('#myCarousel .spacer').css('height'));
+            $('#myCarousel .bannerWrapper .container').height($('#myCarousel .spacer').innerHeight() - $('.carouselBasebarContainer').innerHeight()).css('line-height',($('#myCarousel .spacer').innerHeight()- $('.carouselBasebarContainer').innerHeight()) + "px");
             
             var baseBar = $('.carouselBasebarContainer').innerHeight();
                 var indicator = $('.carousel-indicators').innerHeight();
