@@ -34,6 +34,12 @@ class ModelLocalisationTaxRate extends Model {
 		
 		return $query->row;
 	}
+	
+	public function getTaxRateByName($tax_rate) {
+		$query = $this->db->query("SELECT tr.tax_rate_id, tr.name AS name, tr.rate, tr.type, tr.geo_zone_id, gz.name AS geo_zone, tr.date_added, tr.date_modified FROM " . DB_PREFIX . "tax_rate tr LEFT JOIN " . DB_PREFIX . "geo_zone gz ON (tr.geo_zone_id = gz.geo_zone_id) WHERE tr.name = '" . $this->db->escape($tax_rate) . "'");
+		
+		return $query->row;
+	}
 
 	public function getTaxRates($data = array()) {
 		$sql = "SELECT tr.tax_rate_id, tr.name AS name, tr.rate, tr.type, gz.name AS geo_zone, tr.date_added, tr.date_modified FROM " . DB_PREFIX . "tax_rate tr LEFT JOIN " . DB_PREFIX . "geo_zone gz ON (tr.geo_zone_id = gz.geo_zone_id)";

@@ -7260,3 +7260,43 @@ CREATE TABLE IF NOT EXISTS `oc_news_to_store` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 DELETE FROM `oc_url_alias` WHERE `query` = "news/headlines";
 INSERT INTO `oc_url_alias` (query, keyword) VALUES ('news/headlines', 'articles-headlines');
+
+--
+-- Table structure for table `oc_sage_stock_item`
+--
+
+DROP TABLE IF EXISTS `oc_sage_stock_item`;
+CREATE TABLE `oc_sage_stock_item` (
+  `stock_item_id` int(11) NOT NULL,
+  `stock_item_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `stock_item_name` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `product_id` int(11) NOT NULL,
+  `product_option_value_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`stock_item_id`),
+  KEY `product_id` (`product_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Table structure for table `oc_sage_order`
+--
+
+DROP TABLE IF EXISTS `oc_sage_order`;
+CREATE TABLE `oc_sage_order` (
+  `sage_id` int(11) NOT NULL,
+  `sage_reference` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `sage_status` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `order_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`sage_id`),
+  KEY `order_id` (`order_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
