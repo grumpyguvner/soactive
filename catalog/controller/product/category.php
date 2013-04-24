@@ -52,8 +52,12 @@ class ControllerProductCategory extends Controller {
 
                 if ($this->category->getImage()) {
                         $this->data['thumb'] = $this->model_tool_image->resize($this->category->getImage(), $this->config->get('config_image_category_width'), $this->config->get('config_image_category_height'));
+                        $this->data['thumbW'] = $this->config->get('config_image_category_width');
+                        $this->data['thumbH'] = $this->config->get('config_image_category_height');
                 } else {
                         $this->data['thumb'] = '';
+                        $this->data['thumbW'] = 0;
+                        $this->data['thumbH'] = 0;
                 }
 									
                 $this->data['description'] = html_entity_decode($this->category->getDescription(), ENT_QUOTES, 'UTF-8');

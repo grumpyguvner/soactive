@@ -1,29 +1,37 @@
 <?php echo $header; ?>
-<div class="banner">
-    <?php
-    echo $content_top;
-    if ($thumb && $description) {
-        if ($thumb) {
-            ?>
-            <div class="image" style="position: relative;">
-                <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
-                <?php if ($description) { ?>
-                    <div class="bannerWrapper">
-                        <div class="container">
-                            <?php echo $description; ?>
-                        </div>
-                    </div>
-
-                <?php } ?>
-            </div>
-            <?php
-        }
-    }
+<?php
+echo $content_top;
+if ($thumb && $description) {
+    if ($thumb) {
     ?>
-</div>
+    <div class="bannerWrapper">
+        <img src="<?php echo $thumb; ?>" class="bannerImage" alt="<?php echo $heading_title; ?>" width="<?php echo $thumbW; ?>" height="<?php echo $thumbH; ?>" />
+        <?php if ($description) { ?>
+            <div class="outerContainer">
+                <div class="container" style="height:<?php echo $thumbH; ?>px;line-height:<?php echo $banner['height']; ?>px">
+                    <div class="innerContainer">
+                    <?php echo $description; ?>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
+    </div>
+    <?php
+    }
+}
+?>
 <script type="text/javascript">
-    if ($('.banner').length)
+    if ($('.bannerWrapper').length)
     {
+        $('.bannerWrapper').each (function () {
+            if ($(this).find('a[href]:first').length) {
+                $(this).css('cursor', 'pointer').click(function () {
+                    window.location = $(this).find('a[href]:first').attr('href');
+                    return false;
+                });
+            }
+        });
         $(window).resize(function () {
 
             var settings = {
@@ -32,7 +40,7 @@
                 "step": 50
             };
                     
-            var size = $('.banner:first').innerWidth() / settings.step;
+            var size = $('.bannerWrapper').innerWidth() / settings.step;
                         
             if(size > settings.max){
                 size = settings.max;
@@ -42,16 +50,13 @@
                 size = settings.min;
             }
 			
-            $('.banner .container > div').css("font-size", size + "px");
+            $('.bannerWrapper').css("font-size", size + "px");
+            
+            
+            $('.bannerWrapper .container').css("height", $('.bannerWrapper').innerHeight() + "px").css("line-height", $('.bannerWrapper').innerHeight() + "px");
                         
-            var bheight = $('.banner:first').innerHeight();
-            var dheight = $('.banner:first .container > div').innerHeight();
-            var padding = (bheight - dheight);
-            if (padding > 0) padding = padding / 2;
-                        
-            $('.banner:first .container > div').css("padding-top", padding + "px");
         }).trigger('resize');
-        $('.banner img').load(function () {
+        $('.bannerWrapper img').load(function () {
            $(window).trigger('resize');
         });
     }
