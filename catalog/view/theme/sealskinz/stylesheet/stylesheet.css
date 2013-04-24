@@ -775,15 +775,45 @@ table.radio tr.highlight:hover td {
 }
 .pagination {
     margin: 20px 10px;
-    line-height: 20px;
+    line-height: 19px;
 }
-.pagination .links {
+.pagination .links b {
+    background-color: #9cc967;
+    display: inline-block;
+    border: 1px solid #DDDDDD;
+    width: 19px;
+    height: 19px;
+    padding: 6px;
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    color: #FFFFFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+}
+.pagination .links a {
+    display: inline-block;
+    border: 1px solid #DDDDDD;
+    padding: 0;
+    text-decoration: none;
+    text-align: center;
+    color: #777777 !important;
+    background-repeat: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #efefef) );
+    background:-moz-linear-gradient( center top, #ffffff 5%, #efefef 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#efefef');
 }
 .pagination .links a span {
     display: inline-block;
-    width: 7px;
+    width: 19px;
     height: 19px;
-    padding: 6px 12px;
+    padding: 6px;
+    overflow: hidden;
 }
 .pagination .links a.first span {
     text-indent: -1000px;
@@ -800,35 +830,6 @@ table.radio tr.highlight:hover td {
 .pagination .links a.last span {
     text-indent: -1000px;
     background: transparent url('../image/pagination/icon-fast-forward.png') no-repeat center center;
-}
-.pagination .links a {
-    display: inline-block;
-    border: 1px solid #DDDDDD;
-    padding: 0;
-    text-decoration: none;
-    color: #777777 !important;
-    background-repeat: none;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #efefef) );
-    background:-moz-linear-gradient( center top, #ffffff 5%, #efefef 100% );
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#efefef');
-}
-.pagination .links b {
-    background-color: #9cc967;
-    display: inline-block;
-    border: 1px solid #DDDDDD;
-    width: 7px;
-    height: 19px;
-    padding: 6px 12px;
-    font-weight: normal;
-    text-decoration: none;
-    color: #FFFFFF;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-
 }
 .pagination .results {
     float: right;
@@ -3498,81 +3499,6 @@ select[size] {
     width: auto;
     display: block;
 }
-#listing {
-    margin: 0 10px 10px;
-    padding-bottom: 10px;
-    width: 964px;
-}
-#listing ul {
-    float: left;
-    margin: 0;
-    padding: 0;
-}
-#listing ul li {
-    border: 1px solid #DDDDDD;
-    color: #000000;
-    float: left;
-    height: 264px;
-    list-style: none outside none;
-    margin: 7px;
-    padding: 0;
-    width: 225px;
-}
-#listing ul li span p {
-    margin-left: -5px;
-}
-#listing ul li .sName {
-    border-bottom: 0 solid #DDDDDD;
-    display: block;
-    font-size: 18px;
-    font-weight: normal;
-    height: 45px;
-    padding: 5px;
-}
-#listing ul li .sAddress {
-    border-bottom: 0 solid #DDDDDD;
-    display: block;
-    height: 160px;
-    padding: 5px;
-}
-#listing ul li .sInfo {
-    float: left;
-    padding: 0 5px;
-}
-#listing ul li .rMore {
-    float: left;
-    padding: 0 5px;
-}
-.wrap-slocation {
-    padding-top: 10px;
-    margin-bottom: 20px;
-}
-.wrap-slocation input[type='text']{
-    width: 228px;
-    height: 17px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    border-top-width: 3px;
-    border-bottom-width: 3px;
-    margin-bottom: 0;
-}
-.wrap-slocation input[type='submit']{
-    width: 44px;
-    height: 24px;
-
-}
-.wrap-slocation select {
-    width: 100px;
-    height: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 1px;
-    padding-right: 1px;
-    border-top-width: 3px;
-    border-bottom-width: 3px;
-    border-left-width: 3px;
-    margin-bottom: 0;
-}
 .content-account {
     margin-left: 95px;
     margin-right: 60px;
@@ -3780,4 +3706,31 @@ select[size] {
     height:350px;
     position:relative;
     border-bottom: 1px solid #CCCCCC;
+}
+
+#storeContainer #locForm {
+    display: none;
+    margin: 20px;
+}
+
+#storeContainer .store {
+    width: 179px;
+    height: 239px;
+    padding: 20px;
+    border: 1px solid #DDDDDD;
+    vertical-align: top;
+    overflow: hidden;
+    margin: 0 0 20px 20px;
+    display: inline-block; zoom: 1; *display: inline;
+}
+#storeContainer .sName {
+    font-size: 16px;
+    font-weight: bold;
+}
+#storeContainer .sAddress {
+    margin-bottom: 10px;
+}
+#storeContainer .pagination {
+    margin-top: 0;
+    margin-left: 20px;
 }

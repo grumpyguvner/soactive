@@ -36,9 +36,9 @@ class ModelModuleStoreLocations extends Model {
 		return $query->rows;
 	}
 	
-	public function getTotalLocations() {
+	public function getTotalList() {
 		$query = $this->db->query("select count(*) as total from " . DB_PREFIX . "store_locations");
-		return $query->rows;
+		return $query->row['total'];
 	}
 	
 }
