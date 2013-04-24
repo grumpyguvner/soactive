@@ -3738,3 +3738,8 @@ select[size] {
     margin-top: 0;
     margin-left: 20px;
 }
+#storeContainer .no_stores {
+    margin: 20px;
+    font-weight: bold;
+    
+}

@@ -29,92 +29,93 @@
     <div class="green-bar">
         <div id="storeContainer" class="container">
             <div id="content">
-            <!--h1><?php /* echo $heading_title; */ ?></h1-->
-                <?php if (sizeof($Locations) > 0) { ?>    
-                    <div id="storeMap" class="google-maps"></div>
-                    <div id="locForm">
-                        <form class="form-inline" action="index.php" method="get">
+            <!--h1><?php /* echo $heading_title; */ ?></h1--> 
+                <div id="storeMap" class="google-maps"></div>
+                <div id="locForm">
+                    <form class="form-inline" action="index.php" method="get">
 
-                            <?php echo $store_loc_txt_add; ?>&nbsp;
-                            <input type="hidden" name="route" value="common/store_locations" />
-                            <input type="hidden" id="lat" name="lat" disabled="disabled" value="" />
-                            <input type="hidden" id="lon" name="lon" disabled="disabled" value="" />
-                            <input type="text" name="address" id="address" size="80" value="<?php echo $address; ?>" />&nbsp;
-                            <?php echo $store_loc_radius; ?>&nbsp;
-                            <select id="distance" name="distance" >
-                                <option value="50" <?php echo ($distance == '50') ? 'selected' : ''; ?> >50 Miles</option>
-                                <option value="100" <?php echo ($distance == '100') ? 'selected' : ''; ?> >100 Miles</option>
-                                <option value="150" <?php echo ($distance == '150') ? 'selected' : ''; ?> >150 Miles</option>
-                                <option value="200" <?php echo ($distance == '200') ? 'selected' : ''; ?> >200 Miles</option>
-                                <option value="500" <?php echo ($distance == '500') ? 'selected' : ''; ?> >500 Miles</option>
-                            </select>
-                            <button type="submit" class="btn"><?php echo $store_loc_find_store; ?></button>
-                        </form>
-                    </div>
-                    <script language="javascript">
-                        var get_pins = true;
-                        function findPostcode(address) {
-                            geocoder.geocode( {
-                                'address': address
-                            }, function(results, status) {
-                                if (status == google.maps.GeocoderStatus.OK) {
-                                    $('#lat').attr('disabled', false);
-                                    $('#lon').attr('disabled', false);
-                                    $('#lat').attr('value', results[0].geometry.location.lat());
-                                    $('#lon').attr('value', results[0].geometry.location.lng());
-                                } else {
-                                    geocoder = '';
-                                }
-                                $('#locForm form').trigger('submit');
-                            });
-                        }
+                        <?php echo $store_loc_txt_add; ?>&nbsp;
+                        <input type="hidden" name="route" value="common/store_locations" />
+                        <input type="hidden" id="lat" name="lat" disabled="disabled" value="" />
+                        <input type="hidden" id="lon" name="lon" disabled="disabled" value="" />
+                        <input type="text" name="address" id="address" size="80" value="<?php echo $address; ?>" />&nbsp;
+                        <?php echo $store_loc_radius; ?>&nbsp;
+                        <select id="distance" name="distance" >
+                            <option value="50" <?php echo ($distance == '50') ? 'selected' : ''; ?> >50 Miles</option>
+                            <option value="100" <?php echo ($distance == '100') ? 'selected' : ''; ?> >100 Miles</option>
+                            <option value="150" <?php echo ($distance == '150') ? 'selected' : ''; ?> >150 Miles</option>
+                            <option value="200" <?php echo ($distance == '200') ? 'selected' : ''; ?> >200 Miles</option>
+                            <option value="500" <?php echo ($distance == '500') ? 'selected' : ''; ?> >500 Miles</option>
+                        </select>
+                        <button type="submit" class="btn"><?php echo $store_loc_find_store; ?></button>
+                    </form>
+                </div>
+                <script language="javascript">
+                    var get_pins = true;
+                    function findPostcode(address) {
+                        geocoder.geocode( {
+                            'address': address
+                        }, function(results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                $('#lat').attr('disabled', false);
+                                $('#lon').attr('disabled', false);
+                                $('#lat').attr('value', results[0].geometry.location.lat());
+                                $('#lon').attr('value', results[0].geometry.location.lng());
+                            } else {
+                                geocoder = '';
+                            }
+                            $('#locForm form').trigger('submit');
+                        });
+                    }
                                         
-                        function detectLocation() {
-                            get_pins = false;
-                            if($('#address').attr('value') == '') {
-                                if (navigator.geolocation) {
-                                    navigator.geolocation.getCurrentPosition(detectionSuccess, noFound, {maximumAge:60000, timeout:5000});
-                                }
+                    function detectLocation() {
+                        get_pins = false;
+                        if($('#address').attr('value') == '') {
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(detectionSuccess, noFound, {maximumAge:60000, timeout:5000});
                             }
                         }
+                    }
                                 	
-                        function detectionSuccess(position) {
-                            var lat = position.coords.latitude;
-                            var lng = position.coords.longitude;
-                            $('#lat').attr('disabled', false);
-                            $('#lon').attr('disabled', false);
-                            $('#lat').attr('value', lat);
-                            $('#lon').attr('value', lng);
-                            $('#locForm form').trigger('submit');
-                        }
+                    function detectionSuccess(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        $('#lat').attr('disabled', false);
+                        $('#lon').attr('disabled', false);
+                        $('#lat').attr('value', lat);
+                        $('#lon').attr('value', lng);
+                        $('#locForm form').trigger('submit');
+                    }
                         
-                        $('#locForm form select').change(function () {
-                            $('#locForm form').trigger('submit');
-                        });
+                    $('#locForm form select').change(function () {
+                        $('#locForm form').trigger('submit');
+                    });
                             
-                        $('#locForm form').submit(function  () {
-                            $('#lat').attr('disabled', false);
-                            $('#lon').attr('disabled', false);
-                            if (typeof geocoder != 'undefined' && geocoder != '')
+                    $('#locForm form').submit(function  () {
+                        $('#lat').attr('disabled', false);
+                        $('#lon').attr('disabled', false);
+                        if (typeof geocoder != 'undefined' && geocoder != '')
+                        {
+                            if (!$('#lat').val() && !$('#lat').val() && $('#address').val())
                             {
-                                if (!$('#lat').val() && !$('#lat').val() && $('#address').val())
-                                {
-                                    findPostcode($('#address').val());
-                                    return false;
-                                }
+                                findPostcode($('#address').val());
+                                return false;
                             }
-                        });
-                                	
-                        function noFound() {
-                            get_pins = true;
-                            place_pins_on_map();
                         }
+                    });
+                                	
+                    function noFound() {
+                        get_pins = true;
+                        place_pins_on_map();
+                    }
                                                
-                        <?php echo $detectLoc; ?>
-                                        
-                                        
-                        $('#locForm').show();
-                    </script>
+                    <?php echo $detectLoc; ?>
+
+
+                    $('#locForm').show();
+                </script>
+
+                <?php if (sizeof($Locations) > 0) { ?>   
                     <div class="stores">  
                         <?php foreach ($Locations as $sLocation) {
                             ?><div id="store<?php echo $sLocation['ID'] ?>" class="store">
@@ -136,7 +137,7 @@
                                         <a href="http://<?php echo $sLocation['Website']; ?>" target="_blank"><?php echo $sLocation['Website']; ?></a><br>
                                     <?php } ?></p>
                             </div><?php }
-                        ?>
+                                ?>
                     </div>
                     <div class="pagination"><?php echo $pagination; ?></div>
                     <?php
@@ -167,7 +168,7 @@ if (isset($map_start_address) && $map_start_address) {
     <?php
 }
 ?>
-var getMarkers = '<?php echo html_entity_decode($this->data['ajax_url']); ?>';
+    var getMarkers = '<?php echo html_entity_decode($this->data['ajax_url']); ?>';
     var text_view_on_map = 'View on map';
     $("#storeMap").append('<div id="map" class="google-maps" />');
 </script>
