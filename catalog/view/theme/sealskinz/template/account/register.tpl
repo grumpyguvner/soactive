@@ -97,7 +97,7 @@
                                                         <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
                                                     <?php } ?>
                                                 <?php } ?>
-                                            </select>
+                                            </select><br >
                                             <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
                                             <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
                                             <?php if ($error_postcode_lookup) { ?>
@@ -124,7 +124,7 @@
                                                     }
                                                 }
                                                 ?>
-                                            </select>
+                                            </select><br >
                                             <button class="btn" name="address_select" type="submit"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                                         </div>
                                     </div>
