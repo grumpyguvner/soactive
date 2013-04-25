@@ -338,6 +338,8 @@
     </div>
 </div>
 <script type="text/javascript"><!--
+    $('.postcodeAnywhereContainer').postcodeAnywhere();
+    
     $('input[name=\'customer_group_id\']:checked').live('change', function() {
         var customer_group = [];
 	

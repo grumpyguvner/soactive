@@ -1,74 +1,88 @@
-$(document).ready(function() {
-    $('.postcodeAnywhereContainer .paLookup').css('display', 'block');
-    $('.postcodeAnywhereContainer .paAddress').css('display', 'none');
+(function( $ ){
+    $.fn.postcodeAnywhere = function() {
+        if ($(this).find('.paLookup').length)
+        {
+            $(this).find('.paLookup').show();
+            $(this).find('.paAddress').hide();
+            if ($(this).is('.paCheckout'))
+            {
+               $(this).find('.paAddress button[name=lookup]').show();
+            }
+        }
     
-    $('.postcodeAnywhereContainer').on('click','button[name=lookup]', function () {
-        var paContainer = $(this).parents('.postcodeAnywhereContainer');
-        $.ajax({
-            url: 'index.php?route=module/postcode_anywhere/postcode&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&postcode=' + encodeURIComponent(paContainer.find('input[name=postcode_lookup]').val()),
-            dataType: 'json',
-            beforeSend: function() {
-                $(this).after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-            },
-            complete: function() {
-                $('.wait').remove();
-            },			
-            success: function(json) {
-                html = '';
+        $(this).on('click','button[name=lookup]', function () {
+            var paContainer = $(this).parents('.postcodeAnywhereContainer');
+            $.ajax({
+                url: 'index.php?route=module/postcode_anywhere/postcode&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&postcode=' + encodeURIComponent(paContainer.find('input[name=postcode_lookup]').val()),
+                dataType: 'json',
+                beforeSend: function() {
+                    $(this).after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+                },
+                complete: function() {
+                    $('.wait').remove();
+                },			
+                success: function(json) {
+                    html = '';
 
-                if (json['addresses'] != '') {
-                    for (i = 0; i < json['addresses'].length; i++) {
-                        html += '<option value="' + json['addresses'][i]['value'] + '"';
-
-                        html += '>' + json['addresses'][i]['text'] + '</option>';
+                    if (json['addresses'] != '') {
+                        paSelect = paContainer.find('select[name=\'address_dropdown\']');
+                        for (i = 0; i < json['addresses'].length; i++) {
+                            var option = $('<option/>');
+                            option.attr({
+                                'value': json['addresses'][i]['value']
+                            }).text(json['addresses'][i]['text']);
+                            paSelect.append(option);
+                        }
+                        selectSize = (paSelect.find('option').length > 9) ? 10 : paSelect.find('option').length;
+                        paSelect.attr('size', selectSize);
+                        paContainer.find('.paSelect').show();
                     }
-                    selectSize = (json['addresses'].length > 9) ? 10 : json['addresses'].length;
-                    paContainer.find('select[name=\'address_dropdown\']').attr('size', selectSize);
-                    paContainer.find('.paSelect').show();
-                }
-                paContainer.find('select[name=\'address_dropdown\']').html(html);
                         
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+            return false;
         });
-        return false;
-    });
     
-    $('.postcodeAnywhereContainer').on('click','button[name=address_select]', function () {
-        var paContainer = $(this).parents('.postcodeAnywhereContainer');
-        $.ajax({
-            url: 'index.php?route=module/postcode_anywhere/address&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&address=' + encodeURIComponent(paContainer.find('select[name=address_dropdown]').val()),
-            dataType: 'json',
-            beforeSend: function() {
-                $(this).after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-            },
-            complete: function() {
-                $('.wait').remove();
-            },			
-            success: function(json) {
-                if (json['address'] != '') {
+        $(this).on('click','button[name=address_select]', function () {
+            var paContainer = $(this).parents('.postcodeAnywhereContainer');
+            $.ajax({
+                url: 'index.php?route=module/postcode_anywhere/address&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&address=' + encodeURIComponent(paContainer.find('select[name=address_dropdown]').val()),
+                dataType: 'json',
+                beforeSend: function() {
+                    $(this).after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+                },
+                complete: function() {
+                    $('.wait').remove();
+                },			
+                success: function(json) {
+                    if (json['address'] != '') {
                     
-                    paContainer.find('input[name=\'company\']').val(json['address']['company']);
-                    paContainer.find('input[name=\'address_1\']').val(json['address']['address_1']);
-                    paContainer.find('input[name=\'address_2\']').val(json['address']['address_2']);
-                    paContainer.find('input[name=\'postcode\']').val(json['address']['postcode']);
-                    paContainer.find('input[name=\'city\']').val(json['address']['city']);
-                    paContainer.find('select[name=\'zone_id\']').val(json['address']['zone_id']);
-                    paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']);
-                    paContainer.find('.paLookup').hide();
-                    paContainer.find('.paSelect').hide();
-                    paContainer.find('.paAddress').show();
-                }
+                        paContainer.find('input[name=\'company\']').val(json['address']['company']);
+                        paContainer.find('input[name=\'address_1\']').val(json['address']['address_1']);
+                        paContainer.find('input[name=\'address_2\']').val(json['address']['address_2']);
+                        paContainer.find('input[name=\'postcode\']').val(json['address']['postcode']);
+                        paContainer.find('input[name=\'city\']').val(json['address']['city']);
+                        paContainer.find('select[name=\'zone_id\']').val(json['address']['zone_id']);
+                        paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']);
+                        paContainer.find('.paLookup').hide();
+                        paContainer.find('.paSelect').hide();
+                        paContainer.find('.paAddress').show();
+                    }
                         
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-            }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                //alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+            return false;
         });
-        return false;
-    });
+    }; 
+})( jQuery );
+
+$(document).ready(function() {
     
     /* Search */
     $('.button-search').bind('click', function() {

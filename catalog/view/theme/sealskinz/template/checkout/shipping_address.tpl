@@ -22,7 +22,7 @@
 <div class="row"> 
     <div class="span10">
         <div id="shipping-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
-            <div class="postcodeAnywhereContainer paCheckout">
+            <div id="shippingPostcodeAnywhere" class="postcodeAnywhereContainer paCheckout">
                 <?php
                 if ($use_postcode_anywhere) {
                     ?>
@@ -37,7 +37,7 @@
                                             <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
                                         <?php } ?>
                                     <?php } ?>
-                                </select>
+                                </select><br />
 
                                 <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
                                 <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
@@ -63,7 +63,7 @@
                                         }
                                     }
                                     ?>
-                                </select>
+                                </select><br />
                                 <button class="btn" name="address_select" type="button"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                             </div>
                         </div>
@@ -168,6 +168,8 @@
 </div>
 
 <script type="text/javascript"><!--
+    $('#shippingPostcodeAnywhere').postcodeAnywhere();
+    
     $('#shipping-address input[name=\'shipping_address\']').live('change', function() {
         if (this.value == 'new') {
             $('#shipping-existing').hide();

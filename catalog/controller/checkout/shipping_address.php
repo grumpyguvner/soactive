@@ -11,6 +11,20 @@ class ControllerCheckoutShippingAddress extends Controller {
                 $this->data['entry_select_address'] = $this->language->get('entry_select_address');
                 $this->data['button_find_address'] = $this->language->get('button_find_address');
                 $this->data['button_select_address'] = $this->language->get('button_select_address');
+                
+                $this->data['use_postcode_anywhere'] = $this->model_module_postcode_anywhere->isAvailable();
+
+                if (isset($this->request->post['postcode_lookup'])) {
+                    $this->data['postcode_lookup'] = $this->request->post['postcode_lookup'];
+                } else {
+                    $this->data['postcode_lookup'] = '';
+                }
+
+                if (isset($this->request->post['postcode_lookup_country_id'])) {
+                    $this->data['postcode_lookup_country_id'] = $this->request->post['postcode_lookup_country_id'];
+                } else {
+                    $this->data['postcode_lookup_country_id'] = $this->config->get('config_country_id');
+                }
 		
 		$this->data['text_address_existing'] = $this->language->get('text_address_existing');
 		$this->data['text_address_new'] = $this->language->get('text_address_new');
@@ -60,20 +74,6 @@ class ControllerCheckoutShippingAddress extends Controller {
 		$this->load->model('localisation/country');
 		
 		$this->data['countries'] = $this->model_localisation_country->getCountries();
-                
-                $this->data['use_postcode_anywhere'] = $this->model_module_postcode_anywhere->isAvailable();
-
-                if (isset($this->request->post['postcode_lookup'])) {
-                    $this->data['postcode_lookup'] = $this->request->post['postcode_lookup'];
-                } else {
-                    $this->data['postcode_lookup'] = '';
-                }
-
-                if (isset($this->request->post['postcode_lookup_country_id'])) {
-                    $this->data['postcode_lookup_country_id'] = $this->request->post['postcode_lookup_country_id'];
-                } else {
-                    $this->data['postcode_lookup_country_id'] = $this->config->get('config_country_id');
-                }
 
                 // $this->data['paAddresses'] set in validate
 

@@ -3677,19 +3677,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     display: none;
 }
 
-.postcodeAnywhereContainer.paCheckout .paLookup
-{
-    display: block;
-}
-.postcodeAnywhereContainer.paCheckout .paAddress button[name=lookup]
-{
-    display: block;
-}
-.postcodeAnywhereContainer.paCheckout .paAddress
-{
-    display: none;
-}
-
 .postcodeAnywhereContainer .btn {
     margin-bottom: 10px;
 }

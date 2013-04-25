@@ -63,7 +63,7 @@
 <div id="right" class="half">
     <div class="left" style="border-right: none;">
         <h2><?php echo $text_your_address; ?></h2>
-        <div class="postcodeAnywhereContainer paCheckout">
+        <div id="registerPostcodeAnywhere" class="postcodeAnywhereContainer paCheckout">
             <?php
             if ($use_postcode_anywhere) {
                 ?>
@@ -78,7 +78,7 @@
                                         <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
                                     <?php } ?>
                                 <?php } ?>
-                            </select>
+                            </select><br />
 
                             <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
                             <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
@@ -104,7 +104,7 @@
                                     }
                                 }
                                 ?>
-                            </select>
+                            </select><br />
                             <button class="btn" name="address_select" type="button"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                         </div>
                     </div>
@@ -238,6 +238,8 @@
     </div>
 <?php } ?>
 <script type="text/javascript"><!--
+    $('#registerPostcodeAnywhere').postcodeAnywhere();
+
     $('#payment-address input[name=\'customer_group_id\']:checked').live('change', function() {
         var customer_group = [];
 	
