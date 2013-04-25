@@ -3748,3 +3748,20 @@ select[size] {
     font-weight: bold;
     
 }
+
+.postcodeAnywhereContainer .paLookup, .postcodeAnywhereContainer .paSelect
+{
+    display: none;
+}
+.postcodeAnywhereContainer .paAddress button[name=lookup]
+{
+    display: none;
+}
+
+.postcodeAnywhereContainer .btn {
+    margin-bottom: 10px;
+}
+.postcodeAnywhereContainer select[size] {
+    width: auto;
+    display: block;
+}

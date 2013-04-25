@@ -178,6 +178,7 @@ class PostcodeAnywhere {
 
         $this->error[] = array('code' => $error,
             'description' => $description);
+        
     }
 
 }
