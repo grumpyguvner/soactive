@@ -56,10 +56,10 @@
         DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
         </script>
         <![endif]-->
-        <?php echo $google_analytics; ?>
+        
     </head>
     <body>
-
+        <?php echo $google_analytics; ?>
         <div id="header">
             <div id="background">
                 <div class="container">
