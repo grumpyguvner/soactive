@@ -2961,7 +2961,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: #999999;
 }
 #description-info table {
-    width: 769px;
+    width: 100%;
 }
 .contact-name {
     width: 281px;
