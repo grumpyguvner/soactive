@@ -15,6 +15,7 @@ class ControllerAccountRegister extends Controller {
 
         $this->load->model('account/customer');
         
+        $this->language->load('module/postcode_anywhere');
         $this->load->model('module/postcode_anywhere');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -71,7 +72,6 @@ class ControllerAccountRegister extends Controller {
         $this->data['text_no'] = $this->language->get('text_no');
         $this->data['text_select'] = $this->language->get('text_select');
         $this->data['text_none'] = $this->language->get('text_none');
-        $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
 
         $this->data['entry_firstname'] = $this->language->get('entry_firstname');
         $this->data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -91,14 +91,13 @@ class ControllerAccountRegister extends Controller {
         $this->data['entry_newsletter'] = $this->language->get('entry_newsletter');
         $this->data['entry_password'] = $this->language->get('entry_password');
         $this->data['entry_confirm'] = $this->language->get('entry_confirm');
-        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
-        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
-
-        $this->data['button_find_address'] = $this->language->get('button_find_address');
-        $this->data['button_select_address'] = $this->language->get('button_select_address');
         $this->data['button_continue'] = $this->language->get('button_continue');
         
-        
+        $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
+        $this->data['entry_search_address'] = $this->language->get('entry_search_address');
+        $this->data['entry_select_address'] = $this->language->get('entry_select_address');
+        $this->data['button_find_address'] = $this->language->get('button_find_address');
+        $this->data['button_select_address'] = $this->language->get('button_select_address');
 
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
@@ -484,7 +483,7 @@ class ControllerAccountRegister extends Controller {
 
         if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
             $this->error['address_1'] = $this->language->get('error_address_1');
-            $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses');
+            $this->error['postcode_lookup'] = $this->language->get('error_postcode');
         }
 
         if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
@@ -498,7 +497,7 @@ class ControllerAccountRegister extends Controller {
         if ($country_info) {
             if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
                 $this->error['postcode'] = $this->language->get('error_postcode');
-                $this->error['postcode_lookup'] = $this->language->get('error_postcode_lookup_noaddresses');
+                $this->error['postcode_lookup'] = $this->language->get('error_postcode');
             }
 
             // VAT Validation

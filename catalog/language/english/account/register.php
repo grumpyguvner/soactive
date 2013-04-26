@@ -12,7 +12,6 @@ $_['text_your_address']    = 'Your Address';
 $_['text_newsletter']      = 'Newsletter';
 $_['text_your_password']   = 'Your Password';
 $_['text_agree']           = 'I have read and agree to the <a class="colorbox" href="%s" alt="%s"><b>%s</b></a>';
-$_['text_enter_manually']  = 'Enter Address Manually';
 
 // Entry
 $_['entry_firstname']      = 'First Name:';
@@ -33,8 +32,6 @@ $_['entry_zone']           = 'Region / State:';
 $_['entry_newsletter']     = 'Subscribe:';
 $_['entry_password']       = 'Password:';
 $_['entry_confirm']        = 'Password Confirm:';
-$_['entry_search_address'] = 'Search Address:';
-$_['entry_select_address'] = 'Select Address:';
 
 // Error
 $_['error_exists']         = 'Warning: E-Mail Address is already registered!';
@@ -54,7 +51,4 @@ $_['error_country']        = 'Please select a country!';
 $_['error_zone']           = 'Please select a region / state!';
 $_['error_agree']          = 'Warning: You must agree to the %s!';
 
-$_['error_postcode_lookup_empty']         = 'Please enter a postcode';
-$_['error_postcode_lookup_noaddresses']   = 'No addresses have been found';
-$_['error_address_lookup_empty']          = 'Please select an address';
 ?>

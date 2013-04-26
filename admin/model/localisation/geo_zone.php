@@ -40,6 +40,12 @@ class ModelLocalisationGeoZone extends Model {
 		
 		return $query->row;
 	}
+	
+	public function getGeoZoneByName($geo_zone) {
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "geo_zone WHERE name = '" . $this->db->escape($geo_zone) . "'");
+		
+		return $query->row;
+	}
 
 	public function getGeoZones($data = array()) {
 		if ($data) {

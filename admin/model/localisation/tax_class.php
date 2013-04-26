@@ -40,6 +40,12 @@ class ModelLocalisationTaxClass extends Model {
 		
 		return $query->row;
 	}
+	
+	public function getTaxClassByName($tax_class) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "tax_class WHERE title = '" . $this->db->escape($tax_class) . "'");
+		
+		return $query->row;
+	}
 
 	public function getTaxClasses($data = array()) {
     	if ($data) {

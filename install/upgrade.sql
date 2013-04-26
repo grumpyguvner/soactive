@@ -407,7 +407,41 @@ ALTER TABLE `oc_information_description` ADD `meta_title` varchar(255) COLLATE u
 ALTER TABLE `oc_information_description` ADD `meta_description` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_title`;
 ALTER TABLE `oc_information_description` ADD `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_description`;
 
+#### Start 1.5.4:BC1.2.1
+
+DROP TABLE IF EXISTS `oc_sage_stock_item`;
+CREATE TABLE `oc_sage_stock_item` (
+  `stock_item_id` int(11) NOT NULL,
+  `stock_item_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `stock_item_name` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `product_id` int(11) NOT NULL,
+  `product_option_value_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`stock_item_id`),
+  KEY `product_id` (`product_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `oc_sage_order`;
+CREATE TABLE `oc_sage_order` (
+  `sage_id` int(11) NOT NULL,
+  `sage_reference` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `sage_status` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `order_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`sage_id`),
+  KEY `order_id` (`order_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
 #### Start 1.5.4:BC1.2.2
 
 ALTER TABLE `oc_category` ADD `googlebase_text` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `date_modified`;
 ALTER TABLE `oc_category` ADD `googlebase_xml` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `googlebase_text`;
+
