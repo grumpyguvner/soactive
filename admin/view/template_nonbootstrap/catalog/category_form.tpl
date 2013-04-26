@@ -34,7 +34,7 @@
               </tr>
               <tr>
                 <td><?php echo $entry_meta_title; ?></td>
-                <td><input type="text" name="category_description[<?php echo $language['language_id']; ?>][meta_title]" size="100" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['meta_title'] : ''; ?>" />
+                <td><input name="category_description[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset($category_description[$language['language_id']]['meta_title']) ? $category_description[$language['language_id']]['meta_title'] : ''; ?>" size="100" /></td>
               </tr>
               <tr>
                 <td><?php echo $entry_meta_description; ?></td>
@@ -66,6 +66,14 @@
                   <?php } ?>
                   <?php } ?>
                 </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_googlebase_text; ?></td>
+              <td><input name="googlebase_text" value="<?php echo $googlebase_text ?>" size="100" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_googlebase_xml; ?></td>
+              <td><input name="googlebase_xml" value="<?php echo $googlebase_xml ?>" size="100" /></td>
             </tr>
             <tr>
               <td><?php echo $entry_store; ?></td>

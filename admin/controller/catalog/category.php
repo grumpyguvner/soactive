@@ -20,11 +20,16 @@ class ControllerCatalogCategory extends Controller {
 		$this->load->model('catalog/category');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_category->addCategory($this->request->post);
+			$new_id = $this->model_catalog_category->addCategory($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
+	  
+			$url = '';
+                        
+                        //2012-06 MH Added new_id to url so that api calls can fetch id
+                        $url .= '&new_id=' . $new_id;
 			
-			$this->redirect($this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL')); 
+			$this->redirect($this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url, 'SSL')); 
 		}
 
 		$this->getForm();
@@ -162,6 +167,8 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
+		$this->data['entry_googlebase_text'] = $this->language->get('entry_googlebase_text');
+		$this->data['entry_googlebase_xml'] = $this->language->get('entry_googlebase_xml');
 		$this->data['entry_image'] = $this->language->get('entry_image');
 		$this->data['entry_top'] = $this->language->get('entry_top');
 		$this->data['entry_column'] = $this->language->get('entry_column');		
@@ -210,11 +217,11 @@ class ControllerCatalogCategory extends Controller {
 		
 		$this->data['cancel'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
 
+		$this->data['token'] = $this->session->data['token'];
+
 		if (isset($this->request->get['category_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
       		$category_info = $this->model_catalog_category->getCategory($this->request->get['category_id']);
     	}
-		
-		$this->data['token'] = $this->session->data['token'];
 		
 		$this->load->model('localisation/language');
 		
@@ -247,6 +254,22 @@ class ControllerCatalogCategory extends Controller {
 			$this->data['parent_id'] = $category_info['parent_id'];
 		} else {
 			$this->data['parent_id'] = 0;
+		}
+
+		if (isset($this->request->post['googlebase_text'])) {
+			$this->data['googlebase_text'] = $this->request->post['googlebase_text'];
+		} elseif (!empty($category_info)) {
+			$this->data['googlebase_text'] = $category_info['googlebase_text'];
+		} else {
+			$this->data['googlebase_text'] = '';
+		}
+
+		if (isset($this->request->post['googlebase_xml'])) {
+			$this->data['googlebase_xml'] = $this->request->post['googlebase_xml'];
+		} elseif (!empty($category_info)) {
+			$this->data['googlebase_xml'] = $category_info['googlebase_xml'];
+		} else {
+			$this->data['googlebase_xml'] = '';
 		}
 						
 		$this->load->model('setting/store');

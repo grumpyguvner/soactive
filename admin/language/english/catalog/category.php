@@ -16,11 +16,13 @@ $_['column_action']          = 'Action';
 
 // Entry
 $_['entry_name']             = 'Category Name:';
-$_['entry_meta_title'] 	 = 'Meta Title:';
+$_['entry_meta_title']       = 'Meta Page Title:';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords:';
 $_['entry_meta_description'] = 'Meta Tag Description:';
 $_['entry_description']      = 'Description:';
 $_['entry_parent']           = 'Parent Category:';
+$_['entry_googlebase_text']  = 'Google Base Category Text:';
+$_['entry_googlebase_xml']   = 'Google Base Category XML:';
 $_['entry_store']            = 'Stores:';
 $_['entry_keyword']          = 'SEO Keyword:<br /><span class="help">Do not use spaces instead replace spaces with - and make sure the keyword is globally unique.</span>';
 $_['entry_image']            = 'Image:';
