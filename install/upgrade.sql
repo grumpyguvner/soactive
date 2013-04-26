@@ -444,4 +444,3 @@ CREATE TABLE `oc_sage_order` (
 
 ALTER TABLE `oc_category` ADD `googlebase_text` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `date_modified`;
 ALTER TABLE `oc_category` ADD `googlebase_xml` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `googlebase_text`;
-
