@@ -30,6 +30,7 @@ if ($thumb && $description) {
                     window.location = $(this).find('a[href]:first').attr('href');
                     return false;
                 });
+                $(this).find('*').css('cursor', 'pointer');
             }
         });
         $(window).resize(function () {

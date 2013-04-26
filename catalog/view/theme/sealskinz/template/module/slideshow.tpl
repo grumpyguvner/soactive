@@ -50,6 +50,7 @@ if (!empty($banners)) {
                     window.location = $(this).find('a[href]:first').attr('href');
                     return false;
                 });
+                $(this).find('*').css('cursor', 'pointer');
             }
         });
         

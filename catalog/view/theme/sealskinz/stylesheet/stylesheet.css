@@ -468,6 +468,15 @@ a:hover {
 .bannerWrapper .innerContainer > div {
     width: 25em;
 }
+.bannerWrapper * {
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 .bannerWrapper .innerContainer h1 {
     color: #9dc96a;
     font-size: 2em;

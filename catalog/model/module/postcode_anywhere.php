@@ -11,7 +11,7 @@ class ModelModulePostcodeAnywhere extends Model {
     public function __construct($registry) {
         parent::__construct($registry);
 
-        $this->pa = new PostcodeAnywhere($this->config->get('postcode_anywhere_key'), $this->config->get('postcode_anywhere_account_code'), $this->config->get('postcode_anywhere_cache'), $this->config->get('postcode_anywhere_cache_expire'), &$this->paError);
+        $this->pa = new PostcodeAnywhere($this->config->get('postcode_anywhere_key'), $this->config->get('postcode_anywhere_account_code'), $this->config->get('postcode_anywhere_cache'), $this->config->get('postcode_anywhere_cache_expire'), $this->paError);
     }
 
     public function isAvailable() {

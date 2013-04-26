@@ -18,7 +18,8 @@ class ControllerCommonHeader extends Controller {
         $this->data['scripts'] = $this->document->getScripts();
         $this->data['lang'] = $this->language->get('code');
         $this->data['direction'] = $this->language->get('direction');
-        $this->data['google_analytics'] = html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8');
+        
+        $this->data['google_analytics'] = (strtolower(APPLICATION_ENV) == 'production') ? html_entity_decode($this->config->get('config_google_analytics'), ENT_QUOTES, 'UTF-8') : '';
 
         // Whos Online
         if ($this->config->get('config_customer_online')) {
