@@ -32,6 +32,29 @@
             <label class="control-label"><?php echo $entry_data_feed; ?></label>
             <div class="controls"><textarea class="span6 i-xxlarge" rows="5"><?php echo $data_feed; ?></textarea></div>
           </div>
+            
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_products; ?></label>
+            <div class="controls">
+                <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                    <?php echo p3html::tb_bool_buttons_radio($this->language, 'google_sitemap_products', $google_sitemap_products); ?>
+                <?php } else { ?>
+                    <?php echo p3html::tb_bool_radio_buttons($this->language, 'google_sitemap_products', $google_sitemap_products); ?>
+                <?php } ?>
+            </div>
+        </div>
+          
+         <div class="control-group">
+            <label class="control-label"><?php echo $entry_products_category; ?></label>
+            <div class="controls">
+                <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                    <?php echo p3html::tb_bool_buttons_radio($this->language, 'google_sitemap_products_category', $google_sitemap_products_category); ?>
+                <?php } else { ?>
+                    <?php echo p3html::tb_bool_radio_buttons($this->language, 'google_sitemap_products_category', $google_sitemap_products_category); ?>
+                <?php } ?>
+            </div>
+        </div>
+            
         </div>
       </form>
 

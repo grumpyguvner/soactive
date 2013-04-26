@@ -406,3 +406,8 @@ ALTER TABLE `oc_news_description` ADD `meta_title` varchar(255) COLLATE utf8_bin
 ALTER TABLE `oc_information_description` ADD `meta_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `description`;
 ALTER TABLE `oc_information_description` ADD `meta_description` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_title`;
 ALTER TABLE `oc_information_description` ADD `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' AFTER `meta_description`;
+
+#### Start 1.5.4:BC1.2.2
+
+ALTER TABLE `oc_category` ADD `googlebase_text` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `date_modified`;
+ALTER TABLE `oc_category` ADD `googlebase_xml` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `googlebase_text`;

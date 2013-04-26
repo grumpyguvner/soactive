@@ -15,10 +15,19 @@ class ControllerFeedGoogleBase extends Controller {
 			
 			$this->load->model('tool/image');
 			
+                        $exclude_products = $this->config->get('google_base_product_excluded');
+                        
+                        if (!is_array($exclude_products)) {
+                            $exclude_products = array();
+                        }
+                        
 			$products = $this->model_catalog_product->getProducts();
 			
 			foreach ($products as $product) {
-				if ($product['description']) {
+                            if(!in_array($product['product_id'], $exclude_products)) {
+				$googlebase = $this->model_catalog_product->getProductGoogleBaseCategories($product['product_id']);
+                                
+				if ($product['description'] && $googlebase) {
 					$output .= '<item>';
 					$output .= '<title>' . $product['name'] . '</title>';
 					$output .= '<link>' . $this->url->link('product/product', 'product_id=' . $product['product_id']) . '</link>';
@@ -48,9 +57,11 @@ class ControllerFeedGoogleBase extends Controller {
                     } else {
                         $output .= '<g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency, false, false) . '</g:price>';
                     }
+                    
+                    $output .= '<g:google_product_category>' . $googlebase['googlebase_xml'] . '</g:google_product_category>';
 			   
 					$categories = $this->model_catalog_product->getCategories($product['product_id']);
-					
+                    
 					foreach ($categories as $category) {
 						$path = $this->getPath($category['category_id']);
 						
@@ -79,6 +90,7 @@ class ControllerFeedGoogleBase extends Controller {
 					$output .= '<g:availability>' . ($product['quantity'] ? 'in stock' : 'out of stock') . '</g:availability>';
 					$output .= '</item>';
 				}
+                        }
 			}
 			
 			$output .= '</channel>'; 

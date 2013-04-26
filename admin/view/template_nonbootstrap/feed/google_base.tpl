@@ -32,9 +32,65 @@
             <td><?php echo $entry_data_feed; ?></td>
             <td><textarea cols="40" rows="5"><?php echo $data_feed; ?></textarea></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_excluded; ?></td>
+            <td><input type="text" name="excluded" value="" /></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><div id="products_excluded" class="scrollbox">
+                <?php $class = 'odd'; ?>
+                <?php foreach ($products_excluded as $product_excluded) { ?>
+                <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                <div id="product_excluded<?php echo $product_excluded['product_id']; ?>" class="<?php echo $class; ?>"> <?php echo $product_excluded['name']; ?><img src="view/image/delete.png" />
+                  <input type="hidden" name="google_base_product_excluded[]" value="<?php echo $product_excluded['product_id']; ?>" />
+                </div>
+                <?php } ?>
+              </div></td>
+          </tr>
         </table>
       </form>
     </div>
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--
+$('input[name=\'excluded\']').autocomplete({
+	delay: 0,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {		
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.product_id
+					}
+				}));
+			}
+		});
+		
+	}, 
+	select: function(event, ui) {
+		$('#product_excluded' + ui.item.value).remove();
+		
+		$('#products_excluded').append('<div id="product_excluded' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" /><input type="hidden" name="google_base_product_excluded[]" value="' + ui.item.value + '" /></div>');
+
+		$('#products_excluded div:odd').attr('class', 'odd');
+		$('#products_excluded div:even').attr('class', 'even');
+                
+		return false;
+	},
+	focus: function(event, ui) {
+      return false;
+   }
+});
+
+$('#products_excluded div img').live('click', function() {
+	$(this).parent().remove();
+	
+	$('#products_excluded div:odd').attr('class', 'odd');
+	$('#products_excluded div:even').attr('class', 'even');	
+});
+//--></script> 

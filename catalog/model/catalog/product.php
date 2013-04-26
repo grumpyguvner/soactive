@@ -307,6 +307,21 @@ class ModelCatalogProduct extends Model {
 	  }
 	  
 	}
+        
+        public function getProductGoogleBaseCategories($product_id) {
+
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) WHERE product_id = '" . $product_id . "' and c.googlebase_xml <> '' LIMIt 1");
+
+            if ($query->num_rows > 0) {
+
+                return $query->row;
+            } else {
+
+                return false;
+            }
+        }
+
+        
 	public function updateViewed($product_id) {
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = (viewed + 1) WHERE product_id = '" . (int)$product_id . "'");
 	}

@@ -24,12 +24,15 @@ class ControllerFeedGoogleBase extends Controller {
 		
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		$this->data['entry_data_feed'] = $this->language->get('entry_data_feed');
+                $this->data['entry_excluded'] = $this->language->get('entry_excluded');
 		
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 
 		$this->data['tab_general'] = $this->language->get('tab_general');
-
+                
+                 $this->data['token'] = $this->session->data['token'];
+                 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
 		} else {
@@ -65,7 +68,30 @@ class ControllerFeedGoogleBase extends Controller {
 		} else {
 			$this->data['google_base_status'] = $this->config->get('google_base_status');
 		}
-		
+                                		
+                if (isset($this->request->post['google_base_product_excluded'])) {
+			$product_excluded = $this->request->post['google_base_product_excluded'];
+		} elseif ($this->config->get('google_base_product_excluded')) {
+                        $product_excluded = $this->config->get('google_base_product_excluded');
+                } else {
+			$product_excluded = array();
+		}
+                
+                $this->data['products_excluded'] = array();
+                
+                $this->load->model('catalog/product');
+                
+                foreach ($product_excluded as $product_id) {
+                    $excluded_info = $this->model_catalog_product->getProduct($product_id);
+                    
+                    if ($excluded_info) {
+                        $this->data['products_excluded'][] = array(
+                            'product_id' => $excluded_info['product_id'],
+                            'name'       => $excluded_info['name']
+                    );
+                    }
+                }
+                                
 		$this->data['data_feed'] = HTTP_CATALOG . 'index.php?route=feed/google_base';
 
 		$this->template = 'feed/google_base.tpl';
