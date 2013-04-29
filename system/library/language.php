@@ -7,6 +7,7 @@ class Language {
     private $db;
     private $config;
     private $language_manager = false;
+    private $language_manager_log = false;
 
     public function __construct($directory, $registry = null) {
         
@@ -24,6 +25,13 @@ class Language {
                 $this->theme[] = $this->config->get("config_template");
             }
             $this->language_manager = ($this->config->get("language_manager_status")) ? true : false;
+            
+            $this->language_manager_log = ($this->config->get("language_manager_log")) ? true : false;
+            
+            if ($this->language_manager_log && !isset($this->session->data['language_manager']))
+            {
+                $this->request->data['language_manager'] = array();
+            }
         }
         
         $this->directory = $directory;
@@ -56,20 +64,32 @@ class Language {
         
         if ($this->language_manager)
         {
-            $sql  = "SELECT name, value "
+            $sql  = "SELECT value "
                   . "FROM `".DB_PREFIX."language_manager` "
-                  . "WHERE directory = '" . $this->db->escape($this->directory) . "' "
+                  . "WHERE application = '" . $this->db->escape(DIR_APPLICATION) . "' "
+                  . "AND directory = '" . $this->db->escape($this->directory) . "' "
                   . "AND filename = '" . $this->db->escape($filename) . "'";
             $query = $this->db->query($sql);
             if ($query->num_rows > 0)
             {
-                foreach ($query->row as $row)
+                foreach ($query->rows as $row)
                 {
-                    $this->data[$row['name']] = $row['value'];
+                    $_ = unserialize($row['value']);
+
+                    if (is_array($_))
+                    {
+                        $this->data = array_merge($this->data, $_);
+                    }
                 }
             }
         }
         
+        if ($this->language_manager_log)
+        {
+            $this->request->data['language_manager'] = array('directory' => $this->directory,
+                                                             'filename'  => $filename);
+        }
+            
         return $this->data;
     }
 }
