@@ -35,7 +35,9 @@ class ModelLocalisationLanguageManager extends Model {
                             . "   directory = '" . $this->db->escape($language_manager['directory']) . "', "
                             . "   filename = '" . $this->db->escape($language_manager['filename']) . "', "
                             . "   value = '" . $this->db->escape(serialize($data['language_manager'][$language_id]['value'])) . "'";
-                    $language_manager_id = $this->db->query($sql);
+                    $this->db->query($sql);
+                    
+                    $language_manager_id = $this->db->getLastId();
                     
                     $sql = "INSERT INTO `" . DB_PREFIX . "language_manager_to_store` "
                             . "SET language_manager_id = '" . (int) $language_manager_id . "', "
