@@ -41,11 +41,14 @@
                         <input type="text" name="address" id="address" size="80" value="<?php echo $address; ?>" />&nbsp;
                         <?php echo $store_loc_radius; ?>&nbsp;
                         <select id="distance" name="distance" >
-                            <option value="50" <?php echo ($distance == '50') ? 'selected' : ''; ?> >50 Miles</option>
-                            <option value="100" <?php echo ($distance == '100') ? 'selected' : ''; ?> >100 Miles</option>
-                            <option value="150" <?php echo ($distance == '150') ? 'selected' : ''; ?> >150 Miles</option>
-                            <option value="200" <?php echo ($distance == '200') ? 'selected' : ''; ?> >200 Miles</option>
-                            <option value="500" <?php echo ($distance == '500') ? 'selected' : ''; ?> >500 Miles</option>
+                            <option value="5" <?php echo ($distance == '5') ? 'selected' : ''; ?> >5 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="10" <?php echo ($distance == '10') ? 'selected' : ''; ?> >10 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="25" <?php echo ($distance == '25') ? 'selected' : ''; ?> >25 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="50" <?php echo ($distance == '50') ? 'selected' : ''; ?> >50 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="100" <?php echo ($distance == '100') ? 'selected' : ''; ?> >100 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="150" <?php echo ($distance == '150') ? 'selected' : ''; ?> >150 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="200" <?php echo ($distance == '200') ? 'selected' : ''; ?> >200 <?php echo $store_loc_text_miles; ?></option>
+                            <option value="500" <?php echo ($distance == '500') ? 'selected' : ''; ?> >500 <?php echo $store_loc_text_miles; ?></option>
                         </select>
                         <button type="submit" class="btn"><?php echo $store_loc_find_store; ?></button>
                     </form>

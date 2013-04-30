@@ -116,7 +116,7 @@
                                                         (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
                                                     <?php } ?></span>
                                                     <input type="hidden" id="button-cart-<?php echo $option_value['product_option_value_id']; ?>" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" />
-                                                    <a href="#" class="button button-cart">BUY</a>
+                                                    <a href="#" class="button button-cart"><?php echo $text_buy ?></a>
                                                 </label>
                                             <?php } ?>
                                         </div>
@@ -339,7 +339,7 @@
                         ?>
                         <div class="product-press">             
                             <ul class="nav nav-tabs" id="pressTab" style="margin-bottom: 0;">
-                                <li class="active"><a data-toggle="tab" href="#productPress" id="press-tab">Press</a></li>
+                                <li class="active"><a data-toggle="tab" href="#productPress" id="press-tab"><?php echo $text_press ?></a></li>
                             </ul>
                             <div class="tab-content-press" id="pressTabContent">
                                 <div id="productPress" class="tab-pane active">
@@ -380,7 +380,7 @@
                                         <?php } ?>
                                     </div>
                                     <div class="bar">
-                                        <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>">VIEW PRODUCT INFO</a>
+                                        <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>"><?php echo $text_view_product_info ?></a>
                                     </div>
                                 </div><?php }
                                     ?>

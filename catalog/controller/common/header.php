@@ -92,6 +92,9 @@ class ControllerCommonHeader extends Controller {
         $this->data['text_blog'] = $this->language->get('text_blog');
         $this->data['text_product_registration'] = $this->language->get('text_product_registration');
         $this->data['text_follow_us'] = $this->language->get('text_follow_us');
+        $this->data['text_uk'] = $this->language->get('text_uk');
+        $this->data['text_us'] = $this->language->get('text_us');
+        $this->data['text_brand_story'] = $this->language->get('text_brand_story');
 
         $this->data['home'] = $this->url->link('common/home');
         $this->data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
@@ -102,6 +105,11 @@ class ControllerCommonHeader extends Controller {
         $this->data['login'] = $this->url->link('account/login', '', 'SSL');
         $this->data['register'] = $this->url->link('account/register', '', 'SSL');
         $this->data['stockist'] = $this->url->link('common/store_locations', '', 'SSL');
+        $this->data['fb'] = $this->language->get('fb');
+        $this->data['tw'] = $this->language->get('tw');
+        $this->data['yb'] = $this->language->get('yb');
+        $this->data['pt'] = $this->language->get('pt');
+        $this->data['gp'] = $this->language->get('gp');
 
         if (isset($this->request->get['filter_name'])) {
             $this->data['filter_name'] = $this->request->get['filter_name'];

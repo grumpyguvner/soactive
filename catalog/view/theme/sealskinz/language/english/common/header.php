@@ -18,4 +18,13 @@ $_['text_free_returns']         = 'Free UK Returns';
 $_['text_blog']                 = 'Blog';
 $_['text_product_registration'] = 'Product Registration';
 $_['text_follow_us']            = 'Follow us';
+$_['text_uk']                   = 'UK';
+$_['text_us']                   = 'US';
+$_['text_brand_story']          = 'Brand Story';
+
+$_['fb']                  = '<a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a>';
+$_['tw']                  = '<a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a>';
+$_['yb']                  = '<a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a>';
+$_['pt']                  = '<a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a>';
+$_['gp']                  = '<a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a>';
 ?>

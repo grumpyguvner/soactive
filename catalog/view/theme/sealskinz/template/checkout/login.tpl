@@ -1,6 +1,6 @@
 <div class="row">
     <div class="span5">
-        <div class="left">
+        <div class="new-customer">
           <h2><?php echo $text_new_customer; ?></h2>
           <p style="color: #777777"><?php echo $text_checkout; ?></p>
           <label for="register" class="radio">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="span5">  
-        <div id="login" class="right">
+        <div id="login" class="returning-customer">
           <h2><?php echo $text_returning_customer; ?></h2>
           <p style="color: #777777"><?php echo $text_i_am_returning_customer; ?></p>
           <b><?php echo $entry_email; ?></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

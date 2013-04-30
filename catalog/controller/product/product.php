@@ -164,7 +164,10 @@ class ControllerProductProduct extends Controller {
                         $this->data['text_filter'] = $this->language->get('text_filter');
                         $this->data['text_option_details'] = $this->language->get('text_option_details');
                         $this->data['text_write_review'] = $this->language->get('text_write_review');
-			
+			$this->data['text_buy'] = $this->language->get('text_buy');
+                        $this->data['text_press'] = $this->language->get('text_press');
+                        $this->data['text_view_product_info'] = $this->language->get('text_view_product_info');
+                        
 			$this->data['entry_name'] = $this->language->get('entry_name');
 			$this->data['entry_review'] = $this->language->get('entry_review');
 			$this->data['entry_rating'] = $this->language->get('entry_rating');
