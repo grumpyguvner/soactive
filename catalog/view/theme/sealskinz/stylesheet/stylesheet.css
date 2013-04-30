@@ -1777,7 +1777,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .product-press {
     width: 212px;
-    margin-left: 20px;
+    margin-left: 18px;
 }
 #box-title {
     padding: 15px;
@@ -2264,6 +2264,9 @@ a.button-account:hover, input.button-account:hover {
     max-width: none !important;
 }
 .checkout-content .prow .pInput select {
+    max-width: 205px;
+}
+.checkout-content .form select {
     max-width: 205px;
 }
 .checkout-product table {

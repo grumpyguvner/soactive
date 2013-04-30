@@ -71,7 +71,7 @@
                     <?php
                 }
                 ?>
-                <div class="paAddress content">
+                <div class="paAddress">
                     <div class="prow">
                         <div class="pLabel">  
                             <span class="required">*</span> <?php echo $entry_firstname; ?>
