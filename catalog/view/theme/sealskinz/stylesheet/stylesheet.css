@@ -2246,6 +2246,7 @@ a.button-account:hover, input.button-account:hover {
     clear: both;
     float: right;
     text-align: right;
+    display: block;
 }
 .checkout-content .payment .buttons {
     float: none;
