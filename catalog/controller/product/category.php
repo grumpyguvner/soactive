@@ -241,6 +241,15 @@ class ControllerProductCategory extends Controller {
                         $pagination->limit = $limit;
                         $pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&page={page}' . $urlPage);
                         $this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
                        
                         $pagination2 = new Pagination();
                         $pagination2->total = $product_total;

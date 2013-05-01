@@ -28,6 +28,7 @@ class ControllerInformationInformation extends Controller {
 	  		$this->document->setTitle($information_info['meta_title'] ? $information_info['meta_title'] : $information_info['title']);
 			$this->document->setDescription($information_info['meta_description']);
 			$this->document->setKeywords($information_info['meta_keyword']);
+			$this->document->addLink($this->url->link('information/information', 'information_id=' . $information_id), 'canonical');
                         
                         
                 $this->data['seoClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($this->request->get['_route_'])));

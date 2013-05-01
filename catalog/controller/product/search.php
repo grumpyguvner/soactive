@@ -450,6 +450,15 @@ class ControllerProductSearch extends Controller {
 			
 			$this->data['pagination'] = $pagination->render();
                         
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
+                        
                         $pagination2 = new Pagination();
                         $pagination2->total = $product_total;
                         $pagination2->page = $page;

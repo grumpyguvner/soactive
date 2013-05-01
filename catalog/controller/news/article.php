@@ -76,6 +76,8 @@ class ControllerNewsArticle extends Controller {
 				$this->document->setTitle($news_info['meta_title'] ? $news_info['meta_title'] : $news_info['title']); 
 				$this->document->setDescription($news_info['meta_desc']);
                                 $this->document->setKeywords($news_info['meta_key']);
+                                
+                                $this->document->addLink($this->url->link('news/article', 'news_id=' . $this->request->get['news_id']), 'canonical');
 				
 				$this->data['breadcrumbs'][] = array(
                                     'text'      => $news_info['title'],
@@ -248,6 +250,15 @@ class ControllerNewsArticle extends Controller {
 		        $pagination->text = $this->language->get('text_pagination');
 		        $pagination->url = $this->url->link('news/article', 'news_id=' . $this->request->get['news_id'] . '&page={page}');
 			    $this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 				
 				
 				

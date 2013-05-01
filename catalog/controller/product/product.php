@@ -586,6 +586,15 @@ class ControllerProductProduct extends Controller {
 		$pagination->url = $this->url->link('product/product/review', 'product_id=' . $this->request->get['product_id'] . '&page={page}');
 			
 		$this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 		
 		$this->setTemplate('product/review.tpl');
 		
