@@ -334,6 +334,7 @@ class ControllerProductProduct extends Controller {
                             switch ($attGroup['name']){
                                 case "Product Tabs":
                                     foreach ($attGroup['attribute'] as $tab)
+                                    {
                                         if (preg_match('%^information_id=(\d+)%', $tab['text'])) {
                                             $this->load->model('catalog/information');
                                             $information_id = preg_replace('%^information_id=(\d+)%', '\\1', $tab['text']);
@@ -343,6 +344,7 @@ class ControllerProductProduct extends Controller {
                                             $text = $tab['text'];
                                         }
                                         $this->data['product_tabs'][] = array('name'=>$tab['name'],'text'=>html_entity_decode($text));
+                                    }
                                     break;
                                 default:
                                     $this->data['attribute_groups'][$attGroup['name']][] = $attGroup;

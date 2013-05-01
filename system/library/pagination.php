@@ -80,7 +80,7 @@ class Pagination {
 
             for ($i = $start; $i <= $end; $i++) {
                 if ($page == $i) {
-                    $output .= ' <b>' . $i . '</b> ';
+                    $output .= ' <strong>' . $i . '</strong> ';
                 } else {
                     $output .= ' <a href="' . str_replace('{page}', $i, $this->url) . '"><span>' . $i . '</span></a> ';
                 }
@@ -153,7 +153,7 @@ class Pagination {
 
             for ($i = $start; $i <= $end; $i++) {
                 if ($page == $i) {
-                    $output .= ' <b>' . $i . '</b> ';
+                    $output .= ' <strong>' . $i . '</strong> ';
                 } else {
                     $output .= ' <a href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a> ';
                 }
