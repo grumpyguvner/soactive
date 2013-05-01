@@ -28,65 +28,62 @@
 
 
 <div id="payment-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
-    <div id="left">
-        <div class="left" style="border-right: none;">
+    
+    <div class="left" style="border-right: none;">
             <h2><?php echo $text_personal_details ?></h2>
-            <div class="payform-left">
-                <div id="left">
+            <div class="prow">
+                <div class="pLabel">
                     <span class="required">*</span> <?php echo $entry_firstname; ?>
                 </div>
-                <div id="right">
+                <div class="pInput">
                     <input type="text" name="firstname" value="" class="large-field" />
                 </div>
             </div>
-            <div class="payform-left">
-                <div id="left">
+            <div class="prow">
+                <div class="pLabel">
                     <span class="required">*</span> <?php echo $entry_lastname; ?>
                 </div>
-                <div id="right">
+                <div class="pInput">
                     <input type="text" name="lastname" value="" class="large-field" />
                 </div>    
             </div>
-            <div class="payform-left">
-                <div id="left">
+            <div class="prow">
+                <div class="pLabel">
                     <?php echo $entry_email; ?>
                 </div>
-                <div id="right">
+                <div class="pInput">
                     <input type="text" name="email" value="" class="large-field" />
                 </div>
             </div>
-            <div class="payform-left">
-                <div id="left">
+            <div class="prow">
+                <div class="pLabel">
                     <?php echo $entry_telephone; ?>
                 </div>
-                <div id="right">
+                <div class="pInput">
                     <input type="text" name="phone" value="" class="large-field" />
                 </div>
             </div>
-            <div class="payform-left">
-                <div id="left">
+            <div class="prow">
+                <div class="pLabel">
                     <?php echo $entry_fax; ?>
                 </div>
-                <div id="right">
+                <div class="pInput">
                     <input type="text" name="fax" value="" class="large-field" />
                 </div>
             </div>
 
-        </div>
     </div>
-    <div id="right">
-        <div class="right">
+    
+    <div class="content right">
             <h2><?php echo $text_your_address ?></h2>
-
-
             <div id="paymentPostcodeAnywhere" class="postcodeAnywhereContainer paCheckout">
                 <?php
                 if ($use_postcode_anywhere) {
                     ?>
                     <div class="paLookup content">
-                        <div class="payform-right">
-                            <div id="left"><span class="paLookup_required required">*</span> <?php echo $entry_search_address; ?></div>
-                            <div id="right"><select name="postcode_lookup_country_id">
+                        <div class="prow">
+                            <div class="pLabel"><span class="paLookup_required required">*</span> <?php echo $entry_search_address; ?></div>
+                            <div class="pInput"><select name="postcode_lookup_country_id">
                                     <?php foreach ($countries as $country) { ?>
                                         <?php if ($country['country_id'] == $postcode_lookup_country_id) { ?>
                                             <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
@@ -106,10 +103,10 @@
                         </div>
                     </div>
                     <div class="paSelect content">
-                        <div class="payform-right">
-                            <div id="left"><span class="paSelect_required required">*</span> <?php echo $entry_search_address; ?></div>
-                            <div id="right">
-                                <select name="address_dropdown"<?php if ($paAddresses) echo ' size="' . (count($paAddresses) > 9 ? 10 : count($paAddresses)) . '"'; ?>>
+                        <div class="prow">
+                            <div class="pLabel"><span class="paSelect_required required">*</span> <?php echo $entry_search_address; ?></div>
+                            <div class="pInput">
+                                <select name="address_dropdown"<?php if ($paAddresses) echo ' size="' . (count($paAddresses) > 9 ? 10 : count($paAddresses)) . '"'; ?> class="pselect">
                                     <?php
                                     if ($paAddresses) {
                                         foreach ($paAddresses as $address_info) {
@@ -129,80 +126,80 @@
                 }
                 ?>
 
-                <div class="paAddress">
+                <div class="paAddress content">
 
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <?php echo $entry_company; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <input type="text" name="company" value="" class="large-field" />
                         </div>
                     </div>
                     <?php if ($company_id_display) { ?>
-                        <div class="payform-right">
-                            <div id="left">
+                        <div class="prow">
+                            <div class="pLabel">
                                 <?php if ($company_id_required) { ?>
                                     <span class="required">*</span>
                                 <?php } ?>
                                 <?php echo $entry_company_id; ?>
                                 <td></td>
                             </div>
-                            <div id="right">
+                            <div class="pInput">
                                 <input type="text" name="company_id" value="" class="large-field" />
                             </div>
                         </div>
                     <?php } ?>
                     <?php if ($tax_id_display) { ?>
-                        <div class="payform-right">
-                            <div id="left">
+                        <div class="prow">
+                            <div class="pLabel">
                                 <?php if ($tax_id_required) { ?>
                                     <span class="required">*</span>
                                 <?php } ?>
                                 <?php echo $entry_tax_id; ?>
                             </div>
-                            <div id="right">
+                            <div class="pInput">
                                 <input type="text" name="tax_id" value="" class="large-field" />
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <span class="required">*</span> <?php echo $entry_address_1; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <input type="text" name="address_1" value="" class="large-field" />
                         </div>
                     </div>
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <?php echo $entry_address_2; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <input type="text" name="address_2" value="" class="large-field" />
                         </div>
                     </div>
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <span class="required">*</span> <?php echo $entry_city; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <input type="text" name="city" value="" class="large-field" />
                         </div>
                     </div>
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <input type="text" name="postcode" value="" class="large-field" />
                         </div>
                     </div>
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <span class="required">*</span> <?php echo $entry_country; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <select name="country_id" class="large-field">
                                 <option value=""><?php echo $text_select; ?></option>
                                 <?php foreach ($countries as $country) { ?>
@@ -215,26 +212,24 @@
                             </select>
                         </div>
                     </div>
-                    <div class="payform-right">
-                        <div id="left">
+                    <div class="prow">
+                        <div class="pLabel">
                             <span class="required">*</span> <?php echo $entry_zone; ?>
                         </div>
-                        <div id="right">
+                        <div class="pInput">
                             <select name="zone_id" class="large-field">
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        
     </div>
 </div>
 <br />
 
 <div class="buttons">
-    <div class="right">
         <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-address" class="button" />
-    </div>
 </div>
 
 <script type="text/javascript"><!--

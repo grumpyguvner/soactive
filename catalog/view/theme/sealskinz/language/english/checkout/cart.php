@@ -21,6 +21,8 @@ $_['text_shipping_estimate'] = 'Estimate Shipping &amp; Taxes';
 $_['text_shipping_detail']   = 'Enter your destination to get a shipping estimate.';
 $_['text_shipping_method']   = 'Please select the preferred shipping method to use on this order.';
 $_['text_empty']             = 'Your shopping cart is empty!';
+$_['text_error']             = 'Cart empty';
+
 
 // Column
 $_['column_image']           = 'Image';
@@ -54,4 +56,9 @@ $_['error_country']          = 'Please select a country!';
 $_['error_zone']             = 'Please select a region / state!';
 $_['error_shipping']         = 'Warning: Shipping method required!';
 $_['error_no_shipping']      = 'Warning: No Shipping options are available. Please <a href="%s">contact us</a> for assistance!';
+
+//Button
+
+$_['button_error_back']     = 'BACK';
+$_['button_error_home']     = 'HOME';
 ?>

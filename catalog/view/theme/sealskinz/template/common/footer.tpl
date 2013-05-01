@@ -90,7 +90,7 @@
             <div class="column" id="margin-l46">
                 <h4><?php echo $text_connect; ?></h4>
                 <ul>
-                    <li style="padding: 12px 0;"><span><?php echo $fb ?></a></span><?php echo $tw ?><span></span><?php echo $yb ?><span></span><?php echo $pt ?><span></span><span><?php echo $gp ?></span></li>
+                    <li style="padding: 12px 0;"><span><?php echo $fb ?></span><span><?php echo $tw ?></span><span><?php echo $yb ?></span><span><?php echo $pt ?></span><span><?php echo $gp ?></span></li>
                     <li style="color:gray"><?php echo $store; ?> <?php echo $text_ltd; ?></li>
                     <li style="color:gray"><?php echo $address; ?></li>
                     <li style="color:gray"><?php echo $text_nation; ?></li>

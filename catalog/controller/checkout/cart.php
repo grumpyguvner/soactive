@@ -405,11 +405,17 @@ class ControllerCheckoutCart extends Controller {
 						
 			$this->response->setOutput($this->render());					
     	} else {
+                
+                $this->document->setTitle($this->language->get('text_error'));
+            
       		$this->data['heading_title'] = $this->language->get('heading_title');
 
       		$this->data['text_error'] = $this->language->get('text_empty');
 
       		$this->data['button_continue'] = $this->language->get('button_continue');
+                
+                $this->data['button_error_home'] = $this->language->get('button_error_home');
+                $this->data['button_error_back'] = $this->language->get('button_error_back');
 			
       		$this->data['continue'] = $this->url->link('common/home');
 

@@ -74,7 +74,7 @@
                                         <?php } ?>
                                     </div>
                                     <div class="bar">
-                                        <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>">VIEW PRODUCT INFO</a>
+                                        <div class="price"><?php echo $product['price']; ?></div><a href="<?php echo $product['href']; ?>"><?php echo $text_view_product_info ?></a>
                                     </div>
                                 </div><?php }
                                     ?>

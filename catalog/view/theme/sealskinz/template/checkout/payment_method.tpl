@@ -27,7 +27,7 @@
         <br />-->
         <?php if ($text_agree) { ?>
         <div class="buttons">
-          <div class="right"><label class="checkbox"><?php echo $text_agree; ?>
+          <label class="checkbox"><?php echo $text_agree; ?>
             <?php if ($agree) { ?>
             <input type="checkbox" name="agree" value="1" checked="checked" />
             <?php } else { ?>
@@ -35,13 +35,10 @@
             <?php } ?>
               </label>
             <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-method" class="button" />
-          </div>
         </div>
         <?php } else { ?>
         <div class="buttons">
-          <div class="right">
             <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-method" class="button" />
-          </div>
         </div>
         <?php } ?>
 

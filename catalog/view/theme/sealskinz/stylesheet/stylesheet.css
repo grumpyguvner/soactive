@@ -139,9 +139,7 @@ a:hover {
 #right {
     float: right;
 }
-#payment-new #right {
-    width: 50%;
-}
+
 #title {
     border-bottom: 1px solid #CCCCCC;
 }
@@ -1779,7 +1777,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .product-press {
     width: 212px;
-    margin-left: 20px;
+    margin-left: 18px;
 }
 #box-title {
     padding: 15px;
@@ -2209,14 +2207,67 @@ a.button-account:hover, input.button-account:hover {
     overflow: auto;
 }
 .checkout-content .left {
-    min-height: 268px;
+    float: left;
+    width: 50%;
 }
 .checkout-content .right {
     border-left: 1px solid #DDDDDD;
     padding-left: 20px;
+    float:right;
+    width: 45%;
+}
+.checkout-content .new-customer {
+    float: left;
+}
+.checkout-content .returning-customer {
+    border-left: 1px solid #DDDDDD;
+    padding-left: 20px;
+    float:right;
+}
+.checkout-content #payment-new {
+    width: 100%;
+}
+.checkout-content #shipping-new {
+    width: 50%;
+}
+.checkout-content .prow {
+    width: 100%;
+    padding-bottom: 50px;
+}
+.checkout-content .pLabel {
+    float: left;
+    padding-right: 20px;
+}
+.checkout-content .pInput {
+    float: right;
+    width: 55%;
 }
 .checkout-content .buttons {
     clear: both;
+    float: right;
+    text-align: right;
+    display: block;
+}
+.checkout-content .payment .buttons {
+    float: none;
+}
+.checkout-content .error {
+    font-size: 12px;
+    margin-top: -60px;
+    float: left;
+}
+.checkout-content .form .error{
+    float: right;
+    margin-top: 0;
+}
+.checkout-content .prow .pselect {
+    max-width: none !important;
+}
+.checkout-content .prow .pInput select {
+    max-width: 205px;
+}
+.checkout-content .form select {
+    max-width: 205px;
 }
 .checkout-product table {
     width: 100%;
@@ -2923,14 +2974,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     text-decoration: underline;
     font-size: 16px;
 }
-.payform-left {
-    width: 80%;
-    height: 50px;
-}
-.payform-right {
-    width: 78%;
-    height: 50px;
-}
+
 .formline {
     width: 100%;
     height: 50px;
@@ -3272,8 +3316,8 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 #text-error {
     margin-left: -32px;
-    margin-top: -56px;
-    width: 318px;
+    margin-top: -60px;
+    /*width: 318px;*/
     font-size: 12px;
 }
 .grid-wrap {

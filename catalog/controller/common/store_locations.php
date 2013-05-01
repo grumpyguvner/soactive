@@ -42,6 +42,7 @@ class ControllerCommonStoreLocations extends Controller {
         $this->data['store_loc_radius'] = $this->language->get('store_loc_radius');
         $this->data['store_loc_no_store'] = $this->language->get('store_loc_no_store');
         $this->data['store_loc_txt_add'] = $this->language->get('store_loc_txt_add');
+        $this->data['store_loc_text_miles'] = $this->language->get('store_loc_text_miles');
 
         $this->data['actionURL'] = $this->url->link('common/store_locations');
 

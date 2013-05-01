@@ -38,6 +38,9 @@ $_['text_activity']     = 'Activity';
 $_['text_filter']       = 'Filter';
 $_['text_option_details'] = '';
 $_['text_write_review'] = 'WRITE REVIEW';
+$_['text_buy']          = 'BUY';
+$_['text_press']        = 'Press';
+$_['text_view_product_info'] = 'VIEW PRODUCT INFO';
 
 // Entry
 $_['entry_name']        = 'Your Name:';

@@ -67,6 +67,7 @@ class ControllerNewsArticle extends Controller {
 		$this->data['title_comments'] = sprintf($this->model_catalog_ncomments->getTotalNcommentsByNewsId($this->request->get['news_id']));
 		$this->data['text_coms'] = $this->language->get('title_comments');
                 $this->data['text_recent_articles'] = $this->language->get('text_recent_articles');
+                $this->data['text_view_product_info'] = $this->language->get('text_view_product_info');
 		
 		$this->data['news_id'] = $this->request->get['news_id'];
 			
