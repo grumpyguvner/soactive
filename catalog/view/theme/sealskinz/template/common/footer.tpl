@@ -22,10 +22,9 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="column" id="column2">
-                <div class="wrap1">
-                    <div id="left" class="wrap1-left">
+            
+            <div class="column" id="margin-r46">
+                <div>
                         <h4><?php echo $text_newsletter; ?></h4>
                         <ul>
                             <li style="color:gray"><?php echo $text_description_newsletter ?></li>
@@ -43,21 +42,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="right" class="wrap1-right">
-                        <?php 
-                        echo '<h4>' . $text_customerservice . '</h4><ul>'; 
-                        foreach ($informations as $key => $information) {
-                            if (strtolower($text_customerservice) == strtolower($information['category'])) {
-                                echo '<li><a href="' . $information['href'] . '">' . $information['title'] . '</a></li>';
-                            }
-                        }
-                        echo '<li><a href="' . $contact . '">' . $text_contact . '</a></li></ul>';
-                        echo '</ul>';
-                        ?>
-                    </div>
-                </div>
-                <div class="wrap2">
-                    <div id="left" class="wrap2-left">
+                <div>
                         <?php 
                         echo '<h4>' . $text_sizeguide . '</h4><ul>'; 
                         foreach ($informations as $key => $information) {
@@ -69,7 +54,22 @@
                         ?>
                         
                     </div>
-                    <div id="right" class="wrap2-right">
+            </div>
+            
+            <div class="column" id="margin-r46">
+                <div>
+                        <?php 
+                        echo '<h4>' . $text_customerservice . '</h4><ul>'; 
+                        foreach ($informations as $key => $information) {
+                            if (strtolower($text_customerservice) == strtolower($information['category'])) {
+                                echo '<li><a href="' . $information['href'] . '">' . $information['title'] . '</a></li>';
+                            }
+                        }
+                        echo '<li><a href="' . $contact . '">' . $text_contact . '</a></li></ul>';
+                        echo '</ul>';
+                        ?>
+                    </div>
+                <div>
                         
                         <?php 
                         $category = false;
@@ -84,10 +84,12 @@
                         
                         </ul>
                     </div>
-                </div>
+                
             </div>
 
-            <div class="column" id="margin-l46">
+            
+
+            <div class="column">
                 <h4><?php echo $text_connect; ?></h4>
                 <ul>
                     <li style="padding: 12px 0;"><span><?php echo $fb ?></span><span><?php echo $tw ?></span><span><?php echo $yb ?></span><span><?php echo $pt ?></span><span><?php echo $gp ?></span></li>

@@ -98,7 +98,22 @@ a:hover {
     background: #BBB url('../image/account/account-image.png') no-repeat top left;
 }
 #infoContainer {
-    background: #d5d5d5 url('../image/information/history-back.png') no-repeat 0 518px;
+    background: #d5d5d5 url('../image/information/history-back.png') no-repeat 0 508px;
+}
+#infoContainer.seoOurhistory {
+    background-image:url("../image/information/history-back.png");
+}
+#infoContainer.seoOurfactory {
+    background-image: url('../image/information/customer-service.png');
+}
+#infoContainer.seoOurtechnology {
+    background-image: url('../image/information/brand-story.png');
+}
+#infoContainer.seoRegistration {
+    background-image: url('../image/information/customer-service.png');
+}
+#infoContainer.seoPrivacypolicy {
+    background-image: url('../image/information/customer-service.png');
 }
 #infoContainer #content {
     background-color: #aea7a2;
@@ -121,23 +136,25 @@ a:hover {
 }
 #infoContainer .box {
     background-color: #fff;
-    min-height: 518px;
+    min-height: 508px;
 }
 .infoDescription {
-    padding: 10px;
+    padding: 10px 20px;
 }
 .infoDescription .bStory {
-    margin-left: -155px;
-    margin-right: -10px;
+    margin-left: -165px;
+    margin-right: -20px;
+    margin-top: -20px;
     max-width: none;
 }
 .infoHasImage .infoDescription h1{
     background-color: #000000;
     color: #9CC967;
     font-size: 34px;
-    margin: -10px -10px 0 -155px;
+    margin: -20px -20px 20px -165px;
     font-weight: bold;
     padding: 25px 20px;
+    
 }
 /* ********************* */
 
@@ -2386,12 +2403,15 @@ a.button-account:hover, input.button-account:hover {
     margin-top: 0px;
     border-bottom: 1px solid;
     padding-bottom: 10px;
+    min-width: 210px;
 }
 #footer .column {
     float: left;
     width: 211px;
     min-height: 100px;
-
+}
+#footer .column > div {
+    margin-bottom: 20px;
 }
 #footer #column2 {
     width: 468px;
@@ -2973,10 +2993,9 @@ input[type="color"]:focus, .uneditable-input:focus {
 .right86 {
     width: 86%;
 }
-
 #description-info {
     border: 0 !important; 
-    min-height: 527px;
+    min-height: 508px;
     margin-left: 145px;
     background-color: #fff;
 }
@@ -3140,66 +3159,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .compare-wrap {
     margin-left: 30px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-    .our-history {
-        margin-top: -10px;
-    }
-
-}
-.our-history {
-    background-image: url('../image/information/history-back.png');
-    background-repeat: no-repeat;
-    margin-left: 0;
-    margin-top: 373px;
-    height: 1064px;
-}
-.our-factory {
-    background-image: url('../image/information/customer-service.png');
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    margin-left: 0;
-    margin-top: 373px;
-    height: 588px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-    .our-factory {
-        margin-top: -10px;
-        padding-top: 13px;
-    }
-
-}
-.registration {
-    background-image: url('../image/information/customer-service.png');
-    background-repeat: no-repeat;
-    margin-left: 0;
-    height: 941.5px;
-    background-color: #d3d3d3;
-}
-
-.privacy-policy {
-    /*background-image: url('../image/information/customer-service.png');*/
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    margin-left: 0;
-    height: 675px;
-    margin-top: -99px;
-}
-.technology {
-    background-image: url('../image/information/brand-story.png');
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    margin-left: 0;
-    height: 675px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-    .technology {
-        margin-top: -10px;
-    }
-
 }
 .info-tecnology {
     display: inline-block;
