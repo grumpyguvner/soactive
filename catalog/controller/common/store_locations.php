@@ -126,6 +126,15 @@ class ControllerCommonStoreLocations extends Controller {
             $pagination->limit = $limit;
             $pagination->url = $this->url->link('common/store_locations','page={page}&' . implode('&', $url));
             $this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
         } else {
             $this->data['pagination'] = '';
         }

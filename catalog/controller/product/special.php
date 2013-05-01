@@ -273,6 +273,15 @@ class ControllerProductSpecial extends Controller {
 		$pagination->url = $this->url->link('product/special', $url . '&page={page}');
 			
 		$this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 			
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;

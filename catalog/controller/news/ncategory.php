@@ -158,6 +158,15 @@ class Controllernewsncategory extends Controller {
 			$pagination->url = $this->url->link('news/ncategory', 'ncat=' . $this->request->get['ncat'] . $url . '&page={page}');
 		
 			$this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 			
 			$this->setTemplate('news/ncategory.tpl');
 			

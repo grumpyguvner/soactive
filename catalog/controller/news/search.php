@@ -212,6 +212,15 @@ class ControllerNewsSearch extends Controller {
 			$pagination->url = $this->url->link('news/search', $url . '&page={page}');
 			
 			$this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 		}	
 		
 		$this->data['filter_name'] = $filter_name;

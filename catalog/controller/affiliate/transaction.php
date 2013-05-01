@@ -79,6 +79,15 @@ class ControllerAffiliateTransaction extends Controller {
 		$pagination->url = $this->url->link('affiliate/transaction', 'page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 		
 		$this->data['balance'] = $this->currency->format($this->model_affiliate_transaction->getBalance());
 		

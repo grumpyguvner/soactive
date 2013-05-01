@@ -123,6 +123,15 @@ class ControllerAccountOrder extends Controller {
 		$pagination->url = $this->url->link('account/order', 'page={page}', 'SSL');
 		
 		$this->data['pagination'] = $pagination->render();
+                        
+                        if ($pagination->getPrevLink())
+                        {
+                            $this->document->addLink($pagination->getPrevLink(), 'prev');
+                        }
+                        if ($pagination->getNextLink())
+                        {
+                            $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
 
 		$this->data['continue'] = $this->url->link('account/account', '', 'SSL');
 
