@@ -97,7 +97,48 @@ a:hover {
 #accountContainer {
     background: #BBB url('../image/account/account-image.png') no-repeat top left;
 }
-
+#infoContainer {
+    background: #d5d5d5 url('../image/information/history-back.png') no-repeat 0 518px;
+}
+#infoContainer #content {
+    background-color: #aea7a2;
+}
+#infoContainer p {
+    color: #777777;
+}
+#infoContainer h3 {
+    color: #74964B;
+}
+#infoContainer h4 {
+    color: #74964B;
+}
+#infoContainer #examples {
+    color: #74964B;
+    font-weight: bold;
+}
+#infoContainer span {
+    color: #777777;
+}
+#infoContainer .box {
+    background-color: #fff;
+    min-height: 518px;
+}
+.infoDescription {
+    padding: 10px;
+}
+.infoDescription .bStory {
+    margin-left: -155px;
+    margin-right: -10px;
+    max-width: none;
+}
+.infoHasImage .infoDescription h1{
+    background-color: #000000;
+    color: #9CC967;
+    font-size: 34px;
+    margin: -10px -10px 0 -155px;
+    font-weight: bold;
+    padding: 25px 20px;
+}
 /* ********************* */
 
 .navbar-header{
@@ -163,42 +204,6 @@ a:hover {
     color: white;
     font-weight: bold;
     text-align: center;
-}
-.text-info {
-    width: 575px;
-    padding-left: 20px;
-    padding-right: 25px;
-    padding-top: 20px;
-    color: #777777;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-    .text-info {
-        padding-top: 33px;
-    }
-
-}
-.text-info input[type='text'] {
-    /* height: 28px; */
-}
-.text-info p {
-    color: #777777;
-}
-.text-info h1 {
-    color: #000000;
-}
-.text-info h3 {
-    color: #74964B;
-}
-.text-info h4 {
-    color: #74964B;
-}
-.text-info #examples {
-    color: #74964B;
-    font-weight: bold;
-}
-.text-info span {
-    color: #777777;
 }
 /* header */
 #header {
@@ -1218,7 +1223,7 @@ a.button-account:hover, input.button-account:hover {
 /* content */
 #content .content {
     padding: 10px;
-    overflow: hidden; 
+    /*overflow: hidden;*/ 
 }
 #content .content .left {
     float: left;
@@ -2854,20 +2859,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     border-color: #74964a !important;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #74964A !important;
 }
-.info-title {
-    width: 100%;
-    background-color: #000000;
-    margin: 0; 
-    color: #9cc967;
-}
-.info-title h1 {
-    margin-left: 20px;
-    font-weight: bold;
-    font-size: 34px;
-    color: #9cc967;
-    margin: 0; 
-    padding: 25px 20px;
-}
 #background {
     width: 100%;
     background-color: black;
@@ -2984,12 +2975,16 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 
 #description-info {
-    padding: 0 !important;
     border: 0 !important; 
-    background-image: url('../image/infobar.png');
-    background-repeat: repeat-y;
     min-height: 527px;
+    margin-left: 145px;
+    background-color: #fff;
 }
+
+#description-info .infoImage {
+    margin-left: -145px;
+}
+
 #description-info h2 {
     color: white;
     text-align: center;
@@ -3012,9 +3007,6 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-weight: normal;
     line-height: 16px;
     color: #999999;
-}
-#description-info table {
-    width: 100%;
 }
 .contact-name {
     width: 281px;
@@ -3761,6 +3753,9 @@ select[size] {
 #info-size tr td{
     color: #777777;
     text-align: center;
+    border-top: 1px dotted green;
+    border-bottom: 1px dotted green;
+    width: 769px;
 }
 #info-size tr th{
     color: #777777;

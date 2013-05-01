@@ -25,18 +25,18 @@
 </div>
 <div id="content-back">
     <div class="green-bar">  
-        <div id="mainContainer" class="container<?php if ($catClass) echo ' cat' . $catClass ?><?php if ($seoClass) echo ' seo' . $seoClass ?>"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
+        <div id="infoContainer" class="container<?php if ($catClass) echo ' cat' . $catClass ?><?php if ($seoClass) echo ' seo' . $seoClass ?>"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
             <?php echo $content_top; ?>
-            <div class="content" id="description-info">
+            <div class="<?php if ($thumb) echo ' infoHasImage';?>" id="description-info">
                 <?php if ($thumb || $description) { ?>
-                    <div> 
-                        <?php if ($thumb) { ?>
-                            <div class="image"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
-                        <?php } ?>
-                        <?php if ($description) { ?>
+                    <?php if ($thumb) { ?>
+                        <div class="infoImage"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" /></div>
+                    <?php } ?>
+                    <?php if ($description) { ?>
+                        <div class="infoDescription">
                             <?php echo $description; ?>
-                        <?php } ?>
-                    </div>
+                        </div>
+                    <?php } ?>
                 <?php } ?>
             </div>
         </div></div>
