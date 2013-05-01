@@ -16,4 +16,4 @@ foreach ($informations as $key => $information) {
     $category = $information['category'];
 }
 ?>
-<div class="<?php echo $seo ?>"></div>
+<!--div class="<?php echo $seo ?>"></div-->
