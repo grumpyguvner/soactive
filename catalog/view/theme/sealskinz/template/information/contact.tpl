@@ -27,15 +27,11 @@
 </div>
 <div id="content-back">
     <div class="green-bar">  
-        <div id="mainContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
+        <div id="infoContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
                 <?php echo $content_top; ?>
-                <div class="info-title">
-                    <h1><?php echo $text_linecontact ?></h1>
-                </div> 
-
-                <div class="content" id="description-info" style="border: none;">
-
-                    <div id="right" class="text-info">
+                    <div id="description-info" class="infoHasImage">
+                      <div class="infoDescription">  
+                        <h1><?php echo $text_linecontact ?></h1>
                         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                             <div class="text-contact">
                                 <p><?php echo $text_titlecontact ?></p>
@@ -108,8 +104,9 @@
                             </div>
                         </div>
                         <?php echo $content_bottom; ?>
-                    </div>
+                      </div>
                 </div>
+                
             </div></div>
     </div>
 </div>

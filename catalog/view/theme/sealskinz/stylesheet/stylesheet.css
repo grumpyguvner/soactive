@@ -99,6 +99,7 @@ a:hover {
 }
 #infoContainer {
     background: #d5d5d5 url('../image/information/history-back.png') no-repeat 0 508px;
+    color: #777777;
 }
 #infoContainer.seoOurhistory {
     background-image:url("../image/information/history-back.png");
@@ -138,6 +139,13 @@ a:hover {
     background-color: #fff;
     min-height: 508px;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+
+    #infoContainer .box {
+        margin-bottom: -10px;
+    }
+
+}
 .infoDescription {
     padding: 10px 20px;
 }
@@ -154,7 +162,6 @@ a:hover {
     margin: -20px -20px 20px -165px;
     font-weight: bold;
     padding: 25px 20px;
-    
 }
 /* ********************* */
 
@@ -277,7 +284,7 @@ a:hover {
 #header #cart .heading {
 	/*float: right;*/
 	/*margin-right: 76px;*/
-	border-right: 1px solid grey;
+	border-right: 1px solid #777777;
 	background: #000000;
 	position: relative;
 	z-index: 1;
@@ -325,7 +332,7 @@ a:hover {
 }
 #header #cart.active .content a:link, #header #cart.active .content a:visited, #header #cart.active .content a:link active{
 	background-color: #FFFFFF !important;
-        color: grey !important;
+        color: #777777 !important;
         font-weight: bolder !important;
         text-decoration: none !important;
 }
@@ -2391,14 +2398,11 @@ a.button-account:hover, input.button-account:hover {
     background: #312118 url(../image/footer.png) repeat top left;
     min-height: 379px;
 }
-#footer #margin-r46{
-    margin-right: 46px;
-}
-#footer #margin-l46{
-    margin-left: 46px;
+#footer #lastColumn{
+    margin-right: 0;
 }
 #footer a{
-    color: grey !important;
+    color: #777777 !important;
 }
 #footer h4 {
     color: white;
@@ -2413,6 +2417,7 @@ a.button-account:hover, input.button-account:hover {
     float: left;
     width: 211px;
     min-height: 100px;
+    margin-right: 46px;
 }
 #footer .column > div {
     margin-bottom: 20px;
@@ -2452,7 +2457,7 @@ a.button-account:hover, input.button-account:hover {
 }
 #footer .column a {
     text-decoration: none;
-    color: grey;
+    color: #777777;
 }
 #footer .column a:hover {
     text-decoration: underline;
@@ -2477,7 +2482,7 @@ a.button-account:hover, input.button-account:hover {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    color: grey;
+    color: #777777;
 }
 .newsletter_input a{
     position: absolute;
@@ -2774,12 +2779,12 @@ a.button-account:hover, input.button-account:hover {
     white-space:nowrap;
     padding: 6px 10px;
     font-weight: bolder;
-    color: grey !important;
+    color: #777777 !important;
     height: 21px;
 }
 #menuh a:link, #menuh a:visited, #menuh a:active	/* menu at rest */
 {
-    color: grey;
+    color: #777777;
     background-color: #000000;	
     text-decoration:none;
     font-weight: bolder;
@@ -2816,7 +2821,7 @@ a.button-account:hover, input.button-account:hover {
 
 #menuh li
 {
-    border-left: 1px solid grey;
+    border-left: 1px solid #777777;
     position:relative;
     min-height: 1px;	
     vertical-align: bottom;	
@@ -2935,6 +2940,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 .review-in .win-sp span {
    float: left; 
    padding: 8px 17px;
+   color: #fff;
 }
 .review-in .win-sp img {
    float: right; 
@@ -2983,7 +2989,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .sections p {
     font-size: 14px;
-    color: grey;
+    color: #777777;
 }
 .sections a {
     text-decoration: underline;
@@ -3378,21 +3384,6 @@ input[type="color"]:focus, .uneditable-input:focus {
 } 
 #homeWinBar {
     background: #000;
-}
-.contact-image {
-    background-image: url('../image/information/contact-us.png');
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    margin-left: 0;
-    margin-top: 247px;
-    height: 792px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-    .contact-image {
-        margin-top: -10px;
-    }
-
 }
 .Hats {
     background-image: url('../image/shop-hats-button.png');

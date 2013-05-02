@@ -1,7 +1,7 @@
 <div class="footer-wrap">
     <div class="container">
         <div id="footer">
-            <div class="column" id="margin-r46">
+            <div class="column">
                 <h4><?php echo $text_categories; ?></h4>
                 <div id="left">
                     <ul>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             
-            <div class="column" id="margin-r46">
+            <div class="column">
                 <div>
                         <h4><?php echo $text_newsletter; ?></h4>
                         <ul>
@@ -56,7 +56,7 @@
                     </div>
             </div>
             
-            <div class="column" id="margin-r46">
+            <div class="column">
                 <div>
                         <?php 
                         echo '<h4>' . $text_customerservice . '</h4><ul>'; 
@@ -89,7 +89,7 @@
 
             
 
-            <div class="column">
+            <div class="column" id="lastColumn">
                 <h4><?php echo $text_connect; ?></h4>
                 <ul>
                     <li style="padding: 12px 0;"><span><?php echo $fb ?></span><span><?php echo $tw ?></span><span><?php echo $yb ?></span><span><?php echo $pt ?></span><span><?php echo $gp ?></span></li>
