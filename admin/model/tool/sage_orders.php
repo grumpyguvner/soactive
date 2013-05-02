@@ -63,28 +63,17 @@ class ModelToolSageOrders extends Model {
                     #set header
                     $order_xml =
                             '<order>' . "\n" .
-//                            '<gross_pricing>false</gross_pricing>' . "\n" .
-                            '<allow_backorder>true</allow_backorder>' . "\n" .
-                            '<document_date>' . $order_info['date_added'] . '</document_date>' . "\n";
-                    if ((string) $order_info['delivery_slot_date_start'] !== "0000-00-00 00:00:00") {
-                        $order_xml .=
-                            '<customer_ref>' . "BF" . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . ($order_info['purchase_order'] == "" ? "" : ":" . $order_info['purchase_order'] ) . '</customer_ref>' . "\n";
-                        $order_xml .=
-                                '<requested_date>' . $order_info['delivery_slot_date_start'] . '</requested_date>' . "\n";
-                        $order_xml .=
-                                '<promised_date>' . $order_info['delivery_slot_date_start'] . '</promised_date>' . "\n";
-                    } else {
-                        $order_xml .=
-                            '<customer_ref>' . "BA" . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . ($order_info['purchase_order'] == "" ? "" : ":" . $order_info['purchase_order'] ) . '</customer_ref>' . "\n";
-                    }
+                            '<gross_pricing>true</gross_pricing>' . "\n" .
+                            '<document_date>' . $order_info['date_added'] . '</document_date>' . "\n" .
+                            '<customer_ref>' . SITE_REGION . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . $order_info['firstname']. " " . $order_info['lastname'] . '</customer_ref>' . "\n";
                     #set delivery address
                     $order_xml .=
                             '<delivery_address>' . "\n" .
-                            ' <postal_name>' . str_replace("&", "and", $order_info['shipping_company']) . '</postal_name>' . "\n" .
+                            ' <postal_name>' . str_replace("&", "and", $order_info['shipping_firstname'] . " " . $order_info['shipping_lastname']) . '</postal_name>' . "\n" .
                             ' <address1>' . str_replace("&", "and", $order_info['shipping_address_1']) . '</address1>' . "\n" .
                             ' <address2>' . str_replace("&", "and", $order_info['shipping_address_2']) . '</address2>' . "\n" .
-                            ' <address3>' . str_replace("&", "and", $order_info['shipping_city']) . '</address3>' . "\n" .
-                            ' <address4>' . str_replace("&", "and", $order_info['shipping_zone']) . '</address4>' . "\n" .
+                            ' <city>' . str_replace("&", "and", $order_info['shipping_city']) . '</city>' . "\n" .
+                            ' <county>' . str_replace("&", "and", $order_info['shipping_zone']) . '</county>' . "\n" .
                             ' <postcode>' . $order_info['shipping_postcode'] . '</postcode>' . "\n" .
                             ' <country>' . $order_info['shipping_country'] . '</country>' . "\n" .
                             '</delivery_address>' . "\n";
@@ -92,11 +81,11 @@ class ModelToolSageOrders extends Model {
                     #set invoice address
                     $order_xml .=
                             '<invoice_address>' . "\n" .
-                            ' <postal_name>' . $order_info['payment_firstname'] . " " . $order_info['payment_lastname'] . '</postal_name>' . "\n" .
-                            ' <address1>' . str_replace("&", "and", $order_info['payment_company']) . '</address1>' . "\n" .
-                            ' <address2>' . str_replace("&", "and", $order_info['payment_address_1']) . '</address2>' . "\n" .
-                            ' <address3>' . str_replace("&", "and", $order_info['payment_address_2']) . '</address3>' . "\n" .
+                            ' <postal_name>' . str_replace("&", "and", $order_info['payment_firstname'] . " " . $order_info['payment_lastname']) . '</postal_name>' . "\n" .
+                            ' <address1>' . str_replace("&", "and", $order_info['payment_address_1']) . '</address1>' . "\n" .
+                            ' <address2>' . str_replace("&", "and", $order_info['payment_address_2']) . '</address2>' . "\n" .
                             ' <city>' . str_replace("&", "and", $order_info['payment_city']) . '</city>' . "\n" .
+                            ' <county>' . str_replace("&", "and", $order_info['payment_zone']) . '</county>' . "\n" .
                             ' <postcode>' . $order_info['payment_postcode'] . '</postcode>' . "\n" .
                             ' <country>' . $order_info['payment_country'] . '</country>' . "\n" .
                             '</invoice_address>' . "\n";
@@ -110,29 +99,13 @@ class ModelToolSageOrders extends Model {
                         $order_options = $this->model_sale_order->getOrderOptions($row['order_id'], $order_product['order_product_id']);
                         $this->log->write("checking product " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity']);
                         
-                        //Find if we need to use substitute SKU
                         $product_id = $order_product['product_id'];
                         $product_option_value_id = $order_options[0]['product_option_value_id'];
                         $product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int)$order_product['product_id'] . "' AND product_option_value_id = '" . (int)$order_options[0]['product_option_value_id'] . "'");
                         if ($product_option_value_query->row) {
                             //Make sure order quantity not greater than available quantity
                             if ($order_product['quantity'] > $product_option_value_query->row['quantity']) {
-                                //And we have a substitute sku
-                                if (!empty($product_option_value_query->row['sku2'])) {
-                                    $model = substr($product_option_value_query->row['sku2'], 0, 6);
-                                    //Refresh product data from sage
-//                                    $this->model_tool_sage_products->import($model);
-                                    $alt_sku_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value WHERE sku = '" . $this->db->escape($product_option_value_query->row['sku2']) . "'");
-                                    if ($alt_sku_query->row) {
-                                        $product_id = $alt_sku_query->row['product_id'];
-                                        $product_option_value_id = $alt_sku_query->row['product_option_value_id'];
-                                        $this->log->write("using alternate sku " . $product_option_value_query->row['sku2']);
-                                    } else {
-                                        $this->log->write("product option for alternate sku [" . $product_option_value_query->row['sku2'] . "] doesn't exist so continuing");
-                                    }
-                                }  else {
-                                    $this->log->write("alternate sku empty, continuing");
-                                }
+                                $this->log->write("quantity ordered greater than stock, expect sage to throw error");
                             } else {
                                 $this->log->write("product quantity ok, continuing");
                             }
@@ -149,31 +122,10 @@ class ModelToolSageOrders extends Model {
                                 ' <tax_code_id>' . $this->getSageTaxId($product_info['tax_class_id']) . '</tax_code_id>' . "\n" .
                                 ' <quantity>' . $order_product['quantity'] . '</quantity>' . "\n" .
                                 ' <price>' . $order_product['price'] . '</price>' . "\n" .
-                                ' <discount_percentage>' . $order_info['discount'] . '</discount_percentage>' . "\n" .
                                 '</item>' . "\n";
                     }#next product
+                    
                     #set postage charge
-//                    if ((float) $order_info['discount_total'] > 0) {
-//                        $order_xml .=
-//                                '<free_text_item>' . "\n" .
-//                                ' <description>Discount</description>' . "\n" .
-//                                ' <tax_code_id>2</tax_code_id>' . "\n" .
-//                                ' <price>' . $order_info['discount_total'] . '</price>' . "\n" .
-//                                ' <quantity>1</quantity>' . "\n" .
-//                                '</free_text_item>' . "\n";
-//                    }
-//                    $order_xml .=
-//                            '<free_text_item>' . "\n" .
-//                            ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n";
-//                            switch ($order_info['shipping_code']) {
-//                                case "worldpay":
-//                                    #set WorldPay Transaction ID
-//                                    $order_xml .= ' <item_id>' . ( ( $postage <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n";
-//                                    break;
-//                                default:
-//                                    $order_xml .= ' <item_id>20816591</item_id>' . "\n";
-//                                    break;
-//                            }
                     $order_xml .= 
                             '<free_text_item>' . "\n" .
                             ' <tax_code_id>' . $this->getSageTaxId($this->getShippingTaxClassId($order_info['shipping_code'])) . '</tax_code_id>' . "\n" . 
@@ -181,24 +133,25 @@ class ModelToolSageOrders extends Model {
                             ' <price>' . $order_info['shipping_total'] . '</price>' . "\n" .
                             ' <quantity>1</quantity>' . "\n" .
                             '</free_text_item>' . "\n";
-//                    $order_xml .= '<comment>Ship via:' . $order_info['shipping_method'] . '</comment>' . "\n";
+                    $order_xml .= '<comment>Ship via:' . $order_info['shipping_method'] . '</comment>' . "\n";
 
                     #set order total
-//                    $order_xml .=
-//                            '<payment>' . "\n" .
-//                            ' <amount>' . $order_info['total'] . '</amount>' . "\n" .
-//                            ' <payment_method_id>19108621</payment_method_id>' . "\n" .
-//                            '</payment>' . "\n";
+                    $order_xml .=
+                            '<payment>' . "\n" .
+                            ' <amount>' . $order_info['total'] . '</amount>' . "\n" .
+                            ' <payment_method_id>19108621</payment_method_id>' . "\n" . // Need the method_id for sagepay from Andy
+                            '</payment>' . "\n";
 
-//                    $order_xml .= '<comment>Payment made by: ' . $order_info['payment_method'] . '</comment>' . "\n";
-//                    switch ($order_info['payment_code']) {
-//                        case "worldpay":
-//                            #set WorldPay Transaction ID
-//                            $order_xml .= ( $order_info['worldpay_transaction_id'] <> '' ) ? '<comment>Worldpay Transaction ID: ' . $order_info['worldpay_transaction_id'] . '</comment>' . "\n" : '';
-//                            break;
-//                        default:
-//                            break;
-//                    }
+                    $order_xml .= '<comment>Payment made by: ' . $order_info['payment_method'] . '</comment>' . "\n";
+                    switch ($order_info['payment_code']) {
+                        case "worldpay":
+                            #set WorldPay Transaction ID
+                            // Need to store the sagepay / paypal transaction ids ...
+                            $order_xml .= ( $order_info['worldpay_transaction_id'] <> '' ) ? '<comment>Worldpay Transaction ID: ' . $order_info['worldpay_transaction_id'] . '</comment>' . "\n" : '';
+                            break;
+                        default:
+                            break;
+                    }
 
                     $order_xml .=
                             '</order>' . "\n";
