@@ -2275,6 +2275,10 @@ a.button-account:hover, input.button-account:hover {
     float: right;
     width: 55%;
 }
+.checkout-content .paSelect .pInput {
+    float: right;
+    width: 102%;
+}
 .checkout-content .buttons {
     clear: both;
     float: right;
@@ -3236,11 +3240,11 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 #pageDetail .iRow.international .iBlock {
     border: 1px solid #DDDDDD;
-    float: left;
     margin-right: 5px;
     padding: 0;
-    width: 284px;
+    min-width: 290px;
     min-height: 214px;
+    display: table-cell;
 }
 #pageDetail .iRow {
 
