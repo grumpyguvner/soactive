@@ -23,7 +23,7 @@ class ControllerPaymentSagepay extends Controller {
 		$data = array();
 		
 		$data['VendorTxCode'] = $this->session->data['order_id'];
-		$data['ReferrerID'] = 'E511AF91-E4A0-42DE-80B0-09C981A3FB61';
+		$data['ReferrerID'] = '1C2397BA-69D1-431C-A033-C4FD99CD4E68';
 		$data['Amount'] = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
 		$data['Currency'] = $order_info['currency_code'];
 		$data['Description'] = sprintf($this->language->get('text_description'), date($this->language->get('date_format_short')), $this->session->data['order_id']);
