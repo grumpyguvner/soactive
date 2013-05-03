@@ -485,7 +485,7 @@ a:hover {
     height: 321px;
 }
 .bannerWrapper .container .innerContainer {
-    width: 100%;
+    padding-top: 20px;
     vertical-align: middle;
     text-align: left;
     color: #fff;
@@ -538,8 +538,18 @@ a:hover {
 .bannerWrapper .innerContainer a:hover {
     text-decoration: none;
 }
-.bannerWrapper .bannerRight {
-    float: right;
+
+.bannerWrapper .container.bannerRight  {
+    text-align: right;
+}
+.bannerWrapper .container.bannerCenter  {
+    text-align: center;
+}
+.bannerWrapper .container.bannerTop  .innerContainer  {
+    vertical-align: top;
+}
+.bannerWrapper .container.bannerBottom  .innerContainer  {
+    vertical-align: bottom;
 }
 
 #myCarousel {
