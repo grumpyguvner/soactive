@@ -27,10 +27,12 @@ class ControllerCheckoutShippingMethod extends Controller {
 		
 					if ($quote) {
 						$quote_data[$result['code']] = array( 
-							'title'      => $quote['title'],
-							'quote'      => $quote['quote'], 
-							'sort_order' => $quote['sort_order'],
-							'error'      => $quote['error']
+							'title'             => $quote['title'],
+                                                        'sTitle'            => $quote['sTitle'],
+                                                        'weight_sort_order' => $quote['weight_sort_order'],
+							'quote'             => $quote['quote'], 
+							'sort_order'        => $quote['sort_order'],
+							'error'             => $quote['error']
 						);
 					}
 				}

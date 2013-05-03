@@ -113,7 +113,7 @@
             }
             ?>
             <div class="paAddress content">
-                <div class="prow">
+                <div class="prow" id="paCompany">
                     <div class="pLabel">
                         <?php echo $entry_company; ?>
                     </div>

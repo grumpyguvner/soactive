@@ -72,7 +72,7 @@
                 }
                 ?>
                 <div class="paAddress">
-                    <div class="prow">
+                    <div class="prow" id="paCompany">
                         <div class="pLabel">  
                             <span class="required">*</span> <?php echo $entry_firstname; ?>
                         </div>
