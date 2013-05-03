@@ -7,12 +7,15 @@ if (!empty($banners)) {
             <?php
             $indicators = '';
             foreach ($banners as $key => $banner) {
+                
+                $class = (preg_match('%.*class="(banner[^"]*)".*%', $banner['description'])) ? preg_replace('%.*class="(banner[^"]*)".*%s', ' \\1', $banner['description']) : false;
+                
                 ?>
                 <div class="bannerWrapper item<?php if ($key == 0) echo ' active'; ?>">
                     <?php if ($banner['link']) echo '<a href="' . $banner['link'] . '">'; ?><img class="bannerImage" src="<?php echo $banner['image']; ?>" width="<?php echo $banner['width']; ?>" height="<?php echo $banner['height']; ?>" /><?php if ($banner['link']) echo '</a>'; ?>
                     <?php if ($banner['description']) { ?>
                         <div class="outerContainer">
-                            <div class="container" style="height:<?php echo $banner['height']; ?>px;line-height:<?php echo $banner['height']; ?>px">
+                            <div class="container<?php if ($class) echo $class; ?>" style="height:<?php echo $banner['height']; ?>px;line-height:<?php echo $banner['height']; ?>px">
                                 <div class="innerContainer">
                                 <?php echo $banner['description']; ?>
                                 </div>

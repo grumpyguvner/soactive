@@ -6,9 +6,13 @@ if ($thumb && $description) {
     ?>
     <div class="bannerWrapper">
         <img src="<?php echo $thumb; ?>" class="bannerImage" alt="<?php echo $heading_title; ?>" width="<?php echo $thumbW; ?>" height="<?php echo $thumbH; ?>" />
-        <?php if ($description) { ?>
+        <?php if ($description) {
+            
+                $class = (preg_match('%.*class="(banner[^"]*)".*%', $description)) ? preg_replace('%.*class="(banner[^"]*)".*%s', ' \\1', $description) : false;
+                
+            ?>
             <div class="outerContainer">
-                <div class="container" style="height:<?php echo $thumbH; ?>px;line-height:<?php echo $banner['height']; ?>px">
+                <div class="container<?php if ($class) echo $class; ?>" style="height:<?php echo $thumbH; ?>px;line-height:<?php echo $banner['height']; ?>px">
                     <div class="innerContainer">
                     <?php echo $description; ?>
                     </div>
