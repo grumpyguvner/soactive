@@ -821,6 +821,9 @@ table.radio tr.highlight:hover td {
     background: #F1FFDD;
     cursor: pointer;
 }
+table.radio tr.highlight td#quoteTitle {
+    min-width: 8px;
+}
 .pagination {
     margin: 20px 10px;
     line-height: 19px;
@@ -2241,13 +2244,13 @@ a.button-account:hover, input.button-account:hover {
 }
 .checkout-content .left {
     float: left;
-    width: 50%;
+    width: 46%;
 }
 .checkout-content .right {
     border-left: 1px solid #DDDDDD;
     padding-left: 20px;
     float:right;
-    width: 45%;
+    width: 48%;
 }
 .checkout-content .new-customer {
     float: left;
@@ -2277,7 +2280,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .checkout-content .paSelect .pInput {
     float: right;
-    width: 102%;
+    width: 100%;
 }
 .checkout-content .buttons {
     clear: both;
@@ -3759,11 +3762,18 @@ select[size] {
 {
     display: none;
 }
+.postcodeAnywhereContainer .paLookup, .postcodeAnywhereContainer .paSelect .pLabel 
+{
+    margin-top: 60px;
+}
 .postcodeAnywhereContainer .paAddress button[name=lookup]
 {
     display: none;
 }
-
+.postcodeAnywhereContainer .paAddress #paCompany
+{
+    display: none;
+}
 .postcodeAnywhereContainer .btn {
     margin-bottom: 10px;
 }

@@ -99,7 +99,7 @@
                 ?>
 
                 <div class="paAddress content">
-                    <div class="prow">
+                    <div class="prow" id="paCompany">
                         <div class="pLabel">
                             <?php echo $entry_company; ?>
                         </div>
@@ -184,6 +184,13 @@
                         </div>
                         <div class="pInput">
                             <input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" />
+                        <?php
+                                        if ($use_postcode_anywhere) {
+                                            ?>
+                                            <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
+                                            <?php
+                                        }
+                            ?>
                         </div>
                     </div>
                     <div class="prow">

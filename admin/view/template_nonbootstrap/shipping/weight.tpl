@@ -72,6 +72,10 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_sort_order; ?></td>
+              <td><input type="text" name="weight_<?php echo $geo_zone['geo_zone_id']; ?>_sort_order" value="<?php echo ${'weight_' . $geo_zone['geo_zone_id'] . '_sort_order'} ?>" size="1" /></td>
+            </tr>
           </table>
         </div>
         <?php } ?>
