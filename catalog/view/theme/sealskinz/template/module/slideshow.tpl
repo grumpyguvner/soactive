@@ -8,7 +8,7 @@ if (!empty($banners)) {
             $indicators = '';
             foreach ($banners as $key => $banner) {
                 
-                $class = (preg_match('%.*class="(banner[^"]*)".*%', $banner['description'])) ? preg_replace('%.*class="(banner[^"]*)".*%s', '\\1', $banner['description']) : false;
+                $class = (preg_match('%.*class="(banner[^"]*)".*%', $banner['description'])) ? preg_replace('%.*class="(banner[^"]*)".*%s', ' \\1', $banner['description']) : false;
                 
                 ?>
                 <div class="bannerWrapper item<?php if ($key == 0) echo ' active'; ?>">
