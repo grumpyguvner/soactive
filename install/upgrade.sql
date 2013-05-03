@@ -409,8 +409,7 @@ ALTER TABLE `oc_information_description` ADD `meta_keyword` varchar(255) COLLATE
 
 #### Start 1.5.4:BC1.2.1
 
-DROP TABLE IF EXISTS `oc_sage_stock_item`;
-CREATE TABLE `oc_sage_stock_item` (
+CREATE TABLE IF NOT EXISTS `oc_sage_stock_item` (
   `stock_item_id` int(11) NOT NULL,
   `stock_item_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `stock_item_name` text COLLATE utf8_bin NOT NULL,
@@ -425,8 +424,7 @@ CREATE TABLE `oc_sage_stock_item` (
   KEY `product_id` (`product_id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-DROP TABLE IF EXISTS `oc_sage_order`;
-CREATE TABLE `oc_sage_order` (
+CREATE TABLE IF NOT EXISTS `oc_sage_order` (
   `sage_id` int(11) NOT NULL,
   `sage_reference` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `sage_status` text COLLATE utf8_bin NOT NULL,

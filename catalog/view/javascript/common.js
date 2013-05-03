@@ -2,16 +2,30 @@
     $.fn.postcodeAnywhere = function() {
         if ($(this).find('.paLookup').length)
         {
-            $(this).find('.paLookup').show();
-            $(this).find('.paAddress').hide();
-            if ($(this).is('.paCheckout'))
+            if (!$(this).find('.paAddress input[name=address_1]').val() && !$(this).find('.paAddress input[name=postcode]').val())
             {
-               $(this).find('.paAddress button[name=lookup]').show();
+                $(this).find('.paLookup').show();
+                $(this).find('.paAddress').hide();
             }
+            $(this).find('.paAddress button[name=lookup]').show();
         }
     
         $(this).on('click','button[name=lookup]', function () {
+            event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
+            
+            if ($(this).parents('.paAddress').length)
+            {
+                paContainer.find('input[name=postcode_lookup]').val(paContainer.find('input[name=postcode]').val());
+                paContainer.find('select[name=postcode_lookup_country_id]').val(paContainer.find('select[name=country_id]').val());
+                paContainer.find('.paAddress input').val('').trigger('change');
+                paContainer.find('input[name=postcode]').val(paContainer.find('input[name=postcode_lookup]').val());
+                paContainer.find('.paLookup').show();
+                paContainer.find('.paAddress').hide();
+            }
+            
+            paContainer.find('select[name=\'address_dropdown\'] option').remove();
+            
             $.ajax({
                 url: 'index.php?route=module/postcode_anywhere/postcode&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&postcode=' + encodeURIComponent(paContainer.find('input[name=postcode_lookup]').val()),
                 dataType: 'json',
@@ -43,10 +57,10 @@
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                 }
             });
-            return false;
         });
     
         $(this).on('click','button[name=address_select]', function () {
+            event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
             $.ajax({
                 url: 'index.php?route=module/postcode_anywhere/address&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&address=' + encodeURIComponent(paContainer.find('select[name=address_dropdown]').val()),
@@ -77,7 +91,14 @@
                 //alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                 }
             });
-            return false;
+        });
+        
+        $(this).on('click','.manualAddress', function () {
+            event.preventDefault();
+            var paContainer = $(this).parents('.postcodeAnywhereContainer');
+            paContainer.find('.paLookup').hide();
+            paContainer.find('.paSelect').hide();
+            paContainer.find('.paAddress').show();
         });
     }; 
 })( jQuery );

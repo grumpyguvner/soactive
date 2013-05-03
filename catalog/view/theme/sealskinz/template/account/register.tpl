@@ -102,8 +102,8 @@
                                             <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
                                             <?php if ($error_postcode_lookup) { ?>
                                                 <span class="error"><?php echo $error_postcode_lookup; ?></span>
-                                                <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                                             <?php } ?>
+                                                <br><a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                                 }
                                                 ?>
                                             </select><br >
-                                            <button class="btn" name="address_select" type="submit"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                                            <button class="btn" name="address_select" type="submit"><?php echo $button_select_address; ?></button>
                                         </div>
                                     </div>
                                 </div>

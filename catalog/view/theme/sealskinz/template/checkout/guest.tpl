@@ -69,14 +69,14 @@
                                 <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
                                 <?php if ($error_postcode_lookup) { ?>
                                     <span class="error"><?php echo $error_postcode_lookup; ?></span>
-                                    <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                                 <?php } ?>
+                                    <br><a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
                             </div>
                         </div>
                     </div>
                     <div class="paSelect content">
                         <div class="prow">
-                            <div class="pLabel"><span class="paSelect_required required">*</span> <?php echo $entry_search_address; ?></div>
+                            <div class="pLabel"><span class="paSelect_required required">*</span> <?php echo $entry_select_address; ?></div>
                             <div class="pInput">
                                 <select name="address_dropdown"<?php if ($paAddresses) echo ' size="' . (count($paAddresses) > 9 ? 10 : count($paAddresses)) . '"'; ?> class="pselect">
                                     <?php
@@ -90,7 +90,7 @@
                                     }
                                     ?>
                                 </select><br />
-                                <button class="btn" name="address_select" type="button"><?php echo $button_select_address; ?></button> &nbsp; <a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
+                                <button class="btn" name="address_select" type="button"><?php echo $button_select_address; ?></button>
                             </div>
                         </div>
                     </div>
