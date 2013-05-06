@@ -135,6 +135,9 @@
                 <div class="container">
 
                     <div id='cssmenu'>
+                        <div id="socialn">
+                            <span><?php echo $text_follow_us ?></span>&nbsp<span><?php echo $fb ?></span><span><?php echo $tw ?></span><span><?php echo $yb ?></span><span><?php echo $pt ?></span><span><?php echo $gp ?></span>
+                        </div>
                         <ul>
                             <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
                             <li id="activity"><span><?php echo $text_activity ?></span>
@@ -176,7 +179,7 @@
                             <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span><?php echo $text_blog ?></span></a></li>
                             <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                             <li><a href="registration"><span><?php echo $text_product_registration ?></span></a></li>
-                            <li id="socialn"><span><?php echo $text_follow_us ?></span>&nbsp<span><?php echo $fb ?></span><span><?php echo $tw ?></span><span><?php echo $yb ?></span><span><?php echo $pt ?></span><span><?php echo $gp ?></span></li>
+                            
                         </ul>
                     </div>
                 </div>
