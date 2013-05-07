@@ -347,44 +347,8 @@ class ModelToolSageProducts extends Model {
             
             $product_info['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
             
-            $this->load->model('sale/customer_group');
             $pricebands = $stock_item['pricebands'];
-            foreach ($product_info['product_discount'] AS $key => $product_discount) {
-                //TODO: Delete any discounts which no longer exist
-                $customer_group = $this->model_sale_customer_group->getCustomerGroup($product_discount['customer_group_id']);
-                if ($customer_group) {
-                    if (array_key_exists($customer_group['name'], $pricebands)) {
-                        $product_info['product_discount'][$key]['price'] = $pricebands[$customer_group['name']];
-                        unset ($pricebands[$customer_group['name']]);
-                    } else {
-                        unset($product_info['product_discount'][$key]);
-                    }
-                } else {
-                    unset($product_info['product_discount'][$key]);
-                }
-            }
-            $default_price = (isset($pricebands[$this->config->get('sage_default_priceband')]) ? $pricebands[$this->config->get('sage_default_priceband')] : 0 );
-            foreach ($pricebands AS $customer_group => $price) {
-                switch ($customer_group) {
-                    case $this->config->get('sage_default_priceband'):
-                        $product_info['price'] = $price;
-                        break;
-                    default:
-                        $customer_group_id = $this->getCustomerGroupId($customer_group, $product_info['tax_class_id'] );
-                        $product_info['product_discount'][] = array (
-                            'product_id' => $product_id,
-                            'customer_group_id' => $customer_group_id,
-                            'quantity' => 1,
-                            'priority' => 999,
-                            'price' => ( $price > 0 ? $price : $default_price ),
-                            'date_start' => '0000-00-00',
-                            'date_end' => '0000-00-00'
-                        );
-                        
-                        break;
-                }
-            }
-            
+            $product_info['price'] = (isset($pricebands[$this->config->get('sage_default_priceband')]) ? $pricebands[$this->config->get('sage_default_priceband')] : $product_info['price'] );
             
             $product_info['status'] = ($stock_item['status'] == "Active" ? 1 : 0);
             
@@ -456,27 +420,9 @@ class ModelToolSageProducts extends Model {
                 'product_category' => null,
                 'product_store' => array(0)
             );
+            
             $pricebands = $stock_item['pricebands'];
-            $default_price = (isset($pricebands[$this->config->get('sage_default_priceband')]) ? $pricebands[$this->config->get('sage_default_priceband')] : 0 );
-            foreach ($pricebands AS $customer_group => $price) {
-                switch ($customer_group) {
-                    case $this->config->get('sage_default_priceband'):
-                        $product_info['price'] = $price;
-                        break;
-                    default:
-                        $customer_group_id = $this->getCustomerGroupId($customer_group, $product_info['tax_class_id']);
-                        $product_info['product_discount'][] = array (
-                            'customer_group_id' => $customer_group_id,
-                            'quantity' => 1,
-                            'priority' => 999,
-                            'price' => ( $price > 0 ? $price : $default_price ),
-                            'date_start' => '0000-00-00',
-                            'date_end' => '0000-00-00'
-                        );
-                        
-                        break;
-                }
-            }
+            $product_info['price'] = (isset($pricebands[$this->config->get('sage_default_priceband')]) ? $pricebands[$this->config->get('sage_default_priceband')] : 0 );
             
             $this->log->write($stock_item['description'] . "(" . $model . ") being added");
             $product_id = $this->model_catalog_product->addProduct($product_info);
@@ -628,7 +574,8 @@ class ModelToolSageProducts extends Model {
             'name' => $tax_code['name'],
             'rate' => $tax_code['rate'],
             'type' => "P", // P = Percentage
-            'geo_zone_id' => $this->getGeoZoneId($tax_code['name'] . " Tax Zone")
+            'geo_zone_id' => $this->getGeoZoneId($tax_code['name'] . " Tax Zone"),
+            'tax_rate_customer_group' => array (1)
         );
 
         if ($tax_rate) {

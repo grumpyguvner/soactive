@@ -55,7 +55,7 @@ class ModelToolSageOrders extends Model {
         $result = $this->db->query($sql);
         if ($result->rows) {
             foreach ($result->rows as $row) {
-                $export = true;
+                $errors = array();
                 $order_info = $this->model_sale_order->getOrder($row['order_id']);
                 if (!empty($order_info) && $this->readyToPost($row['order_id'])) {
                     $this->log->write("processing " . $order_info['order_id'] . ":" . $order_info['invoice_prefix'] . ":" . $order_info['customer_name']);
@@ -65,7 +65,7 @@ class ModelToolSageOrders extends Model {
                             '<order>' . "\n" .
                             '<gross_pricing>true</gross_pricing>' . "\n" .
                             '<document_date>' . $order_info['date_added'] . '</document_date>' . "\n" .
-                            '<customer_ref>' . SITE_REGION . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . $order_info['firstname']. " " . $order_info['lastname'] . '</customer_ref>' . "\n";
+                            '<customer_ref>' . (defined('SITE_REGION') ? SITE_REGION : "") . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . " " . $order_info['firstname']. " " . $order_info['lastname'] . '</customer_ref>' . "\n";
                     #set delivery address
                     $order_xml .=
                             '<delivery_address>' . "\n" .
@@ -105,34 +105,45 @@ class ModelToolSageOrders extends Model {
                         if ($product_option_value_query->row) {
                             //Make sure order quantity not greater than available quantity
                             if ($order_product['quantity'] > $product_option_value_query->row['quantity']) {
+                                $errors[] = "quantity ordered greater than stock: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
                                 $this->log->write("quantity ordered greater than stock, expect sage to throw error");
                             } else {
                                 $this->log->write("product quantity ok, continuing");
                             }
+                            $sage_info = $this->model_catalog_product->getSageProductInfo($product_id, $product_option_value_id);
+                            if (!$sage_info) {
+                                $errors[] = "product option doesn't match a sage sku: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
+                            } else {
+                                $product_info = $this->model_catalog_product->getProduct($product_id);
+                                if (!$product_info) {
+                                    $errors[] = "product not found: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
+                                } else {
+
+                                    $order_xml .=
+                                            '<item>' . "\n" .
+                                            ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
+                                            ' <item_id>' . $sage_info['stock_item_id'] . '</item_id>' . "\n" .
+                                            ' <tax_code_id>' . $this->getSageTaxId($product_info['tax_class_id']) . '</tax_code_id>' . "\n" .
+                                            ' <quantity>' . $order_product['quantity'] . '</quantity>' . "\n" .
+                                            ' <price>' . $order_product['price'] . '</price>' . "\n" .
+                                            '</item>' . "\n";
+                                }
+                            }
                         } else {
-                            $this->log->write("product option no longer exists so continuing");
+                            $errors[] = "product option no longer exists: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
+                            $this->log->write("product option no longer exists");
                         }
-                        $sage_info = $this->model_catalog_product->getSageProductInfo($product_id, $product_option_value_id);
-                        $product_info = $this->model_catalog_product->getProduct($product_id);
-                        
-                        $order_xml .=
-                                '<item>' . "\n" .
-                                ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
-                                ' <item_id>' . $sage_info['stock_item_id'] . '</item_id>' . "\n" .
-                                ' <tax_code_id>' . $this->getSageTaxId($product_info['tax_class_id']) . '</tax_code_id>' . "\n" .
-                                ' <quantity>' . $order_product['quantity'] . '</quantity>' . "\n" .
-                                ' <price>' . $order_product['price'] . '</price>' . "\n" .
-                                '</item>' . "\n";
                     }#next product
                     
                     #set postage charge
                     $order_xml .= 
-                            '<free_text_item>' . "\n" .
-                            ' <tax_code_id>' . $this->getSageTaxId($this->getShippingTaxClassId($order_info['shipping_code'])) . '</tax_code_id>' . "\n" . 
-                            ' <description>Ship via:' . $order_info['shipping_method'] . '</description>' . "\n" .
+                            '<item>' . "\n" .
+                            ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
+                            ' <item_id>' . ( ( $order_info['shipping_total'] <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
+                            ' <tax_code_id>2</tax_code_id>' . "\n" .
                             ' <price>' . $order_info['shipping_total'] . '</price>' . "\n" .
                             ' <quantity>1</quantity>' . "\n" .
-                            '</free_text_item>' . "\n";
+                            '</item>' . "\n";
                     $order_xml .= '<comment>Ship via:' . $order_info['shipping_method'] . '</comment>' . "\n";
 
                     #set order total
@@ -157,30 +168,13 @@ class ModelToolSageOrders extends Model {
                             '</order>' . "\n";
 
                     // post order to sage
-                    $sage_info = $this->model_sale_customer->getSagecustomerInfo($order_info['customer_id']);
-                    $ordersURL = "http://" . $this->config->get('sage_server') . ":" . $this->config->get('sage_port') . "/DMC_SOP/customers/" . $sage_info['sage_id'] . "/orders";
-                    if ((string) $sage_info['sage_id'] == "")
-                        $export = false;
+                    $sage_customer_id = 10680255;
+                    $ordersURL = "http://" . $this->config->get('sage_server') . ":" . $this->config->get('sage_port') . "/DMC_SOP/customers/" . $sage_customer_id . "/orders";
                     
-                    if ($export) {
+                    if (!count($errors)) {
                         if ($debug) $this->log->write("posting to " . $ordersURL . ":\n" . $order_xml);
                         $response = send2Sage($ordersURL, $order_xml);
                         if ($debug) $this->log->write("response:\n" . serialize($response));
-
-//$mail = new Mail();
-//$mail->protocol = $this->config->get('config_mail_protocol');
-//$mail->hostname = $this->config->get('config_smtp_host');
-//$mail->username = $this->config->get('config_smtp_username');
-//$mail->password = $this->config->get('config_smtp_password');
-//$mail->port = $this->config->get('config_smtp_port');
-//$mail->timeout = $this->config->get('config_smtp_timeout');							
-////$mail->setTo($this->config->get('config_email'));
-//$mail->setTo("mark.horton@boundlesscommerce.co.uk");
-//$mail->setFrom($this->config->get('config_email'));
-//$mail->setSender($this->config->get('config_name'));
-//$mail->setSubject(html_entity_decode("SAGE ORDER DEBUG - RESPONSE"));
-//$mail->setText(html_entity_decode($ordersURL . "<br/>" . serialize($response), ENT_QUOTES, 'UTF-8'));
-//$mail->send();
                         
                         $xml = simplexml_load_string($response);
                         $order_id = (string) $xml->order->id;
@@ -205,7 +199,16 @@ class ModelToolSageOrders extends Model {
                                                     date_processed = NOW()
                                 ";
                             $this->db->query($sql);
+                        } else {
+                            $subject = "SAGE ORDER ERROR: Unexpected response from sage  " . $order_info['order_id'];
+                            $message = "The URL was:\n" . $ordersURL . "\n\n\nThe response was:\n" . $response . "\n\n\nThe data posted was:\n\n" . $order_xml . "\n";
+                            $this->emailError($subject, $message);
                         }
+                    } else {
+                        $subject = "SAGE ORDER ERROR: Didn't try to send to sage  " . $order_info['order_id'];
+                        $message = "Unable to send to sage because of the following errors:\n" . implode("\n", $errors) . "\n\nAfter resolving the errors the order will then be sent to sage.";
+                        $message .= "\n\n\nThe URL was:\n" . $ordersURL . "\n\n\nThe response was:\n" . $response . "\n\n\nThe data posted was:\n\n" . $order_xml . "\n";
+                        $this->emailError($subject, $message);
                     }
                     
                 }
@@ -218,6 +221,23 @@ class ModelToolSageOrders extends Model {
         }
 
         $this->log->write("Export Complete");
+    }
+
+    function emailError($subject, $message) {
+        $mail = new Mail();
+        $mail->protocol = $this->config->get('config_mail_protocol');
+        $mail->hostname = $this->config->get('config_smtp_host');
+        $mail->username = $this->config->get('config_smtp_username');
+        $mail->password = $this->config->get('config_smtp_password');
+        $mail->port = $this->config->get('config_smtp_port');
+        $mail->timeout = $this->config->get('config_smtp_timeout');							
+        $mail->setTo($this->config->get('config_email'));
+//        $mail->setTo("mark.horton@boundlesscommerce.co.uk");
+        $mail->setFrom($this->config->get('config_email'));
+        $mail->setSender($this->config->get('config_name'));
+        $mail->setSubject($subject);
+        $mail->setText($message);
+        $mail->send();
     }
     
     function readyToPost($order_id) {
