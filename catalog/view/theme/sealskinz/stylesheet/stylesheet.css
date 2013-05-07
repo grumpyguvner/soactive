@@ -2283,15 +2283,16 @@ a.button-account:hover, input.button-account:hover {
 }
 .checkout-content .prow {
     width: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 15px;
 }
 .checkout-content .pLabel {
-    float: left;
+    display: inline-block;
     padding-right: 20px;
+    width: 111px;
 }
 .checkout-content .pInput {
-    float: right;
-    width: 55%;
+    display: inline-block;
+    /*width: 55%;*/
 }
 .checkout-content .paSelect .pInput {
     float: right;
@@ -2308,8 +2309,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .checkout-content .error {
     font-size: 12px;
-    margin-top: -60px;
-    float: left;
+    display: table-cell;
 }
 .checkout-content .form .error{
     float: right;
@@ -3778,10 +3778,6 @@ select[size] {
 .postcodeAnywhereContainer .paLookup, .postcodeAnywhereContainer .paSelect
 {
     display: none;
-}
-.postcodeAnywhereContainer .paLookup, .postcodeAnywhereContainer .paSelect .pLabel 
-{
-    margin-top: 60px;
 }
 .postcodeAnywhereContainer .paAddress button[name=lookup]
 {
