@@ -10,7 +10,7 @@
             $(this).find('.paAddress button[name=lookup]').show();
         }
     
-        $(this).on('click','button[name=lookup]', function () {
+        $(this).on('click','button[name=lookup]', function (event) {
             event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
             
@@ -37,8 +37,8 @@
                 },			
                 success: function(json) {
                     html = '';
-
-                    if (json['addresses'] != '') {
+                        
+                        if (json['addresses'] != '') {
                         paSelect = paContainer.find('select[name=\'address_dropdown\']');
                         for (i = 0; i < json['addresses'].length; i++) {
                             var option = $('<option/>');
@@ -59,7 +59,7 @@
             });
         });
     
-        $(this).on('click','button[name=address_select]', function () {
+        $(this).on('click','button[name=address_select]', function (event) {
             event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
             $.ajax({
@@ -93,7 +93,7 @@
             });
         });
         
-        $(this).on('click','.manualAddress', function () {
+        $(this).on('click','.manualAddress', function (event) {
             event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
             paContainer.find('.paLookup').hide();

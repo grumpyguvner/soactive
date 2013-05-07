@@ -19,13 +19,13 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
         <!-- Bootstrap css -->
         <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
+        <!--        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link href="catalog/view/theme/sealskinz/stylesheet/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">-->
         <!-- End css Bootstrap css -->
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet.css" />
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-480.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-480.css" />
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-767.css" />
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-768-979.css" />
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/sealskinz/stylesheet/stylesheet-768-979.css" /> -->
         <?php foreach ($styles as $style) { ?>
             <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
         <?php } ?>
@@ -56,48 +56,50 @@
         DD_belatedPNG.fix('#logo img');Senza nomSenza nome 1e 1
         </script>
         <![endif]-->
-        <?php echo $google_analytics; ?>
+        
     </head>
     <body>
-
+        <?php echo $google_analytics; ?>
         <div id="header">
             <div id="background">
                 <div class="container">
                     <div id="menuh">
-                            <ul id="left">
-                                <li><a href="#" class="top_parent" onclick="return false;"><img src="image/flags/us.png" alt="UK" />&nbsp US </a>
-                                    <ul>
-                                        <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/UK/"><img src="image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
-                                        <li><a href="#"><img src="image/flags/us.png" alt="US" />&nbsp US</a></li>
-                                    </ul>
-                                </li>
+                        <ul id="left">
+                            <li><a href="#" class="top_parent" onclick="return false;"><img src="image/flags/gb.png" alt="UK" />&nbsp <?php echo $text_uk ?> </a>
+                                <ul>
+                                    <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/UK/"><img src="image/flags/gb.png" alt="UK" />&nbsp UK</a></li>
+                                    <li><a href="#"><img src="image/flags/us.png" alt="US" />&nbsp US</a></li>
+                                </ul>
+                            </li>
                             <?php
                             if ($currency) {
-                            ?>
-                           	
-                              <?php if ($currency != '') { ?>
-                                <li>
-                                    <?php echo $currency; ?>
-                                </li>
+                                ?>
+
+                                <?php if ($currency != '') { ?>
+                                    <li>
+                                        <?php echo $currency; ?>
+                                    </li>
                                 <?php } ?>
-                            
-                            <?php
+
+                                <?php
                             }
                             ?>
-                            </ul>
-                            <ul id="right">
-                                <?php if (!$logged) { ?>
-                                    <li>
-                                        <a href="<?php echo $login; ?>"><?php echo $text_login; ?></a>
-                                    </li>
-                                <?php } else { ?>
-                                    <li>
-                                        <?php echo $text_logged; ?>
-                                    </li>
-                                <?php } ?>
-                                <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
-                                <li><?php echo $cart; ?></li>
-                            </ul> 
+                            <li><a href="free-uk-delivery"><?php echo $text_free_delivery; ?></a></li>
+                            <li><a href="free-uk-returns" style="border-right: 1px solid grey;"><?php echo $text_free_returns; ?></a></li>
+                        </ul>
+                        <ul id="right">
+                            <?php if (!$logged) { ?>
+                                <li>
+                                    <a href="<?php echo $login; ?>"><?php echo $text_login; ?></a>
+                                </li>
+                            <?php } else { ?>
+                                <li>
+                                    <?php echo $text_logged; ?>
+                                </li>
+                            <?php } ?>
+                            <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
+                            <li><?php echo $cart; ?></li>
+                        </ul> 
                     </div> 
                 </div>
             </div>
@@ -125,67 +127,100 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
 
             <!-- Start Menu inferiore -->
             <div class="menu-gradient">
                 <div class="container">
-                    <div class="row">
-                        <div class="margin-30">
-                            <div id="container-in"> 
-                                <div id='cssmenu'>
-                                    <ul>
-                                        <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
-                                        <li><a href=""><span><?php echo $text_activity ?></span></a>
-                                            <?php if ($categories) { ?>
-                                                <ul class="wrap-menu">
-                                                        <div id="left">
-                                                            <?php $children = $categories[1]['children']; ?>
-                                                            <?php if ($children) { ?>
-                                                                <?php for ($i = 0; $i < count($children) && $i < 3; $i++) { ?>
-                                                                    <a href="<?php echo $children[$i]['href'] ?>" alt="<?php echo $children[$i]['name'] ?>" >
-                                                                        <div class="<?php echo $children[$i]['name'] ?>">&nbsp;</div>
-                                                                    </a>
-                                                                <?php } ?>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <div id="right" class="menu-list">
-                                                            <div class="activities"><b><?php echo $categories[0]['name'] ?></b></div>
-                                                            <?php $children = $categories[0]['children']; ?>
-                                                            <?php if ($children) { ?>
-                                                                <div id="left" class="menu-column-left">
-                                                                    <?php for ($i = 0; $i < count($children) && $i < 8; $i++) { ?>
-                                                                        <li><a href="<?php echo $children[$i]['href']; ?>"><?php echo $children[$i]['name']; ?></a></li>
-                                                                    <?php } ?>
-                                                                </div>   
-                                                                <div id="right" class="menu-column-right">
-                                                                    <?php $count = 0; ?>
-                                                                    <?php for ($i = 9; $i < count($children); $i++) { ?>
-                                                                        <li style="border-left: none !important;"><a href="<?php echo $children[$i]['href']; ?>"><?php echo $children[$i]['name']; ?></a></li>
-                                                                        <?php $count = $count + 1; ?>
-                                                                    <?php } ?>
-                                                                    <?php $ncat = 8 - $count; ?>
-                                                                    <?php for ($c = 0; $c < $ncat; $c++) { ?>
-                                                                        <li style="border-left: none !important;">&nbsp</li>
-                                                                    <?php } ?>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                </ul>
-                                            <?php } ?>
-                                        </li>
-                                        <li><a href="our-history"><span>Brand Story</span></a></li>
-                                        <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span><?php echo $text_blog ?></span></a></li>
-                                        <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
-                                        <li><a href="registration"><span><?php echo $text_product_registration ?></span></a></li>
-                                        <li id="socialn"><span><?php echo $text_follow_us ?></span>&nbsp<span><a href="https://www.facebook.com/sealskinzfanz" target="_blank"><img src="catalog/view/theme/sealskinz/image/facebook.png" alt="facebook" /></a></span><span><a href="https://twitter.com/sealskinz" target="_blank"><img src="catalog/view/theme/sealskinz/image/twitter.png" alt="twitter" /></a></span><span><a href="http://www.youtube.com/user/SealSkinzOfficial" target="_blank"><img src="catalog/view/theme/sealskinz/image/youtube.png" alt="Youtube" /></a></span><span><a href="http://pinterest.com/sealskinz/" target="_blank"><img src="catalog/view/theme/sealskinz/image/p.png" alt="Pinterest" /></a></span><span><a href="https://plus.google.com/104755229034762094653/posts" target="_blank"><img src="catalog/view/theme/sealskinz/image/google-plus.png" alt="Google Plus" /></a></span></li>
-                                    </ul>
-                                </div>
-                            </div>
+
+                    <div id='cssmenu'>
+                        <div id="socialn">
+                            <span><?php echo $text_follow_us ?></span>&nbsp<span><?php echo $fb ?></span><span><?php echo $tw ?></span><span><?php echo $yb ?></span><span><?php echo $pt ?></span><span><?php echo $gp ?></span>
                         </div>
+                        <ul>
+                            <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
+                            <li id="activity"><span><?php echo $text_activity ?></span>
+                                <?php if ($categories) { ?>
+                                    <ul class="wrap-menu">
+                                        <div id="left">
+                                            <?php $children = $categories[1]['children']; ?>
+                                            <?php if ($children) { ?>
+                                                <?php for ($i = 0; $i < count($children) && $i < 3; $i++) { ?>
+                                                    <a href="<?php echo $children[$i]['href'] ?>" alt="<?php echo $children[$i]['name'] ?>" >
+                                                        <div class="<?php echo $children[$i]['name'] ?>"></div>
+                                                    </a>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </div>
+                                        <div id="right" class="menu-list">
+                                            <div class="activities"><b><?php echo $categories[0]['name'] ?></b></div>
+                                            <?php $children = $categories[0]['children']; ?>
+                                            <?php if ($children) { ?>
+                                            <?php while (count($children) < 16) {
+                                                    $children[] = array('name' => "&nbsp;", 'href' => "");
+                                                  } 
+                                                  $children = array_slice($children, 0, 16); ?>
+                                                <div id="left" class="menu-column-left">
+                                                    <?php foreach ($children as $child) { ?>
+                                                    <?php   if (++$count == 9) { ?>
+                                                </div>   
+                                                <div id="right" class="menu-column-right">
+                                                    <?php   } ?>
+                                                        <li <?php echo ($count > 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
+                                                    <?php } ?>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    </ul>
+                                <?php } ?>
+                            </li>
+                            <li><a href="our-history"><span><?php echo $text_brand_story ?></span></a></li>
+                            <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span><?php echo $text_blog ?></span></a></li>
+                            <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
+                            <li><a href="registration"><span><?php echo $text_product_registration ?></span></a></li>
+                            
+                        </ul>
                     </div>
-                    <!-- Finish Menu inferiore -->
                 </div>
+                <!-- Finish Menu inferiore -->
             </div>
 
         </div>
+<script type="text/javascript">
+$(document).ready(function () {
+   
+    $('#activity').hover(
+          function () {
+              $('ul', this).fadeIn(100);
+          },
+          function () {
+              $('ul', this).fadeOut(100);       
+          }
+    );
+        
+    $('.wrap-menu').click(
+         function() {
+            if( $('#cssmenu > ul > li > ul').is(':hidden') ) {
+                $('#cssmenu > ul > li > ul').css('display','inline-block'); 
+            }
+            else {
+                $('#cssmenu > ul > li > ul').css('display', 'none');
+            }
+         }
+    );
+        
+    $('#activity').mouseover(
+        function () {
+            $('#cssmenu ul > li#activity > span').css('background','#74964a');
+        }
+    );
+        
+    $('#activity').mouseout(
+        function () {
+            $('#cssmenu ul > li#activity > span').css('background','none');
+        }
+    );
+        
+});
+</script>

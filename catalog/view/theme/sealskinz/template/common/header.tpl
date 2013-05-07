@@ -65,12 +65,16 @@
                 <div class="container">
                     <div id="menuh">
                         <ul id="left">
+                            <?php
+                            /*
                             <li><a href="#" class="top_parent" onclick="return false;"><img src="image/flags/gb.png" alt="UK" />&nbsp <?php echo $text_uk ?> </a>
                                 <ul>
                                     <li><a href="#"><img src="image/flags/gb.png" alt="UK" />&nbsp <?php echo $text_uk ?></a></li>
                                     <li><a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/US/"><img src="image/flags/us.png" alt="English" />&nbsp <?php echo $text_us ?></a></li>
                                 </ul>
                             </li>
+                             */
+                            ?>
                             <?php
                             if ($currency) {
                                 ?>
