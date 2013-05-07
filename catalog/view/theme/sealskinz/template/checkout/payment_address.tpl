@@ -137,7 +137,7 @@
                         </div>
                     </div>
                     <?php if ($company_id_display) { ?>
-                        <div class="prow">
+                        <div class="prow" id="paCompanyId">
                             <div class="pLabel">
                                 <?php if ($company_id_required) { ?>
                                     <span class="required">*</span>

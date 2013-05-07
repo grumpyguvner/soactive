@@ -375,7 +375,7 @@ a:hover {
 }
 .mini-cart-total table {
 	border-collapse: collapse;
-	display: inline-block;
+	display: inline-block; zoom: 1; *display: inline;
 	margin-bottom: 5px;
 }
 .mini-cart-total td {
@@ -559,7 +559,7 @@ a:hover {
     overflow: hidden;
 }
 .carousel-control {
-    behavior: url(../../../pie/PIE.htc);
+    behavior: url(catalog/view/PIE/PIE.htc);
 }
 #myCarousel > img {
     width: 100%;
@@ -611,7 +611,7 @@ background-color: rgba(255,255,255,0.25);
 border-radius: 8px;
 border: 3px solid #969674;
 cursor: pointer;
-behavior: url(../../../pie/PIE.htc);
+behavior: url(catalog/view/PIE/PIE.htc);
 }
 #myCarousel .carousel-indicators .active {
 border-color: #fff;
@@ -919,6 +919,7 @@ a.button, input.button {
     -webkit-box-shadow: 0px 2px 2px #DDDDDD;
     -moz-box-shadow: 0px 2px 2px #DDDDDD;
     box-shadow: 0px 2px 2px #DDDDDD;
+    behavior: url(catalog/view/PIE/PIE.htc);
 }
 a.button {
     display: inline-block;
@@ -1137,7 +1138,7 @@ a.button-account:hover, input.button-account:hover {
     overflow: auto;
 }
 .box-product > div {
-    display: inline-block;
+    display: inline-block; zoom: 1; *display: inline;
     vertical-align: top;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -1432,7 +1433,7 @@ a.button-account:hover, input.button-account:hover {
     vertical-align: top;
     border: 1px solid #CCCCCC;
     line-height: 20px;
-    display: inline-block;
+    display: inline-block; zoom: 1; *display: inline;
     margin-right: -1px;
     margin-bottom: -1px;
     font-size: 14px;
@@ -1487,7 +1488,7 @@ a.button-account:hover, input.button-account:hover {
 
 .product-grid-search {
     width: 100%;
-    display: inline-block
+    display: inline-block; zoom: 1; *display: inline;
 }
 .product-grid > div {
     width: 33.07%;
@@ -2034,7 +2035,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .order-list .order-content {
     padding: 10px 0px;
-    display: inline-block;
+    display: inline-block; zoom: 1; *display: inline;
     width: 100%;
     margin-bottom: 20px;
     border-top: 1px solid #EEEEEE;
@@ -2068,7 +2069,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .return-list .return-content {
     padding: 10px 0px;
-    display: inline-block;
+    display: inline-block; zoom: 1; *display: inline;
     width: 100%;
     margin-bottom: 20px;
     border-top: 1px solid #EEEEEE;
@@ -2136,7 +2137,7 @@ a.button-account:hover, input.button-account:hover {
 }
 .download-list .download-content {
     padding: 10px 0px;
-    display: inline-block;
+    display: inline-block; zoom: 1; *display: inline;
     width: 100%;
     margin-bottom: 20px;
     border-top: 1px solid #EEEEEE;
@@ -2496,19 +2497,16 @@ a.button-account:hover, input.button-account:hover {
     margin-left: 10px;
     width: 206px;
     height: 38px;
-
 }
 #newsletter-wrapper input[type="email"]{
-
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
     color: #777777;
-    behavior: url(../../../pie/PIE.htc);
 }
 .newsletter_input a{
     position: absolute;
-    margin-left: -42px;
+    margin-left: -34px;
     margin-top: 0;
     height: 26px;
     font-size: 16px;
@@ -2952,21 +2950,23 @@ input[type="color"]:focus, .uneditable-input:focus {
     color: #FFFFFF;
     text-align: center;
     font-weight: bold;
-    background-color: #5a7639;
+    background: #5a7639;
     width: 206px;
     height: 38px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    behavior: url(../../../pie/PIE.htc);
 }
 .review-in .win-sp span {
    float: left; 
    padding: 8px 17px;
    color: #fff;
+   -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+   behavior: url('catalog/view/PIE/PIE.htc');
 }
 .review-in .win-sp img {
    float: right; 
+   left: 173px;
+   position: absolute;
 }
 .review-in h3 {
     font-size: 20px;
@@ -3154,11 +3154,10 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin: 0 !important;
 }
 .navbar-search .search-query, .navbar-search .search-form {
-    border-radius: 10px 10px 10px 10px !important;
+    border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -khtml-border-radius: 10px 10px 10px 10px;
-    behavior: url(../../../PIE/PIE.htc);
 }
 
 .middle {
@@ -3195,7 +3194,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     margin-left: 30px;
 }
 .info-tecnology {
-    display: inline-block;
+    display: inline-block; zoom: 1; *display: inline;
 }
 .how-they-work.first {
     background-color: #D4E257; 
@@ -3709,6 +3708,7 @@ select[size] {
     padding: 12px 18px;
     border-left: 1px solid #434245;
     border-right: 1px solid #434245;
+    white-space: nowrap;
 }
 #rp-form {
     line-height: 25px;  
@@ -3787,7 +3787,7 @@ select[size] {
 {
     display: none;
 }
-.postcodeAnywhereContainer .paAddress #paCompany
+.postcodeAnywhereContainer .paAddress #paCompany, .postcodeAnywhereContainer .paAddress #paCompanyId, .postcodeAnywhereContainer .paAddress .paCompanyId
 {
     display: none;
 }

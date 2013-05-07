@@ -132,7 +132,7 @@
                     </div>
 
 
-                    <div id="company-id-display">
+                    <div id="company-id-display" class="paCompanyId">
                         <div class="prow">
                             <div class="pLabel">
                                 <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
