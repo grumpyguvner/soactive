@@ -446,6 +446,7 @@ class ModelToolSageProducts extends Model {
                 'product_description' => array(
                     $this->languageId => array(
                         'name' => (string) $stock_item['description'],
+                        'meta_title' => "",
                         'meta_keyword' => (string) $stock_item['description'],
                         'meta_description' => "",
                         'description' => "",
