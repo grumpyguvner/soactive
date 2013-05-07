@@ -513,39 +513,39 @@
                                                     }
 								
                                                     if (json['error']['firstname']) {
-                                                        $('#shipping-address input[name=\'firstname\']').after('<span id="right" class="error">' + json['error']['firstname'] + '</span>');
+                                                        $('#shipping-address input[name=\'firstname\']').after('<span class="error">' + json['error']['firstname'] + '</span>');
                                                     }
 				
                                                     if (json['error']['lastname']) {
-                                                        $('#shipping-address input[name=\'lastname\']').after('<span id="right" class="error">' + json['error']['lastname'] + '</span>');
+                                                        $('#shipping-address input[name=\'lastname\']').after('<span class="error">' + json['error']['lastname'] + '</span>');
                                                     }	
 				
                                                     if (json['error']['email']) {
-                                                        $('#shipping-address input[name=\'email\']').after('<span id="right" class="error">' + json['error']['email'] + '</span>');
+                                                        $('#shipping-address input[name=\'email\']').after('<span class="error">' + json['error']['email'] + '</span>');
                                                     }
 				
                                                     if (json['error']['telephone']) {
-                                                        $('#shipping-address input[name=\'telephone\']').after('<span id="right" class="error">' + json['error']['telephone'] + '</span>');
+                                                        $('#shipping-address input[name=\'telephone\']').after('<span class="error">' + json['error']['telephone'] + '</span>');
                                                     }		
 										
                                                     if (json['error']['address_1']) {
-                                                        $('#shipping-address input[name=\'address_1\']').after('<span id="right" class="error">' + json['error']['address_1'] + '</span>');
+                                                        $('#shipping-address input[name=\'address_1\']').after('<span class="error">' + json['error']['address_1'] + '</span>');
                                                     }	
 				
                                                     if (json['error']['city']) {
-                                                        $('#shipping-address input[name=\'city\']').after('<span id="right" class="error">' + json['error']['city'] + '</span>');
+                                                        $('#shipping-address input[name=\'city\']').after('<span class="error">' + json['error']['city'] + '</span>');
                                                     }	
 				
                                                     if (json['error']['postcode']) {
-                                                        $('#shipping-address input[name=\'postcode\']').after('<span id="right" class="error">' + json['error']['postcode'] + '</span>');
+                                                        $('#shipping-address input[name=\'postcode\']').after('<span class="error">' + json['error']['postcode'] + '</span>');
                                                     }	
 				
                                                     if (json['error']['country']) {
-                                                        $('#shipping-address select[name=\'country_id\']').after('<span id="right" class="error">' + json['error']['country'] + '</span>');
+                                                        $('#shipping-address select[name=\'country_id\']').after('<span class="error">' + json['error']['country'] + '</span>');
                                                     }	
 				
                                                     if (json['error']['zone']) {
-                                                        $('#shipping-address select[name=\'zone_id\']').after('<span id="right" class="error">' + json['error']['zone'] + '</span>');
+                                                        $('#shipping-address select[name=\'zone_id\']').after('<span class="error">' + json['error']['zone'] + '</span>');
                                                     }
                                                 } else {
                                                     $.ajax({
