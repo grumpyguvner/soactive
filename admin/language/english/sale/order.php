@@ -196,4 +196,8 @@ $_['error_upload']                            = 'Upload required!';
 $_['error_filename']                          = 'Filename must be between 3 and 128 characters!';
 $_['error_filetype']                          = 'Invalid file type!';
 $_['error_action']                            = 'Warning: Could not complete this action!';
+
+$_['error_total_change_title']                = 'New Total Amount';
+$_['error_total_change_refund']               = 'Warning: The total has changed on this order.';
+$_['error_total_change_collect']              = 'Warning: Could not complete this action!';
 ?>
