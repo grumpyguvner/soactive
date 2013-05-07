@@ -43,7 +43,7 @@ class ModelShippingWeight extends Model {
 						'code'         => 'weight.weight_' . $result['geo_zone_id'],
 						'title'        => $result['name'] . '  (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')',
 						'sTitle'       => $result['name'],
-                                                'weight_sort_order' => $this->config->get('weight_' . $result['geo_zone_id'] . '_sort_order'),
+                                                'sort_order' => $this->config->get('weight_' . $result['geo_zone_id'] . '_sort_order'),
                                                 'cost'         => $cost,
 						'tax_class_id' => $this->config->get('weight_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('weight_tax_class_id'), $this->config->get('config_tax')))
@@ -55,6 +55,16 @@ class ModelShippingWeight extends Model {
 		$method_data = array();
 	
 		if ($quote_data) {
+                    
+                    $sort_order = array();
+		  
+                    foreach ($quote_data as $key => $value) {
+                            $sort_order[$key] = $value['sort_order'];
+                    }
+
+                    array_multisort($sort_order, SORT_ASC, $quote_data);
+                    
+                    
       		$method_data = array(
         		'code'       => 'weight',
         		'title'      => $this->language->get('text_title'),

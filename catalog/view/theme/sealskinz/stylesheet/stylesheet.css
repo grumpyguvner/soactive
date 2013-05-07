@@ -558,6 +558,9 @@ a:hover {
     position: relative;
     overflow: hidden;
 }
+.carousel-control {
+    behavior: url(../../../pie/PIE.htc);
+}
 #myCarousel > img {
     width: 100%;
 }
@@ -608,6 +611,7 @@ background-color: rgba(255,255,255,0.25);
 border-radius: 8px;
 border: 3px solid #969674;
 cursor: pointer;
+behavior: url(../../../pie/PIE.htc);
 }
 #myCarousel .carousel-indicators .active {
 border-color: #fff;
@@ -2500,6 +2504,7 @@ a.button-account:hover, input.button-account:hover {
     -moz-border-radius: 10px;
     border-radius: 10px;
     color: #777777;
+    behavior: url(../../../pie/PIE.htc);
 }
 .newsletter_input a{
     position: absolute;
@@ -2953,6 +2958,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    behavior: url(../../../pie/PIE.htc);
 }
 .review-in .win-sp span {
    float: left; 
@@ -3152,6 +3158,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     -webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -khtml-border-radius: 10px 10px 10px 10px;
+    behavior: url(../../../PIE/PIE.htc);
 }
 
 .middle {
@@ -3697,7 +3704,7 @@ select[size] {
     line-height: 20px;
     margin-bottom: 5px;
 }
-#cssmenu li#socialn {
+#cssmenu > div#socialn {
     float: right;
     padding: 12px 18px;
     border-left: 1px solid #434245;
