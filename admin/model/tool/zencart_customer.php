@@ -326,11 +326,11 @@ class ModelToolZencartCustomer extends ModelToolZencart {
     
     static function getOrderStatus ($order_status_id) {
         
-        $order_status = array(0 => 7,
+        $order_status = array(0 => 17,
                               1 => 1,
                               2 => 2,
                               3 => 3,
-                              4 => 5);
+                              4 => 17);
         
         return $order_status[$order_status_id];
     }

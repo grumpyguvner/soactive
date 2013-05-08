@@ -10,7 +10,7 @@
             <input type="radio" name="account" value="register" id="register" />
             <?php } ?>
             <b><?php echo $text_register; ?></b></label>
-          
+          <br />
           <?php if ($guest_checkout) { ?>
           <label for="guest" class="radio">
             <?php if ($account == 'guest') { ?>
