@@ -125,7 +125,7 @@ class ModelToolSageOrders extends Model {
                                             ' <item_id>' . $sage_info['stock_item_id'] . '</item_id>' . "\n" .
                                             ' <tax_code_id>' . $this->getSageTaxId($product_info['tax_class_id']) . '</tax_code_id>' . "\n" .
                                             ' <quantity>' . $order_product['quantity'] . '</quantity>' . "\n" .
-                                            ' <price>' . $order_product['price'] . '</price>' . "\n" .
+                                            ' <price>' . ($order_product['price']+$order_product['tax']) . '</price>' . "\n" .
                                             '</item>' . "\n";
                                 }
                             }
@@ -136,12 +136,13 @@ class ModelToolSageOrders extends Model {
                     }#next product
                     
                     #set postage charge
+                    $shipping = $this->model_sale_order->getOrderShippingTotal($row['order_id']);
                     $order_xml .= 
                             '<item>' . "\n" .
                             ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
-                            ' <item_id>' . ( ( $order_info['shipping_total'] <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
+                            ' <item_id>' . ( ( $shipping <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
                             ' <tax_code_id>2</tax_code_id>' . "\n" .
-                            ' <price>' . $order_info['shipping_total'] . '</price>' . "\n" .
+                            ' <price>' . ((float) $shipping <> 0 ? (float) $shipping  : 0) . '</price>' . "\n" .
                             ' <quantity>1</quantity>' . "\n" .
                             '</item>' . "\n";
                     $order_xml .= '<comment>Ship via:' . $order_info['shipping_method'] . '</comment>' . "\n";
@@ -186,7 +187,7 @@ class ModelToolSageOrders extends Model {
                                 'notify' => true,
                                 'comment' => $comment
                             );
-                            $this->order->addOrderHistory($row['order_id'],$data);
+                            $this->model_sale_order->addOrderHistory($row['order_id'],$data);
                             $sql = "INSERT INTO `" . DB_PREFIX . "sage_order` SET 
                                                     sage_id = " . $order_id . ",
                                                     sage_reference = '" . $order_info['order_id'] . "',

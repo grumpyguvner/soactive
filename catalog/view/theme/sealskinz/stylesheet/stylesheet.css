@@ -2289,10 +2289,11 @@ a.button-account:hover, input.button-account:hover {
     display: inline-block;
     padding-right: 20px;
     width: 111px;
+    vertical-align: top;
 }
 .checkout-content .pInput {
     display: inline-block;
-    /*width: 55%;*/
+    width: 242px;
 }
 .checkout-content .paSelect .pInput {
     float: right;
@@ -3791,7 +3792,7 @@ select[size] {
 }
 .postcodeAnywhereContainer .paAddress #paCompany, .postcodeAnywhereContainer .paAddress #paCompanyId, .postcodeAnywhereContainer .paAddress .paCompanyId
 {
-    display: none;
+    display: none !important;
 }
 .postcodeAnywhereContainer .btn {
     margin-bottom: 10px;

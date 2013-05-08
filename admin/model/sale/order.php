@@ -541,6 +541,12 @@ class ModelSaleOrder extends Model {
 
 		return $query->rows;
 	}
+				
+	public function getOrderShippingTotal($order_id) {
+		$query = $this->db->query("SELECT SUM(value) AS total FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "' AND code = 'shipping'");
+
+		return $query->row['total'];
+	}
 
 	public function getTotalOrders($data = array()) {
       	$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order`";

@@ -14,16 +14,20 @@
             event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
             
+            paContainer.find('.error').remove();
+            
             if ($(this).parents('.paAddress').length)
             {
                 paContainer.find('input[name=postcode_lookup]').val(paContainer.find('input[name=postcode]').val());
                 paContainer.find('select[name=postcode_lookup_country_id]').val(paContainer.find('select[name=country_id]').val());
                 paContainer.find('.paAddress input').val('').trigger('change');
                 paContainer.find('input[name=postcode]').val(paContainer.find('input[name=postcode_lookup]').val());
-                paContainer.find('.paLookup').show();
-                paContainer.find('.paAddress').hide();
+
             }
             
+            paContainer.find('.paLookup').show();
+            paContainer.find('.paSelect').hide();
+            paContainer.find('.paAddress').hide();
             paContainer.find('select[name=\'address_dropdown\'] option').remove();
             
             $.ajax({
@@ -38,7 +42,10 @@
                 success: function(json) {
                     html = '';
                         
-                        if (json['addresses'] != '') {
+                    if (json['error'])
+                    {
+                        paContainer.find('.paLookup').prepend('<span class="error">' + json['error'] + '</span>');
+                    } else {
                         paSelect = paContainer.find('select[name=\'address_dropdown\']');
                         for (i = 0; i < json['addresses'].length; i++) {
                             var option = $('<option/>');
