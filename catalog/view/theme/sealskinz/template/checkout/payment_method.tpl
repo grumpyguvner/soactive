@@ -33,7 +33,7 @@
             <?php } else { ?>
             <input type="checkbox" name="agree" value="1" />
             <?php } ?>
-              </label>
+             </label> 
             <input type="button" value="<?php echo $button_continue; ?>" id="button-payment-method" class="button" />
         </div>
         <?php } else { ?>

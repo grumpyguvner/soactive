@@ -2304,6 +2304,12 @@ a.button-account:hover, input.button-account:hover {
     text-align: right;
     display: block;
 }
+.checkout-content .buttons label.checkbox {
+    display: table;
+}
+.checkout-content label {
+    display: inline-block;
+}
 .checkout-content .payment .buttons {
     float: none;
 }
