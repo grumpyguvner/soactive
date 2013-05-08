@@ -44,7 +44,7 @@
                         
                     if (json['error'])
                     {
-                        paContainer.find('.paLookup').prepend('<span class="error">' + json['error'] + '</span>');
+                        paContainer.find('.paLookup .pInput').prepend('<span class="error">' + json['error'] + '</span>');
                     } else {
                         paSelect = paContainer.find('select[name=\'address_dropdown\']');
                         for (i = 0; i < json['addresses'].length; i++) {
@@ -69,6 +69,9 @@
         $(this).on('click','button[name=address_select]', function (event) {
             event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
+            
+            paContainer.find('.error').remove();
+            
             $.ajax({
                 url: 'index.php?route=module/postcode_anywhere/address&country_id=' + paContainer.find('select[name=postcode_lookup_country_id]').val() + '&address=' + encodeURIComponent(paContainer.find('select[name=address_dropdown]').val()),
                 dataType: 'json',
@@ -79,15 +82,20 @@
                     $('.wait').remove();
                 },			
                 success: function(json) {
-                    if (json['address'] != '') {
-                    
+                    if (json['error'])
+                    {
+                        paContainer.find('.paLookup').show();
+                        paContainer.find('.paSelect').hide();
+                        paContainer.find('.paAddress').hide();
+                        paContainer.find('.paLookup .pInput').prepend('<span class="error">' + json['error'] + '</span>');
+                    } else {
                         paContainer.find('input[name=\'company\']').val(json['address']['company']);
                         paContainer.find('input[name=\'address_1\']').val(json['address']['address_1']);
                         paContainer.find('input[name=\'address_2\']').val(json['address']['address_2']);
                         paContainer.find('input[name=\'postcode\']').val(json['address']['postcode']);
                         paContainer.find('input[name=\'city\']').val(json['address']['city']);
+                        paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']).trigger('change');
                         paContainer.find('select[name=\'zone_id\']').val(json['address']['zone_id']);
-                        paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']);
                         paContainer.find('.paLookup').hide();
                         paContainer.find('.paSelect').hide();
                         paContainer.find('.paAddress').show();
@@ -103,6 +111,9 @@
         $(this).on('click','.manualAddress', function (event) {
             event.preventDefault();
             var paContainer = $(this).parents('.postcodeAnywhereContainer');
+            
+            paContainer.find('.error').remove();
+            
             paContainer.find('.paLookup').hide();
             paContainer.find('.paSelect').hide();
             paContainer.find('.paAddress').show();
