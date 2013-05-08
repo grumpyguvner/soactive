@@ -18,7 +18,9 @@ class ModelLocalisationLanguageManager extends Model {
             $query = $this->db->query($sql);
 
             if (isset($data['language_manager'][$language_id]['value'])) {
-
+                    array_walk($data['language_manager'][$language_id]['value'], function(&$n) {
+                            $n = html_entity_decode($n, ENT_QUOTES, 'UTF-8');
+                    });
                 if ($query->num_rows > 0) {
                     $sql = "UPDATE `" . DB_PREFIX . "language_manager` "
                             . "SET language_id = '" . (int) $language_id . "', "
@@ -134,7 +136,7 @@ class ModelLocalisationLanguageManager extends Model {
         $data = array();
 
         $app_dir = self::getApplicationDir();
-        $folders = self::getLanguageFolders();
+        $folders = self::getLanguageFolders($this->config->get('config_base_template'), $this->config->get('config_template'));
         
         $files = array();
 
@@ -153,7 +155,7 @@ class ModelLocalisationLanguageManager extends Model {
                 require($file);
 
                 array_walk($_, function(&$n) {
-                            $n = htmlentities($n);
+                            $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
                         });
 
                 $data = array_merge($data, $_);
@@ -179,6 +181,10 @@ class ModelLocalisationLanguageManager extends Model {
                 $_ = unserialize($row['value']);
 
                 if (is_array($_)) {
+                    
+                    array_walk($_, function(&$n) {
+                            $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
+                    });
                     $data = array_merge($data, $_);
                 }
             }
@@ -191,11 +197,19 @@ class ModelLocalisationLanguageManager extends Model {
         return DIR_CATALOG;
     }
 
-    static function getLanguageFolders() {
+    static function getLanguageFolders($base, $default) {
         
         $folders = array(DIR_CATALOG . 'language');
         
-        $folders = array_merge($folders, glob(DIR_CATALOG . 'view/theme/*/language', GLOB_ONLYDIR));
+        if (is_dir(DIR_CATALOG . 'view/theme/' . $base . '/language'))
+        {
+            $folders[] = DIR_CATALOG . 'view/theme/' . $base . '/language';
+        }
+        
+        if (is_dir(DIR_CATALOG . 'view/theme/' . $default . '/language'))
+        {
+            $folders[] = DIR_CATALOG . 'view/theme/' . $default . '/language';
+        }
         
         return $folders;
     }
