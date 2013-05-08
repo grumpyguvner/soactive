@@ -67,13 +67,13 @@ class ModelLocalisationLanguageManager extends Model {
         foreach ($folders as $folder) {
             $folderFiles = array();
 
-            $files = glob($folder . $this->default . '/*/*.php');
+            $files = glob($folder  . '/' . $this->default . '/*/*.php');
             if ($files) {
                 $folderFiles = $files;
             }
 
             foreach ($languages as $language) {
-                $files = glob($folder . $language['directory'] . '/*/*.php');
+                $files = glob($folder . '/' . $language['directory'] . '/*/*.php');
                 if ($files) {
                     $folderFiles = $files;
                 }
@@ -135,11 +135,15 @@ class ModelLocalisationLanguageManager extends Model {
 
         $app_dir = self::getApplicationDir();
         $folders = self::getLanguageFolders();
-
-        $files = array($value . $this->default . '/' . $filename . '.php');
+        
+        $files = array();
 
         foreach ($folders as $value) {
-            $files[] = $value . $directory . '/' . $filename . '.php';
+            $files[] = $value . '/' . $this->default . '/' . $filename . '.php';
+            if ($directory != $this->default)
+            {
+                $files[] = $value . '/' . $directory . '/' . $filename . '.php';
+            }
         }
 
         foreach ($files as $file) {
@@ -189,8 +193,9 @@ class ModelLocalisationLanguageManager extends Model {
 
     static function getLanguageFolders() {
         
-        $folders = array_merge(array(DIR_CATALOG . 'language/'), glob(DIR_CATALOG . '*/language', GLOB_ONLYDIR));
-        				
+        $folders = array(DIR_CATALOG . 'language');
+        
+        $folders = array_merge($folders, glob(DIR_CATALOG . 'view/theme/*/language', GLOB_ONLYDIR));
         
         return $folders;
     }
