@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="paSelect content">
-                        <div class="prow">
+                        <div class="payform-right">
                             <div class="pLabel"><span class="paSelect_required required">*</span> <?php echo $entry_select_address; ?></div>
                             <div class="pInput">
                                 <select name="address_dropdown"<?php if ($paAddresses) echo ' size="' . (count($paAddresses) > 9 ? 10 : count($paAddresses)) . '"'; ?> class="pselect">
