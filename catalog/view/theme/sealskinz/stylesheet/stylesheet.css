@@ -2289,6 +2289,7 @@ a.button-account:hover, input.button-account:hover {
     display: inline-block;
     padding-right: 20px;
     width: 111px;
+    vertical-align: top;
 }
 .checkout-content .pInput {
     display: inline-block;
