@@ -182,8 +182,11 @@ class ModelToolSageOrders extends Model {
                         
                         $comment = "SAGE INTERFACE" . " [" . $this->request->server['REMOTE_ADDR'] . "]";
                         if ($order_id) {
+//                            $status_id = $this->config->get('config_complete_status_id');
+                            //We need to set the order status to Processing but do not have a conifg setting for this yet.
+                            $status_id = 2;
                             $data = array(
-                                'order_status_id' => $this->config->get('config_complete_status_id'),
+                                'order_status_id' => $status_id,
                                 'notify' => true,
                                 'comment' => $comment
                             );
@@ -194,7 +197,7 @@ class ModelToolSageOrders extends Model {
                                                     sage_status = '" . $order_info['order_id'] . "',
                                                     data = '" . $this->db->escape(serialize($response)) . "',
                                                     order_id = '" . $order_info['order_id'] . "',
-                                                    status = '" . $this->config->get('config_complete_status_id') . "',
+                                                    status = '" . $status_id . "',
                                                     date_added = NOW(),
                                                     date_modified = NOW(),
                                                     date_processed = NOW()
