@@ -136,12 +136,13 @@ class ModelToolSageOrders extends Model {
                     }#next product
                     
                     #set postage charge
+                    $shipping = $this->model_sale_order->getOrderShippingTotal($row['order_id']);
                     $order_xml .= 
                             '<item>' . "\n" .
                             ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
-                            ' <item_id>' . ( ( $order_info['shipping_total'] <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
+                            ' <item_id>' . ( ( $shipping <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
                             ' <tax_code_id>2</tax_code_id>' . "\n" .
-                            ' <price>' . ((float) $order_info['shipping_total'] <> 0 ? (float) $order_info['shipping_total']  : 0) . '</price>' . "\n" .
+                            ' <price>' . ((float) $shipping <> 0 ? (float) $shipping  : 0) . '</price>' . "\n" .
                             ' <quantity>1</quantity>' . "\n" .
                             '</item>' . "\n";
                     $order_xml .= '<comment>Ship via:' . $order_info['shipping_method'] . '</comment>' . "\n";
