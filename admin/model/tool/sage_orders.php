@@ -63,7 +63,7 @@ class ModelToolSageOrders extends Model {
                     #set header
                     $order_xml =
                             '<order>' . "\n" .
-                            '<gross_pricing>false</gross_pricing>' . "\n" .
+                            '<gross_pricing>true</gross_pricing>' . "\n" .
                             '<document_date>' . $order_info['date_added'] . '</document_date>' . "\n" .
                             '<customer_ref>' . (defined('SITE_REGION') ? SITE_REGION : "") . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . " " . $order_info['firstname']. " " . $order_info['lastname'] . '</customer_ref>' . "\n";
                     #set delivery address
@@ -125,7 +125,7 @@ class ModelToolSageOrders extends Model {
                                             ' <item_id>' . $sage_info['stock_item_id'] . '</item_id>' . "\n" .
                                             ' <tax_code_id>' . $this->getSageTaxId($product_info['tax_class_id']) . '</tax_code_id>' . "\n" .
                                             ' <quantity>' . $order_product['quantity'] . '</quantity>' . "\n" .
-                                            ' <price>' . $order_product['price'] . '</price>' . "\n" .
+                                            ' <price>' . ($order_product['price']+$order_product['tax']) . '</price>' . "\n" .
                                             '</item>' . "\n";
                                 }
                             }
@@ -141,7 +141,7 @@ class ModelToolSageOrders extends Model {
                             ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
                             ' <item_id>' . ( ( $order_info['shipping_total'] <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
                             ' <tax_code_id>2</tax_code_id>' . "\n" .
-                            ' <price>' . ((float) $order_info['shipping_total'] <> 0 ? ((float) $order_info['shipping_total'] / 1.2)  : 0) . '</price>' . "\n" .
+                            ' <price>' . ((float) $order_info['shipping_total'] <> 0 ? (float) $order_info['shipping_total']  : 0) . '</price>' . "\n" .
                             ' <quantity>1</quantity>' . "\n" .
                             '</item>' . "\n";
                     $order_xml .= '<comment>Ship via:' . $order_info['shipping_method'] . '</comment>' . "\n";
