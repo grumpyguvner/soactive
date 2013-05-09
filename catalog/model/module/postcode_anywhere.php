@@ -35,7 +35,7 @@ class ModelModulePostcodeAnywhere extends Model {
             {
                 $balance = $this->pa->getBalance();
 
-                if ($balance)
+                if ($balance && empty($this->paError))
                 {
                     foreach ($balance->Items as $credit)
                     {
@@ -88,7 +88,7 @@ class ModelModulePostcodeAnywhere extends Model {
                         $address['postcode'] = $address_info->PostalCode;
                         $address['city'] = $address_info->City;
 
-                        $zone = $this->model_localisation_zone->getZoneByCode($address_info->State, $address['country_id']);
+                        $zone = $this->model_localisation_zone->getZoneByName($address_info->State, $address['country_id']);
 
                         $address['zone_id'] = ($zone) ? $zone['zone_id'] : '';
                     
@@ -154,6 +154,12 @@ class ModelModulePostcodeAnywhere extends Model {
                         $zone = $this->model_localisation_zone->getZoneByName($address->Items[0]->County, $data['country_id']);
 
                         $data['zone_id'] = ($zone) ? $zone['zone_id'] : '';
+                        
+                        if (!$data['zone_id']) {
+                           $zone = $this->model_localisation_zone->getZoneByCode($address->Items[0]->County, $data['country_id']);
+
+                           $data['zone_id'] = ($zone) ? $zone['zone_id'] : ''; 
+                        }
 
                         break;
                     case 'USA':
@@ -166,9 +172,15 @@ class ModelModulePostcodeAnywhere extends Model {
                         $data['postcode'] = $address->Items[0]->Zip;
                         $data['city'] = $address->Items[0]->City;
 
-                        $zone = $this->model_localisation_zone->getZoneByName($address->Items[0]->StateName, $data['country_id']);
+                        $zone = $this->model_localisation_zone->getZoneByName($address->Items[0]->County, $data['country_id']);
 
                         $data['zone_id'] = ($zone) ? $zone['zone_id'] : '';
+                        
+                        if (!$data['zone_id']) {
+                           $zone = $this->model_localisation_zone->getZoneByCode($address->Items[0]->County, $data['country_id']);
+
+                           $data['zone_id'] = ($zone) ? $zone['zone_id'] : ''; 
+                        }
                         break;
                 }
                 if ($data) return $data;
