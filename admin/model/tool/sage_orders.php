@@ -240,12 +240,21 @@ class ModelToolSageOrders extends Model {
         $mail->port = $this->config->get('config_smtp_port');
         $mail->timeout = $this->config->get('config_smtp_timeout');							
         $mail->setTo($this->config->get('config_email'));
-//        $mail->setTo("mark.horton@boundlesscommerce.co.uk");
         $mail->setFrom($this->config->get('config_email'));
         $mail->setSender($this->config->get('config_name'));
         $mail->setSubject($subject);
         $mail->setText($message);
         $mail->send();
+				
+        // Send to additional alert emails
+        $emails = explode(',', $this->config->get('config_alert_emails'));
+
+        foreach ($emails as $email) {
+                if ($email && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
+                        $mail->setTo($email);
+                        $mail->send();
+                }
+        }				
     }
     
     function readyToPost($order_id) {
@@ -257,7 +266,7 @@ class ModelToolSageOrders extends Model {
         //TODO: Add "Ready to Post" to order status i/o hard coding
         if ($result->rows) {
             switch ($result->rows[0]['order_status_id']) {
-                case $this->config->get('config_order_status_id'):
+                case 1: //Order Status Pending needs separate module config
 //                case $this->config->get('config_customer_order_status_id'):
                     return true;
                     break;
