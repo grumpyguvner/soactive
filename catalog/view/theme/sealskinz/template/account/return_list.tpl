@@ -42,11 +42,12 @@
                         <div class="content"><?php echo $text_empty; ?></div>
                     <?php } ?>
                     <div class="buttons">
-                        <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
+                        <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
                     </div>
                 </div>
                 <?php echo $content_bottom; ?>
-            </div></div>
+            </div>
+        </div>
     </div>
 </div>
 <?php echo $footer; ?>

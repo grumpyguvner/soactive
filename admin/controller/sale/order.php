@@ -332,8 +332,8 @@ class ControllerSaleOrder extends Controller {
 				'customer'      => $result['customer'],
 				'status'        => $result['status'],
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
-				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
+				'date_added'    => date($this->language->get('date_format_short_time'), strtotime($result['date_added'])),
+				'date_modified' => date($this->language->get('date_format_short_time'), strtotime($result['date_modified'])),
 				'selected'      => isset($this->request->post['selected']) && in_array($result['order_id'], $this->request->post['selected']),
 				'action'        => $action
 			);
@@ -1609,8 +1609,8 @@ class ControllerSaleOrder extends Controller {
 			$this->data['forwarded_ip'] = $order_info['forwarded_ip'];
 			$this->data['user_agent'] = $order_info['user_agent'];
 			$this->data['accept_language'] = $order_info['accept_language'];
-			$this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
-			$this->data['date_modified'] = date($this->language->get('date_format_short'), strtotime($order_info['date_modified']));		
+			$this->data['date_added'] = date($this->language->get('date_format_short_time'), strtotime($order_info['date_added']));
+			$this->data['date_modified'] = date($this->language->get('date_format_short_time'), strtotime($order_info['date_modified']));		
 			$this->data['payment_firstname'] = $order_info['payment_firstname'];
 			$this->data['payment_lastname'] = $order_info['payment_lastname'];
 			$this->data['payment_company'] = $order_info['payment_company'];
