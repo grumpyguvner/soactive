@@ -72,6 +72,8 @@ class ModelToolSageOrders extends Model {
                             ' <postal_name>' . str_replace("&", "and", $order_info['shipping_firstname'] . " " . $order_info['shipping_lastname']) . '</postal_name>' . "\n" .
                             ' <address1>' . str_replace("&", "and", $order_info['shipping_address_1']) . '</address1>' . "\n" .
                             ' <address2>' . str_replace("&", "and", $order_info['shipping_address_2']) . '</address2>' . "\n" .
+                            ' <address3>' . str_replace("&", "and", $order_info['shipping_city']) . '</address3>' . "\n" .
+                            ' <address4>' . str_replace("&", "and", $order_info['shipping_zone']) . '</address4>' . "\n" .
                             ' <city>' . str_replace("&", "and", $order_info['shipping_city']) . '</city>' . "\n" .
                             ' <county>' . str_replace("&", "and", $order_info['shipping_zone']) . '</county>' . "\n" .
                             ' <postcode>' . $order_info['shipping_postcode'] . '</postcode>' . "\n" .
@@ -84,6 +86,8 @@ class ModelToolSageOrders extends Model {
                             ' <postal_name>' . str_replace("&", "and", $order_info['payment_firstname'] . " " . $order_info['payment_lastname']) . '</postal_name>' . "\n" .
                             ' <address1>' . str_replace("&", "and", $order_info['payment_address_1']) . '</address1>' . "\n" .
                             ' <address2>' . str_replace("&", "and", $order_info['payment_address_2']) . '</address2>' . "\n" .
+                            ' <address3>' . str_replace("&", "and", $order_info['payment_city']) . '</address3>' . "\n" .
+                            ' <address4>' . str_replace("&", "and", $order_info['payment_zone']) . '</address4>' . "\n" .
                             ' <city>' . str_replace("&", "and", $order_info['payment_city']) . '</city>' . "\n" .
                             ' <county>' . str_replace("&", "and", $order_info['payment_zone']) . '</county>' . "\n" .
                             ' <postcode>' . $order_info['payment_postcode'] . '</postcode>' . "\n" .
