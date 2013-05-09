@@ -257,7 +257,7 @@ class ModelToolSageOrders extends Model {
         //TODO: Add "Ready to Post" to order status i/o hard coding
         if ($result->rows) {
             switch ($result->rows[0]['order_status_id']) {
-                case $this->config->get('config_order_status_id'):
+                case 1: //Order Status Pending needs separate module config
 //                case $this->config->get('config_customer_order_status_id'):
                     return true;
                     break;
