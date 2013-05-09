@@ -2519,7 +2519,7 @@ a.button-account:hover, input.button-account:hover {
 .newsletter_input a{
     position: absolute;
     margin-left: -34px;
-    margin-top: 0;
+    margin-top: -1px;
     height: 26px;
     font-size: 16px;
 }
@@ -2934,7 +2934,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 }
 .newsletter-form input[name=email] {
     width: 183px;
-    height: 36px;
+    height: 34px;
     padding: 0 6px 0 17px;
 }
 #submit_review {
@@ -2964,7 +2964,7 @@ input[type="color"]:focus, .uneditable-input:focus {
     font-weight: bold;
     background: #5a7639;
     width: 206px;
-    height: 38px;
+    height: 37px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -2982,6 +2982,7 @@ input[type="color"]:focus, .uneditable-input:focus {
 .review-in .win-sp img {
    float: right; 
    left: 173px;
+   top: 52px;
    position: absolute;
 }
 .review-in h3 {
