@@ -183,6 +183,12 @@ DROP TABLE IF EXISTS oc_return_product;
 
 ALTER TABLE oc_tax_rate_to_customer_group DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+#### START 1.5.2.1
+
+ALTER TABLE `oc_affiliate` ADD `account_commission` decimal(4,2) NOT NULL DEFAULT '0.00' AFTER `commission`;
+ALTER TABLE `oc_affiliate` MODIFY `payment` varchar(10) COLLATE utf8_bin NOT NULL;
+ALTER TABLE `oc_affiliate_transaction` ADD `customer_id` int(11) DEFAULT NULL AFTER `affiliate_id`; 
+
 # Disable Category Module to force user to reenable with new settings to avoid php error
 UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:"status";s:1:"0"') WHERE `key` = 'category_module';
 
