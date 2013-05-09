@@ -24,6 +24,10 @@ class ControllerModulePostcodeAnywhere extends Controller {
         } else {
             $json['error'] = $this->language->get('error_postcode_unavailable');
         }
+        
+        if (!$this->model_module_postcode_anywhere->isAvailable()) {
+            $json['error'] = $this->language->get('error_postcode_unavailable');
+        }
 
         $this->response->setOutput(json_encode($json));
     }
@@ -48,6 +52,10 @@ class ControllerModulePostcodeAnywhere extends Controller {
                 $json['error'] = $this->language->get('error_address_lookup_empty');
             }
         } else {
+            $json['error'] = $this->language->get('error_postcode_unavailable');
+        }
+        
+        if (!$this->model_module_postcode_anywhere->isAvailable()) {
             $json['error'] = $this->language->get('error_postcode_unavailable');
         }
 

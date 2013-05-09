@@ -18,7 +18,9 @@ class ModelLocalisationLanguageManager extends Model {
             $query = $this->db->query($sql);
 
             if (isset($data['language_manager'][$language_id]['value'])) {
-
+                    array_walk($data['language_manager'][$language_id]['value'], function(&$n) {
+                            $n = html_entity_decode($n, ENT_QUOTES, 'UTF-8');
+                    });
                 if ($query->num_rows > 0) {
                     $sql = "UPDATE `" . DB_PREFIX . "language_manager` "
                             . "SET language_id = '" . (int) $language_id . "', "
@@ -67,13 +69,13 @@ class ModelLocalisationLanguageManager extends Model {
         foreach ($folders as $folder) {
             $folderFiles = array();
 
-            $files = glob($folder . $this->default . '/*/*.php');
+            $files = glob($folder  . '/' . $this->default . '/*/*.php');
             if ($files) {
                 $folderFiles = $files;
             }
 
             foreach ($languages as $language) {
-                $files = glob($folder . $language['directory'] . '/*/*.php');
+                $files = glob($folder . '/' . $language['directory'] . '/*/*.php');
                 if ($files) {
                     $folderFiles = $files;
                 }
@@ -134,12 +136,16 @@ class ModelLocalisationLanguageManager extends Model {
         $data = array();
 
         $app_dir = self::getApplicationDir();
-        $folders = self::getLanguageFolders();
-
-        $files = array($value . $this->default . '/' . $filename . '.php');
+        $folders = self::getLanguageFolders($this->config->get('config_base_template'), $this->config->get('config_template'));
+        
+        $files = array();
 
         foreach ($folders as $value) {
-            $files[] = $value . $directory . '/' . $filename . '.php';
+            $files[] = $value . '/' . $this->default . '/' . $filename . '.php';
+            if ($directory != $this->default)
+            {
+                $files[] = $value . '/' . $directory . '/' . $filename . '.php';
+            }
         }
 
         foreach ($files as $file) {
@@ -149,7 +155,7 @@ class ModelLocalisationLanguageManager extends Model {
                 require($file);
 
                 array_walk($_, function(&$n) {
-                            $n = htmlentities($n);
+                            $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
                         });
 
                 $data = array_merge($data, $_);
@@ -175,6 +181,10 @@ class ModelLocalisationLanguageManager extends Model {
                 $_ = unserialize($row['value']);
 
                 if (is_array($_)) {
+                    
+                    array_walk($_, function(&$n) {
+                            $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
+                    });
                     $data = array_merge($data, $_);
                 }
             }
@@ -187,10 +197,19 @@ class ModelLocalisationLanguageManager extends Model {
         return DIR_CATALOG;
     }
 
-    static function getLanguageFolders() {
+    static function getLanguageFolders($base, $default) {
         
-        $folders = array_merge(array(DIR_CATALOG . 'language/'), glob(DIR_CATALOG . '*/language', GLOB_ONLYDIR));
-        				
+        $folders = array(DIR_CATALOG . 'language');
+        
+        if (is_dir(DIR_CATALOG . 'view/theme/' . $base . '/language'))
+        {
+            $folders[] = DIR_CATALOG . 'view/theme/' . $base . '/language';
+        }
+        
+        if (is_dir(DIR_CATALOG . 'view/theme/' . $default . '/language'))
+        {
+            $folders[] = DIR_CATALOG . 'view/theme/' . $default . '/language';
+        }
         
         return $folders;
     }
