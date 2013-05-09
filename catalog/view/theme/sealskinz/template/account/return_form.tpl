@@ -31,7 +31,7 @@
                         <h2><?php echo $text_order; ?></h2>
                         <div class="content">
                             <div class="row"> 
-                                <div class="span5">
+                                <div class="span4">
                                     <div class="left"><span class="required">*</span> <?php echo $entry_firstname; ?><br />
                                         <input type="text" name="firstname" value="<?php echo $firstname; ?>" class="large-field" />
                                         <br />
@@ -62,9 +62,9 @@
                                         <br />
                                     </div>
                                 </div>
-                                <div class="span6">
+                                <div class="span3">
 
-                                    <div class="right"><span class="required">*</span> <?php echo $entry_order_id; ?><br />
+                                    <span class="required">*</span> <?php echo $entry_order_id; ?><br />
                                         <input type="text" name="order_id" value="<?php echo $order_id; ?>" class="large-field" />
                                         <br />
                                         <?php if ($error_order_id) { ?>
@@ -74,7 +74,7 @@
                                         <?php echo $entry_date_ordered; ?><br />
                                         <input type="text" name="date_ordered" value="<?php echo $date_ordered; ?>" class="large-field date" />
                                         <br />
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="span5">
+                                        <div class="span4">
                                             <div class="return-model"><span class="required">*</span> <b><?php echo $entry_model; ?></b><br />
                                                 <input type="text" name="model" value="<?php echo $model; ?>" />
                                                 <br />
@@ -117,14 +117,7 @@
 
                                 </div>
 
-
-                                <div class="row"> 
-
                                     <div class="return-detail">
-
-
-
-                                        <div class="span4">
                                             <div class="return-reason"><span class="required">*</span> <b><?php echo $entry_reason; ?></b><br />
                                                 <table>
                                                     <?php foreach ($return_reasons as $return_reason) { ?>
@@ -145,12 +138,7 @@
                                                     <span class="error"><?php echo $error_reason; ?></span>
                                                 <?php } ?>
                                             </div>
-                                        </div>
-
-
-
-
-                                        <div class="span5">
+                                    
                                             <div class="return-opened"><b><?php echo $entry_opened; ?></b><br />
                                                 <?php if ($opened) { ?>
                                                     <input type="radio" name="opened" value="1" id="opened" checked="checked" />
@@ -158,6 +146,7 @@
                                                     <input type="radio" name="opened" value="1" id="opened" />
                                                 <?php } ?>
                                                 <label for="opened"><?php echo $text_yes; ?></label>
+                                                <br />
                                                 <?php if (!$opened) { ?>
                                                     <input type="radio" name="opened" value="0" id="unopened" checked="checked" />
                                                 <?php } else { ?>
@@ -169,11 +158,7 @@
                                                 <?php echo $entry_fault_detail; ?><br />
                                                 <textarea name="comment" cols="150" rows="6"><?php echo $comment; ?></textarea>
                                             </div>
-                                        </div>
-
-
-
-                                        <div class="span1">  
+                                        
                                             <div class="return-captcha"><b><?php echo $entry_captcha; ?></b><br />
                                                 <input type="text" name="captcha" value="<?php echo $captcha; ?>" />
                                                 <br />
@@ -182,16 +167,16 @@
                                                     <span class="error"><?php echo $error_captcha; ?></span>
                                                 <?php } ?>
                                             </div>
-                                        </div>
+                                      
                                     </div>
-                                </div>
+                               
                             </div>
 
                         </div>
                         <div class="buttons">
-                            <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
+                            <div class="left"><a href="<?php echo $back; ?>" class="button-account"><?php echo $button_back; ?></a></div>
                             <div class="right">
-                                <input class="button" type="submit" value="<?php echo $button_continue; ?>" class="button" />
+                                <input type="submit" value="<?php echo $button_continue; ?>" class="button-account" />
                             </div>
                         </div>
                     </form>

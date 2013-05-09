@@ -154,8 +154,8 @@
                             </tbody>
                         </table>
 <?php } ?>
-                    <div class="buttons" id="margin-r26">
-                        <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
+                    <div class="buttons">
+                        <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
                     </div>
                 </div>
 <?php echo $content_bottom; ?>

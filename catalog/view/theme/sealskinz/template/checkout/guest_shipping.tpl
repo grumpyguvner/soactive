@@ -169,7 +169,7 @@
 <br />
 
 <div class="buttons">
-        <input type="button" value="<?php echo $button_continue; ?>" id="button-shipping-address" class="button" />
+        <input type="button" value="<?php echo $button_continue; ?>" id="button-guest-shipping" class="button" />
 </div>
 
 <script type="text/javascript"><!--
