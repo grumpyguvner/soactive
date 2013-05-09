@@ -2965,6 +2965,9 @@ input[type="color"]:focus, .uneditable-input:focus {
     background: #5a7639;
     width: 206px;
     height: 38px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 .review-in .win-sp span {
    float: left; 
