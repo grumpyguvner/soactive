@@ -507,54 +507,56 @@ class ControllerSaleAffiliate extends Controller {
   	}
   
   	private function getForm() {
-    	$this->data['heading_title'] = $this->language->get('heading_title');
- 
-    	$this->data['text_enabled'] = $this->language->get('text_enabled');
-    	$this->data['text_disabled'] = $this->language->get('text_disabled');
-		$this->data['text_select'] = $this->language->get('text_select');
-		$this->data['text_none'] = $this->language->get('text_none');
-    	$this->data['text_wait'] = $this->language->get('text_wait');
-		$this->data['text_cheque'] = $this->language->get('text_cheque');
-		$this->data['text_paypal'] = $this->language->get('text_paypal');
-		$this->data['text_bank'] = $this->language->get('text_bank');
-				
-    	$this->data['entry_firstname'] = $this->language->get('entry_firstname');
-    	$this->data['entry_lastname'] = $this->language->get('entry_lastname');
-    	$this->data['entry_email'] = $this->language->get('entry_email');
-    	$this->data['entry_telephone'] = $this->language->get('entry_telephone');
-    	$this->data['entry_fax'] = $this->language->get('entry_fax');
-    	$this->data['entry_company'] = $this->language->get('entry_company');
-		$this->data['entry_address_1'] = $this->language->get('entry_address_1');
-		$this->data['entry_address_2'] = $this->language->get('entry_address_2');
-		$this->data['entry_city'] = $this->language->get('entry_city');
-		$this->data['entry_postcode'] = $this->language->get('entry_postcode');
-		$this->data['entry_country'] = $this->language->get('entry_country');
-		$this->data['entry_zone'] = $this->language->get('entry_zone');
-		$this->data['entry_code'] = $this->language->get('entry_code');
-		$this->data['entry_commission'] = $this->language->get('entry_commission');
-		$this->data['entry_tax'] = $this->language->get('entry_tax');
-		$this->data['entry_payment'] = $this->language->get('entry_payment');
-		$this->data['entry_cheque'] = $this->language->get('entry_cheque');
-		$this->data['entry_paypal'] = $this->language->get('entry_paypal');
-		$this->data['entry_bank_name'] = $this->language->get('entry_bank_name');
-		$this->data['entry_bank_branch_number'] = $this->language->get('entry_bank_branch_number');
-		$this->data['entry_bank_swift_code'] = $this->language->get('entry_bank_swift_code');
-		$this->data['entry_bank_account_name'] = $this->language->get('entry_bank_account_name');
-		$this->data['entry_bank_account_number'] = $this->language->get('entry_bank_account_number');
-		$this->data['entry_password'] = $this->language->get('entry_password');
-    	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
-		$this->data['entry_status'] = $this->language->get('entry_status');
-		$this->data['entry_amount'] = $this->language->get('entry_amount');
- 		$this->data['entry_description'] = $this->language->get('entry_description');
- 
-		$this->data['button_save'] = $this->language->get('button_save');
-    	$this->data['button_cancel'] = $this->language->get('button_cancel');
-    	$this->data['button_add_transaction'] = $this->language->get('button_add_transaction');
-    	$this->data['button_remove'] = $this->language->get('button_remove');
-	
-		$this->data['tab_general'] = $this->language->get('tab_general');
-		$this->data['tab_payment'] = $this->language->get('tab_payment');
-		$this->data['tab_transaction'] = $this->language->get('tab_transaction');
+                $this->data['heading_title'] = $this->language->get('heading_title');
+
+                $this->data['text_enabled'] = $this->language->get('text_enabled');
+                $this->data['text_disabled'] = $this->language->get('text_disabled');
+                $this->data['text_select'] = $this->language->get('text_select');
+                $this->data['text_none'] = $this->language->get('text_none');
+                $this->data['text_wait'] = $this->language->get('text_wait');
+                $this->data['text_voucher'] = $this->language->get('text_voucher'); 
+                $this->data['text_cheque'] = $this->language->get('text_cheque');
+                $this->data['text_paypal'] = $this->language->get('text_paypal');
+                $this->data['text_bank'] = $this->language->get('text_bank');
+
+                $this->data['entry_firstname'] = $this->language->get('entry_firstname');
+                $this->data['entry_lastname'] = $this->language->get('entry_lastname');
+                $this->data['entry_email'] = $this->language->get('entry_email');
+                $this->data['entry_telephone'] = $this->language->get('entry_telephone');
+                $this->data['entry_fax'] = $this->language->get('entry_fax');
+                $this->data['entry_company'] = $this->language->get('entry_company');
+                $this->data['entry_address_1'] = $this->language->get('entry_address_1');
+                $this->data['entry_address_2'] = $this->language->get('entry_address_2');
+                $this->data['entry_city'] = $this->language->get('entry_city');
+                $this->data['entry_postcode'] = $this->language->get('entry_postcode');
+                $this->data['entry_country'] = $this->language->get('entry_country');
+                $this->data['entry_zone'] = $this->language->get('entry_zone');
+                $this->data['entry_code'] = $this->language->get('entry_code');
+                $this->data['entry_account_commission'] = $this->language->get('entry_account_commission');
+                $this->data['entry_commission'] = $this->language->get('entry_commission');
+                $this->data['entry_tax'] = $this->language->get('entry_tax');
+                $this->data['entry_payment'] = $this->language->get('entry_payment');
+                $this->data['entry_cheque'] = $this->language->get('entry_cheque');
+                $this->data['entry_paypal'] = $this->language->get('entry_paypal');
+                $this->data['entry_bank_name'] = $this->language->get('entry_bank_name');
+                $this->data['entry_bank_branch_number'] = $this->language->get('entry_bank_branch_number');
+                $this->data['entry_bank_swift_code'] = $this->language->get('entry_bank_swift_code');
+                $this->data['entry_bank_account_name'] = $this->language->get('entry_bank_account_name');
+                $this->data['entry_bank_account_number'] = $this->language->get('entry_bank_account_number');
+                $this->data['entry_password'] = $this->language->get('entry_password');
+                $this->data['entry_confirm'] = $this->language->get('entry_confirm');
+                $this->data['entry_status'] = $this->language->get('entry_status');
+                $this->data['entry_amount'] = $this->language->get('entry_amount');
+                $this->data['entry_description'] = $this->language->get('entry_description');
+
+                $this->data['button_save'] = $this->language->get('button_save');
+                $this->data['button_cancel'] = $this->language->get('button_cancel');
+                $this->data['button_add_transaction'] = $this->language->get('button_add_transaction');
+                $this->data['button_remove'] = $this->language->get('button_remove');
+
+                $this->data['tab_general'] = $this->language->get('tab_general');
+                $this->data['tab_payment'] = $this->language->get('tab_payment');
+                $this->data['tab_transaction'] = $this->language->get('tab_transaction');
 
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -809,7 +811,15 @@ class ControllerSaleAffiliate extends Controller {
 		} else {
       		$this->data['code'] = uniqid();
     	}
-		
+	
+        if (isset($this->request->post['account_commission'])) {
+            $this->data['account_commission'] = $this->request->post['account_commission'];
+        } elseif (!empty($affiliate_info)) { 
+            $this->data['account_commission'] = $affiliate_info['account_commission'];
+        } else {
+            $this->data['account_commission'] = $this->config->get('config_account_commission');
+        }
+     
 		if (isset($this->request->post['commission'])) {
       		$this->data['commission'] = $this->request->post['commission'];
     	} elseif (!empty($affiliate_info)) { 
@@ -831,7 +841,7 @@ class ControllerSaleAffiliate extends Controller {
     	} elseif (!empty($affiliate_info)) { 
 			$this->data['payment'] = $affiliate_info['payment'];
 		} else {
-      		$this->data['payment'] = 'cheque';
+      		$this->data['payment'] = 'voucher';
     	}	
 
 		if (isset($this->request->post['cheque'])) {

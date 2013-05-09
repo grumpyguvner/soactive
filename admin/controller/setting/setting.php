@@ -102,7 +102,8 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_stock_checkout'] = $this->language->get('entry_stock_checkout');
 		$this->data['entry_stock_status'] = $this->language->get('entry_stock_status');
 		$this->data['entry_allow_affiliate'] = $this->language->get('entry_allow_affiliate');	
-		$this->data['entry_affiliate'] = $this->language->get('entry_affiliate');	
+		$this->data['entry_affiliate'] = $this->language->get('entry_affiliate');
+                $this->data['entry_account_commission'] = $this->language->get('entry_account_commission');
 		$this->data['entry_commission'] = $this->language->get('entry_commission');	
 		$this->data['entry_return_status'] = $this->language->get('entry_return_status');
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
@@ -708,6 +709,14 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_affiliate_id'] = $this->config->get('config_affiliate_id');		
 		}
 		
+                if (isset($this->request->post['config_account_commission'])) {
+                        $this->data['config_account_commission'] = $this->request->post['config_account_commission'];
+                } elseif ($this->config->has('config_account_commission')) {
+                        $this->data['config_account_commission'] = $this->config->get('config_account_commission');    
+                } else {
+                        $this->data['config_account_commission'] = '0.00';
+                }
+     
 		if (isset($this->request->post['config_commission'])) {
 			$this->data['config_commission'] = $this->request->post['config_commission'];
 		} elseif ($this->config->has('config_commission')) {
