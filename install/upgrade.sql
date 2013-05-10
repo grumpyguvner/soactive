@@ -75,8 +75,6 @@ ALTER TABLE oc_tax_rate DROP description;
 
 
 #### START 1.5.2
-
-
 CREATE TABLE IF NOT EXISTS oc_customer_ip_blacklist (
     customer_ip_blacklist_id int(11) NOT NULL DEFAULT 0 COMMENT '' auto_increment,
     ip varchar(15) NOT NULL DEFAULT '' COMMENT '' COLLATE utf8_bin,
@@ -182,12 +180,6 @@ ALTER TABLE `oc_return` ADD `return_action_id` int(11) NOT NULL DEFAULT '0' COMM
 DROP TABLE IF EXISTS oc_return_product;
 
 ALTER TABLE oc_tax_rate_to_customer_group DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-#### START 1.5.2.1
-
-ALTER TABLE `oc_affiliate` ADD `account_commission` decimal(4,2) NOT NULL DEFAULT '0.00' AFTER `commission`;
-ALTER TABLE `oc_affiliate` MODIFY `payment` varchar(10) COLLATE utf8_bin NOT NULL;
-ALTER TABLE `oc_affiliate_transaction` ADD `customer_id` int(11) DEFAULT NULL AFTER `affiliate_id`; 
 
 # Disable Category Module to force user to reenable with new settings to avoid php error
 UPDATE `oc_setting` SET `value` = replace(`value`, 's:6:"status";s:1:"1"', 's:6:"status";s:1:"0"') WHERE `key` = 'category_module';
@@ -448,3 +440,18 @@ CREATE TABLE IF NOT EXISTS `oc_sage_order` (
 
 ALTER TABLE `oc_category` ADD `googlebase_text` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `date_modified`;
 ALTER TABLE `oc_category` ADD `googlebase_xml` varchar(255) COLLATE utf8_bin DEFAULT NULL AFTER `googlebase_text`;
+
+#### Start 1.5.4:BC1.2.3
+
+ALTER TABLE `oc_affiliate` ADD `account_commission` decimal(4,2) NOT NULL DEFAULT '0.00' AFTER `commission`;
+ALTER TABLE `oc_affiliate` MODIFY `payment` varchar(10) COLLATE utf8_bin NOT NULL;
+ALTER TABLE `oc_affiliate_transaction` ADD `customer_id` int(11) DEFAULT NULL AFTER `affiliate_id`; 
+
+CREATE TABLE IF NOT EXISTS `oc_country_to_ip` (
+  `ip` varchar(40) NOT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `iso_code_2` varchar(2) NOT NULL,
+  `iso_code_3` varchar(3) NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ip`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

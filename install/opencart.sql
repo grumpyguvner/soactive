@@ -786,6 +786,26 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 -- Table structure for table `oc_coupon`
 --
 
+DROP TABLE IF EXISTS `oc_country_to_ip`;
+CREATE TABLE `oc_country_to_ip` (
+  `ip` varchar(40) NOT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `iso_code_2` varchar(2) NOT NULL,
+  `iso_code_3` varchar(3) NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ip`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `oc_country_to_ip`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_coupon`
+--
+
 DROP TABLE IF EXISTS `oc_coupon`;
 CREATE TABLE `oc_coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT,

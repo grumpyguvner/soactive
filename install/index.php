@@ -11,9 +11,8 @@ define('ALLOW_UPGRADE', true);
 defined('APPLICATION_ENV')
         || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : die('Warning: You must set an environment variable <em>APPLICATION_ENV</em>')));
 
-// HTTP
-define('HTTP_SERVER', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/');
-define('HTTP_OPENCART', 'http://' . $_SERVER['HTTP_HOST'] . rtrim(rtrim(dirname($_SERVER['SCRIPT_NAME']), 'install'), '/.\\') . '/');
+defined('CONFIG_OVERRIDE')
+        || define('CONFIG_OVERRIDE', (getenv('CONFIG_OVERRIDE') ? getenv('CONFIG_OVERRIDE') : false));
 
 // DIR
 define('DIR_APPLICATION', str_replace('\'', '/', realpath(dirname(__FILE__))) . '/');
@@ -24,8 +23,7 @@ define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');
 
-defined('CONFIG_OVERRIDE')
-        || define('CONFIG_OVERRIDE', (getenv('CONFIG_OVERRIDE') ? getenv('CONFIG_OVERRIDE') : false));
+$url_prefix = '';
 
 if (!defined('FILE_CONFIG') && CONFIG_OVERRIDE)
 {
@@ -41,13 +39,19 @@ if (!defined('FILE_CONFIG') && CONFIG_OVERRIDE)
     if (isset($sub_config_file))
     {
         define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config_' . $sub_config_file . '.php' : 'config_' . $sub_config_file . '_' . APPLICATION_ENV . '.php');
+        $url_prefix = '/' . $sub_config_file;
     }
 }
+
+// HTTP
+define('HTTP_SERVER', 'http://' . $_SERVER['HTTP_HOST'] . $url_prefix . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/');
+define('HTTP_OPENCART', 'http://' . $_SERVER['HTTP_HOST'] . $url_prefix . rtrim(rtrim(dirname($_SERVER['SCRIPT_NAME']), 'install'), '/.\\') . '/');
+
+
 
 // set config file name which we will write to
 defined('FILE_CONFIG')
     || define('FILE_CONFIG', (strtoupper(APPLICATION_ENV) == 'PRODUCTION') ? 'config.php' : 'config_' . APPLICATION_ENV . '.php');
-
 
 // Upgrade
 $upgrade = false;
