@@ -84,8 +84,9 @@
                             <div class="model"><span class="text-label"><?php echo $text_model; ?></span> <span><?php echo $model; ?></span></div>
                         <?php } ?>
 
-                        <?php if ($options) { ?>
+                        <?php if ($options || isset($attribute_groups['Filter'])) { ?>
                             <div class="options">
+                        <?php if ($options) { ?>
                                 <?php foreach ($options as $option) { ?>
                                     <?php if ($option['type'] == 'select') { ?>
                                         <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -222,6 +223,7 @@
                                         </div>
                                         <br />
                                     <?php } ?>
+                                <?php } ?>
                                 <?php } ?>
                                 <?php if (isset($attribute_groups['Filter'])) { ?>
                                 <div class="rating-top thermal">

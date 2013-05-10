@@ -407,6 +407,16 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_allow_buy; ?></label>
+                                        <div class="controls">
+                                            <?php if ($this->config->get('p3adminrebooted_toggle_buttons')) { ?>
+                                                <?php echo p3html::tb_bool_buttons_radio($this->language, 'config_allow_buy', $config_allow_buy); ?>
+                                            <?php } else { ?>
+                                                <?php echo p3html::tb_bool_radio_buttons($this->language, 'config_allow_buy', $config_allow_buy); ?>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label"><?php echo $entry_account; ?></label>
                                         <div class="controls">
                                             <select name="config_account_id" class="i-medium input-block-level">
