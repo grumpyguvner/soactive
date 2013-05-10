@@ -11,8 +11,6 @@ class ControllerCommonGeolocation extends Controller {
         
         $user_ip = (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
         
-        $user_ip = '37.143.176.0';
-        
         if (!array_key_exists($user_ip, $this->session->data['geolocation']) || $this->session->data['geolocation']['timeadded'] < strtotime("-" . $timeout . " hour"))
         {
             $this->load->model('localisation/country');
