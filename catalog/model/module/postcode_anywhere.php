@@ -54,23 +54,26 @@ class ModelModulePostcodeAnywhere extends Model {
     
     public function getCountryFromIp($ipAddress) {
         
-        $country_ip = $this->pa->getCountryFromIP($ipAddress);
-        
-        if ($country_ip)
+        if ($this->config->get('postcode_anywhere_geolocation') && $this->isAvailable())
         {
-            $this->load->model('localisation/country');
-            
-            $data = array();
-            
-            $data['ip'] = $country_ip->Items[0]->IpAddress;
-            $data['iso_code_2'] = $country_ip->Items[0]->Iso2;
-            $data['iso_code_3'] = $country_ip->Items[0]->Iso3;
-            
-            $country = $this->model_localisation_country->getCountryByISO3($country_ip->Items[0]->Iso3);
-            
-            $data['country_id'] = ($country) ? $country['country_id'] : 0;
-            
-            return $data;
+            $country_ip = $this->pa->getCountryFromIP($ipAddress);
+
+            if ($country_ip)
+            {
+                $this->load->model('localisation/country');
+
+                $data = array();
+
+                $data['ip'] = $country_ip->Items[0]->IpAddress;
+                $data['iso_code_2'] = $country_ip->Items[0]->Iso2;
+                $data['iso_code_3'] = $country_ip->Items[0]->Iso3;
+
+                $country = $this->model_localisation_country->getCountryByISO3($country_ip->Items[0]->Iso3);
+
+                $data['country_id'] = ($country) ? $country['country_id'] : 0;
+
+                return $data;
+            }
         }
 
         return false;

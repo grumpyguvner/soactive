@@ -28,26 +28,32 @@ class ControllerCommonGeolocation extends Controller {
                 }
             }
             
-            $this->session->data['geolocation'][$user_ip] = $country_ip;
+            if ($country_ip)
+            {
+                $this->session->data['geolocation'][$user_ip] = $country_ip;
+            }
             $this->session->data['geolocation'][$user_ip]['timeadded'] = strtotime("now");
         }
         
-        switch ($this->session->data['geolocation'][$user_ip]['iso_code_2'])
+        if (array_key_exists('iso_code_2', $this->session->data['geolocation'][$user_ip]))
         {
-            case 'NO':
-            case 'SE':
-            case 'DK':
-            case 'FI':
-            case 'DE':
-            case 'BE':
-            case 'NL':
-            case 'LU':
-            case 'IS':
-            case 'ES':
-            case 'CH':
-            case 'AT':
-                $this->config->set('config_allow_buy', false);
-                break;
+            switch ($this->session->data['geolocation'][$user_ip]['iso_code_2'])
+            {
+                case 'NO':
+                case 'SE':
+                case 'DK':
+                case 'FI':
+                case 'DE':
+                case 'BE':
+                case 'NL':
+                case 'LU':
+                case 'IS':
+                case 'ES':
+                case 'CH':
+                case 'AT':
+                    $this->config->set('config_allow_buy', false);
+                    break;
+            }
         }
     }
 }
