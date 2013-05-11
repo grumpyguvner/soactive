@@ -282,7 +282,6 @@ a:hover {
 #header #cart .heading {
 	/*float: right;*/
 	/*margin-right: 76px;*/
-	border-right: 1px solid #777777;
 	background: #000000;
 	position: relative;
 	z-index: 1;
@@ -2858,6 +2857,10 @@ a.button-account:hover, input.button-account:hover {
     min-height: 1px;	
     vertical-align: bottom;	
     display: table-cell;
+}
+#menuh li:last-child
+{
+    border-right: 1px solid #777777;
 }
 
 #menuh ul ul

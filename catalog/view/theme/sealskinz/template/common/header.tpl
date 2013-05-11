@@ -89,7 +89,7 @@
                             }
                             ?>
                             <li><a href="free-uk-delivery"><?php echo $text_free_delivery; ?></a></li>
-                            <li><a href="free-uk-returns" style="border-right: 1px solid grey;"><?php echo $text_free_returns; ?></a></li>
+                            <li><a href="free-uk-returns"><?php echo $text_free_returns; ?></a></li>
                         </ul>
                         <ul id="right">
                             <?php if (!$logged) { ?>
@@ -102,7 +102,9 @@
                                 </li>
                             <?php } ?>
                             <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
+                            <?php if ($cart) { ?>
                             <li><?php echo $cart; ?></li>
+                            <?php } ?>
                         </ul> 
                     </div> 
                 </div>
