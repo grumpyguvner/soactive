@@ -29,6 +29,7 @@ class ControllerModulePostcodeAnywhere extends Controller {
         $this->data['entry_account_code'] = $this->language->get('entry_account_code');
         $this->data['entry_key'] = $this->language->get('entry_key');
         $this->data['entry_check_credit'] = $this->language->get('entry_check_credit');
+        $this->data['entry_geolocation'] = $this->language->get('entry_geolocation');
         $this->data['entry_international'] = $this->language->get('entry_international');
         $this->data['entry_cache'] = $this->language->get('entry_cache');
         $this->data['entry_cache_expire'] = $this->language->get('entry_cache_expire');
@@ -66,6 +67,14 @@ class ControllerModulePostcodeAnywhere extends Controller {
             $this->data['postcode_anywhere_international'] = $this->config->get('postcode_anywhere_international');
         } else {
             $this->data['postcode_anywhere_international'] = '1';
+        }
+        
+        if (isset($this->request->post['postcode_anywhere_geolocation'])) {
+            $this->data['postcode_anywhere_geolocation'] = $this->request->post['postcode_anywhere_geolocation'];
+        } elseif ($this->config->get('postcode_anywhere_geolocation')) {
+            $this->data['postcode_anywhere_geolocation'] = $this->config->get('postcode_anywhere_geolocation');
+        } else {
+            $this->data['postcode_anywhere_geolocation'] = '1';
         }
         
         if (isset($this->request->post['postcode_anywhere_check_credit'])) {
