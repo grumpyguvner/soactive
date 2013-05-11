@@ -188,19 +188,19 @@ class ControllerPaymentPPStandard extends Controller {
 				}
 				
 				if (!$order_info['order_status_id']) {
-					$this->model_checkout_order->confirm($order_id, $order_status_id, self::getMessage($comment), false);
+					$this->model_checkout_order->confirm($order_id, $order_status_id, $this->getMessage($comment), false);
 				} else {
-					$this->model_checkout_order->update($order_id, $order_status_id, self::getMessage($comment), false);
+					$this->model_checkout_order->update($order_id, $order_status_id, $this->getMessage($comment), false);
 				}
 			} else {
-				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'), self::getMessage($comment), false);
+				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'), $this->getMessage($comment), false);
 			}
 			
 			curl_close($curl);
 		}	
 	}
         
-        static function getMessage($comment)
+        private function getMessage($comment)
         {
             $comment = 'PayPal Standard Callback' . "\n" . $comment;
             
