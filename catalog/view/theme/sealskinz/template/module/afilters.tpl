@@ -20,13 +20,13 @@
         }
     }
     
-     if ($attributes || $categories) {
+    if ($attributes || $categories) {
     ?>
     <div class="aFilterbox box">
         <div class="box-heading"><?php echo $heading_title; ?></div>
         <div class="box-content">
             <div class="box-category">
-                <form action="<?php echo $path; ?>" method="get" name="afilter" id="afilter">
+                <form action="<?php echo $href_no_filters; ?>" method="get" name="afilter" id="afilter">
                     <input type="hidden" name="sort" value="<?php echo $sort; ?>" />
                     <input type="hidden" name="order" value="<?php echo $order; ?>" />
                     <input type="hidden" name="limit" value="<?php echo $limit; ?>" />

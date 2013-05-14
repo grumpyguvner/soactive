@@ -226,7 +226,7 @@ class Category {
                 'separator' => false
             );	
 
-            //$path = $this->getPath(); # commented out as this was doubling category name in url
+            $path = false;
 
             $parts = explode('_', (string)$this->request->get['path']);
 

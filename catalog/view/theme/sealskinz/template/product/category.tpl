@@ -12,7 +12,7 @@ if ($thumb && $description) {
                 
             ?>
             <div class="outerContainer">
-                <div class="container<?php if ($class) echo $class; ?>" style="height:<?php echo $thumbH; ?>px;line-height:<?php echo $banner['height']; ?>px">
+                <div class="container<?php if ($class) echo $class; ?>" style="height:<?php echo $thumbH; ?>px;line-height:<?php echo $thumbH; ?>px">
                     <div class="innerContainer">
                     <?php echo $description; ?>
                     </div>
@@ -79,16 +79,16 @@ if ($thumb && $description) {
     </div>
 </div>
 <div id="notification">
-    <?php if ($success) { ?>
+    <?php if (isset($success) && $success) { ?>
         <div class="success"><?php echo $success; ?></div>
         <?php
     }
-    if ($error_warning) {
+    if (isset($error_warning) && $error_warning) {
         ?>
         <div class="warning"><?php echo $error_warning; ?></div>
         <?php
     }
-    if ($attention) {
+    if (isset($attention) && $attention) {
         ?>
         <div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
         <?php

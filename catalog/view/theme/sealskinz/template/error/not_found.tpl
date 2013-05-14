@@ -9,15 +9,15 @@
     </div>
 </div>
 <div id="notification">
-    <?php if ($success) { ?>
+    <?php if (isset($success) && $success) { ?>
         <div class="success"><?php echo $success; ?></div>
     <?php }
-    if ($error_warning) {
+    if (isset($error_warning) && $error_warning) {
         ?>
         <div class="warning"><?php echo $error_warning; ?></div>
         <?php
     }
-    if ($attention) {
+    if (isset($attention) && $attention) {
         ?>
         <div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
         <?php

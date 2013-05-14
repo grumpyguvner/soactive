@@ -163,12 +163,12 @@
                                                   } 
                                                   $children = array_slice($children, 0, 16); ?>
                                                 <div id="left" class="menu-column-left">
-                                                    <?php foreach ($children as $child) { ?>
-                                                    <?php   if (++$count == 9) { ?>
+                                                    <?php foreach ($children as $key => $child) { ?>
+                                                    <?php   if ($key == 9) { ?>
                                                 </div>   
                                                 <div id="right" class="menu-column-right">
                                                     <?php   } ?>
-                                                        <li <?php echo ($count > 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
+                                                        <li <?php echo ($key > 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
                                                     <?php } ?>
                                                 </div>
                                             <?php } ?>
