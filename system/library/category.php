@@ -8,7 +8,6 @@ class Category {
 	private $meta_keyword;
 	private $image;
 	private $parent_id;
-	private $address_id;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -40,7 +39,6 @@ class Category {
                         $this->meta_keyword = $category_query->row['meta_keyword'];
                         $this->image = $category_query->row['image'];
                         $this->parent_id = $category_query->row['parent_id'];
-                        $this->address_id = $category_query->row['address_id'];
 
                         $this->session->data['category_id'] = $category_id;
                 } else {
@@ -226,7 +224,7 @@ class Category {
                 'separator' => false
             );	
 
-            //$path = $this->getPath(); # commented out as this was doubling category name in url
+            $path = false; # commented out as this was doubling category name in url
 
             $parts = explode('_', (string)$this->request->get['path']);
 
@@ -252,7 +250,7 @@ class Category {
         }
 	
 	public function getChildren() {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
 		return $query->rows;
 	}
         
