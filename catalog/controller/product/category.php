@@ -250,6 +250,10 @@ class ControllerProductCategory extends Controller {
                         {
                             $this->document->addLink($pagination->getNextLink(), 'next');
                         }
+                        if ($page == 1)
+                        {
+                            $this->document->addLink($this->url->link('product/category', 'path=' . $this->request->get['path'] . $urlPage), 'canonical');
+                        }
                        
                         $pagination2 = new Pagination();
                         $pagination2->total = $product_total;
