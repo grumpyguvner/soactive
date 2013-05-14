@@ -9,11 +9,11 @@
     </div>
 </div>
 <div id="notification">
-    <?php if ($success) { ?>
+    <?php if (isset($success) && $success) { ?>
         <div class="success"><?php echo $success; ?></div>
     <?php
     }
-    if ($error_warning) {
+    if (isset($error_warning) && $error_warning) {
         ?>
         <div class="warning"><?php echo $error_warning; ?></div>
     <?php }

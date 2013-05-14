@@ -589,15 +589,28 @@ class ModelToolSageProducts extends Model {
         // We actually need to save the tax class against the product
         $this->load->model('localisation/tax_class');
         $tax_class = $this->model_localisation_tax_class->getTaxClassByName($tax_code['name']);
+        $old_rules = $this->model_localisation_tax_class->getTaxRules($tax_class['tax_class_id']);
+        $new_rules = array();
+        $new_rules[] = array (
+            'tax_rate_id' => $tax_rate_id,
+            'based' => 'shipping',
+            'priority' => 1
+            );
+        //Now add other rules back into tax class
+        foreach ($old_rules as $tax_rule) {
+            if (!$tax_rule['tax_rate_id'] == $tax_rate_id) {
+                $new_rules[] = array (
+                    'tax_rate_id' => $tax_rule['tax_rate_id'],
+                    'based' => $tax_rule['based'],
+                    'priority' => $tax_rule['priority']
+                    );
+            }
+        }
         
         $data = array(
             'title' => $tax_code['name'],
             'description' => "",
-            'tax_rule' => array (1 => array (
-                'tax_rate_id' => $tax_rate_id,
-                'based' => 'shipping',
-                'priority' => 1
-            ))
+            'tax_rule' => $new_rules
         );
 
         if ($tax_class) {

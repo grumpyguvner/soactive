@@ -27,6 +27,23 @@ class PostcodeAnywhere {
 
         return $this->getData($endpoint);
     }
+    
+    public function getLists() {
+
+        $endpoint = 'http://services.postcodeanywhere.co.uk/Management/Keys/List/v1.00/json3.ws?';
+        $endpoint .= 'Key=' . urlencode($this->key);
+
+        return $this->getData($endpoint);
+    }
+    
+    public function getCountryFromIP($IpAddress) {
+
+        $endpoint = 'http://services.postcodeanywhere.co.uk/Extras/Web/Ip2Country/v1.00/json3.ws?';
+        $endpoint .= 'Key=' . urlencode($this->key);
+        $endpoint .= '&IpAddress=' . $IpAddress;
+
+        return $this->getData($endpoint);
+    }
 
     public function getAddressesByPostcode($postcode, $iso3 = 'GBR', $building = null) {
         switch ($iso3) {

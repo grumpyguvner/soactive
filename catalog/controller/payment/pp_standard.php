@@ -111,6 +111,8 @@ class ControllerPaymentPPStandard extends Controller {
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 		
 		if ($order_info) {
+                        $comment = '';
+                        
 			$request = 'cmd=_notify-validate';
 		
 			foreach ($this->request->post as $key => $value) {
@@ -134,6 +136,8 @@ class ControllerPaymentPPStandard extends Controller {
 			
 			if (!$response) {
 				$this->log->write('PP_STANDARD :: CURL failed ' . curl_error($curl) . '(' . curl_errno($curl) . ')');
+                                
+                                $comment .= 'CURL failed ' . curl_error($curl) . '(' . curl_errno($curl) . ')' . "\n";
 			}
 					
 			if ($this->config->get('pp_standard_debug')) {
@@ -153,6 +157,8 @@ class ControllerPaymentPPStandard extends Controller {
 							$order_status_id = $this->config->get('pp_standard_completed_status_id');
 						} else {
 							$this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
+                                                        
+                                                        $comment .= 'RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']) . "\n";
 						}
 						break;
 					case 'Denied':
@@ -182,16 +188,39 @@ class ControllerPaymentPPStandard extends Controller {
 				}
 				
 				if (!$order_info['order_status_id']) {
-					$this->model_checkout_order->confirm($order_id, $order_status_id);
+					$this->model_checkout_order->confirm($order_id, $order_status_id, $this->getMessage($comment), false);
 				} else {
-					$this->model_checkout_order->update($order_id, $order_status_id);
+					$this->model_checkout_order->update($order_id, $order_status_id, $this->getMessage($comment), false);
 				}
 			} else {
-				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'));
+				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'), $this->getMessage($comment), false);
 			}
 			
 			curl_close($curl);
 		}	
 	}
+        
+        private function getMessage($comment)
+        {
+            $comment = 'PayPal Standard Callback' . "\n" . $comment;
+            
+            foreach ($this->request->post as $key => $value)
+            {
+                switch ($key) {
+                    case 'auth_amount':
+                    case 'payer_status':
+                    case 'payment_date':
+                    case 'mc_gross':
+                    case 'mc_currency':
+                    case 'payment_type':
+                    case 'pending_reason':
+                    case 'reason_code':
+                        $comment .= $key . ' {' . $value . '}' . "\n";
+                        break;
+                }
+            }
+            
+            return trim($comment);
+        }
 }
 ?>

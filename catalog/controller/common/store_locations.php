@@ -198,7 +198,7 @@ class ControllerCommonStoreLocations extends Controller {
                 $address = explode(",", $Location['Address']);
                 $temp['html'] .= '<br />' . implode('<br>', $address);
                 if (!empty($Location['Phone'])) {
-                     $temp['html'] .= '<br >'. $sLocation['Phone'];
+                     $temp['html'] .= '<br >'. $Location['Phone'];
                 }
                 if (!empty($Location['Email'])) {
                      $temp['html'] .= '<br ><a href="mailto:' . $Location['Email'] . '">' . $Location['Email'] . '</a>';

@@ -8,6 +8,7 @@ class ControllerModulePostcodeAnywhere extends Controller {
         $json = array();
         $json['addresses'] = false;
         $json['error'] = false;
+        $json['fail'] = false;
         
         $this->load->model('module/postcode_anywhere');
         if ($this->model_module_postcode_anywhere->isAvailable())
@@ -23,10 +24,12 @@ class ControllerModulePostcodeAnywhere extends Controller {
             }
         } else {
             $json['error'] = $this->language->get('error_postcode_unavailable');
+            $json['fail'] = true;
         }
         
         if (!$this->model_module_postcode_anywhere->isAvailable()) {
             $json['error'] = $this->language->get('error_postcode_unavailable');
+            $json['fail'] = true;
         }
 
         $this->response->setOutput(json_encode($json));
@@ -38,6 +41,7 @@ class ControllerModulePostcodeAnywhere extends Controller {
         $json = array();
         $json['address'] = false;
         $json['error'] = false;
+        $json['fail'] = false;
         
         $this->load->model('module/postcode_anywhere');
         if ($this->model_module_postcode_anywhere->isAvailable())
@@ -53,10 +57,12 @@ class ControllerModulePostcodeAnywhere extends Controller {
             }
         } else {
             $json['error'] = $this->language->get('error_postcode_unavailable');
+            $json['fail'] = true;
         }
         
         if (!$this->model_module_postcode_anywhere->isAvailable()) {
             $json['error'] = $this->language->get('error_postcode_unavailable');
+            $json['fail'] = true;
         }
 
         $this->response->setOutput(json_encode($json));

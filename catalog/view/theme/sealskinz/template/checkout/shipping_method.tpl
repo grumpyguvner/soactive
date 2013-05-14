@@ -1,5 +1,5 @@
 
-        <?php if ($error_warning) { ?>
+        <?php if (isset($error_warning) && $error_warning) { ?>
         <div class="warning"><?php echo $error_warning; ?></div>
         <?php } ?>
         <?php if ($shipping_methods) { ?>
@@ -18,7 +18,7 @@
               <?php } else { ?>
               <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
               <?php } ?></td>
-            <td><label for="<?php echo $quote['code']; ?>"><?php echo $quote['sTitle'] ?></label></td>
+            <td><label for="<?php echo $quote['code']; ?>"><?php echo $quote['title'] ?></label></td>
             <td style="text-align: right;"><label for="<?php echo $quote['code']; ?>"><?php echo $quote['text']; ?></label></td>
           </tr>
           <?php } ?>

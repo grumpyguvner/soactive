@@ -35,7 +35,7 @@ class ModelModulePostcodeAnywhere extends Model {
             {
                 $balance = $this->pa->getBalance();
 
-                if ($balance)
+                if ($balance && empty($this->paError))
                 {
                     foreach ($balance->Items as $credit)
                     {
@@ -50,6 +50,33 @@ class ModelModulePostcodeAnywhere extends Model {
             }
         }
         return $this->available = false;
+    }
+    
+    public function getCountryFromIp($ipAddress) {
+        
+        if ($this->config->get('postcode_anywhere_geolocation') && $this->isAvailable())
+        {
+            $country_ip = $this->pa->getCountryFromIP($ipAddress);
+
+            if ($country_ip)
+            {
+                $this->load->model('localisation/country');
+
+                $data = array();
+
+                $data['ip'] = $country_ip->Items[0]->IpAddress;
+                $data['iso_code_2'] = $country_ip->Items[0]->Iso2;
+                $data['iso_code_3'] = $country_ip->Items[0]->Iso3;
+
+                $country = $this->model_localisation_country->getCountryByISO3($country_ip->Items[0]->Iso3);
+
+                $data['country_id'] = ($country) ? $country['country_id'] : 0;
+
+                return $data;
+            }
+        }
+
+        return false;
     }
 
     public function getAddressesByPostcode($postcode, $country_id = false) {
@@ -88,7 +115,7 @@ class ModelModulePostcodeAnywhere extends Model {
                         $address['postcode'] = $address_info->PostalCode;
                         $address['city'] = $address_info->City;
 
-                        $zone = $this->model_localisation_zone->getZoneByCode($address_info->State, $address['country_id']);
+                        $zone = $this->model_localisation_zone->getZoneByName($address_info->State, $address['country_id']);
 
                         $address['zone_id'] = ($zone) ? $zone['zone_id'] : '';
                     
@@ -154,6 +181,12 @@ class ModelModulePostcodeAnywhere extends Model {
                         $zone = $this->model_localisation_zone->getZoneByName($address->Items[0]->County, $data['country_id']);
 
                         $data['zone_id'] = ($zone) ? $zone['zone_id'] : '';
+                        
+                        if (!$data['zone_id']) {
+                           $zone = $this->model_localisation_zone->getZoneByCode($address->Items[0]->County, $data['country_id']);
+
+                           $data['zone_id'] = ($zone) ? $zone['zone_id'] : ''; 
+                        }
 
                         break;
                     case 'USA':
@@ -166,9 +199,15 @@ class ModelModulePostcodeAnywhere extends Model {
                         $data['postcode'] = $address->Items[0]->Zip;
                         $data['city'] = $address->Items[0]->City;
 
-                        $zone = $this->model_localisation_zone->getZoneByName($address->Items[0]->StateName, $data['country_id']);
+                        $zone = $this->model_localisation_zone->getZoneByName($address->Items[0]->County, $data['country_id']);
 
                         $data['zone_id'] = ($zone) ? $zone['zone_id'] : '';
+                        
+                        if (!$data['zone_id']) {
+                           $zone = $this->model_localisation_zone->getZoneByCode($address->Items[0]->County, $data['country_id']);
+
+                           $data['zone_id'] = ($zone) ? $zone['zone_id'] : ''; 
+                        }
                         break;
                 }
                 if ($data) return $data;

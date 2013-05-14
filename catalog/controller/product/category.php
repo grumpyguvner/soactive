@@ -104,7 +104,7 @@ class ControllerProductCategory extends Controller {
                                 $image = false;
                         }
 
-                        if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+                        if ($this->config->get('config_allow_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
                                 $price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
                         } else {
                                 $price = false;
@@ -249,6 +249,10 @@ class ControllerProductCategory extends Controller {
                         if ($pagination->getNextLink())
                         {
                             $this->document->addLink($pagination->getNextLink(), 'next');
+                        }
+                        if ($page == 1)
+                        {
+                            $this->document->addLink($this->url->link('product/category', 'path=' . $this->request->get['path'] . $urlPage), 'canonical');
                         }
                        
                         $pagination2 = new Pagination();

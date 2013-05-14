@@ -58,6 +58,7 @@ $_['entry_customer_online']        = 'Customers Online:<br /><span class="help">
 $_['entry_customer_group']         = 'Customer Group:<br /><span class="help">Default customer group.</span>';
 $_['entry_customer_group_display'] = 'Customer Groups:<br /><span class="help">Display customer groups that new customers can select to use such as wholesale and business when signing up.</span>';
 $_['entry_customer_price']         = 'Login Display Prices:<br /><span class="help">Only show prices when a customer is logged in.</span>';
+$_['entry_allow_buy']              = 'Display Prices and buy button:<br /><span class="help">Stop purchases on the store.</span>';
 $_['entry_account']                = 'Account Terms:<br /><span class="help">Forces people to agree to terms before an account can be created.</span>';
 $_['entry_cart_weight']            = 'Display Weight on Cart Page:<br /><span class="help">Show the cart weight on the cart page</span>';
 $_['entry_guest_checkout']         = 'Guest Checkout:<br /><span class="help">Allow customers to checkout without creating an account. This will not be available when a downloadable product is in the shopping cart.</span>';

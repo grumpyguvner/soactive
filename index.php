@@ -3,7 +3,6 @@ if (is_file('redirects.php')) {
     include_once('redirects.php');
 }
 
-
 // Define application environment
 defined('APPLICATION_ENV')
         || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
@@ -244,6 +243,9 @@ $controller = new Front($registry);
 
 // Maintenance Mode
 $controller->addPreAction(new Action('common/maintenance'));
+
+// Geo location
+$controller->addPreAction(new Action('common/geolocation'));
 
 // SEO URL's
 $controller->addPreAction(new Action('common/seo_url'));

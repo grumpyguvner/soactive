@@ -11,6 +11,7 @@ $_['entry_status']        = 'Status:';
 $_['entry_account_code']  = 'Account:';
 $_['entry_key']           = 'Key:';
 $_['entry_international'] = 'Allow International:';
+$_['entry_geolocation']   = 'Allow Geolocation:';
 $_['entry_check_credit']  = 'Check Credit:';
 $_['entry_cache']         = 'Cache:';
 $_['entry_cache_expire']     = 'Cache Expire (seconds):';

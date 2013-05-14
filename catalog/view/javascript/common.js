@@ -22,7 +22,14 @@
                 paContainer.find('select[name=postcode_lookup_country_id]').val(paContainer.find('select[name=country_id]').val());
                 paContainer.find('.paAddress input').val('').trigger('change');
                 paContainer.find('input[name=postcode]').val(paContainer.find('input[name=postcode_lookup]').val());
-
+            } else {
+                paContainer.find('input[name=\'postcode\']').val(paContainer.find('input[name=postcode_lookup]').val());
+                paContainer.find('select[name=\'country_id\']').val(paContainer.find('select[name=postcode_lookup_country_id]').val()).trigger('change');
+                paContainer.find('input[name=\'company\']').val();
+                paContainer.find('input[name=\'address_1\']').val();
+                paContainer.find('input[name=\'address_2\']').val();
+                paContainer.find('input[name=\'city\']').val();
+                paContainer.find('select[name=\'zone_id\']').val();
             }
             
             paContainer.find('.paLookup').show();
@@ -44,7 +51,15 @@
                         
                     if (json['error'])
                     {
-                        paContainer.find('.paLookup .pInput').prepend('<span class="error">' + json['error'] + '</span>');
+                        if (json['fail'])
+                        {
+                            paContainer.find('.paLookup').hide();
+                            paContainer.find('.paSelect').hide();
+                            paContainer.find('.paAddress').show();
+                            paContainer.find('.paAddress').prepend('<span class="error">' + json['error'] + '</span>');
+                        } else {
+                            paContainer.find('.paLookup').prepend('<span class="error">' + json['error'] + '</span>');
+                        }
                     } else {
                         paSelect = paContainer.find('select[name=\'address_dropdown\']');
                         for (i = 0; i < json['addresses'].length; i++) {
@@ -84,17 +99,25 @@
                 success: function(json) {
                     if (json['error'])
                     {
-                        paContainer.find('.paLookup').show();
-                        paContainer.find('.paSelect').hide();
-                        paContainer.find('.paAddress').hide();
-                        paContainer.find('.paLookup .pInput').prepend('<span class="error">' + json['error'] + '</span>');
+                        if (json['fail'])
+                        {
+                            paContainer.find('.paLookup').hide();
+                            paContainer.find('.paSelect').hide();
+                            paContainer.find('.paAddress').show();
+                            paContainer.find('.paAddress').prepend('<span class="error">' + json['error'] + '</span>');
+                        } else {
+                            paContainer.find('.paLookup').show();
+                            paContainer.find('.paSelect').hide();
+                            paContainer.find('.paAddress').hide();
+                            paContainer.find('.paLookup').prepend('<span class="error">' + json['error'] + '</span>');
+                        }
                     } else {
                         paContainer.find('input[name=\'company\']').val(json['address']['company']);
                         paContainer.find('input[name=\'address_1\']').val(json['address']['address_1']);
                         paContainer.find('input[name=\'address_2\']').val(json['address']['address_2']);
                         paContainer.find('input[name=\'postcode\']').val(json['address']['postcode']);
                         paContainer.find('input[name=\'city\']').val(json['address']['city']);
-                        paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']).trigger('change');
+                        paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']);
                         paContainer.find('select[name=\'zone_id\']').val(json['address']['zone_id']);
                         paContainer.find('.paLookup').hide();
                         paContainer.find('.paSelect').hide();

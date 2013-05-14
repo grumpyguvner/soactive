@@ -25,5 +25,19 @@ class ModelLocalisationCountry extends Model {
 
 		return $country_data;
 	}
+        
+	public function getCountryByIp($ipAddress, $timeout = 72) {
+            
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country_to_ip WHERE ip = '" . $ipAddress . "' and date_added > DATE_ADD(NOW(), INTERVAL -" . $timeout . " HOUR)");
+		
+		return $query->row;
+        }
+        
+	public function insertCountryByIp($data) {
+                
+                $this->db->query("DELETE FROM " . DB_PREFIX . "country_to_ip WHERE ip = '" . $this->db->escape($data['ip']) . "'");
+            
+		$this->db->query("INSERT " . DB_PREFIX . "country_to_ip SET ip = '" . $this->db->escape($data['ip']) . "', iso_code_2 = '" . $this->db->escape($data['iso_code_2']) . "', iso_code_3 = '" . $this->db->escape($data['iso_code_3']) . "', country_id = '" . (int)$data['country_id'] . "'");
+        }
 }
 ?>

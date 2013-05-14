@@ -89,7 +89,7 @@
                             }
                             ?>
                             <li><a href="free-uk-delivery"><?php echo $text_free_delivery; ?></a></li>
-                            <li><a href="free-uk-returns" style="border-right: 1px solid grey;"><?php echo $text_free_returns; ?></a></li>
+                            <li><a href="free-uk-returns"><?php echo $text_free_returns; ?></a></li>
                         </ul>
                         <ul id="right">
                             <?php if (!$logged) { ?>
@@ -102,7 +102,9 @@
                                 </li>
                             <?php } ?>
                             <li><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></li>
+                            <?php if ($cart) { ?>
                             <li><?php echo $cart; ?></li>
+                            <?php } ?>
                         </ul> 
                     </div> 
                 </div>
@@ -166,12 +168,13 @@
                                                   } 
                                                   $children = array_slice($children, 0, 16); ?>
                                                 <div id="left" class="menu-column-left">
-                                                    <?php foreach ($children as $child) { ?>
-                                                    <?php   if (++$count == 9) { ?>
+                                                    <?php 
+                                                    foreach ($children as $key => $child) { ?>
+                                                    <?php   if ($key == 9) { ?>
                                                 </div>   
                                                 <div id="right" class="menu-column-right">
                                                     <?php   } ?>
-                                                        <li <?php echo ($count > 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
+                                                        <li <?php echo ($key > 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
                                                     <?php } ?>
                                                 </div>
                                             <?php } ?>
