@@ -8,14 +8,9 @@ redirects.php
 !index.html
 
 /download/*
-/image/data/*
-/image/cache/*
-/image/cache/data/*
+/image/*
 /system/cache/*
 /system/logs/*
 
 .DS_Store
 /nbproject
-
-
-/image/
