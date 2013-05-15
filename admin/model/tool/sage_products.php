@@ -598,7 +598,7 @@ class ModelToolSageProducts extends Model {
             );
         //Now add other rules back into tax class
         foreach ($old_rules as $tax_rule) {
-            if (!$tax_rule['tax_rate_id'] == $tax_rate_id) {
+            if ($tax_rule['tax_rate_id'] != $tax_rate_id) {
                 $new_rules[] = array (
                     'tax_rate_id' => $tax_rule['tax_rate_id'],
                     'based' => $tax_rule['based'],
