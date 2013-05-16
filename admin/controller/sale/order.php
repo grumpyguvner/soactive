@@ -777,6 +777,7 @@ class ControllerSaleOrder extends Controller {
 		} else {
 			$this->data['store_url'] = HTTP_CATALOG;
 		}
+                $this->data['store_url'] = preg_replace('%://.*?/%', '://' . $_SERVER['HTTP_HOST'] . '/', $this->data['store_url']);
 		
 		if (isset($this->request->post['customer'])) {
 			$this->data['customer'] = $this->request->post['customer'];
