@@ -112,11 +112,11 @@ class ControllerReportRegisterYourProduct extends Controller {
         $data = array();
 
         foreach ($results as $rownum => $row) {
-            $data[$rownum][] = $result['name'];
-            $data[$rownum][] = $result['email'];
-            $data[$rownum][] = $result['location'];
-            $data[$rownum][] = $result['barcode'];
-            $data[$rownum][] = $result['date_purchased'];
+            $data[$rownum][] = $row['name'];
+            $data[$rownum][] = $row['email'];
+            $data[$rownum][] = $row['location'];
+            $data[$rownum][] = $row['barcode'];
+            $data[$rownum][] = $row['date_purchased'];
         }
 
         // create data formats per column
