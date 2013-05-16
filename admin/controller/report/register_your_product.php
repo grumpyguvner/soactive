@@ -92,7 +92,7 @@ class ControllerReportRegisterYourProduct extends Controller {
     }
 
     public function download() {
-        $this->load->language('report/regsiter_your_product');
+        $this->load->language('report/register_your_product');
 
         // Get Model
         $this->load->model('report/customer');
