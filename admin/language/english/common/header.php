@@ -55,6 +55,7 @@ $_['text_report_product_viewed']       = 'Viewed';
 $_['text_report_product_purchased']    = 'Purchased';
 $_['text_report_product_stock']        = 'Stock';
 $_['text_report_customer_online']      = 'Customers Online';
+$_['text_report_register_your_product']= 'Registered Products';
 $_['text_report_customer_order']       = 'Orders';
 $_['text_report_customer_purchased']   = 'Purchased by group';
 $_['text_report_customer_reward']      = 'Reward Points';

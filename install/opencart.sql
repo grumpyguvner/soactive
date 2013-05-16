@@ -783,7 +783,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon`
+-- Table structure for table `oc_country_to_ip`
 --
 
 DROP TABLE IF EXISTS `oc_country_to_ip`;
