@@ -84,7 +84,7 @@ $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $con
 $registry->set('url', $url);
 
 // Log 
-$log = new Log(date("Y-m-d") . $config->get('config_error_filename'));
+$log = new Log(date("Y-m-d") . "-" . $config->get('config_error_filename'));
 $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
