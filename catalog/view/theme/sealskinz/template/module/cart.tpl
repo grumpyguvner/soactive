@@ -1,9 +1,8 @@
-<div id="cart">
+<div id="cart" class="mouseover<?php if ($products || $vouchers) echo ' hasItems' ?>">
   <div class="heading">
-    <a><span id="cart-total"><img src="catalog/view/theme/sealskinz/image/shopping-cart.png" alt="Cart" />&nbsp<?php echo $text_items; ?></span></a>
+    <a><span id="cart-total"><?php echo $text_items; ?></span></a>
     </div>
     
-  
     <!--ul style="margin: -13px 0 0 -173px;"><li class="cart-menu"-->
   
     <div class="content">

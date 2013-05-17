@@ -275,13 +275,10 @@ a:hover {
     text-decoration: none;
 }
 #header #cart {
-	top: 0px;
-	/*right: 145px;*/
+	top: 0;
 	z-index: 9;
 }
 #header #cart .heading {
-	/*float: right;*/
-	/*margin-right: 76px;*/
 	background: #000000;
 	position: relative;
 	z-index: 1;
@@ -294,8 +291,12 @@ a:hover {
 	margin-bottom: 3px;
 }
 #header #cart .heading a {
-	color: #38B0E3;
 	text-decoration: none;
+}
+#header #cart #cart-total {
+	display: inline-block;
+        background: transparent url('../image/shopping-cart.png') no-repeat left center;
+        padding-left: 20px;
 }
 #header #cart .content {
 	clear: both;
@@ -319,19 +320,25 @@ a:hover {
 	background: #FFF;
         
 }
-
+#header #cart.hasItems .heading a, #header #cart.active .heading a {
+        color: white;
+        background-color: #74964a;
+        text-decoration: none;
+        color: #fff;
+}
 #header #cart.active .content {
 	display: block;
+        z-index: 8;
 }
 #header #cart.active .content a {
 	border: none !important;
         display: inline-table;
 }
 #header #cart.active .content a:link, #header #cart.active .content a:visited, #header #cart.active .content a:link active{
-	background-color: #FFFFFF !important;
-        color: #777777 !important;
-        font-weight: bolder !important;
-        text-decoration: none !important;
+	background-color: #FFFFFF;
+        color: #777777;
+        font-weight: bold;
+        text-decoration: none;
 }
 
 .mini-cart-info table {
@@ -2810,7 +2817,7 @@ a.button-account:hover, input.button-account:hover {
     white-space:nowrap;
     padding: 6px 10px;
     font-weight: bolder;
-    color: #777777 !important;
+    color: #777777;
     height: 21px;
 }
 #menuh a:link, #menuh a:visited, #menuh a:active	/* menu at rest */
@@ -2822,8 +2829,8 @@ a.button-account:hover, input.button-account:hover {
 }
 #menuh a:hover	/* menu on mouse-over  */
 {
-    color: white  !important;
-    background-color: #74964a !important;	
+    color: white;
+    background-color: #74964a;	
     text-decoration:none;
 }	
 #menuh a.top_parent, #menuh a.top_parent:hover  /* attaches down-arrow to all top-parents */
