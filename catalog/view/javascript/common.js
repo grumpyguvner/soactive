@@ -252,11 +252,14 @@ $(document).ready(function() {
     
     /* Ajax Cart */
     $('#header').on({mouseenter: function() {
-            openCart();
+            if ($(this).hasClass('mouseover'))
+            {
+                openCart();
+            }
         },mouseleave:  function() {
             closeCart();
         }
-    }, '#cart.mouseover');
+    }, '#cart');
     
     $('#header').on('click', '#cart .heading a', function(event) {
         event.preventDefault();
