@@ -339,7 +339,7 @@ function openCart(delay, update) {
     if (typeof update != 'undefined' && update)
     {
         $("html, body").animate({ scrollTop: 0 }, 600);
-        $('#cart').load('index.php?route=module/cart #cart > *');
+        $('#cart').load('index.php?route=module/cart #cart');
     }
     $('#cart').addClass("active");
     if (typeof delay != 'undefined' && delay)
