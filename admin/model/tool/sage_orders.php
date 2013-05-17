@@ -65,7 +65,7 @@ class ModelToolSageOrders extends Model {
                             '<order>' . "\n" .
                             '<gross_pricing>true</gross_pricing>' . "\n" .
                             '<document_date>' . $order_info['date_added'] . '</document_date>' . "\n" .
-                            '<customer_ref>' . (defined('SITE_REGION') ? SITE_REGION : "") . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . " " . $order_info['firstname']. " " . $order_info['lastname'] . '</customer_ref>' . "\n";
+                            '<customer_ref>' . substr((defined('SITE_REGION') ? SITE_REGION : "") . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . " " . $order_info['firstname']. " " . $order_info['lastname'] ,0,30) . '</customer_ref>' . "\n";
                     #set delivery address
                     $order_xml .=
                             '<delivery_address>' . "\n" .
