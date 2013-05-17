@@ -1,6 +1,11 @@
 <?php
+
+include "log.php";
+
 class DB {
 	private $driver;
+        
+        private $auditUsername = "unknown";
 	
 	public function __construct($driver, $hostname, $username, $password, $database) {
 		if (file_exists(DIR_DATABASE . $driver . '.php')) {
@@ -13,7 +18,12 @@ class DB {
 	}
 		
   	public function query($sql) {
-		return $this->driver->query($sql);
+                if (strpos($sql, "SELECT ", 0) === FALSE) {
+                    $audit = new Log(date("Y-m-d") . "-audit.log");
+                    $audit->write($this->auditUsername . "[" . $_SERVER['REMOTE_ADDR'] . "]:" . $sql);
+                }
+
+		return $this->driver->query($sql, $this->auditUsername);
   	}
 	
 	public function escape($value) {
@@ -26,6 +36,10 @@ class DB {
 
   	public function getLastId() {
 		return $this->driver->getLastId();
-  	}	
+  	}
+        
+        public function setAuditUsername($username) {
+            $this->auditUsername = $username;
+        }
 }
 ?>
