@@ -61,7 +61,7 @@ $url = new Url(HTTP_SERVER, $config->get('config_use_ssl') ? HTTPS_SERVER : HTTP
 $registry->set('url', $url);
 		
 // Log 
-$log = new Log(date("Y-m-d") . $config->get('config_error_filename'));
+$log = new Log(date("Y-m-d") . "-" . $config->get('config_error_filename'));
 $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
