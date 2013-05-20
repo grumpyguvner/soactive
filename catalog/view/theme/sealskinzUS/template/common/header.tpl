@@ -59,6 +59,7 @@
         
     </head>
     <body>
+        <?php if (isset($data_layer)) echo "<script>dataLayer =[" . json_encode($data_layer) . "];</script>"; ?>
         <?php echo $google_analytics; ?>
         <div id="header">
             <div id="background">
