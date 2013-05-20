@@ -8,6 +8,7 @@ abstract class Controller {
     protected $template;
     protected $children = array();
     protected $data = array();
+    protected $data_layer = array();
     protected $output;
 
     public function __construct($registry) {
@@ -41,6 +42,9 @@ abstract class Controller {
             $class = $action->getClass();
 
             $controller = new $class($this->registry);
+            
+            //Pass the data layer to all children
+            $controller->setDataLayer($this->data_layer);
 
             $controller->{$action->getMethod()}($action->getArgs());
 
@@ -49,6 +53,10 @@ abstract class Controller {
             trigger_error('Error: Could not load controller ' . $child . '!');
             exit();
         }
+    }
+
+    protected function setDataLayer($data_layer) {
+        $this->data_layer = $data_layer;
     }
 
     protected function setTemplate($template) {
@@ -69,6 +77,8 @@ abstract class Controller {
         if (file_exists(DIR_TEMPLATE . $this->template)) {
             extract($this->data);
 
+            $data_layer = $this->data_layer;
+            
             ob_start();
 
             require(DIR_TEMPLATE . $this->template);
