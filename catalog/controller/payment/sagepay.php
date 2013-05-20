@@ -116,6 +116,10 @@ class ControllerPaymentSagepay extends Controller {
 	}
 	
 	public function success() {
+                if (TRUE === TRUE) {
+                    $audit = new Log(date("Y-m-d") . "-sagepay.log");
+                    $audit->write(serialize($this->request->get));
+                }
 		if (isset($this->request->get['crypt'])) {
 			$string = base64_decode(str_replace(' ', '+', $this->request->get['crypt']));
 			$password = $this->config->get('sagepay_password');	
