@@ -1,4 +1,7 @@
 <?php
+
+include DIR_SYSTEM . 'library/log.php';
+
 class ControllerPaymentPPStandard extends Controller {
 	protected function index() {
 		$this->language->load('payment/pp_standard');
@@ -100,6 +103,11 @@ class ControllerPaymentPPStandard extends Controller {
 	}
 	
 	public function callback() {
+                if (TRUE === TRUE) {
+                    $audit = new Log(date("Y-m-d") . "-paypal.log");
+                    $audit->write(serialize($this->request->post));
+                }
+            
 		if (isset($this->request->post['custom'])) {
 			$order_id = $this->request->post['custom'];
 		} else {
