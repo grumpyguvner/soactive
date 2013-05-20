@@ -192,7 +192,8 @@ class ModelToolSageOrders extends Model {
                             $data = array(
                                 'order_status_id' => $status_id,
                                 'notify' => true,
-                                'comment' => $comment
+                                'comment' => '',
+                                'notes' => $comment
                             );
                             $this->model_sale_order->addOrderHistory($row['order_id'],$data);
                             $sql = "INSERT INTO `" . DB_PREFIX . "sage_order` SET 

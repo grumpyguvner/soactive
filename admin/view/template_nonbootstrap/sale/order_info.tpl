@@ -375,7 +375,11 @@
           </tr>
           <tr>
             <td><?php echo $entry_comment; ?></td>
-            <td><textarea name="comment" cols="40" rows="8" style="width: 99%"></textarea>
+            <td><textarea name="comment" cols="40" rows="8" style="width: 99%"></textarea></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_notes; ?></td>
+            <td><textarea name="notes" cols="40" rows="8" style="width: 99%"></textarea>
               <div style="margin-top: 10px; text-align: right;"><a id="button-history" class="button"><?php echo $button_add_history; ?></a></div></td>
           </tr>
         </table>
@@ -919,7 +923,7 @@ $('#button-history').live('click', function() {
 		url: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
 		dataType: 'html',
-		data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+		data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()) + '&notes=' + encodeURIComponent($('textarea[name=\'notes\']').val()),
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			$('#button-history').attr('disabled', true);
@@ -933,6 +937,7 @@ $('#button-history').live('click', function() {
 			$('#history').html(html);
 			
 			$('textarea[name=\'comment\']').val('');
+			$('textarea[name=\'notes\']').val('');
 			
 			$('#order-status').html($('select[name=\'order_status_id\'] option:selected').text());
 		}

@@ -1498,6 +1498,7 @@ class ControllerSaleOrder extends Controller {
             $this->data['entry_order_status'] = $this->language->get('entry_order_status');
             $this->data['entry_notify'] = $this->language->get('entry_notify');
             $this->data['entry_comment'] = $this->language->get('entry_comment');
+            $this->data['entry_notes'] = $this->language->get('entry_notes');
 
             $this->data['button_invoice'] = $this->language->get('button_invoice');
             $this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -2226,7 +2227,8 @@ class ControllerSaleOrder extends Controller {
                 'notify' => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
                 'status' => $result['status'],
                 'comment' => nl2br($result['comment']),
-                'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+                'notes' => nl2br($result['notes']),
+                'date_added' => date($this->language->get('date_format_short_time'), strtotime($result['date_added']))
             );
         }
 

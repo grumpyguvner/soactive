@@ -455,3 +455,7 @@ CREATE TABLE IF NOT EXISTS `oc_country_to_ip` (
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ip`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#### Start 1.5.4:BC1.2.4
+
+ALTER TABLE `oc_order_history` ADD `notes` TEXT NOT NULL AFTER `comment` ;

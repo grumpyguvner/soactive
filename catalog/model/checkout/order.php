@@ -161,7 +161,7 @@ class ModelCheckoutOrder extends Model {
 		}
 	}	
 
-	public function confirm($order_id, $order_status_id, $comment = '', $notify = false) {
+	public function confirm($order_id, $order_status_id, $comment = '', $notify = false, $notes = '') {
 		$order_info = $this->getOrder($order_id);
 		 
 		if ($order_info && !$order_info['order_status_id']) {
@@ -201,7 +201,7 @@ class ModelCheckoutOrder extends Model {
 				
 			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
 
-			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '1', comment = '" . $this->db->escape(($comment && $notify) ? $comment : '') . "', date_added = NOW()");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '1', comment = '" . $this->db->escape(($comment && $notify) ? $comment : '') . "', notes = '" . $this->db->escape($notes) . "', date_added = NOW()");
 
 			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 			
@@ -577,7 +577,7 @@ class ModelCheckoutOrder extends Model {
 		}
 	}
 	
-	public function update($order_id, $order_status_id, $comment = '', $notify = false) {
+	public function update($order_id, $order_status_id, $comment = '', $notify = false, $notes = '') {
 		$order_info = $this->getOrder($order_id);
 
 		if ($order_info && $order_info['order_status_id']) {
@@ -618,7 +618,7 @@ class ModelCheckoutOrder extends Model {
 						
 			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
 		
-			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '" . (int)$notify . "', comment = '" . $this->db->escape($comment) . "', date_added = NOW()");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '" . (int)$notify . "', comment = '" . $this->db->escape($comment) . "', notes = '" . $this->db->escape($notes) . "', date_added = NOW()");
 	
 			// Send out any gift voucher mails
 			if ($this->config->get('config_complete_status_id') == $order_status_id) {
