@@ -1306,9 +1306,8 @@ class ControllerSaleOrder extends Controller {
                 $total = $this->request->post['order_total'][count($this->request->post['order_total']) - 1]['value'];
             }
 
-            if ($total != $order_info['total'] && $this->request->post['action_confirmed'] != 'total:' . $total) {
+            if ($total != $order_info['total'] && $this->request->post['action_confirmed'] != 'total:' . $total . ':' .$order_info['total']) {
                 $this->error['confirm']['title'] = $this->language->get('error_total_change_title');
-
 
                 $previous = $order_info['total'];
                 $new = $total;
@@ -1320,7 +1319,7 @@ class ControllerSaleOrder extends Controller {
                     $diff = $order_info['total'] - $total;
                     $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_refund'), $previous, $new, $diff);
                 }
-                $this->error['confirm']['action'] = 'total:' . $total;
+                $this->error['confirm']['action'] = 'total:' . $total . ':' .$order_info['total'];
             }
         }
 

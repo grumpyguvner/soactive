@@ -247,6 +247,30 @@ class ModelSaleOrder extends Model {
 		}
 				 
 		$this->db->query("UPDATE `" . DB_PREFIX . "order` SET total = '" . (float)$total . "', affiliate_id = '" . (int)$affiliate_id . "', commission = '" . (float)$commission . "' WHERE order_id = '" . (int)$order_id . "'"); 
+                
+                if (isset($data['action_confirmed']) && $data['action_confirmed'])
+                {
+                    
+                    $this->language->load('sale/order');
+        
+                    $order_status_id = $data['order_status_id'];
+                    
+                    $results = $this->getOrderHistories($order_id, 0, 10000);
+                    foreach ($results as $result) {
+                        $order_status_id = $result['order_status_id'];
+                    }
+                    
+                    $dataOH = array();
+                    $dataOH['order_status_id'] = $order_status_id;
+                    $dataOH['notify'] = 0;
+                    $dataOH['comment'] = '';
+                    
+                    $totals = explode(':', $data['action_confirmed']);
+                    
+                    $dataOH['notes'] = sprintf($this->language->get('confirm_new_total'), $totals[1], $totals[2]);
+
+                    $this->addOrderHistory($order_id, $dataOH);
+                }
 	}
 	
 	public function deleteOrder($order_id) {
@@ -707,7 +731,7 @@ class ModelSaleOrder extends Model {
 			$limit = 10;
 		}	
 				
-		$query = $this->db->query("SELECT oh.date_added, os.name AS status, oh.comment, oh.notes, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added ASC LIMIT " . (int)$start . "," . (int)$limit);
+		$query = $this->db->query("SELECT oh.date_added, os.name AS status, oh.comment, oh.notes, oh.notify, oh.order_status_id FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added ASC LIMIT " . (int)$start . "," . (int)$limit);
 
 		return $query->rows;
 	}

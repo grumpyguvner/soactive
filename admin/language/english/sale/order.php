@@ -202,5 +202,7 @@ $_['error_action']                            = 'Warning: Could not complete thi
 
 $_['error_total_change_title']                = 'New Total Amount';
 $_['error_total_change_refund']               = 'Warning: The total has changed on this order.<br><br>Previous total : %s<br>New Total : %s<br>Refund amount : %s<br><br>Please confirm you have manually refunded the customer via their payment method manually.';
-$_['error_total_change_collect']              = 'Warning: The total has changed on this order.<br><br>Previous total : %s<br>New Total : %s<br>Underpaid amount : %s<br><br>Please confirm you have manually collected he underpaid amount from the customer manually.';
+$_['error_total_change_collect']              = 'Warning: The total has changed on this order.<br><br>Previous total : %s<br>New Total : %s<br>Underpaid amount : %s<br><br>Please confirm you have manually collected the underpaid amount from the customer manually.';
+
+$_['confirm_new_total']                       = 'New order total confirmed: %s (was %s)';
 ?>
