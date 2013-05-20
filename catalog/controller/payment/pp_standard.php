@@ -1,7 +1,5 @@
 <?php
 
-include DIR_SYSTEM . 'library/log.php';
-
 class ControllerPaymentPPStandard extends Controller {
 	protected function index() {
 		$this->language->load('payment/pp_standard');
