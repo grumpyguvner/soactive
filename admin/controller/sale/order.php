@@ -1299,7 +1299,7 @@ class ControllerSaleOrder extends Controller {
             }
         }
 
-        if (isset($this->request->get['order_id'])) {
+        if (empty($this->error) && isset($this->request->get['order_id'])) {
             $order_info = $this->model_sale_order->getOrder($this->request->get['order_id']);
 
             if (isset($this->request->post['order_total'])) {
