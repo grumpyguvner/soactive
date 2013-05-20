@@ -1305,21 +1305,26 @@ class ControllerSaleOrder extends Controller {
             if (isset($this->request->post['order_total'])) {
                 $total = $this->request->post['order_total'][count($this->request->post['order_total']) - 1]['value'];
             }
+            
+            $previous = number_format($order_info['total'], 2);
+            $new = number_format($total, 2);
+            if ($new > $previous) {
+                $diff = number_format($new - $previous, 2);
+            } else {
+                $diff = number_format($previous - $new, 2);
+            }
 
-            if ($total != $order_info['total'] && $this->request->post['action_confirmed'] != 'total:' . $total . ':' .$order_info['total']) {
+            if ($total != $order_info['total'] && $this->request->post['action_confirmed'] != 'total:' . $new . ':' .$previous) {
                 $this->error['confirm']['title'] = $this->language->get('error_total_change_title');
 
-                $previous = $order_info['total'];
-                $new = $total;
-
-                if ($total > $order_info['total']) {
-                    $diff = $total - $order_info['total'];
+                if ($new > $previous) {
+                    $diff = $new - $previous;
                     $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_collect'), $previous, $new, $diff);
                 } else {
-                    $diff = $order_info['total'] - $total;
+                    $diff = $previous - $new;
                     $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_refund'), $previous, $new, $diff);
                 }
-                $this->error['confirm']['action'] = 'total:' . $total . ':' .$order_info['total'];
+                $this->error['confirm']['action'] = 'total:' . $new . ':' .$previous;
             }
         }
 

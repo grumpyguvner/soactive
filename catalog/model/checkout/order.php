@@ -425,12 +425,14 @@ class ModelCheckoutOrder extends Model {
 			}
 	
 			$template->data['totals'] = $order_total_query->rows;
-			
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/order.tpl')) {
-				$html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
-			} else {
-				$html = $template->fetch('default/template/mail/order.tpl');
-			}
+                        
+                        if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/' . $template)) {
+                            $this->template = $this->config->get('config_template') . '/template/' . $template;
+                        } elseif (file_exists(DIR_TEMPLATE . $this->config->get('config_base_template') . '/template/' . $template)) {
+                            $this->template = $this->config->get('config_base_template') . '/template/' . $template;
+                        } else {
+                            $this->template = 'default/template/' . $template;
+                        }
 			
 			// Text Mail
 			$text  = sprintf($language->get('text_new_greeting'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8')) . "\n\n";
