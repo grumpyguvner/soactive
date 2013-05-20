@@ -127,6 +127,10 @@ class ControllerPaymentSagepay extends Controller {
 			$output = utf8_encode($this->simpleXor($string, $password));
 			
 			$data = $this->getToken($output);
+                        if (TRUE === TRUE) {
+                            $audit = new Log(date("Y-m-d") . "-sagepay.log");
+                            $audit->write(serialize($data));
+                        }
 		
 			if ($data && is_array($data)) {
 				$this->load->model('checkout/order');
