@@ -27,5 +27,9 @@ class ModelPaymentPPPro extends Model {
    
     	return $method_data;
   	}
+        
+  	public function isRefundable() {
+		return false;
+  	}
 }
 ?>

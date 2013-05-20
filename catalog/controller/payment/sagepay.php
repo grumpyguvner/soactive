@@ -180,9 +180,9 @@ class ControllerPaymentSagepay extends Controller {
 				}
 				
 				if ($data['Status'] == 'OK') {
-					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('sagepay_order_status_id'), $message, false);
+					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('sagepay_order_status_id'), '', false, $message);
 				} else {
-					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('config_order_status_id'), $message, false);
+					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('config_order_status_id'), '', false, $message);
 				}
 				
 				$this->redirect($this->url->link('checkout/success'));

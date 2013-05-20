@@ -417,6 +417,13 @@ $order_status_label = p3html::order_status_label_for_order_id($this, $order_id);
             <label class="control-label"><?php echo $entry_comment; ?></label>
             <div class="controls">
 							<textarea name="comment" class="input-block-level" rows="8"></textarea>
+  
+						</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"><?php echo $entry_notes; ?></label>
+            <div class="controls">
+							<textarea name="notes" class="input-block-level" rows="8"></textarea>
               <div style="margin-top: 10px; text-align: right;">
 								<a id="button-history" class="btn"><i class="icon-clock"></i> <?php echo $button_add_history; ?></a>
 							</div>
@@ -969,7 +976,7 @@ $('#button-history').live('click', function() {
 		url: 'index.php?route=sale/order/history&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
 		dataType: 'html',
-		data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+		data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()) + '&notes=' + encodeURIComponent($('textarea[name=\'notes\']').val()),
 		beforeSend: function() {
 			$('.success, .warning').remove();
 			$('#button-history').attr('disabled', true);
@@ -983,6 +990,7 @@ $('#button-history').live('click', function() {
 			$('#history').html(html);
 
 			$('textarea[name=\'comment\']').val('');
+			$('textarea[name=\'notes\']').val('');
 
 			$('#order-status').html($('select[name=\'order_status_id\'] option:selected').text());
 		}

@@ -20,6 +20,7 @@ $_['text_total']                              = 'Total:';
 $_['text_reward']                             = 'Reward Points:';
 $_['text_order_status']                       = 'Order Status:';
 $_['text_comment']                            = 'Comment:';
+$_['text_notes']                              = 'Internal Comment:';
 $_['text_affiliate']                          = 'Affiliate:';
 $_['text_commission']                         = 'Commission:';
 $_['text_ip']                                 = 'IP Address:';
@@ -130,6 +131,7 @@ $_['column_download']                         = 'Download Name';
 $_['column_filename']                         = 'Filename';
 $_['column_remaining']                        = 'Remaining Downloads';
 $_['column_comment']                          = 'Comment';
+$_['column_notes']                            = 'Internal Comment';
 $_['column_notify']                           = 'Customer Notified';
 $_['column_action']                           = 'Action';
 
@@ -167,6 +169,7 @@ $_['entry_affiliate']                         = 'Affiliate:';
 $_['entry_order_status']                      = 'Order Status:';
 $_['entry_notify']                            = 'Notify Customer:';
 $_['entry_comment']                           = 'Comment:';
+$_['entry_notes']                             = 'Internal Comment:';
 $_['entry_shipping']                          = 'Shipping Method:';
 $_['entry_payment']                           = 'Payment Method:';
 $_['entry_coupon']                            = 'Coupon:';
@@ -196,4 +199,10 @@ $_['error_upload']                            = 'Upload required!';
 $_['error_filename']                          = 'Filename must be between 3 and 128 characters!';
 $_['error_filetype']                          = 'Invalid file type!';
 $_['error_action']                            = 'Warning: Could not complete this action!';
+
+$_['error_total_change_title']                = 'New Total Amount';
+$_['error_total_change_refund']               = 'Warning: The total has changed on this order.<br><br>Previous total : %s<br>New Total : %s<br>Refund amount : %s<br><br>Please confirm you have manually refunded the customer via their payment method manually.';
+$_['error_total_change_collect']              = 'Warning: The total has changed on this order.<br><br>Previous total : %s<br>New Total : %s<br>Underpaid amount : %s<br><br>Please confirm you have manually collected the underpaid amount from the customer manually.';
+
+$_['confirm_new_total']                       = 'New order total confirmed: %s (was %s)';
 ?>

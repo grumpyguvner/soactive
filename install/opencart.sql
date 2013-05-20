@@ -1765,6 +1765,7 @@ CREATE TABLE `oc_order_history` (
   `order_status_id` int(5) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `comment` text COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_history_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

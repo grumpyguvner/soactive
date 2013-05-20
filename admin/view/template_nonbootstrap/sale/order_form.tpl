@@ -8,6 +8,12 @@
   <?php if ($error_warning) { ?>
   <div class="warning"><?php echo $error_warning; ?></div>
   <?php } ?>
+  
+  <?php if ($error_confirm) { ?>
+  <div id="dialog-message" title="<?php echo $error_confirm_title ?>" data-action="<?php echo $error_confirm_action ?>">
+ <?php echo $error_confirm ?>
+</div>
+    <?php } ?>
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
@@ -16,6 +22,7 @@
     <div class="content">
       <div id="vtabs" class="vtabs"><a href="#tab-customer"><?php echo $tab_customer; ?></a><a href="#tab-payment"><?php echo $tab_payment; ?></a><a href="#tab-shipping"><?php echo $tab_shipping; ?></a><a href="#tab-product"><?php echo $tab_product; ?></a><a href="#tab-voucher"><?php echo $tab_voucher; ?></a><a href="#tab-total"><?php echo $tab_total; ?></a></div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+        <input type="hidden" name="action_confirmed" value="0" />
         <div id="tab-customer" class="vtabs-content">
           <table class="form">
             <tr>
@@ -1601,5 +1608,21 @@ $('.time').timepicker({timeFormat: 'h:m'});
 //--></script> 
 <script type="text/javascript"><!--
 $('.vtabs a').tabs();
-//--></script> 
+//--></script>
+<script>
+$(function() {
+    $( "#dialog-message" ).dialog({
+      modal: true,
+      buttons: {
+        OK: function() {
+          $('input[name=action_confirmed]').val($(this).data('action'));
+          $('#form').submit();
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
+</script>
 <?php echo $footer; ?>
