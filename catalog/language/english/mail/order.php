@@ -11,9 +11,9 @@ $_['text_new_date_added']       = 'Date Added:';
 $_['text_new_order_status']     = 'Order Status:';
 $_['text_new_payment_method']   = 'Payment Method:';
 $_['text_new_shipping_method']  = 'Shipping Method:';
-$_['text_new_email']  			= 'Email:';
-$_['text_new_telephone']  		= 'Telephone:';
-$_['text_new_ip']  				= 'IP Address:';
+$_['text_new_email']  		= 'Email:';
+$_['text_new_telephone']  	= 'Telephone:';
+$_['text_new_ip']  		= 'IP Address:';
 $_['text_new_payment_address']  = 'Payment Address';
 $_['text_new_shipping_address'] = 'Shipping Address';
 $_['text_new_products']         = 'Products';
@@ -26,7 +26,9 @@ $_['text_new_total']            = 'Total';
 $_['text_new_download']         = 'Once your payment has been confirmed you can click on the link below to access your downloadable products:';
 $_['text_new_comment']          = 'The comments for your order are:';
 $_['text_new_footer']           = 'Please reply to this email if you have any questions.';
-$_['text_new_powered']          = 'Powered By <a href="http://www.opencart.com">OpenCart</a>.';
+$_['text_new_powered']          = 'Powered By <a href="http://www.totallyboundless.com">Boundless Commerce</a>.';
+
+
 $_['text_update_subject']       = '%s - Order Update %s';
 $_['text_update_order']         = 'Order ID:';
 $_['text_update_date_added']    = 'Date Ordered:';
