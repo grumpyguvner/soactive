@@ -116,6 +116,10 @@ class ControllerPaymentSagepay extends Controller {
 	}
 	
 	public function success() {
+                if (TRUE === TRUE) {
+                    $audit = new Log(date("Y-m-d") . "-sagepay.log");
+                    $audit->write(serialize($this->request->get));
+                }
 		if (isset($this->request->get['crypt'])) {
 			$string = base64_decode(str_replace(' ', '+', $this->request->get['crypt']));
 			$password = $this->config->get('sagepay_password');	
@@ -123,6 +127,10 @@ class ControllerPaymentSagepay extends Controller {
 			$output = utf8_encode($this->simpleXor($string, $password));
 			
 			$data = $this->getToken($output);
+                        if (TRUE === TRUE) {
+                            $audit = new Log(date("Y-m-d") . "-sagepay.log");
+                            $audit->write(serialize($data));
+                        }
 		
 			if ($data && is_array($data)) {
 				$this->load->model('checkout/order');

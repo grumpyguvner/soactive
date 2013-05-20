@@ -1,6 +1,6 @@
 <?php
 
-include "log.php";
+include DIR_SYSTEM . 'library/log.php';
 
 class DB {
 	private $driver;
