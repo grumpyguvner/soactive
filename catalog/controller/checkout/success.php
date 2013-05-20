@@ -92,7 +92,7 @@ class ControllerCheckoutSuccess extends Controller {
                 $products = $this->model_account_order->getOrderProducts($this->session->data['last_order_id']);
                 foreach ($products as $product) {
                     $products_data['name'] = $product['name'];
-                    $products_data['model'] = $product['model'];
+                    $products_data['sku'] = $product['model'];
 
                     $options = $this->model_account_order->getOrderOptions($this->session->data['last_order_id'], $product['order_product_id']);
 
