@@ -141,6 +141,16 @@ class ModelToolSageOrders extends Model {
                     
                     #set postage charge
                     $shipping = $this->model_sale_order->getOrderShippingTotal($row['order_id']);
+                    if ($shipping > 5) {
+                        $order_xml .=
+                                '<item>' . "\n" .
+                                ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
+                                ' <item_id>8200429</item_id>' . "\n" .
+                                ' <price>0</price>' . "\n" .
+                                ' <tax_code_id>2</tax_code_id>' . "\n" .
+                                ' <quantity>1</quantity>' . "\n" .
+                                '</item>' . "\n";
+                    }
                     $order_xml .= 
                             '<item>' . "\n" .
                             ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
