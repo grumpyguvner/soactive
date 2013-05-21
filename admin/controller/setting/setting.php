@@ -107,6 +107,8 @@ class ControllerSettingSetting extends Controller {
                 $this->data['entry_account_commission'] = $this->language->get('entry_account_commission');
 		$this->data['entry_commission'] = $this->language->get('entry_commission');	
 		$this->data['entry_return_status'] = $this->language->get('entry_return_status');
+		$this->data['entry_return_refund'] = $this->language->get('entry_return_refund');
+		$this->data['entry_return_replacement'] = $this->language->get('entry_return_replacement');
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
 		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
@@ -737,10 +739,26 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_return_status_id'] = $this->config->get('config_return_status_id');		
 		}
+						
+		if (isset($this->request->post['config_return_refund_action_id'])) {
+			$this->data['config_return_refund_action_id'] = $this->request->post['config_return_refund_action_id'];
+		} else {
+			$this->data['config_return_refund_action_id'] = $this->config->get('config_return_refund_action_id');		
+		}
+						
+		if (isset($this->request->post['config_return_replacement_action_id'])) {
+			$this->data['config_return_replacement_action_id'] = $this->request->post['config_return_replacement_action_id'];
+		} else {
+			$this->data['config_return_replacement_action_id'] = $this->config->get('config_return_replacement_action_id');		
+		}
 		
 		$this->load->model('localisation/return_status');
 		
 		$this->data['return_statuses'] = $this->model_localisation_return_status->getReturnStatuses();	
+                
+                $this->load->model('localisation/return_action');
+		
+		$this->data['return_actions'] = $this->model_localisation_return_action->getReturnActions();	
 			
 		$this->load->model('tool/image');
 

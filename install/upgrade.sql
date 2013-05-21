@@ -459,3 +459,9 @@ CREATE TABLE IF NOT EXISTS `oc_country_to_ip` (
 #### Start 1.5.4:BC1.2.4
 
 ALTER TABLE `oc_order_history` ADD `notes` TEXT NOT NULL AFTER `comment` ;
+
+#### Start 1.5.4:BC1.2.5
+
+ALTER TABLE `oc_return` ADD `price` DECIMAL(15,4) NOT NULL DEFAULT '0.0000' AFTER `model`;
+ALTER TABLE `oc_return` ADD `refund_amount` DECIMAL(15,4) NOT NULL DEFAULT '0.0000' AFTER `quantity`;
+

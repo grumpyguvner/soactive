@@ -1,8 +1,37 @@
 <?php
 class ModelSaleReturn extends Model {
-	public function addReturn($data) {
-      	$this->db->query("INSERT INTO `" . DB_PREFIX . "return` SET order_id = '" . (int)$data['order_id'] . "', product_id = '" . (int)$data['product_id'] . "', customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', product = '" . $this->db->escape($data['product']) . "', model = '" . $this->db->escape($data['model']) . "', quantity = '" . (int)$data['quantity'] . "', opened = '" . (int)$data['opened'] . "', return_reason_id = '" . (int)$data['return_reason_id'] . "', return_action_id = '" . (int)$data['return_action_id'] . "', return_status_id = '" . (int)$data['return_status_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_ordered = '" . $this->db->escape($data['date_ordered']) . "', date_added = NOW(), date_modified = NOW()");
-	}
+    public function addReturn($data) {
+        $this->db->query("INSERT INTO `" . DB_PREFIX . "return` SET order_id = '" . (int) $data['order_id'] . "', product_id = '" . (int) $data['product_id'] . "', customer_id = '" . (int) $data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', product = '" . $this->db->escape($data['product']) . "', model = '" . $this->db->escape($data['model']) . "', price = '" . (float) $data['price'] . "', quantity = '" . (int) $data['quantity'] . "', refund_amount = '" . (float) $data['refund_amount'] . "', opened = '" . (int) $data['opened'] . "', return_reason_id = '" . (int) $data['return_reason_id'] . "', return_action_id = '" . (int) $data['return_action_id'] . "', return_status_id = '" . (int) $data['return_status_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_ordered = '" . $this->db->escape($data['date_ordered']) . "', date_added = NOW(), date_modified = NOW()");
+
+        $return_id = $this->db->getLastId();
+        $this->load->language('sale/return');
+        switch ($data['return_action_id']) {
+            case $this->config->get('config_return_refund_action_id'):
+
+                $this->load->model('sale/order');
+                $order_info = $this->model_sale_order->getOrder($this->request->post['order_id']);
+                
+                $refund_amount = number_format($data['refund_amount'], 2);
+
+                $order_status_id = $order_info['order_status_id'];
+
+                $results = $this->model_sale_order->getOrderHistories($order_info['order_id'], 0, 10000);
+                foreach ($results as $result) {
+                    $order_status_id = $result['order_status_id'];
+                }
+
+                $dataOH = array();
+                $dataOH['order_status_id'] = $order_status_id;
+                $dataOH['notify'] = 0;
+                $dataOH['comment'] = '';
+
+                $dataOH['notes'] = sprintf($this->language->get('confirm_refund'), $refund_amount, $return_id);
+
+                $this->model_sale_order->addOrderHistory($order_info['order_id'], $dataOH);
+
+                break;
+        }
+    }
 	
 	public function editReturn($return_id, $data) {
 		$this->db->query("UPDATE `" . DB_PREFIX . "return` SET order_id = '" . (int)$data['order_id'] . "', product_id = '" . (int)$data['product_id'] . "', customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', product = '" . $this->db->escape($data['product']) . "', model = '" . $this->db->escape($data['model']) . "', quantity = '" . (int)$data['quantity'] . "', opened = '" . (int)$data['opened'] . "', return_reason_id = '" . (int)$data['return_reason_id'] . "', return_action_id = '" . (int)$data['return_action_id'] . "', return_status_id = '" . (int)$data['return_status_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_ordered = '" . $this->db->escape($data['date_ordered']) . "', date_modified = NOW() WHERE return_id = '" . (int)$return_id . "'");

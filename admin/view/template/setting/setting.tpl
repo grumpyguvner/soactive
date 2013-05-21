@@ -587,6 +587,22 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_return_refund; ?></label>
+                                        <div class="controls">
+                                            <select name="config_return_action_id" class="i-medium input-block-level">
+                                                <?php echo p3html::oc_return_actions_options($return_actions, $config_return_refund_action_id); ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_return_replacement; ?></label>
+                                        <div class="controls">
+                                            <select name="config_return_action_id" class="i-medium input-block-level">
+                                                <?php echo p3html::oc_return_actions_options($return_actions, $config_return_replacement_action_id); ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
