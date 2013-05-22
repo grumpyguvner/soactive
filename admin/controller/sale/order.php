@@ -497,6 +497,7 @@ class ControllerSaleOrder extends Controller {
         $this->data['text_product'] = $this->language->get('text_product');
         $this->data['text_voucher'] = $this->language->get('text_voucher');
         $this->data['text_order'] = $this->language->get('text_order');
+        $this->data['text_add_product'] = $this->language->get('text_add_product');
 
         $this->data['entry_store'] = $this->language->get('entry_store');
         $this->data['entry_customer'] = $this->language->get('entry_customer');
@@ -1314,7 +1315,7 @@ class ControllerSaleOrder extends Controller {
                 $diff = number_format($previous - $new, 2);
             }
 
-            if ($total != $order_info['total']) {
+            if ($previous != $new) {
                 
                 $this->load->model('setting/extension');
                 $extensions = $this->model_setting_extension->getInstalled('payment');

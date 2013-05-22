@@ -403,6 +403,7 @@ class ControllerSaleReturn extends Controller {
         $this->data['button_insert'] = $this->language->get('button_insert');
         $this->data['button_delete'] = $this->language->get('button_delete');
         $this->data['button_filter'] = $this->language->get('button_filter');
+        $this->data['button_add_product'] = $this->language->get('button_add_product');
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -556,9 +557,11 @@ class ControllerSaleReturn extends Controller {
     private function getForm() {
         $this->data['heading_title'] = $this->language->get('heading_title');
 
+        $this->data['text_no_results'] = $this->language->get('text_no_results');
         $this->data['text_select'] = $this->language->get('text_select');
         $this->data['text_opened'] = $this->language->get('text_opened');
         $this->data['text_unopened'] = $this->language->get('text_unopened');
+        $this->data['text_add_product'] = $this->language->get('text_add_product');
 
         $this->data['entry_customer'] = $this->language->get('entry_customer');
         $this->data['entry_order_id'] = $this->language->get('entry_order_id');
@@ -570,13 +573,24 @@ class ControllerSaleReturn extends Controller {
         $this->data['entry_return_status'] = $this->language->get('entry_return_status');
         $this->data['entry_comment'] = $this->language->get('entry_comment');
         $this->data['entry_product'] = $this->language->get('entry_product');
-        $this->data['entry_model'] = $this->language->get('entry_model');
+        $this->data['entry_option'] = $this->language->get('entry_option');
+        $this->data['entry_quantity'] = $this->language->get('entry_quantity');
         $this->data['entry_price'] = $this->language->get('entry_price');
         $this->data['entry_quantity'] = $this->language->get('entry_quantity');
         $this->data['entry_reason'] = $this->language->get('entry_reason');
         $this->data['entry_opened'] = $this->language->get('entry_opened');
         $this->data['entry_action'] = $this->language->get('entry_action');
         $this->data['entry_refund_amount'] = $this->language->get('entry_refund_amount');
+        
+        
+        $this->data['column_product'] = $this->language->get('column_product');
+        $this->data['column_model'] = $this->language->get('column_model');
+        $this->data['column_quantity'] = $this->language->get('column_quantity');
+        $this->data['column_price'] = $this->language->get('column_price');
+        $this->data['column_total'] = $this->language->get('column_total');
+        
+
+        $this->data['button_add_product'] = $this->language->get('button_add_product');
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -845,6 +859,49 @@ class ControllerSaleReturn extends Controller {
         } else {
             $this->data['return_reason_id'] = '';
         }
+        
+        if (isset($this->request->post['order_product'])) {
+            $order_products = $this->request->post['order_product'];
+        } else {
+            $order_products = array();
+        }
+        
+        
+        $this->data['order_products'] = array();
+
+        foreach ($order_products as $order_product) {
+            if (isset($order_product['order_option'])) {
+                $order_option = $order_product['order_option'];
+            } else {
+                $order_option = array();
+            }
+
+            if (isset($order_product['order_download'])) {
+                $order_download = $order_product['order_download'];
+            } else {
+                $order_download = array();
+            }
+
+            $this->data['order_products'][] = array(
+                'order_product_id' => $order_product['order_product_id'],
+                'product_id' => $order_product['product_id'],
+                'name' => $order_product['name'],
+                'model' => $order_product['model'],
+                'option' => $order_option,
+                'download' => $order_download,
+                'quantity' => $order_product['quantity'],
+                'price' => $order_product['price'],
+                'total' => $order_product['total'],
+                'tax' => $order_product['tax'],
+                'reward' => $order_product['reward']
+            );
+        }
+        
+        if (isset($this->request->post['order_total'])) {
+            $this->data['order_totals'] = $this->request->post['order_total'];
+        } else {
+            $this->data['order_totals'] = array();
+        }
 
         $this->load->model('localisation/return_reason');
 
@@ -1056,7 +1113,7 @@ class ControllerSaleReturn extends Controller {
             $this->data['model'] = $return_info['model'];
             $this->data['quantity'] = $return_info['quantity'];
             $this->data['price'] = $return_info['price'];
-            $this->data['refund_amount'] = $return_info['refund_amount'];
+            $this->data['refund_amount'] = $return_info['refund_amount'];            
 
             $this->load->model('localisation/return_reason');
 
@@ -1178,6 +1235,40 @@ class ControllerSaleReturn extends Controller {
                             $this->error['confirm']['title'] = $this->language->get('error_refund_amount_title');
                             $this->error['confirm']['message'] = sprintf($this->language->get('error_refund_amount'), $refund_amount);
                             $this->error['confirm']['action'] = 'refund:' . $refund_amount;
+                        }
+                    }
+                    break;
+                case $this->config->get('config_return_replacement_action_id'):
+                    
+                    if (isset($this->request->post['order_total'])) {
+                        $total = $this->request->post['order_total'][count($this->request->post['order_total']) - 1]['value'];
+                    }
+
+                    $previous = number_format($this->request->post['refund_amount'], 2);
+                    $new = number_format($total, 2);
+                    if ($new > $previous) {
+                        $diff = number_format($new - $previous, 2);
+                    } else {
+                        $diff = number_format($previous - $new, 2);
+                    }
+
+                    if ($previous != $new) {
+
+                        $this->load->model('setting/extension');
+                        $extensions = $this->model_setting_extension->getInstalled('payment');
+                        if (!in_array($order_info['payment_code'], $extensions) || !$this->config->get($order_info['payment_code'] . '_refunds')) {
+                            if ($this->request->post['action_confirmed'] != 'replacement:' . $new . ':' .$previous) {
+                                $this->error['confirm']['title'] = $this->language->get('error_replacement_amount_title');
+
+                                if ($new > $previous) {
+                                    $diff = $new - $previous;
+                                    $this->error['confirm']['message'] = sprintf($this->language->get('error_replacement_amount_underpay'), $previous, $new, $diff);
+                                } else {
+                                    $diff = $previous - $new;
+                                    $this->error['confirm']['message'] = sprintf($this->language->get('error_replacement_amount_refund'), $previous, $new, $diff);
+                                }
+                                $this->error['confirm']['action'] = 'replacement:' . $new . ':' . $previous;
+                            }
                         }
                     }
                     break;

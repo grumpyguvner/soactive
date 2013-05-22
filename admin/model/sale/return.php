@@ -30,6 +30,73 @@ class ModelSaleReturn extends Model {
                 $this->model_sale_order->addOrderHistory($order_info['order_id'], $dataOH);
 
                 break;
+           case $this->config->get('config_return_replacement_action_id'):
+
+                $this->load->model('sale/order');
+                $old_order_info = $this->model_sale_order->getOrder($this->request->post['order_id']);
+                
+                $new_order_info = $old_order_info;
+                $new_order_info['order_product'] = $this->request->post['order_product'];
+                $new_order_info['order_total'] = $this->request->post['order_total'];
+                
+                $new_order_id = $this->model_sale_order->addOrder($new_order_info);
+                
+                $new_order_info = $this->model_sale_order->getOrder($new_order_id);
+                
+                $return_amount = number_format($data['refund_amount'], 2);
+                $order_amount = number_format($new_order_info['total'], 2);
+                
+                if ($return_amount > $order_amount)
+                {
+                    $refund_amount = number_format($return_amount - $order_amount, 2);
+                } else {
+                    $refund_amount = number_format($order_amount - $return_amount, 2);
+                }
+                
+                $dataOH = array();
+                $dataOH['order_status_id'] = 0;
+                $dataOH['notify'] = 0;
+                $dataOH['comment'] = '';
+if ($return_amount > $order_amount)
+                $dataOH['notes'] = '';
+
+                // update history on old order
+                $order_status_id = $old_order_info['order_status_id'];
+
+                $results = $this->model_sale_order->getOrderHistories($old_order_info['order_id'], 0, 10000);
+                foreach ($results as $result) {
+                    $order_status_id = $result['order_status_id'];
+                }
+
+                $dataOH['order_status_id'] = $order_status_id;
+                if ($return_amount > $order_amount)
+                {
+                    $dataOH['notes'] = sprintf($this->language->get('confirm_replacement_refund'), $return_amount, $order_amount, $refund_amount, $return_id, $new_order_info['order_id']);
+                } else {
+                    $dataOH['notes'] = sprintf($this->language->get('confirm_replacement_underpay'), $return_amount, $order_amount, $refund_amount, $return_id, $new_order_info['order_id']);
+                }
+
+                $this->model_sale_order->addOrderHistory($old_order_info['order_id'], $dataOH);
+                
+                // update history on new order
+                $order_status_id = $new_order_info['order_status_id'];
+
+                $results = $this->model_sale_order->getOrderHistories($new_order_info['order_id'], 0, 10000);
+                foreach ($results as $result) {
+                    $order_status_id = $result['order_status_id'];
+                }
+
+                $dataOH['order_status_id'] = $order_status_id;
+                if ($return_amount > $order_amount)
+                {
+                    $dataOH['notes'] = sprintf($this->language->get('confirm_replacement_refund'), $return_amount, $order_amount, $refund_amount, $return_id, $old_order_info['order_id']);
+                } else {
+                    $dataOH['notes'] = sprintf($this->language->get('confirm_replacement_underpay'), $return_amount, $order_amount, $refund_amount, $return_id, $old_order_info['order_id']);
+                }
+
+                $this->model_sale_order->addOrderHistory($new_order_info['order_id'], $dataOH);
+
+                break;
         }
     }
 	
