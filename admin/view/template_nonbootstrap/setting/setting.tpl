@@ -705,6 +705,30 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_return_refund; ?></td>
+              <td><select name="config_return_refund_action_id">
+                  <?php foreach ($return_actions as $return_action) { ?>
+                  <?php if ($return_action['return_action_id'] == $config_return_refund_action_id) { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"><?php echo $return_action['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_return_replacement; ?></td>
+              <td><select name="config_return_replacement_action_id">
+                  <?php foreach ($return_actions as $return_action) { ?>
+                  <?php if ($return_action['return_action_id'] == $config_return_replacement_action_id) { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"><?php echo $return_action['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
           </table>
         </div>
         <div id="tab-image">

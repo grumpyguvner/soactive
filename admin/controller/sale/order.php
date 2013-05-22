@@ -1305,7 +1305,7 @@ class ControllerSaleOrder extends Controller {
             if (isset($this->request->post['order_total'])) {
                 $total = $this->request->post['order_total'][count($this->request->post['order_total']) - 1]['value'];
             }
-            
+
             $previous = number_format($order_info['total'], 2);
             $new = number_format($total, 2);
             if ($new > $previous) {
@@ -1314,17 +1314,24 @@ class ControllerSaleOrder extends Controller {
                 $diff = number_format($previous - $new, 2);
             }
 
-            if ($total != $order_info['total'] && $this->request->post['action_confirmed'] != 'total:' . $new . ':' .$previous) {
-                $this->error['confirm']['title'] = $this->language->get('error_total_change_title');
+            if ($total != $order_info['total']) {
+                
+                $this->load->model('setting/extension');
+                $extensions = $this->model_setting_extension->getInstalled('payment');
+                if (!in_array($order_info['payment_code'], $extensions) || !$this->config->get($order_info['payment_code'] . '_refunds')) {
+                    if ($this->request->post['action_confirmed'] != 'total:' . $new . ':' .$previous) {
+                        $this->error['confirm']['title'] = $this->language->get('error_total_change_title');
 
-                if ($new > $previous) {
-                    $diff = $new - $previous;
-                    $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_collect'), $previous, $new, $diff);
-                } else {
-                    $diff = $previous - $new;
-                    $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_refund'), $previous, $new, $diff);
+                        if ($new > $previous) {
+                            $diff = $new - $previous;
+                            $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_collect'), $previous, $new, $diff);
+                        } else {
+                            $diff = $previous - $new;
+                            $this->error['confirm']['message'] = sprintf($this->language->get('error_total_change_refund'), $previous, $new, $diff);
+                        }
+                        $this->error['confirm']['action'] = 'total:' . $new . ':' . $previous;
+                    }
                 }
-                $this->error['confirm']['action'] = 'total:' . $new . ':' .$previous;
             }
         }
 
@@ -2584,7 +2591,39 @@ class ControllerSaleOrder extends Controller {
 
         $this->response->setOutput($this->render());
     }
+    
+    public function getOrder () {
+        $this->load->model('sale/order');
+       
+        if (isset($this->request->get['order_id'])) {
+            $order_id = $this->request->get['order_id'];
+        } else {
+            $order_id = 0;
+        }
 
+        $order_info = $this->model_sale_order->getOrder($order_id);
+        
+        if ($order_info)
+        {
+            $order_info['date_added'] = date('Y-m-d', strtotime($order_info['date_added']));
+        }
+        
+        $this->response->setOutput(json_encode($order_info));
+    }
+    
+    public function getOrderProducts () {
+        $this->load->model('sale/order');
+       
+        if (isset($this->request->get['order_id'])) {
+            $order_id = $this->request->get['order_id'];
+        } else {
+            $order_id = 0;
+        }
+
+        $order_products_info = $this->model_sale_order->getOrderProducts($order_id);
+        
+        $this->response->setOutput(json_encode($order_products_info));
+    }
 }
 
 ?>

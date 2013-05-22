@@ -56,7 +56,7 @@ class Language {
             if (file_exists($file)) {
                 $_ = array();
 
-                require_once($file);
+                require($file);
 
                 $this->data = array_merge($this->data, $_);
             }
