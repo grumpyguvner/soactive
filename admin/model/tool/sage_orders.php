@@ -108,12 +108,15 @@ class ModelToolSageOrders extends Model {
                         $product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int)$order_product['product_id'] . "' AND product_option_value_id = '" . (int)$order_options[0]['product_option_value_id'] . "'");
                         if ($product_option_value_query->row) {
                             //Make sure order quantity not greater than available quantity
-                            if ($order_product['quantity'] > $product_option_value_query->row['quantity']) {
-                                $errors[] = "quantity ordered greater than stock: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
-                                $this->log->write("quantity ordered greater than stock, expect sage to throw error");
-                            } else {
-                                $this->log->write("product quantity ok, continuing");
-                            }
+                            //*****************************************************************
+                            //*** This can only be done if we have refreshed the sage data ****
+//                            if ($order_product['quantity'] > $product_option_value_query->row['quantity']) {
+//                                $errors[] = "quantity ordered greater than stock: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
+//                                $this->log->write("quantity ordered greater than stock, expect sage to throw error");
+//                            } else {
+//                                $this->log->write("product quantity ok, continuing");
+//                            }
+                            //*****************************************************************
                             $sage_info = $this->model_catalog_product->getSageProductInfo($product_id, $product_option_value_id);
                             if (!$sage_info) {
                                 $errors[] = "product option doesn't match a sage sku: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
