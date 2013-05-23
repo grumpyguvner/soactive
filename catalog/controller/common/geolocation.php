@@ -52,7 +52,6 @@ class ControllerCommonGeolocation extends Controller {
                 case 'CH':
                 case 'AT':
                 case 'FR':
-                case 'IT':
                     $this->config->set('config_allow_buy', false);
                     break;
             }
