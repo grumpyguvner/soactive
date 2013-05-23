@@ -129,7 +129,7 @@ class ControllerModuleCart extends Controller {
 		$this->data['cart'] = $this->url->link('checkout/cart');
 						
 		$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
-                if ($this->config->get('config_allow_buy'))
+                if (!$this->config->get('config_block_buy'))
                 {
                     $this->setTemplate('module/cart.tpl');
 
