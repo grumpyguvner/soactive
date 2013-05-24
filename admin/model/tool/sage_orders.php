@@ -65,7 +65,7 @@ class ModelToolSageOrders extends Model {
                             '<order>' . "\n" .
                             '<gross_pricing>true</gross_pricing>' . "\n" .
                             '<document_date>' . $order_info['date_added'] . '</document_date>' . "\n" .
-                            '<customer_ref>' . (defined('SITE_REGION') ? SITE_REGION : "") . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . " " . $order_info['firstname']. " " . $order_info['lastname'] . '</customer_ref>' . "\n";
+                            '<customer_ref>' . substr((defined('SITE_REGION') ? SITE_REGION : "") . str_pad($order_info['order_id'], 6, "0", STR_PAD_LEFT) . " " . $order_info['firstname']. " " . $order_info['lastname'] ,0,30) . '</customer_ref>' . "\n";
                     #set delivery address
                     $order_xml .=
                             '<delivery_address>' . "\n" .
@@ -108,12 +108,15 @@ class ModelToolSageOrders extends Model {
                         $product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int)$order_product['product_id'] . "' AND product_option_value_id = '" . (int)$order_options[0]['product_option_value_id'] . "'");
                         if ($product_option_value_query->row) {
                             //Make sure order quantity not greater than available quantity
-                            if ($order_product['quantity'] > $product_option_value_query->row['quantity']) {
-                                $errors[] = "quantity ordered greater than stock: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
-                                $this->log->write("quantity ordered greater than stock, expect sage to throw error");
-                            } else {
-                                $this->log->write("product quantity ok, continuing");
-                            }
+                            //*****************************************************************
+                            //*** This can only be done if we have refreshed the sage data ****
+//                            if ($order_product['quantity'] > $product_option_value_query->row['quantity']) {
+//                                $errors[] = "quantity ordered greater than stock: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
+//                                $this->log->write("quantity ordered greater than stock, expect sage to throw error");
+//                            } else {
+//                                $this->log->write("product quantity ok, continuing");
+//                            }
+                            //*****************************************************************
                             $sage_info = $this->model_catalog_product->getSageProductInfo($product_id, $product_option_value_id);
                             if (!$sage_info) {
                                 $errors[] = "product option doesn't match a sage sku: " . $order_product['model'] . " : " . $order_options[0]['value'] . " x " . $order_product['quantity'];
@@ -141,6 +144,16 @@ class ModelToolSageOrders extends Model {
                     
                     #set postage charge
                     $shipping = $this->model_sale_order->getOrderShippingTotal($row['order_id']);
+                    if ($shipping > 5) {
+                        $order_xml .=
+                                '<item>' . "\n" .
+                                ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
+                                ' <item_id>8200429</item_id>' . "\n" .
+                                ' <price>0</price>' . "\n" .
+                                ' <tax_code_id>2</tax_code_id>' . "\n" .
+                                ' <quantity>1</quantity>' . "\n" .
+                                '</item>' . "\n";
+                    }
                     $order_xml .= 
                             '<item>' . "\n" .
                             ' <warehouse_id>' . $this->config->get('sage_warehouse') . '</warehouse_id>' . "\n" .
@@ -192,7 +205,8 @@ class ModelToolSageOrders extends Model {
                             $data = array(
                                 'order_status_id' => $status_id,
                                 'notify' => true,
-                                'comment' => $comment
+                                'comment' => '',
+                                'notes' => $comment
                             );
                             $this->model_sale_order->addOrderHistory($row['order_id'],$data);
                             $sql = "INSERT INTO `" . DB_PREFIX . "sage_order` SET 

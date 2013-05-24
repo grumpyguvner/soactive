@@ -85,7 +85,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$this->data['entry_customer_group_display'] = $this->language->get('entry_customer_group_display');
 		$this->data['entry_customer_price'] = $this->language->get('entry_customer_price');
-		$this->data['entry_allow_buy'] = $this->language->get('entry_allow_buy');
+		$this->data['entry_block_buy'] = $this->language->get('entry_block_buy');
 		$this->data['entry_account'] = $this->language->get('entry_account');
 		$this->data['entry_cart_weight'] = $this->language->get('entry_cart_weight');		
 		$this->data['entry_guest_checkout'] = $this->language->get('entry_guest_checkout');
@@ -107,6 +107,8 @@ class ControllerSettingSetting extends Controller {
                 $this->data['entry_account_commission'] = $this->language->get('entry_account_commission');
 		$this->data['entry_commission'] = $this->language->get('entry_commission');	
 		$this->data['entry_return_status'] = $this->language->get('entry_return_status');
+		$this->data['entry_return_refund'] = $this->language->get('entry_return_refund');
+		$this->data['entry_return_replacement'] = $this->language->get('entry_return_replacement');
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
 		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
@@ -592,10 +594,10 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_customer_price'] = $this->config->get('config_customer_price');			
 		}
 								
-		if (isset($this->request->post['config_allow_buy'])) {
-			$this->data['config_allow_buy'] = $this->request->post['config_allow_buy'];
+		if (isset($this->request->post['config_block_buy'])) {
+			$this->data['config_block_buy'] = $this->request->post['config_block_buy'];
 		} else {
-			$this->data['config_allow_buy'] = $this->config->get('config_allow_buy');			
+			$this->data['config_block_buy'] = $this->config->get('config_block_buy');			
 		}
 						
 		if (isset($this->request->post['config_account_id'])) {
@@ -737,10 +739,26 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_return_status_id'] = $this->config->get('config_return_status_id');		
 		}
+						
+		if (isset($this->request->post['config_return_refund_action_id'])) {
+			$this->data['config_return_refund_action_id'] = $this->request->post['config_return_refund_action_id'];
+		} else {
+			$this->data['config_return_refund_action_id'] = $this->config->get('config_return_refund_action_id');		
+		}
+						
+		if (isset($this->request->post['config_return_replacement_action_id'])) {
+			$this->data['config_return_replacement_action_id'] = $this->request->post['config_return_replacement_action_id'];
+		} else {
+			$this->data['config_return_replacement_action_id'] = $this->config->get('config_return_replacement_action_id');		
+		}
 		
 		$this->load->model('localisation/return_status');
 		
 		$this->data['return_statuses'] = $this->model_localisation_return_status->getReturnStatuses();	
+                
+                $this->load->model('localisation/return_action');
+		
+		$this->data['return_actions'] = $this->model_localisation_return_action->getReturnActions();	
 			
 		$this->load->model('tool/image');
 

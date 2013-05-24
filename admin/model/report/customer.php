@@ -127,6 +127,61 @@ class ModelReportCustomer extends Model {
 		
 		return $query->row['total'];
 	}
+        
+        
+	public function getRegisterYourProduct($data = array()) { 
+		$sql = "SELECT * FROM " . DB_PREFIX . "register_product";
+		
+		$implode = array();
+
+		if ($implode) {
+			$sql .= " AND " . implode(" AND ", $implode);
+		}
+				
+		$sql .= " ORDER BY register_product_id ASC";
+				
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}			
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}	
+			
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+			
+		$query = $this->db->query($sql);
+	
+		return $query->rows;
+	}
+
+	public function getTotalRegisterYourProduct() {
+		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "register_product`";
+		
+		$implode = array();
+		
+		if ($implode) {
+			$sql .= " WHERE " . implode(" AND ", $implode);
+		}
+				
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}			
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}	
+			
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+						
+		$query = $this->db->query($sql);
+		
+		return $query->row['total'];
+	}
 	
 	public function getCredit($data = array()) { 
 		$sql = "SELECT ct.customer_id, CONCAT(c.firstname, ' ', c.lastname) AS customer, c.email, cgd.name AS customer_group, c.status, SUM(ct.amount) AS total FROM " . DB_PREFIX . "customer_transaction ct LEFT JOIN `" . DB_PREFIX . "customer` c ON (ct.customer_id = c.customer_id) LEFT JOIN " . DB_PREFIX . "customer_group cg ON (c.customer_group_id = cg.customer_group_id) LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (cg.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";

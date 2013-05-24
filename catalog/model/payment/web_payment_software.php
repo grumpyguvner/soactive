@@ -27,5 +27,9 @@ class ModelPaymentWebPaymentSoftware extends Model {
    
     	return $method_data;
   	}
+        
+  	public function isRefundable() {
+		return false;
+  	}
 }
 ?>

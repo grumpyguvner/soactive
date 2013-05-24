@@ -205,10 +205,12 @@ class ModelToolSageProducts extends Model {
         foreach ($stock_items as $key => $value) {
             if (!count($importRefs) || in_array($value['code'], $importRefs)) {
                 // Create a record if one doesn't already exist for this stock item
+                // 2013-05-17 Modified to always convert stock_item_code to uppercase due to some codes being entered in sage in upper and lower case
+                //            this does mean that they cannot use lower case codes and was explained to Matt Boyce and Andy May
                 $sql = "INSERT INTO `" . DB_PREFIX . "sage_stock_item` (`stock_item_id`, `stock_item_code`, `stock_item_name`, `data`, `date_added`, `date_modified`)
-                                    VALUES ( " . (int) $value['id'] . ",'" . $this->db->escape($value['code']) . "', '" . $this->db->escape($value['name']) . "', '', NOW(), NOW())
+                                    VALUES ( " . (int) $value['id'] . ",'" . strtoupper($this->db->escape($value['code'])) . "', '" . $this->db->escape($value['name']) . "', '', NOW(), NOW())
                                ON DUPLICATE KEY UPDATE
-                                    `stock_item_code` = '" . $this->db->escape($value['code']) . "', 
+                                    `stock_item_code` = '" . strtoupper($this->db->escape($value['code'])) . "', 
                                     `stock_item_name` = '" . $this->db->escape($value['name']) . "', 
                                     `data` = '', 
                                     `date_modified` = NOW()
@@ -310,6 +312,12 @@ class ModelToolSageProducts extends Model {
                                     case "sparebit3":
                                         //Treat as booleans
                                         $stock_item[strtolower((string) $third_gen->getName())] = (boolean)(int) $third_gen;
+                                        break;
+
+                                    case "code":
+                                        // 2013-05-17 Modified to always convert stock_item_code to uppercase due to some codes being entered in sage in upper and lower case
+                                        //            this does mean that they cannot use lower case codes and was explained to Matt Boyce and Andy May
+                                        $stock_item[strtolower((string) $third_gen->getName())] = strtoupper((string) $third_gen);
                                         break;
 
                                     default:
@@ -598,7 +606,7 @@ class ModelToolSageProducts extends Model {
             );
         //Now add other rules back into tax class
         foreach ($old_rules as $tax_rule) {
-            if (!$tax_rule['tax_rate_id'] == $tax_rate_id) {
+            if ($tax_rule['tax_rate_id'] != $tax_rate_id) {
                 $new_rules[] = array (
                     'tax_rate_id' => $tax_rule['tax_rate_id'],
                     'based' => $tax_rule['based'],

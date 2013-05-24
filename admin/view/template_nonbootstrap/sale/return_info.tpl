@@ -79,6 +79,10 @@
             <td><?php echo $model; ?></td>
           </tr>
           <tr>
+            <td><?php echo $text_price; ?></td>
+            <td><?php echo $price; ?></td>
+          </tr>
+          <tr>
             <td><?php echo $text_quantity; ?></td>
             <td><?php echo $quantity; ?></td>
           </tr>
@@ -102,6 +106,10 @@
                 <?php } ?>
                 <?php } ?>
               </select></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_refund_amount; ?></td>
+            <td><?php echo $refund_amount; ?></td>
           </tr>
           <?php if ($comment) { ?>
           <tr>

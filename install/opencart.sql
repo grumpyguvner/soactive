@@ -783,7 +783,7 @@ INSERT INTO `oc_country` (`country_id`, `name`, `iso_code_2`, `iso_code_3`, `add
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oc_coupon`
+-- Table structure for table `oc_country_to_ip`
 --
 
 DROP TABLE IF EXISTS `oc_country_to_ip`;
@@ -1765,6 +1765,7 @@ CREATE TABLE `oc_order_history` (
   `order_status_id` int(5) NOT NULL,
   `notify` tinyint(1) NOT NULL DEFAULT '0',
   `comment` text COLLATE utf8_bin NOT NULL,
+  `notes` text COLLATE utf8_bin NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_history_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -2471,7 +2472,9 @@ CREATE TABLE `oc_return` (
   `telephone` varchar(32) COLLATE utf8_bin NOT NULL,
   `product` varchar(255) COLLATE utf8_bin NOT NULL,
   `model` varchar(64) COLLATE utf8_bin NOT NULL,
+  `price` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
   `quantity` int(4) NOT NULL,
+  `refund_amount` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
   `opened` tinyint(1) NOT NULL,
   `return_reason_id` int(11) NOT NULL,
   `return_action_id` int(11) NOT NULL,
@@ -2754,7 +2757,8 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (123, 0, 'config', 'config_order_edit', '100', 0),
 (124, 0, 'config', 'config_voucher_min', '1', 0),
 (125, 0, 'config', 'config_voucher_max', '1000', 0),
-(128, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:\"1\";}', 1);
+(128, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:\"1\";}', 1),
+(128, 0, 'config', 'config_block_buy', '0', 0);
 
 -- --------------------------------------------------------
 

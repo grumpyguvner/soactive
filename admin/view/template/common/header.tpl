@@ -313,6 +313,7 @@ function fixMenu($menu) {
                                                         <li><a href="<?php echo $report_product_stock; ?>"><?php echo $text_report_product_stock; ?></a></li>
                                                         <li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>
                                                         <li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>
+                                                        <li><a href="<?php echo $report_register_your_product; ?>"><?php echo $text_report_register_your_product; ?></a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown-submenu">

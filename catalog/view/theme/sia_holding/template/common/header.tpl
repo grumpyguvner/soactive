@@ -41,6 +41,7 @@
 DD_belatedPNG.fix('#logo img');
 </script>
 <![endif]-->
+<?php if (isset($data_layer)) echo "<script>dataLayer =[" . json_encode($data_layer) . "];</script>"; ?>
 <?php echo $google_analytics; ?>
 </head>
 <body>

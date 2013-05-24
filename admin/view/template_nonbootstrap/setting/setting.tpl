@@ -451,16 +451,16 @@
                 <?php } ?></td>
             </tr>
             <tr>
-              <td><?php echo $entry_allow_buy; ?></td>
-              <td><?php if ($config_allow_buy) { ?>
-                <input type="radio" name="config_allow_buy" value="1" checked="checked" />
+              <td><?php echo $entry_block_buy; ?></td>
+              <td><?php if ($config_block_buy) { ?>
+                <input type="radio" name="config_block_buy" value="1" checked="checked" />
                 <?php echo $text_yes; ?>
-                <input type="radio" name="config_allow_buy" value="0" />
+                <input type="radio" name="config_block_buy" value="0" />
                 <?php echo $text_no; ?>
                 <?php } else { ?>
-                <input type="radio" name="config_allow_buy" value="1" />
+                <input type="radio" name="config_block_buy" value="1" />
                 <?php echo $text_yes; ?>
-                <input type="radio" name="config_allow_buy" value="0" checked="checked" />
+                <input type="radio" name="config_block_buy" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?></td>
             </tr>
@@ -701,6 +701,30 @@
                   <option value="<?php echo $return_status['return_status_id']; ?>" selected="selected"><?php echo $return_status['name']; ?></option>
                   <?php } else { ?>
                   <option value="<?php echo $return_status['return_status_id']; ?>"><?php echo $return_status['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_return_refund; ?></td>
+              <td><select name="config_return_refund_action_id">
+                  <?php foreach ($return_actions as $return_action) { ?>
+                  <?php if ($return_action['return_action_id'] == $config_return_refund_action_id) { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"><?php echo $return_action['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_return_replacement; ?></td>
+              <td><select name="config_return_replacement_action_id">
+                  <?php foreach ($return_actions as $return_action) { ?>
+                  <?php if ($return_action['return_action_id'] == $config_return_replacement_action_id) { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"><?php echo $return_action['name']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
                   <?php } ?>
                   <?php } ?>
                 </select></td>

@@ -58,7 +58,7 @@ $_['entry_customer_online']        = 'Customers Online:<br /><span class="help">
 $_['entry_customer_group']         = 'Customer Group:<br /><span class="help">Default customer group.</span>';
 $_['entry_customer_group_display'] = 'Customer Groups:<br /><span class="help">Display customer groups that new customers can select to use such as wholesale and business when signing up.</span>';
 $_['entry_customer_price']         = 'Login Display Prices:<br /><span class="help">Only show prices when a customer is logged in.</span>';
-$_['entry_allow_buy']              = 'Display Prices and buy button:<br /><span class="help">Stop purchases on the store.</span>';
+$_['entry_block_buy']              = 'Hide prices, buy buttons and cart:<br /><span class="help">Stop purchases on the store.</span>';
 $_['entry_account']                = 'Account Terms:<br /><span class="help">Forces people to agree to terms before an account can be created.</span>';
 $_['entry_cart_weight']            = 'Display Weight on Cart Page:<br /><span class="help">Show the cart weight on the cart page</span>';
 $_['entry_guest_checkout']         = 'Guest Checkout:<br /><span class="help">Allow customers to checkout without creating an account. This will not be available when a downloadable product is in the shopping cart.</span>';
@@ -79,6 +79,8 @@ $_['entry_affiliate']              = 'Affiliate Terms:<br /><span class="help">F
 $_['entry_account_commission']     = 'New Account Commission:<br /><span class="help">The default affiliate commission amount per new account.</span>';
 $_['entry_commission']             = 'Affiliate Commission (%):<br /><span class="help">The default affiliate commission percentage on each order.</span>'; 
 $_['entry_return_status']          = 'Return Status:<br /><span class="help">Set the default return status when an returns request is submitted.</span>';
+$_['entry_return_refund']          = 'Return Refunded:<br /><span class="help">The return action for a refund.</span>';
+$_['entry_return_replacement']     = 'Return Replacement:<br /><span class="help">The return action to create a new replacement order.</span>';
 $_['entry_logo']                   = 'Store Logo:';
 $_['entry_icon']                   = 'Icon:<br /><span class="help">The icon should be a PNG that is 16px x 16px.</span>';
 $_['entry_image_category']         = 'Category Image Size:';

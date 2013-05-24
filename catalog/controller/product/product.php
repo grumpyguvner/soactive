@@ -242,7 +242,7 @@ class ControllerProductProduct extends Controller {
 				);
 			}	
 						
-			if ($this->config->get('config_allow_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
+			if (!$this->config->get('config_block_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
 				$this->data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 				$this->data['price'] = false;
@@ -273,7 +273,7 @@ class ControllerProductProduct extends Controller {
 			
 			$this->data['options'] = array();
                         
-                        if ($this->config->get('config_allow_buy'))
+                        if (!$this->config->get('config_block_buy'))
                         {
 			
                             foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) { 
@@ -366,7 +366,7 @@ class ControllerProductProduct extends Controller {
 					$image = false;
 				}
 				
-				if ($this->config->get('config_allow_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
+				if (!$this->config->get('config_block_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
 					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
 				} else {
 					$price = false;
@@ -415,7 +415,7 @@ class ControllerProductProduct extends Controller {
 					$image = false;
 				}
 				
-				if ($this->config->get('config_allow_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
+				if (!$this->config->get('config_block_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
 					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
 				} else {
 					$price = false;

@@ -116,6 +116,10 @@ class ControllerPaymentSagepay extends Controller {
 	}
 	
 	public function success() {
+                if (TRUE === TRUE) {
+                    $audit = new Log(date("Y-m-d") . "-sagepay.log");
+                    $audit->write(serialize($this->request->get));
+                }
 		if (isset($this->request->get['crypt'])) {
 			$string = base64_decode(str_replace(' ', '+', $this->request->get['crypt']));
 			$password = $this->config->get('sagepay_password');	
@@ -123,6 +127,10 @@ class ControllerPaymentSagepay extends Controller {
 			$output = utf8_encode($this->simpleXor($string, $password));
 			
 			$data = $this->getToken($output);
+                        if (TRUE === TRUE) {
+                            $audit = new Log(date("Y-m-d") . "-sagepay.log");
+                            $audit->write(serialize($data));
+                        }
 		
 			if ($data && is_array($data)) {
 				$this->load->model('checkout/order');
@@ -172,9 +180,9 @@ class ControllerPaymentSagepay extends Controller {
 				}
 				
 				if ($data['Status'] == 'OK') {
-					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('sagepay_order_status_id'), $message, false);
+					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('sagepay_order_status_id'), '', false, $message);
 				} else {
-					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('config_order_status_id'), $message, false);
+					$this->model_checkout_order->update($this->request->get['order_id'], $this->config->get('config_order_status_id'), '', false, $message);
 				}
 				
 				$this->redirect($this->url->link('checkout/success'));

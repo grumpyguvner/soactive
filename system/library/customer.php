@@ -20,6 +20,7 @@ class Customer {
 			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND status = '1'");
 			
 			if ($customer_query->num_rows) {
+                                $this->db->setAuditUsername($customer_query->row['firstname'] . " " . $customer_query->row['lastname']);
 				$this->customer_id = $customer_query->row['customer_id'];
 				$this->firstname = $customer_query->row['firstname'];
 				$this->lastname = $customer_query->row['lastname'];
@@ -52,6 +53,7 @@ class Customer {
 		
 		if ($customer_query->num_rows) {
 			$this->session->data['customer_id'] = $customer_query->row['customer_id'];	
+                        $this->db->setAuditUsername($customer_query->row['firstname'] . " " . $customer_query->row['lastname']);
 		    
 			if ($customer_query->row['cart'] && is_string($customer_query->row['cart'])) {
 				$cart = unserialize($customer_query->row['cart']);

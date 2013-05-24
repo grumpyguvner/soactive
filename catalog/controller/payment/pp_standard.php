@@ -1,4 +1,5 @@
 <?php
+
 class ControllerPaymentPPStandard extends Controller {
 	protected function index() {
 		$this->language->load('payment/pp_standard');
@@ -100,6 +101,11 @@ class ControllerPaymentPPStandard extends Controller {
 	}
 	
 	public function callback() {
+                if (TRUE === TRUE) {
+                    $audit = new Log(date("Y-m-d") . "-paypal.log");
+                    $audit->write(serialize($this->request->post));
+                }
+            
 		if (isset($this->request->post['custom'])) {
 			$order_id = $this->request->post['custom'];
 		} else {
@@ -188,12 +194,12 @@ class ControllerPaymentPPStandard extends Controller {
 				}
 				
 				if (!$order_info['order_status_id']) {
-					$this->model_checkout_order->confirm($order_id, $order_status_id, $this->getMessage($comment), false);
+					$this->model_checkout_order->confirm($order_id, $order_status_id, '', false, $this->getMessage($comment));
 				} else {
-					$this->model_checkout_order->update($order_id, $order_status_id, $this->getMessage($comment), false);
+					$this->model_checkout_order->update($order_id, $order_status_id, '', false, $this->getMessage($comment));
 				}
 			} else {
-				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'), $this->getMessage($comment), false);
+				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'), '', false, $this->getMessage($comment));
 			}
 			
 			curl_close($curl);

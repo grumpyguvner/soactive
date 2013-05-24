@@ -18,6 +18,7 @@ class User {
 			$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE user_id = '" . (int)$this->session->data['user_id'] . "' AND status = '1'");
 			
 			if ($user_query->num_rows) {
+                                $this->db->setAuditUsername($user_query->row['username']);
 				$this->user_id = $user_query->row['user_id'];
 				$this->username = $user_query->row['username'];
 				$this->name = $user_query->row['firstname'] . ' ' . $user_query->row['lastname'];
@@ -48,6 +49,7 @@ class User {
 
     	if ($user_query->num_rows) {
 			$this->session->data['user_id'] = $user_query->row['user_id'];
+                        $this->db->setAuditUsername($user_query->row['username']);
 			
 			$this->user_id = $user_query->row['user_id'];
 			$this->username = $user_query->row['username'];	
