@@ -260,7 +260,18 @@ $(document).ready(function() {
             $(this).removeClass('active');
         });
     });
-	
+
+    /* Ajax Cart */
+    $('#wrapCurrency > .heading a').live('click', function() {
+        $('#wrapCurrency').addClass('active');
+		
+        $('#wrapCurrency').load('index.php?route=module/currency #wrapCurrency > *');
+		
+        $('#wrapCurrency').live('mouseleave', function() {
+            $(this).removeClass('active');
+        });
+    });
+    
     /* Mega Menu */
     $('#menu ul > li > a + div').each(function(index, element) {
         // IE6 & IE7 Fixes

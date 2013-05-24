@@ -359,14 +359,6 @@ class ControllerDesignBanner extends Controller {
 		} else {
 			$this->data['status'] = true;
 		}
-                
-                if (isset($this->request->post['sort_order'])) {
-                    $this->data['sort_order'] = $this->request->post['sort_order'];
-                } elseif (!empty($banner_info)) {
-                    $this->data['sort_order'] = $banner_info['sort_order'];
-                } else {
-                    $this->data['sort_order'] = 1;
-                }
 
 		$this->load->model('localisation/language');
 		

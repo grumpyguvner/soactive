@@ -78,7 +78,7 @@
                     </div>
                 <!----------------------------- It has to be a cms block ------------------------------------>
                     <div class="followUs">
-                        <h4>FOLLOW SOACTIVE</h4>
+                        <h4>FOLLOW <span>SO</span>ACTIVE</h4>
                         <p>If you like to stay social, then make sure you follow soactive. Facebook, Twitter, Pinterest & Instagram will always be up to date with offers & news</p>
                         <div class="social">
                             <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
@@ -89,8 +89,10 @@
             <div class="underFooter">
                 <div class="weAreSoactive">
                     <h4>WE ARE SOACTIVE</h4>
-                    <div class="wsRow">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea</div>
-                    <div class="wsRow">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea</div>
+                    <div class="wsRow">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                    </div>
                 </div>
                 <div class="securePayment">
                     <h4>SECURE PAYMENT</h4>

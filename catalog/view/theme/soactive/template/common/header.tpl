@@ -23,6 +23,7 @@
         <?php } ?>
         <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="catalog/view/javascript/jquery/jquery.jcarousel.min.js"></script>
         <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
         <script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
         <script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
@@ -56,9 +57,9 @@
             <?php } ?>
                 <div class="links">
                     <div class="top">
-                        <div class="social">
+                        <!--div class="social">
                             <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
-                        </div>
+                        </div-->
                         <?php echo $language; ?>
                         <?php echo $currency; ?>
                         <div id="welcome">
@@ -107,4 +108,4 @@
                 </div>
             <?php } ?>
             <div id="notification"></div>
-        
+    
