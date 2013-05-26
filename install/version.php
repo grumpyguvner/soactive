@@ -1,5 +1,5 @@
 <?php
 // Set up version numbers
 define('BASE_VERSION', '1.5.4');
-define('BOUNDLESS_VERSION', 'BC1.2.5');
+define('BOUNDLESS_VERSION', 'BC1.2.6');
 define('FULL_VERSION', BASE_VERSION . ((BOUNDLESS_VERSION) ? ':' . BOUNDLESS_VERSION : ''));

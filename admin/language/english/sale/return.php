@@ -11,6 +11,7 @@ $_['text_wait']           = 'Please Wait!';
 // Text
 $_['text_return_id']      = 'Return ID:';
 $_['text_order_id']       = 'Order ID:';
+$_['text_new_order_id']       = 'New Order ID:';
 $_['text_date_ordered']   = 'Order Date:';
 $_['text_customer']       = 'Customer:';
 $_['text_email']          = 'E-Mail:';
@@ -26,7 +27,8 @@ $_['text_refund_amount']  = 'Refund Amount:';
 $_['text_return_reason']  = 'Return Reason:';
 $_['text_return_action']  = 'Return Action:';
 $_['text_comment']        = 'Comment:';
-$_['text_add_product']       = 'Add Product(s)';
+$_['text_add_product']    = 'Add Product(s)';
+$_['text_order']                              = 'Order Details';
 
 // Column
 $_['column_return_id']     = 'Return ID';
@@ -62,6 +64,7 @@ $_['entry_return_status'] = 'Return Status:';
 $_['entry_notify']        = 'Notify Customer:';
 $_['entry_action']        = 'Return Action:';
 $_['entry_refund_amount'] = 'Refund Amount:';
+$_['entry_shipping']                          = 'Shipping Method:';
 
 $_['entry_product']                           = 'Choose Product:';
 $_['entry_option']                            = 'Choose Option(s):';

@@ -1422,7 +1422,7 @@ $('#button-product, #button-voucher, #button-update').live('click', function() {
 				
 				$('#product').html(html);
 			} else {
-				html  = '</tr>';
+				html  = '<tr>';
 				html += '  <td colspan="6" class="center"><?php echo $text_no_results; ?></td>';
 				html += '</tr>';	
 

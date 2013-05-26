@@ -94,6 +94,10 @@
             <td><?php echo $text_opened; ?></td>
             <td><?php echo $opened; ?></td>
           </tr>
+          <?php
+          if (isset($return_actions))
+          {
+          ?>
           <tr>
             <td><?php echo $text_return_action; ?></td>
             <td><select name="return_action_id">
@@ -107,10 +111,37 @@
                 <?php } ?>
               </select></td>
           </tr>
+          <?php } else { ?>
+          <tr>
+            <td><?php echo $text_return_action; ?></td>
+            <td><?php echo $return_action; ?></td>
+          </tr>
+          <?php } ?>
+          <?php
+          if (isset($refund_amount))
+          {
+          ?>
           <tr>
             <td><?php echo $text_refund_amount; ?></td>
             <td><?php echo $refund_amount; ?></td>
           </tr>
+          <?php } ?>
+          <?php
+          if (isset($new_order))
+          {
+          ?>
+          <?php if ($new_order) { ?>
+          <tr>
+            <td><?php echo $text_new_order_id; ?></td>
+            <td><a href="<?php echo $new_order; ?>"><?php echo $new_order_id; ?></a></td>
+          </tr>
+          <?php } else { ?>
+          <tr>
+            <td><?php echo $text_new_order_id; ?></td>
+            <td><?php echo $new_order_id; ?></td>
+          </tr>
+          <?php } ?>
+          <?php } ?>
           <?php if ($comment) { ?>
           <tr>
             <td><?php echo $text_comment; ?></td>

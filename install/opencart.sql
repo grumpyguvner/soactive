@@ -2475,6 +2475,7 @@ CREATE TABLE `oc_return` (
   `price` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
   `quantity` int(4) NOT NULL,
   `refund_amount` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
+  `new_order_id` int(11) NOT NULL,
   `opened` tinyint(1) NOT NULL,
   `return_reason_id` int(11) NOT NULL,
   `return_action_id` int(11) NOT NULL,

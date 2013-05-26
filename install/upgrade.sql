@@ -465,3 +465,6 @@ ALTER TABLE `oc_order_history` ADD `notes` TEXT NOT NULL AFTER `comment` ;
 ALTER TABLE `oc_return` ADD `price` DECIMAL(15,4) NOT NULL DEFAULT '0.0000' AFTER `model`;
 ALTER TABLE `oc_return` ADD `refund_amount` DECIMAL(15,4) NOT NULL DEFAULT '0.0000' AFTER `quantity`;
 
+#### Start 1.5.4:BC1.2.6
+
+ALTER TABLE `oc_return` ADD `new_order_id` int(11) NOT NULL AFTER `refund_amount`;
