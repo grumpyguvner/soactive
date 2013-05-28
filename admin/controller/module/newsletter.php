@@ -395,7 +395,7 @@ class ControllerModuleNewsletter extends Controller {
                     {
                         $total_lists[] = $list->ListID;
                     }
-            if(empty($this->request->post[$this->name . '_mailchimp_listid']) && !array_search($this->request->post[$this->name . '_mailchimp_listid'], $total_lists)){
+            if(empty($this->request->post[$this->name . '_mailcampaign_listid']) && !array_search($this->request->post[$this->name . '_mailcampaign_listid'], $total_lists)){
                $this->error['warning'] = $this->language->get('error_newsletter_mailcampaign_lists');
                 return false;
                 }
