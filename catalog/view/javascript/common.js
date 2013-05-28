@@ -249,33 +249,28 @@ $(document).ready(function() {
         $(this).parents('form').trigger('submit');
         return false;
     });
-    
+	
     /* Ajax Cart */
-    $('#header').on({mouseenter: function() {
-            if ($(this).hasClass('mouseover'))
-            {
-                openCart();
-            }
-        },mouseleave:  function() {
-            closeCart();
-        }
-    }, '#cart');
-    
-    $('#header').on('click', '#cart .heading a', function(event) {
-        event.preventDefault();
-        openCart(false, true);
+    $('#cart > .heading a').live('click', function() {
+        $('#cart').addClass('active');
+		
+        $('#cart').load('index.php?route=module/cart #cart > *');
+		
+        $('#cart').live('mouseleave', function() {
+            $(this).removeClass('active');
+        });
     });
 
-    /* Ajax Cart */
+    /* Ajax Currency */
     $('#wrapCurrency > .heading a').live('click', function() {
         $('#wrapCurrency').addClass('active');
 		
-        $('#wrapCurrency').load('index.php?route=module/currency #wrapCurrency > *');
+        $('#wrapCurrency').load('index.php?route=module/currency #wrapCurrency');
 		
         $('#wrapCurrency').live('mouseleave', function() {
             $(this).removeClass('active');
         });
-    });
+    })/*.trigger('click')*/;
     
     /* Mega Menu */
     $('#menu ul > li > a + div').each(function(index, element) {
@@ -346,25 +341,6 @@ function getURLVar(urlVarName) {
 	
     return urlVarValue;
 } 
-
-cartTimeout = null;
-function openCart(delay, update) {
-    clearTimeout(cartTimeout);
-    if (typeof update != 'undefined' && update)
-    {
-        $("html, body").animate({ scrollTop: 0 }, 600);
-        $('#cart').load('index.php?route=module/cart #cart');
-    }
-    $('#cart').addClass("active");
-    if (typeof delay != 'undefined' && delay)
-    {
-        cartTimeout = setTimeout('closeCart()', delay);
-    }
-} 
-
-function closeCart() {
-    $('#cart').removeClass("active");
-}
 
 function addToCart(product_id, quantity) {
     quantity = typeof(quantity) != 'undefined' ? quantity : 1;

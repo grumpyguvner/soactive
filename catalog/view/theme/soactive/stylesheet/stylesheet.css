@@ -74,6 +74,7 @@ label {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
+        position: relative;
 }
 #column-left {
 	float: left;
@@ -2057,6 +2058,7 @@ a.button:hover, input.button:hover {
 }
 
 /** Start Slideshow Home Page **/
+
 #myCarousel {
     max-height: 449px;
 }
@@ -2068,9 +2070,43 @@ a.button:hover, input.button:hover {
     top: 0;
     left: 0;
 }
+#myCarousel .carousel-inner .bannerWrapper {
+    height: 449px;
+}
+#myCarousel .carousel-inner .bannerWrapper .outerContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+#myCarousel .carousel-inner .bannerWrapper .outerContainer .container {
+    text-align: center;
+    width: 100%;
+}
+#myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer {
+    padding: 0 62px;
+    height: 30px;
+    position: relative;
+    top: 404px;
+}
+#myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a {
+    background-color: #46E1CF;
+    position: relative;
+    float: left;
+    height: 26px;
+    width: 144px;
+    color: #514f4f;
+    line-height: 24px;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: Helvetica;
+}
+#myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a + a {
+    float: right;height: 26px;
+    width: 144px;
+}
 #myCarousel .container {
     line-height: 473px;
-    height: 473px;
+    height: 449px;
 }
 #myCarousel .carouselBasebarContainer {
     position: absolute;
@@ -2107,45 +2143,35 @@ a.button:hover, input.button:hover {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    border: 3px solid #969674;
     cursor: pointer;
     behavior: url(catalog/view/PIE/PIE.htc);
 }
 #myCarousel .carousel-indicators .active {
-    border-color: #fff;
     background-color: #46E1CF;
 }
-#myCarousel .leftIndicators {
-    width: 29px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    background-color: #67653C;
-    background-color: rgba(255,255,255,0.25);
-}
-#myCarousel .rightIndicators {
-    width: 29px;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 951px;
-    background-color: #67653C;
-    background-color: rgba(255,255,255,0.25);
-}
 #myCarousel .carousel-control {
-    background: none;
-    border: none;
+    width: 29px;
+    height: 100%;
+    background-color: #67653C;
+    background-color: rgba(255,255,255,0.25);
     border-radius: 0;
     color: #FFFFFF;
     font-size: 30px;
     font-weight: 100;
-    line-height: 30px;
-    margin-top: -20px;
     opacity: 0.5;
-    position: absolute;
     text-align: center;
-    top: 220px;
-    width: 29px;
-    left: inherit;
+    border: none;
+    top: 0;
+    margin-top: 0;
+}
+#myCarousel .carousel-control span {
+    position: relative;
+    top: 45%;
+}
+#myCarousel .carousel-control.left {
+    left: -29px;
+}
+#myCarousel .carousel-control.right {
+    right: -29px;
 }
 /** End Slideshow Home Page**/

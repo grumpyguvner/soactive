@@ -38,7 +38,7 @@ if (!empty($banners)) {
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#myCarousel .carouselBasebarContainer .container').prepend('<ol class="carousel-indicators"><?php echo $indicators ?></ol>');
-                $('#myCarousel').append('<div class="leftIndicators"><a data-slide="prev" href="#myCarousel" class="left carousel-control">‹‹</a></div><div class="rightIndicators"><a data-slide="next" href="#myCarousel" class="right carousel-control">››</a></div>').carousel();
+                $('#myCarousel').append('<a data-slide="prev" href="#myCarousel" class="left carousel-control"><span>‹‹</span></a><a data-slide="next" href="#myCarousel" class="right carousel-control"><span>››</span></a>').carousel();
             });
         </script>
     <?php } ?>
@@ -79,10 +79,25 @@ if (!empty($banners)) {
             $('#myCarousel .bannerWrapper .container').height($('#myCarousel .spacer').innerHeight() - $('.carouselBasebarContainer').innerHeight()).css('line-height',($('#myCarousel .spacer').innerHeight()- $('.carouselBasebarContainer').innerHeight()) + "px");
                 
         }).trigger('resize');
-                    
+        
         $(window).load(function () {
             $(window).trigger('resize');
         });
-                    
+                
+         $(document).ready(function() {
+            $('.bannerWrapper').hover(
+                function () {
+                    $('.carousel-control.left').animate({'marginLeft':'29px'},200);
+                    $('.carousel-control.right').animate({'marginRight':'29px'},200);
+                });
+                
+                $('.bannerWrapper').mouseout(
+                function () {
+                    $('.carousel-control.left').animate({'marginLeft':'-29px'},200);
+                    $('.carousel-control.right').animate({'marginRight':'-29px'},200);
+                });
+                
+        });
+        
     </script>
 <?php } ?>
