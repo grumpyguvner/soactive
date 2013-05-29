@@ -10,6 +10,8 @@
         <?php if ($keywords) { ?>
             <meta name="keywords" content="<?php echo $keywords; ?>" />
         <?php } ?>
+            <meta name="google-site-verification" content="uTRSIhaTvT8os1WOM8Xtj6CNGcjPEvGgLmU3eGXKZ1M" />
+            <meta name="google-site-verification" content="GnpcrcP98Rc5FcauLQsmGiQ5XT_XhpOG62Pto9gWbfg" />
         <?php if ($icon) { ?>
             <link href="<?php echo $icon; ?>" rel="icon" />
         <?php } ?>
