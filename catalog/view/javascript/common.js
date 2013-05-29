@@ -253,11 +253,13 @@ $(document).ready(function() {
     /* Ajax Cart */
     $('#cart > .heading a').live('click', function() {
         $('#cart').addClass('active');
+        $('#header #cart').css('border','none');
 		
         $('#cart').load('index.php?route=module/cart #cart > *');
 		
         $('#cart').live('mouseleave', function() {
             $(this).removeClass('active');
+            $('#header #cart').css({'border-left':'1px solid #46e1cf', 'border-right': '1px solid #46e1cf', 'border-bottom': '1px solid #46e1cf' });
         });
     });
 
@@ -265,7 +267,7 @@ $(document).ready(function() {
     $('#wrapCurrency > .heading a').live('click', function() {
         $('#wrapCurrency').addClass('active');
 		
-        $('#wrapCurrency').load('index.php?route=module/currency #wrapCurrency');
+        $('#wrapCurrency').load('index.php?route=module/localisation #wrapCurrency');
 		
         $('#wrapCurrency').live('mouseleave', function() {
             $(this).removeClass('active');

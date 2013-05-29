@@ -111,11 +111,6 @@ label {
         float: right;
 }
 #language {
-	position: absolute;
-	top: 15px;
-	left: 320px;
-	width: 80px;
-	color: #999;
 	line-height: 17px;
 }
 #language img {
@@ -149,15 +144,22 @@ label {
         vertical-align: middle;
         position: absolute;
         right: 0;
-        top: 5px;
+        top: 0;
+        border-left: 1px solid #46e1cf;
+        border-right: 1px solid #46e1cf;
+        border-bottom: 1px solid #46e1cf;
+        -webkit-border-radius: 0px 0px 7px 7px;
+	-moz-border-radius: 0px 0px 7px 7px;
+	-khtml-border-radius: 0px 0px 7px 7px;
+	border-radius: 0px 0px 7px 7px;
+        height: 30px;
+        padding-top: 4px;
 }
 #header #cart .heading {
 	float: right;
-	padding-right: 14px;
-        padding-top: 4px;
-	border-top: 1px solid #FFFFFF;
-	border-left: 1px solid #FFFFFF;
-	border-right: 1px solid #EEEEEE;
+	padding-right: 10px;
+        padding-left: 10px;
+        padding-top: 6px;
 	background: #FFF;
 	position: relative;
 	z-index: 1;
@@ -188,10 +190,10 @@ label {
 	border-left: 1px solid #EEEEEE;
 	border-right: 1px solid #EEEEEE;
 	border-bottom: 1px solid #EEEEEE;
-	-webkit-border-radius: 0px 7px 7px 7px;
-	-moz-border-radius: 0px 7px 7px 7px;
-	-khtml-border-radius: 0px 7px 7px 7px;
-	border-radius: 0px 7px 7px 7px;
+	-webkit-border-radius: 0px 0px 7px 7px;
+	-moz-border-radius: 0px 0px 7px 7px;
+	-khtml-border-radius: 0px 0px 7px 7px;
+	border-radius: 0px 0px 7px 7px;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
 	box-shadow: 0px 2px 2px #DDDDDD;
@@ -269,13 +271,11 @@ label {
         z-index: 9;
         display: inline-block;
         vertical-align: middle;
+        position: absolute;
+        right: 250px;
 }
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
-        border-left: 1px solid #FFFFFF;
-        border-right: 1px solid #EEEEEE;
-        border-top: 1px solid #FFFFFF;
-        padding-right: 14px;
         position: relative;
         z-index: 1;
         float: right;
@@ -292,10 +292,29 @@ label {
         padding: 8px;
         position: relative;
         top: 0;
+        text-align: left;
 }  
 #header #wrapCurrency .content .mini-currency-info {
         width: 100%;
-}  
+}
+#header #wrapCurrency .content .mini-currency-info #language img {
+        margin-top: 6px;
+}
+#header #wrapCurrency .content .mini-currency-info #language .enFlag {
+        display: inline-block;
+}
+#header #wrapCurrency .content .mini-currency-info #language .frFlag {
+        display: inline-block;
+}
+#header #wrapCurrency .content .mini-currency-info #language p {
+        color: #514f4f;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0;
+}
+#header #wrapCurrency .content .mini-currency-info #language img {
+        width: 80px;
+}
 #header #wrapCurrency .content .CurrencyTitle {
         font-size: 15px;
         color: #514f4f;
@@ -304,8 +323,10 @@ label {
         margin-bottom: 10px;
         padding: 10px 10px;
 }
-#header #wrapCurrency .heading a span {
-        background: url("../image/arrow-down.png") no-repeat scroll 100% 50% #FFFFFF;
+#header #wrapCurrency .heading a {
+        background-image: url("../image/arrow-down.png");
+        background-position: right;
+        background-repeat: no-repeat;
         padding-right: 15px;
 }
 #header #search {
@@ -354,12 +375,13 @@ label {
 	border-left: 1px solid #b9bdbd;
 }
 #header .links .top a#wishlist-total {
-    margin-right: 111px;
 }
 #header .links .top {
         height: 30px;
         margin-bottom: 10px;
         margin-top: 10px;
+        margin-right: 110px;
+        text-align: right;
 }
 #header .links .top form {
         display: inline-block;
@@ -1659,6 +1681,9 @@ a.button:hover, input.button:hover {
 }
 #footer .followUs .social span a {
         padding: 0 2px;
+}
+#footer .followUs .fb-activity {
+    display: block;
 }
 #footer h4 {
     color: #000;

@@ -1,4 +1,4 @@
-   <?php if (count($currencies) > 1) { ?>
+<?php if (count($currencies) > 1 || count($languages) > 1) { ?>
     <div id="wrapCurrency">
         <div class="heading">
           <a><span id="currentCurrency"></span><?php echo $currency_code; ?></a>
@@ -6,7 +6,23 @@
         <div class="content">
             <div class="mini-currency-info">
                 <div class="CurrencyTitle">
-                    <span></span><span>UNITED KINGDOM</span>
+                    <span></span><span>
+                        <?php
+                        foreach ($languages as $language) {
+                          if ($language['code'] == 'en') { 
+                            if ($currency_code == 'GBP') { 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/' . $language['image'] . '" alt="' . $language['image'] . '" />' . ' UNITED KINGDOM'; 
+
+                            } elseif ($currency_code == 'EUR') { 
+                                echo 'FRANCE'; 
+                            
+                            } else {
+                                echo 'UNITED STATES';
+                            }
+                          }
+                        } 
+                        ?>
+                    </span>
                 </div>
                 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                     <div id="currency"><?php echo $text_currency; ?><br />
@@ -28,12 +44,24 @@
                       <input type="hidden" name="currency_code" value="" />
                       <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
                     </div>
+                    
+                    <div id="language"><?php echo $text_language; ?><br />
+                        <?php foreach ($languages as $language) { ?>
+                        <div class="<?php echo $language['code']; ?>Flag">
+                            <img src="catalog/view/theme/soactive/image/flags/big_<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" onclick="$('input[name=\'language_code\']').attr('value', '<?php echo $language['code']; ?>'); $(this).parent().parent().submit();" />
+                            <p><?php echo $language['name']; ?></p>
+                        </div>
+                        <?php } ?>
+                        <input type="hidden" name="language_code" value="" />
+                        <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
+                    </div>
                 </form>
-                <div class="country">
-                    Select Country:
-                </div>
+                
+                
+                
             </div> 
         </div>
 </div>
 <?php } ?>
+
 
