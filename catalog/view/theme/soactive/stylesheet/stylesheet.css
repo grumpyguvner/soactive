@@ -621,17 +621,15 @@ table.radio tr.highlight:hover td {
 }
 /* button */
 a.button, input.button {
+        background-image: url('../image/button_arrow.png');
+        background-repeat: no-repeat;
+        background-position: right bottom; 
 	cursor: pointer;
-	color: #FFFFFF;
+	color: #514f4f;
 	line-height: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
-	background: url('../image/button.png') top left repeat-x;
-	-webkit-border-radius: 7px 7px 7px 7px;
-	-moz-border-radius: 7px 7px 7px 7px;
-	-khtml-border-radius: 7px 7px 7px 7px;
-	border-radius: 7px 7px 7px 7px;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
 	box-shadow: 0px 2px 2px #DDDDDD;
@@ -639,7 +637,7 @@ a.button, input.button {
 a.button {
 	display: inline-block;
 	text-decoration: none;
-	padding: 6px 12px 6px 12px;
+	padding: 5px 12px;
 }
 input.button {
 	margin: 0;
@@ -648,7 +646,7 @@ input.button {
 	padding: 0px 12px 0px 12px;
 }
 a.button:hover, input.button:hover {
-	background: url('../image/button-active.png') repeat-x;
+        background-color: #46e1cf;
 }
 .buttons {
 	background: #FFFFFF;
@@ -1639,6 +1637,7 @@ a.button:hover, input.button:hover {
     min-height: 160px;
     padding-top: 20px;
     background: transparent;  
+    margin-bottom: 20px;
 }
 #footer p {
     margin-bottom: 6px;
@@ -1656,6 +1655,7 @@ a.button:hover, input.button:hover {
 #footer .followUs .social {
         display: inline-block;
         vertical-align: middle;
+        margin-bottom: 10px;
 }
 #footer .followUs .social span a {
         padding: 0 2px;
@@ -1719,30 +1719,6 @@ a.button:hover, input.button:hover {
 #footer .column a:hover {
     text-decoration: underline;
 }
-#footer .underFooter {
-    width: 100%;
-    margin-bottom: 20px;
-}
-#footer .underFooter .weAreSoactive {
-    width: 300px;
-    display: inline-block;
-    margin-right: 22px;
-}
-#footer .underFooter .weAreSoactive .wsRow {
-    display: inline-block;
-    width: 305px;
-}
-#footer .underFooter .securePayment {
-    width: 300px;
-    display: inline-block;
-    vertical-align: top;
-}
-#footer .underFooter .securePayment img {
-    vertical-align: bottom;
-}
-#footer .underFooter .securePayment p {
-   margin-bottom: 0;
-}
 #footer .newsletter_input a {
     position: absolute;
     margin-left: -34px;
@@ -1779,43 +1755,69 @@ a.button:hover, input.button:hover {
 .sections {
     width: 100%;
 }
+.sections a {
+    background-color: #46e1cf;
+    color: #514f4f;
+}
 .sections .moves {
     margin-bottom: 10px;
 }
-.sections .moves a {
-    color: #46e1cf;
-    text-decoration: underline;
-}
-.sections .moves a > img {
+.sections .moves .she {
     display: inline-block;
+    position: relative;
+}
+.sections .moves .he {
+    display: inline-block;
+    float: right;
+    position: relative;
+}
+.sections .moves a.button {
+    position: absolute;
+    top: 63px;
+    left: 26px;
 }
 .sections .runs {
     margin-bottom: 10px;
 }
-.sections .runs a {
-    color: #46e1cf;
-    text-decoration: underline;
-}
-.sections .runs a > img {
+.sections .runs .she {
     display: inline-block;
+    position: relative;
+}
+.sections .runs .he {
+    display: inline-block;
+    float: right;
+    position: relative;
+}
+.sections .runs a.button {
+    position: absolute;
+    top: 57px;
+    left: 20px;
 }
 .sections .sportsbras {
     margin-bottom: 10px;
 }
-.sections .sportsbras a {
-    color: #46e1cf;
-    text-decoration: underline;
-}
-.sections .sportsbras a > img {
+.sections .sportsbras .shopLeft {
     display: inline-block;
+    position: relative;
+}
+.sections .sportsbras .shopRight {
+    display: inline-block;
+    float: right;
+    position: relative;
+}
+.sections .sportsbras .shopLeft a.button {
+    position: absolute;
+    top: 317px;
+    left: 462px;
+}
+.sections .sportsbras .shopRight a.button {
+    position: absolute;
+    top: 316px;
+    left: 209px;
 }
 .sections .shopNike {
     width: 360px;
     display: inline-block;
-}
-.sections .shopNike a {
-    color: #46e1cf;
-    text-decoration: underline;
 }
 .wrapBrands {
     border-bottom: 2px solid #b9bdbd;
@@ -2086,23 +2088,21 @@ a.button:hover, input.button:hover {
     padding: 0 62px;
     height: 30px;
     position: relative;
-    top: 404px;
+    top: 386px;
 }
 #myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a {
     background-color: #46E1CF;
     position: relative;
     float: left;
-    height: 26px;
-    width: 144px;
+    width: 120px;
     color: #514f4f;
-    line-height: 24px;
     font-weight: bold;
     font-size: 14px;
     font-family: Helvetica;
 }
 #myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a + a {
-    float: right;height: 26px;
-    width: 144px;
+    float: right;
+    width: 119px;
 }
 #myCarousel .container {
     line-height: 473px;
@@ -2111,11 +2111,11 @@ a.button:hover, input.button:hover {
 #myCarousel .carouselBasebarContainer {
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 57px;
+    left: 62px;
+    width: 40%;
+    height: 50px;
     z-index: 3;
-    left: 445px;
+    top: 0;
 }
 #myCarousel .carouselBasebarContainer .container {
     text-align: right;

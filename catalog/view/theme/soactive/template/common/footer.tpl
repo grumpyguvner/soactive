@@ -19,6 +19,16 @@
                         <?php } ?>
                     </ul>
                 </div>
+               <!----------------------------- It has to be a cms block ------------------------------------> 
+                <div class="weAreSoactive">
+                    <h4>WE ARE SOACTIVE</h4>
+                    <div class="wsRow">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        <br /><br />
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                    </div>
+                </div>
+               <!----------------------------- End code for cms block ------------------------------------>
             </div>
             
                         
@@ -57,6 +67,13 @@
                         
                         </ul>
                     </div>
+                <!----------------------------- It has to be a cms block ------------------------------------>
+                <div class="securePayment">
+                    <h4>SECURE PAYMENT</h4>
+                    <p>We accept paypal and most major credit cards. All payments are processed securely for your peace of mind.</p>
+                    <img src="catalog/view/theme/soactive/image/footer/credit-cards.png" alt="Credit Cards" />
+                </div>
+                <!----------------------------- End code for cms block ------------------------------------>
             </div>
     
             <div class="column" id="lastColumn">
@@ -83,22 +100,9 @@
                         <div class="social">
                             <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
                         </div>
+                        <div class="fb-activity" data-site="http://www.example.com" data-width="327" data-height="266" data-header="true" data-recommendations="false"></div>
                     </div>
                 <!---------------------------------- End cms block ------------------------------------------>
-            </div> 
-            <div class="underFooter">
-                <div class="weAreSoactive">
-                    <h4>WE ARE SOACTIVE</h4>
-                    <div class="wsRow">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    </div>
-                </div>
-                <div class="securePayment">
-                    <h4>SECURE PAYMENT</h4>
-                    <p>We accept paypal and most major credit cards. All payments are processed securely for your peace of mind.</p>
-                    <img src="catalog/view/theme/soactive/image/footer/credit-cards.png" alt="Credit Cards" />
-                </div>
             </div> 
         </div>
 </div>
