@@ -267,7 +267,7 @@ $(document).ready(function() {
     $('#wrapCurrency > .heading a').live('click', function() {
         $('#wrapCurrency').addClass('active');
 		
-        $('#wrapCurrency').load('index.php?route=module/localisation #wrapCurrency');
+        $('#wrapCurrency').load('index.php?route=module/localisation #wrapCurrency > *');
 		
         $('#wrapCurrency').live('mouseleave', function() {
             $(this).removeClass('active');

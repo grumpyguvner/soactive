@@ -8,19 +8,17 @@
                 <div class="CurrencyTitle">
                     <span></span><span>
                         <?php
-                        foreach ($languages as $language) {
-                          if ($language['code'] == 'en') { 
+                        
                             if ($currency_code == 'GBP') { 
-                                echo '<img src="catalog/view/theme/soactive/image/flags/' . $language['image'] . '" alt="' . $language['image'] . '" />' . ' UNITED KINGDOM'; 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . ' UNITED KINGDOM'; 
 
                             } elseif ($currency_code == 'EUR') { 
-                                echo 'FRANCE'; 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/fr.png" alt="fr.png" />' . ' FRANCE'; 
                             
-                            } else {
-                                echo 'UNITED STATES';
+                            } elseif ($currency_code == 'USD') {
+                                echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . ' UNITED STATES';
                             }
-                          }
-                        } 
+                         
                         ?>
                     </span>
                 </div>

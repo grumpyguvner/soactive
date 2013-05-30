@@ -294,6 +294,14 @@ label {
         top: 0;
         text-align: left;
 }  
+#header #wrapCurrency.active .heading {
+	margin-top: -9px;
+	padding-top: 10px;
+	padding-bottom: 6px;
+}
+#header #wrapCurrency.active .content {
+	display: block;
+}
 #header #wrapCurrency .content .mini-currency-info {
         width: 100%;
 }
@@ -1682,8 +1690,8 @@ a.button:hover, input.button:hover {
 #footer .followUs .social span a {
         padding: 0 2px;
 }
-#footer .followUs .fb-activity {
-    display: block;
+#footer .followUs .fb-activity span {
+    vertical-align: top !important;
 }
 #footer h4 {
     color: #000;
@@ -1986,9 +1994,12 @@ a.button:hover, input.button:hover {
     overflow: hidden;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
-    width:  910px;
+    width:  914px;
     /*height: 75px;*/
-    margin-left: 20px;
+    margin-left: 28px;
+}
+.jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
+    min-width: 935px;
 }
 .jcarousel-skin-tango .jcarousel-clip-vertical {
     width:  75px;
@@ -2000,7 +2011,7 @@ a.button:hover, input.button:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal {
 	margin-left: 0;
-        margin-right: 10px;
+        margin-right: 8px;
         text-align: center;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a {
@@ -2027,8 +2038,8 @@ a.button:hover, input.button:hover {
     position: absolute;
     top: 112px;
     right: 5px;
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 28px;
     cursor: pointer;
     background: transparent url(../image/next.png) no-repeat 0 0;
 }
@@ -2055,8 +2066,8 @@ a.button:hover, input.button:hover {
     position: absolute;
     top: 112px;
     left: 5px;
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 28px;
     cursor: pointer;
     background: transparent url(../image/preview.png) no-repeat 0 0;
 }
@@ -2145,6 +2156,7 @@ a.button:hover, input.button:hover {
 #myCarousel .carouselBasebarContainer .container {
     text-align: right;
     position: relative;
+    width: auto;
 }
 #myCarousel .carouselBasebarContainer .container > ol {
     padding-top: 20.5px;
