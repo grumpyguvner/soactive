@@ -1,14 +1,26 @@
 <?php if (count($currencies) > 1 || count($languages) > 1) { ?>
     <div id="wrapCurrency">
         <div class="heading">
-          <a><span id="currentCurrency"></span><?php echo $currency_code; ?></a>
+          <a><span id="currentCurrency">
+              <?php
+                            if ($currency_code == 'GBP') { 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . ' ' . $currency_code; 
+
+                            } elseif ($currency_code == 'EUR') { 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/fr.png" alt="fr.png" />' . ' ' . $currency_code; 
+                            
+                            } elseif ($currency_code == 'USD') {
+                                echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . ' ' . $currency_code;
+                            }
+                         
+                        ?>
+             </span></a>
         </div>
         <div class="content">
             <div class="mini-currency-info">
                 <div class="CurrencyTitle">
                     <span></span><span>
                         <?php
-                        
                             if ($currency_code == 'GBP') { 
                                 echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . ' UNITED KINGDOM'; 
 
@@ -18,7 +30,6 @@
                             } elseif ($currency_code == 'USD') {
                                 echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . ' UNITED STATES';
                             }
-                         
                         ?>
                     </span>
                 </div>
