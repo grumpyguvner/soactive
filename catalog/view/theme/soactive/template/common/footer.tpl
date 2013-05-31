@@ -1,3 +1,6 @@
+</div>
+<div class="endConten"></div>
+<div id="container">
 <div id="footer">
             <div class="column">
                 <h4><?php echo $text_categories; ?></h4>

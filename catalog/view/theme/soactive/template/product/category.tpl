@@ -1,14 +1,16 @@
 <?php echo $header; ?><?php echo $content_top; ?>
 <?php if ($thumb || $description) { ?>
     <div class="category-info">
-        <?php if ($thumb) { ?>
-            <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
-        <?php } ?>
         <div class="breadcrumb">
             <?php foreach ($breadcrumbs as $breadcrumb) { ?>
                 <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
             <?php } ?>
         </div>
+        <?php if ($thumb) { ?>
+        <div class="categoryImage">
+            <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
+        </div>    
+        <?php } ?>
         <?php if ($description) { ?>
             <div class="cDescription">
                 <?php echo $description; ?>
@@ -21,7 +23,7 @@
     <?php if ($products) { ?>
         <div class="product-filter">
             <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
-            
+            <div class="productResult"><?php echo $pagination2; ?></div>
             <div class="sort"><b><?php echo $text_sort; ?></b>
                 <select onchange="location = this.value;">
                     <?php foreach ($sorts as $sorts) { ?>
@@ -43,12 +45,17 @@
                                     <?php } ?>
                                 </div>
                                 <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
-                                
-                                    <div class="price"><?php echo $product['price']; ?></div>
-                                
+                                <?php if ($product['price']) { ?>
+                                    <?php if (!$product['special']) { ?>
+                                    <span class="price"><?php echo $product['price']; ?></span>
+                                    <?php } else { ?>
+                                    <span class="price-old"><?php echo $product['price']; ?></span><span class="price-new"> NOW <?php echo $product['special']; ?></span>
+                                    <?php } ?>
+                                <?php } ?>
                             </div><?php }
                                 ?>
                     </div>
+    
                     <div class="pagination"><?php echo $pagination; ?></div>
                 <?php } else { ?>
                     <div class="content"><?php echo $text_empty; ?></div>

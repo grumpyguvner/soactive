@@ -32,7 +32,7 @@
         <?php if (!$special) { ?>
         <?php echo $price; ?>
         <?php } else { ?>
-        <span class="price-old"><?php echo $price; ?></span> <span class="price-new"><?php echo $special; ?></span>
+          <span class="price-old"><?php echo $price; ?></span> <span class="price-new"><span>NOW </span><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -219,19 +219,31 @@
             </ul>
             <div class="tab-content">
                 <div id="productTabDesc" class="tab-pane active">
-                    <p><?php echo $description; ?></p>
-                    <p>
-                    <?php
-                    if ($review_anonymous_status == '1' || $logged) {
-                        ?>
-                        <a class="button" onclick="$('#tab-review').trigger('click');"><?php echo $text_write_review ?></a>
-                        <?php
-                    } else {
-                        ?>
-                        <p><a class="button" href="<?php echo $login ?>"><?php echo $text_write_review ?></a>
-                        <?php
-                    }
-                    ?>&nbsp; </p>
+                    <div class="descTab"><?php echo $description; ?></div>
+                    
+                    <?php if (isset($attribute_groups['Ratings'])) { ?>
+                        <div class="rating">
+                            <?php
+                            $rating = array();
+                            foreach ($attribute_groups['Ratings'] as $attribute_group) {
+                                foreach ($attribute_group['attribute'] as $attribute) {
+                                    $rating = '';
+                                    $rating[] = $attribute['text'];
+                                    echo '<div class="rating' . $attribute['name'] . '"><p>' . $attribute['name'] . ':</p>';
+                                   
+                                    for ($i = 1; $i <= 5; $i++) { ?>
+                                            <div class="rating<?php echo $i; if (in_array($i, $rating)) echo ' checked' ?>"><?php echo $i ?></span></div>
+                                        
+                                    <?php
+                                    
+                                    }
+                                    echo '</div>';
+                                }
+                            } ?>
+
+                        </div>
+                    <?php } ?>
+                    
                 </div>
                 <?php
                 if ($product_tabs) {
