@@ -2018,7 +2018,7 @@ a.button:hover, input.button:hover {
 .jcarousel-skin-tango .jcarousel-container {
     
 }
-.jcarousel-skin-tango .jcarousel-container span.price {
+.jcarousel-skin-tango .jcarousel-container span.price, .jcarousel-skin-tango .jcarousel-container span.price-old, .jcarousel-skin-tango .jcarousel-container span.price-new {
     display: block;
     margin-top: -4px;
     font-weight: bold;
@@ -2028,7 +2028,6 @@ a.button:hover, input.button:hover {
 	direction: rtl;
 }
 .jcarousel-skin-tango .jcarousel-container-horizontal {
-    width: 960px;
     padding: 10px 10px;
 }
 .jcarousel-skin-tango .jcarousel-container-vertical {
@@ -2040,12 +2039,12 @@ a.button:hover, input.button:hover {
     overflow: hidden;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
-    width:  914px;
+    width:  922px;
     /*height: 75px;*/
-    margin-left: 28px;
+    margin-left: 22px;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
-    min-width: 935px;
+    min-width: 950px;
 }
 .jcarousel-skin-tango .jcarousel-clip-vertical {
     width:  75px;
@@ -2057,8 +2056,15 @@ a.button:hover, input.button:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal {
 	margin-left: 0;
-        margin-right: 8px;
+        margin-right: 14px;
         text-align: center;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+
+    .jcarousel-skin-tango .jcarousel-item-horizontal {
+        margin-right: 12px;
+    }
+
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a {
 	font-size: 14px;
