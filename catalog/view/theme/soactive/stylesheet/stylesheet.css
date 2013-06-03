@@ -502,8 +502,8 @@ label {
 	border-radius: 5px 5px 5px 5px;
 }
 .success {
-	background: #EAF7D9 url('../image/success.png') 10px center no-repeat;
-	border: 1px solid #BBDF8D;
+	background: #46E1CF url('../image/success.png') 10px center no-repeat;
+	border: 1px solid #B9BDBD;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
 	-khtml-border-radius: 5px 5px 5px 5px;
@@ -739,10 +739,17 @@ a.button:hover, input.button:hover {
         line-height: 16px;  
         display: inline-block;
         margin-right: 20px;
+        width: 72%;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
         vertical-align: top;
+        width: 20%;
+}
+.tab-content #productTabDesc .rating img {
+        margin-right: -5px;
+        width: 24px;
+        height: 24px;
 }
 .tab-content #productTabDesc .rating .checked {
         font-weight: bold;
@@ -781,6 +788,10 @@ a.button:hover, input.button:hover {
 }
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
         border-bottom-color: #FFFFFF !important;
+}
+.nav-tabs > li > a, .nav-pills > li > a {
+        padding-left: 7px;
+        padding-right: 7px;
 }
 .product-tab #productTab {
         margin-bottom: 0;
@@ -1181,6 +1192,7 @@ a.button:hover, input.button:hover {
 .product-info .image-additional {
 	margin-left: -10px;
 	clear: both;
+        width: 303px;
 	overflow: hidden;
 }
 .product-info .image-additional img {
@@ -1188,9 +1200,19 @@ a.button:hover, input.button:hover {
 }
 .product-info .image-additional a {
 	float: left;
-	display: block;
 	margin-left: 10px;
 	margin-bottom: 10px;
+        display: block;
+        position: relative;
+}
+.product-info .image-additional a .play-button {
+        background: url("../image/play_icon.png") no-repeat scroll center center rgba(255, 255, 255, 0.2);
+        display: block;
+        left: 0;
+        position: absolute;
+        top: 0;
+        border: 1px solid #B9BDBD;
+        z-index: 2;
 }
 .product-info .description {
 	line-height: 20px;
@@ -1243,6 +1265,9 @@ a.button:hover, input.button:hover {
 	color: #000000;
         margin-bottom: 0;
 }
+.product-info .options .error {
+        display: inline-block;
+}
 .product-info .options .option > select {
         width: 140px;
         height: 30px;
@@ -1269,8 +1294,15 @@ a.button:hover, input.button:hover {
         margin-bottom: 20px;
 }
 .product-info .cart .cartButton {
+        background-color: #46E1CF;
+        border: medium none;
+        border-radius: 6px 6px 6px 6px;
+        -webkit-border-radius: 6px 6px 6px 6px;
+	-moz-border-radius: 6px 6px 6px 6px;
+	-khtml-border-radius: 6px 6px 6px 6px;
         height: 30px;
         width: 230px;
+        font-size: 17px;
 }
 .product-info .cart div {
 	float: left;

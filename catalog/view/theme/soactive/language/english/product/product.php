@@ -37,7 +37,7 @@ $_['entry_bad']         = 'Bad';
 $_['entry_captcha']     = 'Enter the code in the box below:';
 
 // Tabs
-$_['tab_description']   = 'Description';
+$_['tab_description']   = 'Details';
 $_['tab_attribute']     = 'Delivery & Returns';
 $_['tab_attribute_size']= 'Size Guide';
 $_['tab_attribute_fabric']= 'Fabric';
