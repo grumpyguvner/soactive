@@ -1181,7 +1181,13 @@ a.button:hover, input.button:hover {
 	margin-right: 20px;
 }
 .product-info > .left + .right {
-	margin-left: 312px;
+	display: inline-block;
+}
+.product-info > .right + #column-right {
+        display: inline-block;
+}
+.product-info > #column-right {
+        width: 80px;
 }
 .product-info .image {
 	border: 1px solid #b9bdbd;
