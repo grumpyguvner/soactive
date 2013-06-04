@@ -79,6 +79,7 @@ class ControllerStep3 extends Controller {
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes($this->request->post['db_password']) . '\');' . "\n";
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_name']) . '\');' . "\n";
 			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n";
+			$output .= '?>';	
 
 			$file = fopen(DIR_OPENCART . 'admin/' . FILE_CONFIG, 'w');
 		
