@@ -17,4 +17,11 @@
     <?php } ?> 
 </ul>
 
-
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#recentlyViewedStyles').jcarousel({
+    	 vertical: true,
+         scroll: 3
+    });
+});
+</script>
