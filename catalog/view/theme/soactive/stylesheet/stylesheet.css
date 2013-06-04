@@ -52,7 +52,8 @@ form {
 }
 input[type='text'], input[type='password'], textarea {
 	background: #F8F8F8;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #514f4f;
+        border-radius: 0;
 	padding: 3px;
 	margin-left: 0px;
 	margin-right: 0px;
@@ -652,9 +653,19 @@ table.radio tr.highlight:hover td {
 }
 /* button */
 a.button, input.button {
-        background-image: url('../image/button_arrow.png');
-        background-repeat: no-repeat;
-        background-position: right bottom; 
+        /* IE10 Consumer Preview */ 
+        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
+        /* Mozilla Firefox */ 
+        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Opera */ 
+        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Webkit (Safari/Chrome 10) */ 
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
+        /* Webkit (Chrome 11+) */ 
+        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* W3C Markup, IE10 Release Preview */ 
+        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 	cursor: pointer;
 	color: #514f4f;
 	line-height: 12px;
@@ -664,6 +675,10 @@ a.button, input.button {
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
 	box-shadow: 0px 2px 2px #DDDDDD;
+        border-radius: 4px 4px 4px 4px;
+        -webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-khtml-border-radius: 4px 4px 4px 4px;
 }
 a.button {
         background-color: #46e1cf;
@@ -680,12 +695,65 @@ input.button {
 a.button:hover, input.button:hover {
         background-color: #46e1cf;
 }
+/***** Button Home Page *****/
+a.buttonHome, input.buttonHome {
+        background-image: url('../image/button_arrow.png');
+        background-repeat: no-repeat;
+        background-position: right bottom; 
+	cursor: pointer;
+	color: #514f4f;
+	line-height: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
+	-moz-box-shadow: 0px 2px 2px #DDDDDD;
+	box-shadow: 0px 2px 2px #DDDDDD;
+}
+a.buttonHome {
+        background-color: #46e1cf;
+	display: inline-block;
+	text-decoration: none;
+	padding: 5px 12px;        
+        min-width: 113px;
+}
+input.buttonHome {
+	margin: 0;
+	border: 0;
+	height: 24px;
+	padding: 0px 12px 0px 12px;
+}
+a.buttonHome:hover, input.buttonHome:hover {
+        background-color: #46e1cf;
+}
+/***** End Button Home Page *****/
 .buttons {
 	background: #FFFFFF;
-	border: 1px solid #EEEEEE;
 	overflow: auto;
 	padding: 6px;
 	margin-bottom: 20px;
+}
+.buttons .buttonLeft {
+        display: inline-block;
+}
+.buttons .buttonLeft > a {
+        /* IE10 Consumer Preview */ 
+        background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
+        /* Mozilla Firefox */ 
+        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        /* Opera */ 
+        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        /* Webkit (Safari/Chrome 10) */ 
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
+        /* Webkit (Chrome 11+) */ 
+        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        /* W3C Markup, IE10 Release Preview */ 
+        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+}
+.buttons .buttonRight {
+        display: inline-block;
+        float: right;
 }
 .buttons .left {
 	float: left;
@@ -1145,7 +1213,7 @@ a.button:hover, input.button:hover {
 	text-decoration: line-through;
 }
 .product-grid .price-new {
-        color: #FF0000;
+        color: #FF0758;
 	font-weight: bold;
 }
 .product-grid .price .price-tax {
@@ -1265,7 +1333,7 @@ a.button:hover, input.button:hover {
 	text-decoration: line-through;
 }
 .product-info .price-new {
-    color: #FF0000;
+    color: #ff0758;
 }
 .product-info .price-tax {
 	font-size: 12px;
@@ -1316,12 +1384,24 @@ a.button:hover, input.button:hover {
         margin-bottom: 20px;
 }
 .product-info .cart .cartButton {
-        background-color: #46E1CF;
+        /* IE10 Consumer Preview */ 
+        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
+        /* Mozilla Firefox */ 
+        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Opera */ 
+        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Webkit (Safari/Chrome 10) */ 
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
+        /* Webkit (Chrome 11+) */ 
+        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* W3C Markup, IE10 Release Preview */ 
+        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
         border: medium none;
-        border-radius: 6px 6px 6px 6px;
-        -webkit-border-radius: 6px 6px 6px 6px;
-	-moz-border-radius: 6px 6px 6px 6px;
-	-khtml-border-radius: 6px 6px 6px 6px;
+        border-radius: 4px 4px 4px 4px;
+        -webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-khtml-border-radius: 4px 4px 4px 4px;
         height: 30px;
         width: 230px;
         font-size: 17px;
@@ -1644,7 +1724,6 @@ a.button:hover, input.button:hover {
 /* cart */
 .cart-info table {
 	width: 100%;
-	margin-bottom: 15px;
 	border-collapse: collapse;
 	border-top: 1px solid #DDDDDD;
 	border-left: 1px solid #DDDDDD;
@@ -1655,8 +1734,19 @@ a.button:hover, input.button:hover {
 }
 .cart-info thead td {
 	color: #4D4D4D;
-	font-weight: bold;
-	background-color: #F7F7F7;
+	font-weight: bold;/* IE10 Consumer Preview */ 
+        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
+        /* Mozilla Firefox */ 
+        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Opera */ 
+        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Webkit (Safari/Chrome 10) */ 
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
+        /* Webkit (Chrome 11+) */ 
+        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* W3C Markup, IE10 Release Preview */ 
+        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 	border-bottom: 1px solid #DDDDDD;
 }
 .cart-info thead .image {
@@ -1681,6 +1771,9 @@ a.button:hover, input.button:hover {
 .cart-info tbody .name, .cart-info tbody .model, .cart-info tbody .quantity {
 	text-align: left;
 }
+.cart-info tbody .name > a > h4 {
+        color: #46E1CF;
+}
 .cart-info tbody .quantity input[type='image'], .cart-info tbody .quantity img {
 	position: relative;
 	top: 4px;
@@ -1696,18 +1789,28 @@ a.button:hover, input.button:hover {
 .cart-module > div {
 	display: none;
 }
+#shipping-head > tbody > tr > td > h1 {
+        margin-bottom: 4px;
+        color: #514f4f;
+}
 .cart-total {
-	border-top: 1px solid #DDDDDD;
 	overflow: auto;
-	padding-top: 8px;
-	margin-bottom: 15px;
 }
 .cart-total table {
 	float: right;
+        width: 100%;
+}
+.cart-total table > tbody > tr {
+	border-left: 1px solid #DDDDDD;
+        border-right: 1px solid #DDDDDD;
+        border-bottom: 1px solid #DDDDDD; 
 }
 .cart-total td {
-	padding: 3px;
+	padding: 20px;
 	text-align: right;
+}
+.cart-total td.textTotal {
+	width: 84%;
 }
 /* checkout */
 .checkout-heading {
@@ -1718,17 +1821,49 @@ a.button:hover, input.button:hover {
 	font-size: 13px;
 	color: #555555;
 	margin-bottom: 15px;
+        border-radius: 4px 4px 4px 4px;
+        -webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-khtml-border-radius: 4px 4px 4px 4px;
+}
+.checkout .active {
+	background: #46E1CF;
 }
 .checkout-heading a {
 	float: right;
 	margin-top: 1px;
 	font-weight: normal;
 	text-decoration: none;
+        color: #46E1CF;
 }
 .checkout-content {
 	padding: 0px 0px 15px 0px;
 	display: none;
 	overflow: auto;
+}
+.checkout-content .new-customer, .checkout-content #login {
+        display: inline-block; 
+        width: 48%;
+}
+.checkout-content .new-customer {
+        border: 1px solid #DDDDDD;
+        padding: 0 10px 10px;
+        border-radius: 4px 4px 4px 4px;
+        -webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-khtml-border-radius: 4px 4px 4px 4px;
+}
+.checkout-content #login {
+        float: right;
+}
+.checkout-content #login a {
+        color: #46E1CF;
+}
+.checkout-content td#quoteTitle > input[type="radio"] {
+        margin-left: 0px;
+}
+.checkout-content tr.highlight > td > input[type="radio"] {
+        margin-left: 0px;
 }
 .checkout-content .left {
 	float: left;
@@ -1959,7 +2094,7 @@ a.button:hover, input.button:hover {
     float: right;
     position: relative;
 }
-.sections .moves a.button {
+.sections .moves a.buttonHome {
     position: absolute;
     top: 63px;
     left: 26px;
@@ -1976,7 +2111,7 @@ a.button:hover, input.button:hover {
     float: right;
     position: relative;
 }
-.sections .runs a.button {
+.sections .runs a.buttonHome {
     position: absolute;
     top: 57px;
     left: 20px;
@@ -1993,12 +2128,12 @@ a.button:hover, input.button:hover {
     float: right;
     position: relative;
 }
-.sections .sportsbras .shopLeft a.button {
+.sections .sportsbras .shopLeft a.buttonHome {
     position: absolute;
     top: 317px;
     left: 462px;
 }
-.sections .sportsbras .shopRight a.button {
+.sections .sportsbras .shopRight a.buttonHome {
     position: absolute;
     top: 316px;
     left: 209px;
