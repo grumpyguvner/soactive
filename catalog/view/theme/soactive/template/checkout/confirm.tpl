@@ -15,10 +15,12 @@
             <tbody>
               <?php foreach ($products as $product) { ?>
               <tr>
-                <td class="name"><a href="<?php echo $product['href']; ?>"><h4><?php echo $product['name']; ?></h4></a>
+                <td class="name"><a href="<?php echo $product['href']; ?>"><img src="image/soactive/no_image.jpg" alt="Product Image" />
+                        <h4><?php echo $product['name']; ?></h4></a>
+                    
                   <?php foreach ($product['option'] as $option) { ?>
-                  <br />
-                  &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
+                 
+                  <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
                   <?php } ?></td>
                 <td class="model"><h4 style="font-weight: normal"><?php echo $product['model']; ?></h4></td>
                 <!--td class="rrp"><h4 style="font-weight: normal"></h4></td-->
@@ -29,7 +31,7 @@
               <?php } ?>
               <?php foreach ($vouchers as $voucher) { ?>
               <tr>
-                <td class="name"><h4><?php echo $voucher['description']; ?></h4></td>
+                <td class="name"><?php echo $voucher['description']; ?></h4></td>
                 <td class="model"></td>
                 <td class="quantity"><h4>1</h4></td>
                 <td class="price"><h4><?php echo $voucher['amount']; ?></h4></td>
@@ -41,7 +43,7 @@
               <?php foreach ($totals as $total) { ?>
               <tr>
                 <td colspan="4" class="price"><h4><?php echo $total['title']; ?>:</h4></td>
-                <td class="total"><h4 style="font-weight: normal"><?php echo $total['text']; ?></h4></td>
+                <td class="total"><h4 <?php if ($total['code'] == 'total') { echo 'style="font-weight: bold;"'; } else { echo 'style="font-weight: normal;"'; } ?>><?php echo $total['text']; ?></h4></td>
               </tr>
               <?php } ?>
             </tfoot>

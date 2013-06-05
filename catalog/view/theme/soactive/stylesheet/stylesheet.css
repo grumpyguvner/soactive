@@ -986,7 +986,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	padding: 10px;
 	overflow: auto;
 	margin-bottom: 20px;
-	border: 1px solid #EEEEEE;
+	/* border: 1px solid #EEEEEE; */
 }
 #content .content .left {
 	float: left;
@@ -1826,8 +1826,41 @@ a.buttonHome:hover, input.buttonHome:hover {
 	-moz-border-radius: 4px 4px 4px 4px;
 	-khtml-border-radius: 4px 4px 4px 4px;
 }
+.checkout h1.checkoutHeadTitle {
+        margin-bottom: 0px;
+        color: #514f4f;
+        font-family: Arial;
+}
+.checkout #confirm .checkout-product .table .name a > h4 {
+        color: #46E1CF;
+}
+.checkout .buttons {
+        float: right;
+}
+.checkout-content .error {
+        font-size: 12px;
+        display: table-cell;
+}
+.checkout-content label {
+        display: inline-block;
+}
+.checkout .payment .buttons .right {
+        float: none;
+}
 .checkout .active {
-	background: #46E1CF;
+	/* IE10 Consumer Preview */ 
+        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
+        /* Mozilla Firefox */ 
+        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Opera */ 
+        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* Webkit (Safari/Chrome 10) */ 
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
+        /* Webkit (Chrome 11+) */ 
+        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        /* W3C Markup, IE10 Release Preview */ 
+        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 }
 .checkout-heading a {
 	float: right;
@@ -1840,6 +1873,35 @@ a.buttonHome:hover, input.buttonHome:hover {
 	padding: 0px 0px 15px 0px;
 	display: none;
 	overflow: auto;
+}
+.checkout-content .prow {
+    width: 100%;
+    padding-bottom: 15px;
+}
+.checkout-content .prow .pInput select {
+    width: 214px;
+}
+.checkout-content .prow .pInput select.registerTitle {
+    width: 90px;
+}
+.checkout-content .pLabel {
+    display: inline-block;
+    padding-right: 20px;
+    min-height: 28px;
+    width: 130px;
+    vertical-align: top;
+}
+.checkout-content .prow .pLabel > span, .checkout-content .prow .pLabel > label {
+    display: inline-block;
+    line-height: 30px;
+}
+.checkout-content .pInput {
+    display: inline-block;
+    width: 290px;
+}
+.checkout-content .paSelect .pInput {
+    float: right;
+    width: 100%;
 }
 .checkout-content .new-customer, .checkout-content #login {
         display: inline-block; 
@@ -1872,9 +1934,15 @@ a.buttonHome:hover, input.buttonHome:hover {
 .checkout-content .right {
 	float: right;
 	width: 48%;
+        border-left: 1px solid #DDDDDD;
+        margin-bottom: 20px;
+        padding-left: 20px;
 }
 .checkout-content .buttons {
 	clear: both;
+}
+.checkout-product h4 {
+        font-size: 12px;
 }
 .checkout-product table {
 	width: 100%;
@@ -1883,6 +1951,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 	border-left: 1px solid #DDDDDD;
 	border-right: 1px solid #DDDDDD;
 	margin-bottom: 20px;
+}
+.checkout-product table > tbody > tr> td.name > a > img, .checkout-product table > tbody > tr> td.name > a > h4 {
+	display: inline-block;
 }
 .checkout-product td {
 	padding: 7px;

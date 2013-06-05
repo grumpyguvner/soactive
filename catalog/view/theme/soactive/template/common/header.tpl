@@ -66,12 +66,9 @@
             <?php } ?>
                 <div class="links">
                     <div class="top">
-                        <!--div class="social">
-                            <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
-                        </div-->
-                        <?php /* echo $language; */?>
-                        <?php /* echo $currency; */?>
-                        <?php echo $localisation; ?>
+                        <div id="wrapCurrency" <?php if ($logged) echo 'style="right: 315px;"'; ?>>
+                            <?php echo $localisation; ?>
+                        </div>
                         <div id="welcome">
                             <?php if (!$logged) { ?>
                                 <?php echo $text_welcome; ?>

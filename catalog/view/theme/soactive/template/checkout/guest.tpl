@@ -7,7 +7,7 @@
                     <span class="required">*</span> <?php echo $entry_firstname; ?>
                 </div>
                 <div class="pInput">
-                    <input type="text" name="firstname" value="<?php echo $firstname; ?>" class="large-field" />
+                    <input type="text" name="firstname" value="<?php echo $firstname; ?>" />
                 </div>
             </div>
             <div class="prow">
@@ -15,7 +15,7 @@
                     <span class="required">*</span> <?php echo $entry_lastname; ?>
                 </div>
                 <div class="pInput">
-                    <input type="text" name="lastname" value="<?php echo $lastname; ?>" class="large-field" />
+                    <input type="text" name="lastname" value="<?php echo $lastname; ?>" />
                 </div>
             </div>
             <div class="prow">
@@ -23,7 +23,7 @@
                     <span class="required">*</span> <?php echo $entry_email; ?>
                 </div>
                 <div class="pInput">
-                    <input type="text" name="email" value="<?php echo $email; ?>" class="large-field" />
+                    <input type="text" name="email" value="<?php echo $email; ?>" />
                 </div>
             </div>
             <div class="prow">
@@ -31,7 +31,7 @@
                     <span class="required">*</span> <?php echo $entry_telephone; ?>
                 </div>
                 <div class="pInput">
-                    <input type="text" name="telephone" value="<?php echo $telephone; ?>" class="large-field" />
+                    <input type="text" name="telephone" value="<?php echo $telephone; ?>" />
                 </div>
             </div>
             <div class="prow">
@@ -39,7 +39,7 @@
                     <?php echo $entry_fax; ?>
                 </div>
                 <div class="pInput">
-                    <input type="text" name="fax" value="<?php echo $fax; ?>" class="large-field" />
+                    <input type="text" name="fax" value="<?php echo $fax; ?>" />
                 </div>
             </div>
         
@@ -104,7 +104,7 @@
                             <?php echo $entry_company; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="company" value="<?php echo $company; ?>" class="large-field" />
+                            <input type="text" name="company" value="<?php echo $company; ?>" />
                         </div>
                     </div>
 
@@ -138,7 +138,7 @@
                                 <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
                             </div>
                             <div class="pInput">    
-                                <input type="text" name="company_id" value="<?php echo $company_id; ?>" class="large-field" />
+                                <input type="text" name="company_id" value="<?php echo $company_id; ?>" />
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                                 <span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?>
                             </div>
                             <div class="pInput">    
-                                <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" class="large-field" />
+                                <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                             <span class="required">*</span> <?php echo $entry_address_1; ?>
                         </div>
                         <div class="pInput">    
-                            <input type="text" name="address_1" value="<?php echo $address_1; ?>" class="large-field" />
+                            <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
                         </div>
                     </div>
                     <div class="prow">
@@ -167,7 +167,7 @@
                             <?php echo $entry_address_2; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="address_2" value="<?php echo $address_2; ?>" class="large-field" />
+                            <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
                         </div>
                     </div>
                     <div class="prow">
@@ -175,7 +175,7 @@
                             <span class="required">*</span> <?php echo $entry_city; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="city" value="<?php echo $city; ?>" class="large-field" />
+                            <input type="text" name="city" value="<?php echo $city; ?>" />
                         </div>
                     </div>
                     <div class="prow">
@@ -183,7 +183,7 @@
                             <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" />
+                            <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
                         <?php
                                         if ($use_postcode_anywhere) {
                                             ?>
@@ -198,7 +198,7 @@
                             <span class="required">*</span> <?php echo $entry_country; ?>
                         </div>
                         <div class="pInput">
-                            <select name="country_id" class="large-field">
+                            <select name="country_id">
                                 <option value=""><?php echo $text_select; ?></option>
                                 <?php foreach ($countries as $country) { ?>
                                     <?php if ($country['country_id'] == $country_id) { ?>
@@ -215,7 +215,7 @@
                             <span class="required">*</span> <?php echo $entry_zone; ?>
                         </div>
                         <div class="pInput">
-                            <select name="zone_id" class="large-field">
+                            <select name="zone_id">
                             </select>
                         </div>
                     </div>

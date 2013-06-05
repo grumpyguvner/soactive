@@ -3,59 +3,67 @@
         <h2><?php echo $text_your_details; ?></h2>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <?php echo $entry_firstname; ?>
+                <span class="required">*</span> <label>Title:</label>
             </div>
             <div class="pInput">
-                <input type="text" name="firstname" value="" class="large-field" />
+                <select class="registerTitle" name="title"></select>
             </div>
         </div>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <?php echo $entry_lastname; ?>
+                <span class="required">*</span> <label><?php echo $entry_firstname; ?></label>
             </div>
             <div class="pInput">
-                <input type="text" name="lastname" value="" class="large-field" />
+                <input type="text" name="firstname" value="" />
             </div>
         </div>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <?php echo $entry_email; ?>
+                <span class="required">*</span> <label><?php echo $entry_lastname; ?></label>
+            </div>
+            <div class="pInput">
+                <input type="text" name="lastname" value="" />
+            </div>
+        </div>
+        <div class="prow">
+            <div class="pLabel">
+                <span class="required">*</span> <label><?php echo $entry_email; ?></label>
             </div>
             <div class="pInput">  
-                <input type="text" name="email" value="" class="large-field" />
+                <input type="text" name="email" value="" />
             </div>
         </div>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <?php echo $entry_telephone; ?>
+                <span class="required">*</span> <label><?php echo $entry_telephone; ?></label>
             </div>
             <div class="pInput">
-                <input type="text" name="telephone" value="" class="large-field" />
+                <input type="text" name="telephone" value="" />
             </div>
         </div>
-        <div class="prow">
+        <div class="prow" style="display: none;">
             <div class="pLabel">
-                <?php echo $entry_fax; ?>
+                <label><?php echo $entry_fax; ?></label>
             </div>
             <div class="pInput">  
-                <input type="text" name="fax" value="" class="large-field" />
+                <input type="text" name="fax" value="" />
             </div>
         </div>
         <h2><?php echo $text_your_password; ?></h2>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <?php echo $entry_password; ?>
+                <span class="required">*</span> <label><?php echo $entry_password; ?></label>
             </div>
             <div class="pInput">  
-                <input type="password" name="password" value="" class="large-field" />
+                <input type="password" name="password" value="" />
             </div>
         </div>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <?php echo $entry_confirm; ?>
+                <span class="required">*</span> <label><?php echo $entry_confirm; ?></label>
             </div>
             <div class="pInput">   
-                <input type="password" name="confirm" value="" class="large-field" />
+                <input type="password" name="confirm" value="" />
             </div>
         </div>
     
@@ -115,10 +123,10 @@
             <div class="paAddress content">
                 <div class="prow" id="paCompany">
                     <div class="pLabel">
-                        <?php echo $entry_company; ?>
+                        <label><?php echo $entry_company; ?></label>
                     </div>
                     <div class="pInput">  
-                        <input type="text" name="company" value="" class="large-field" />
+                        <input type="text" name="company" value="" />
                     </div>
                 </div>
 
@@ -141,42 +149,42 @@
                 <input type="hidden" name="tax_id" value="" />
                 <div class="prow">
                     <div class="pLabel">  
-                        <span class="required">*</span> <?php echo $entry_address_1; ?>
+                        <span class="required">*</span> <label><?php echo $entry_address_1; ?></label>
                     </div>
                     <div class="pInput">
-                        <input type="text" name="address_1" value="" class="large-field" />
+                        <input type="text" name="address_1" value="" />
                     </div>
                 </div>
                 <div class="prow">
                     <div class="pLabel">  
-                        <?php echo $entry_address_2; ?>
+                        <label><?php echo $entry_address_2; ?></label>
                     </div>
                     <div class="pInput">
-                        <input type="text" name="address_2" value="" class="large-field" />
+                        <input type="text" name="address_2" value="" />
                     </div>
                 </div>
                 <div class="prow">
                     <div class="pLabel">    
-                        <span class="required">*</span> <?php echo $entry_city; ?>
+                        <span class="required">*</span> <label><?php echo $entry_city; ?></label>
                     </div>
                     <div class="pInput">
-                        <input type="text" name="city" value="" class="large-field" />
+                        <input type="text" name="city" value="" />
                     </div>
                 </div>
                 <div class="prow">
                     <div class="pLabel">  
-                        <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
+                        <span id="payment-postcode-required" class="required">*</span> <label><?php echo $entry_postcode; ?></label>
                     </div>
                     <div class="pInput">
-                        <input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" />
+                        <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
                     </div>
                 </div>
                 <div class="prow">
                     <div class="pLabel">    
-                        <span class="required">*</span> <?php echo $entry_country; ?>
+                        <span class="required">*</span> <label><?php echo $entry_country; ?>
                     </div>
                     <div class="pInput">
-                        <select name="country_id" class="large-field">
+                        <select name="country_id">
                             <option value=""><?php echo $text_select; ?></option>
                             <?php foreach ($countries as $country) { ?>
                                 <?php if ($country['country_id'] == $country_id) { ?>
@@ -190,10 +198,10 @@
                 </div>
                 <div class="prow">
                     <div class="pLabel">    
-                        <span class="required">*</span> <?php echo $entry_zone; ?>
+                        <span class="required">*</span> <label><?php echo $entry_zone; ?></label>
                     </div>
                     <div class="pInput">
-                        <select name="zone_id" class="large-field">
+                        <select name="zone_id">
                         </select>
                     </div>
                 </div>
@@ -203,7 +211,7 @@
 </div>
 <div style="clear: both; padding-top: 15px; border-top: 1px solid #EEEEEE;">  
     <?php
-    if ($show_newsletter) {
+    if (isset($show_newsletter)) {
         ?>
         <label for="newsletter" class="checkbox"><input type="checkbox" name="newsletter" value="1" id="newsletter" />
             <?php echo $entry_newsletter; ?></label>

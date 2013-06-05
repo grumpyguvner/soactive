@@ -77,7 +77,7 @@
                             <span class="required">*</span> <?php echo $entry_firstname; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="firstname" value="" class="large-field" />
+                            <input type="text" name="firstname" value="" />
                         </div>
                     </div>
                     <div class="prow">
@@ -85,7 +85,7 @@
                             <span class="required">*</span> <?php echo $entry_lastname; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="lastname" value="" class="large-field" />
+                            <input type="text" name="lastname" value="" />
                         </div>
                     </div>
                     <div class="prow" id="paCompany">
@@ -93,7 +93,7 @@
                             <?php echo $entry_company; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="company" value="" class="large-field" />
+                            <input type="text" name="company" value="" />
                         </div>
                     </div>
                     <div class="prow">
@@ -101,7 +101,7 @@
                             <span class="required">*</span> <?php echo $entry_address_1; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="address_1" value="" class="large-field" />
+                            <input type="text" name="address_1" value="" />
                         </div>
                     </div>
                     <div class="prow">
@@ -109,7 +109,7 @@
                             <?php echo $entry_address_2; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="address_2" value="" class="large-field" />
+                            <input type="text" name="address_2" value="" />
                         </div>
                     </div>
                     <div class="prow">
@@ -117,7 +117,7 @@
                             <span class="required">*</span> <?php echo $entry_city; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="city" value="" class="large-field" />
+                            <input type="text" name="city" value="" />
                         </div>
                     </div>
                     <div class="prow">
@@ -125,7 +125,7 @@
                             <span id="shipping-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
                         </div>
                         <div class="pInput">
-                            <input type="text" name="postcode" value="<?php echo $postcode; ?>" class="large-field" />
+                            <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
                             <?php
                                         if ($use_postcode_anywhere) {
                                             ?>
@@ -140,7 +140,7 @@
                             <span class="required">*</span> <?php echo $entry_country; ?>
                         </div>
                         <div class="pInput">
-                            <select name="country_id" class="large-field">
+                            <select name="country_id">
                                 <option value=""><?php echo $text_select; ?></option>
                                 <?php foreach ($countries as $country) { ?>
                                     <?php if ($country['country_id'] == $country_id) { ?>
@@ -157,7 +157,7 @@
                             <span class="required">*</span> <?php echo $entry_zone; ?>
                         </div>
                         <div class="pInput">
-                            <select name="zone_id" class="large-field">
+                            <select name="zone_id">
                             </select>
                         </div>
                     </div>

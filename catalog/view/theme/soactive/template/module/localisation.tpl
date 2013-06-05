@@ -1,5 +1,5 @@
 <?php if (count($currencies) > 1 || count($languages) > 1) { ?>
-    <div id="wrapCurrency">
+    
         <div class="heading">
           <a><span id="currentCurrency">
               <?php
@@ -70,7 +70,7 @@
                 
             </div> 
         </div>
-</div>
+
 <?php } ?>
 
 
