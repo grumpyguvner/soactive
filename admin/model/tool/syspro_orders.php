@@ -46,6 +46,7 @@ class ModelToolSysproOrders extends Model {
             FROM `" . DB_PREFIX . "order` o 
                 LEFT JOIN `" . DB_PREFIX . "syspro_order` so ON (o.order_id = so.order_id) 
             WHERE so.order_id IS NULL 
+              AND o.order_status_id = 1
             ORDER BY o.order_id";
         $result = $this->db->query($sql);
         if ($result->rows) {
@@ -148,7 +149,7 @@ class ModelToolSysproOrders extends Model {
                                 ' <warehouse_id>' . $this->config->get('syspro_warehouse') . '</warehouse_id>' . "\n" .
                                 ' <item_id>8200429</item_id>' . "\n" .
                                 ' <price>0</price>' . "\n" .
-                                ' <tax_code_id>2</tax_code_id>' . "\n" .
+                                ' <tax_code_id>A</tax_code_id>' . "\n" .
                                 ' <quantity>1</quantity>' . "\n" .
                                 '</item>' . "\n";
                     }
@@ -156,7 +157,7 @@ class ModelToolSysproOrders extends Model {
                             '<item>' . "\n" .
                             ' <warehouse_id>' . $this->config->get('syspro_warehouse') . '</warehouse_id>' . "\n" .
                             ' <item_id>' . ( ( $shipping <= 5 ) ? 20816591 : 19318251 ) . '</item_id>' . "\n" .
-                            ' <tax_code_id>2</tax_code_id>' . "\n" .
+                            ' <tax_code_id>A</tax_code_id>' . "\n" .
                             ' <price>' . ((float) $shipping <> 0 ? (float) $shipping  : 0) . '</price>' . "\n" .
                             ' <quantity>1</quantity>' . "\n" .
                             '</item>' . "\n";
@@ -172,7 +173,7 @@ class ModelToolSysproOrders extends Model {
                             $order_xml .= '<comment>Payment made by: ' . $order_info['payment_method'] . '</comment>' . "\n";
                             $order_xml .= ( $order_info['payment_transaction_id'] <> '' ) ? '<comment>Payment Transaction ID: ' . $order_info['payment_transaction_id'] . '</comment>' . "\n" : '';
                             break;
-                        case "paypal":
+                        case "pp_standard":
                             $order_xml .=
                                     '<payment>' . "\n" .
                                     ' <amount>' . $order_info['total'] . '</amount>' . "\n" .
@@ -273,31 +274,17 @@ class ModelToolSysproOrders extends Model {
         
         return false;
     }
-    
+
     private function getSysproTaxId($tax_class_id) {
         
-        $this->load->model('localisation/tax_class');
-        
-        $tax_class = $this->model_localisation_tax_class->getTaxClass($tax_class_id);
-        
-        if ($tax_class)
-        {
-            foreach ($this->tax_codes as $key => $tax_code) {
-                if ($tax_code['name'] == $tax_class['title'])
-                {
-                    return $key;
-                }
-            }
-        }
-        
-        foreach ($this->tax_codes as $key => $tax_code) {
-            if ((float)$tax_code['rate'] == 0)
-            {
-                return $key;
-            }
-        }
-        
-        return 0;
+        $sql = "SELECT tax_code
+                FROM `" . DB_PREFIX . "syspro_tax_code` WHERE tax_class_id = '" . (int)$tax_class_id . "'";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows)
+            return $result->rows[0]['tax_code'];
+
+        return "";
     }
     
 }

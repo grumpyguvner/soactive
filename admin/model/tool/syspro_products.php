@@ -6,8 +6,6 @@ class ModelToolSysproProducts extends Model {
     
     private $size_option_id = 0;
     
-    private $tax_codes = array();
-
     private function getDefaultLanguageId() {
         $code = $this->config->get('config_language');
         $sql = "SELECT language_id FROM `" . DB_PREFIX . "language` WHERE code = '$code'";
@@ -143,7 +141,7 @@ class ModelToolSysproProducts extends Model {
                 
                 if ($product_id && $product_option_value_id) {
                     $this->log->write("updating syspro cache data");
-                    $sql = "UPDATE `" . DB_PREFIX . "syspro_stock_item` SET date_processed = NOW(), product_id = " . $product_id . ", product_option_value_id = " . $product_option_value_id . " WHERE stock_item_id = " . (int) $row['stock_item_id'];
+                    $sql = "UPDATE `" . DB_PREFIX . "syspro_stock_item` SET date_processed = NOW(), product_id = " . $product_id . ", product_option_value_id = " . $product_option_value_id . " WHERE stock_item_code = '" . $this->db->escape((string)$row['stock_item_code']) . "'";
                     $this->db->query($sql);
                 }
                 
@@ -191,7 +189,7 @@ class ModelToolSysproProducts extends Model {
         if (count($importRefs)) 
             $this->log->write("importing: " . implode(", ", $importRefs));
 
-        foreach (glob($this->config->get('syspro_input_folder') . "/b2c-stock_item_detail_*.xml") as $filename) {
+        foreach (glob($this->config->get('syspro_input_folder') . "/b2b-stock_item_detail_*.xml") as $filename) {
             $this->log->write("importing: " . basename($filename));
 
             $response = fopen($filename, "r");
@@ -265,7 +263,6 @@ class ModelToolSysproProducts extends Model {
                             } else {
                                 switch (strtolower((string) $third_gen->getName())) {
                                     case "id":
-                                    case "tax_code_id":
                                         //Treat as integers
                                         $stock_item[strtolower((string) $third_gen->getName())] = (int) $third_gen;
                                         break;
@@ -541,14 +538,11 @@ class ModelToolSysproProducts extends Model {
     }
 
     private function getTaxClassId($syspro_tax_code) {
-        if (!isset($this->tax_codes[$syspro_tax_code]))
-            return 0;
-        
         $sql = "SELECT tax_class_id
                 FROM `" . DB_PREFIX . "syspro_tax_code` WHERE tax_code = '" . $this->db->escape((string)$syspro_tax_code) . "'";
         $result = $this->db->query($sql);
 
-        if ($result->count > 0)
+        if ($result->num_rows > 0)
             return $result->rows[0]['tax_class_id'];
 
         return 0;
@@ -573,7 +567,7 @@ class ModelToolSysproProducts extends Model {
 
     private function fetchSysproTaxCodes() {
 
-        foreach (glob($this->config->get('syspro_input_folder') . "/b2c-tax_codes_*.xml") as $filename) {
+        foreach (glob($this->config->get('syspro_input_folder') . "/b2b-tax_codes_*.xml") as $filename) {
             $this->log->write("importing: " . basename($filename));
             
             $response = fopen($filename, "r");
@@ -616,7 +610,7 @@ class ModelToolSysproProducts extends Model {
     private function createTaxClassId($tax_code, $tax_name, $tax_rate) {
         
         $this->load->model('localisation/tax_rate');
-        $tax_info = $this->model_localisation_tax_rate->getTaxRateByName($tax_code);
+        $tax_info = $this->model_localisation_tax_rate->getTaxRateByName($tax_name);
 
         $data = array(
             'name' => $tax_name,
@@ -636,17 +630,30 @@ class ModelToolSysproProducts extends Model {
         // We actually need to save the tax class against the product
         $this->load->model('localisation/tax_class');
         $class_info = $this->model_localisation_tax_class->getTaxClassByName($tax_name);
+        $old_rules = $this->model_localisation_tax_class->getTaxRules($class_info['tax_class_id']);
+        $new_rules = array();
+        $new_rules[] = array (
+            'tax_rate_id' => $tax_rate_id,
+            'based' => 'shipping',
+            'priority' => 1
+            );
+        //Now add other rules back into tax class
+        foreach ($old_rules as $tax_rule) {
+            if ($tax_rule['tax_rate_id'] != $tax_rate_id) {
+                $new_rules[] = array (
+                    'tax_rate_id' => $tax_rule['tax_rate_id'],
+                    'based' => $tax_rule['based'],
+                    'priority' => $tax_rule['priority']
+                    );
+            }
+        }
         
         $data = array(
-            'title' => $tax_name,
+            'title' => $tax_code['name'],
             'description' => "",
-            'tax_rule' => array (1 => array (
-                'tax_rate_id' => $tax_rate_id,
-                'based' => 'shipping',
-                'priority' => 1
-            ))
+            'tax_rule' => $new_rules
         );
-
+        
         if ($class_info) {
             //Update the tax class
             $tax_class_id = $class_info['tax_class_id'];
