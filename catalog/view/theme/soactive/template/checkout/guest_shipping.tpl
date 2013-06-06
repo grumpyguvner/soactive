@@ -74,7 +74,7 @@
                 <div class="paAddress">
                     <div class="prow">
                         <div class="pLabel">  
-                            <span class="required">*</span> <?php echo $entry_firstname; ?>
+                            <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="firstname" value="" />
@@ -82,7 +82,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_lastname; ?>
+                            <span class="required">*</span> <span><?php echo $entry_lastname; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="lastname" value="" />
@@ -90,7 +90,7 @@
                     </div>
                     <div class="prow" id="paCompany">
                         <div class="pLabel">
-                            <?php echo $entry_company; ?>
+                            <span><?php echo $entry_company; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="company" value="" />
@@ -98,7 +98,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_address_1; ?>
+                            <span class="required">*</span> <span><?php echo $entry_address_1; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="address_1" value="" />
@@ -106,7 +106,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <?php echo $entry_address_2; ?>
+                            <span><?php echo $entry_address_2; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="address_2" value="" />
@@ -114,7 +114,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_city; ?>
+                            <span class="required">*</span> <span><?php echo $entry_city; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="city" value="" />
@@ -122,7 +122,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span id="shipping-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
+                            <span id="shipping-postcode-required" class="required">*</span> <span><?php echo $entry_postcode; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
@@ -137,7 +137,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_country; ?>
+                            <span class="required">*</span> <span><?php echo $entry_country; ?></span>
                         </div>
                         <div class="pInput">
                             <select name="country_id">
@@ -154,7 +154,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_zone; ?>
+                            <span class="required">*</span> <span><?php echo $entry_zone; ?></span>
                         </div>
                         <div class="pInput">
                             <select name="zone_id">

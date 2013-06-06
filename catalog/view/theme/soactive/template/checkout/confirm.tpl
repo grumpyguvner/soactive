@@ -16,12 +16,12 @@
               <?php foreach ($products as $product) { ?>
               <tr>
                 <td class="name"><a href="<?php echo $product['href']; ?>"><img src="image/soactive/no_image.jpg" alt="Product Image" />
-                        <h4><?php echo $product['name']; ?></h4></a>
+                        <div class="namePOption"><h4><?php echo $product['name']; ?></h4></a>
                     
                   <?php foreach ($product['option'] as $option) { ?>
                  
                   <small><?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
-                  <?php } ?></td>
+                  <?php } ?></div></td>
                 <td class="model"><h4 style="font-weight: normal"><?php echo $product['model']; ?></h4></td>
                 <!--td class="rrp"><h4 style="font-weight: normal"></h4></td-->
                 <td class="quantity"><h4 style="font-weight: normal"><?php echo $product['quantity']; ?></h4></td>

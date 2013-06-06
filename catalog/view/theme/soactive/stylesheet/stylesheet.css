@@ -684,13 +684,12 @@ a.button {
         background-color: #46e1cf;
 	display: inline-block;
 	text-decoration: none;
-	padding: 5px 12px;
+	padding: 9px 12px;
 }
 input.button {
 	margin: 0;
 	border: 0;
-	height: 24px;
-	padding: 0px 12px 0px 12px;
+	padding: 8px 12px;
 }
 a.button:hover, input.button:hover {
         background-color: #46e1cf;
@@ -1722,6 +1721,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 	text-align: right;
 }
 /* cart */
+.cart-info h4 {
+    font-size: 12px;
+}
 .cart-info table {
 	width: 100%;
 	border-collapse: collapse;
@@ -1814,7 +1816,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 /* checkout */
 .checkout-heading {
-	background: #F8F8F8;
+	background: #EEEEEE;
 	border: 1px solid #DBDEE1;
 	padding: 8px;
 	font-weight: bold;
@@ -1830,9 +1832,6 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin-bottom: 0px;
         color: #514f4f;
         font-family: Arial;
-}
-.checkout #confirm .checkout-product .table .name a > h4 {
-        color: #46E1CF;
 }
 .checkout .buttons {
         float: right;
@@ -1941,6 +1940,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 .checkout-content .buttons {
 	clear: both;
 }
+#shipping-method .checkout-content table.radio {
+        width: 30%;
+}
 .checkout-product h4 {
         font-size: 12px;
 }
@@ -1952,8 +1954,16 @@ a.buttonHome:hover, input.buttonHome:hover {
 	border-right: 1px solid #DDDDDD;
 	margin-bottom: 20px;
 }
-.checkout-product table > tbody > tr> td.name > a > img, .checkout-product table > tbody > tr> td.name > a > h4 {
+.checkout-product table > tbody > tr> td.name > a > img, .checkout-product table > tbody > tr> td.name > div.namePOption {
 	display: inline-block;
+}
+.checkout-product table > tbody > tr> td.name > div.namePOption {
+        vertical-align: top;
+        margin-top: 12px;
+}
+.checkout-product table > tbody > tr> td.name > div.namePOption > a > h4 {
+        color: #46E1CF;
+        margin: 0;
 }
 .checkout-product td {
 	padding: 7px;

@@ -3,7 +3,7 @@
         <div class="warning"><?php echo $error_warning; ?></div>
         <?php } ?>
         <?php if ($payment_methods) { ?>
-        <p><?php echo $text_payment_method; ?></p>
+        <p><b><?php echo $text_payment_method; ?></b></p>
         <table class="radio">
           <?php foreach ($payment_methods as $payment_method) { ?>
           <tr class="highlight">
@@ -19,12 +19,10 @@
         </table>
         <br />
         <?php } ?>
-        <div class="comments">
+        <div class="comments" style="display: none">
         <b><?php echo $text_comments; ?></b>
         <textarea name="comment" rows="8"><?php echo $comment; ?></textarea>
         </div>
-        <br />
-        <br />
         <?php if ($text_agree) { ?>
         <div class="buttons">
           <label class="checkbox"><?php echo $text_agree; ?>

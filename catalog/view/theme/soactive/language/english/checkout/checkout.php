@@ -4,7 +4,7 @@ $_['heading_title']                  = 'Checkout';
 
 // Text
 $_['text_cart']                      = 'Shopping Cart';
-$_['text_checkout_option']           = 'Step 1: Checkout Options';
+$_['text_checkout_option']           = 'Step 1: Checkout';
 $_['text_checkout_account']          = 'Step 2: Account &amp; Billing Details';
 $_['text_checkout_payment_address']  = 'Step 2: Account & Address Details';
 $_['text_checkout_shipping_address'] = 'Step 3: Delivery Details';

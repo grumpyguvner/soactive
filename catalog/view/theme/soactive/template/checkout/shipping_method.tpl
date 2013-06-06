@@ -3,7 +3,7 @@
         <div class="warning"><?php echo $error_warning; ?></div>
         <?php } ?>
         <?php if ($shipping_methods) { ?>
-        <p><?php echo $text_shipping_method; ?></p>
+        <p><b><?php echo $text_shipping_method; ?></b></p>
         <table class="radio">
           <?php foreach ($shipping_methods as $shipping_method) { ?>
           <tr>
@@ -18,8 +18,8 @@
               <?php } else { ?>
               <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
               <?php } ?></td>
-            <td><label for="<?php echo $quote['code']; ?>"><?php echo $quote['title'] ?></label></td>
-            <td style="text-align: right;"><label for="<?php echo $quote['code']; ?>"><?php echo $quote['text']; ?></label></td>
+            <td><label for="<?php echo $quote['code']; ?>"><b><?php echo $quote['title'] ?></b></label></td>
+            <td style="text-align: right;"><label for="<?php echo $quote['code']; ?>"><b><?php echo $quote['text']; ?></b></label></td>
           </tr>
           <?php } ?>
           <?php } else { ?>
@@ -31,12 +31,11 @@
         </table>
         <br />
         <?php } ?>
-        <div class="comments">
+        <div class="comments" style="display: none">
         <b><?php echo $text_comments; ?></b>
         <br/>
         <textarea name="comment" rows="8"><?php echo $comment; ?></textarea>
-        </div><br />
-        <br />
+        </div>
         
         <div class="buttons">
             <input type="button" value="<?php echo strtoupper($button_continue); ?>" id="button-shipping-method" class="button" />

@@ -4,7 +4,7 @@
             <h2><?php echo $text_your_details; ?></h2>
             <div class="prow">
                 <div class="pLabel">
-                    <span class="required">*</span> <?php echo $entry_firstname; ?>
+                    <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
                 </div>
                 <div class="pInput">
                     <input type="text" name="firstname" value="<?php echo $firstname; ?>" />
@@ -12,7 +12,7 @@
             </div>
             <div class="prow">
                 <div class="pLabel">
-                    <span class="required">*</span> <?php echo $entry_lastname; ?>
+                    <span class="required">*</span> <span><?php echo $entry_lastname; ?></span>
                 </div>
                 <div class="pInput">
                     <input type="text" name="lastname" value="<?php echo $lastname; ?>" />
@@ -20,7 +20,7 @@
             </div>
             <div class="prow">
                 <div class="pLabel">
-                    <span class="required">*</span> <?php echo $entry_email; ?>
+                    <span class="required">*</span> <span><?php echo $entry_email; ?></span>
                 </div>
                 <div class="pInput">
                     <input type="text" name="email" value="<?php echo $email; ?>" />
@@ -28,7 +28,7 @@
             </div>
             <div class="prow">
                 <div class="pLabel">
-                    <span class="required">*</span> <?php echo $entry_telephone; ?>
+                    <span class="required">*</span> <span><?php echo $entry_telephone; ?></span>
                 </div>
                 <div class="pInput">
                     <input type="text" name="telephone" value="<?php echo $telephone; ?>" />
@@ -36,7 +36,7 @@
             </div>
             <div class="prow">
                 <div class="pLabel">
-                    <?php echo $entry_fax; ?>
+                    <span><?php echo $entry_fax; ?></span>
                 </div>
                 <div class="pInput">
                     <input type="text" name="fax" value="<?php echo $fax; ?>" />
@@ -101,7 +101,7 @@
                 <div class="paAddress content">
                     <div class="prow" id="paCompany">
                         <div class="pLabel">
-                            <?php echo $entry_company; ?>
+                            <span><?php echo $entry_company; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="company" value="<?php echo $company; ?>" />
@@ -135,7 +135,7 @@
                     <div id="company-id-display" class="paCompanyId">
                         <div class="prow">
                             <div class="pLabel">
-                                <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
+                                <span id="company-id-required" class="required">*</span> <span><?php echo $entry_company_id; ?></span>
                             </div>
                             <div class="pInput">    
                                 <input type="text" name="company_id" value="<?php echo $company_id; ?>" />
@@ -146,7 +146,7 @@
                     <div id="tax-id-display">
                         <div class="prow">
                             <div class="pLabel">
-                                <span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?>
+                                <span id="tax-id-required" class="required">*</span> <span><?php echo $entry_tax_id; ?></span>
                             </div>
                             <div class="pInput">    
                                 <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
@@ -156,7 +156,7 @@
 
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_address_1; ?>
+                            <span class="required">*</span> <span><?php echo $entry_address_1; ?></span>
                         </div>
                         <div class="pInput">    
                             <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
@@ -164,7 +164,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <?php echo $entry_address_2; ?>
+                            <span><?php echo $entry_address_2; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
@@ -172,7 +172,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_city; ?>
+                            <span class="required">*</span> <span><?php echo $entry_city; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="city" value="<?php echo $city; ?>" />
@@ -180,7 +180,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span id="payment-postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
+                            <span id="payment-postcode-required" class="required">*</span> <span><?php echo $entry_postcode; ?></span>
                         </div>
                         <div class="pInput">
                             <input type="text" name="postcode" value="<?php echo $postcode; ?>" />
@@ -212,7 +212,7 @@
                     </div>
                     <div class="prow">
                         <div class="pLabel">
-                            <span class="required">*</span> <?php echo $entry_zone; ?>
+                            <span class="required">*</span> <span><?php echo $entry_zone; ?></span>
                         </div>
                         <div class="pInput">
                             <select name="zone_id">
