@@ -649,7 +649,7 @@ class ModelToolSysproProducts extends Model {
         }
         
         $data = array(
-            'title' => $tax_code['name'],
+            'title' => $tax_name,
             'description' => "",
             'tax_rule' => $new_rules
         );
