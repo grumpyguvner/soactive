@@ -653,18 +653,12 @@ table.radio tr.highlight:hover td {
 }
 /* button */
 a.button, input.button {
-        /* IE10 Consumer Preview */ 
         background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        /* Mozilla Firefox */ 
         background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Opera */ 
         background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Webkit (Safari/Chrome 10) */ 
         background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        /* Webkit (Chrome 11+) */ 
         background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* W3C Markup, IE10 Release Preview */ 
         background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 	cursor: pointer;
 	color: #514f4f;
@@ -736,18 +730,12 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
 }
 .buttons .buttonLeft > a {
-        /* IE10 Consumer Preview */ 
         background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
-        /* Mozilla Firefox */ 
         background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        /* Opera */ 
         background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        /* Webkit (Safari/Chrome 10) */ 
         background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
-        /* Webkit (Chrome 11+) */ 
         background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        /* W3C Markup, IE10 Release Preview */ 
         background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
 }
 .buttons .buttonRight {
@@ -797,7 +785,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	border-right: 1px solid #DDDDDD;
 	border-bottom: 1px solid #DDDDDD;
 	padding: 10px;
-	margin-bottom: 20px;
+        margin-bottom: 8px;
 	z-index: 2;
 	overflow: auto;
         width: 525px;
@@ -805,18 +793,29 @@ a.buttonHome:hover, input.buttonHome:hover {
 .tab-content #productTabDesc .descTab {
         line-height: 16px;  
         display: inline-block;
-        margin-right: 10px;
         width: 72%;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
         vertical-align: top;
-        width: 22%;
+        width: 26%;
+}
+.tab-content #productTabDesc .rating > label {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
 }
 .tab-content #productTabDesc .rating img {
         margin-right: -5px;
         width: 24px;
         height: 24px;
+}
+.tab-content #productTabDesc .rating .review {
+        margin-top: 25px;
+}
+.tab-content #productTabDesc .rating .review label {
+        font-size: 12px;
+        font-weight: bold;
 }
 .tab-content #productTabDesc .rating .checked {
         font-weight: bold;
@@ -844,7 +843,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
 }
 .product-tab {
-        margin-bottom: 20px;
+        margin-bottom: 0;
         display: table;
 }
 .nav-tabs > li > a {
@@ -1383,24 +1382,19 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin-bottom: 20px;
 }
 .product-info .cart .cartButton {
-        /* IE10 Consumer Preview */ 
         background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        /* Mozilla Firefox */ 
         background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Opera */ 
         background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Webkit (Safari/Chrome 10) */ 
         background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        /* Webkit (Chrome 11+) */ 
         background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* W3C Markup, IE10 Release Preview */ 
         background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
         border: medium none;
         border-radius: 4px 4px 4px 4px;
         -webkit-border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
 	-khtml-border-radius: 4px 4px 4px 4px;
+        box-shadow: 0 2px 2px #DDDDDD;
         height: 30px;
         width: 230px;
         font-size: 17px;
@@ -1439,6 +1433,45 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .review .share a {
 	text-decoration: none;
+}
+.product-info .gotQuestion {
+        width: 526px;
+        border: 1px solid #b9bdbd;
+        padding: 10px;
+}
+.product-info .gotQuestion .gotQuestionText {
+        display: inline-block;
+        width: 75%;
+}
+.product-info .gotQuestion span {
+        font-size: 22px;
+        font-weight: bold;
+        color: #46e1cf;
+}
+.product-info .gotQuestion span + br + span {
+        font-size: 16px;
+        color: #514f4f;
+        margin-top: 10px;
+        float: right;
+}
+.product-info .gotQuestion a.button {
+        background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
+        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
+        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        display: inline-block;
+        float: right;
+        margin-top: 4px;
+}
+.product-info .social {
+        text-align: center;
+}
+.product-info .social a {
+        margin-right: 4px;
+        text-align: center;
 }
 .review-list {
 	padding: 10px;
@@ -1736,18 +1769,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .cart-info thead td {
 	color: #4D4D4D;
-	font-weight: bold;/* IE10 Consumer Preview */ 
+	font-weight: bold;
         background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        /* Mozilla Firefox */ 
         background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Opera */ 
         background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Webkit (Safari/Chrome 10) */ 
         background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        /* Webkit (Chrome 11+) */ 
         background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* W3C Markup, IE10 Release Preview */ 
         background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 	border-bottom: 1px solid #DDDDDD;
 }
@@ -1846,19 +1874,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 .checkout .payment .buttons .right {
         float: none;
 }
-.checkout .active {
-	/* IE10 Consumer Preview */ 
+.checkout .active { 
         background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        /* Mozilla Firefox */ 
         background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Opera */ 
         background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* Webkit (Safari/Chrome 10) */ 
         background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        /* Webkit (Chrome 11+) */ 
         background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        /* W3C Markup, IE10 Release Preview */ 
         background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 }
 .checkout-heading a {

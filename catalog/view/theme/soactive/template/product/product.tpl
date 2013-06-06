@@ -9,37 +9,37 @@
     <?php if ($thumb || $images) { ?>
     <div class="left">
       <div class="product-img">
-                        <?php if ($thumb || $images) { ?>
-                            <div class="image" id="wrap-image">
-                                <?php if ($thumb) { ?>
-                                    <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
-                                <?php } ?>
-                            </div>
-                            <?php if ($images) { ?>
-                                <div class="image-additional">
-                                    <?php
-                                    if ($additional) {
-                                        ?><a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" id="mainImage" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/><?php
-                                        
-                                    }
-                          
-                                    if ($images) {
-                                      for ($i = 0; $i < count($images); $i++)  {
-                                          
-                                          if (empty($images[$i]['video'])) {
-                                                        ?><a href="<?php echo $images[$i]['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $images[$i]['main']; ?>" <?php if ($i > 1) echo 'style="display: none;"' ?>><img src="<?php echo $images[$i]['thumb']; ?>" alt="" /></a><?php
-                                        } else {
-                                                        ?><a href="http://www.youtube.com/watch?v=<?php echo $images[$i]['video']; ?>" class="videoAdditional" data-video="<?php echo $images[$i]['video']; ?>" target="_blank" style="<?php if ($i > 1) echo "display: none;" ?>line-height:<?php echo $additionalHeight; ?>px;height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"><img src="http://img.youtube.com/vi/<?php echo $images[$i]['video']; ?>/0.jpg" alt="" /><span class="play-button" style="height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"></span></a><?php
-                                            }
-                                      }
-                                        
-                                        }
-                                    ?>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
+            <?php if ($thumb || $images) { ?>
+                <div class="image" id="wrap-image">
+                    <?php if ($thumb) { ?>
+                        <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
+                    <?php } ?>
+                </div>
+                <?php if ($images) { ?>
+                    <div class="image-additional">
+                        <?php
+                        if ($additional) {
+                            ?><a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" id="mainImage" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/><?php
 
+                        }
+
+                        if ($images) {
+                          for ($i = 0; $i < count($images); $i++)  {
+
+                              if (empty($images[$i]['video'])) {
+                                            ?><a href="<?php echo $images[$i]['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $images[$i]['main']; ?>" <?php if ($i > 1) echo 'style="display: none;"' ?>><img src="<?php echo $images[$i]['thumb']; ?>" alt="" /></a><?php
+                            } else {
+                                            ?><a href="http://www.youtube.com/watch?v=<?php echo $images[$i]['video']; ?>" class="videoAdditional" data-video="<?php echo $images[$i]['video']; ?>" target="_blank" style="<?php if ($i > 1) echo "display: none;" ?>line-height:<?php echo $additionalHeight; ?>px;height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"><img src="http://img.youtube.com/vi/<?php echo $images[$i]['video']; ?>/0.jpg" alt="" /><span class="play-button" style="height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"></span></a><?php
+                                }
+                          }
+
+                            }
+                        ?>
                     </div>
+                <?php } ?>
+            <?php } ?>
+            <div class="social"><a target="_blank" href="#"><img alt="Twitter" src="catalog/view/theme/soactive/image/social/twitter.png"></a><a target="_blank" href="#"><img alt="Pinterest" src="catalog/view/theme/soactive/image/social/pin_it.png"></a><a target="_blank" href="#"><img alt="Facebook" src="catalog/view/theme/soactive/image/social/facebook.png"></a><a target="_blank" href="#"><img alt="Send" src="catalog/view/theme/soactive/image/social/send.png"></a><a target="_blank" href="#"><img alt="Pinterest" src="catalog/view/theme/soactive/image/social/pin_it.png"></a></div>
+        </div>
     </div>
     <?php } ?>
     <div class="right">
@@ -67,12 +67,7 @@
           <?php } ?>
         </div>
         <?php } ?>
-      </div>
-      <?php if ($review_status) { ?>
-      <div class="review">
-        <div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>
-      </div>
-      <?php } ?>  
+      </div>  
       <?php } ?>
       <?php if ($options) { ?>
       <div class="options">
@@ -245,12 +240,11 @@
                     
                     <?php if (isset($attribute_groups['Ratings'])) { ?>
                         <div class="rating">
+                            <label>OUR EXPERTS REVIEW</label>
                             <?php
-                            $rating = array();
                             foreach ($attribute_groups['Ratings'] as $attribute_group) {
                                 foreach ($attribute_group['attribute'] as $attribute) {
-                                    $rating = '';
-                                    $rating[] = $attribute['text'];
+                                    
                                     echo '<div class="rating' . $attribute['name'] . '"><p>' . $attribute['name'] . ':</p>';
                                    
                                     for ($i = 1; $i <= 5; $i++) { 
@@ -265,9 +259,26 @@
                                 }
                             } ?>
 
+                            <?php if ($review_status && $rating > 0) { ?>
+                                <div class="review">
+                                    <label>Customer Review:</label>  
+                                  <div>
+                                      <?php 
+                                            for ($j = 0; $j <= 4; $j++) { 
+                                                if ($j < $rating) { ?>
+                                                    <img src="catalog/view/theme/soactive/image/review_star_active.png" alt="<?php echo $reviews; ?>" />
+                                            <?php
+                                                } else { ?>
+                                                    <img src="catalog/view/theme/soactive/image/review_star.png" alt="<?php echo $reviews; ?>" />
+                                                <?php }
+                                            }
+                                      ?>
+                                      
+                                  </div>
+                                </div>
+                            <?php } ?> 
                         </div>
                     <?php } ?>
-                    
                 </div>
                 <?php
                 if ($product_tabs) {
@@ -319,7 +330,14 @@
                 </div>
             </div>
         </div>
-    
+        <div class="gotQuestion">
+            <div class="gotQuestionText">
+                <span><i>Got a question about this product?</i></span>
+                <br/>
+                <span><i>ASK ONE OF OUR EXPERT...</i></span>
+            </div>
+            <a href="index.php?route=information/contact" type="button" class="button">CONTACT US</a>
+        </div>
     </div>
       <?php echo $column_right; ?>
   </div>
