@@ -616,14 +616,19 @@ class ModelToolSysproProducts extends Model {
             'name' => $tax_name,
             'rate' => $tax_rate,
             'type' => "P", // P = Percentage
-            'geo_zone_id' => $this->getGeoZoneId($tax_name . " Tax Zone")
+            'geo_zone_id' => $this->getGeoZoneId($tax_name . " Tax Zone"),
         );
 
         if ($tax_info) {
             //Update the tax rate (percentage may have changed!)
             $tax_rate_id = $tax_info['tax_rate_id'];
+            $data['tax_rate_customer_group'] = $this->model_localisation_tax_rate->getTaxRateCustomerGroups($tax_rate_id);
+
             $this->model_localisation_tax_rate->editTaxRate($tax_rate_id, $data);
         } else {
+            $this->load->model('sale/customer_group');
+            $data['tax_rate_customer_group'] = $this->model_sale_customer_group->getCustomerGroups();
+            
             $tax_rate_id = $this->model_localisation_tax_rate->addTaxRate($data);
         }
 
