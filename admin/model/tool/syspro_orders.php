@@ -68,6 +68,7 @@ class ModelToolSysproOrders extends Model {
                     #set delivery address
                     $order_xml .=
                             '<delivery_address>' . "\n" .
+                            ' <email>' . $order_info['email'] . '</email>' . "\n";
                             ' <postal_name>' . str_replace("&", "and", $order_info['shipping_firstname'] . " " . $order_info['shipping_lastname']) . '</postal_name>' . "\n" .
                             ' <address1>' . str_replace("&", "and", $order_info['shipping_address_1']) . '</address1>' . "\n" .
                             ' <address2>' . str_replace("&", "and", $order_info['shipping_address_2']) . '</address2>' . "\n" .
