@@ -326,7 +326,7 @@ class ModelToolSysproProducts extends Model {
             $pricebands = $stock_item['pricebands'];
             $product_info['price'] = (isset($pricebands[$this->config->get('syspro_default_priceband')]) ? $pricebands[$this->config->get('syspro_default_priceband')] : $product_info['price'] );
             
-            $product_info['status'] = ($stock_item['status'] == "Active" ? 1 : 0);
+            //$product_info['status'] = ($stock_item['status'] == "Active" ? 1 : 0);
             
             //Load all existing data for product
             $product_info['product_description'] = $this->model_catalog_product->getProductDescriptions($product_id);
