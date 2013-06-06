@@ -936,4 +936,5 @@
                                         });	
                                     });
                                     //--></script> 
+<script type='text/javascript' src='https://platform.cloud-iq.com/cartrecovery/store.js?app_id=17262'></script>
 <?php echo $footer; ?>
