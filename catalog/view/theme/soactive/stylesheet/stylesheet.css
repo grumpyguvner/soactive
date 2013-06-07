@@ -431,14 +431,14 @@ label {
 	float: left;
 	z-index: 20;
 	padding: 0 7px 0 7px;
-        border-right: 2px solid #676767;
+        border-right: 1px solid #676767;
         max-height: 20px;
 }
 #menu > ul > li:hover {
 }
 #menu > ul > li > a {
-	font-size: 18px;
-	color: #000;
+	font-size: 14px;
+	color: #514f4f;
 	line-height: 20px;
 	text-decoration: none;
 	margin-bottom: 5px;
@@ -1240,7 +1240,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 /* Product */
 .product-info {
 	overflow: auto;
-	margin-bottom: 20px;
 }
 .product-info > .left {
 	float: left;
@@ -2539,6 +2538,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #featuredProduct h5 {
     border-bottom: 1px solid #b9bdbd;
+    margin-top: 0;
 }
 /** Start Slideshow Home Page **/
 
@@ -2593,11 +2593,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 #myCarousel .carouselBasebarContainer {
     position: absolute;
     bottom: 0;
-    left: 62px;
-    width: 40%;
+    width: 100%;
     height: 50px;
     z-index: 3;
-    top: 0;
 }
 #myCarousel .carouselBasebarContainer .container {
     text-align: right;
@@ -2641,7 +2639,8 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #FFFFFF;
     font-size: 30px;
     font-weight: 100;
-    opacity: 0.5;
+    opacity: 0.3;
+    display: none;
     text-align: center;
     border: none;
     top: 0;

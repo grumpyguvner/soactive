@@ -92,9 +92,9 @@
             <?php if ($categories) { ?>
                 <div id="menu">
                     <ul>
-                        <li style="border-left: 2px solid #676767;"><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/soactive/image/home-button.png" alt="Home"/></span></a></li>
+                        <li style="border-left: 1px solid #676767;"><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/soactive/image/home-button.png" alt="Home"/></span></a></li>
                         <?php foreach ($categories as $category) { ?>
-                            <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
+                        <li><a href="<?php echo $category['href']; ?>"><?php echo strtoupper($category['name']); ?></a>
                                 <?php if ($category['children']) { ?>
                                     <div>
                                         <?php for ($i = 0; $i < count($category['children']);) { ?>

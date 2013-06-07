@@ -61,7 +61,8 @@ if (!empty($banners)) {
             };
 
             var size = $('#myCarousel').innerWidth() / settings.step;
-
+            var marginIndicators = ($('#myCarousel').innerWidth() - $('.carousel-indicators').innerWidth())/2;
+            
             if(size > settings.max){
                 size = settings.max;
             }
@@ -73,7 +74,7 @@ if (!empty($banners)) {
             $('#myCarousel .bannerWrapper').css("font-size", size + "px");
                 
             if ($('#myCarousel .bannerWrapper').length > 1) {
-                $('.carouselBasebarContainer .container').css("height", $('.carouselBasebarContainer').innerHeight() + "px").css("line-height", $('.carouselBasebarContainer').innerHeight() + "px");
+                $('.carouselBasebarContainer .container').css("margin-left", marginIndicators).css("height", $('.carouselBasebarContainer').innerHeight() + "px").css("line-height", $('.carouselBasebarContainer').innerHeight() + "px");
             }
                         
             $('#myCarousel .bannerWrapper .container').height($('#myCarousel .spacer').innerHeight() - $('.carouselBasebarContainer').innerHeight()).css('line-height',($('#myCarousel .spacer').innerHeight()- $('.carouselBasebarContainer').innerHeight()) + "px");
@@ -87,16 +88,25 @@ if (!empty($banners)) {
          $(document).ready(function() {
             $('.bannerWrapper').hover(
                 function () {
-                    $('.carousel-control.left').animate({'marginLeft':'29px'},200);
-                    $('.carousel-control.right').animate({'marginRight':'29px'},200);
+                    $('#myCarousel .carousel-control').css({'display': 'block'});
+                    $('.carousel-control.left').animate({'marginLeft':'29px'},400);
+                    $('.carousel-control.right').animate({'marginRight':'29px'},400);
+                    
                 });
                 
-                $('.bannerWrapper').mouseout(
+                $('.bannerWrapper, .carousel-control').mouseout(
                 function () {
-                    $('.carousel-control.left').animate({'marginLeft':'-29px'},200);
-                    $('.carousel-control.right').animate({'marginRight':'-29px'},200);
+                    $('.carousel-control.left').animate({'marginLeft':'-29px'},400);
+                    $('.carousel-control.right').animate({'marginRight':'-29px'},400);
                 });
                 
+                $('.carousel-control').hover(
+                function () {
+                    $('#myCarousel .carousel-control').css({'display': 'block'});
+                    $('.carousel-control.left').stop(true, true);
+                    $('.carousel-control.right').stop(true, true);
+                   
+                });           
         });
         
     </script>
