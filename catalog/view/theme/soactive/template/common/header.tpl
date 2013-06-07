@@ -66,7 +66,7 @@
             <?php } ?>
                 <div class="links">
                     <div class="top">
-                        <div id="wrapCurrency" <?php if ($logged) echo 'style="right: 315px;"'; ?>>
+                        <div id="wrapCurrency" <?php if ($logged) echo 'style="right: 350px;"'; ?>>
                             <?php echo $localisation; ?>
                         </div>
                         <div id="welcome">

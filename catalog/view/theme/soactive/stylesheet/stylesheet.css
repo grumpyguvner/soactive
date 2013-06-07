@@ -15,8 +15,6 @@ body, td, th, input, textarea, select, a {
 	font-size: 12px;
 }
 h1, .welcome {
-	color: #636E75;
-	font: Verdana;
 	margin-top: 0px;
 	margin-bottom: 20px;
 	font-size: 32px;
@@ -24,7 +22,6 @@ h1, .welcome {
 	text-shadow: 0 0 1px rgba(0, 0, 0, .01);
 }
 h2 {
-	color: #000000;
 	font-size: 16px;
 	margin-top: 0px;
 	margin-bottom: 5px;
@@ -90,10 +87,10 @@ label {
 	margin-bottom: 25px;
 }
 #column-left + #column-right + #content, #column-left + #content {
-	margin-left: 195px;
+	margin-left: 186px;
 }
 #column-right + #content {
-	margin-right: 195px;
+	margin-right: 186px;
 }
 /* header */
 #header {
@@ -152,14 +149,14 @@ label {
 	-moz-border-radius: 0px 0px 7px 7px;
 	-khtml-border-radius: 0px 0px 7px 7px;
 	border-radius: 0px 0px 7px 7px;
-        height: 30px;
+        height: 32px;
         padding-top: 4px;
 }
 #header #cart .heading {
 	float: right;
 	padding-right: 10px;
         padding-left: 10px;
-        padding-top: 6px;
+        padding-top: 2px;
 	background: #FFF;
 	position: relative;
 	z-index: 1;
@@ -272,7 +269,7 @@ label {
         display: inline-block;
         vertical-align: middle;
         position: absolute;
-        right: 250px;
+        right: 300px;
 }
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
@@ -391,7 +388,7 @@ label {
         height: 30px;
         margin-bottom: 10px;
         margin-top: 10px;
-        margin-right: 110px;
+        margin-right: 150px;
         text-align: right;
 }
 #header .links .top form {
@@ -431,7 +428,7 @@ label {
 	float: left;
 	z-index: 20;
 	padding: 0 7px 0 7px;
-        border-right: 1px solid #676767;
+        border-right: 1px solid #514f4f;
         max-height: 20px;
 }
 #menu > ul > li:hover {
@@ -2386,7 +2383,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
     width:  922px;
-    /*height: 75px;*/
+    height: 260px;
     margin-left: 22px;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
@@ -2662,3 +2659,124 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+/********** Account **********/
+#accountContainer {
+    background: url("../image/account/account-image.png") no-repeat scroll left top #ffffff;
+    min-height: 400px;
+}
+#accountNoImage {
+    background: none !important;
+    min-height: 400px;
+}
+#accountNoImage .box .box-heading {
+    border-top: none;
+    color: #514f4f;
+}
+#accountNoImage .box .box-content {
+    border-bottom: none;
+}
+#accountNoImage .box .box-content > ul {
+    margin: 0;
+}
+#accountNoImage .box .box-content > ul > li {
+    list-style: none;
+    line-height: 30px;
+}
+#accountContainer .content-account {
+    margin-left: 15px;
+}
+#accountNoImage .content-account {
+    margin-left: 80px;
+}
+.content-account > h1 {
+    margin-bottom: 0;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.content-account h3 {
+    font-size: 20px;
+}
+.content-account .newCustomer, .content-account .returningCustomer {
+    display: inline-block;
+    width: 49%;
+}
+.content-account .newCustomer {
+    
+}
+.content-account .returningCustomer {
+    float: right;
+    border-left: 1px solid #b9bdbd;
+}
+.content-account .returningCustomer .content {
+    padding: 0 !important;
+    float: right;
+    margin-right: 40px;
+}
+.content-account .returningCustomer a {
+    color: #46e1cf;
+    font-weight: bold;
+}
+.content-account .returningCustomer .content > table > tbody > tr {
+    line-height: 50px;
+}
+.content-account .wrap-edit {
+    margin-bottom: 30px;
+}
+.content-account .wrap-edit a {
+    color: #46e1cf;
+}
+.content-account .wrap-edit > ul {
+    margin: 0 0 10px 70px;
+}
+.content-account .buttons .buttonLeft > a {
+    padding: 9px 37px;
+}
+.content-account .prow {
+    width: 100%;
+    padding-bottom: 15px;
+}
+.content-account .prow .pInput select {
+    width: 214px;
+}
+.content-account .prow .pInput select.registerTitle {
+    width: 90px;
+}
+.content-account .pLabel {
+    display: inline-block;
+    padding-right: 20px;
+    min-height: 28px;
+    width: 130px;
+    vertical-align: top;
+}
+.content-account .prow .pLabel > span, .content-account .prow .pLabel > label {
+    display: inline-block;
+    line-height: 30px;
+}
+.content-account .pInput {
+    display: inline-block;
+    width: 290px;
+}
+.content-account .addressBookWrap {
+    border: 1px solid #b9bdbd;
+    line-height: 20px;
+   border-radius: 4px 4px 4px 4px;
+   -webkit-border-radius: 4px 4px 4px 4px;
+   -moz-border-radius: 4px 4px 4px 4px;
+   -khtml-border-radius: 4px 4px 4px 4px;
+   margin-bottom: 6px;
+   margin-left: 70px;
+}
+.content-account .addressBookWrap .content {
+    margin-bottom: 0 !important;
+}
+.content-account .addressBookWrap .content > table > tbody > tr > td + td > a + a {
+   background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
+        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
+        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+}
+/********** End Account ******/

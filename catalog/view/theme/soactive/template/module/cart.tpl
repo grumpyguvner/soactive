@@ -1,6 +1,6 @@
 <div id="cart">
   <div class="heading">
-    
+    <img src="catalog/view/theme/soactive/image/bag.png" alt="Bag" />
     <a><span id="cart-total"><?php echo $text_items; ?></span></a></div>
   <div class="content">
     <?php if ($products || $vouchers) { ?>
