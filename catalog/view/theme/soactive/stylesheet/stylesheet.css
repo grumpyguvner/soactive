@@ -799,12 +799,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 .tab-content #productTabDesc .descTab {
         line-height: 16px;  
         display: inline-block;
-        width: 72%;
+        width: 77%;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
         vertical-align: top;
-        width: 26%;
+        width: 22%;
 }
 .tab-content #productTabDesc .rating > label {
         font-size: 12px;
@@ -2155,7 +2155,6 @@ a.buttonHome:hover, input.buttonHome:hover {
     list-style: none outside none
 }
 #footer .column ul li {
-    font-weight: bold;
     line-height: 15px;
 }
 #footer .column a {
@@ -2163,7 +2162,8 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #514f4f;
 }
 #footer .column a:hover {
-    text-decoration: underline;
+    color: #46e1cf;
+    text-decoration: none;
 }
 #footer .newsletter_input a {
     position: absolute;
@@ -2337,9 +2337,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 .shopBar h4 {
     color: #46e1cf;
     margin: 0px;
-    font-weight: normal;
+    font-weight: 700;
     line-height: 17px;
-    font-size: 13px;
+    font-size: 14px;
 }
 .shopBar p {
     margin-bottom: 0;

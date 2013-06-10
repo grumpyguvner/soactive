@@ -1,6 +1,7 @@
 <?php
 // Text
 $_['text_information']              = 'Information';
+$_['text_categories']               = 'SHOP <span style="color: #46e1cf;">SO</span>ACTIVE BY';
 $_['text_customerservice']          = 'Customer Service';
 $_['text_extra']                    = 'Extras';
 $_['text_contact']                  = 'Contact Us';
