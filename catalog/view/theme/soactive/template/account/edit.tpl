@@ -23,8 +23,7 @@
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <h2><?php echo $text_your_details; ?></h2>
 
-                <div class="content">
-                    
+                <div class="wrapContentAccount content">
                     <div class="prow">
                         <div class="pLabel">
                             <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
@@ -77,7 +76,6 @@
                             <input type="text" name="fax" value="<?php echo $fax; ?>" />
                         </div>
                     </div>
-                   
                 </div>
 
                 <div class="buttons">

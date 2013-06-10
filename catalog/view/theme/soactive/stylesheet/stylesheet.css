@@ -2688,6 +2688,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 #accountNoImage .content-account {
     margin-left: 80px;
 }
+#accountNoImage .content-account .wrapContentAccount {
+    margin-left: 40px;
+}
 .content-account > h1 {
     margin-bottom: 0;
     padding-top: 15px;
@@ -2729,6 +2732,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 .content-account .wrap-edit > ul {
     margin: 0 0 10px 70px;
 }
+.content-account .buttons {
+    margin-left: 40px;
+}
 .content-account .buttons .buttonLeft > a {
     padding: 9px 37px;
 }
@@ -2765,7 +2771,7 @@ a.buttonHome:hover, input.buttonHome:hover {
    -moz-border-radius: 4px 4px 4px 4px;
    -khtml-border-radius: 4px 4px 4px 4px;
    margin-bottom: 6px;
-   margin-left: 70px;
+   margin-left: 40px;
 }
 .content-account .addressBookWrap .content {
     margin-bottom: 0 !important;
