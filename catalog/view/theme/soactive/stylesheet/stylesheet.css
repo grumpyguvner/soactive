@@ -6,13 +6,16 @@ html {
 body {
 	background-color: #ffffff;
 	color: #514f4f;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Open Sans Condensed', sans-serif;;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
 	margin: 0px;
 	padding: 0px;
-        line-height: 12px;
+        line-height: 17px;
 }
 body, td, th, input, textarea, select, a {
-	font-size: 12px;
+	font-size: 13px;
 }
 h1, .welcome {
 	margin-top: 0px;
@@ -278,7 +281,7 @@ label {
         float: right;
 }
 #header #wrapCurrency .heading #currentCurrency > img {
-        vertical-align: top;
+        vertical-align: middle;
 }
 #header #wrapCurrency .content {
         background: none repeat scroll 0 0 #FFFFFF;
@@ -370,14 +373,13 @@ label {
 }
 #header .links {
         float: right;
-	font-size: 10px;
         height: 100%;
 }
 #header .links a {
-	padding: 0px 7px 0px 7px;
+	padding: 0px 12px 0px 12px;
 	color: #514f4f;
 	text-decoration: none;
-	font-size: 12px;
+	font-size: 13px;
 }
 #header .links a + a {
 	border-left: 1px solid #b9bdbd;
@@ -441,7 +443,7 @@ label {
 	margin-bottom: 5px;
 	z-index: 6;
 	position: relative;
-        font-weight: bold;
+        font-weight: 700;
 }
 #menu > ul > li:hover > a {
 	background: #FFF;
@@ -1375,7 +1377,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
 	color: #4D4D4D;
 	overflow: auto;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
 }
 .product-info .cart .cartButton {
         background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
@@ -2070,8 +2072,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer h4 {
     color: #000;
-    font-size: 13px;
-    font-weight: bolder;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
     margin-top: 0px;
     border-bottom: 1px solid #46e1cf;
     padding-bottom: 10px;
@@ -2083,7 +2087,29 @@ a.buttonHome:hover, input.buttonHome:hover {
     min-height: 100px;
     margin-right: 25px;
 }
-#footer .column > div {
+#footer .column .securePayment .needHelp {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    height: 55px;
+}
+#footer .column .securePayment .needHelp > img {
+    float: left;
+    margin-right: 4px;
+}
+#footer .column .securePayment .needHelp > div > span + span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #46E1CF;
+}
+#footer .column .securePayment .needHelp > img, #footer .column .securePayment .needHelp > div {
+    display: inline;
+}
+#footer .column .securePayment .trustPilot > img {
+    float: left;
+    margin-right: 4px;
+}
+#footer .column .securePayment .trustPilot > img, #footer .column .securePayment .trustPilot > div {
+    display: inline;
 }
 #footer #column2 {
     width: 468px;

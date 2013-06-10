@@ -75,8 +75,17 @@
                     <h4>SECURE PAYMENT</h4>
                     <p>We accept paypal and most major credit cards. All payments are processed securely for your peace of mind.</p>
                     <img src="catalog/view/theme/soactive/image/footer/credit-cards.png" alt="Credit Cards" />
+                    
+                    <div class="needHelp">
+                        <img src="catalog/view/theme/soactive/image/phone_icon.png" alt="Phone icon">
+                        <div><span>Need help? Contact our expert for advice on product selection, delivery, returns & questions about your order:</span> <span>0945 094 9434</span></div>
+                    </div>
+                    <div class="trustPilot">
+                        <img src="catalog/view/theme/soactive/image/trustpilot_logo.png" alt="Trust Pilot">
+                    </div>
                 </div>
                 <!----------------------------- End code for cms block ------------------------------------>
+                
             </div>
     
             <div class="column" id="lastColumn">
@@ -103,7 +112,7 @@
                         <div class="social">
                             <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
                         </div>
-                        <div class="fb-activity" data-site="http://www.example.com" data-width="327" data-height="266" data-header="true" data-recommendations="false"></div>
+                        <div class="fb-activity" data-site="http://www.example.com" data-width="327" data-height="240" data-header="true" data-recommendations="false"></div>
                     </div>
                 <!---------------------------------- End cms block ------------------------------------------>
             </div> 
