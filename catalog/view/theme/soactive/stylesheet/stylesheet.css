@@ -575,7 +575,14 @@ table.list td {
 	border-bottom: 1px solid #DDDDDD;
 }
 table.list thead td {
-	background-color: #EFEFEF;
+	background-color: #46E1CF;
+        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
+        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
+        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 	padding: 0px 5px;
 }
 table.list thead td a, .list thead td {
@@ -1707,13 +1714,18 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .return-reason {
 	float: left;
-	width: 31%;
-	margin-right: 15px;
+        width: 100%;
+        margin-bottom: 20px;
 }
 .return-opened {
 	float: left;
-	width: 31%;
-	margin-right: 15px;
+        width: 100%
+}
+.return-opened input[type='radio'], .return-opened label {
+        display: inline-block;
+}
+.return-opened label {
+        margin-right: 10px;
 }
 .return-opened textarea {
 	width: 98%;
