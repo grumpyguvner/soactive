@@ -54,7 +54,7 @@
         <?php if (!$special) { ?>
         <?php echo $price; ?>
         <?php } else { ?>
-          <span class="price-old"><?php echo $price; ?></span> <span class="price-new"><span>NOW </span><?php echo $special; ?></span>
+          <span class="save">SAVE <?php /* $save_decimal = ((($price * 100) - ($special * 100))/($price)); $save = sprintf('%s', (float)$save_decimal); echo $save . '% ' */;?></span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -221,6 +221,9 @@
         <div class="minimum"><?php echo $text_minimum; ?></div>
         <?php } ?>
       </div>
+      <div class="wishlist">
+          <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo strtoupper($button_wishlist); ?></a>
+      </div>
       <div class="product-tab<?php if ($news && !empty($news)) echo ' news'?>"> 
             <ul class="nav nav-tabs" id="productTab">
                 <li class="active"><a href="#productTabDesc"><?php echo strtoupper($tab_description); ?></a></li>
@@ -350,13 +353,17 @@
                       <?php if ($product['thumb']) { ?>
                       <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a>
                       <?php } ?><br />
-                      <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                      <div class="nameItem">
+                        <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                      </div>
                       <?php if ($product['price']) { ?>
+                        <div class="priceItem">
                           <?php if (!$product['special']) { ?>
                           <span class="price"><?php echo $product['price']; ?></span>
                           <?php } else { ?>
                           <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>
                           <?php } ?>
+                        </div>
                      <?php } ?>
                   </li>
                 <?php } ?> 

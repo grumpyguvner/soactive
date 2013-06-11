@@ -673,7 +673,7 @@ a.button, input.button {
 	cursor: pointer;
 	color: #514f4f;
 	line-height: 12px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 12px;
 	font-weight: bold;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
@@ -1342,6 +1342,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .price-new {
     color: #ff0758;
 }
+.product-info .save {
+    color: #ff0758;
+}
 .product-info .price-tax {
 	font-size: 12px;
 	font-weight: normal;
@@ -1383,6 +1386,24 @@ a.buttonHome:hover, input.buttonHome:hover {
 	margin-right: 5px;
 	border: 1px solid #CCCCCC;
 	cursor: pointer;
+}
+.product-info .wishlist {
+        display: inline-block;
+        margin-left: 30px;
+        margin-top: 17px;
+        vertical-align: top;
+}
+.product-info .wishlist a {
+        background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
+        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
+        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        color: #46e1cf;
+        font-weight: normal;
+        font-size: 18px;
 }
 .product-info .cart {
         display: inline-block;
