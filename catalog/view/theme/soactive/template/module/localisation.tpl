@@ -4,13 +4,13 @@
           <a><span id="currentCurrency">
               <?php
                             if ($currency_code == 'GBP') { 
-                                echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . ' ' . $currency_code; 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . $symbol_left . ' ' . $currency_code; 
 
                             } elseif ($currency_code == 'EUR') { 
-                                echo '<img src="catalog/view/theme/soactive/image/flags/fr.png" alt="fr.png" />' . ' ' . $currency_code; 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/fr.png" alt="fr.png" />' . $symbol_right . ' ' . $currency_code; 
                             
                             } elseif ($currency_code == 'USD') {
-                                echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . ' ' . $currency_code;
+                                echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . $symbol_left . ' ' . $currency_code;
                             }
                          
                         ?>

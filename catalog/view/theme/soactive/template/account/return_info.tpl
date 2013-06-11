@@ -1,12 +1,8 @@
 <?php echo $header; ?>
-<div id="breadcrumb">
-    <div class="container">
-        <?php
-        foreach ($breadcrumbs as $breadcrumb) {
-            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
-        }
-        ?>
-    </div>
+<div class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <?php } ?>
 </div>
 <div id="notification">
     <?php if (isset($success) && $success) { ?>
@@ -19,9 +15,8 @@
     ?>
 </div>
     
-<div id="content-back">
-    <div class="green-bar">
-        <div id="accountContainer" class="container"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content"> 
+
+        <div id="accountNoImage"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content"> 
                 <?php echo $content_top; ?>
   <div class="content-account">
   <h1><?php echo $heading_title; ?></h1>
@@ -109,12 +104,11 @@
   </table>
   <?php } ?>
   <div class="buttons">
-    <div class="right"><a href="<?php echo $continue; ?>" class="button-account"><?php echo $button_continue; ?></a></div>
+      <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo strtoupper($button_continue); ?></a></div>
   </div>
   </div>
   <?php echo $content_bottom; ?>
             </div>
         </div>
-    </div>
-</div>
+    
 <?php echo $footer; ?>

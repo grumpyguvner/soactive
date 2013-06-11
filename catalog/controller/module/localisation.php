@@ -44,6 +44,8 @@ class ControllerModuleLocalisation extends Controller {
         $this->data['action'] = $this->url->link('module/localisation', '', $connection);
 
         $this->data['currency_code'] = $this->currency->getCode();
+        $this->data['symbol_left'] = $this->currency->getSymbolLeft();
+        $this->data['symbol_right'] = $this->currency->getSymbolRight();
         $this->data['language_code'] = $this->session->data['language'];
 
         $this->load->model('localisation/currency');

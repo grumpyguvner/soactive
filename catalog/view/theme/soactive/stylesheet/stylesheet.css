@@ -157,8 +157,8 @@ label {
 }
 #header #cart .heading {
 	float: right;
-	padding-right: 10px;
-        padding-left: 10px;
+	padding-right: 4px;
+        padding-left: 4px;
         padding-top: 2px;
 	background: #FFF;
 	position: relative;
@@ -178,6 +178,9 @@ label {
 #header #cart .heading a span {
 	background: #FFFFFF url('../image/arrow-down.png') 100% 50% no-repeat;
 	padding-right: 15px;
+}
+#header #cart .heading a span#cart-total {
+	margin-left: -10px;
 }
 #header #cart .content {
 	clear: both;
@@ -272,7 +275,7 @@ label {
         display: inline-block;
         vertical-align: middle;
         position: absolute;
-        right: 300px;
+        right: 257px;
 }
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
@@ -282,6 +285,7 @@ label {
 }
 #header #wrapCurrency .heading #currentCurrency > img {
         vertical-align: middle;
+        padding-right: 12px;
 }
 #header #wrapCurrency .content {
         background: none repeat scroll 0 0 #FFFFFF;
@@ -341,7 +345,7 @@ label {
         padding-right: 15px;
 }
 #header #search {
-	width: 298px;
+	width: 326px;
 	z-index: 15;
         float: right;
 }
@@ -350,7 +354,7 @@ label {
 	background: url('../image/button-search.png') center center no-repeat;
 	width: 28px;
 	height: 21px;
-        margin-left: 268px;
+        margin-left: 298px;
 	border-left: 1px solid #4E4E4E;
 	cursor: pointer;
         margin-top: 5px;
@@ -358,7 +362,7 @@ label {
 #header #search input {
 	background: #FFF;
 	padding: 1px 1px 1px 6px;
-	width: 289px;
+	width: 317px;
 	height: 27px;
 	border: 1px solid #4e4e4e;
         box-shadow: none;
@@ -390,7 +394,7 @@ label {
         height: 30px;
         margin-bottom: 10px;
         margin-top: 10px;
-        margin-right: 150px;
+        margin-right: 112px;
         text-align: right;
 }
 #header .links .top form {
@@ -417,8 +421,7 @@ label {
 /* menu */
 #menu {
 	height: 20px;
-	margin-bottom: 10px;
-	padding: 0px 5px;
+	margin-bottom: 9px;
 }
 #menu ul {
 	list-style: none;
@@ -429,14 +432,13 @@ label {
 	position: relative;
 	float: left;
 	z-index: 20;
-	padding: 0 7px 0 7px;
-        border-right: 1px solid #514f4f;
         max-height: 20px;
+        padding-bottom: 9px;
 }
 #menu > ul > li:hover {
 }
 #menu > ul > li > a {
-	font-size: 14px;
+	font-size: 18px;
 	color: #514f4f;
 	line-height: 20px;
 	text-decoration: none;
@@ -444,6 +446,8 @@ label {
 	z-index: 6;
 	position: relative;
         font-weight: 700;
+	padding: 0 12px;
+        border-left: 1px solid #514f4f;
 }
 #menu > ul > li:hover > a {
 	background: #FFF;
@@ -457,7 +461,7 @@ label {
 	padding: 5px;
         border-top: 6px solid #46e1cf;
         box-shadow: 2px 0 2px 0 #514F4F;
-        top: 26px;
+        top: 24px;
         left: 0;
 }
 #menu > ul > li:hover > div {
@@ -2288,8 +2292,17 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-right: 10px;
 }
 .wrapBrands .womens {
-    width: 48%;
+    width: 49%;
     margin-bottom: 20px;
+    display: inline-block;
+}
+.wrapBrands .womens > h5 {
+    display: inline-block;
+}
+.wrapBrands .womens hr {
+    border-bottom: 2px solid #B9BDBD;
+    width: 88%;
+    vertical-align: middle;
     display: inline-block;
 }
 .wrapBrands .womens .brands {
@@ -2298,8 +2311,18 @@ a.buttonHome:hover, input.buttonHome:hover {
     padding: 12px 0 0;
 }
 .wrapBrands .mens {
-    width: 48%;
+    width: 50%;
+    float: right;
     margin-bottom: 20px;
+    display: inline-block;
+}
+.wrapBrands .mens > h5 {
+    display: inline-block;
+}
+.wrapBrands .mens hr {
+    border-bottom: 2px solid #B9BDBD;
+    width: 93%;
+    vertical-align: middle;
     display: inline-block;
 }
 .wrapBrands .mens .brands {
@@ -2339,7 +2362,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin: 0px;
     font-weight: 700;
     line-height: 17px;
-    font-size: 14px;
+    font-size: 18px;
 }
 .shopBar p {
     margin-bottom: 0;
@@ -2402,7 +2425,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-container span.price, .jcarousel-skin-tango .jcarousel-container span.price-old, .jcarousel-skin-tango .jcarousel-container span.price-new {
     display: block;
-    margin-top: -4px;
     font-weight: bold;
     color: #514f4f;
 }
@@ -2421,7 +2443,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
     width:  922px;
-    height: 260px;
+    height: 274px;
     margin-left: 22px;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
@@ -2449,6 +2471,23 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a {
 	font-size: 14px;
+        width: 170px;
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem {
+	
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-old {
+	display: inline-block;
+        text-decoration: line-through;
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-new {
+	display: inline-block;
+        color: #FF0758;
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal div.nameItem {
+        max-width: 170px;
+        line-height: 14px;
+        margin-top: 5px;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a:hover {
 	color: #46e1cf;
@@ -2571,7 +2610,16 @@ a.buttonHome:hover, input.buttonHome:hover {
 .featuredTitle {
     color: #46e1cf;
 }
-#featuredProduct h5 {
+.featuredTitle > h5 {
+    display: inline-block;
+}
+.featuredTitle hr {
+    display: inline-block;
+    width: 90%;
+    border-bottom: 2px solid #b9bdbd;
+    vertical-align: middle;
+}
+.featuredProduct h5 {
     border-bottom: 1px solid #b9bdbd;
     margin-top: 0;
 }
@@ -2616,6 +2664,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     font-weight: bold;
     font-size: 14px;
     font-family: Helvetica;
+    z-index: 4;
 }
 #myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a + a {
     float: right;
