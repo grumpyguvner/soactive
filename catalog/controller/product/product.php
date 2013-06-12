@@ -250,8 +250,10 @@ class ControllerProductProduct extends Controller {
 						
 			if ((float)$product_info['special']) {
 				$this->data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+                                $this->data['save'] = ceil((($product_info['price'] * 100) - ($product_info['special'] * 100)) / ($product_info['price']));
 			} else {
 				$this->data['special'] = false;
+                                $this->data['save'] = false;
 			}
 			
 			if ($this->config->get('config_tax')) {
@@ -391,13 +393,16 @@ class ControllerProductProduct extends Controller {
                                         $idcat = $categoryid['category_id'];
                                     }
                                 }
-							
+				                                
+                                $save = ceil(((($result['price'] * 100) - ($result['special'] * 100))/($result['price'])));
+                                
 				$this->data['products'][] = array(
 					'product_id' => $result['product_id'],
 					'thumb'   	 => $image,
 					'name'    	 => $result['name'],
 					'price'   	 => $price,
 					'special' 	 => $special,
+                                        'save'           => $save,
 					'rating'     => $rating,
 					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
 					'href'    	 => $this->url->link('product/product', 'path=' . $idcat . '&product_id=' . $result['product_id']),
@@ -432,7 +437,7 @@ class ControllerProductProduct extends Controller {
 				} else {
 					$rating = false;
 				}
-							
+				                                
 				$this->data['alsoBought'][] = array(
 					'product_id' => $result['product_id'],
 					'thumb'   	 => $image,

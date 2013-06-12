@@ -791,9 +791,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 	background: #FFFFFF;
 }
 .tab-content {
-	border-left: 1px solid #DDDDDD;
-	border-right: 1px solid #DDDDDD;
-	border-bottom: 1px solid #DDDDDD;
+	border-left: 1px solid #B9BDBD;
+	border-right: 1px solid #B9BDBD;
+	border-bottom: 1px solid #B9BDBD;
 	padding: 10px;
         margin-bottom: 8px;
 	z-index: 2;
@@ -821,17 +821,14 @@ a.buttonHome:hover, input.buttonHome:hover {
         height: 24px;
 }
 .tab-content #productTabDesc .rating .review {
-        margin-top: 25px;
-}
-.tab-content #productTabDesc .rating .review label {
-        font-size: 12px;
-        font-weight: bold;
-}
-.tab-content #productTabDesc .rating .checked {
-        font-weight: bold;
+        margin-top: 20px;
 }
 .tab-content #productTabDesc .rating p {
-        margin-bottom: 10px;
+        margin-bottom: 0;
+        font-size: 12px;
+        font-weight: 700;
+}
+.tab-content #productTabDesc .rating .checked {
         font-weight: bold;
 }
 .tab-content #productTabDesc .rating .ratingStyle {
@@ -856,14 +853,18 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin-bottom: 0;
         display: table;
 }
+.nav-tabs {
+        border-bottom: 1px solid #b9bdbd;
+}
 .nav-tabs > li > a {
         background-color: #f7f7f7;
-        border-bottom: 1px solid #DDDDDD !important;
+        border-bottom: 1px solid #b9bdbd !important;
         color: #514f4f !important;
         font-weight: bold;
 }
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
         border-bottom-color: #FFFFFF !important;
+        border-color: #b9bdbd #b9bdbd transparent;
 }
 .nav-tabs > li > a, .nav-pills > li > a {
         padding-left: 7px;
@@ -1262,7 +1263,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
 }
 .product-info > #column-right {
-        width: 125px;
+        width: 121px;
 }
 .product-info #column-right ul {
         margin: 0 0 10px 0;
@@ -1331,7 +1332,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .price {
 	overflow: auto;
 	padding: 2px 2px 10px;
-	margin-bottom: 10px;
 	font-size: 18px;
 	font-weight: bold;
 	color: #514f4f;
@@ -1359,6 +1359,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 	font-weight: normal;
 	font-size: 12px;
 	color: #4D4D4D;
+}
+.product-info .optionCart {
+        width: 100%;
 }
 .product-info .options {
         display: inline-block;
@@ -1466,6 +1469,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .gotQuestion {
         width: 526px;
+        height: 45px;
         border: 1px solid #b9bdbd;
         padding: 10px;
 }
@@ -1474,14 +1478,14 @@ a.buttonHome:hover, input.buttonHome:hover {
         width: 75%;
 }
 .product-info .gotQuestion span {
-        font-size: 22px;
+        font-size: 30px;
         font-weight: bold;
         color: #46e1cf;
 }
 .product-info .gotQuestion span + br + span {
-        font-size: 16px;
+        font-size: 22px;
         color: #514f4f;
-        margin-top: 10px;
+        margin-top: 6px;
         float: right;
 }
 .product-info .gotQuestion a.button {
@@ -2332,10 +2336,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .wrapBrands .womens > h5 {
     display: inline-block;
+    margin-left: 10px;
 }
 .wrapBrands .womens hr {
     border-bottom: 2px solid #B9BDBD;
-    width: 88%;
+    width: 86%;
+    float: right;
     vertical-align: middle;
     display: inline-block;
 }
@@ -2355,7 +2361,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .wrapBrands .mens hr {
     border-bottom: 2px solid #B9BDBD;
-    width: 93%;
+    width: 92%;
+    float: right;
     vertical-align: middle;
     display: inline-block;
 }
@@ -2457,10 +2464,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-container {
     
 }
+.jcarousel-skin-tango .jcarousel-container span.price {
+    color: #514F4F;
+}
 .jcarousel-skin-tango .jcarousel-container span.price, .jcarousel-skin-tango .jcarousel-container span.price-old, .jcarousel-skin-tango .jcarousel-container span.price-new {
-    display: block;
+    display: inline-block;
     font-weight: bold;
-    color: #514f4f;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl {
 	direction: rtl;
@@ -2470,14 +2479,14 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-container-vertical {
     height: 485px;
-    padding: 30px 0 40px 10px;
+    padding: 30px 14px 40px 15px;
 }
 .jcarousel-skin-tango .jcarousel-clip {
     overflow: hidden;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
     width:  922px;
-    height: 274px;
+    height: 290px;
     margin-left: 22px;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
@@ -2495,6 +2504,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 	margin-left: 0;
         margin-right: 14px;
         text-align: center;
+        line-height: 14px;
+        height: 290px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 
@@ -2509,6 +2520,11 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem {
 	
+}
+.jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.save {
+        display: block;
+        color: #FF0758;
+        font-weight: 700;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-old {
 	display: inline-block;
@@ -2534,6 +2550,8 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-right: 0;
 }
 .jcarousel-skin-tango .jcarousel-item-vertical {
+    width: 92px;
+    height: 160px;
     margin-bottom: 0;
 }
 .jcarousel-skin-tango .jcarousel-item-vertical a, .jcarousel-skin-tango .jcarousel-item-vertical span {
@@ -2607,7 +2625,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     bottom: 5px;
     cursor: pointer;
     height: 32px;
-    left: 43px;
+    left: 52px;
     position: absolute;
     width: 32px;
 }
@@ -2625,7 +2643,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     background: url("../image/prev-vertical.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 32px;
-    left: 43px;
+    left: 52px;
     position: absolute;
     top: 5px;
     width: 32px;
@@ -2641,15 +2659,22 @@ a.buttonHome:hover, input.buttonHome:hover {
     cursor: default;
 }
 /****************************** End Carousel Home Page ************************/
+#featuredProduct {
+    border-bottom: 1px solid #b9bdbd;
+    max-height: 30px;
+    margin-bottom: 10px;
+}
 .featuredTitle {
     color: #46e1cf;
 }
 .featuredTitle > h5 {
     display: inline-block;
+    padding-left: 10px;
 }
 .featuredTitle hr {
     display: inline-block;
-    width: 90%;
+    width: 88%;
+    float: right;
     border-bottom: 2px solid #b9bdbd;
     vertical-align: middle;
 }
