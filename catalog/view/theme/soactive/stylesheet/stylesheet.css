@@ -1599,7 +1599,20 @@ a.buttonHome:hover, input.buttonHome:hover {
 .wishlist-info td {
 	padding: 7px;
 }
+.wishlist-info h4 {
+	font-size: 13px;
+        line-height: 17px;
+        margin: 0;
+}
 .wishlist-info thead td {
+        background-color: #46E1CF;
+        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
+        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
+        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
 	color: #4D4D4D;
 	font-weight: bold;
 	background-color: #F7F7F7;
