@@ -13,7 +13,8 @@
                 <?php if (!$product['special']) { ?>
                 <span class="price"><?php echo $product['price']; ?></span>
                 <?php } else { ?>
-                <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new">NOW <?php echo $product['special']; ?></span>
+                <span class="save">SAVE <?php echo $product['save'] . '%' ?></span>
+                <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"> <?php echo $product['special']; ?></span>
               <?php } ?>
            </div>
          <?php } ?>
