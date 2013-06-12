@@ -74,7 +74,6 @@
         <?php if ($options) { ?>
         <div class="options">
           <!--h2><?php /* echo $text_option; */ ?></h2-->
-          <br />
           <?php foreach ($options as $option) { ?>
           <?php if ($option['type'] == 'select') { ?>
           <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
@@ -89,7 +88,6 @@
               <?php } ?>
             </select>
           </div>
-          <br />
           <?php } ?>
           <?php if ($option['type'] == 'radio') { ?>
           <div id="option-<?php echo $option['product_option_id']; ?>" class="option">

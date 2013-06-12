@@ -99,7 +99,7 @@
                                     <input type="hidden" name="route" value="module/newsletter/callback">
                                     <input type="hidden" name="subscribe" value="1">
                                     <div class="newsletter_input">
-                                        <input type="email" name="email" placeholder="Email Address"><a class="submit" href="#"><img src="catalog/view/theme/soactive/image/submit_newsletter.png" alt="Go Button" /></a>
+                                        <input type="email" name="email" placeholder="Your Email"><a class="submit" href="#"><img src="catalog/view/theme/soactive/image/submit_newsletter.png" alt="Go Button" /></a>
                                     </div>
                                 </form>
                             </li>
