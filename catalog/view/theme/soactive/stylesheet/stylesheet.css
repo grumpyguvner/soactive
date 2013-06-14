@@ -506,6 +506,12 @@ label {
         border-radius: 0;
         
 }
+.breadcrumb .back {
+        float: right;
+}
+.breadcrumb .back a {
+        font-weight: 700;
+}
 .success, .warning, .attention, .information {
 	padding: 10px 10px 10px 33px;
 	margin-bottom: 15px;
