@@ -22,13 +22,13 @@
                     <span></span><span>
                         <?php
                             if ($currency_code == 'GBP') { 
-                                echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . ' UNITED KINGDOM'; 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/gb.png" alt="gb.png" />' . '<span> UNITED KINGDOM</span>'; 
 
                             } elseif ($currency_code == 'EUR') { 
-                                echo '<img src="catalog/view/theme/soactive/image/flags/fr.png" alt="fr.png" />' . ' FRANCE'; 
+                                echo '<img src="catalog/view/theme/soactive/image/flags/fr.png" alt="fr.png" />' . '<span> FRANCE</span>'; 
                             
                             } elseif ($currency_code == 'USD') {
-                                echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . ' UNITED STATES';
+                                echo '<img src="catalog/view/theme/soactive/image/flags/us.png" alt="us.png" />' . '<span> UNITED STATES</span>';
                             }
                         ?>
                     </span>

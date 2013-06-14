@@ -125,7 +125,7 @@ label {
         border-bottom: 2px solid #46E1CF;
         height: 50px;
         margin-bottom: 10px;
-        min-width: 179px;
+        min-width: 160px;
 }
 #currency a {
 	display: inline-block;
@@ -321,6 +321,7 @@ label {
 }
 #header #wrapCurrency .content .mini-currency-info #language .frFlag {
         display: inline-block;
+        float: right;
 }
 #header #wrapCurrency .content .mini-currency-info #language p {
         color: #514f4f;
@@ -329,7 +330,7 @@ label {
         margin-bottom: 0;
 }
 #header #wrapCurrency .content .mini-currency-info #language img {
-        width: 80px;
+        width: 68px;
 }
 #header #wrapCurrency .content .CurrencyTitle {
         font-size: 15px;
@@ -338,6 +339,14 @@ label {
         border-bottom: 2px solid #46E1CF;
         margin-bottom: 10px;
         padding: 10px 10px;
+}
+#header #wrapCurrency .content .CurrencyTitle > span > span {
+        font-size: 17px;
+        vertical-align: middle;
+}
+#header #wrapCurrency .content .CurrencyTitle > span > img {
+        width: 18px;
+        height: 14px;
 }
 #header #wrapCurrency .heading a {
         background-image: url("../image/arrow-down.png");
