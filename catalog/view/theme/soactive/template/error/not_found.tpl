@@ -1,9 +1,14 @@
 <?php echo $header; ?>
 <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <?php if ($breadcrumbs) { ?>
+      <?php $count = count($breadcrumbs) - 1; ?>
+      <?php for ($i = 0; $i < $count; $i++) { ?>
+        <?php echo $breadcrumbs[$i]['separator']; ?><a href="<?php echo $breadcrumbs[$i]['href']; ?>"><b><?php echo $breadcrumbs[$i]['text']; ?></b></a>
+      <?php } ?>
+        <?php echo $breadcrumbs[$count]['separator']; ?><a href="<?php echo $breadcrumbs[$count]['href']; ?>"><?php echo $breadcrumbs[$count]['text']; ?></a>
+       
     <?php } ?>
-</div>
+  </div>
 
     <?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>

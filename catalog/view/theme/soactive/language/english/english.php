@@ -16,7 +16,7 @@ $_['text_none']             = ' --- None --- ';
 $_['text_select']           = 'Select Size ';
 $_['text_all_zones']        = 'All Zones';
 $_['text_pagination']       = '{total} styles found';
-$_['text_separator']        = ' &raquo; ';
+$_['text_separator']        = ' &gt; ';
 
 // Buttons
 $_['button_add_address']    = 'Add Address';

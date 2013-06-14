@@ -1446,6 +1446,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         height: 30px;
         width: 230px;
         font-size: 17px;
+        font-weight: 700;
 }
 .product-info .cart div {
 	float: left;

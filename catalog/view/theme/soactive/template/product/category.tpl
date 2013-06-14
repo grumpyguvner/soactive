@@ -2,10 +2,15 @@
 <?php if ($thumb || $description) { ?>
     <div class="category-info">
         <div class="breadcrumb">
-            <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-                <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-            <?php } ?>
-        </div>
+    <?php if ($breadcrumbs) { ?>
+      <?php $count = count($breadcrumbs) - 1; ?>
+      <?php for ($i = 0; $i < $count; $i++) { ?>
+        <?php echo $breadcrumbs[$i]['separator']; ?><a href="<?php echo $breadcrumbs[$i]['href']; ?>"><b><?php echo $breadcrumbs[$i]['text']; ?></b></a>
+      <?php } ?>
+        <?php echo $breadcrumbs[$count]['separator']; ?><a href="<?php echo $breadcrumbs[$count]['href']; ?>"><?php echo $breadcrumbs[$count]['text']; ?></a>
+       
+    <?php } ?>
+  </div>
         <?php if ($thumb) { ?>
         <div class="categoryImage">
             <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
