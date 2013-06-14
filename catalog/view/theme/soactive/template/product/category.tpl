@@ -46,11 +46,14 @@
                                 </div>
                                 <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
                                 <?php if ($product['price']) { ?>
-                                    <?php if (!$product['special']) { ?>
-                                    <span class="price"><?php echo $product['price']; ?></span>
-                                    <?php } else { ?>
-                                    <span class="price-old"><?php echo $product['price']; ?></span><span class="price-new"> NOW <?php echo $product['special']; ?></span>
-                                    <?php } ?>
+                                    <div class="priceItem">
+                                        <?php if (!$product['special']) { ?>
+                                            <span class="price"><?php echo $product['price']; ?></span>
+                                        <?php } else { ?>
+                                            <span class="save">SAVE <?php echo $product['save'] . '%' ?></span>
+                                            <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
+                                        <?php } ?>
+                                    </div>
                                 <?php } ?>
                             </div><?php }
                                 ?>

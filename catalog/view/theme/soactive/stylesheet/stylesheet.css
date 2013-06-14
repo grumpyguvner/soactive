@@ -1201,7 +1201,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-grid .productItem a {
         color: #514f4f;
-	font-weight: bold;
 	text-decoration: none;
 	display: block;
 	margin-bottom: 4px;
@@ -1226,6 +1225,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 	font-weight: bold;
 	color: #333333;
 	margin-bottom: 4px;
+}
+.product-grid .save {
+        font-weight: 700;
+        display: block;
 }
 .product-grid .price-old {
         font-weight: bold;
