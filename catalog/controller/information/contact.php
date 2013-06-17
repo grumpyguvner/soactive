@@ -56,6 +56,14 @@ class ControllerInformationContact extends Controller {
     	$this->data['entry_email'] = $this->language->get('entry_email');
     	$this->data['entry_enquiry'] = $this->language->get('entry_enquiry');
 		$this->data['entry_captcha'] = $this->language->get('entry_captcha');
+                
+            if (count($this->data['breadcrumbs']) > 1)
+                {
+                    $count = count($this->data['breadcrumbs']) - 2;
+                    $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                } else {
+                    $this->data['text_breadcrumb_back'] = '';
+                }
 
 		if (isset($this->error['name'])) {
     		$this->data['error_name'] = $this->error['name'];

@@ -46,6 +46,13 @@ class ControllerInformationInformation extends Controller {
       		$this->data['button_continue'] = $this->language->get('button_continue');
                 $this->data['text_designed'] = $this->language->get('text_designed');
                 
+                if (count($this->data['breadcrumbs']) > 1)
+                    {
+                        $count = count($this->data['breadcrumbs']) - 2;
+                        $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                    } else {
+                        $this->data['text_breadcrumb_back'] = '';
+                    }
                 
                 /************************** Added Antonio 05/02/2013 **********************/	
                 if ($information_info['image']) {

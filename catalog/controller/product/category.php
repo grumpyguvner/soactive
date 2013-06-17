@@ -49,6 +49,14 @@ class ControllerProductCategory extends Controller {
                 $this->data['button_wishlist'] = $this->language->get('button_wishlist');
                 $this->data['button_compare'] = $this->language->get('button_compare');
                 $this->data['button_continue'] = $this->language->get('button_continue');
+                
+                if (count($this->data['breadcrumbs']) > 1)
+                    {
+                        $count = count($this->data['breadcrumbs']) - 2;
+                        $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                    } else {
+                        $this->data['text_breadcrumb_back'] = '';
+                    }
 
                 if ($this->category->getImage()) {
                         $this->data['thumb'] = $this->model_tool_image->resize($this->category->getImage(), $this->config->get('config_image_category_width'), $this->config->get('config_image_category_height'));

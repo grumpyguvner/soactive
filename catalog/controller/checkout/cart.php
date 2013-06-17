@@ -154,6 +154,14 @@ class ControllerCheckoutCart extends Controller {
 			$this->data['button_shipping'] = $this->language->get('button_shipping');			
                         $this->data['button_shopping'] = $this->language->get('button_shopping');
                         $this->data['button_checkout'] = $this->language->get('button_checkout');
+                        
+                        if (count($this->data['breadcrumbs']) > 1)
+                            {
+                                $count = count($this->data['breadcrumbs']) - 2;
+                                $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                            } else {
+                                $this->data['text_breadcrumb_back'] = '';
+                            }
 			
 			if (isset($this->error['warning'])) {
 				$this->data['error_warning'] = $this->error['warning'];
