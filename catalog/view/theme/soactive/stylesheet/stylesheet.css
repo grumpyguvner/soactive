@@ -41,7 +41,7 @@ a, a:visited, a b {
 }
 a:hover {
 	text-decoration: none;
-        color: #46e1cf;
+        color: #1db4b7;
 }
 a img {
 	border: none;
@@ -123,7 +123,7 @@ label {
 #currency {
 	position: relative;
         line-height: 20px;
-        border-bottom: 2px solid #46E1CF;
+        border-bottom: 2px solid #1db4b7;
         height: 50px;
         margin-bottom: 10px;
         min-width: 160px;
@@ -147,9 +147,9 @@ label {
         position: absolute;
         right: 0;
         top: 0;
-        border-left: 1px solid #46e1cf;
-        border-right: 1px solid #46e1cf;
-        border-bottom: 1px solid #46e1cf;
+        border-left: 1px solid #1db4b7;
+        border-right: 1px solid #1db4b7;
+        border-bottom: 1px solid #1db4b7;
         -webkit-border-radius: 0px 0px 7px 7px;
 	-moz-border-radius: 0px 0px 7px 7px;
 	-khtml-border-radius: 0px 0px 7px 7px;
@@ -293,7 +293,7 @@ label {
         background: none repeat scroll 0 0 #FFFFFF;
         border-left: 1px solid #EEEEEE;
         border-bottom: 1px solid #EEEEEE;
-        border-top: 6px solid #46E1CF;
+        border-top: 6px solid #1db4b7;
         box-shadow: 2px 2px 2px 0px #514f4f;
         clear: both;
         display: none;
@@ -337,7 +337,7 @@ label {
         font-size: 15px;
         color: #514f4f;
         font-weight: bold;
-        border-bottom: 2px solid #46E1CF;
+        border-bottom: 2px solid #1db4b7;
         margin-bottom: 10px;
         padding: 10px 10px;
 }
@@ -462,7 +462,7 @@ label {
 }
 #menu > ul > li:hover > a {
 	background: #FFF;
-	color: #46e1cf;
+	color: #1db4b7;
 }
 #menu > ul > li > div {
 	display: none;
@@ -470,7 +470,7 @@ label {
 	position: absolute;
 	z-index: 5;
 	padding: 5px;
-        border-top: 6px solid #46e1cf;
+        border-top: 6px solid #1db4b7;
         box-shadow: 2px 0 2px 0 #514F4F;
         top: 24px;
         left: 0;
@@ -493,7 +493,7 @@ label {
 	min-width: 120px;
 }
 #menu > ul > li ul > li > a:hover {
-	color: #46e1cf;
+	color: #1db4b7;
 }
 #menu > ul > li > div > ul > li > a {
 	color: #514f4f;
@@ -524,7 +524,7 @@ label {
 	border-radius: 5px 5px 5px 5px;
 }
 .success {
-	background: #46E1CF url('../image/success.png') 10px center no-repeat;
+	background: #1db4b7 url('../image/success.png') 10px center no-repeat;
 	border: 1px solid #B9BDBD;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
@@ -597,14 +597,7 @@ table.list td {
 	border-bottom: 1px solid #DDDDDD;
 }
 table.list thead td {
-	background-color: #46E1CF;
-        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+	background-color: #1db4b7;
 	padding: 0px 5px;
 }
 table.list thead td a, .list thead td {
@@ -682,13 +675,7 @@ table.radio tr.highlight:hover td {
 }
 /* button */
 a.button, input.button {
-        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-color: #1db4b7;
 	cursor: pointer;
 	color: #514f4f;
 	line-height: 12px;
@@ -704,7 +691,7 @@ a.button, input.button {
 	-khtml-border-radius: 4px 4px 4px 4px;
 }
 a.button {
-        background-color: #46e1cf;
+        background-color: #1db4b7;
 	display: inline-block;
 	text-decoration: none;
 	padding: 9px 12px;
@@ -714,9 +701,7 @@ input.button {
 	border: 0;
 	padding: 8px 12px;
 }
-a.button:hover, input.button:hover {
-        background-color: #46e1cf;
-}
+
 /***** Button Home Page *****/
 a.buttonHome, input.buttonHome {
         background-image: url('../image/button_arrow.png');
@@ -1201,7 +1186,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid > div {
 	display: inline-block;
         /* height: 254px; */
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         margin-left: 2px;
         vertical-align: top;
 }
@@ -1297,7 +1282,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info #column-right .recentlyViewedTitle h5 {
         font-size: 12px;
-        color: #46E1CF;
+        color: #1db4b7;
         border-left: 1px solid #514f4f;
         border-right: 1px solid #514f4f;
         text-align: center;
@@ -1338,7 +1323,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	line-height: 20px;
 }
 .product-info .description h1 {
-	color: #46e1cf;
+	color: #1db4b7;
         font-size: 18px;
         margin-bottom: 0;
         line-height: 24px;
@@ -1395,11 +1380,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .options .error {
         display: inline-block;
+        font-weight: 700;
 }
 .product-info .options .option > select {
         width: 140px;
         height: 30px;
         padding: 4px;
+        margin-bottom: 0;
 }
 .product-info .option-image {
 	margin-top: 3px;
@@ -1421,16 +1408,10 @@ a.buttonHome:hover, input.buttonHome:hover {
         vertical-align: top;
 }
 .product-info .wishlist a {
-        background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
-        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
-        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        color: #46e1cf;
+        background-color: #dee0e0;
+        color: #514f4f;
         font-weight: normal;
-        font-size: 18px;
+        font-size: 16px;
 }
 .product-info .cart {
         display: inline-block;
@@ -1439,13 +1420,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         vertical-align: top;
 }
 .product-info .cart .cartButton {
-        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-color: #1db4b7;
         border: medium none;
         border-radius: 4px 4px 4px 4px;
         -webkit-border-radius: 4px 4px 4px 4px;
@@ -1505,7 +1480,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .gotQuestion span {
         font-size: 30px;
         font-weight: bold;
-        color: #46e1cf;
+        color: #1db4b7;
 }
 .product-info .gotQuestion span + br + span {
         font-size: 22px;
@@ -1514,13 +1489,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         float: right;
 }
 .product-info .gotQuestion a.button {
-        background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
-        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
-        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-color: #dee0e0;
         display: inline-block;
         float: right;
         margin-top: 4px;
@@ -1634,17 +1603,9 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin: 0;
 }
 .wishlist-info thead td {
-        background-color: #46E1CF;
-        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-color: #1db4b7;
 	color: #4D4D4D;
 	font-weight: bold;
-	background-color: #F7F7F7;
 	border-bottom: 1px solid #DDDDDD;
 }
 .wishlist-info thead .image {
@@ -1847,13 +1808,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .cart-info thead td {
 	color: #4D4D4D;
 	font-weight: bold;
-        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-color: #1db4b7;
 	border-bottom: 1px solid #DDDDDD;
 }
 .cart-info thead .image {
@@ -1879,7 +1834,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	text-align: left;
 }
 .cart-info tbody .name > a > h4 {
-        color: #46E1CF;
+        color: #1db4b7;
 }
 .cart-info tbody .quantity input[type='image'], .cart-info tbody .quantity img {
 	position: relative;
@@ -1952,20 +1907,14 @@ a.buttonHome:hover, input.buttonHome:hover {
         float: none;
 }
 .checkout .active { 
-        background-image: -ms-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b7ebe0', endColorstr='#49e1d0');
-        background-image: -moz-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -o-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #b7ebe0), color-stop(1, #49e1d0));
-        background-image: -webkit-linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
-        background-image: linear-gradient(top , #b7ebe0 0%, #49e1d0 72%);
+        background-color: #1db4b7;
 }
 .checkout-heading a {
 	float: right;
 	margin-top: 1px;
 	font-weight: normal;
 	text-decoration: none;
-        color: #46E1CF;
+        color: #1db4b7;
 }
 .checkout-content {
 	padding: 0px 0px 15px 0px;
@@ -2017,7 +1966,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         float: right;
 }
 .checkout-content #login a {
-        color: #46E1CF;
+        color: #1db4b7;
 }
 .checkout-content td#quoteTitle > input[type="radio"] {
         margin-left: 0px;
@@ -2061,7 +2010,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin-top: 12px;
 }
 .checkout-product table > tbody > tr> td.name > div.namePOption > a > h4 {
-        color: #46E1CF;
+        color: #1db4b7;
         margin: 0;
 }
 .checkout-product td {
@@ -2136,7 +2085,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     width: 330px;
 }
 #footer .followUs span {
-    color: #46E1CF;
+    color: #1db4b7;
 }
 #footer .followUs .social {
         display: inline-block;
@@ -2156,7 +2105,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     font-style: normal;
     font-weight: 700;
     margin-top: 0px;
-    border-bottom: 1px solid #46e1cf;
+    border-bottom: 1px solid #1db4b7;
     padding-bottom: 10px;
     min-width: 210px;
 }
@@ -2178,7 +2127,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .column .securePayment .needHelp > div > span + span {
     font-size: 24px;
     font-weight: bold;
-    color: #46E1CF;
+    color: #1db4b7;
 }
 #footer .column .securePayment .needHelp > img, #footer .column .securePayment .needHelp > div {
     display: inline;
@@ -2229,7 +2178,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #514f4f;
 }
 #footer .column a:hover {
-    color: #46e1cf;
+    color: #1db4b7;
     text-decoration: none;
 }
 #footer .newsletter_input a {
@@ -2279,13 +2228,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .soInfo span + span {
     font-weight: bold;
-    color: #514f4f;
+    color: #1db4b7;
 }
 .sections {
     width: 100%;
 }
 .sections a {
-    background-color: #46e1cf;
+    background-color: #1db4b7;
     color: #514f4f;
 }
 .sections .moves {
@@ -2350,7 +2299,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .wrapBrands {
     border-bottom: 2px solid #b9bdbd;
-    color: #46E1CF;
+    color: #1db4b7;
     margin-bottom: 20px;
 }
 .wrapBrands a {
@@ -2413,7 +2362,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     padding: 10px 0;
 }
 .shopBanner .shopBannerText span {
-    color: #46E1CF;
+    color: #1db4b7;
 }
 .shopBanner .shopBannerText span + span {
     color: #514f4f;
@@ -2426,7 +2375,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     border-bottom: 1px solid #514f4f;
 }
 .shopBar h4 {
-    color: #46e1cf;
+    color: #1db4b7;
     margin: 0px;
     font-weight: 700;
     line-height: 17px;
@@ -2693,6 +2642,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .featuredTitle > h5 {
     display: inline-block;
     padding-left: 10px;
+    color: #1db4b7;
 }
 .featuredTitle hr {
     display: inline-block;
@@ -2775,7 +2725,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     top: 386px;
 }
 #myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a {
-    background-color: #46E1CF;
+    background-color: #1db4b7;
     position: relative;
     float: left;
     width: 120px;
@@ -2831,7 +2781,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     behavior: url(catalog/view/PIE/PIE.htc);
 }
 #myCarousel .carousel-indicators .active {
-    background-color: #46E1CF;
+    background-color: #1db4b7;
 }
 #myCarousel .carousel-control {
     width: 29px;
@@ -2923,7 +2873,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-right: 40px;
 }
 .content-account .returningCustomer a {
-    color: #46e1cf;
+    color: #1db4b7;
     font-weight: bold;
 }
 .content-account .returningCustomer .content > table > tbody > tr {
@@ -2933,7 +2883,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-bottom: 30px;
 }
 .content-account .wrap-edit a {
-    color: #46e1cf;
+    color: #1db4b7;
 }
 .content-account .wrap-edit > ul {
     margin: 0 0 10px 70px;
