@@ -80,7 +80,8 @@ label {
 }
 #column-left {
 	float: left;
-	width: 180px;
+	width: 190px;
+        margin-right: 13px;
 }
 #column-right {
 	float: right;
@@ -91,7 +92,7 @@ label {
 	margin-bottom: 25px;
 }
 #column-left + #column-right + #content, #column-left + #content {
-	margin-left: 186px;
+	margin-left: 190px;
 }
 #column-right + #content {
 	margin-right: 186px;
@@ -502,6 +503,7 @@ label {
         margin-bottom: 10px;
         padding-bottom: 10px;
         padding-left: 0;
+        padding-right: 0;
         background-color: #fff;
         border-radius: 0;
         
@@ -653,6 +655,7 @@ table.radio tr.highlight:hover td {
 	display: inline-block;
 	width: 100%;
 	margin-bottom: 10px;
+        margin-top: 10px;
 }
 .pagination .links {
 	float: left;
@@ -1027,11 +1030,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .category-info .categoryImage {
 	display: inline-block;
+        width: 190px;
 }
 .category-info .cDescription {
         display: inline-block;
         float: right;
-        width: 785px;
+        width: 778px;
 }
 .category-info .cDescription p {
     line-height: 15px;
@@ -1097,7 +1101,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-filter .productResult {
         display: inline-block;
-        margin-top: 5px;
+        margin-top: 4px;
 }
 .product-filter .sort {
         display: inline-block;
@@ -1198,9 +1202,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 	display: inline-block;
         /* height: 254px; */
         margin-bottom: 15px;
-        margin-left: 4px;
+        margin-left: 2px;
         vertical-align: top;
-        width: 192px;
 }
 .product-grid .productItem {
         text-align: center;
@@ -2956,3 +2959,25 @@ a.buttonHome:hover, input.buttonHome:hover {
         background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
 }
 /********** End Account ******/
+
+.contentTopBar {
+    height: 34px;
+    line-height: 30px;
+    border-bottom: 1px solid #b9bdbd;
+    border-top: 1px solid #b9bdbd;
+    margin-bottom: 15px;
+}
+.contentTopBar .results, .contentTopBar .sort {
+    display: inline-block;
+}
+.contentTopBar .sort {
+    float: right;
+}
+.contentTopBar label, .contentTopBar select {
+    margin-bottom: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+.contentTopBar label {   
+    height: 100%; 
+}
