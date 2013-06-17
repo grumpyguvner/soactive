@@ -6,7 +6,7 @@
           <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a>
           <?php } ?><br />
           <div class="nameItem">
-                <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                <a href="<?php echo $product['href']; ?>"><?php echo $product['shortname']; ?></a>
           </div>
           <?php if ($product['price']) { ?>
               <div class="priceItem">

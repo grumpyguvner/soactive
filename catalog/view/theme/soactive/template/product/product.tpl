@@ -60,7 +60,7 @@
         <?php echo $price; ?>
         <?php } else { ?>
           <span class="save">SAVE <?php echo $save . '% ' ?></span>
-          <span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
+          <span style="font-weight: normal;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -353,7 +353,7 @@
   
   <?php if ($products && count($products) > 0) { ?>
         <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($tab_related) ?></h5></div>
-            <ul id="featuredStyles" class="jcarousel-skin-tango">
+            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($products) <= 5) { echo ' completeLook';} ?>">
               <?php foreach ($products as $product) { ?>
                   <li>
                       <?php if ($product['thumb']) { ?>
@@ -365,7 +365,7 @@
                       <?php if ($product['price']) { ?>
                         <div class="priceItem">
                           <?php if (!$product['special']) { ?>
-                          <span class="price"><?php echo $product['price']; ?></span>
+                          Pay: <span class="price"><?php echo $product['price']; ?></span>
                           <?php } else { ?>
                           <span class="save">SAVE <?php echo $product['save'] . '%' ?></span>
                           <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
@@ -515,6 +515,7 @@ $('.datetime').datetimepicker({
 });
 $('.time').timepicker({timeFormat: 'h:m'});
 //--></script> 
+<?php if (count($products) > 5) { ?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
     jQuery('#featuredStyles').jcarousel({
@@ -522,6 +523,7 @@ jQuery(document).ready(function() {
     });
 });
 </script>
+<?php } else { }?>
 <script type="text/javascript">
         
     $(document).ready(function () {

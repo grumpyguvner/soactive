@@ -2491,12 +2491,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-container {
     
 }
-.jcarousel-skin-tango .jcarousel-container span.price {
-    color: #514F4F;
-}
 .jcarousel-skin-tango .jcarousel-container span.price, .jcarousel-skin-tango .jcarousel-container span.price-old, .jcarousel-skin-tango .jcarousel-container span.price-new {
     display: inline-block;
     font-weight: bold;
+    color: #FF0758;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl {
 	direction: rtl;
@@ -2568,9 +2566,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a:hover {
 	color: #46e1cf;
-}
-.jcarousel-skin-tango .jcarousel-item-horizontal a > img {
-	border: 1px solid #b9bdbd;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-item-horizontal {
 	margin-left: 10px;
@@ -2709,6 +2704,43 @@ a.buttonHome:hover, input.buttonHome:hover {
 .featuredProduct h5 {
     border-bottom: 1px solid #b9bdbd;
     margin-top: 0;
+}
+#featuredStyles {
+    list-style: none;
+}
+#featuredStyles img {
+    border: 1px solid #b9bdbd;
+}
+.completeLook {
+    height: 290px;
+    padding: 10px 0;
+}
+.completeLook li {
+    display: inline-block;
+    margin-right: 15px;
+    text-align: center;
+    vertical-align: top;
+    line-height: 14px;
+}
+.completeLook li > .nameItem {
+    margin-top: 5px;
+    max-width: 170px;
+}
+.completeLook span.price-old, .completeLook span.price-new, .completeLook span.price {
+    font-weight: 700;
+}
+.completeLook span.price-old {
+    display: inline-block;
+    text-decoration: line-through;
+}
+.completeLook span.price-new {
+    color: #FF0758;
+    display: inline-block;
+}
+.completeLook .save {
+    color: #FF0758;
+    display: block;
+    font-weight: 700;
 }
 /** Start Slideshow Home Page **/
 
