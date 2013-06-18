@@ -17,6 +17,7 @@ body {
 body, td, th, input, textarea, select, a {
 	font-size: 13px;
         font-family: 'Open Sans Condensed', sans-serif;
+        color: #514f4f;
 }
 h1, .welcome {
 	margin-top: 0px;
@@ -92,7 +93,7 @@ label {
 	margin-bottom: 25px;
 }
 #column-left + #column-right + #content, #column-left + #content {
-	margin-left: 190px;
+	margin-left: 203px;
 }
 #column-right + #content {
 	margin-right: 186px;
@@ -643,22 +644,26 @@ table.radio tr.highlight:hover td {
 	cursor: pointer;
 }
 .pagination {
-	border-top: 1px solid #b9bdbd;
-	padding-top: 8px;
 	display: inline-block;
-	width: 100%;
-	margin-bottom: 10px;
-        margin-top: 10px;
+	margin-bottom: 0;
+        margin-left: 10px;
+        margin-top: 0;
+        padding: 0 6px;
+        border-left: 1px solid #514f4f;
+        border-right: 1px solid #514f4f;
 }
-.pagination .links {
-	float: left;
+.pagination strong {
+        color: #1db4b7;
+        text-shadow: 0 0 2px #1db4b7;
 }
 .pagination .links a {
 	display: inline-block;
-	border: 1px solid #EEEEEE;
-	padding: 4px 10px;
+	padding: 0 8px;
 	text-decoration: none;
-	color: #A3A3A3;
+	color: #514f4f;
+}
+.pagination .links a.next, .pagination .links a.last, .pagination .links a.first, .pagination .links a.prev {
+        font-weight: 700;
 }
 .pagination .links b {
 	display: inline-block;
@@ -1061,7 +1066,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 /* product */
 .product-filter {
-        border-top: 1px solid #DDDDDD;
+        border-top: 1px solid #dee0e0;
         overflow: auto;
         padding-bottom: 5px;
         padding-top: 5px;
@@ -1077,7 +1082,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-filter .sort {
 	float: right;
-	color: #333;
+	color: #514f4f;
+}
+.product-filter .sort span {
+	margin-right: 10px;
 }
 .product-filter .limit {
 	margin-left: 15px;
@@ -1093,6 +1101,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-filter .sort > select {
         margin-bottom: 0;
+}
+.product-filter .numberProducts {
+    display: inline-block;
+}
+.product-filter .numberProducts a {
+    font-weight: 700;
+    color: #514f4f;
 }
 .product-compare {
 	padding-top: 6px;
@@ -1182,6 +1197,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid {
 	width: 100%;
         margin-left: 0;
+        margin-bottom: 10px; 
 }
 .product-grid > div {
 	display: inline-block;
@@ -1193,16 +1209,34 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid .productItem {
         text-align: center;
 }
+.product-grid .productItem .name {
+        margin-top: 5px;
+        max-width: 193px;
+}
 .product-grid .productItem a {
         color: #514f4f;
 	text-decoration: none;
 	display: block;
-	margin-bottom: 4px;
+        line-height: 14px;
+}
+.product-grid .productItem .image {
+        position: relative;
 }
 .product-grid .productItem .image img {
-        border: 1px solid #b9bdbd;
+        border: 1px solid #dee0e0;
 	display: block;
 	margin-bottom: 0px;
+}
+.product-grid .productItem .image img.newProduct {
+        border: none;
+        left: 130px;
+        position: absolute;
+        top: 0;
+}
+.product-grid .productItem .image img.saleProduct {
+        border: none;
+        position: absolute;
+        top: 190px;
 }
 #column-left + #column-right + #content .product-grid > div {
 	width: 125px;
@@ -1217,19 +1251,20 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid .price {
 	display: block;
 	font-weight: bold;
-	color: #333333;
+	color: #514f4f;
 	margin-bottom: 4px;
 }
 .product-grid .save {
         font-weight: 700;
         display: block;
+        color: #fd0303;
 }
 .product-grid .price-old {
         font-weight: bold;
 	text-decoration: line-through;
 }
 .product-grid .price-new {
-        color: #FF0758;
+        color: #fd0303;
 	font-weight: bold;
 }
 .product-grid .price .price-tax {
@@ -2224,11 +2259,11 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .soInfo span {
     font-weight: bold;
-    color: #46e1cf;
+    color: #1db4b7;
 }
 .soInfo span + span {
     font-weight: bold;
-    color: #1db4b7;
+    color: #514f4f;
 }
 .sections {
     width: 100%;
@@ -2409,8 +2444,8 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-bottom: 0;
 }
 .accordion .accordion-group .accordion-heading {
-    border-top: 1px solid #DDDDDD;
-    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #dee0e0;
+    border-bottom: 1px solid #dee0e0;
 }
 .accordion .accordion-group .accordion-heading .accordion-toggle {
     padding: 8px 0;
@@ -2697,6 +2732,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #myCarousel {
     max-height: 449px;
     margin-bottom: 0;
+    overflow: hidden;
 }
 #myCarousel > img {
     width: 100%;
@@ -2786,8 +2822,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #myCarousel .carousel-control {
     width: 29px;
     height: 100%;
-    background-color: #67653C;
-    background-color: rgba(255,255,255,0.75);
+    background-color: #514f4f;
     border-radius: 0;
     color: #FFFFFF;
     font-size: 30px;
@@ -2811,7 +2846,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 /** End Slideshow Home Page**/
 .endConten {
-    border-bottom: 1px solid #b9bdbd;
+    border-bottom: 1px solid #dee0e0;
     margin-top: 10px;
     margin-bottom: 20px;
 }
@@ -2963,4 +2998,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .contentTopBar label {   
     height: 100%; 
+}
+.imageBlock {
+    width: 190px;
+    height: 83px;
+    margin-bottom: 9px;
+    background-color: #000;
 }

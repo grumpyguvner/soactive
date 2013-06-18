@@ -29,7 +29,9 @@
         <div class="product-filter">
             <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
             <div class="productResult"><?php echo $pagination2; ?></div>
-            <div class="sort"><b><?php echo $text_sort; ?></b>
+            <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
+            <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+            <div class="sort"><span><?php echo $text_sort; ?></span>
                 <select onchange="location = this.value;">
                     <?php foreach ($sorts as $sorts) { ?>
                         <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
@@ -44,9 +46,15 @@
             <?php if ($products) { ?>
                     <div class="product-grid">
                         <?php foreach ($products as $product) {
-                            ?><div class="productItem"> 
+                            ?><div class="productItem">
                                 <div class="image"><?php if ($product['thumb']) { ?>
                                         <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
+                                        <?php if ($product['new'] == TRUE) { ?> 
+                                            <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
+                                        <?php } ?>
+                                        <?php if ($product['save'] != 0) { ?> 
+                                            <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
+                                        <?php } ?>    
                                     <?php } ?>
                                 </div>
                                 <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
@@ -64,12 +72,13 @@
                                 ?>
                     </div>
     
-                    <div class="pagination"><?php echo $pagination; ?></div>
+                    <div class="product-filter">
+                        <div class="productResult"><?php echo $pagination2; ?></div>
+                        <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
+                        <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+                    </div>
                 <?php } else { ?>
                     <div class="content"><?php echo $text_empty; ?></div>
-                    <!--div class="buttons">
-                      <div class="right"><a href="<?php /* echo $continue; */ ?>" class="btn"><?php /* echo $button_continue; */ ?></a></div>
-                    </div-->
                 <?php } ?>
     <?php } ?>
     <?php if (!$categories && !$products) { ?>
