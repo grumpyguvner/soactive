@@ -1,6 +1,6 @@
 <?php echo $header; ?><?php echo $content_top; ?>
 <?php if ($thumb || $description) { ?>
-    <div class="category-info">
+    
         <div class="breadcrumb">
     <?php if ($breadcrumbs) { ?>
       <?php $count = count($breadcrumbs) - 1; ?>
@@ -11,6 +11,7 @@
         <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
     <?php } ?>
   </div>
+<div class="category-info">
         <?php if ($thumb) { ?>
         <div class="categoryImage">
             <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />

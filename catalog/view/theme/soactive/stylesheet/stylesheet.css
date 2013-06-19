@@ -1017,6 +1017,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 /* category */
 .category-info {
 	overflow: auto;
+        border-top: 1px solid #dee0e0;
+        padding: 10px 0 5px;
 }
 .category-info .categoryImage {
 	display: inline-block;
@@ -2446,9 +2448,16 @@ a.buttonHome:hover, input.buttonHome:hover {
 .accordion .accordion-group .accordion-heading {
     border-top: 1px solid #dee0e0;
     border-bottom: 1px solid #dee0e0;
+    padding-left: 3px;
+}
+.accordion .accordion-group .accordion-heading a {
+    background: transparent url('../image/arrow-up.png') no-repeat left center;
+}
+.accordion .accordion-group .accordion-heading a.collapsed {
+    background-image: url('../image/arrow-down.png');
 }
 .accordion .accordion-group .accordion-heading .accordion-toggle {
-    padding: 8px 0;
+    padding: 8px 10px;
     font-weight: bold;
     color: #514f4f;
 }
@@ -2845,7 +2854,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     right: -29px;
 }
 /** End Slideshow Home Page**/
-.endConten {
+.separatorLine {
     border-bottom: 1px solid #dee0e0;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -3005,3 +3014,6 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-bottom: 9px;
     background-color: #000;
 }
+/********** Afilter **********/
+
+/******** End Afilter *******/

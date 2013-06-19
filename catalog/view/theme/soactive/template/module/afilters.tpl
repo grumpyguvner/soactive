@@ -38,7 +38,7 @@
                             ?>
                                     <div class="accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                         <div class="accordion-heading">
-                                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $category_group['name']; ?></a>
+                                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo strtoupper($category_group['name']); ?></a>
                                         </div>
                                         <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
                                             <div class="accordion-inner">
