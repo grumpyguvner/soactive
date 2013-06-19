@@ -22,8 +22,8 @@ body, td, th, input, textarea, select, a {
 h1, .welcome {
 	margin-top: 0px;
 	margin-bottom: 20px;
-	font-size: 32px;
-	font-weight: normal;
+	font-size: 22px;
+	font-weight: 700;
 	text-shadow: 0 0 1px rgba(0, 0, 0, .01);
 }
 h2 {
@@ -749,13 +749,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
 }
 .buttons .buttonLeft > a {
-        background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
-        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
-        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+        background-color: #dee0e0; 
 }
 .buttons .buttonRight {
         display: inline-block;
@@ -1385,10 +1379,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 	text-decoration: line-through;
 }
 .product-info .price-new {
-    color: #ff0758;
+    color: #fd0303;
 }
 .product-info .save {
-    color: #ff0758;
+    color: #fd0303;
 }
 .product-info .price-tax {
 	font-size: 12px;
@@ -1848,38 +1842,50 @@ a.buttonHome:hover, input.buttonHome:hover {
         background-color: #1db4b7;
 	border-bottom: 1px solid #DDDDDD;
 }
-.cart-info thead .image {
-	text-align: center;
+.cart-info thead .name {
+        width: 70%;
 }
 .cart-info thead .name, .cart-info thead .model, .cart-info thead .quantity {
 	text-align: left;
 }
-.cart-info thead .price, .cart-info thead .total {
+.cart-info thead .quantity, .cart-info thead .price, .cart-info thead .total {
 	text-align: right;
 }
 .cart-info tbody td {
 	vertical-align: top;
 	border-bottom: 1px solid #DDDDDD;
 }
-.cart-info tbody .image img {
+.cart-info tbody .name img {
 	border: 1px solid #DDDDDD;
+        margin-left: 0;
 }
-.cart-info tbody .image {
-	text-align: center;
+.cart-info tbody .name > a, .cart-info tbody .name > div {
+        display: inline-block
+}
+.cart-info tbody .name > div {
+        margin-left: 6px;
+        vertical-align: top;
 }
 .cart-info tbody .name, .cart-info tbody .model, .cart-info tbody .quantity {
 	text-align: left;
 }
-.cart-info tbody .name > a > h4 {
+.cart-info tbody .quantity, .cart-info tbody .price, .cart-info tbody .total {
+        width: 10%;
+}
+.cart-info tbody .name > div > a > h4 {
         color: #1db4b7;
+        margin: 0 0;
 }
 .cart-info tbody .quantity input[type='image'], .cart-info tbody .quantity img {
 	position: relative;
-	top: 4px;
+	top: -3px;
 	cursor: pointer;
 }
 .cart-info tbody .price, .cart-info tbody .total {
 	text-align: right;
+}
+.cart-info tbody .price h4 {
+    margin: 0;
 }
 .cart-info tbody span.stock {
 	color: #F00;
@@ -1905,11 +1911,29 @@ a.buttonHome:hover, input.buttonHome:hover {
         border-bottom: 1px solid #DDDDDD; 
 }
 .cart-total td {
-	padding: 20px;
+	padding: 20px 7px 20px 20px;
 	text-align: right;
 }
 .cart-total td.textTotal {
-	width: 84%;
+	width: 90%;
+}
+.cart-total tr > td.couponVoucher {
+        display: none;
+}
+.cart-total tr > td.couponVoucher > span {
+        margin-right: 10px;
+}
+.cart-total tr > td.couponVoucher input {
+        margin-bottom: 0;
+}
+.cart-total tr > td.couponVoucher input.button {
+        padding: 6px 12px;
+        background-color: #dee0e0;
+        margin-left: 38px;
+}
+.cart-total tr > td.promotionalCode span {
+    color: #1db4b7;
+    cursor: pointer;
 }
 /* checkout */
 .checkout-heading {
@@ -2273,6 +2297,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .sections a {
     background-color: #1db4b7;
     color: #514f4f;
+    box-shadow: none;
 }
 .sections .moves {
     margin-bottom: 10px;
@@ -2305,8 +2330,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .sections .runs a.buttonHome {
     position: absolute;
-    top: 57px;
-    left: 20px;
+    top: 58px;
+    left: 19px;
 }
 .sections .sportsbras {
     margin-bottom: 10px;
@@ -2327,8 +2352,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .sections .sportsbras .shopRight a.buttonHome {
     position: absolute;
-    top: 316px;
-    left: 209px;
+    top: 317px;
+    left: 200px;
 }
 .sections .shopNike {
     width: 360px;
@@ -2487,7 +2512,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-container span.price, .jcarousel-skin-tango .jcarousel-container span.price-old, .jcarousel-skin-tango .jcarousel-container span.price-new {
     display: inline-block;
     font-weight: bold;
-    color: #FF0758;
+    color: #fd0303;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl {
 	direction: rtl;
@@ -2541,7 +2566,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.save {
         display: block;
-        color: #FF0758;
+        color: #fd0303;
         font-weight: 700;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-old {
@@ -2550,7 +2575,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-new {
 	display: inline-block;
-        color: #FF0758;
+        color: #fd0303;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.nameItem {
         max-width: 170px;
@@ -2779,6 +2804,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     font-size: 14px;
     font-family: Helvetica;
     z-index: 4;
+    box-shadow: none;
 }
 #myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a + a {
     float: right;
