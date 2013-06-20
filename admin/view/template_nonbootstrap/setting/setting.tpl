@@ -245,6 +245,10 @@
           <h2><?php echo $text_product; ?></h2>
           <table class="form">
             <tr>
+              <td><?php echo $entry_new_product_count; ?></td>
+              <td><input type="text" name="config_new_product_age" value="<?php echo $config_new_product_age; ?>" size="3" /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_product_count; ?></td>
               <td><?php if ($config_product_count) { ?>
                 <input type="radio" name="config_product_count" value="1" checked="checked" />
