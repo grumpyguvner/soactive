@@ -60,7 +60,7 @@
         <?php if (!$special) { ?>
         <?php echo $price; ?>
         <?php } else { ?>
-          <span class="save">SAVE <?php echo $save . '% ' ?></span>
+          <span class="save">SAVE <?php echo $saving_percent . '% ' ?></span>
           <span style="font-weight: normal;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
@@ -368,7 +368,7 @@
                           <?php if (!$product['special']) { ?>
                           Pay: <span class="price"><?php echo $product['price']; ?></span>
                           <?php } else { ?>
-                          <span class="save">SAVE <?php echo $product['save'] . '%' ?></span>
+                          <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
                           <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
                           <?php } ?>
                         </div>

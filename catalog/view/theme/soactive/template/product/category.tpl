@@ -50,10 +50,10 @@
                             ?><div class="productItem">
                                 <div class="image"><?php if ($product['thumb']) { ?>
                                         <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
-                                        <?php if ($product['new'] == TRUE) { ?> 
+                                        <?php if ($product['new']) { ?> 
                                             <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                                         <?php } ?>
-                                        <?php if ($product['save'] != 0) { ?> 
+                                        <?php if ($product['saving_percent']) { ?> 
                                             <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
                                         <?php } ?>    
                                     <?php } ?>
@@ -64,7 +64,7 @@
                                         <?php if (!$product['special']) { ?>
                                             <span class="price"><?php echo $product['price']; ?></span>
                                         <?php } else { ?>
-                                            <span class="save">SAVE <?php echo $product['save'] . '%' ?></span>
+                                            <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
                                             <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
                                         <?php } ?>
                                     </div>

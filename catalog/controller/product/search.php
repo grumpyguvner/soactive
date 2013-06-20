@@ -239,11 +239,8 @@ class ControllerProductSearch extends Controller {
 				
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
-                                        $save = ceil((($result['price'] * 100) - ($result['special'] * 100)) / ($result['price']));
 				} else {
 					$special = false;
-                                        $save = false;
-                                        
 				}	
 				
 				if ($this->config->get('config_tax')) {
@@ -265,7 +262,8 @@ class ControllerProductSearch extends Controller {
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
 					'price'       => $price,
 					'special'     => $special,
-                                        'save'        => $save,
+                                        'saving_percent'        => $result['saving_percent'],
+                                        'new'        => $result['product_id'],
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),

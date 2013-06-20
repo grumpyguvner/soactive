@@ -39,10 +39,8 @@ class ControllerModuleFeatured extends Controller {
 						
 				if ((float)$product_info['special']) {
 					$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
-                                        $save = ceil((($product_info['price'] * 100) - ($product_info['special'] * 100)) / ($product_info['price']));
 				} else {
 					$special = false;
-                                        $save = false;
 				}
 				
 				if ($this->config->get('config_review_status')) {
@@ -65,7 +63,8 @@ class ControllerModuleFeatured extends Controller {
                                         'quantity'    	 => $product_info['quantity'],
 					'price'   	  => $price,
 					'special' 	  => $special,
-                                        'save'            => $save,
+                                        'saving_percent'            => $product_info['saving_percent'],
+                                        'new'            => $product_info['new'],
 					'summary'     => htmlentities($summary, ENT_QUOTES, 'UTF-8'),
 					'rating'      => $rating,
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']),

@@ -71,6 +71,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_catalog_limit'] = $this->language->get('entry_catalog_limit');
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
+		$this->data['entry_new_product_age'] = $this->language->get('entry_new_product_age');
 		$this->data['entry_review'] = $this->language->get('entry_review');
         $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
 		$this->data['entry_download'] = $this->language->get('entry_download');
@@ -497,11 +498,17 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->data['config_admin_limit'] = $this->config->get('config_admin_limit');
 		}
-		
+                
 		if (isset($this->request->post['config_product_count'])) {
 			$this->data['config_product_count'] = $this->request->post['config_product_count'];
 		} else {
 			$this->data['config_product_count'] = $this->config->get('config_product_count');
+		}
+		
+		if (isset($this->request->post['config_new_product_age'])) {
+			$this->data['config_new_product_age'] = $this->request->post['config_new_product_age'];
+		} else {
+			$this->data['config_new_product_age'] = $this->config->get('config_new_product_age');
 		}
 				
 		if (isset($this->request->post['config_review_status'])) {
@@ -1175,13 +1182,13 @@ class ControllerSettingSetting extends Controller {
 			$this->error['address'] = $this->language->get('error_address');
 		}
 		
-    	if ((utf8_strlen($this->request->post['config_email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
-      		$this->error['email'] = $this->language->get('error_email');
-    	}
+                if ((utf8_strlen($this->request->post['config_email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
+                        $this->error['email'] = $this->language->get('error_email');
+                }
 
-    	if ((utf8_strlen($this->request->post['config_telephone']) < 3) || (utf8_strlen($this->request->post['config_telephone']) > 32)) {
-      		$this->error['telephone'] = $this->language->get('error_telephone');
-    	}
+                if ((utf8_strlen($this->request->post['config_telephone']) < 3) || (utf8_strlen($this->request->post['config_telephone']) > 32)) {
+                        $this->error['telephone'] = $this->language->get('error_telephone');
+                }
 
 		if (!$this->request->post['config_title']) {
 			$this->error['title'] = $this->language->get('error_title');

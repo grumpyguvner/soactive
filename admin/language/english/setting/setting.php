@@ -44,6 +44,7 @@ $_['entry_weight_class']           = 'Weight Class:';
 $_['entry_catalog_limit'] 	   = 'Default Items Per Page (Catalog):<br /><span class="help">Determines how many catalog items are shown per page (products, categories, etc)</span>';
 $_['entry_admin_limit']   	   = 'Default Items Per Page (Admin):<br /><span class="help">Determines how many admin items are shown per page (orders, customers, etc)</span>';
 $_['entry_product_count']          = 'Category Product Count:<br /><span class="help">Show the number of products inside the subcategories in the storefront header category menu. Be warned, this will cause an extreme performance hit for stores with a lot of subcategories!</span>';
+$_['entry_new_product_age']        = 'New Product Age:<br /><span class="help">Maximum number of days a product can be classified as "new"!</span>';
 $_['entry_review']       	   = 'Allow Reviews:<br /><span class="help">Enable/Disable new review entry and display of existing reviews</span>';
 $_['entry_anonymous_review']       = 'Allow Anonymous Reviews:<br /><span class="help">Enable/Disable new review entry and display of existing reviews</span>';
 $_['entry_download']               = 'Allow Downloads:';
@@ -140,7 +141,7 @@ $_['error_address']                = 'Store Address must be between 10 and 256 c
 $_['error_email']                  = 'E-Mail Address does not appear to be valid!';
 $_['error_telephone']              = 'Telephone must be between 3 and 32 characters!';
 $_['error_title']                  = 'Title must be between 3 and 32 characters!';
-$_['error_limit']       	       = 'Limit required!';
+$_['error_limit']       	   = 'Limit required!';
 $_['error_customer_group_display'] = 'You must include the default customer group if you are going to use this feature!';
 $_['error_voucher_min']            = 'Minimum voucher amount required!';
 $_['error_voucher_max']            = 'Maximum voucher amount required!';
