@@ -2702,8 +2702,6 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (69, 0, 'config', 'config_image_popup_width', '500', 0),
 (70, 0, 'config', 'config_image_thumb_height', '228', 0),
 (71, 0, 'config', 'config_image_thumb_width', '228', 0),
-(126, 0, 'config', 'config_image_information_height', '228', 0),
-(127, 0, 'config', 'config_image_information_width', '228', 0),
 (72, 0, 'config', 'config_icon', 'data/cart.png', 0),
 (73, 0, 'config', 'config_logo', 'data/logo.png', 0),
 (74, 0, 'config', 'config_cart_weight', '1', 0),
@@ -2757,8 +2755,10 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 (123, 0, 'config', 'config_order_edit', '100', 0),
 (124, 0, 'config', 'config_voucher_min', '1', 0),
 (125, 0, 'config', 'config_voucher_max', '1000', 0),
+(126, 0, 'config', 'config_image_information_height', '228', 0),
+(127, 0, 'config', 'config_image_information_width', '228', 0),
 (128, 0, 'config', 'config_customer_group_display', 'a:1:{i:0;s:1:\"1\";}', 1),
-(128, 0, 'config', 'config_block_buy', '0', 0);
+(129, 0, 'config', 'config_block_buy', '0', 0);
 
 -- --------------------------------------------------------
 
