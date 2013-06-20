@@ -168,6 +168,14 @@ class ControllerProductProduct extends Controller {
                         $this->data['text_press'] = $this->language->get('text_press');
                         $this->data['text_view_product_info'] = $this->language->get('text_view_product_info');
                         
+                        if (count($this->data['breadcrumbs']) > 1)
+                        {
+                            $count = count($this->data['breadcrumbs']) - 2;
+                            $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                        } else {
+                            $this->data['text_breadcrumb_back'] = '';
+                        }
+                        
 			$this->data['entry_name'] = $this->language->get('entry_name');
 			$this->data['entry_review'] = $this->language->get('entry_review');
 			$this->data['entry_rating'] = $this->language->get('entry_rating');

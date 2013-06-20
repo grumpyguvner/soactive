@@ -156,6 +156,14 @@ class ControllerProductSearch extends Controller {
 		$this->data['button_cart'] = $this->language->get('button_cart');
 		$this->data['button_wishlist'] = $this->language->get('button_wishlist');
 		$this->data['button_compare'] = $this->language->get('button_compare');
+                
+                if (count($this->data['breadcrumbs']) > 1)
+                    {
+                        $count = count($this->data['breadcrumbs']) - 2;
+                        $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                    } else {
+                        $this->data['text_breadcrumb_back'] = '';
+                    }
 
 		$this->data['compare'] = $this->url->link('product/compare');
 		
@@ -231,8 +239,11 @@ class ControllerProductSearch extends Controller {
 				
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+                                        $save = ceil((($result['price'] * 100) - ($result['special'] * 100)) / ($result['price']));
 				} else {
 					$special = false;
+                                        $save = false;
+                                        
 				}	
 				
 				if ($this->config->get('config_tax')) {
@@ -254,6 +265,7 @@ class ControllerProductSearch extends Controller {
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 100) . '..',
 					'price'       => $price,
 					'special'     => $special,
+                                        'save'        => $save,
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
@@ -445,6 +457,10 @@ class ControllerProductSearch extends Controller {
 			$pagination->total = $product_total;
 			$pagination->page = $page;
 			$pagination->limit = $limit;
+                        $pagination->text_first = $this->language->get('text_first');
+                        $pagination->text_prev = $this->language->get('text_prev');
+                        $pagination->text_next = $this->language->get('text_next');
+                        $pagination->text_last = $this->language->get('text_last');
 			$pagination->text = $this->language->get('text_pagination');
 			$pagination->url = $this->url->link('product/search', $url . '&page={page}');
 			

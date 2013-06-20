@@ -1,8 +1,13 @@
 <?php echo $header; ?><?php echo $column_left; ?>
 <div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
+    <?php if ($breadcrumbs) { ?>
+      <?php $count = count($breadcrumbs) - 1; ?>
+      <?php for ($i = 0; $i < $count; $i++) { ?>
+        <?php echo '<b>' . $breadcrumbs[$i]['separator'] . '</b>'; ?><a href="<?php echo $breadcrumbs[$i]['href']; ?>"><b><?php echo $breadcrumbs[$i]['text']; ?></b></a>
+      <?php } ?>
+        <?php echo '<b>' .$breadcrumbs[$count]['separator'] . '</b>'; ?><a href="<?php echo $breadcrumbs[$count]['href']; ?>"><?php echo $breadcrumbs[$count]['text']; ?></a>
+        <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
     <?php } ?>
   </div>
   <div class="product-info">
@@ -13,6 +18,7 @@
                 <div class="image" id="wrap-image">
                     <?php if ($thumb) { ?>
                         <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
+                        <a href="<?php echo $thumb; ?>" alt="Zoom"><div class="zoom">Zoom</div></a>
                     <?php } ?>
                 </div>
                 <?php if ($images) { ?>
@@ -55,7 +61,7 @@
         <?php echo $price; ?>
         <?php } else { ?>
           <span class="save">SAVE <?php echo $save . '% ' ?></span>
-          <span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
+          <span style="font-weight: normal;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -348,7 +354,7 @@
   
   <?php if ($products && count($products) > 0) { ?>
         <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($tab_related) ?></h5></div>
-            <ul id="featuredStyles" class="jcarousel-skin-tango">
+            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($products) <= 5) { echo ' completeLook';} ?>">
               <?php foreach ($products as $product) { ?>
                   <li>
                       <?php if ($product['thumb']) { ?>
@@ -360,7 +366,7 @@
                       <?php if ($product['price']) { ?>
                         <div class="priceItem">
                           <?php if (!$product['special']) { ?>
-                          <span class="price"><?php echo $product['price']; ?></span>
+                          Pay: <span class="price"><?php echo $product['price']; ?></span>
                           <?php } else { ?>
                           <span class="save">SAVE <?php echo $product['save'] . '%' ?></span>
                           <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
@@ -510,6 +516,7 @@ $('.datetime').datetimepicker({
 });
 $('.time').timepicker({timeFormat: 'h:m'});
 //--></script> 
+<?php if (count($products) > 5) { ?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
     jQuery('#featuredStyles').jcarousel({
@@ -517,6 +524,7 @@ jQuery(document).ready(function() {
     });
 });
 </script>
+<?php } else { }?>
 <script type="text/javascript">
         
     $(document).ready(function () {

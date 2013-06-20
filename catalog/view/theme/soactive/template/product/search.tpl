@@ -1,7 +1,5 @@
-<?php echo $header; ?><?php echo $content_top; ?>
-<?php if ($thumb || $description) { ?>
-    
-        <div class="breadcrumb">
+<?php echo $header; ?>
+<div class="breadcrumb">
     <?php if ($breadcrumbs) { ?>
       <?php $count = count($breadcrumbs) - 1; ?>
       <?php for ($i = 0; $i < $count; $i++) { ?>
@@ -11,23 +9,27 @@
         <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
     <?php } ?>
   </div>
-<div class="category-info">
-        <?php if ($thumb) { ?>
-        <div class="categoryImage">
-            <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
-        </div>    
-        <?php } ?>
-        <?php if ($description) { ?>
-            <div class="cDescription">
-                <?php echo $description; ?>
-            </div>
-        <?php } ?>
-    </div>
-<?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content">
-    <?php if ($products) { ?>
-        <div class="product-filter">
+<div id="notification">
+    <?php if (isset($success) && $success) { ?>
+        <div class="success"><?php echo $success; ?></div>
+        <?php
+    }
+    if (isset($error_warning) && $error_warning) {
+        ?>
+        <div class="warning"><?php echo $error_warning; ?></div>
+        <?php
+    }
+    if (isset($attention) && $attention) {
+        ?>
+        <div class="attention"><?php echo $attention; ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
+        <?php
+    }
+    ?>
+</div>
+    <div id="mainContainer"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
+            <?php echo $content_top; ?>
+
+            <div class="product-filter">
             <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
             <div class="productResult"><?php echo $pagination2; ?></div>
             <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
@@ -45,17 +47,11 @@
             </div>
         </div>
             <?php if ($products) { ?>
-                    <div class="product-grid">
+                <div class="product-grid">
                         <?php foreach ($products as $product) {
-                            ?><div class="productItem">
+                            ?><div class="productItem"> 
                                 <div class="image"><?php if ($product['thumb']) { ?>
                                         <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" /></a>
-                                        <?php if ($product['new'] == TRUE) { ?> 
-                                            <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
-                                        <?php } ?>
-                                        <?php if ($product['save'] != 0) { ?> 
-                                            <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
-                                        <?php } ?>    
                                     <?php } ?>
                                 </div>
                                 <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
@@ -72,21 +68,16 @@
                             </div><?php }
                                 ?>
                     </div>
-    
                     <div class="product-filter">
                         <div class="productResult"><?php echo $pagination2; ?></div>
                         <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
                         <div class="numberProducts"><a href="#">View 100 items per page</a></div>
                     </div>
-                <?php } else { ?>
-                    <div class="content"><?php echo $text_empty; ?></div>
-                <?php } ?>
-    <?php } ?>
-    <?php if (!$categories && !$products) { ?>
-        <div class="content"><?php echo $text_empty; ?></div>
-        <div class="buttons">
-            <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
-        </div>
-    <?php } ?>
-    <?php echo $content_bottom; ?></div>
+            <?php } else { ?>
+                <div class="content"><?php echo $text_empty; ?></div>
+            <?php } ?>
+            <?php echo $content_bottom; ?>
+     </div>
+    </div>
+    
 <?php echo $footer; ?>

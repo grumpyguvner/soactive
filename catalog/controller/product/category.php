@@ -49,6 +49,14 @@ class ControllerProductCategory extends Controller {
                 $this->data['button_wishlist'] = $this->language->get('button_wishlist');
                 $this->data['button_compare'] = $this->language->get('button_compare');
                 $this->data['button_continue'] = $this->language->get('button_continue');
+                
+                if (count($this->data['breadcrumbs']) > 1)
+                    {
+                        $count = count($this->data['breadcrumbs']) - 2;
+                        $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+                    } else {
+                        $this->data['text_breadcrumb_back'] = '';
+                    }
 
                 if ($this->category->getImage()) {
                         $this->data['thumb'] = $this->model_tool_image->resize($this->category->getImage(), $this->config->get('config_image_category_width'), $this->config->get('config_image_category_height'));
@@ -129,7 +137,9 @@ class ControllerProductCategory extends Controller {
                         } else {
                                 $rating = false;
                         }
-
+                        
+                        $days_left = floor((time() - strtotime($result['date_added'])) / ( 60*60*24));   
+                        
                         $this->data['products'][] = array(
                                 'product_id'  => $result['product_id'],
                                 'thumb'       => $image,
@@ -138,6 +148,7 @@ class ControllerProductCategory extends Controller {
                                 'price'       => $price,
                                 'special'     => $special,
                                 'save'        => $save,
+                                'new'         => ($days_left <= 30) ? true : false,
                                 'tax'         => $tax,
                                 'rating'      => $result['rating'],
                                 'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
@@ -242,6 +253,10 @@ class ControllerProductCategory extends Controller {
                         $pagination->total = $product_total;
                         $pagination->page = $page;
                         $pagination->limit = $limit;
+                        $pagination->text_first = $this->language->get('text_first');
+                        $pagination->text_prev = $this->language->get('text_prev');
+                        $pagination->text_next = $this->language->get('text_next');
+                        $pagination->text_last = $this->language->get('text_last');
                         $pagination->url = $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&page={page}' . $urlPage);
                         $this->data['pagination'] = $pagination->render();
                         
@@ -263,6 +278,7 @@ class ControllerProductCategory extends Controller {
                         $pagination2->page = $page;
                         $pagination2->limit = $limit;
                         $pagination2->text = $this->language->get('text_pagination');
+                        
            
                         $this->data['pagination2'] = $pagination2->text();
                         

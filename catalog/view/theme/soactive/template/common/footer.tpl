@@ -1,5 +1,5 @@
 </div>
-<div class="endConten"></div>
+<div class="separatorLine"></div>
 <div id="container">
 <div id="footer">
             <div class="column">

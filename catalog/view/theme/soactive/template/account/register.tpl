@@ -1,13 +1,14 @@
 <?php echo $header; ?>
-<div id="breadcrumb">
-    <div class="container">
-        <?php
-        foreach ($breadcrumbs as $breadcrumb) {
-            echo $breadcrumb['separator'] . '<a href="' . $breadcrumb['href'] . '">' . $breadcrumb['text'] . '</a>';
-        }
-        ?>
-    </div>
-</div>
+<div class="breadcrumb">
+    <?php if ($breadcrumbs) { ?>
+      <?php $count = count($breadcrumbs) - 1; ?>
+      <?php for ($i = 0; $i < $count; $i++) { ?>
+        <?php echo '<b>' . $breadcrumbs[$i]['separator'] . '</b>'; ?><a href="<?php echo $breadcrumbs[$i]['href']; ?>"><b><?php echo $breadcrumbs[$i]['text']; ?></b></a>
+      <?php } ?>
+        <?php echo '<b>' .$breadcrumbs[$count]['separator'] . '</b>'; ?><a href="<?php echo $breadcrumbs[$count]['href']; ?>"><?php echo $breadcrumbs[$count]['text']; ?></a>
+        <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
+    <?php } ?>
+  </div>
 <div id="notification">
     <?php if (isset($success) && $success) { ?>
         <div class="success"><?php echo $success; ?></div>
