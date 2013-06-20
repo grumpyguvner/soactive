@@ -57,7 +57,7 @@
           js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-        <div id="container">
+        <div class="container">
             <div id="header">
                 
             <?php if ($logo) { ?>

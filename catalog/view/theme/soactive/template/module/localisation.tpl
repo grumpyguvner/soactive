@@ -57,7 +57,7 @@
                     <div id="language"><?php echo $text_language; ?><br />
                         <?php foreach ($languages as $language) { ?>
                         <div class="<?php echo $language['code']; ?>Flag">
-                            <img src="catalog/view/theme/soactive/image/flags/big_<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" onclick="$('input[name=\'language_code\']').attr('value', '<?php echo $language['code']; ?>'); $(this).parent().parent().submit();" />
+                            <img src="catalog/view/theme/soactive/image/flags/big_<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" onclick="$('input[name=\'language_code\']').attr('value', '<?php echo $language['code']; ?>'); $(this).parent().parent().parent().submit();" />
                             <p><?php echo $language['name']; ?></p>
                         </div>
                         <?php } ?>

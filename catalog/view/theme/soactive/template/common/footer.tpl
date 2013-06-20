@@ -1,6 +1,6 @@
 </div>
 <div class="separatorLine"></div>
-<div id="container">
+<div class="container">
 <div id="footer">
             <div class="column">
                 <h4><?php echo $text_categories; ?></h4>
