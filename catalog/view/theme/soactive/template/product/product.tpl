@@ -18,6 +18,7 @@
                 <div class="image" id="wrap-image">
                     <?php if ($thumb) { ?>
                         <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
+                        <a href="<?php echo $thumb; ?>" alt="Zoom"><div class="zoom">Zoom</div></a>
                     <?php } ?>
                 </div>
                 <?php if ($images) { ?>

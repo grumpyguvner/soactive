@@ -457,6 +457,10 @@ class ControllerProductSearch extends Controller {
 			$pagination->total = $product_total;
 			$pagination->page = $page;
 			$pagination->limit = $limit;
+                        $pagination->text_first = $this->language->get('text_first');
+                        $pagination->text_prev = $this->language->get('text_prev');
+                        $pagination->text_next = $this->language->get('text_next');
+                        $pagination->text_last = $this->language->get('text_last');
 			$pagination->text = $this->language->get('text_pagination');
 			$pagination->url = $this->url->link('product/search', $url . '&page={page}');
 			

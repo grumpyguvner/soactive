@@ -29,20 +29,23 @@
     <div id="mainContainer"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
             <?php echo $content_top; ?>
 
-            <div class="contentTopBar">
-                <?php echo $pagination2; ?>
-                <div class="sort"><label><?php echo $text_sort; ?></label>&nbsp;
-                        <select onchange="window.location = this.value;">
-                            <?php foreach ($sorts as $sorts) { ?>
-                                <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-                                    <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
-                                <?php } else { ?>
-                                    <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
-                                <?php } ?>
-                            <?php } ?>
-                        </select>
-                </div>
+            <div class="product-filter">
+            <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
+            <div class="productResult"><?php echo $pagination2; ?></div>
+            <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
+            <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+            <div class="sort"><span><?php echo $text_sort; ?></span>
+                <select onchange="location = this.value;">
+                    <?php foreach ($sorts as $sorts) { ?>
+                        <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
+                            <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+                        <?php } else { ?>
+                            <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
             </div>
+        </div>
             <?php if ($products) { ?>
                 <div class="product-grid">
                         <?php foreach ($products as $product) {
@@ -65,7 +68,11 @@
                             </div><?php }
                                 ?>
                     </div>
-                <div class="pagination"><?php echo $pagination; ?></div>
+                    <div class="product-filter">
+                        <div class="productResult"><?php echo $pagination2; ?></div>
+                        <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
+                        <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+                    </div>
             <?php } else { ?>
                 <div class="content"><?php echo $text_empty; ?></div>
             <?php } ?>

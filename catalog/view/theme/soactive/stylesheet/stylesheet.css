@@ -555,12 +555,13 @@ label {
 	cursor: pointer;
 }
 .required {
-	color: #FF0000;
-	font-weight: bold;
+	color: #fd0303;
+	font-weight: 700;
 }
 .error {
 	display: block;
-	color: #FF0000;
+	color: #fd0303;
+	font-weight: 700;
 }
 .help {
 	color: #999;
@@ -806,12 +807,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 .tab-content #productTabDesc .descTab {
         line-height: 16px;  
         display: inline-block;
-        width: 77%;
+        width: 76%;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
         vertical-align: top;
-        width: 22%;
+        width: 23%;
 }
 .tab-content #productTabDesc .rating > label {
         font-size: 12px;
@@ -819,7 +820,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin-bottom: 12px;
 }
 .tab-content #productTabDesc .rating img {
-        margin-right: -5px;
+        margin-right: -3px;
         width: 24px;
         height: 24px;
 }
@@ -1324,6 +1325,18 @@ a.buttonHome:hover, input.buttonHome:hover {
 	float: left;
 	margin-bottom: 5px;
 	text-align: center;
+        position: relative;
+}
+.product-info .image .zoom {
+        background-color: #1DB4B7; 
+        width: 37px;
+        height: 18px;
+        position: absolute;
+        left: 253px; 
+        top: 352px;
+}
+.product-info .image > a, .product-info .image > a:hover {
+        color: #514f4f;
 }
 .product-info .image-additional {
 	margin-left: -6px;
@@ -3012,34 +3025,9 @@ a.buttonHome:hover, input.buttonHome:hover {
         background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
 }
 /********** End Account ******/
-
-.contentTopBar {
-    height: 34px;
-    line-height: 30px;
-    border-bottom: 1px solid #b9bdbd;
-    border-top: 1px solid #b9bdbd;
-    margin-bottom: 15px;
-}
-.contentTopBar .results, .contentTopBar .sort {
-    display: inline-block;
-}
-.contentTopBar .sort {
-    float: right;
-}
-.contentTopBar label, .contentTopBar select {
-    margin-bottom: 0;
-    vertical-align: middle;
-    display: inline-block;
-}
-.contentTopBar label {   
-    height: 100%; 
-}
 .imageBlock {
     width: 190px;
     height: 83px;
     margin-bottom: 9px;
     background-color: #000;
 }
-/********** Afilter **********/
-
-/******** End Afilter *******/
