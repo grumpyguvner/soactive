@@ -352,7 +352,7 @@
             <div class="gotQuestionText">
                 <span><i>Got a question about this product?</i></span>
                 <br/>
-                <span><i>ASK ONE OF OUR EXPERT...</i></span>
+                <span><i>ASK ONE OF OUR EXPERTS...</i></span>
             </div>
             <a href="index.php?route=information/contact" type="button" class="button">CONTACT US</a>
         </div>

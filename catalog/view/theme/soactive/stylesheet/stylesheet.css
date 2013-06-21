@@ -690,8 +690,8 @@ a.button, input.button {
 	cursor: pointer;
 	color: #514f4f;
 	line-height: 12px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 12px;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 17px;
 	font-weight: bold;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
@@ -710,14 +710,14 @@ a.button {
 input.button {
 	margin: 0;
 	border: 0;
-	padding: 8px 12px;
+	padding: 3px 12px;
 }
 
 /***** Button Home Page *****/
 a.buttonHome, input.buttonHome {
         background-image: url('../image/button_arrow.png');
         background-repeat: no-repeat;
-        background-position: right bottom; 
+        background-position: 98% 88%; 
 	cursor: pointer;
 	color: #514f4f;
 	line-height: 12px;
@@ -1952,7 +1952,6 @@ a.buttonHome:hover, input.buttonHome:hover {
         margin-bottom: 0;
 }
 .cart-total tr > td.couponVoucher input.button {
-        padding: 6px 12px;
         background-color: #dee0e0;
         margin-left: 38px;
 }
@@ -3046,13 +3045,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-bottom: 0 !important;
 }
 .content-account .addressBookWrap .content > table > tbody > tr > td + td > a + a {
-   background-image: -ms-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dee0e0', endColorstr='#bebfbf');
-        background-image: -moz-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -o-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: -webkit-gradient(linear, top, right bottom, color-stop(0, #dee0e0), color-stop(1, #bebfbf));
-        background-image: -webkit-linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
-        background-image: linear-gradient(top , #dee0e0 0%, #bebfbf 72%);
+   background-color: #dee0e0;
 }
 /********** End Account ******/
 .imageBlock {
