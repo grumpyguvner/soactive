@@ -1289,7 +1289,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 /* Product */
 .product-info {
-	overflow: auto;
+	display: inline-block;
+        width: 100%;
 }
 .product-info > .left {
 	float: left;
@@ -1540,6 +1541,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .social {
         text-align: center;
+}
+.product-info .social .addthis_toolbox {
+        display: inline-block;
+        margin-left: 4px;
+        width: 267px;
+        height: 24px;
 }
 .product-info .social a {
         margin-right: 4px;

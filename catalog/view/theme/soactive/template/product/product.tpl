@@ -44,7 +44,15 @@
                     </div>
                 <?php } ?>
             <?php } ?>
-            <div class="social"><a target="_blank" href="#"><img alt="Twitter" src="catalog/view/theme/soactive/image/social/twitter.png"></a><a target="_blank" href="#"><img alt="Pinterest" src="catalog/view/theme/soactive/image/social/pin_it.png"></a><a target="_blank" href="#"><img alt="Facebook" src="catalog/view/theme/soactive/image/social/facebook.png"></a><a target="_blank" href="#"><img alt="Send" src="catalog/view/theme/soactive/image/social/send.png"></a><a target="_blank" href="#"><img alt="Pinterest" src="catalog/view/theme/soactive/image/social/pin_it.png"></a></div>
+          <div class="social">
+              <div class="addthis_toolbox addthis_default_style ">
+                <a class="addthis_button_tweet" tw:count="none"></a>
+                <a class="addthis_button_facebook_like" style="width:47px;overflow:hidden"></a>
+                <a class="addthis_button_pinterest_pinit"></a>
+                <a class="addthis_button_google_plusone" g:plusone:size="medium" g:plusone:count="false"></a>
+                <a class="addthis_button_facebook_send"></a>
+                </div>
+          </div>
         </div>
     </div>
     <?php } ?>
@@ -551,4 +559,5 @@ jQuery(document).ready(function() {
     });
         
 </script>
+<script type="text/javascript" async="true" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51c425d953829875"></script>
 <?php echo $footer; ?>
