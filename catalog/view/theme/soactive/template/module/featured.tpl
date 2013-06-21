@@ -14,7 +14,7 @@
                 Pay: <span class="price"><?php echo $product['price']; ?></span>
                 <?php } else { ?>
                 <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
-                <span class="price-old"><?php echo $product['price']; ?></span> Pay: <span class="price-new"> <?php echo $product['special']; ?></span>
+                <span class="price-old">RRP: <?php echo $product['price']; ?></span> Pay: <span class="price-new"> <?php echo $product['special']; ?></span>
               <?php } ?>
            </div>
          <?php } ?>

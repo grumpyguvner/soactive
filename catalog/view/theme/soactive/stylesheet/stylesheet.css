@@ -1249,7 +1249,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid .price {
 	display: block;
 	font-weight: bold;
-	color: #514f4f;
+	color: #fd0303;
 	margin-bottom: 4px;
 }
 .product-grid .save {
@@ -1258,7 +1258,6 @@ a.buttonHome:hover, input.buttonHome:hover {
         color: #fd0303;
 }
 .product-grid .price-old {
-        font-weight: bold;
 	text-decoration: line-through;
 }
 .product-grid .price-new {
@@ -1391,12 +1390,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .price-old {
 	text-decoration: line-through;
+        font-weight: normal;
 }
 .product-info .price-new {
     color: #fd0303;
 }
 .product-info .save {
-    color: #fd0303;
+    color: #514f4f;
 }
 .product-info .price-tax {
 	font-size: 12px;
@@ -2529,6 +2529,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     font-weight: bold;
     color: #514f4f;
 }
+.jcarousel-skin-tango .jcarousel-container span.price {    
+    color: #fd0303;
+}
 .jcarousel-skin-tango .jcarousel-direction-rtl {
 	direction: rtl;
 }
@@ -2587,6 +2590,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-old {
 	display: inline-block;
         text-decoration: line-through;
+        font-weight: normal;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.price-new {
 	display: inline-block;
