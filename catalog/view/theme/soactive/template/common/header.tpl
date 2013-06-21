@@ -57,7 +57,7 @@
           js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-        <div id="container">
+        <div class="container">
             <div id="header">
                 
             <?php if ($logo) { ?>
@@ -67,7 +67,7 @@
             <?php } ?>
                 <div class="links">
                     <div class="top">
-                        <div id="wrapCurrency" <?php if ($logged) echo 'style="right: 325px;"'; ?>>
+                        <div id="wrapCurrency" <?php if ($logged) echo 'style="right: 324px;"'; ?>>
                             <?php echo $localisation; ?>
                         </div>
                         <div id="welcome">
@@ -85,7 +85,7 @@
                         <?php if ($filter_name) { ?>
                             <input type="text" name="filter_name" value="<?php echo $filter_name; ?>" />
                         <?php } else { ?>
-                            <input type="text" name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
+                            <input type="text" name="filter_name" placeholder="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
                         <?php } ?>
                     </div>
                 </div>

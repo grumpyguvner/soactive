@@ -72,7 +72,7 @@ label {
 	cursor: pointer;
 }
 /* layout */
-#container {
+.container {
 	width: 980px;
 	margin-left: auto;
 	margin-right: auto;
@@ -127,7 +127,7 @@ label {
         border-bottom: 2px solid #1db4b7;
         height: 50px;
         margin-bottom: 10px;
-        min-width: 160px;
+        min-width: 136px;
 }
 #currency a {
 	display: inline-block;
@@ -148,21 +148,20 @@ label {
         position: absolute;
         right: 0;
         top: 0;
-        border-left: 1px solid #1db4b7;
-        border-right: 1px solid #1db4b7;
-        border-bottom: 1px solid #1db4b7;
+        border-left: 2px solid #1db4b7;
+        border-right: 2px solid #1db4b7;
+        border-bottom: 2px solid #1db4b7;
         -webkit-border-radius: 0px 0px 7px 7px;
 	-moz-border-radius: 0px 0px 7px 7px;
 	-khtml-border-radius: 0px 0px 7px 7px;
 	border-radius: 0px 0px 7px 7px;
         height: 32px;
-        padding-top: 4px;
+        padding-top: 2px;
 }
 #header #cart .heading {
 	float: right;
-	padding-right: 4px;
-        padding-left: 4px;
-        padding-top: 2px;
+	padding-right: 2px;
+        padding-left: 12px;
 	background: #FFF;
 	position: relative;
 	z-index: 1;
@@ -177,6 +176,7 @@ label {
 #header #cart .heading a {
 	color: #514f4f;
 	text-decoration: none;
+        vertical-align: bottom;
 }
 #header #cart .heading a span {
 	background: #FFFFFF url('../image/arrow-down.png') 100% 50% no-repeat;
@@ -278,7 +278,7 @@ label {
         display: inline-block;
         vertical-align: middle;
         position: absolute;
-        right: 257px;
+        right: 263px;
 }
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
@@ -298,8 +298,9 @@ label {
         box-shadow: 2px 2px 2px 0px #514f4f;
         clear: both;
         display: none;
+        width: 136px;
         min-height: 150px;
-        padding: 8px;
+        padding: 15px 8px 10px;
         position: relative;
         top: 0;
         text-align: left;
@@ -332,7 +333,6 @@ label {
         margin-bottom: 0;
 }
 #header #wrapCurrency .content .mini-currency-info #language img {
-        width: 68px;
 }
 #header #wrapCurrency .content .CurrencyTitle {
         font-size: 15px;
@@ -340,15 +340,14 @@ label {
         font-weight: bold;
         border-bottom: 2px solid #1db4b7;
         margin-bottom: 10px;
-        padding: 10px 10px;
+        padding: 0 0 15px;
 }
 #header #wrapCurrency .content .CurrencyTitle > span > span {
-        font-size: 17px;
         vertical-align: middle;
 }
 #header #wrapCurrency .content .CurrencyTitle > span > img {
-        width: 18px;
-        height: 14px;
+        width: 20px;
+        height: 12px;
 }
 #header #wrapCurrency .heading a {
         background-image: url("../image/arrow-down.png");
@@ -357,7 +356,7 @@ label {
         padding-right: 15px;
 }
 #header #search {
-	width: 326px;
+	width: 332px;
 	z-index: 15;
         float: right;
 }
@@ -366,7 +365,7 @@ label {
 	background: url('../image/button-search.png') center center no-repeat;
 	width: 28px;
 	height: 21px;
-        margin-left: 298px;
+        margin-left: 302px;
 	border-left: 1px solid #4E4E4E;
 	cursor: pointer;
         margin-top: 5px;
@@ -374,7 +373,7 @@ label {
 #header #search input {
 	background: #FFF;
 	padding: 1px 1px 1px 6px;
-	width: 317px;
+	width: 323px;
 	height: 27px;
 	border: 1px solid #4e4e4e;
         box-shadow: none;
@@ -386,13 +385,14 @@ label {
 	text-align: right;
 	color: #999999;
         display: inline-block;
+        border-right: 1px solid #514f4f;
 }
 #header .links {
         float: right;
         height: 100%;
 }
 #header .links a {
-	padding: 0px 12px 0px 12px;
+	padding: 0px 12px;
 	color: #514f4f;
 	text-decoration: none;
 	font-size: 13px;
@@ -406,7 +406,7 @@ label {
         height: 30px;
         margin-bottom: 10px;
         margin-top: 10px;
-        margin-right: 112px;
+        margin-right: 122px;
         text-align: right;
 }
 #header .links .top form {
@@ -656,10 +656,11 @@ table.radio tr.highlight:hover td {
 .pagination strong {
         color: #1db4b7;
         text-shadow: 0 0 2px #1db4b7;
+        padding: 0 4px;
 }
 .pagination .links a {
 	display: inline-block;
-	padding: 0 8px;
+	padding: 0 4px;
 	text-decoration: none;
 	color: #514f4f;
 }
@@ -2264,11 +2265,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer .newsletter_input a {
     position: absolute;
-    margin-left: -34px;
+    margin-left: -36px;
     margin-top: 5px;
     height: 21px;
     font-size: 16px;
     border-left: 1px solid #4e4e4e;
+    padding: 0 0 0 6px;
 }
 #footer .newsletter_input a img{
     padding-left: 6px;
@@ -2532,7 +2534,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-container span.price, .jcarousel-skin-tango .jcarousel-container span.price-old, .jcarousel-skin-tango .jcarousel-container span.price-new {
     display: inline-block;
     font-weight: bold;
-    color: #fd0303;
+    color: #514f4f;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl {
 	direction: rtl;

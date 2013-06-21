@@ -11,7 +11,7 @@ $_['text_reward']            = 'Success: Your reward points discount has been ap
 $_['text_shipping']          = 'Success: Your shipping estimate has been applied!';
 $_['text_login']             = 'Attention: You must <a href="%s">login</a> or <a href="%s">create an account</a> to view prices!';
 $_['text_points']            = 'Reward Points: %s';
-$_['text_items']             = '%s item(s) - %s';
+$_['text_items']             = 'My Bag (%s)';
 $_['text_next']              = 'To enter your promotional code or gift voucher &nbsp<span>click here</span>';
 $_['text_next_choice']       = 'Enter your promotional code or gift voucher here:';
 $_['text_use_coupon']        = 'Use Coupon Code';

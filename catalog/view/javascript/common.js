@@ -259,7 +259,7 @@ $(document).ready(function() {
 		
         $('#cart').live('mouseleave', function() {
             $(this).removeClass('active');
-            $('#header #cart').css({'border-left':'1px solid #46e1cf', 'border-right': '1px solid #46e1cf', 'border-bottom': '1px solid #46e1cf' });
+            $('#header #cart').css({'border-left':'2px solid #1db4b7', 'border-right': '2px solid #1db4b7', 'border-bottom': '2px solid #1db4b7' });
         });
     });
 
