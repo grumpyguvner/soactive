@@ -1454,7 +1454,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .wishlist {
         display: inline-block;
-        margin-left: 30px;
+        margin-left: 35px;
         vertical-align: top;
 }
 .product-info .wishlist a {
@@ -1481,6 +1481,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         width: 230px;
         font-size: 17px;
         font-weight: 700;
+        margin-left: 35px;
 }
 .product-info .cart div {
 	float: left;
