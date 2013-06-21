@@ -367,6 +367,12 @@
                   <li>
                       <?php if ($product['thumb']) { ?>
                       <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a>
+                      <?php if ($product['new']) { ?> 
+                          <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
+                      <?php } ?>
+                      <?php if ($product['saving_percent']) { ?> 
+                          <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
+                      <?php } ?>
                       <?php } ?><br />
                       <div class="nameItem">
                         <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>

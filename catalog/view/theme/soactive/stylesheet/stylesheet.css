@@ -184,6 +184,9 @@ label {
 }
 #header #cart .heading a span#cart-total {
 	margin-left: -10px;
+        vertical-align: bottom;
+        display: inline-block;
+        vertical-align: bottom;
 }
 #header #cart .content {
 	clear: both;
@@ -405,8 +408,8 @@ label {
 }
 #header .links .top {
         height: 30px;
-        margin-bottom: 10px;
-        margin-top: 23px;
+        margin-bottom: 23px;
+        margin-top: 10px;
         margin-right: 122px;
         text-align: right;
 }
@@ -2575,6 +2578,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         text-align: center;
         line-height: 14px;
         height: 290px;
+        position: relative;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 
@@ -2756,6 +2760,18 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #featuredStyles img {
     border: 1px solid #b9bdbd;
+}
+#featuredStyles img.saleProduct {
+    border: none;
+    position: absolute;
+    top: 162px;
+    left: 0;
+}
+#featuredStyles img.newProduct {
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 108px;
 }
 .completeLook {
     height: 290px;
