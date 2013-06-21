@@ -1461,13 +1461,14 @@ a.buttonHome:hover, input.buttonHome:hover {
         background-color: #dee0e0;
         color: #514f4f;
         font-weight: normal;
-        font-size: 16px;
+        font-size: 17px;
 }
 .product-info .cart {
         display: inline-block;
 	color: #4D4D4D;
 	overflow: auto;
         vertical-align: top;
+        margin-left: 35px;
 }
 .product-info .cart .cartButton {
         background-color: #1db4b7;
@@ -1481,7 +1482,6 @@ a.buttonHome:hover, input.buttonHome:hover {
         width: 230px;
         font-size: 17px;
         font-weight: 700;
-        margin-left: 35px;
 }
 .product-info .cart div {
 	float: left;
