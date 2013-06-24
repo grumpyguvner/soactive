@@ -3,7 +3,7 @@ class ControllerModuleRecentlyViewed extends Controller {
 	protected function index($setting) {
 		$this->language->load('module/recently_viewed'); 
 
-      	$this->data['heading_title'] = $this->language->get('heading_title');
+                $this->data['heading_title'] = $this->language->get('heading_title');
 		
 		$this->data['button_cart'] = $this->language->get('button_cart');
 		
@@ -13,7 +13,13 @@ class ControllerModuleRecentlyViewed extends Controller {
 
 		$this->data['products'] = array();
 
-		$products = explode(',', $this->config->get('featured_product'));		
+                if (!isset($this->request->cookie['recently_viewed'])) {
+                    $recently_viewed = array();
+                } else {
+                    $recently_viewed = explode(',', $this->request->cookie['recently_viewed']);
+                }
+                
+                $products = array_reverse($recently_viewed);
 
 		if (empty($setting['limit'])) {
 			$setting['limit'] = 5;

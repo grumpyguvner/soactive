@@ -324,7 +324,30 @@ class ModelCatalogProduct extends Model {
         
 	public function updateViewed($product_id) {
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = (viewed + 1) WHERE product_id = '" . (int)$product_id . "'");
-	}
+                
+                if (!isset($this->request->cookie['recently_viewed'])) {
+                    $recently_viewed = array();
+                } else {
+                    $recently_viewed = explode(',', $this->request->cookie['recently_viewed']);
+                }
+                
+                if ($pos = array_search($product_id, $recently_viewed))
+                {
+                    unset($recently_viewed[$pos]);
+                }
+                
+                array_push($recently_viewed, $product_id);
+                
+                $this->request->cookie['recently_viewed'] = implode(',', $recently_viewed);
+                
+                if (defined('SITE_REGION'))
+                {
+                    setcookie('recently_viewed', $this->request->cookie['recently_viewed'], time() + 60 * 60 * 24 * 30, '/' . SITE_REGION . '/', $this->request->server['HTTP_HOST']);
+                } else {
+                    setcookie('recently_viewed', $this->request->cookie['recently_viewed'], time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
+                }
+                
+        }
 	
 	public function getProduct($product_id) {
 		if ($this->customer->isLogged()) {
