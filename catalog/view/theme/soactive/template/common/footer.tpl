@@ -4,22 +4,38 @@
 <div id="footer">
             <div class="column">
                 <h4><?php echo $text_categories; ?></h4>
-                <div id="left">
+                <div id="columnLeft">
                     <ul>
-                        <?php foreach ($categories[0]['children'] as $category) { ?>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Brand</a></li>
+                        <li><a href="#">Sport</a></li>
+                        <li><a href="#">Product</a></li>
+                        <li><a href="#">Mens Fitness Clothes</a></li>
+                        <li><a href="#">Womens Fitness Clothes</a></li>
+                        <li><a href="#">Mens Running Clothes</a></li>
+                        <li><a href="#">Womens Running Clothes</a></li>
+                        <li><a href="#">Mens Footwear</a></li>
+                        <li><a href="#">Womens Footwear</a></li>
+                        <li><a href="#">Fitness Accessories</a></li>
+                        
+                        <?php /* foreach ($categories[0]['children'] as $category) { ?>
                             <?php if ($category['name'] != 'Activity') { ?>
                                 <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
                             <?php } ?>
-                        <?php } ?>
+                        <?php } */ ?>
                     </ul>
                 </div>
-                <div id="right">
+                <div id="columnRight">
                     <ul>
-                        <?php foreach ($categories[1]['children'] as $category) { ?>
+                        <li><a href="#">Sport Bras</a></li>
+                        <li><a href="#">Sale Items</a></li>
+                        
+                        <?php /* foreach ($categories[1]['children'] as $category) { ?>
                             <?php if ($category['name'] != 'Activity') { ?>
                                 <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
                             <?php } ?>
-                        <?php } ?>
+                        <?php } */ ?>
                     </ul>
                 </div>
                <!----------------------------- It has to be a cms block ------------------------------------> 
@@ -27,6 +43,9 @@
                     <h4>WE ARE <span>SO</span>ACTIVE</h4>
                     <div class="wsRow">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        <br /><br />
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         <br /><br />
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                     </div>
@@ -112,12 +131,12 @@
                         <div class="social">
                             <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
                         </div>
-                        <div class="fb-like-box" data-href="https://www.facebook.com/sheactivefans" data-width="327" data-height="250" data-show-faces="true" data-stream="false" data-show-border="true" data-header="true"></div>
+                        <div class="fb-like-box" data-href="https://www.facebook.com/sheactivefans" data-width="327" data-height="266" data-show-faces="true" data-stream="false" data-show-border="true" data-header="true"></div>
                     </div>
                 <!---------------------------------- End cms block ------------------------------------------>
             </div> 
         </div>
-    <div id="powered">Copyright © 2011-2013, SoActive Limited. All rights reserved. <br/>Design and Build by Boundless</div>
+    <div id="powered"><?php echo $powered; ?></div>
 </div>
 </div>
 </body></html>

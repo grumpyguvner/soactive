@@ -2206,6 +2206,15 @@ a.buttonHome:hover, input.buttonHome:hover {
     min-height: 100px;
     margin-right: 25px;
 }
+#footer .column #columnLeft, #footer .column #columnRight {
+    display: inline-block;
+}
+#footer .column #columnLeft {
+    width: 62%;
+}
+#footer .column #columnRight {
+    vertical-align: top;
+}
 #footer .column > div {
     margin-bottom: 20px;
 }
@@ -2268,7 +2277,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     list-style: none outside none
 }
 #footer .column ul li {
-    line-height: 15px;
+    line-height: 18px;
 }
 #footer .column a {
     text-decoration: none;
