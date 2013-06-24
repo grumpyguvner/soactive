@@ -2461,32 +2461,39 @@ a.buttonHome:hover, input.buttonHome:hover {
     background-color: #fff;
     border-top: 1px solid #514f4f;
     border-bottom: 1px solid #514f4f;
+    overflow: hidden;
 }
-.shopBar h4 {
+.shopBar .shopBarInfo {
+    width: 326px;
+    height: 30px;
+    display: block;
+    float: left;
+    border-right: 1px solid #514f4f;
+    margin: 5px 0;
+}
+.shopBar .shopBarInfo:last-child {
+    border-right: none;
+}
+.shopBar span {
+    display: block;
+    color: #514f4f;
+}
+.shopBar br {
+    display: none;
+}
+.shopBar .title {
     color: #1db4b7;
     margin: 0px;
     font-weight: 700;
     line-height: 17px;
     font-size: 18px;
 }
-.shopBar p {
-    margin-bottom: 0;
-    color: #514f4f;
-}
-.shopBar .shopBarInfo {
-    width: 312px;
-    height: 30px;
-    display: inline-block;
-    border-right: 1px solid #514f4f;
-    margin: 5px;
+.shopBar .shopBarInfo a {
+    display: block;
     text-align: center;
 }
-.shopBar .shopBarInfoLast {
-    width: 312px;
-    height: 30px;
-    display: inline-block;
-    margin: 5px;
-    text-align: center;
+.shopBar .shopBarInfo a:hover * {
+    color: #d1d1d1 !important;
 }
 /** Accordion menu filter **/
 .accordion .accordion-group {
@@ -2906,7 +2913,6 @@ a.buttonHome:hover, input.buttonHome:hover {
     font-size: 30px;
     font-weight: 100;
     opacity: 0.3;
-    display: none;
     text-align: center;
     border: none;
     top: 0;

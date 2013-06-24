@@ -86,30 +86,18 @@ if (!empty($banners)) {
         });
                 
          $(document).ready(function() {
-            $('.bannerWrapper').hover(
-                function () {
-                    $('#myCarousel .carousel-control').css({'display': 'block'});
-                    $('#myCarousel .carousel-control').css({'visibility': 'visible'});
-                    $('.carousel-control.left').animate({'marginLeft':'29px'},400);
-                    $('.carousel-control.right').animate({'marginRight':'29px'},400);
-                    
-                });
                 
-                $('.carousel-control').hover(
-                function () {
-                    $('#myCarousel .carousel-control').css({'display': 'block'});
-                    $('#myCarousel .carousel-control').css({'visibility': 'visible'});
-                    $('.carousel-control.left').stop(true, true);
-                    $('.carousel-control.right').stop(true, true);
-                   
-                });  
-                
-                $('.bannerWrapper, .carousel-control').mouseout(
-                function () {
-                    $('.carousel-control.left').animate({'marginLeft':'-29px'},400).css({'visibility': 'hidden'});
-                    $('.carousel-control.right').animate({'marginRight':'-29px'},400).css({'visibility': 'hidden'});
-                });
-                
+                $('#myCarousel').hover(
+                    function () {
+                        $('.carousel-control.left').stop().animate({'left':'0'},400);
+                        $('.carousel-control.right').stop().animate({'right':'0'},400);
+
+                    },
+                    function () {
+                        $('.carousel-control.left').stop().animate({'left':'-29px'},400);
+                        $('.carousel-control.right').stop().animate({'right':'-29px'},400);
+                    }
+                );  
                          
         });
         
