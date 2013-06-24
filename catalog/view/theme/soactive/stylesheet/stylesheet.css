@@ -156,7 +156,7 @@ label {
 	-khtml-border-radius: 0px 0px 7px 7px;
 	border-radius: 0px 0px 7px 7px;
         height: 32px;
-        padding-top: 2px;
+        padding-top: 3px;
 }
 #header #cart .heading {
 	float: right;
@@ -165,6 +165,18 @@ label {
 	background: #FFF;
 	position: relative;
 	z-index: 1;
+}
+#header #cart.active .heading {
+	margin-top: 5px;
+	padding-top: 10px;
+	padding-bottom: 6px;
+	border-top: 1px solid #EEEEEE;
+	border-left: 1px solid #EEEEEE;
+	border-right: 1px solid #EEEEEE;
+	-webkit-border-radius: 7px 7px 0px 0px;
+	-moz-border-radius: 7px 7px 0px 0px;
+	-khtml-border-radius: 7px 7px 0px 0px;
+	border-radius: 7px 7px 0px 0px;
 }
 #header #cart .heading h4 {
 	color: #333333;
@@ -207,18 +219,6 @@ label {
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
 	box-shadow: 0px 2px 2px #DDDDDD;
 	background: #FFF;
-}
-#header #cart.active .heading {
-	margin-top: 5px;
-	padding-top: 10px;
-	padding-bottom: 6px;
-	border-top: 1px solid #EEEEEE;
-	border-left: 1px solid #EEEEEE;
-	border-right: 1px solid #EEEEEE;
-	-webkit-border-radius: 7px 7px 0px 0px;
-	-moz-border-radius: 7px 7px 0px 0px;
-	-khtml-border-radius: 7px 7px 0px 0px;
-	border-radius: 7px 7px 0px 0px;
 }
 #header #cart.active .content {
 	display: block;
@@ -282,15 +282,21 @@ label {
         vertical-align: middle;
         position: absolute;
         right: 263px;
+        top: 11px;
 }
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
         position: relative;
         z-index: 1;
         float: right;
+} 
+#header #wrapCurrency.active .heading {
+	margin-top: -10px;
+	padding-top: 10px;
+	padding-bottom: 6px;
 }
 #header #wrapCurrency .heading #currentCurrency > img {
-        vertical-align: middle;
+        vertical-align: baseline;
         padding-right: 12px;
 }
 #header #wrapCurrency .content {
@@ -307,12 +313,7 @@ label {
         position: relative;
         top: 0;
         text-align: left;
-}  
-#header #wrapCurrency.active .heading {
-	margin-top: -9px;
-	padding-top: 10px;
-	padding-bottom: 6px;
-}
+} 
 #header #wrapCurrency.active .content {
 	display: block;
 }
