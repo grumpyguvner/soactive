@@ -2161,7 +2161,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     min-height: 160px;
     padding-top: 20px;
     background: transparent;  
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 #footer p {
     margin-bottom: 6px;
@@ -2189,13 +2189,14 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer h4 {
     color: #000;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
     margin-top: 0px;
+    margin-bottom: 15px;
     border-bottom: 1px solid #1db4b7;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     min-width: 210px;
 }
 #footer .column {
@@ -2203,6 +2204,12 @@ a.buttonHome:hover, input.buttonHome:hover {
     width: 300px;
     min-height: 100px;
     margin-right: 25px;
+}
+#footer .column > div {
+    margin-bottom: 20px;
+}
+#footer .column .weAreSoactive > h4 > span {
+    color: #1db4b7;
 }
 #footer .column .securePayment .needHelp {
     margin-top: 6px;
@@ -2292,8 +2299,8 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #514f4f;
     font-size: 13px;
 }
+
 #powered {
-	margin-top: 5px;
 	text-align: right;
 	clear: both;
 }

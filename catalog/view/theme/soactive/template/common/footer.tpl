@@ -24,7 +24,7 @@
                 </div>
                <!----------------------------- It has to be a cms block ------------------------------------> 
                 <div class="weAreSoactive">
-                    <h4>WE ARE SOACTIVE</h4>
+                    <h4>WE ARE <span>SO</span>ACTIVE</h4>
                     <div class="wsRow">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                         <br /><br />
@@ -78,7 +78,7 @@
                     
                     <div class="needHelp">
                         <img src="catalog/view/theme/soactive/image/phone_icon.png" alt="Phone icon">
-                        <div><span>Need help? Contact our expert for advice on product selection, delivery, returns & questions about your order:</span> <span>0945 094 9434</span></div>
+                        <div><span>Need help? Contact our expert for advice on product selection, delivery, returns & questions about your order:</span> <span>0845 094 9434</span></div>
                     </div>
                     <div class="trustPilot">
                         <img src="catalog/view/theme/soactive/image/trustpilot_logo.png" alt="Trust Pilot">
@@ -112,11 +112,12 @@
                         <div class="social">
                             <span><a target="_blank" href="https://www.facebook.com/sheactivefans"><img alt="facebook" src="catalog/view/theme/soactive/image/facebook.png"></a></span><span><a target="_blank" href="https://twitter.com/sheactive"><img alt="twitter" src="catalog/view/theme/soactive/image/twitter.png"></a></span><span><a target="_blank" href="https://pinterest.com/source/sheactive.co.uk/‎"><img alt="Pinterest" src="catalog/view/theme/soactive/image/p.png"></a></span><span><a target="_blank" href=""><img alt="Instagram" src="catalog/view/theme/soactive/image/instagram_icon.png"></a></span>
                         </div>
-                        <div class="fb-activity" data-site="http://www.example.com" data-width="327" data-height="240" data-header="true" data-recommendations="false"></div>
+                        <div class="fb-like-box" data-href="https://www.facebook.com/sheactivefans" data-width="327" data-height="250" data-show-faces="true" data-stream="false" data-show-border="true" data-header="true"></div>
                     </div>
                 <!---------------------------------- End cms block ------------------------------------------>
             </div> 
         </div>
+    <div id="powered">Copyright © 2011-2013, SoActive Limited. All rights reserved. <br/>Design and Build by Boundless</div>
 </div>
 </div>
 </body></html>
