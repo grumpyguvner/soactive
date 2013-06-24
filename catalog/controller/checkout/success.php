@@ -119,7 +119,7 @@ class ControllerCheckoutSuccess extends Controller {
 
         $this->data['continue'] = $this->url->link('common/home');
 
-        $this->setTemplate('common/success.tpl');
+        $this->setTemplate('checkout/success.tpl');
 
         $this->children = array(
             'common/column_left',
