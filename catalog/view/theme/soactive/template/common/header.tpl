@@ -93,7 +93,7 @@
             <?php if ($categories) { ?>
                 <div id="menu">
                     <ul>
-                        <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/soactive/image/home-button.png" alt="Home"/></span></a></li>
+                        <li><a href='<?php echo $home; ?>'><img src="catalog/view/theme/soactive/image/home-button.png" alt="Home"/></a></li>
                         <?php foreach ($categories as $category) { ?>
                         <li><a href="<?php echo $category['href']; ?>"><?php echo strtoupper($category['name']); ?></a>
                                 <?php if ($category['children']) { ?>
