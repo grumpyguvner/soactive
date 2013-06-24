@@ -34,6 +34,9 @@ class ControllerModuleLocalisation extends Controller {
 
         $this->data['text_currency'] = $this->language->get('text_currency');
         $this->data['text_language'] = $this->language->get('text_language');
+        $this->data['text_gbp_heading'] = $this->language->get('text_gbp_heading');
+        $this->data['text_eur_heading'] = $this->language->get('text_eur_heading');
+        $this->data['text_usd_heading'] = $this->language->get('text_usd_heading');
 
         if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
             $connection = 'SSL';
@@ -77,20 +80,10 @@ class ControllerModuleLocalisation extends Controller {
                 }
         }
 
-        if (!isset($this->request->get['route'])) {
-            $this->data['redirect'] = $this->url->link('common/home');
+         if (isset($this->request->server['HTTP_REFERER'])) {
+            $this->data['redirect'] = $this->request->server['HTTP_REFERER'];
         } else {
-            $data = $this->request->get;
-            unset($data['_route_']);
-            $route = $data['route'];
-            unset($data['route']);
-
-            $url = '';
-            if ($data) {
-                $url = '&' . urldecode(http_build_query($data, '', '&'));
-            }
-
-            $this->data['redirect'] = $this->url->link($route, $url, $connection);
+            $this->data['redirect'] = $this->url->link('common/home');
         }
         
         $this->setTemplate('module/localisation.tpl');
