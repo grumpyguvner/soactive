@@ -404,6 +404,9 @@ label {
 #header .links a + a {
 	border-left: 1px solid #b9bdbd;
 }
+#header .links #currency a {
+	padding: 0px 6px;
+}
 #header .links .top a#wishlist-total {
 }
 #header .links .top {
