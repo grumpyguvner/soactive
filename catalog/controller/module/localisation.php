@@ -42,6 +42,8 @@ class ControllerModuleLocalisation extends Controller {
         }
 
         $this->data['action'] = $this->url->link('module/localisation', '', $connection);
+        
+        $this->data['logged'] = $this->customer->isLogged();
 
         $this->data['currency_code'] = $this->currency->getCode();
         $this->data['symbol_left'] = $this->currency->getSymbolLeft();
@@ -90,14 +92,11 @@ class ControllerModuleLocalisation extends Controller {
 
             $this->data['redirect'] = $this->url->link($route, $url, $connection);
         }
+        
+        $this->setTemplate('module/localisation.tpl');
 
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/localisation.tpl')) {
-            $this->template = $this->config->get('config_template') . '/template/module/localisation.tpl';
-        } else {
-            $this->template = 'default/template/module/localisation.tpl';
-        }
+        $this->response->setOutput($this->render());	
 
-        $this->render();
     }
 
 }
