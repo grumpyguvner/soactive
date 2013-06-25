@@ -2548,6 +2548,15 @@ a.button-account:hover, input.button-account:hover {
     transition: all ease .3s;
 }
 
+#cssmenu ul li.clearance{
+    background-color: #f00;
+}
+
+#cssmenu ul li.clearance a.withpad{
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
 #cssmenu:before, #cssmenu:after, #cssmenu > ul:before, #cssmenu > ul:after {
 
     content: '';
@@ -2827,6 +2836,11 @@ a.button-account:hover, input.button-account:hover {
     text-decoration:none;
     font-weight: bolder;
 }
+#menuh a.white:link, #menuh a.white:visited, #menuh a.white:active	/* menu at rest */
+{
+    color: white;
+}
+
 #menuh a:hover	/* menu on mouse-over  */
 {
     color: white;
