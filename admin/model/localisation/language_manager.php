@@ -18,9 +18,9 @@ class ModelLocalisationLanguageManager extends Model {
             $query = $this->db->query($sql);
 
             if (isset($data['language_manager'][$language_id]['value'])) {
-                    array_walk($data['language_manager'][$language_id]['value'], function(&$n) {
+                array_walk($data['language_manager'][$language_id]['value'], function(&$n) {
                             $n = html_entity_decode($n, ENT_QUOTES, 'UTF-8');
-                    });
+                        });
                 if ($query->num_rows > 0) {
                     $sql = "UPDATE `" . DB_PREFIX . "language_manager` "
                             . "SET language_id = '" . (int) $language_id . "', "
@@ -38,9 +38,9 @@ class ModelLocalisationLanguageManager extends Model {
                             . "   filename = '" . $this->db->escape($language_manager['filename']) . "', "
                             . "   value = '" . $this->db->escape(serialize($data['language_manager'][$language_id]['value'])) . "'";
                     $this->db->query($sql);
-                    
+
                     $language_manager_id = $this->db->getLastId();
-                    
+
                     $sql = "INSERT INTO `" . DB_PREFIX . "language_manager_to_store` "
                             . "SET language_manager_id = '" . (int) $language_manager_id . "', "
                             . "   store_id = '" . 0 . "'";
@@ -63,13 +63,13 @@ class ModelLocalisationLanguageManager extends Model {
 
         $languageFiles = array();
 
-        $folders = self::getLanguageFolders();
+        $folders = self::getLanguageFolders($this->config->get('config_base_template'), $this->config->get('config_template'));
         $languages = $this->model_localisation_language->getLanguages();
 
         foreach ($folders as $folder) {
             $folderFiles = array();
 
-            $files = glob($folder  . '/' . $this->default . '/*/*.php');
+            $files = glob($folder . '/' . $this->default . '/*/*.php');
             if ($files) {
                 $folderFiles = $files;
             }
@@ -133,32 +133,45 @@ class ModelLocalisationLanguageManager extends Model {
     }
 
     private function dataLoadFiles($directory, $filename) {
-        $data = array();
-
+        
         $app_dir = self::getApplicationDir();
         $folders = self::getLanguageFolders($this->config->get('config_base_template'), $this->config->get('config_template'));
         
-        $files = array();
-
-        foreach ($folders as $value) {
-            $files[] = $value . '/' . $this->default . '/' . $filename . '.php';
-            if ($directory != $this->default)
-            {
-                $files[] = $value . '/' . $directory . '/' . $filename . '.php';
-            }
+        $is_default = ($filename == $directory) ? true : false;
+        
+        $data = array();
+        
+        $directories = array();
+        $directories[] = $this->default;
+        if ($this->default != $directory)
+        {
+            $directories[] = $directory;
         }
 
-        foreach ($files as $file) {
-            if (file_exists($file)) {
-                $_ = array();
+        foreach ($directories as $directory) {
+            
+            if ($is_default)
+            {
+                $filename = $directory;
+            }
+            
+            $files = array();
+            foreach ($folders as $value) {
+                $files[] = $value . '/' . $directory . '/' . $filename . '.php';
+            }
 
-                require($file);
+            foreach ($files as $file) {
+                if (file_exists($file)) {
+                    $_ = array();
 
-                array_walk($_, function(&$n) {
-                            $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
-                        });
+                    require($file);
 
-                $data = array_merge($data, $_);
+                    array_walk($_, function(&$n) {
+                                $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
+                            });
+
+                    $data = array_merge($data, $_);
+                }
             }
         }
 
@@ -181,10 +194,10 @@ class ModelLocalisationLanguageManager extends Model {
                 $_ = unserialize($row['value']);
 
                 if (is_array($_)) {
-                    
+
                     array_walk($_, function(&$n) {
-                            $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
-                    });
+                                $n = htmlentities($n, ENT_QUOTES, 'UTF-8');
+                            });
                     $data = array_merge($data, $_);
                 }
             }
@@ -198,19 +211,17 @@ class ModelLocalisationLanguageManager extends Model {
     }
 
     static function getLanguageFolders($base, $default) {
-        
+
         $folders = array(DIR_CATALOG . 'language');
-        
-        if (is_dir(DIR_CATALOG . 'view/theme/' . $base . '/language'))
-        {
+
+        if (is_dir(DIR_CATALOG . 'view/theme/' . $base . '/language')) {
             $folders[] = DIR_CATALOG . 'view/theme/' . $base . '/language';
         }
-        
-        if (is_dir(DIR_CATALOG . 'view/theme/' . $default . '/language'))
-        {
+
+        if (is_dir(DIR_CATALOG . 'view/theme/' . $default . '/language')) {
             $folders[] = DIR_CATALOG . 'view/theme/' . $default . '/language';
         }
-        
+
         return $folders;
     }
 
