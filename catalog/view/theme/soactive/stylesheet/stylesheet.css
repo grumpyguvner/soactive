@@ -2164,7 +2164,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     min-height: 160px;
     padding-top: 20px;
     background: transparent;  
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 #footer p {
     margin-bottom: 6px;
@@ -2275,6 +2275,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .column ul {
     margin-top: 0px;
     margin-left: 0px;
+    margin-bottom: 0;
     padding: 0;
     list-style: none outside none
 }
@@ -2310,11 +2311,13 @@ a.buttonHome:hover, input.buttonHome:hover {
     border-radius: 0;
     color: #514f4f;
     font-size: 13px;
+    margin-bottom: 0;
 }
 
 #powered {
 	text-align: right;
 	clear: both;
+        margin-bottom: 15px;
 }
 /* banner */
 .banner div {
