@@ -200,8 +200,14 @@ class ControllerLocalisationLanguageManager extends Controller {
             'href' => $this->url->link('localisation/language_manager', 'token=' . $this->session->data['token'] . $url, 'SSL'),
             'separator' => ' :: '
         );
-
+        
         $this->data['cancel'] = $this->url->link('localisation/language_manager', 'token=' . $this->session->data['token'] . $url, 'SSL');
+
+        if (isset($this->request->get['file'])) {
+            $url .= '&file=' . $this->request->get['file'];
+        }
+
+        $this->data['action'] = $this->url->link('localisation/language_manager/update', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 
         $this->load->model('localisation/language');

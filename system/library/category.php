@@ -288,7 +288,7 @@ class Category {
         
         private function getAvailableDates($category_id) {
 		
-		$query = $this->db->query("SELECT date_start, date_end, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+		$query = $this->db->query("SELECT if(date_start,date_start,0) AS date_start, if(date_end,date_end,0) AS date_end, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
 
 		if ($query->num_rows) {
                     $date_start = ($query->row['date_start']) ? strtotime($query->row['date_start']) : false;
@@ -296,7 +296,7 @@ class Category {
                     
                     
                     $date_start_prev = ($this->date_start) ? strtotime($this->date_start) : false;
-                    $date_end_prev = ($this->date_start) ? strtotime($this->date_false) : false;
+                    $date_end_prev = ($this->date_end) ? strtotime($this->date_end) : false;
                     
                     if ($date_start && (!$date_start_prev || $date_start < $date_start_prev)) {
                         $this->date_start = $query->row['date_start'];
