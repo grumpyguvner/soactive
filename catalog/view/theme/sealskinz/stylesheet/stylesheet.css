@@ -1823,7 +1823,7 @@ a.button-account:hover, input.button-account:hover {
 }
 
 .product-tab.news {
-    width: 493px;
+    width: 495px;
 }
 .product-tab.news, .product-press {
     margin-bottom: 20px;
@@ -1853,6 +1853,10 @@ a.button-account:hover, input.button-account:hover {
 
 #productTab {
     margin-bottom: 0;
+}
+
+#productTab > li > a {
+    padding: 10px;
 }
 
 #productTab > li > a {
