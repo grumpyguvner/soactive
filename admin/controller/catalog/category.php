@@ -169,6 +169,10 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
 		$this->data['entry_googlebase_text'] = $this->language->get('entry_googlebase_text');
 		$this->data['entry_googlebase_xml'] = $this->language->get('entry_googlebase_xml');
+		$this->data['entry_is_filter'] = $this->language->get('entry_is_filter');
+		$this->data['entry_members_only'] = $this->language->get('entry_members_only');
+		$this->data['entry_date_start'] = $this->language->get('entry_date_start');
+		$this->data['entry_date_end'] = $this->language->get('entry_date_end');
 		$this->data['entry_image'] = $this->language->get('entry_image');
 		$this->data['entry_top'] = $this->language->get('entry_top');
 		$this->data['entry_column'] = $this->language->get('entry_column');		
@@ -335,6 +339,44 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['sort_order'] = 0;
 		}
+
+		if (isset($this->request->post['is_filter'])) {
+			$this->data['is_filter'] = $this->request->post['is_filter'];
+		} elseif (!empty($category_info)) {
+			$this->data['is_filter'] = $category_info['is_filter'];
+		} else {
+			$this->data['is_filter'] = 0;
+		}
+
+		if (isset($this->request->post['members_only'])) {
+			$this->data['members_only'] = $this->request->post['members_only'];
+		} elseif (!empty($category_info)) {
+			$this->data['members_only'] = $category_info['members_only'];
+		} else {
+			$this->data['members_only'] = 0;
+		}
+
+                if (isset($this->request->post['date_start_date'])) {
+                    $this->data['date_start_date'] = $this->request->post['date_start_date'];
+                    $this->data['date_start_time'] = $this->request->post['date_start_time'];
+                } elseif (!empty($category_info)) {
+                    $this->data['date_start_date'] = date('Y-m-d', strtotime($category_info['date_start']));
+                    $this->data['date_start_time'] = date('H:i', strtotime($category_info['date_start']));
+                } else {
+                    $this->data['date_start_date'] = '';
+                    $this->data['date_start_time'] = '';
+                }
+
+                if (isset($this->request->post['date_end_date'])) {
+                    $this->data['date_end_date'] = $this->request->post['date_end_date'];
+                    $this->data['date_end_time'] = $this->request->post['date_end_time'];
+                } elseif (!empty($category_info)) {
+                    $this->data['date_end_date'] = date('Y-m-d', strtotime($category_info['date_end']));
+                    $this->data['date_end_time'] = date('H:i', strtotime($category_info['date_end']));
+                } else {
+                    $this->data['date_end_date'] = '';
+                    $this->data['date_end_time'] = '';
+                }
 		
 		if (isset($this->request->post['status'])) {
 			$this->data['status'] = $this->request->post['status'];

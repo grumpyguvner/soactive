@@ -8,6 +8,8 @@ class Category {
 	private $meta_keyword;
 	private $image;
 	private $parent_id;
+	private $date_start;
+	private $date_end;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -39,6 +41,10 @@ class Category {
                         $this->meta_keyword = $category_query->row['meta_keyword'];
                         $this->image = $category_query->row['image'];
                         $this->parent_id = $category_query->row['parent_id'];
+                        
+                        $this->date_start = null;
+                        $this->date_end = null;
+                        $this->getAvailableDates($category_query->row['category_id']);
 
                         $this->session->data['category_id'] = $category_id;
                 } else {
@@ -89,6 +95,14 @@ class Category {
 
   	public function getParentId() {
 		return $this->parent_id;	
+  	}
+
+  	public function getDateStart() {
+		return $this->date_start;	
+  	}
+
+  	public function getDateEnd() {
+		return $this->date_end;	
   	}
 
   	public function getSort() {
@@ -252,6 +266,65 @@ class Category {
 	public function getChildren() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
 		return $query->rows;
+	}
+        
+        public function isMembersOnly($category_id) {
+		
+		$query = $this->db->query("SELECT members_only, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+
+		if ($query->num_rows) {
+                    if ($query->row['members_only']) {
+                        return true;
+                    }
+                    elseif ($query->row['parent_id'])
+                    {
+                        return $this->isMembersOnly($query->row['parent_id']);
+                    }
+                }
+                return false;
+	}
+        
+        private function getAvailableDates($category_id) {
+		
+		$query = $this->db->query("SELECT date_from, date_to, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+
+		if ($query->num_rows) {
+                    $date_start = ($query->row['date_start']) ? strtotime($query->row['date_start']) : false;
+                    $date_end = ($query->row['date_end']) ? strtotime($query->row['date_end']) : false;
+                    
+                    
+                    $date_start_prev = ($this->date_start) ? strtotime($this->date_start) : false;
+                    $date_end_prev = ($this->date_start) ? strtotime($this->date_false) : false;
+                    
+                    if ($date_start && (!$date_start_prev || $date_start < $date_start_prev)) {
+                        $this->date_start = $query->row['date_start'];
+                    }
+                    
+                    if ($date_end && (!$date_end_prev || $date_end > $date_end_prev))
+                    {
+                        $this->date_end = $query->row['date_end'];
+                    }
+                    
+                    if ($query->row['parent_id'])
+                    {
+                        $this->getAvailableDates($query->row['parent_id']);
+                    }
+                }
+	}
+        
+        public function isAvailable() {
+                $date_start = ($this->date_start) ? strtotime($this->date_start) : false;
+                $date_end = ($this->date_end) ? strtotime($this->date_end) : false;
+
+                if ($date_start && time() <= $date_start) {
+                    return false;
+                }
+                elseif ($date_end && time() >= $date_end)
+                {
+                    return false;
+                }
+                
+                return true;
 	}
         
 }

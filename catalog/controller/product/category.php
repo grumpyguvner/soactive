@@ -4,7 +4,7 @@ class ControllerProductCategory extends Controller {
                 $category_id = $this->category->getIdFromPath();
 
                 $this->category->load($category_id);
-                if ($this->category->getId() != $category_id) {
+                if ($this->category->getId() != $category_id || !$this->category->isAvailable()) {
                     $this->categoryNotFound();
                     return false;
                 }
@@ -151,6 +151,9 @@ class ControllerProductCategory extends Controller {
                                 'href'        => $this->url->link('product/product', 'path=' . $path . '&product_id=' . $result['product_id'])
                         );
                 }
+                
+                    $this->data['login_required'] = (!$this->customer->isLogged() && $this->category->isMembersOnly()) ? true : false;
+                    $this->data['date_end'] = $this->category->getDateEnd();
 
                         $urlSort = $this->category->getUrlQuery('sort');
 			$this->data['sorts'] = array();
