@@ -112,6 +112,7 @@
                                 <?php } ?>
                             </li>
                         <?php } ?>
+                        <li><a href='index.php?route=information/event/events'>EVENTS</a></li>
                     </ul>
                 </div>
             <?php } ?>

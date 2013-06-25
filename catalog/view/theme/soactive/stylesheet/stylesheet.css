@@ -2593,6 +2593,10 @@ a.buttonHome:hover, input.buttonHome:hover {
     height: 290px;
     margin-left: 22px;
 }
+.events .jcarousel-skin-tango .jcarousel-clip-horizontal {
+    width: 736px;
+    margin-left: 16px;
+}
 .jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
     min-width: 950px;
 }
@@ -2676,6 +2680,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     cursor: pointer;
     background: transparent url(../image/next.png) no-repeat 0 0;
 }
+.events .jcarousel-skin-tango .jcarousel-next-horizontal {
+    right: -1px;
+}
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-next-horizontal {
     left: 5px;
     right: auto;
@@ -2703,6 +2710,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     height: 28px;
     cursor: pointer;
     background: transparent url(../image/preview.png) no-repeat 0 0;
+}
+.events .jcarousel-skin-tango .jcarousel-prev-horizontal {
+    left: 2px;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-prev-horizontal {
     left: auto;
@@ -2768,6 +2778,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     max-height: 30px;
     margin-bottom: 10px;
 }
+.events #featuredProduct {
+    margin-top: 14px;
+}
 .featuredTitle {
     color: #46e1cf;
 }
@@ -2816,6 +2829,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     vertical-align: top;
     line-height: 14px;
     position: relative;
+}
+.events .completeLook li {
+    margin-right: 14px;
 }
 .completeLook li > .nameItem {
     margin-top: 5px;
@@ -3086,4 +3102,46 @@ a.buttonHome:hover, input.buttonHome:hover {
     height: 83px;
     margin-bottom: 9px;
     background-color: #000;
+}
+.events {
+    margin-top: 15px;
+}
+.events #content h1 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding-top: 20px;
+}
+.events #content p {
+    margin-bottom: 0;
+}
+.events #column-left .box .box-heading {
+    border-top: none;
+}
+.events #column-left .box .box-content {
+    border-bottom: none;
+}
+.events #column-left .box .social {
+    padding-top: 30px;
+    padding-left: 10px;
+}
+.events #column-left .box .box-content #module_ec > table > tbody {
+    border: 1px solid #dee0e0;
+}
+.events #column-left .box .box-content #module_ec > table > tbody > tr > td {
+    background-color: #dee0e0;
+}
+.events #column-left .box .box-content #module_ec > table > tbody > tr td {
+    border: 1px solid #dee0e0;
+}
+.events #column-left .box .box-content #module_ec a.button {
+    padding: 5px 12px;
+    font-size: 13px;
+    background-color: #dee0e0;
+    float: left;
+}
+.events #column-left .box .box-content #module_ec a.button + a.button {
+    background-color: #1db4b7;
+    float: right;
+}
+.events #content .manufacturer-list .manufacturer-heading > a {
+    color: #1db4b7;
 }
