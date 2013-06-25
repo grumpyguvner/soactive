@@ -470,4 +470,4 @@ ALTER TABLE `oc_return` ADD `refund_amount` DECIMAL(15,4) NOT NULL DEFAULT '0.00
 ALTER TABLE `oc_category` ADD `is_filter` tinyint(1) NOT NULL DEFAULT 0 AFTER `sort_order`;
 ALTER TABLE `oc_category` ADD `members_only` tinyint(1) NOT NULL AFTER `is_filter`;
 ALTER TABLE `oc_category` ADD `date_start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `members_only`;
-ALTER TABLE `oc_category` ADD `date_end` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `date_end`;
+ALTER TABLE `oc_category` ADD `date_end` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `date_start`;

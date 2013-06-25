@@ -268,8 +268,10 @@ class Category {
 		return $query->rows;
 	}
         
-        public function isMembersOnly($category_id) {
+        public function isMembersOnly($category_id = null) {
 		
+            if (!$category_id) $category_id = $this->category_id;
+            
 		$query = $this->db->query("SELECT members_only, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
 
 		if ($query->num_rows) {
@@ -286,7 +288,7 @@ class Category {
         
         private function getAvailableDates($category_id) {
 		
-		$query = $this->db->query("SELECT date_from, date_to, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+		$query = $this->db->query("SELECT date_start, date_end, parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
 
 		if ($query->num_rows) {
                     $date_start = ($query->row['date_start']) ? strtotime($query->row['date_start']) : false;
