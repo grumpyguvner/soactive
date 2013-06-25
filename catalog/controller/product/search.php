@@ -263,7 +263,7 @@ class ControllerProductSearch extends Controller {
 					'price'       => $price,
 					'special'     => $special,
                                         'saving_percent'        => $result['saving_percent'],
-                                        'new'        => $result['product_id'],
+                                        'new'        => $result['new'],
 					'tax'         => $tax,
 					'rating'      => $result['rating'],
 					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),

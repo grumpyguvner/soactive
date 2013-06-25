@@ -1335,14 +1335,16 @@ a.buttonHome:hover, input.buttonHome:hover {
 	margin-bottom: 5px;
 	text-align: center;
         position: relative;
+        cursor: pointer;
 }
-.product-info .image .zoom {
+.product-info .image span {
         background-color: #1DB4B7; 
         width: 37px;
         height: 18px;
         position: absolute;
         left: 253px; 
         top: 352px;
+        cursor: pointer;
 }
 .product-info .image > a, .product-info .image > a:hover {
         color: #514f4f;
@@ -2810,6 +2812,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     text-align: center;
     vertical-align: top;
     line-height: 14px;
+    position: relative;
 }
 .completeLook li > .nameItem {
     margin-top: 5px;

@@ -136,8 +136,6 @@ class ControllerProductCategory extends Controller {
                                 $rating = false;
                         }
                         
-                        $days_left = floor((time() - strtotime($result['date_added'])) / ( 60*60*24));   
-                        
                         $this->data['products'][] = array(
                                 'product_id'  => $result['product_id'],
                                 'thumb'       => $image,
