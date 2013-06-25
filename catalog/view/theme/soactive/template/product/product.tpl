@@ -18,7 +18,7 @@
                 <div class="image" id="wrap-image">
                     <?php if ($thumb) { ?>
                         <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
-                        <img class="zoom" data-colorbox="" alt="Zoom" />
+                        <span>Zoom</span>
                     <?php } ?>
                 </div>
                 <?php if ($images) { ?>
@@ -549,21 +549,26 @@ jQuery(document).ready(function() {
         });
             
         $('.image-additional').delegate('a.imageAdditional','click', function(){
-            $('.product-img .image').html('<img src="' + $(this).data('main') + '" alt="" />');
+            $('.product-img .image').html('<img src="' + $(this).data('main') + '" alt="" /><span>Zoom</span>');
             return false;
         });
             
         $('.product-img .image').delegate('img','click', function(){
-            $('.colorbox').colorbox({
+            $('.colorbox, .videoAdditional').colorbox({
                 overlayClose: true,
                 opacity: 0.5,
                 open: true
             });
-            $(".videoAdditional").colorbox({iframe:true, innerWidth:500, innerHeight:500});
+            $('.videoAdditional').colorbox({iframe:true, innerWidth:'640', innerHeight:'390'});
         });
         
     });
         
 </script>
 <script type="text/javascript" async="true" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51c425d953829875"></script>
+<script type="text/javascript">
+    $('#wrap-image > span').live('click', function() {
+        $('#wrap-image > img').trigger('click');
+    });
+</script>  
 <?php echo $footer; ?>
