@@ -326,11 +326,15 @@ CREATE TABLE `oc_category` (
   `top` tinyint(1) NOT NULL,
   `column` int(3) NOT NULL,
   `sort_order` int(3) NOT NULL DEFAULT '0',
+  `is_filter` tinyint(1) NOT NULL DEFAULT 0,
+  `members_only` tinyint(1) NOT NULL,
+  `date_start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_end` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `googlebase_text` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `googlebase_xml` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `googlebase_text` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `googlebase_xml` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`category_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

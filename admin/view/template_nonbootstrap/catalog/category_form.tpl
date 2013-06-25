@@ -125,6 +125,30 @@
               <td><input type="text" name="column" value="<?php echo $column; ?>" size="1" /></td>
             </tr>
             <tr>
+              <td><?php echo $entry_is_filter; ?></td>
+              <td><?php if ($is_filter) { ?>
+                <input type="checkbox" name="is_filter" value="1" checked="checked" />
+                <?php } else { ?>
+                <input type="checkbox" name="is_filter" value="1" />
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_members_only; ?></td>
+              <td><?php if ($top) { ?>
+                <input type="checkbox" name="members_only" value="1" checked="checked" />
+                <?php } else { ?>
+                <input type="checkbox" name="members_only" value="1" />
+                <?php } ?></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_date_start; ?></td>
+              <td><input type="text" name="date_start_date" value="<?php echo $date_start_date; ?>" size="12" class="date" /> <input type="text" name="date_start_time" value="<?php echo $date_start_time; ?>" size="6" class="time" /></td>
+            </tr>
+            <tr>
+              <td><?php echo $entry_date_end; ?></td>
+              <td><input type="text" name="date_end_date" value="<?php echo $date_end_date; ?>" size="12" class="date" /> <input type="text" name="date_end_time" value="<?php echo $date_end_time; ?>" size="6" class="time" /></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_sort_order; ?></td>
               <td><input type="text" name="sort_order" value="<?php echo $sort_order; ?>" size="1" /></td>
             </tr>
