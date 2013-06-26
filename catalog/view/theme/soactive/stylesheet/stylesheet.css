@@ -716,6 +716,7 @@ input.button {
 	margin: 0;
 	border: 0;
 	padding: 3px 12px;
+        min-height: 30px;
 }
 
 /***** Button Home Page *****/
@@ -3008,7 +3009,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #accountContainer .content-account {
     margin-left: 15px;
 }
-#accountNoImage .content-account {
+#accountNoImage .content-account, #accountContainer #registerAccount {
     margin-left: 67px;
 }
 #accountNoImage .content-account .wrapContentAccount {

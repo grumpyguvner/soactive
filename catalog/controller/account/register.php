@@ -98,7 +98,15 @@ class ControllerAccountRegister extends Controller {
         $this->data['entry_select_address'] = $this->language->get('entry_select_address');
         $this->data['button_find_address'] = $this->language->get('button_find_address');
         $this->data['button_select_address'] = $this->language->get('button_select_address');
-
+        
+        if (count($this->data['breadcrumbs']) > 1)
+            {
+                $count = count($this->data['breadcrumbs']) - 2;
+                $this->data['text_breadcrumb_back'] = sprintf($this->language->get('text_breadcrumb_back'), $this->data['breadcrumbs'][$count]['text']);
+            } else {
+                $this->data['text_breadcrumb_back'] = '';
+            }
+                        
         if (isset($this->error['warning'])) {
             $this->data['error_warning'] = $this->error['warning'];
         } else {

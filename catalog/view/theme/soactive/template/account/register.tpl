@@ -20,12 +20,9 @@
     <?php }
     ?>
 </div>
-
-<div id="content-back">
-    <div class="green-bar">
-        <div id="accountContainer" class="container"><div id="column-left"><div class="register-account"></div></div><div id="content"> 
+        <div id="accountContainer"><div id="column-left"><div class="register-account"></div></div><div id="content"> 
                 <?php echo $content_top; ?>
-                <div class="content-account">
+                <div class="content-account" id="registerAccount">
                     <h1><?php echo $heading_title; ?></h1>
 
                     <p><?php echo $text_account_already; ?></p>
@@ -34,50 +31,59 @@
                     <form action="<?php echo $action; ?>" class="form-register" method="post" enctype="multipart/form-data">
                         <h3><?php echo $text_your_details; ?></h3>
                         <div class="content">
-                            <div class="row">
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_firstname; ?>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="text" name="firstname" value="<?php echo $firstname; ?>" />
                                     <?php if ($error_firstname) { ?>
                                         <span class="error"><?php echo $error_firstname; ?></span>
                                     <?php } ?>
                                 </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_lastname; ?>
+                            </div>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span class="required">*</span> <span><?php echo $entry_lastname; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="text" name="lastname" value="<?php echo $lastname; ?>" />
                                     <?php if ($error_lastname) { ?>
                                         <span class="error"><?php echo $error_lastname; ?></span>
                                     <?php } ?>
                                 </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_email; ?>
+                            </div>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span class="required">*</span> <span><?php echo $entry_email; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="text" name="email" value="<?php echo $email; ?>" />
                                     <?php if ($error_email) { ?>
                                         <span class="error"><?php echo $error_email; ?></span>
                                     <?php } ?>
                                 </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_telephone; ?>
+                            </div>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span class="required">*</span> <span><?php echo $entry_telephone; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="text" name="telephone" value="<?php echo $telephone; ?>" />
                                     <?php if ($error_telephone) { ?>
                                         <span class="error"><?php echo $error_telephone; ?></span>
                                     <?php } ?>
                                 </div>
-                                <div class="span2">
-                                    <?php echo $entry_fax; ?>
+                            </div>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span><?php echo $entry_fax; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="text" name="fax" value="<?php echo $fax; ?>" />
                                 </div>
                             </div>
+                            
                         </div>
 
                         <h3><?php echo $text_your_address; ?></h3>
@@ -134,13 +140,14 @@
                             }
                             ?>
                             <div class="paAddress content">
-                                <div class="row">
-                                    <div class="span2">
-                                        <?php echo $entry_company; ?>
+                                <div class="prow">
+                                    <div class="pLabel">  
+                                        <span><?php echo $entry_company; ?></span>
                                     </div>
-                                    <div class="span5">
+                                    <div class="pInput">
                                         <input type="text" name="company" value="<?php echo $company; ?>" />
                                     </div>
+                                </div>
 
                                     <table class="form" style="display: <?php echo (count($customer_groups) > 1 ? 'table-row' : 'none'); ?>;">
 
@@ -160,73 +167,82 @@
                                         </tr>
                                     </table>
 
-                                    <div id="company-id-display">
-                                        <div class="span2">
-                                            <span id="company-id-required" class="required">*</span> <?php echo $entry_company_id; ?>
+                                    <div class="prow" id="company-id-display">
+                                        <div class="pLabel">  
+                                            <span id="company-id-required" class="required">*</span> <span><?php echo $entry_company_id; ?></span>
                                         </div>
-                                        <div class="span5">
+                                        <div class="pInput">
                                             <input type="text" name="company_id" value="<?php echo $company_id; ?>" />
                                             <?php if ($error_company_id) { ?>
                                                 <span class="error"><?php echo $error_company_id; ?></span>
                                             <?php } ?>
                                         </div>
                                     </div>
-                                    <div id="tax-id-display">
-                                        <div class="span2">
-                                            <span id="tax-id-required" class="required">*</span> <?php echo $entry_tax_id; ?>
+                                    <div class="prow" id="tax-id-display">
+                                        <div class="pLabel">  
+                                            <span id="tax-id-required" class="required">*</span> <span><?php echo $entry_tax_id; ?></span>
                                         </div>
-                                        <div class="span5">
+                                        <div class="pInput">
                                             <input type="text" name="tax_id" value="<?php echo $tax_id; ?>" />
                                             <?php if ($error_tax_id) { ?>
                                                 <span class="error"><?php echo $error_tax_id; ?></span>
                                             <?php } ?>
                                         </div>
                                     </div>
-                                    <div class="span2">
-                                        <span class="required">*</span> <?php echo $entry_address_1; ?>
+                                    <div class="prow">
+                                        <div class="pLabel">  
+                                            <span class="required">*</span> <span><?php echo $entry_address_1; ?></span>
+                                        </div>
+                                        <div class="pInput">
+                                            <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
+                                            <?php if ($error_address_1) { ?>
+                                                <span class="error"><?php echo $error_address_1; ?></span>
+                                            <?php } ?>
+                                        </div>
                                     </div>
-                                    <div class="span5">
-                                        <input type="text" name="address_1" value="<?php echo $address_1; ?>" />
-                                        <?php if ($error_address_1) { ?>
-                                            <span class="error"><?php echo $error_address_1; ?></span>
-                                        <?php } ?>
+                                    <div class="prow">
+                                        <div class="pLabel">  
+                                            <span><?php echo $entry_address_2; ?></span>
+                                        </div>
+                                        <div class="pInput">
+                                            <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
+                                        </div>
                                     </div>
-                                    <div class="span2">
-                                        <?php echo $entry_address_2; ?>
+                                    <div class="prow">
+                                        <div class="pLabel">  
+                                            <span class="required">*</span> <span><?php echo $entry_city; ?></span>
+                                        </div>
+                                        <div class="pInput">
+                                            <input type="text" name="city" value="<?php echo $city; ?>" />
+                                            <?php if ($error_city) { ?>
+                                                <span class="error"><?php echo $error_city; ?></span>
+                                            <?php } ?>
+                                        </div>
                                     </div>
-                                    <div class="span5">
-                                        <input type="text" name="address_2" value="<?php echo $address_2; ?>" />
-                                    </div>
-                                    <div class="span2">
-                                        <span class="required">*</span> <?php echo $entry_city; ?>
-                                    </div>
-                                    <div class="span5">
-                                        <input type="text" name="city" value="<?php echo $city; ?>" />
-                                        <?php if ($error_city) { ?>
-                                            <span class="error"><?php echo $error_city; ?></span>
-                                        <?php } ?>
-                                    </div>
-                                    <div class="span2">
-                                        <span id="postcode-required" class="required">*</span> <?php echo $entry_postcode; ?>
-                                    </div>
-                                    <div class="span5">
-                                        <input type="text" name="postcode" class="span2" value="<?php echo $postcode; ?>" />
-                                        <?php
-                                        if ($use_postcode_anywhere) {
-                                            ?>
-                                            <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
+                                    <div class="prow">
+                                        <div class="pLabel">  
+                                            <span id="postcode-required" class="required">*</span> <span><?php echo $entry_postcode; ?></span>
+                                        </div>
+                                        <div class="pInput">
+                                            <input type="text" name="postcode" class="span2" value="<?php echo $postcode; ?>" />
                                             <?php
-                                        }
-                                        if ($error_postcode) {
-                                            ?>
-                                            <span class="error"><?php echo $error_postcode; ?></span>
-                                        <?php } ?>
+                                            if ($use_postcode_anywhere) {
+                                                ?>
+                                                <button class="btn" name="lookup" type="submit"><?php echo $button_find_address; ?></button>
+                                                <?php
+                                            }
+                                            if ($error_postcode) {
+                                                ?>
+                                                <span class="error"><?php echo $error_postcode; ?></span>
+                                            <?php } ?>
+                                        </div>
                                     </div>
-                                    <div class="span2">
-                                        <span class="required">*</span> <?php echo $entry_country; ?>
-                                    </div>
-                                    <div class="span5">
-                                        <select name="country_id">
+                                    <div class="prow">
+                                        <div class="pLabel">  
+                                            <span class="required">*</span> <span><?php echo $entry_country; ?></span>
+                                        </div>
+                                        <div class="pInput">
+                                            <select name="country_id">
                                             <option value=""><?php echo $text_select; ?></option>
                                             <?php foreach ($countries as $country) { ?>
                                                 <?php if ($country['country_id'] == $country_id) { ?>
@@ -239,54 +255,58 @@
                                         <?php if ($error_country) { ?>
                                             <span class="error"><?php echo $error_country; ?></span>
                                         <?php } ?>
+                                        </div>
                                     </div>
-                                    <div class="span2">
-                                        <span class="required">*</span> <?php echo $entry_zone; ?>
+                                    <div class="prow">
+                                        <div class="pLabel">  
+                                            <span class="required">*</span> <span><?php echo $entry_zone; ?></span>
+                                        </div>
+                                        <div class="pInput">
+                                            <select name="zone_id">
+                                            </select>
+                                            <?php if ($error_zone) { ?>
+                                                <span class="error"><?php echo $error_zone; ?></span>
+                                            <?php } ?>
+                                        </div>
                                     </div>
-                                    <div class="span5">
-                                        <select name="zone_id">
-                                        </select>
-                                        <?php if ($error_zone) { ?>
-                                            <span class="error"><?php echo $error_zone; ?></span>
-                                        <?php } ?>
-                                    </div>
-                                </div>    
                             </div> 
                         </div>
                         <h3><?php echo $text_your_password; ?></h3>
                         <div class="content">
-                            <div class="row">
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_password; ?>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span class="required">*</span> <span><?php echo $entry_password; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="password" name="password" value="<?php echo $password; ?>" />
                                     <?php if ($error_password) { ?>
                                         <span class="error"><?php echo $error_password; ?></span>
                                     <?php } ?>
                                 </div>
-                                <div class="span2">
-                                    <span class="required">*</span> <?php echo $entry_confirm; ?>
+                            </div>
+                            <div class="prow">
+                                <div class="pLabel">  
+                                    <span class="required">*</span> <span><?php echo $entry_confirm; ?></span>
                                 </div>
-                                <div class="span5">
+                                <div class="pInput">
                                     <input type="password" name="confirm" value="<?php echo $confirm; ?>" />
                                     <?php if ($error_confirm) { ?>
                                         <span class="error"><?php echo $error_confirm; ?></span>
                                     <?php } ?>
                                 </div>
-
                             </div>
+                           
                         </div>
                         <?php
                         if ($show_newsletter) {
                             ?>
                             <h3><?php echo $text_newsletter; ?></h3>
                             <div class="content">
-                                <div class="row">
-                                    <div class="span2">
-                                        <?php echo $entry_newsletter; ?>
+                                <div class="prow">
+                                    <div class="pLabel">  
+                                        <span><?php echo $entry_newsletter; ?></span>
                                     </div>
-                                    <div class="span5">
+                                    <div class="pInput">
                                         <?php if ($newsletter) { ?>
                                             <input type="radio" name="newsletter" value="1" checked="checked" />
                                             <?php echo $text_yes; ?>
@@ -299,7 +319,7 @@
                                             <?php echo $text_no; ?>
                                         <?php } ?>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
                             <?php
                         } else {
@@ -336,8 +356,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    
 <script type="text/javascript"><!--
     $('.postcodeAnywhereContainer').postcodeAnywhere();
     
