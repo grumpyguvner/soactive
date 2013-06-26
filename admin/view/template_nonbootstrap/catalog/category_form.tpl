@@ -134,7 +134,7 @@
             </tr>
             <tr>
               <td><?php echo $entry_members_only; ?></td>
-              <td><?php if ($top) { ?>
+              <td><?php if ($members_only) { ?>
                 <input type="checkbox" name="members_only" value="1" checked="checked" />
                 <?php } else { ?>
                 <input type="checkbox" name="members_only" value="1" />

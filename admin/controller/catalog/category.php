@@ -359,7 +359,7 @@ class ControllerCatalogCategory extends Controller {
                 if (isset($this->request->post['date_start_date'])) {
                     $this->data['date_start_date'] = $this->request->post['date_start_date'];
                     $this->data['date_start_time'] = $this->request->post['date_start_time'];
-                } elseif (!empty($category_info)) {
+                } elseif (!empty($category_info) && strtotime($category_info['date_start'])) {
                     $this->data['date_start_date'] = date('Y-m-d', strtotime($category_info['date_start']));
                     $this->data['date_start_time'] = date('H:i', strtotime($category_info['date_start']));
                 } else {
@@ -370,7 +370,7 @@ class ControllerCatalogCategory extends Controller {
                 if (isset($this->request->post['date_end_date'])) {
                     $this->data['date_end_date'] = $this->request->post['date_end_date'];
                     $this->data['date_end_time'] = $this->request->post['date_end_time'];
-                } elseif (!empty($category_info)) {
+                } elseif (!empty($category_info) && strtotime($category_info['date_end'])) {
                     $this->data['date_end_date'] = date('Y-m-d', strtotime($category_info['date_end']));
                     $this->data['date_end_time'] = date('H:i', strtotime($category_info['date_end']));
                 } else {
