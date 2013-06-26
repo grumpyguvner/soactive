@@ -665,6 +665,7 @@ table.radio tr.highlight:hover td {
         color: #1db4b7;
         text-shadow: 0 0 2px #1db4b7;
         padding: 0 4px;
+        font-weight: normal;
 }
 .pagination .links a {
 	display: inline-block;
@@ -697,9 +698,9 @@ a.button, input.button {
 	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 17px;
 	font-weight: bold;
-	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
-	-moz-box-shadow: 0px 2px 2px #DDDDDD;
-	box-shadow: 0px 2px 2px #DDDDDD;
+	-webkit-box-shadow: 0px 2px 2px #CCCCCC;
+	-moz-box-shadow: 0px 2px 2px #CCCCCC;
+	box-shadow: 0px 2px 2px #CCCCCC;
         border-radius: 4px 4px 4px 4px;
         -webkit-border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
@@ -1214,6 +1215,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-grid .productItem {
         text-align: center;
+        line-height: 14px;
 }
 .product-grid .productItem .name {
         margin-top: 5px;
@@ -1259,6 +1261,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	font-weight: bold;
 	color: #fd0303;
 	margin-bottom: 4px;
+        display: inline-block;
 }
 .product-grid .save {
         font-weight: 700;
@@ -1483,7 +1486,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         -webkit-border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
 	-khtml-border-radius: 4px 4px 4px 4px;
-        box-shadow: 0 2px 2px #DDDDDD;
+        box-shadow: 0 2px 2px #CCCCCC;
         height: 30px;
         width: 230px;
         font-size: 17px;
@@ -2575,6 +2578,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-container span.price {    
     color: #fd0303;
 }
+.jcarousel-skin-tango .jcarousel-container-vertical span.price-new {    
+    color: #fd0303;
+}
 .jcarousel-skin-tango .jcarousel-direction-rtl {
 	direction: rtl;
 }
@@ -2592,6 +2598,10 @@ a.buttonHome:hover, input.buttonHome:hover {
     width:  922px;
     height: 290px;
     margin-left: 22px;
+}
+.events .jcarousel-skin-tango .jcarousel-clip-horizontal {
+    width: 736px;
+    margin-left: 16px;
 }
 .jcarousel-skin-tango .jcarousel-clip-horizontal #featuredStyles {
     min-width: 950px;
@@ -2676,6 +2686,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     cursor: pointer;
     background: transparent url(../image/next.png) no-repeat 0 0;
 }
+.events .jcarousel-skin-tango .jcarousel-next-horizontal {
+    right: -1px;
+}
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-next-horizontal {
     left: 5px;
     right: auto;
@@ -2703,6 +2716,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     height: 28px;
     cursor: pointer;
     background: transparent url(../image/preview.png) no-repeat 0 0;
+}
+.events .jcarousel-skin-tango .jcarousel-prev-horizontal {
+    left: 2px;
 }
 .jcarousel-skin-tango .jcarousel-direction-rtl .jcarousel-prev-horizontal {
     left: auto;
@@ -2768,6 +2784,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     max-height: 30px;
     margin-bottom: 10px;
 }
+.events #featuredProduct {
+    margin-top: 14px;
+}
 .featuredTitle {
     color: #46e1cf;
 }
@@ -2816,6 +2835,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     vertical-align: top;
     line-height: 14px;
     position: relative;
+}
+.events .completeLook li {
+    margin-right: 14px;
 }
 .completeLook li > .nameItem {
     margin-top: 5px;
@@ -2987,7 +3009,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-left: 15px;
 }
 #accountNoImage .content-account {
-    margin-left: 80px;
+    margin-left: 67px;
 }
 #accountNoImage .content-account .wrapContentAccount {
     margin-left: 40px;
@@ -3013,7 +3035,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     border-left: 1px solid #b9bdbd;
 }
 .content-account .returningCustomer .content {
-    padding: 0 !important;
+    padding-top: 0 !important;
     float: right;
     margin-right: 40px;
 }
@@ -3086,4 +3108,46 @@ a.buttonHome:hover, input.buttonHome:hover {
     height: 83px;
     margin-bottom: 9px;
     background-color: #000;
+}
+.events {
+    margin-top: 15px;
+}
+.events #content h1 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding-top: 20px;
+}
+.events #content p {
+    margin-bottom: 0;
+}
+.events #column-left .box .box-heading {
+    border-top: none;
+}
+.events #column-left .box .box-content {
+    border-bottom: none;
+}
+.events #column-left .box .social {
+    padding-top: 30px;
+    padding-left: 10px;
+}
+.events #column-left .box .box-content #module_ec > table > tbody {
+    border: 1px solid #dee0e0;
+}
+.events #column-left .box .box-content #module_ec > table > tbody > tr > td {
+    background-color: #dee0e0;
+}
+.events #column-left .box .box-content #module_ec > table > tbody > tr td {
+    border: 1px solid #dee0e0;
+}
+.events #column-left .box .box-content #module_ec a.button {
+    padding: 5px 12px;
+    font-size: 13px;
+    background-color: #dee0e0;
+    float: left;
+}
+.events #column-left .box .box-content #module_ec a.button + a.button {
+    background-color: #1db4b7;
+    float: right;
+}
+.events #content .manufacturer-list .manufacturer-heading > a {
+    color: #1db4b7;
 }
