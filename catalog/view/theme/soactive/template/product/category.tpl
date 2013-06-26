@@ -16,10 +16,27 @@ if ($login_required)
         <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
     <?php } ?>
   </div>
+
+<script type="text/javascript" src="catalog/view/javascript/jquery/countdown/jquery.countdown.js"></script>
+<script type="text/javascript">
+      $(function() {
+        var endDate = "<?php echo date("M j, Y, G:i:s", strtotime($date_end)); ?>";
+        
+        $('.countdown.styled').countdown({
+          date: endDate,
+          render: function(data) {
+            $(this.el).html("<div>" + this.leadingZeros(data.days, 3) + " <span>days</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>hrs</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>sec</span></div>");
+          }
+        });
+        
+      });
+    </script>
 <?php if ($thumb || $description) { ?>
 <div class="category-info">
         <?php if ($thumb) { ?>
         <div class="categoryImage">
+             
+            <div class="countdown styled"></div>
             <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
         </div>    
         <?php } ?>

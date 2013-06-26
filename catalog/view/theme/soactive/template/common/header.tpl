@@ -22,7 +22,7 @@
         <?php foreach ($styles as $style) { ?>
             <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
         <?php } ?>
-        <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript" src="catalog/view/javascript/jquery/jquery.jcarousel.min.js"></script>
         <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
@@ -50,13 +50,15 @@
     </head>
     <body>
         <div id="fb-root"></div>
-        <script>(function(d, s, id) {
+        <script>
+            (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
           js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
           fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
         <div class="container">
             <div id="header">
                 
