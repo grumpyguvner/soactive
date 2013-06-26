@@ -1,11 +1,11 @@
 
-<div class="login-modal">
+<div id="login-module">
     <h1><?php echo strtoupper($heading_title); ?></h1>
     <div id="modal_notification">
-        <div class="warning"><?php echo $text_register_account; ?></div>
+        <div class="success"><?php echo $text_register_account; ?></div>
     </div>
     <form id="login_modal" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-        <p><?php echo $text_i_am_returning_customer; ?></p>
+        <p><?php echo $text_returning_customer; ?></p>
         <table>
             <tr>
                 <td><strong><?php echo $entry_email; ?></strong></td>
@@ -21,14 +21,26 @@
                 <td>&nbsp;</td>
             </tr>
         </table>
-        <input type="submit" value="<?php echo strtoupper($button_login); ?>" class="button" />
+        <input type="button" value="<?php echo strtoupper($button_login); ?>" class="button" />
     </form>
 </div>
-
-<script type="text/javascript"><!--
-    $('#login_modal input').keydown(function(e) {
+<script type="text/javascript">
+$('#login-module').submit(function(event) {
+    event.preventDefault();
+    
+    if ($('input[name=customer]').val())
+        {
+            
+        }
+ alert($('input[name=customer]').val());
+});
+</script>
+<script type="text/javascript">
+<!--
+    $('#login-module input').keydown(function(e) {
         if (e.keyCode == 13) {
-            $('#login_modal').submit();
+            $('#login-module').trigger('submit');
         }
     });
-    //--></script> 
+//-->
+</script> 
