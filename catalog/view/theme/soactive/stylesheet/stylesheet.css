@@ -665,6 +665,7 @@ table.radio tr.highlight:hover td {
         color: #1db4b7;
         text-shadow: 0 0 2px #1db4b7;
         padding: 0 4px;
+        font-weight: normal;
 }
 .pagination .links a {
 	display: inline-block;
@@ -1214,6 +1215,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-grid .productItem {
         text-align: center;
+        line-height: 14px;
 }
 .product-grid .productItem .name {
         margin-top: 5px;
@@ -1259,6 +1261,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	font-weight: bold;
 	color: #fd0303;
 	margin-bottom: 4px;
+        display: inline-block;
 }
 .product-grid .save {
         font-weight: 700;

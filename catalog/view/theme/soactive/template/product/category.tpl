@@ -1,7 +1,5 @@
 <?php echo $header; ?><?php echo $content_top; ?>
-<?php if ($thumb || $description) { ?>
-    
-        <div class="breadcrumb">
+<div class="breadcrumb">
     <?php if ($breadcrumbs) { ?>
       <?php $count = count($breadcrumbs) - 1; ?>
       <?php for ($i = 0; $i < $count; $i++) { ?>
@@ -11,6 +9,7 @@
         <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
     <?php } ?>
   </div>
+<?php if ($thumb || $description) { ?>
 <div class="category-info">
         <?php if ($thumb) { ?>
         <div class="categoryImage">
@@ -31,14 +30,21 @@
             <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
             <div class="productResult"><?php echo $pagination2; ?></div>
             <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
-            <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+            <div class="numberProducts"><a href="<?php 
+                foreach ($limits as $hlimit) {
+                    if($hlimit['value'] == '100') { 
+                        echo $hlimit['href']; 
+                    }
+                }
+                ?>"><?php echo $text_hundred_per_page; ?></a>
+            </div>
             <div class="sort"><span><?php echo $text_sort; ?></span>
                 <select onchange="location = this.value;">
-                    <?php foreach ($sorts as $sorts) { ?>
-                        <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-                            <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+                    <?php foreach ($sorts as $sort_first) { ?>
+                        <?php if ($sort_first['value'] == $sort . '-' . $order) { ?>
+                            <option value="<?php echo $sort_first['href']; ?>" selected="selected"><?php echo $sort_first['text']; ?></option>
                         <?php } else { ?>
-                            <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+                            <option value="<?php echo $sort_first['href']; ?>"><?php echo $sort_first['text']; ?></option>
                         <?php } ?>
                     <?php } ?>
                 </select>
@@ -62,7 +68,7 @@
                                 <?php if ($product['price']) { ?>
                                     <div class="priceItem">
                                         <?php if (!$product['special']) { ?>
-                                            <span class="price"><?php echo $product['price']; ?></span>
+                                             <span>Pay: </span><span class="price"><?php echo $product['price']; ?></span>
                                         <?php } else { ?>
                                             <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
                                             <span class="price-old">RRP: <?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
@@ -76,7 +82,25 @@
                     <div class="product-filter">
                         <div class="productResult"><?php echo $pagination2; ?></div>
                         <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
-                        <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+                        <div class="numberProducts"><a href="<?php 
+                            foreach ($limits as $hlimit) {
+                                if($hlimit['value'] == '100') { 
+                                    echo $hlimit['href']; 
+                                }
+                            }
+                            ?>"><?php echo $text_hundred_per_page; ?></a>
+                        </div>
+                        <div class="sort"><span><?php echo $text_sort; ?></span>
+                <select onchange="location = this.value;">
+                    <?php foreach ($sorts as $sort_after) { ?>
+                        <?php if ($sort_after['value'] == $sort . '-' . $order) { ?>
+                            <option value="<?php echo $sort_after['href']; ?>" selected="selected"><?php echo $sort_after['text']; ?></option>
+                        <?php } else { ?>
+                            <option value="<?php echo $sort_after['href']; ?>"><?php echo $sort_after['text']; ?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
+            </div>
                     </div>
                 <?php } else { ?>
                     <div class="content"><?php echo $text_empty; ?></div>
