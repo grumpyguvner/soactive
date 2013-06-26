@@ -1,4 +1,11 @@
-<?php echo $header; ?><?php echo $content_top; ?>
+<?php echo $header; ?>
+<?php
+if ($login_required)
+{
+    echo '<script>$.colorbox({href:"' . $login_modal . '",opacity: 0.5,overlayClose: false, escKey :false, closeButton: false});</script>';
+}
+?>
+<?php echo $content_top; ?>
 <?php if ($thumb || $description) { ?>
     
         <div class="breadcrumb">

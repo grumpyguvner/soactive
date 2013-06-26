@@ -153,6 +153,7 @@ class ControllerProductCategory extends Controller {
                 }
                 
                     $this->data['login_required'] = (!$this->customer->isLogged() && $this->category->isMembersOnly()) ? true : false;
+                    $this->data['login_modal'] = $this->url->link('account/login/modal');
                     $this->data['date_end'] = $this->category->getDateEnd();
 
                         $urlSort = $this->category->getUrlQuery('sort');
