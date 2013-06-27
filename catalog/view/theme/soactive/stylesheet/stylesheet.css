@@ -3176,6 +3176,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 .countdown div.countdownText {
   display: block;
   font-size: 16px;
-  text-align: left;
+  text-align: center;
 }
 /**** End Countdown ***/

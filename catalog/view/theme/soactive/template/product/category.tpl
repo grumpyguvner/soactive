@@ -25,7 +25,7 @@ if ($login_required)
         $('.countdown').countdown({
           date: endDate,
           render: function(data) {
-            $(this.el).html("<div>" + this.leadingZeros(data.days, 3) + " :<div class='countdownText'>Days</div></div><div>" + this.leadingZeros(data.hours, 2) + " :<div class='countdownText'>Hr</div></div><div>" + this.leadingZeros(data.min, 2) + " : <div class='countdownText'>Min</div></div><div>" + this.leadingZeros(data.sec, 2) + "<div class='countdownText'>Sec</div></div>");
+            $(this.el).html("<div>" + this.leadingZeros(data.days, 2) + " :<div class='countdownText'>Days</div></div><div>" + this.leadingZeros(data.hours, 2) + " :<div class='countdownText'>Hr</div></div><div>" + this.leadingZeros(data.min, 2) + " : <div class='countdownText'>Min</div></div><div>" + this.leadingZeros(data.sec, 2) + "<div class='countdownText'>Sec</div></div>");
           }
         });
         
