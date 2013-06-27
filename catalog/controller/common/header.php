@@ -198,7 +198,8 @@ class ControllerCommonHeader extends Controller {
             'module/language',
             'module/currency',
             'module/cart',
-            'common/content_banner'
+            'common/content_banner',
+            'module/megamenu'
         );
 
         $this->setTemplate('common/header.tpl');

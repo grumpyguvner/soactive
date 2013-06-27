@@ -18,6 +18,7 @@
         <?php } ?>
         <link href="catalog/view/theme/soactive/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/stylesheet.css" />
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/megamenu.css" />
         <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300normal,300italic,700normal|Open+Sans:400normal|Abel:400normal|Oswald:400normal|BenchNine:400normal|Unica+One:400normal|PT+Sans+Narrow:400normal|Droid+Sans:400normal|Droid+Serif:400normal|Cuprum:400normal|Ubuntu+Condensed:400normal&amp;subset=all">
         <?php foreach ($styles as $style) { ?>
             <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
@@ -90,7 +91,11 @@
                     </div>
                 </div>
             </div>
-            <?php if ($categories) { ?>
+            <?php 
+            if ($megamenu)
+            {
+                echo $megamenu;
+            } elseif ($categories) { ?>
                 <div id="menu">
                     <ul>
                         <li><a href='<?php echo $home; ?>'><img src="catalog/view/theme/soactive/image/home-button.png" alt="Home"/></a></li>
