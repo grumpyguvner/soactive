@@ -148,6 +148,8 @@ class ControllerProductSearch extends Controller {
 		$this->data['text_sort'] = $this->language->get('text_sort');
 		$this->data['text_limit'] = $this->language->get('text_limit');
                 $this->data['text_pview'] = $this->language->get('text_pview');
+                $this->data['text_fourty_per_page'] = $this->language->get('text_fourty_per_page');
+                $this->data['text_hundred_per_page'] = $this->language->get('text_hundred_per_page');
 		
 		$this->data['entry_search'] = $this->language->get('entry_search');
     	$this->data['entry_description'] = $this->language->get('entry_description');
@@ -398,7 +400,13 @@ class ControllerProductSearch extends Controller {
 				'value' => 25,
 				'href'  => $this->url->link('product/search', $url . '&limit=25')
 			);
-			
+                        
+			$this->data['limits'][] = array(
+				'text'  => 40,
+				'value' => 40,
+				'href'  => $this->url->link('product/search', $url . '&limit=40')
+			);
+                        
 			$this->data['limits'][] = array(
 				'text'  => 50,
 				'value' => 50,

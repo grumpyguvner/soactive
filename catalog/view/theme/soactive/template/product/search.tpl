@@ -33,14 +33,22 @@
             <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
             <div class="productResult"><?php echo $pagination2; ?></div>
             <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
-            <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+            <div class="numberProducts">
+                    <?php foreach ($limits as $hlimit) { ?>
+                        <?php if ($hlimit['value'] == '100' && $limit != '100') { ?>
+                        <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_hundred_per_page; ?></a>
+                        <?php } else if ($hlimit['value'] == '40' && $limit == '100') { ?>
+                        <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_fourty_per_page; ?></a>
+                        <?php } ?>
+                    <?php } ?>
+            </div>
             <div class="sort"><span><?php echo $text_sort; ?></span>
                 <select onchange="location = this.value;">
-                    <?php foreach ($sorts as $sorts) { ?>
-                        <?php if ($sorts['value'] == $sort . '-' . $order) { ?>
-                            <option value="<?php echo $sorts['href']; ?>" selected="selected"><?php echo $sorts['text']; ?></option>
+                    <?php foreach ($sorts as $sort_first) { ?>
+                        <?php if ($sort_first['value'] == $sort . '-' . $order) { ?>
+                            <option value="<?php echo $sort_first['href']; ?>" selected="selected"><?php echo $sort_first['text']; ?></option>
                         <?php } else { ?>
-                            <option value="<?php echo $sorts['href']; ?>"><?php echo $sorts['text']; ?></option>
+                            <option value="<?php echo $sort_first['href']; ?>"><?php echo $sort_first['text']; ?></option>
                         <?php } ?>
                     <?php } ?>
                 </select>
@@ -77,7 +85,26 @@
                     <div class="product-filter">
                         <div class="productResult"><?php echo $pagination2; ?></div>
                         <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
-                        <div class="numberProducts"><a href="#">View 100 items per page</a></div>
+                        <div class="numberProducts">
+                            <?php foreach ($limits as $hlimit) { ?>
+                                <?php if ($hlimit['value'] == '100' && $limit != '100') { ?>
+                                <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_hundred_per_page; ?></a>
+                                <?php } else if ($hlimit['value'] == '40' && $limit == '100') { ?>
+                                <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_fourty_per_page; ?></a>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <div class="sort"><span><?php echo $text_sort; ?></span>
+                            <select onchange="location = this.value;">
+                                <?php foreach ($sorts as $sort_after) { ?>
+                                    <?php if ($sort_after['value'] == $sort . '-' . $order) { ?>
+                                        <option value="<?php echo $sort_after['href']; ?>" selected="selected"><?php echo $sort_after['text']; ?></option>
+                                    <?php } else { ?>
+                                        <option value="<?php echo $sort_after['href']; ?>"><?php echo $sort_after['text']; ?></option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
             <?php } else { ?>
                 <div class="content"><?php echo $text_empty; ?></div>
