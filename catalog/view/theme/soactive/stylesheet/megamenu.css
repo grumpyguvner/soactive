@@ -130,7 +130,7 @@
 #megamenu > ul > li ul > li > a {
 	text-decoration: none;
 	padding: 4px;
-	color: #FFFFFF;
+	color: #514f4f;
 	display: block;
 	white-space: nowrap;
 	min-width: 120px;
@@ -157,7 +157,7 @@
         max-height: 20px;
         padding-bottom: 9px;
 }
-#megamenu li{ position:relative;}
+#megamenu li{ position:relative; line-height: 10px;}
 #megamenu li:hover { z-index:1600}
 
 #megamenu > ul > li > a 
@@ -180,17 +180,30 @@
 #megamenu > ul > li > div.dropdown
 {
 
-    display:none;
+    display: block;
     position:absolute;
-    padding:0px 0 25px; 
+    padding: 10px 10px; 
     z-index:10;	
     border:1px solid #dcdcdc; 
     text-align:left; 
-    top:73px; 
+    top: 24px; 
     left:0;
     padding-bottom:10px;
+    border-top: 6px solid #1db4b7;
 
 
+}
+#megamenu > ul > li > div.dropdown h5, #megamenu > ul > li > div.dropdown h6 {
+    
+    color: #514f4f;
+    margin: 0 0 10px 0;
+    
+}
+#megamenu > ul > li > div.dropdown h6 {
+    margin: 0;
+}
+#megamenu > ul > li > div.dropdown h5 > span {
+    color: #1db4b7;
 }
 #megamenu > ul > li > div.dropdown  a 
 { 
