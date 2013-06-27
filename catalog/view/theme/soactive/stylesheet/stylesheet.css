@@ -553,7 +553,7 @@ table.list tbody td {
 }
 table.list .left {
 	text-align: left;
-	padding: 7px;
+	padding: 19px 7px;
 }
 table.list .right {
 	text-align: right;
@@ -1595,7 +1595,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	margin-bottom: 20px;
 }
 .wishlist-info td {
-	padding: 7px;
+	padding: 19px 7px;
 }
 .wishlist-info h4 {
 	font-size: 13px;
@@ -1841,6 +1841,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 /* cart */
 .cart-info h4 {
     font-size: 12px;
+    margin: 0;
 }
 .cart-info table {
 	width: 100%;
@@ -1850,7 +1851,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	border-right: 1px solid #DDDDDD;
 }
 .cart-info td {
-	padding: 7px;
+	padding: 19px 7px;
 }
 .cart-info thead td {
 	color: #4D4D4D;

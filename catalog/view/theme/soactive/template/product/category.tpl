@@ -54,13 +54,14 @@ if ($login_required)
             <!--div class="display"><b><?php /* echo $text_display; */ ?></b> <?php /* echo $text_list; */ ?> <b>/</b> <a onclick="display('grid');"><?php /* echo $text_grid; */ ?></a></div-->
             <div class="productResult"><?php echo $pagination2; ?></div>
             <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
-            <div class="numberProducts"><a href="<?php 
-                foreach ($limits as $hlimit) {
-                    if($hlimit['value'] == '100') { 
-                        echo $hlimit['href']; 
-                    }
-                }
-                ?>"><?php echo $text_hundred_per_page; ?></a>
+            <div class="numberProducts">
+                <?php foreach ($limits as $hlimit) { ?>
+                    <?php if ($hlimit['value'] == '100' && $limit != '100') { ?>
+                    <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_hundred_per_page; ?></a>
+                    <?php } else if ($hlimit['value'] == '40' && $limit == '100') { ?>
+                    <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_fourty_per_page; ?></a>
+                    <?php } ?>
+                <?php } ?>
             </div>
             <div class="sort"><span><?php echo $text_sort; ?></span>
                 <select onchange="location = this.value;">
@@ -106,25 +107,26 @@ if ($login_required)
                     <div class="product-filter">
                         <div class="productResult"><?php echo $pagination2; ?></div>
                         <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
-                        <div class="numberProducts"><a href="<?php 
-                            foreach ($limits as $hlimit) {
-                                if($hlimit['value'] == '100') { 
-                                    echo $hlimit['href']; 
-                                }
-                            }
-                            ?>"><?php echo $text_hundred_per_page; ?></a>
+                        <div class="numberProducts">
+                            <?php foreach ($limits as $hlimit) { ?>
+                                <?php if ($hlimit['value'] == '100' && $limit != '100') { ?>
+                                <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_hundred_per_page; ?></a>
+                                <?php } else if ($hlimit['value'] == '40' && $limit == '100') { ?>
+                                <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_fourty_per_page; ?></a>
+                                <?php } ?>
+                            <?php } ?>
                         </div>
                         <div class="sort"><span><?php echo $text_sort; ?></span>
-                <select onchange="location = this.value;">
-                    <?php foreach ($sorts as $sort_after) { ?>
-                        <?php if ($sort_after['value'] == $sort . '-' . $order) { ?>
-                            <option value="<?php echo $sort_after['href']; ?>" selected="selected"><?php echo $sort_after['text']; ?></option>
-                        <?php } else { ?>
-                            <option value="<?php echo $sort_after['href']; ?>"><?php echo $sort_after['text']; ?></option>
-                        <?php } ?>
-                    <?php } ?>
-                </select>
-            </div>
+                            <select onchange="location = this.value;">
+                                <?php foreach ($sorts as $sort_after) { ?>
+                                    <?php if ($sort_after['value'] == $sort . '-' . $order) { ?>
+                                        <option value="<?php echo $sort_after['href']; ?>" selected="selected"><?php echo $sort_after['text']; ?></option>
+                                    <?php } else { ?>
+                                        <option value="<?php echo $sort_after['href']; ?>"><?php echo $sort_after['text']; ?></option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
                 <?php } else { ?>
                     <div class="content"><?php echo $text_empty; ?></div>
