@@ -110,6 +110,35 @@ class ControllerModuleLogin extends Controller {
         $this->response->setOutput($this->render());
     }
 
+    public function auth() {
+        $this->load->model('account/customer');
+        
+        $this->language->load('module/login');
+        
+        $json = array();
+        
+        $json['error'] = false;
+        $json['success'] = false;
+        
+        if (!$this->customer->login($this->request->post['email'], $this->request->post['password'])) {
+            $json['error'] = $this->language->get('error_login');
+        }
+
+        $customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+
+        if ($customer_info && !$customer_info['approved']) {
+            $json['error'] = $this->language->get('error_approved');
+        }
+        
+        if (!$json['error'])
+        {
+            $json['success'] = true;
+        }
+        
+        $this->response->setOutput(json_encode($json));
+    }
+    
+
     private function validate() {
         if (!$this->customer->login($this->request->post['email'], $this->request->post['password'])) {
             $this->error['warning'] = $this->language->get('error_login');

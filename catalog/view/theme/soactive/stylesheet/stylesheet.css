@@ -71,6 +71,7 @@ select {
 label {
 	cursor: pointer;
 }
+
 /* layout */
 .container {
 	width: 980px;
@@ -1706,6 +1707,53 @@ a.buttonHome:hover, input.buttonHome:hover {
 .wishlist-info tbody .action img {
 	cursor: pointer;
 }
+
+
+#login-module {
+    width: 550px;
+    padding: 24px;
+}
+#login-module h1 {
+        margin: 0 0 10px 0;
+        line-height: 1em;
+}
+#login-module .login-form {
+        border: 1px solid #DDDDDD;
+        padding: 15px;
+        border-radius: 4px 4px 4px 4px;
+        -webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-khtml-border-radius: 4px 4px 4px 4px;
+}
+#login-module .login-form table {
+        width: 100%;
+        margin-bottom: 10px;
+}
+#login-module .login-form p {
+        font-size: 24px;
+        line-height: 1.2em;
+        font-weight: bold;
+        margin-bottom: 10px;
+}
+#login-module .login-form a {
+        font-weight: bold;
+        color: #1db4b7;
+}
+#login-module .title {
+	background: #1db4b7;
+	border: 1px solid #DBDEE1;
+	padding: 8px;
+	font-weight: bold;
+	font-size: 15px;
+        text-transform: uppercase;
+	color: #555555;
+	margin-bottom: 15px;
+        border-radius: 4px 4px 4px 4px;
+        -webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-khtml-border-radius: 4px 4px 4px 4px;
+}
+
 .login-content {
 	margin-bottom: 20px;
 	overflow: auto;
