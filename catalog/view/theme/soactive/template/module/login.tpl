@@ -62,11 +62,11 @@ $('#form-login-module').submit(function(event) {
 <!--
     $('#login-module input').keydown(function(e) {
         if (e.keyCode == 13) {
-            $('#login-module').trigger('submit');
+            $('#form-login-module').trigger('submit');
         }
     });
     $('#login-module input[type=button]').click(function(e) {
-        $('#login-module').trigger('submit');
+        $('#form-login-module').trigger('submit');
     });
 //-->
 </script> 
