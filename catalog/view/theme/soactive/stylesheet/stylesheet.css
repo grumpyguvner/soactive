@@ -1030,6 +1030,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .category-info .categoryImage {
 	display: inline-block;
         width: 190px;
+        position: relative;
 }
 .category-info .cDescription {
         display: inline-block;
@@ -3200,3 +3201,29 @@ a.buttonHome:hover, input.buttonHome:hover {
 .events #content .manufacturer-list .manufacturer-heading > a {
     color: #1db4b7;
 }
+/***** Countdown ******/
+.countdown {
+  position: absolute;
+  background: #009899;
+  height: 62px;
+  width: 190px;
+  top: 4px;
+  color: #fff;
+  text-align: center;
+}
+.countdown div {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 100;
+  font-weight: 700;
+  line-height: 1;
+  text-align: right;
+  margin-top: 7px;
+  margin-right: 6px;
+}
+.countdown div.countdownText {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+}
+/**** End Countdown ***/
