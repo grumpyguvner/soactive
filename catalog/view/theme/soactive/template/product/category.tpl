@@ -22,10 +22,10 @@ if ($login_required)
       $(function() {
         var endDate = "<?php echo date("M j, Y, G:i:s", strtotime($date_end)); ?>";
         
-        $('.countdown.styled').countdown({
+        $('.countdown').countdown({
           date: endDate,
           render: function(data) {
-            $(this.el).html("<div>" + this.leadingZeros(data.days, 3) + " <span>days</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>hrs</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>min</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>sec</span></div>");
+            $(this.el).html("<div>" + this.leadingZeros(data.days, 3) + " :<div class='countdownText'>Days</div></div><div>" + this.leadingZeros(data.hours, 2) + " :<div class='countdownText'>Hr</div></div><div>" + this.leadingZeros(data.min, 2) + " : <div class='countdownText'>Min</div></div><div>" + this.leadingZeros(data.sec, 2) + "<div class='countdownText'>Sec</div></div>");
           }
         });
         
@@ -36,7 +36,7 @@ if ($login_required)
         <?php if ($thumb) { ?>
         <div class="categoryImage">
              
-            <div class="countdown styled"></div>
+            <div class="countdown"></div>
             <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
         </div>    
         <?php } ?>
