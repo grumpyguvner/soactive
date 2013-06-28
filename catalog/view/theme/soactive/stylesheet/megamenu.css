@@ -193,10 +193,16 @@
 
 
 }
+#megamenu > ul > li > div.dropdown .staticblock > h5 + ul + h5 {
+    margin-top: 30px; 
+}
+#megamenu > ul > li > div.dropdown .staticblock > h6 + ul + h6 {
+    margin-top: 15px; 
+}
 #megamenu > ul > li > div.dropdown h5, #megamenu > ul > li > div.dropdown h6 {
     
     color: #514f4f;
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     
 }
 #megamenu > ul > li > div.dropdown h6 {
