@@ -26,5 +26,6 @@ $_['text_rating_desc']  = 'Rating (Highest)';
 $_['text_model_asc']    = 'Model (A - Z)';
 $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Show:';
+$_['text_fourty_per_page']  = 'View 40 items per page';
 $_['text_hundred_per_page']  = 'View 100 items per page';
 ?>

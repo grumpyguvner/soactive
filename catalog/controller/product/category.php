@@ -44,6 +44,7 @@ class ControllerProductCategory extends Controller {
                 $this->data['text_limit'] = $this->language->get('text_limit');
                 $this->data['text_designed'] = $this->language->get('text_designed');
                 $this->data['text_pview'] = $this->language->get('text_pview');
+                $this->data['text_fourty_per_page'] = $this->language->get('text_fourty_per_page');
                 $this->data['text_hundred_per_page'] = $this->language->get('text_hundred_per_page');
 
                 $this->data['button_cart'] = $this->language->get('button_cart');
