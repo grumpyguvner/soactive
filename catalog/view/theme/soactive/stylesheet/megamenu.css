@@ -163,7 +163,7 @@
 #megamenu li{ position:relative; line-height: 10px;}
 #megamenu li:hover { z-index:1600}
 
-#megamenu > ul > li:first-child> a{padding-left: 12px}
+#megamenu > ul > li:first-child> a{padding-left: 12px; display: block; padding-bottom: 3px;}
 #megamenu > ul > li:first-child> a > img {vertical-align: top;}
 #megamenu > ul > li > div.dropdown
 {
