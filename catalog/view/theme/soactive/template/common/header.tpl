@@ -94,7 +94,12 @@
             <?php 
             if ($megamenu)
             {
-                echo $megamenu;
+                $search = '>home<';
+                $replace = '><img src="catalog/view/theme/soactive/image/home-button.png" alt="Home" class="home" /><';
+                $mega_menu = str_replace($search, $replace, $megamenu);
+                
+                echo $mega_menu;
+                
             } elseif ($categories) { ?>
                 <div id="menu">
                     <ul>
