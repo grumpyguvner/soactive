@@ -471,3 +471,8 @@ ALTER TABLE `oc_category` ADD `is_filter` tinyint(1) NOT NULL DEFAULT 0 AFTER `s
 ALTER TABLE `oc_category` ADD `members_only` tinyint(1) NOT NULL AFTER `is_filter`;
 ALTER TABLE `oc_category` ADD `date_start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `members_only`;
 ALTER TABLE `oc_category` ADD `date_end` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `date_start`;
+
+#### Start 1.5.4:BC1.2.7
+
+ALTER TABLE `oc_customer` ADD `date_of_birth` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `fax`;
+
