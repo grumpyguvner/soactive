@@ -922,6 +922,7 @@ CREATE TABLE `oc_customer` (
   `email` varchar(96) COLLATE utf8_bin NOT NULL DEFAULT '',
   `telephone` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
   `fax` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `date_of_birth` DATE NOT NULL DEFAULT '0000-00-00 00:00:00',
   `password` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
   `salt` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT '',
   `cart` text COLLATE utf8_bin,
