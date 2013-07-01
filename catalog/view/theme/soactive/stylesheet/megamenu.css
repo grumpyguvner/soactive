@@ -180,7 +180,7 @@
 #megamenu > ul > li > div.dropdown
 {
 
-    display: block;
+    display: none;
     position:absolute;
     padding: 10px 10px; 
     z-index:10;	
