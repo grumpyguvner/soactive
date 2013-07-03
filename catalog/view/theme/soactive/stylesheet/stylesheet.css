@@ -1349,6 +1349,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .price-new {
     color: #fd0303;
 }
+.product-info .right .price .price-new {
+    font-size: 20px;
+}
 .product-info .save {
     color: #514f4f;
 }

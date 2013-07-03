@@ -69,7 +69,7 @@
         <?php echo $price; ?>
         <?php } else { ?>
           <span class="save">SAVE <?php echo $saving_percent . '% ' ?></span>
-          <span style="font-weight: normal;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
+          <span style="font-weight: normal; text-decoration: line-through;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
