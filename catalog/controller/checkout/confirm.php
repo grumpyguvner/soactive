@@ -338,6 +338,9 @@ class ControllerCheckoutConfirm extends Controller {
             $this->data['column_price'] = $this->language->get('column_price');
             $this->data['column_total'] = $this->language->get('column_total');
 
+            
+	    $this->load->model('tool/image');
+                        
             $this->data['products'] = array();
 
             foreach ($this->cart->getProducts() as $product) {
@@ -357,12 +360,20 @@ class ControllerCheckoutConfirm extends Controller {
                         'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
                     );
                 }
+                			
+					
+                if ($product['image']) {
+                        $image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
+                } else {
+                        $image = '';
+                }
 
                 $this->data['products'][] = array(
                     'product_id' => $product['product_id'],
                     'name' => $product['name'],
                     'model' => $product['model'],
                     'option' => $option_data,
+                    'thumb' => $image,
                     'quantity' => $product['quantity'],
                     'subtract' => $product['subtract'],
                     'price' => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),

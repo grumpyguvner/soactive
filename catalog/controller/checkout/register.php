@@ -70,6 +70,12 @@ class ControllerCheckoutRegister extends Controller {
 		
 		$this->data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		
+		if (isset($this->request->get['email'])) {
+			$this->data['email'] = $this->request->get['email'];		
+		} else {
+			$this->data['email'] = '';
+		}
+		
 		if (isset($this->session->data['shipping_postcode'])) {
 			$this->data['postcode'] = $this->session->data['shipping_postcode'];		
 		} else {

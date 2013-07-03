@@ -1,14 +1,9 @@
 <div class="new-customer">
     <h2><?php echo $text_new_customer; ?></h2>
-    <p style="color: #777777"><?php echo $text_checkout; ?></p>
-    <label for="register" class="radio">
-        <?php if ($account == 'register') { ?>
-            <input type="radio" name="account" value="register" id="register" checked="checked" />
-        <?php } else { ?>
-            <input type="radio" name="account" value="register" id="register" />
-        <?php } ?>
-        <b><?php echo $text_register; ?></b></label>
-    <br />
+    <p style="color: #777777"><?php echo $text_register; ?></p>
+    <b><?php echo $entry_email; ?></b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <input type="text" name="new-email" value="" />
+    <input type="hidden" name="account" value="register" />
     <?php if ($guest_checkout) { ?>
         <label for="guest" class="radio">
             <?php if ($account == 'guest') { ?>
