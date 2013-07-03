@@ -26,13 +26,26 @@
         
         <div class="afilterContent">
             
-                <form action="<?php echo $path; ?>" method="get" name="afilter" id="afilter">
+                <form action="" method="get" name="afilter" id="afilter">
                     <input type="hidden" name="sort" value="<?php echo $sort; ?>" />
                     <input type="hidden" name="order" value="<?php echo $order; ?>" />
                     <input type="hidden" name="limit" value="<?php echo $limit; ?>" />
                     <input type="hidden" name="page" value="<?php echo $page; ?>" />
                     <div class="accordion">
                         <?php
+                        $categories = array();
+                        
+                        $categories[] = array('name' => 'REFINE BY Product',
+                                              'children' => array());
+                        
+                        
+                        $categories[] = array('name' => 'REFINE BY Sport',
+                                              'children' => array());
+                        
+                        
+                        $categories[] = array('name' => 'REFINE BY Brand',
+                                              'children' => array());
+                        
                         if ($categories) {
                             foreach ($categories as $category_group) {
                             ?>
@@ -78,29 +91,16 @@
                                                 <div class="box-category">
                                                     <ul>
                                                         <?php
-                                                        if ($attribute['name'] == 'Thermal Rating') {
-                                                            echo '<li class="thermal">';
-                                                            foreach ($attribute['values'] as $value) {
-                                                                if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
-                                                                    ?>
-                                                                    <label class="<?php echo 'therm' . $value; ?> thermalChecked"><input type="checkbox" name="<?php echo 'att_filters[' . $attribute['attribute_id'] . '][]' ?>" value="<?php echo $value; ?>" checked="checked" /><?php echo $value; ?></label>
-                                                                <?php } else { 
-                                                                    ?>
-                                                                    <label class="<?php echo 'therm' . $value; ?>"><input type="checkbox" name="<?php echo 'att_filters[' . $attribute['attribute_id'] . '][]' ?>" value="<?php echo $value; ?>" /><?php echo $value; ?></label>
-                                                                <?php }
-                                                            }
-                                                            echo '</li>';
-                                                        } else {
-                                                            foreach ($attribute['values'] as $value) {
+                                                        
+                                                        foreach ($attribute['values'] as $value) {
 
-                                                                if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
-                                                                    ?>
-                                                                    <li><label class="checkbox"><input type="checkbox" name="<?php echo 'att_filters[' . $attribute['attribute_id'] . '][]' ?>" value="<?php echo $value; ?>" checked="checked" /> <?php echo $value; ?></label></li>
-                                                                <?php } else { ?>
+                                                            if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
+                                                                ?>
+                                                                <li><label class="checkbox"><input type="checkbox" name="<?php echo 'att_filters[' . $attribute['attribute_id'] . '][]' ?>" value="<?php echo $value; ?>" checked="checked" /> <?php echo $value; ?></label></li>
+                                                            <?php } else { ?>
 
-                                                                    <li><label class="checkbox"><input type="checkbox" name="<?php echo 'att_filters[' . $attribute['attribute_id'] . '][]' ?>" value="<?php echo $value; ?>" /> <?php echo $value ?></label></li>
-                                                                    <?php
-                                                                }
+                                                                <li><label class="checkbox"><input type="checkbox" name="<?php echo 'att_filters[' . $attribute['attribute_id'] . '][]' ?>" value="<?php echo $value; ?>" /> <?php echo $value ?></label></li>
+                                                                <?php
                                                             }
                                                         }
                                                         ?>
@@ -114,6 +114,22 @@
                             }
                         }
                         ?>
+                        <div class="accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
+                                    <div class="accordion-heading">
+                                        <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">PRICE RANGE</a>
+                                    </div>
+                                    <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
+                                        <div class="accordion-inner">
+                                            <div class="box-content">
+                                                <div class="box-category">
+                                                    <ul>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
                 </form>
             
