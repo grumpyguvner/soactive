@@ -38,6 +38,7 @@ $_['column_price']                   = 'Price';
 $_['column_total']                   = 'Total';
 
 // Entry
+$_['entry_title']                    = 'Title:';
 $_['entry_email_address']            = 'E-Mail Address:';
 $_['entry_email']                    = 'E-Mail:';
 $_['entry_password']                 = 'Password:';
@@ -65,6 +66,7 @@ $_['error_warning']                  = 'There was a problem while trying to proc
 $_['error_login']                    = 'Warning: No match for E-Mail Address and/or Password.';
 $_['error_approved']                 = 'Warning: Your account requires approval before you can login.'; 
 $_['error_exists']                   = 'Warning: E-Mail Address is already registered!';
+$_['error_title']                    = 'You must select a title';
 $_['error_firstname']                = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']                 = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']                    = 'E-Mail Address does not appear to be valid!';

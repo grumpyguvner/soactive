@@ -50,11 +50,10 @@
                 </div>
             <?php } ?>
             <div id="payment-method">
-                <div class="checkout-heading" id="headPayMethod"><?php echo $text_checkout_payment_method; ?></div>
-                <div class="checkout-content"></div>
+                <div class="checkout-heading" id="headPayMethod"><?php echo $text_checkout_confirm; ?></div>
+                <div class="checkout-content" style="padding-bottom: 0"></div>
             </div>
             <div id="confirm">
-                <div class="checkout-heading" id="headConfirm"><?php echo $text_checkout_confirm; ?></div>
                 <div class="checkout-content"></div>
             </div>
         </div>
@@ -116,7 +115,9 @@
     // Checkout
     $('#button-account').live('click', function() {
         $.ajax({
-            url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').attr('value'),
+            url: 'index.php?route=checkout/' + $('input[name=\'account\']').attr('value'),
+            type: 'get',
+            data: {email: $('input[name=\'new-email\']').val()},
             dataType: 'html',
             beforeSend: function() {
                 $('#button-account').attr('disabled', true);
@@ -209,6 +210,10 @@
                         $('#payment-address .checkout-content').prepend('<div class="warning" style="display: none;">' + json['error']['warning'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
                         $('.warning').fadeIn('slow');
+                    }
+				
+                    if (json['error']['title']) {
+                        $('#payment-address select[name=\'title\']').after('<div class="error">' + json['error']['title'] + '</div>');
                     }
 				
                     if (json['error']['firstname']) {
@@ -901,7 +906,9 @@
                                                             $('#shipping-method .checkout-heading a').remove();
                                                             $('#payment-method .checkout-heading a').remove();
 						
-                                                            $('#shipping-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
+                                                            $('#shipping-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+                                                            
+                                                            $('#button-payment-method').trigger('click');
 
                                                         },
                                                         error: function(xhr, ajaxOptions, thrownError) {
@@ -923,14 +930,15 @@
                                             data: $('#payment-method input[type=\'radio\']:checked, #payment-method input[type=\'checkbox\']:checked, #payment-method textarea'),
                                             dataType: 'json',
                                             beforeSend: function() {
-                                                $('#button-payment-method').attr('disabled', true);
-                                                $('#button-payment-method').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+//                                                $('#button-payment-method').attr('disabled', true);
+//                                                $('#button-payment-method').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+                                                  $('#confirm input[type=submit]').attr('disabled', true);
                                             },	
                                             complete: function() {
-                                                $('.checkout-heading').removeClass('active');
-                                                $('#headConfirm').addClass('active');
-                                                $('#button-payment-method').attr('disabled', false);
-                                                $('.wait').remove();
+//                                                $('.checkout-heading').removeClass('active');
+//                                                $('#headConfirm').addClass('active');
+//                                                $('#button-payment-method').attr('disabled', false);
+//                                                $('.wait').remove();
                                             },			
                                             success: function(json) {
                                                 $('.warning, .error').remove();
@@ -948,15 +956,15 @@
                                                         url: 'index.php?route=checkout/confirm',
                                                         dataType: 'html',
                                                         success: function(html) {
-                                                            $('#confirm .checkout-content').html(html);
+                                                            $('#confirm .checkout-content').html(html).show();
+                                                            $('#confirm input[type=submit]').attr('disabled', false);
 						
-                                                            $('#payment-method .checkout-content').slideUp('slow');
-						
-                                                            $('#confirm .checkout-content').slideDown('slow');
-						
-                                                            $('#payment-method .checkout-heading a').remove();
-						
-                                                            $('#payment-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
+//                                                            $('#payment-method .checkout-content').slideUp('slow');
+//						
+//						
+//                                                            $('#payment-method .checkout-heading a').remove();
+//						
+//                                                            $('#payment-method .checkout-heading').append('<a><?php echo $text_modify; ?></a>');	
                                                         },
                                                         error: function(xhr, ajaxOptions, thrownError) {
                                                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -969,5 +977,10 @@
                                             }
                                         });	
                                     });
+                                    
+                                    $('input[name="payment_method"]').live('change', function () {
+                                        $('#button-payment-method').trigger('click');
+                                    });
+                                    
                                     //--></script> 
 <?php echo $footer; ?>

@@ -2,6 +2,7 @@
     $.fn.postcodeAnywhere = function() {
         if ($(this).find('.paLookup').length)
         {
+            $(this).find('.paSelect').hide();
             if (!$(this).find('.paAddress input[name=address_1]').val() && !$(this).find('.paAddress input[name=postcode]').val())
             {
                 $(this).find('.paLookup').show();

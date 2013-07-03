@@ -6,7 +6,12 @@
                 <span class="required">*</span> <label>Title:</label>
             </div>
             <div class="pInput">
-                <select class="registerTitle" name="title"></select>
+                <select class="registerTitle" name="title"><option></option><?php
+                foreach ($select_title as $title)
+                {
+                    echo '<option>' . $title . '</option>';
+                }
+                ?></select>
             </div>
         </div>
         <div class="prow">
@@ -30,7 +35,7 @@
                 <span class="required">*</span> <label><?php echo $entry_email; ?></label>
             </div>
             <div class="pInput">  
-                <input type="text" name="email" value="" />
+                <input type="text" name="email" value="<?php echo $email ?>" />
             </div>
         </div>
         <div class="prow">
@@ -78,15 +83,15 @@
                     if ($day_birth) {
                         for ($i = 1; $i <= 12; $i++) {
                             if ($i == $month_birth) {
-                               echo '<option value="'.$month_birth.'" selected="selected">'.$month_birth.'</option>'; 
+                               echo '<option value="'.$month_birth.'" selected="selected">'.date("F", mktime(0, 0, 0, $month_birth, 1, 2013)).'</option>'; 
                             } else {
-                               echo '<option value="'.$i.'">'.$i.'</option>';
+                               echo '<option value="'.$i.'">'.date("F", mktime(0, 0, 0, $i, 1, 2013)).'</option>';
                             } 
                         }
                     } else {
                         echo '<option value=""></option>';
                         for($i = 1; $i <= 12; $i++) {
-                            echo '<option value="'.$i.'">'.$i.'</option>';
+                            echo '<option value="'.$i.'">'.date("F", mktime(0, 0, 0, $i, 1, 2013)).'</option>';
                         }
                     }
                     ?>
@@ -95,8 +100,9 @@
                 <select class="year" name="year_birth">
                     <?php
                     $actYear = date("Y",time());
+                    $startYear = date("Y",strtotime('-120years'));
                     if ($day_birth) {
-                        for ($i = 1930; $i <= $actYear; $i++) {
+                        for ($i = $actYear; $i >= $startYear; $i--) {
                             if ($i == $year_birth) {
                                echo '<option value="'.$year_birth.'" selected="selected">'.$year_birth.'</option>'; 
                             } else {
@@ -105,7 +111,7 @@
                         }
                     } else {
                         echo '<option value=""></option>';
-                        for($i = 1930; $i <= $actYear; $i++) {
+                        for($i = $actYear; $i >= $startYear; $i--) {
                             echo '<option value="'.$i.'">'.$i.'</option>';
                         }
                     }
@@ -154,7 +160,7 @@
 
                             <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
                             <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
-                            <?php if ($error_postcode_lookup) { ?>
+                            <?php if (isset($error_postcode_lookup) && $error_postcode_lookup) { ?>
                                 <span class="error"><?php echo $error_postcode_lookup; ?></span>
                             <?php } ?>
                                 <br><a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
@@ -296,9 +302,9 @@
     <br />
 </div>
 <?php if ($text_agree) { ?>
-    <div class="buttons">
-        <label class="checkbox"><?php echo $text_agree; ?>
-                <input type="checkbox" name="agree" value="1" /></label>
+    <div class="buttons" style="text-align: right">
+        <label class="checkbox"><input type="checkbox" name="agree" value="1" /> <?php echo $text_agree; ?>
+                </label><br >
             <input type="button" value="<?php echo strtoupper($button_continue); ?>" id="button-register" class="button" />
     </div>
 <?php } else { ?>
