@@ -8,7 +8,7 @@
 class ControllerModuleLocalisation extends Controller {
 
     public function index() {
-        if (isset($this->request->post['currency_code'])) {
+        if (isset($this->request->post['currency_code']) && $this->request->post['currency_code']) {
             $this->currency->set($this->request->post['currency_code']);
 
             unset($this->session->data['shipping_method']);
@@ -20,7 +20,7 @@ class ControllerModuleLocalisation extends Controller {
                 $this->redirect($this->url->link('common/home'));
             }
         }
-        if (isset($this->request->post['language_code'])) {
+        if (isset($this->request->post['language_code']) && $this->request->post['language_code']) {
             $this->session->data['language'] = $this->request->post['language_code'];
 
             if (isset($this->request->post['redirect'])) {
