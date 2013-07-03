@@ -2532,19 +2532,62 @@ a.buttonHome:hover, input.buttonHome:hover {
     border-right: none;
     margin-bottom: 0;
 }
+#slider-range {
+    display: inline-block;
+    margin-bottom: .5em;
+    width: 100%;
+}
+
+#slider-range .from {
+    float: left;
+}
+#slider-range .to {
+    float: right;
+}
+.accordion .ui-slider-horizontal {
+height: .4em;
+margin: .5em 0 .5em 0;
+}
+.accordion .ui-widget-header {
+background: #000;
+}
+.accordion .ui-slider .ui-slider-handle {
+width: .6em;
+height: 1em;
+}
+.filterSale {
+    color: #fd0303
+}
+.filterNew {
+    color: #1db4b7
+}
+
+.accordion .reset {
+ text-align: right;
+ margin-bottom: .5em;
+}
+
+.accordion .accordion-group .accordion-inner .box-content .box-category > ul {
+max-height: 250px;
+overflow: scroll;
+}
+
 .accordion .accordion-group .accordion-heading {
     border-top: 1px solid #dee0e0;
     border-bottom: 1px solid #dee0e0;
     padding-left: 3px;
 }
+.accordion .accordion-group {
+    margin-bottom: -1px;
+}
 .accordion .accordion-group .accordion-heading a {
-    background: transparent url('../image/arrow-up.png') no-repeat left center;
+    background: transparent url('../image/arrow-down.png') no-repeat left center;
 }
 .accordion .accordion-group .accordion-heading a.collapsed {
-    background-image: url('../image/arrow-down.png');
+    background-image: url('../image/arrow-up.png');
 }
 .accordion .accordion-group .accordion-heading .accordion-toggle {
-    padding: 8px 10px;
+    padding: 8px 10px 8px 13px;
     font-weight: bold;
     color: #514f4f;
 }
@@ -2553,8 +2596,10 @@ a.buttonHome:hover, input.buttonHome:hover {
     border-top: none;
 }
 .accordion .accordion-group .accordion-inner .box-content {
-    padding: 0;
+    padding: 1px;
     border-bottom: none;
+    border-bottom: 1px solid #dee0e0;
+    margin-bottom: 10px;
 }
 .accordion .accordion-group .accordion-inner .box-content .box-category {
     margin-top: 8px;

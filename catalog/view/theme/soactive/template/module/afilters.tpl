@@ -51,12 +51,13 @@
                             ?>
                                     <div class="accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                         <div class="accordion-heading">
-                                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo strtoupper($category_group['name']); ?></a>
+                                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle collapsed"><?php echo strtoupper($category_group['name']); ?></a>
                                         </div>
-                                        <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
+                                        <div class="accordion-body collapse" id="<?php echo 'collapse' . $cnt; ?>">
                                             <div class="accordion-inner">
                                                 <div class="box-content">
                                                     <div class="box-category">
+                                                        <div class="reset"><a href="#">clear</a></div>
                                                         <ul>
                                                             <?php foreach ($category_group['children'] as $category) { ?>
                                                                 <?php if ($cat_id != $category['category_id']) { ?>
@@ -89,6 +90,7 @@
                                         <div class="accordion-inner">
                                             <div class="box-content">
                                                 <div class="box-category">
+                                                    <div class="reset"><a href="#">clear</a></div>
                                                     <ul>
                                                         <?php
                                                         
@@ -122,8 +124,66 @@
                                         <div class="accordion-inner">
                                             <div class="box-content">
                                                 <div class="box-category">
+                                                    <div class="reset"><a href="#">clear</a></div>
                                                     <ul>
+                                                        <li>
+  <input type="hidden" id="priceslide" name="item_filters[price][]" style="border: 0; color: #f6931f; font-weight: bold;" />
+
+ <div id="slider-range">
+    <div class="slider"></div>
+
+    <div class="from">£0</div>
+    <div class="to">£500</div>
+ </div>
+
+<script>
+  $(function() {
+    $( "#slider-range .slider" ).slider({
+      range: true,
+      min: 0,
+      max: 500,
+      step: 5,
+      values: [ 0, 500 ],
+      slide: function( event, ui ) {
+        $( "#priceslide" ).val( "" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+        $( "#slider-range .from" ).html( '£' + ui.values[ 0 ]);
+        $( "#slider-range .to" ).html( '£' + ui.values[ 1 ]);
+      },
+      change: function( event, ui ) {
+        $( "#priceslide" ).val( "" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+        $( "#slider-range .from" ).html( '£' + ui.values[ 0 ]);
+        $( "#slider-range .to" ).html( '£' + ui.values[ 1 ]);
+        
+        //$('#afilter').trigger('submit');
+      }
+    });
+  });
+  </script>
+                                                        </li>
                                                         
+                                                        <?php
+
+                                                            if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
+                                                                ?>
+                                                                <li class="filterSale"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[sale][]' ?>" value="Sale" checked="checked" /> Sale items only</label></li>
+                                                            <?php } else { ?>
+
+                                                                <li class="filterSale"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[sale][]' ?>" value="Sale" /> Sale items only</label></li>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                                
+                                                        <?php
+
+                                                            if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
+                                                                ?>
+                                                                <li class="filterNew"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[new][]' ?>" value="New" checked="checked" /> New items only</label></li>
+                                                            <?php } else { ?>
+
+                                                                <li class="filterNew"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[new][]' ?>" value="New" /> New items only</label></li>
+                                                                <?php
+                                                            }
+                                                        ?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -137,27 +197,18 @@
     </div>
 <?php } ?>
 <script type="text/javascript">
-    $('#afilter .thermal input').change(function () {
-        if ($(this).is(':checked'))
-        {
-            $(this).parent('label').addClass('thermalChecked');
-        } else {
-            $(this).parent('label').removeClass('thermalChecked');
-        }
-    });
-    $('#afilter .thermal label').click(function () {
-        if ($(this).find('input').is(':checked'))
-        {
-            $(this).find('input').attr('checked', false);
-        } else {
-            $(this).find('input').attr('checked', 'checked');
-        }
-        $(this).find('input').trigger('change');
-    });
     $('#afilter input').change(function () {
-        $('#afilter').trigger('submit');
+        //$('#afilter').trigger('submit');
     });
     $('#cfilter input').change(function () {
-        $('#afilter').trigger('submit');
+        //$('#afilter').trigger('submit');
+    });
+    
+    $('.reset a').click(function (e) {
+        e.preventDefault();
+        $(this).parents('.box-content').find('input:checked').attr('checked', false).trigger('change');
+        
+        $(this).parents('.box-content').find("#slider-range .slider" ).slider( "option", "values", [ 0, 500 ] );
+        
     });
 </script>
