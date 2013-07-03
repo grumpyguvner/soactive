@@ -22,26 +22,43 @@
     <div id="accountNoImage"><?php echo $column_left; ?><?php echo $column_right; ?><div id="content"> 
             <?php echo $content_top; ?>
             <div class="content-account">
-                <h1><?php echo $heading_title; ?></h1>
+                <h1><?php echo strtoupper($heading_title); ?></h1>
+                <h4><?php echo $text_choose_newsletter ?></h4>
                 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-                    <div class="wrapContentAccount content">
                         <table class="form">
                             <tr>
-                                <td><?php echo $entry_newsletter; ?></td>
-                                <td><?php if ($newsletter) { ?>
-                                        <input type="radio" name="newsletter" value="1" checked="checked" />
+                                <td><?php echo $text_choose_newsletter_womens ?></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><?php if ($newsletter) { ?>
+                                        <input type="radio" name="newsletter_womens" value="1" checked="checked" />
                                         <?php echo $text_yes; ?>&nbsp;
-                                        <input type="radio" name="newsletter" value="0" />
+                                        <input type="radio" name="newsletter_womens" value="0" />
                                         <?php echo $text_no; ?>
                                     <?php } else { ?>
-                                        <input type="radio" name="newsletter" value="1" />
+                                        <input type="radio" name="newsletter_womens" value="1" />
                                         <?php echo $text_yes; ?>&nbsp;
-                                        <input type="radio" name="newsletter" value="0" checked="checked" />
+                                        <input type="radio" name="newsletter_womens" value="0" checked="checked" />
+                                        <?php echo $text_no; ?>
+                                    <?php } ?></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo $text_choose_newsletter_mens ?></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center"><?php if ($newsletter) { ?>
+                                        <input type="radio" name="newsletter_mens" value="1" checked="checked" />
+                                        <?php echo $text_yes; ?>&nbsp;
+                                        <input type="radio" name="newsletter_mens" value="0" />
+                                        <?php echo $text_no; ?>
+                                    <?php } else { ?>
+                                        <input type="radio" name="newsletter_mens" value="1" />
+                                        <?php echo $text_yes; ?>&nbsp;
+                                        <input type="radio" name="newsletter_mens" value="0" checked="checked" />
                                         <?php echo $text_no; ?>
                                     <?php } ?></td>
                             </tr>
                         </table>
-                    </div>
                     
                     <div class="buttons">
                         <div class="buttonLeft"><a href="<?php echo $back; ?>" class="button"><?php echo strtoupper($button_back); ?></a></div>

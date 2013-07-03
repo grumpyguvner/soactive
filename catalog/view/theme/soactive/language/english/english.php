@@ -25,6 +25,7 @@ $_['text_newsletter_signup']= 'Newsletter Signup';
 $_['text_choose_newsletter']= 'Your Newsletter Subscription Settings';
 $_['text_choose_newsletter_womens']= 'Would you like to receive news, offers and discount related to <span>WOMEN s</span> clothing and accessories?';
 $_['text_choose_newsletter_mens']= 'Would you like to receive news, offers and discount related to <span>MEN s</span> clothing and accessories?';
+$_['text_my_newsletters']= 'My Newsletters';
 
 // Buttons
 $_['button_add_address']    = 'Add Address';

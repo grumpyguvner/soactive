@@ -3066,8 +3066,25 @@ overflow: scroll;
 #accountContainer .content-account {
     margin-left: 15px;
 }
+#accountNoImage .content-account > h1 {
+    margin-bottom: 20px;
+}
+#accountNoImage .content-account > h4 {
+    margin-bottom: 25px;
+    margin-top: 0;
+}
 #accountNoImage .content-account, #accountContainer #registerAccount {
     margin-left: 67px;
+}
+#accountNoImage .content-account table.form {
+    width: 60%;
+}
+#accountNoImage .content-account table.form tr td {
+    padding-bottom: 25px;
+}
+#accountNoImage .content-account table.form td:first-child > span {
+    color: #1db4b7;
+    font-weight: 700;
 }
 #accountNoImage .content-account .wrapContentAccount {
     margin-left: 40px;

@@ -48,7 +48,7 @@
               <?php } ?>
           </div>
       </div>
-      <h1>MY NEWSLETTERS</h1> 
+      <h1><?php echo strtoupper($text_my_newsletters); ?></h1> 
       <h4><?php echo $text_choose_newsletter ?></h4><br />
       <div class="radioNewsletter">
         <div><?php echo $text_choose_newsletter_womens ?></div>  

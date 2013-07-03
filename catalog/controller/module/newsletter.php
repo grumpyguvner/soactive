@@ -128,6 +128,7 @@ class ControllerModuleNewsletter extends Controller {
         
         $this->data['heading_title'] = $this->language->get('heading_title');
         
+        $this->data['text_my_newsletters'] = $this->language->get('text_my_newsletters');
         $this->data['text_choose_newsletter'] = $this->language->get('text_choose_newsletter');
         $this->data['text_choose_newsletter_womens'] = $this->language->get('text_choose_newsletter_womens');
         $this->data['text_choose_newsletter_mens'] = $this->language->get('text_choose_newsletter_mens');

@@ -14,8 +14,8 @@ $_['button_go'] 	    = 'Subscribe';
 $_['text_subscribed'] 	    = "'%s' has been added to our mailing list.";
 $_['text_subscribed_optin'] = "'%s' has been added, please check your inbox to confirm this subscription.";
 $_['text_unsubscribed']     = "'%s' has been removed from our mailing list.";
-$_['text_signup'] 	        = 'Signup for our newsletter!';
-$_['text_subscribe']     	= 'Subscribe';
+$_['text_signup'] 	    = 'Signup for our newsletter!';
+$_['text_subscribe']        = 'Subscribe';
 $_['text_unsubscribe']      = 'Unsubscribe';
 
 // Error
