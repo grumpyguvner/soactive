@@ -58,6 +58,7 @@ $_['entry_country']                  = 'Country:';
 $_['entry_zone']                     = 'Region / State:';
 $_['entry_newsletter']               = 'I wish to subscribe to the %s newsletter.';
 $_['entry_shipping'] 	             = 'My delivery and billing addresses are the same.';
+$_['entry_date_birth'] = 'Date Of Birth:';
 
 // Error
 $_['error_warning']                  = 'There was a problem while trying to process your order! If the problem persists please try selecting a different payment method or you can contact the store owner by <a href="%s">clicking here</a>.';
@@ -84,4 +85,7 @@ $_['error_shipping']                 = 'Warning: Shipping method required!';
 $_['error_no_shipping']              = 'Warning: No Shipping options are available. Please <a href="%s">contact us</a> for assistance!';
 $_['error_payment']                  = 'Warning: Payment method required!';
 $_['error_no_payment']               = 'Warning: No Payment options are available. Please <a href="%s">contact us</a> for assistance!';
+$_['error_day_birth']                = 'You need to select a day!';
+$_['error_month_birth']              = 'You need to select a month!';
+$_['error_year_birth']               = 'You need to select a year!';
 ?>

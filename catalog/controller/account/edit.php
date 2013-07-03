@@ -56,7 +56,8 @@ class ControllerAccountEdit extends Controller {
         $this->data['entry_email'] = $this->language->get('entry_email');
         $this->data['entry_telephone'] = $this->language->get('entry_telephone');
         $this->data['entry_fax'] = $this->language->get('entry_fax');
-
+        $this->data['entry_date_birth'] = $this->language->get('entry_date_birth');
+        
         $this->data['button_continue'] = $this->language->get('button_continue');
         $this->data['button_back'] = $this->language->get('button_back');
         
@@ -143,6 +144,20 @@ class ControllerAccountEdit extends Controller {
         } else {
             $this->data['fax'] = '';
         }
+        
+        if (isset($this->request->post['day_birth']) && isset($this->request->post['month_birth']) && isset($this->request->post['year_birth'])) {
+            $this->data['day_birth'] = $this->request->post['day_birth'];
+            $this->data['month_birth'] = $this->request->post['month_birth'];
+            $this->data['year_birth'] = $this->request->post['year_birth'];
+        } elseif (isset($customer_info)) {
+            $this->data['day_birth'] = date("d", strtotime($customer_info['date_of_birth']));
+            $this->data['month_birth'] = date("m", strtotime($customer_info['date_of_birth']));
+            $this->data['year_birth'] = date("Y", strtotime($customer_info['date_of_birth']));
+        } else {
+            $this->data['day_birth'] = '';
+            $this->data['month_birth'] = '';
+            $this->data['year_birth'] = '';
+        }
 
         $this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
@@ -180,7 +195,21 @@ class ControllerAccountEdit extends Controller {
         if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
             $this->error['telephone'] = $this->language->get('error_telephone');
         }
+        
+        if (isset($this->request->post['day_birth']) || isset($this->request->post['month_birth']) || isset($this->request->post['year_birth'])) {
+            if (!isset($this->request->post['day_birth'])) {
+                $this->error['day_birth'] = $this->language->get('error_day_birth');
+            }
 
+            if (!isset($this->request->post['month_birth'])) {
+                $this->error['month_birth'] = $this->language->get('error_month_birth');
+            }
+
+            if (!isset($this->request->post['year_birth'])) {
+                $this->error['year_birth'] = $this->language->get('error_year_birth');
+            }
+        }
+        
         if (!$this->error) {
             return true;
         } else {

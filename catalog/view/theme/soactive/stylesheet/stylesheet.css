@@ -2004,6 +2004,15 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .checkout-content .prow .pInput select {
     width: 214px;
+    border: 1px solid #514F4F;
+}
+.checkout-content .prow .pInput select.day, .checkout-content .prow .pInput select.year {
+    width: 52px;
+    margin-right: 10px;
+}
+.checkout-content .prow .pInput select.month {
+    margin-right: 10px;
+    width: 83px;
 }
 .checkout-content .prow .pInput select.registerTitle {
     width: 90px;
@@ -2018,6 +2027,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .checkout-content .prow .pLabel > span, .checkout-content .prow .pLabel > label {
     display: inline-block;
     line-height: 30px;
+    font-weight: 700;
 }
 .checkout-content .pInput {
     display: inline-block;
@@ -3049,6 +3059,15 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .content-account .prow .pInput select {
     width: 214px;
+    border: 1px solid #514F4F;
+}
+.content-account .prow .pInput select.day, .content-account .prow .pInput select.year {
+    width: 52px;
+    margin-right: 10px;
+} 
+.content-account .prow .pInput select.month {
+    width: 83px;
+    margin-right: 10px;
 }
 .content-account .prow .pInput select.registerTitle {
     width: 90px;
@@ -3063,6 +3082,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .content-account .prow .pLabel > span, .content-account .prow .pLabel > label {
     display: inline-block;
     line-height: 30px;
+    font-weight: 700;
 }
 .content-account .pInput {
     display: inline-block;
