@@ -2538,6 +2538,11 @@ a.buttonHome:hover, input.buttonHome:hover {
     width: 100%;
 }
 
+#slider-range {
+    display: inline-block;
+    margin-bottom: .5em;
+    width: 100%;
+}
 #slider-range .from {
     float: left;
 }
@@ -2546,7 +2551,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .accordion .ui-slider-horizontal {
 height: .4em;
-margin: .5em 0 .5em 0;
+margin: .5em .2em .5em .5em;
 }
 .accordion .ui-widget-header {
 background: #000;
