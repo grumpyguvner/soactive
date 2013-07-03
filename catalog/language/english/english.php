@@ -23,6 +23,9 @@ $_['text_prev']             = '&lt;';
 $_['text_next']             = '&gt;';
 $_['text_last']             = '&gt;|';
 
+// Text
+$_['select_title']           = 'Mr,Mrs,Miss,Ms,Reverend,Dr';
+
 // Buttons
 $_['button_add_address']    = 'Add Address';
 $_['button_back']           = 'Back';

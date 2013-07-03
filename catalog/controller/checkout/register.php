@@ -32,6 +32,7 @@ class ControllerCheckoutRegister extends Controller {
 		$this->data['text_select'] = $this->language->get('text_select');
 		$this->data['text_none'] = $this->language->get('text_none');
 						
+		$this->data['entry_title'] = $this->language->get('entry_title');
 		$this->data['entry_firstname'] = $this->language->get('entry_firstname');
 		$this->data['entry_lastname'] = $this->language->get('entry_lastname');
 		$this->data['entry_email'] = $this->language->get('entry_email');
@@ -52,6 +53,8 @@ class ControllerCheckoutRegister extends Controller {
 		$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 		$this->data['entry_shipping'] = $this->language->get('entry_shipping');
                 $this->data['entry_date_birth'] = $this->language->get('entry_date_birth');
+                
+		$this->data['select_title'] = explode(',', $this->language->get('select_title'));
 
 		$this->data['button_continue'] = $this->language->get('button_continue');
 
@@ -83,27 +86,27 @@ class ControllerCheckoutRegister extends Controller {
 			$this->data['postcode'] = '';
 		}
 		
-    	if (isset($this->session->data['shipping_country_id'])) {
-			$this->data['country_id'] = $this->session->data['shipping_country_id'];		
-		} else {	
-      		$this->data['country_id'] = $this->config->get('config_country_id');
-    	}
-		
-    	if (isset($this->session->data['shipping_zone_id'])) {
-			$this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
-		} else {
-      		$this->data['zone_id'] = '';
-    	}
-        
-        if (isset($this->session->data['day_birth']) && isset($this->session->data['month_birth']) && isset($this->session->data['year_birth'])) {
-                $this->data['day_birth'] = $this->session->data['day_birth'];
-                $this->data['month_birth'] = $this->session->data['month_birth'];
-                $this->data['year_birth'] = $this->session->data['year_birth'];
-	} else {
-      		$this->data['day_birth'] = '';
-                $this->data['month_birth'] = '';
-                $this->data['year_birth'] = '';
-    	}
+                if (isset($this->session->data['shipping_country_id'])) {
+                                $this->data['country_id'] = $this->session->data['shipping_country_id'];		
+                        } else {	
+                        $this->data['country_id'] = $this->config->get('config_country_id');
+                }
+
+                if (isset($this->session->data['shipping_zone_id'])) {
+                                $this->data['zone_id'] = $this->session->data['shipping_zone_id'];			
+                        } else {
+                        $this->data['zone_id'] = '';
+                }
+
+                if (isset($this->session->data['day_birth']) && isset($this->session->data['month_birth']) && isset($this->session->data['year_birth'])) {
+                        $this->data['day_birth'] = $this->session->data['day_birth'];
+                        $this->data['month_birth'] = $this->session->data['month_birth'];
+                        $this->data['year_birth'] = $this->session->data['year_birth'];
+                } else {
+                        $this->data['day_birth'] = '';
+                        $this->data['month_birth'] = '';
+                        $this->data['year_birth'] = '';
+                }
         
         				
 		$this->load->model('localisation/country');
@@ -167,7 +170,13 @@ class ControllerCheckoutRegister extends Controller {
 			}				
 		}
 						
-		if (!$json) {					
+		if (!$json) {		
+                    
+                    				
+			if (isset($this->request->post['title']) && (utf8_strlen($this->request->post['title']) > 1)) {
+				$json['error']['title'] = $this->language->get('error_title');
+			}
+                    
 			if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 				$json['error']['firstname'] = $this->language->get('error_firstname');
 			}

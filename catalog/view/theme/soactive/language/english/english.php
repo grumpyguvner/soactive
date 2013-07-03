@@ -25,7 +25,7 @@ $_['text_last']             = '';
 // Buttons
 $_['button_add_address']    = 'Add Address';
 $_['button_back']           = 'Back';
-$_['button_continue']       = 'Continue >';
+$_['button_continue']       = 'Continue &gt;';
 $_['button_cart']           = 'Add to Bag';
 $_['button_compare']        = 'Add to Compare';
 $_['button_wishlist']       = 'Wish List';

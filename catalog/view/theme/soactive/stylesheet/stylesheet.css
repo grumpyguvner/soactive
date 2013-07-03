@@ -36,7 +36,7 @@ p {
 	margin-bottom: 20px;
 }
 a, a:visited, a b {
-	color: #514f4f;
+	color: #1db4b7;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -449,6 +449,12 @@ label {
         border-radius: 0;
         
 }
+
+.breadcrumb a, .breadcrumb a:visited, .breadcrumb a b {
+        color: #514f4f;
+        
+}
+
 .breadcrumb .back {
         float: right;
 }

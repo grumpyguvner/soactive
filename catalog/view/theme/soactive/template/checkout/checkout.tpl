@@ -212,6 +212,10 @@
                         $('.warning').fadeIn('slow');
                     }
 				
+                    if (json['error']['title']) {
+                        $('#payment-address select[name=\'title\']').after('<div class="error">' + json['error']['title'] + '</div>');
+                    }
+				
                     if (json['error']['firstname']) {
                         $('#payment-address input[name=\'firstname\']').after('<div class="error">' + json['error']['firstname'] + '</div>');
                     }
