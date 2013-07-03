@@ -108,7 +108,7 @@
 
                                 <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
                                 <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
-                                <?php if ($error_postcode_lookup) { ?>
+                                <?php if (isset($error_postcode_lookup)) { ?>
                                     <span class="error"><?php echo $error_postcode_lookup; ?></span>
                                 <?php } ?>
                                     <br><a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
