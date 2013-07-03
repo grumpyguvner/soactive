@@ -83,6 +83,70 @@
                                     <input type="text" name="fax" value="<?php echo $fax; ?>" />
                                 </div>
                             </div>
+                            <div class="prow">
+                        <div class="pLabel">
+                                <span><?php echo $entry_date_birth; ?></span>
+                        </div>
+                        <div class="pInput">
+                            <select class="day" name="day_birth">
+                                <?php
+                                if ($day_birth) {
+                                    for ($i = 1; $i <= 31; $i++) {
+                                        if ($i == $day_birth) {
+                                           echo '<option value="'.$day_birth.'" selected="selected">'.$day_birth.'</option>'; 
+                                        } else {
+                                           echo '<option value="'.$i.'">'.$i.'</option>';
+                                        } 
+                                    }
+                                } else {
+                                    echo '<option value=""></option>';
+                                    for($i = 1; $i <= 31; $i++) {
+                                        echo '<option value="'.$i.'">'.$i.'</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+
+                            <select class="month" name="month_birth">
+                                <?php
+                                if ($day_birth) {
+                                    for ($i = 1; $i <= 12; $i++) {
+                                        if ($i == $month_birth) {
+                                           echo '<option value="'.$month_birth.'" selected="selected">'.$month_birth.'</option>'; 
+                                        } else {
+                                           echo '<option value="'.$i.'">'.$i.'</option>';
+                                        } 
+                                    }
+                                } else {
+                                    echo '<option value=""></option>';
+                                    for($i = 1; $i <= 12; $i++) {
+                                        echo '<option value="'.$i.'">'.$i.'</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+
+                            <select class="year" name="year_birth">
+                                <?php
+                                $actYear = date("Y",time());
+                                if ($day_birth) {
+                                    for ($i = 1930; $i <= $actYear; $i++) {
+                                        if ($i == $year_birth) {
+                                           echo '<option value="'.$year_birth.'" selected="selected">'.$year_birth.'</option>'; 
+                                        } else {
+                                           echo '<option value="'.$i.'">'.$i.'</option>';
+                                        } 
+                                    }
+                                } else {
+                                    echo '<option value=""></option>';
+                                    for($i = 1930; $i <= $actYear; $i++) {
+                                        echo '<option value="'.$i.'">'.$i.'</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                             
                         </div>
 
