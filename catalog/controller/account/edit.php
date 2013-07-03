@@ -57,6 +57,9 @@ class ControllerAccountEdit extends Controller {
         $this->data['entry_telephone'] = $this->language->get('entry_telephone');
         $this->data['entry_fax'] = $this->language->get('entry_fax');
         $this->data['entry_date_birth'] = $this->language->get('entry_date_birth');
+        $this->data['entry_title'] = $this->language->get('entry_title');
+        
+        $this->data['select_title'] = explode(',', $this->language->get('select_title'));
         
         $this->data['button_continue'] = $this->language->get('button_continue');
         $this->data['button_back'] = $this->language->get('button_back');
@@ -103,6 +106,14 @@ class ControllerAccountEdit extends Controller {
 
         if ($this->request->server['REQUEST_METHOD'] != 'POST') {
             $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+        }
+        
+        if (isset($this->request->post['title'])) {
+            $this->data['title'] = $this->request->post['title'];
+        } elseif (isset($customer_info)) {
+            $this->data['title'] = $customer_info['title'];
+        } else {
+            $this->data['title'] = '';
         }
 
         if (isset($this->request->post['firstname'])) {

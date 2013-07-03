@@ -476,3 +476,6 @@ ALTER TABLE `oc_category` ADD `date_end` datetime NOT NULL DEFAULT '0000-00-00 0
 
 ALTER TABLE `oc_customer` ADD `date_of_birth` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `fax`;
 
+#### Start 1.5.4:BC1.2.8
+
+ALTER TABLE `oc_customer` ADD `title` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT ''  AFTER `store_id`;

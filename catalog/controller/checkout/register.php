@@ -173,7 +173,7 @@ class ControllerCheckoutRegister extends Controller {
 		if (!$json) {		
                     
                     				
-			if (isset($this->request->post['title']) && (utf8_strlen($this->request->post['title']) > 1)) {
+			if (isset($this->request->post['title']) && empty($this->request->post['title'])) {
 				$json['error']['title'] = $this->language->get('error_title');
 			}
                     

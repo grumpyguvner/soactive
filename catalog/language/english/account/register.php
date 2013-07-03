@@ -33,6 +33,9 @@ $_['entry_zone']           = 'Region / State:';
 $_['entry_newsletter']     = 'Subscribe:';
 $_['entry_password']       = 'Password:';
 $_['entry_confirm']        = 'Password Confirm:';
+$_['entry_date_birth']     = 'Date Of Birth:';
+$_['entry_title']          = 'Title:';
+
 
 // Error
 $_['error_exists']         = 'Warning: E-Mail Address is already registered!';

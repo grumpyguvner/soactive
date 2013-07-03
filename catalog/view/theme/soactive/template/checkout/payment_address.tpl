@@ -30,7 +30,20 @@
 <div id="payment-new" style="display: <?php echo ($addresses ? 'none' : 'block'); ?>;">
     
     <div class="left" style="border-right: none;">
-            <h2><?php echo $text_personal_details ?></h2>
+            <h2><?php echo $text_your_details ?></h2>
+            <div class="prow">
+                <div class="pLabel">
+                    <span class="required">*</span> <label><?php echo $entry_title; ?></label>
+                </div>
+                <div class="pInput">
+                    <select class="registerTitle" name="title"><option></option><?php
+                    foreach ($select_title as $title)
+                    {
+                        echo '<option>' . $title . '</option>';
+                    }
+                    ?></select>
+                </div>
+            </div>
             <div class="prow">
                 <div class="pLabel">
                     <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
@@ -95,7 +108,7 @@
 
                                 <input class="span2" name="postcode_lookup" type="text" value="<?php echo $postcode_lookup; ?>">
                                 <button class="btn" name="lookup" type="button"><?php echo $button_find_address; ?></button>
-                                <?php if ($error_postcode_lookup) { ?>
+                                <?php if (isset($error_postcode_lookup)) { ?>
                                     <span class="error"><?php echo $error_postcode_lookup; ?></span>
                                 <?php } ?>
                                     <br><a href="#" class="manualAddress"><?php echo $text_enter_manually; ?></a>
