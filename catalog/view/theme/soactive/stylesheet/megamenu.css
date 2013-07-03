@@ -276,7 +276,8 @@
 .footer-social-setting {}
 #footer-block-payment li { float:left; margin-right:5px}
 #footer-block-friends img { margin-right:5px}
-#megamenu > ul > li > div.dropdown .staticblock a{padding-left:0}
+#megamenu > ul > li > div.dropdown .staticblock a{padding-left:0; color: #514f4f;}
+#megamenu > ul > li > div.dropdown .staticblock a:hover{color: #1db4b7;}
 
 .column_content { }
 

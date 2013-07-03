@@ -471,7 +471,7 @@ label {
 	border-radius: 5px 5px 5px 5px;
 }
 .success {
-	background: #1db4b7 url('../image/success.png') 10px center no-repeat;
+	background: #dee0e0 url('../image/success.png') 10px center no-repeat;
 	border: 1px solid #B9BDBD;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
@@ -2105,7 +2105,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         vertical-align: top;
         margin-top: 12px;
 }
-.checkout-product table > tbody > tr> td.name > div.namePOption > a > h4 {
+.checkout-product table > tbody > tr> td.name > div.namePOption > h4 {
         color: #1db4b7;
         margin: 0;
 }
@@ -2633,6 +2633,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .jcarousel-skin-tango .jcarousel-item-horizontal a {
 	font-size: 14px;
         width: 170px;
+        color: #514f4f;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem {
 	
@@ -3005,6 +3006,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 #accountNoImage .box .box-content > ul > li {
     list-style: none;
     line-height: 30px;
+}
+#accountNoImage .box .box-content > ul > li > a:hover {
+    color: #1db4b7;
+}
+#accountNoImage .box .box-content > ul > li > a {
+    color: #514f4f;
 }
 #accountContainer .content-account {
     margin-left: 15px;

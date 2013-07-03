@@ -61,7 +61,7 @@
                                         <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
                                     <?php } ?>
                                     <div>    
-                                        <a href="<?php echo $product['href']; ?>"><h4 style="font-weight: normal"><?php echo $product['name']; ?></h4></a>
+                                        <a href="<?php echo $product['href']; ?>"><h4 style="font-weight: 700"><?php echo $product['name']; ?></h4></a>
                                         <?php if (!$product['stock']) { ?>
                                             <span class="stock">***</span>
                                         <?php } ?>

@@ -45,7 +45,7 @@
                                         <td class="image"><?php if ($product['thumb']) { ?>
                                                 <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
                                             <?php } ?></td>
-                                        <td class="name"><a href="<?php echo $product['href']; ?>"><h4 style="font-weight: normal"><?php echo $product['name']; ?></h4></a></td>
+                                        <td class="name"><a href="<?php echo $product['href']; ?>"><h4 style="font-weight: 700"><?php echo $product['name']; ?></h4></a></td>
                                         <td class="model"><h4 style="font-weight: normal"><?php echo $product['model']; ?></h4></td>
                                         <td class="stock"><h4 style="font-weight: normal"><?php echo $product['stock']; ?></h4></td>
                                         <td class="price"><?php if ($product['price']) { ?>
