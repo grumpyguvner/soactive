@@ -73,6 +73,19 @@
                 ?>
                 <div class="paAddress">
                     <div class="prow">
+                        <div class="pLabel">
+                            <span class="required">*</span> <label><?php echo $entry_title; ?></label>
+                        </div>
+                        <div class="pInput">
+                            <select class="registerTitle" name="title"><option></option><?php
+                            foreach ($select_title as $title)
+                            {
+                                echo '<option>' . $title . '</option>';
+                            }
+                            ?></select>
+                        </div>
+                    </div>
+                    <div class="prow">
                         <div class="pLabel">  
                             <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
                         </div>

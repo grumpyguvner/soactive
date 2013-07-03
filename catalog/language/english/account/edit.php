@@ -15,6 +15,7 @@ $_['entry_email']      = 'E-Mail:';
 $_['entry_telephone']  = 'Telephone:';
 $_['entry_fax']        = 'Fax:';
 $_['entry_date_birth'] = 'Date Of Birth:';
+$_['entry_title']          = 'Title:';
 
 // Error
 $_['error_exists']     = 'Warning: E-Mail address is already registered!';

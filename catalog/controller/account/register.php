@@ -93,6 +93,9 @@ class ControllerAccountRegister extends Controller {
         $this->data['entry_confirm'] = $this->language->get('entry_confirm');
         $this->data['button_continue'] = $this->language->get('button_continue');
         $this->data['entry_date_birth'] = $this->language->get('entry_date_birth');
+        $this->data['entry_title'] = $this->language->get('entry_title');
+        
+        $this->data['select_title'] = explode(',', $this->language->get('select_title'));
         
         $this->data['text_enter_manually'] = $this->language->get('text_enter_manually');
         $this->data['entry_search_address'] = $this->language->get('entry_search_address');

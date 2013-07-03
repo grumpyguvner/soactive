@@ -30,6 +30,23 @@
 
                 <div class="wrapContentAccount content">
                     <div class="prow">
+                        <div class="pLabel">  
+                            <span class="required">*</span> <span><?php echo $entry_title; ?></span>
+                        </div>
+                        <div class="pInput">
+                            <select class="registerTitle" name="title"><option></option><?php
+                            foreach ($select_title as $titles)
+                            {
+                                if ($titles == $title) {
+                                    echo '<option selected="selected">' . $titles . '</option>';
+                                } else {
+                                    echo '<option>' . $titles . '</option>';
+                                }
+                            }
+                            ?></select>
+                        </div>
+                    </div>
+                    <div class="prow">
                         <div class="pLabel">
                             <span class="required">*</span> <span><?php echo $entry_firstname; ?></span>
                         </div>
@@ -110,15 +127,15 @@
                                 if ($day_birth) {
                                     for ($i = 1; $i <= 12; $i++) {
                                         if ($i == $month_birth) {
-                                           echo '<option value="'.$month_birth.'" selected="selected">'.$month_birth.'</option>'; 
+                                           echo '<option value="'.$month_birth.'" selected="selected">'.date("F", mktime(0, 0, 0, $month_birth, 1, 2013)).'</option>'; 
                                         } else {
-                                           echo '<option value="'.$i.'">'.$i.'</option>';
+                                           echo '<option value="'.$i.'">'.date("F", mktime(0, 0, 0, $i, 1, 2013)).'</option>';
                                         } 
                                     }
                                 } else {
                                     echo '<option value=""></option>';
                                     for($i = 1; $i <= 12; $i++) {
-                                        echo '<option value="'.$i.'">'.$i.'</option>';
+                                        echo '<option value="'.$i.'">'.date("F", mktime(0, 0, 0, $i, 1, 2013)).'</option>';
                                     }
                                 }
                                 ?>
