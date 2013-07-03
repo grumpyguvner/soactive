@@ -17,27 +17,36 @@ if ($login_required)
     <?php } ?>
   </div>
 
+<?php if ($thumb || $date_end || $description) { ?>
+<div class="category-info">
+        <?php if ($thumb || $date_end) { ?>
+        <div class="categoryImage">
+            <?php
+            if ($date_end)
+            {
+                ?>
+            <div class="countdown"></div>
 <script type="text/javascript" src="catalog/view/javascript/jquery/countdown/jquery.countdown.js"></script>
 <script type="text/javascript">
-      $(function() {
-        var endDate = "<?php echo date("M j, Y, G:i:s", strtotime($date_end)); ?>";
-        
-        $('.countdown').countdown({
-          date: endDate,
-          render: function(data) {
-            $(this.el).html("<div>" + this.leadingZeros(data.days, 2) + " :<div class='countdownText'>Days</div></div><div>" + this.leadingZeros(data.hours, 2) + " :<div class='countdownText'>Hr</div></div><div>" + this.leadingZeros(data.min, 2) + " : <div class='countdownText'>Min</div></div><div>" + this.leadingZeros(data.sec, 2) + "<div class='countdownText'>Sec</div></div>");
-          }
-        });
-        
+    $(function() {
+      var endDate = "<?php echo date("M j, Y, G:i:s", strtotime($date_end)); ?>";
+
+      $('.countdown').countdown({
+        date: endDate,
+        render: function(data) {
+          $(this.el).html("<div>" + this.leadingZeros(data.days, 2) + " :<div class='countdownText'>Days</div></div><div>" + this.leadingZeros(data.hours, 2) + " :<div class='countdownText'>Hr</div></div><div>" + this.leadingZeros(data.min, 2) + " : <div class='countdownText'>Min</div></div><div>" + this.leadingZeros(data.sec, 2) + "<div class='countdownText'>Sec</div></div>");
+        }
       });
-    </script>
-<?php if ($thumb || $description) { ?>
-<div class="category-info">
-        <?php if ($thumb) { ?>
-        <div class="categoryImage">
-             
-            <div class="countdown"></div>
+
+    });
+  </script>
+            <?php
+            } else {
+            ?>
             <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
+            <?php
+            } 
+            ?>
         </div>    
         <?php } ?>
         <?php if ($description) { ?>
