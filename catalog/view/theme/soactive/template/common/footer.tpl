@@ -114,11 +114,9 @@
                             <li style="font-weight: normal"><?php echo $text_description_newsletter ?></li>
                             <br />
                             <li>
-                                <form action="/index.php" method="get" class="newsletter-form" target="_blank">
-                                    <input type="hidden" name="route" value="module/newsletter/callback">
-                                    <input type="hidden" name="subscribe" value="1">
+                                <form action="index.php?route=module/newsletter/signup" method="post" enctype="multipart/form-data">
                                     <div class="newsletter_input">
-                                        <input type="email" name="email" placeholder="Your Email"><a class="submit" href="#"><img src="catalog/view/theme/soactive/image/submit_newsletter.png" alt="Go Button" /></a>
+                                        <input type="email" name="email" placeholder="Your Email"><a class="submit" href="index.php?route=module/newsletter/signup"><img src="catalog/view/theme/soactive/image/submit_newsletter.png" alt="Go Button" /></a>
                                     </div>
                                 </form>
                             </li>
@@ -140,3 +138,9 @@
 </div>
 </div>
 </body></html>
+<script type="text/javascript">
+    $('.submit img').click(function () {
+        $(this).parents('form').trigger('submit');
+        return false;
+    });
+</script>

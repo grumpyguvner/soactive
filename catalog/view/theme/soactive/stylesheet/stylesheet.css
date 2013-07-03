@@ -3185,3 +3185,43 @@ a.buttonHome:hover, input.buttonHome:hover {
   text-align: center;
 }
 /**** End Countdown ***/
+
+.newsletterSignup .prow {
+    width: 100%;
+    padding-bottom: 15px;
+}
+.newsletterSignup .pLabel, .newsletterSignup .pInput {
+    display: inline-block;
+}
+.newsletterSignup .prow .pLabel > span, .newsletterSignup .prow .pLabel > label {
+    display: inline-block;
+    line-height: 30px;
+    font-weight: 700;
+}
+.newsletterSignup .pInput {
+    width: 74%;
+    float: right;
+}
+.newsletterSignup .radioNewsletter {
+    width: 460px;
+}
+.newsletterSignup .radioNewsletter div {
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+.newsletterSignup .radioNewsletter div > span:first-child {
+    color: #1db4b7;
+    font-weight: 700;
+}
+.newsletterSignup .radioNewsletter .chooseNewsletter {
+    text-align: center;
+}
+.newsletterSignup .radioNewsletter .chooseNewsletter > span {
+    font-weight: 700;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.newsletterSignup .radioNewsletter div > span {
+    vertical-align: top;
+    text-align: center;
+}

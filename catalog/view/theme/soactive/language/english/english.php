@@ -21,6 +21,10 @@ $_['text_first']            = '';
 $_['text_prev']             = '&lt; Prev ';
 $_['text_next']             = 'Next &gt; ';
 $_['text_last']             = '';
+$_['text_newsletter_signup']= 'Newsletter Signup';
+$_['text_choose_newsletter']= 'Your Newsletter Subscription Settings';
+$_['text_choose_newsletter_womens']= 'Would you like to receive news, offers and discount related to <span>WOMEN s</span> clothing and accessories?';
+$_['text_choose_newsletter_mens']= 'Would you like to receive news, offers and discount related to <span>MEN s</span> clothing and accessories?';
 
 // Buttons
 $_['button_add_address']    = 'Add Address';
@@ -53,6 +57,7 @@ $_['button_voucher']        = 'Apply Voucher';
 $_['button_upload']         = 'Upload File';
 $_['button_reward']         = 'Apply Points';
 $_['button_quote']          = 'Get Quotes';
+$_['button_subscribe']      = 'Subscribe';
 
 // Error
 $_['error_upload_1']        = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';
