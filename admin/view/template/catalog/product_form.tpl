@@ -82,6 +82,12 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label"><?php echo $entry_description; ?></label>
+                                            <div class="controls">
+                                                <textarea name="product_description[<?php echo $language['language_id']; ?>][brief_summary]" id="brief_summary<?php echo $language['language_id']; ?>" class="input-block-level"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['brief_summary'] : ''; ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label class="control-label"><?php echo $entry_tag; ?></label>
                                             <div class="controls">
                                                 <?php if (VERSION >= '1.5.4') { ?>
@@ -820,6 +826,7 @@
 <script>
 <?php foreach ($languages as $language) { ?>
     <?php echo p3html::oc_ckeditor_replace('description' . $language['language_id'], $token); ?>
+    <?php echo p3html::oc_ckeditor_replace('brief_summary' . $language['language_id'], $token); ?>
 <?php } ?>
 </script>
 <!--CKEDITOR-->
