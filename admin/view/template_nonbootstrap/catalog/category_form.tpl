@@ -67,6 +67,29 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <?php
+            if ($has_filters)
+            {
+            ?>
+            <tr>
+              <td><?php echo $entry_filter; ?></td>
+              <td><input type="text" name="filter" value="" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><div id="category-filter" class="scrollbox">
+                  <?php $class = 'odd'; ?>
+                  <?php foreach ($category_filters as $category_filter) { ?>
+                  <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                  <div id="category-filter<?php echo $category_filter['filter_id']; ?>" class="<?php echo $class; ?>"><?php echo $category_filter['name']; ?><img src="view/image/delete.png" alt="" />
+                    <input type="hidden" name="category_filter[]" value="<?php echo $category_filter['filter_id']; ?>" />
+                  </div>
+                  <?php } ?>
+                </div></td>
+            </tr>
+            <?php
+            }
+            ?>
             <tr>
               <td><?php echo $entry_googlebase_text; ?></td>
               <td><input name="googlebase_text" value="<?php echo $googlebase_text ?>" size="100" /></td>
@@ -123,14 +146,6 @@
             <tr>
               <td><?php echo $entry_column; ?></td>
               <td><input type="text" name="column" value="<?php echo $column; ?>" size="1" /></td>
-            </tr>
-            <tr>
-              <td><?php echo $entry_is_filter; ?></td>
-              <td><?php if ($is_filter) { ?>
-                <input type="checkbox" name="is_filter" value="1" checked="checked" />
-                <?php } else { ?>
-                <input type="checkbox" name="is_filter" value="1" />
-                <?php } ?></td>
             </tr>
             <tr>
               <td><?php echo $entry_members_only; ?></td>
@@ -224,6 +239,46 @@ CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
 <?php } ?>
+//--></script>
+<script type="text/javascript"><!--
+// Filter
+$('input[name=\'filter\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/filter/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {		
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.filter_id
+					}
+				}));
+			}
+		});
+	}, 
+	select: function(event, ui) {
+		$('#category-filter' + ui.item.value).remove();
+		
+		$('#category-filter').append('<div id="category-filter' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="category_filter[]" value="' + ui.item.value + '" /></div>');
+
+		$('#category-filter div:odd').attr('class', 'odd');
+		$('#category-filter div:even').attr('class', 'even');
+				
+		return false;
+	},
+	focus: function(event, ui) {
+      return false;
+   }
+});
+
+$('#category-filter div img').live('click', function() {
+	$(this).parent().remove();
+	
+	$('#category-filter div:odd').attr('class', 'odd');
+	$('#category-filter div:even').attr('class', 'even');	
+});
 //--></script> 
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {

@@ -583,6 +583,7 @@ class ControllerCatalogProduct extends Controller {
         $this->data['entry_image'] = $this->language->get('entry_image');
         $this->data['entry_download'] = $this->language->get('entry_download');
         $this->data['entry_category'] = $this->language->get('entry_category');
+        $this->data['entry_filter'] = $this->language->get('entry_filter');
         $this->data['entry_related'] = $this->language->get('entry_related');
         $this->data['entry_attribute'] = $this->language->get('entry_attribute');
         $this->data['entry_text'] = $this->language->get('entry_text');
@@ -997,14 +998,57 @@ class ControllerCatalogProduct extends Controller {
         } else {
             $this->data['length_class_id'] = $this->config->get('config_length_class_id');
         }
+        
+        // Filters
+        $this->load->model('catalog/filter');
+        
+        $this->data['has_filters'] = $this->model_catalog_filter->getTotalFilterGroups();
+
+        if (isset($this->request->post['product_filter'])) {
+                $filters = $this->request->post['product_filter'];
+        } elseif (isset($this->request->get['product_id'])) {
+                $filters = $this->model_catalog_product->getProductFilters($this->request->get['product_id']);
+        } else {
+                $filters = array();
+        }
+
+        $this->data['product_filters'] = array();
+
+        foreach ($filters as $filter_id) {
+                $filter_info = $this->model_catalog_filter->getFilter($filter_id);
+
+                if ($filter_info) {
+                        $this->data['product_filters'][] = array(
+                                'filter_id' => $filter_info['filter_id'],
+                                'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
+                        );
+                }
+        }	
+		
+        // Attributes
+        $this->load->model('catalog/attribute');
 
         if (isset($this->request->post['product_attribute'])) {
-            $this->data['product_attributes'] = $this->request->post['product_attribute'];
+                $product_attributes = $this->request->post['product_attribute'];
         } elseif (isset($this->request->get['product_id'])) {
-            $this->data['product_attributes'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
+                $product_attributes = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
         } else {
-            $this->data['product_attributes'] = array();
+                $product_attributes = array();
         }
+
+        $this->data['product_attributes'] = array();
+
+        foreach ($product_attributes as $product_attribute) {
+                $attribute_info = $this->model_catalog_attribute->getAttribute($product_attribute['attribute_id']);
+
+                if ($attribute_info) {
+                        $this->data['product_attributes'][] = array(
+                                'attribute_id'                  => $product_attribute['attribute_id'],
+                                'name'                          => $attribute_info['name'],
+                                'product_attribute_description' => $product_attribute['product_attribute_description']
+                        );
+                }
+        }		
 
         $this->load->model('catalog/option');
 
