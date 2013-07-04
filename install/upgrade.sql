@@ -479,3 +479,7 @@ ALTER TABLE `oc_customer` ADD `date_of_birth` DATE NOT NULL DEFAULT '0000-00-00 
 #### Start 1.5.4:BC1.2.8
 
 ALTER TABLE `oc_customer` ADD `title` varchar(9) COLLATE utf8_bin NOT NULL DEFAULT ''  AFTER `store_id`;
+
+#### Start 1.5.4:BC1.2.9
+
+ALTER TABLE `oc_product_description` ADD `brief_summary` text COLLATE utf8_bin NOT NULL AFTER `description`;

@@ -32,6 +32,7 @@ $_['entry_meta_title'] 	 = 'Meta Title:';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords:';
 $_['entry_meta_description'] = 'Meta Tag Description:';
 $_['entry_description']      = 'Description:';
+$_['entry_brief_summary']    = 'Brief Summary:';
 $_['entry_store']            = 'Stores:';
 $_['entry_keyword']          = 'SEO Keyword:<br /><span class="help">Do not use spaces instead replace spaces with - and make sure the keyword is globally unique.</span>';
 $_['entry_model']            = 'Model:';

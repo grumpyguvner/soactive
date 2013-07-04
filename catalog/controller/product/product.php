@@ -341,6 +341,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
 			$this->data['rating'] = (int)$product_info['rating'];
 			$this->data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+                        $this->data['brief_summary'] = html_entity_decode($product_info['brief_summary'], ENT_QUOTES, 'UTF-8');
 			$attGroups = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
                         $this->data['attribute_groups'] = array();
                         $this->data['product_tabs'] = array();

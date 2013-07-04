@@ -2016,6 +2016,7 @@ CREATE TABLE `oc_product_description` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `description` text COLLATE utf8_bin NOT NULL,
+  `brief_summary` text COLLATE utf8_bin NOT NULL,
   `meta_title` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
   `meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,

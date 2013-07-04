@@ -84,6 +84,9 @@
         <?php } ?>
       </div>  
       <?php } ?>
+      <div class="briefSummary">
+          <?php echo $brief_summary ?>
+      </div>
       <div class="optionCart">  
         <?php if ($options) { ?>
         <div class="options">

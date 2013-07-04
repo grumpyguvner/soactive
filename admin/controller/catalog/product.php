@@ -554,6 +554,7 @@ class ControllerCatalogProduct extends Controller {
         $this->data['entry_meta_description'] = $this->language->get('entry_meta_description');
         $this->data['entry_meta_keyword'] = $this->language->get('entry_meta_keyword');
         $this->data['entry_description'] = $this->language->get('entry_description');
+        $this->data['entry_brief_summary'] = $this->language->get('entry_brief_summary');
         $this->data['entry_store'] = $this->language->get('entry_store');
         $this->data['entry_keyword'] = $this->language->get('entry_keyword');
         $this->data['entry_model'] = $this->language->get('entry_model');
@@ -730,7 +731,15 @@ class ControllerCatalogProduct extends Controller {
         } else {
             $this->data['product_description'] = array();
         }
-
+        
+        if (isset($this->request->post['product_brief_summary'])) {
+            $this->data['product_brief_summary'] = $this->request->post['product_brief_summary'];
+        } elseif (isset($this->request->get['product_id'])) {
+            $this->data['product_brief_summary'] = $this->model_catalog_product->getProductDescriptions($this->request->get['product_id']);
+        } else {
+            $this->data['product_brief_summary'] = array();
+        }
+        
         if (isset($this->request->post['model'])) {
             $this->data['model'] = $this->request->post['model'];
         } elseif (!empty($product_info)) {
@@ -1209,6 +1218,12 @@ class ControllerCatalogProduct extends Controller {
         }
 
         foreach ($this->request->post['product_description'] as $language_id => $value) {
+            if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 255)) {
+                $this->error['name'][$language_id] = $this->language->get('error_name');
+            }
+        }
+        
+        foreach ($this->request->post['product_brief_summary'] as $language_id => $value) {
             if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 255)) {
                 $this->error['name'][$language_id] = $this->language->get('error_name');
             }
