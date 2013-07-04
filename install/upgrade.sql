@@ -484,6 +484,8 @@ ALTER TABLE `oc_customer` ADD `title` varchar(9) COLLATE utf8_bin NOT NULL DEFAU
 
 ALTER TABLE `oc_product_description` ADD `brief_summary` text COLLATE utf8_bin NOT NULL AFTER `description`;
 
+#### Start 1.5.4.1:BC1.2.10 
+
 CREATE TABLE IF NOT EXISTS `oc_category_filter` (
   `category_id` int(11) NOT NULL,
   `filter_id` int(11) NOT NULL,
