@@ -1,20 +1,20 @@
 <?php
-class ControllerModuleBossBlockquality extends Controller {
+class ControllerModuleBlocks extends Controller {
 	private $error = array(); 
 	
 	public function index() {   
-		$this->language->load('module/boss_blockquality');
+		$this->language->load('module/blocks');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('boss_blockquality', $this->request->post);		
+			$this->model_setting_setting->editSetting('blocks', $this->request->post);		
 					
 			$this->session->data['success'] = $this->language->get('text_success');
 						
-			$this->redirect($this->url->link('module/boss_blockquality', 'token=' . $this->session->data['token'], 'SSL'));
+			$this->redirect($this->url->link('module/blocks', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 				
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -47,6 +47,7 @@ class ControllerModuleBossBlockquality extends Controller {
 		$this->data['tab_content'] = $this->language->get('tab_content');
 		$this->data['tab_footer'] = $this->language->get('tab_footer');
 		$this->data['tab_footer_1'] = $this->language->get('tab_footer_1');
+                $this->data['tab_header'] = $this->language->get('tab_header');
 		
 		$this->data['tab_block'] = $this->language->get('tab_block');
 		
@@ -72,11 +73,11 @@ class ControllerModuleBossBlockquality extends Controller {
 		
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('module/boss_blockquality', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('module/blocks', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 		
-		$this->data['action'] = $this->url->link('module/boss_blockquality', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['action'] = $this->url->link('module/blocks', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 		
@@ -148,11 +149,27 @@ class ControllerModuleBossBlockquality extends Controller {
 
 		$this->data['modules'] = array();
 		
-		if (isset($this->request->post['boss_blockquality_module'])) {
-			$this->data['modules'] = $this->request->post['boss_blockquality_module'];
-		} elseif ($this->config->get('boss_blockquality_module')) { 
-			$this->data['modules'] = $this->config->get('boss_blockquality_module');
-		}	
+		if (isset($this->request->post['blocks_module'])) {
+			$this->data['modules'] = $this->request->post['blocks_module'];
+		} elseif ($this->config->get('blocks_module')) { 
+			$this->data['modules'] = $this->config->get('blocks_module');
+		}
+                
+                $this->data['modules_footer'] = array();
+                
+                if (isset($this->request->post['blocks_module_footer'])) {
+			$this->data['modules_footer'] = $this->request->post['blocks_module_footer'];
+		} elseif ($this->config->get('blocks_module_footer')) { 
+			$this->data['modules_footer'] = $this->config->get('blocks_module_footer');
+		}
+                
+                $this->data['modules_header'] = array();
+                
+                if (isset($this->request->post['blocks_module_header'])) {
+			$this->data['modules_header'] = $this->request->post['blocks_module_header'];
+		} elseif ($this->config->get('blocks_module_header')) { 
+			$this->data['modules_header'] = $this->config->get('blocks_module_header');
+		}
 		
 		$this->load->model('design/layout');
 		
@@ -166,7 +183,7 @@ class ControllerModuleBossBlockquality extends Controller {
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
 						
-		$this->template = 'module/boss_blockquality.tpl';
+		$this->template = 'module/blocks.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -176,7 +193,7 @@ class ControllerModuleBossBlockquality extends Controller {
 	}
 	
 	protected function validate() {
-		if (!$this->user->hasPermission('modify', 'module/boss_blockquality')) {
+		if (!$this->user->hasPermission('modify', 'module/blocks')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
@@ -218,16 +235,16 @@ class ControllerModuleBossBlockquality extends Controller {
 &lt;/ul&gt;
 &lt;/div&gt;';
 		}
-		$boss_blockquality = array(
+		$blocks = array(
 			'B_Block_Footer_1' =>array('content' => $array_description_footer_0, 'status' => 1, 'store_id' => array(0=>0)),
-			'boss_blockquality_module' => array(
+			'blocks_module' => array(
 				0 => array ( 'description' => $array_description0, 'layout_id' => $this->getIdLayout("home"), 'store_id' => array(0=>0), 'position' => 'content_top', 'status' => 1, 'sort_order' => 1),
 				1 => array ( 'description' => $array_description1, 'layout_id' => $this->getIdLayout("home"), 'store_id' => array(0=>0), 'position' => 'content_top', 'status' => 1, 'sort_order' => 3),
 				2 => array ( 'description' => $array_description2, 'layout_id' => $this->getIdLayout("home"), 'store_id' => array(0=>0), 'position' => 'content_top', 'status' => 1, 'sort_order' => 6)
 			)
 		);
 
-		$this->model_setting_setting->editSetting('boss_blockquality', $boss_blockquality);		
+		$this->model_setting_setting->editSetting('blocks', $blocks);		
 	}	
 	
 
