@@ -166,6 +166,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_store'] = $this->language->get('entry_store');
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
+		$this->data['entry_filter'] = $this->language->get('entry_filter');
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
 		$this->data['entry_googlebase_text'] = $this->language->get('entry_googlebase_text');
 		$this->data['entry_googlebase_xml'] = $this->language->get('entry_googlebase_xml');
@@ -259,6 +260,31 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$this->data['parent_id'] = 0;
 		}
+                
+		$this->load->model('catalog/filter');
+                
+                $this->data['has_filters'] = $this->model_catalog_filter->getTotalFilterGroups();
+		
+		if (isset($this->request->post['category_filter'])) {
+			$filters = $this->request->post['category_filter'];
+		} elseif (isset($this->request->get['category_id'])) {		
+			$filters = $this->model_catalog_category->getCategoryFilters($this->request->get['category_id']);
+		} else {
+			$filters = array();
+		}
+	
+		$this->data['category_filters'] = array();
+		
+		foreach ($filters as $filter_id) {
+			$filter_info = $this->model_catalog_filter->getFilter($filter_id);
+			
+			if ($filter_info) {
+				$this->data['category_filters'][] = array(
+					'filter_id' => $filter_info['filter_id'],
+					'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
+				);
+			}
+		}	
 
 		if (isset($this->request->post['googlebase_text'])) {
 			$this->data['googlebase_text'] = $this->request->post['googlebase_text'];
@@ -338,14 +364,6 @@ class ControllerCatalogCategory extends Controller {
 			$this->data['sort_order'] = $category_info['sort_order'];
 		} else {
 			$this->data['sort_order'] = 0;
-		}
-
-		if (isset($this->request->post['is_filter'])) {
-			$this->data['is_filter'] = $this->request->post['is_filter'];
-		} elseif (!empty($category_info)) {
-			$this->data['is_filter'] = $category_info['is_filter'];
-		} else {
-			$this->data['is_filter'] = 0;
 		}
 
 		if (isset($this->request->post['members_only'])) {
