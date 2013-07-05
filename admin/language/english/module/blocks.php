@@ -1,10 +1,10 @@
 <?php
 // Heading
-$_['heading_title']       = 'Boss - Static Block';
+$_['heading_title']       = 'Content Block';
 
 // Text
 $_['text_module']         = 'Modules';
-$_['text_success']        = 'Success: You have modified module Boss - Static Block!';
+$_['text_success']        = 'Success: You have modified module Content Block!';
 $_['text_content_top']    = 'Content Top';
 $_['text_content_bottom'] = 'Content Bottom';
 $_['text_column_left']    = 'Column Left';
@@ -16,6 +16,7 @@ $_['text_image_manager'] = 'Image Manager';
 $_['tab_content']         = 'Block Content';
 $_['tab_footer']         = 'Block Footer';
 $_['tab_footer_1']         = 'About Us';
+$_['tab_header']         = 'Block Header';
 // Entry
 $_['entry_layout']        = 'Layout:';
 $_['entry_position']      = 'Position:';
@@ -42,5 +43,5 @@ $_['entry_status']        = 'Status:';
 $_['entry_sort_order']    = 'Sort Order:';
 
 // Error
-$_['error_permission']    = 'Warning: You do not have permission to modify module Boss - Static Block!';
+$_['error_permission']    = 'Warning: You do not have permission to modify module Content Block!';
 ?>

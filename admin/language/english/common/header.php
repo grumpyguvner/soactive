@@ -90,6 +90,7 @@ $_['text_sage']                        = 'Sage Interface';
 $_['text_zone']                        = 'Zones';
 
 $_['text_welcome']                     = 'Blocks';
+$_['text_content_block']               = 'Content Block';
 $_['text_store_locations']             = 'Store locations';
 $_['text_news']                        = 'News / Blog';
 

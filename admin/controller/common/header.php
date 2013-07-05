@@ -113,6 +113,7 @@ class ControllerCommonHeader extends Controller {
         $this->data['text_zone'] = $this->language->get('text_zone');
         
         $this->data['text_welcome'] = $this->language->get('text_welcome');
+        $this->data['text_content_block'] = $this->language->get('text_content_block');
         $this->data['text_store_locations'] = $this->language->get('text_store_locations');
         $this->data['text_news'] = $this->language->get('text_news');
 
@@ -202,6 +203,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['news'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'], 'SSL');
             $this->data['store_locations'] = $this->url->link('module/store_locations', '&token=' . $this->session->data['token'], 'SSL');
             $this->data['welcome'] = $this->url->link('module/welcome', '&token=' . $this->session->data['token'], 'SSL');
+            $this->data['content_block'] = $this->url->link('module/blocks', '&token=' . $this->session->data['token'], 'SSL');
             
             $this->data['event'] = $this->url->link('catalog/event', '&token=' . $this->session->data['token'], 'SSL');
 
