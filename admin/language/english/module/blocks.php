@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']       = 'Content Block';
+$_['heading_title']       = 'Blocks';
 
 // Text
 $_['text_module']         = 'Modules';

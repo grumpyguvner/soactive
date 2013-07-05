@@ -2179,10 +2179,6 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer ul {
     font-size: 13px;
 }
-#footer #lastColumn {
-    margin-right: 0;
-    width: 330px;
-}
 #footer .followUs span {
     color: #1db4b7;
 }
@@ -2214,6 +2210,10 @@ a.buttonHome:hover, input.buttonHome:hover {
     width: 300px;
     min-height: 100px;
     margin-right: 25px;
+}
+#footer .column:last-child {
+    margin-right: 0;
+    width: 330px;
 }
 #footer .column #columnLeft, #footer .column #columnRight {
     display: inline-block;
@@ -2584,6 +2584,7 @@ overflow: scroll;
     border-top: 1px solid #dee0e0;
     border-bottom: 1px solid #dee0e0;
     padding-left: 3px;
+    text-transform: uppercase;
 }
 .accordion .accordion-group {
     margin-bottom: -1px;
