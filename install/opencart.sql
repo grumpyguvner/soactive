@@ -1806,6 +1806,7 @@ DROP TABLE IF EXISTS `oc_option`;
 CREATE TABLE `oc_option` (
   `option_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) NOT NULL,
+  `is_filter` TINYINT NOT NULL,
   `sort_order` int(3) NOT NULL,
   PRIMARY KEY (`option_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
