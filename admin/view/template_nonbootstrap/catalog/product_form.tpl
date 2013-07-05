@@ -48,12 +48,15 @@
                 <td><textarea name="product_description[<?php echo $language['language_id']; ?>][meta_keyword]" cols="40" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea></td>
               </tr>
               <tr>
-                <td><?php echo $entry_description; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
+                <td><?php echo $entry_brief_summary; ?></td>
+                <td><input type="text" name="product_description[<?php echo $language['language_id']; ?>][brief_summary]" size="100" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['brief_summary'] : ''; ?>" />
+                  <?php if (isset($error_name[$language['language_id']])) { ?>
+                  <span class="error"><?php echo $error_name[$language['language_id']]; ?></span>
+                  <?php } ?></td>
               </tr>
               <tr>
-                <td><?php echo $entry_brief_summary; ?></td>
-                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][brief_summary]" id="brief_summary<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['brief_summary'] : ''; ?></textarea></td>
+                <td><?php echo $entry_description; ?></td>
+                <td><textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea></td>
               </tr>
               <tr>
                 <td><?php echo $entry_tag; ?></td>
@@ -756,14 +759,6 @@
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
 CKEDITOR.replace('description<?php echo $language['language_id']; ?>', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-});
-CKEDITOR.replace('brief_summary<?php echo $language['language_id']; ?>', {
 	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
 	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
