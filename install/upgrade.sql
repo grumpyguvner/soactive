@@ -482,7 +482,7 @@ ALTER TABLE `oc_customer` ADD `title` varchar(9) COLLATE utf8_bin NOT NULL DEFAU
 
 #### Start 1.5.4:BC1.2.9
 
-ALTER TABLE `oc_product_description` ADD `brief_summary` text COLLATE utf8_bin NOT NULL AFTER `description`;
+ALTER TABLE `oc_product_description` ADD `brief_summary` varchar(255) NOT NULL AFTER `description`;
 
 #### Start 1.5.4.1:BC1.2.10 
 

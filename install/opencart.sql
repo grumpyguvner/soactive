@@ -2362,7 +2362,7 @@ CREATE TABLE `oc_product_description` (
   `language_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `brief_summary` text NOT NULL,
+  `brief_summary` varchar(255) NOT NULL,
   `meta_title` varchar(255) NOT NULL,
   `meta_description` varchar(255) NOT NULL,
   `meta_keyword` varchar(255) NOT NULL,
