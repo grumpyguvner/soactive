@@ -93,6 +93,7 @@ $_['text_welcome']                     = 'Blocks';
 $_['text_content_block']               = 'Content Block';
 $_['text_store_locations']             = 'Store locations';
 $_['text_news']                        = 'News / Blog';
+$_['text_megamenu']                    = 'Mega Menu';
 
 ### Event Calendar - Start ###
 $_['text_event']              = 'Events';

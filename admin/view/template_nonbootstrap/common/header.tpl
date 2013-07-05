@@ -93,6 +93,7 @@ ob_start("fixMenu");
         <ul>
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
           <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
+          <li><a href="<?php echo $megamenu; ?>"><?php echo $text_megamenu; ?></a></li>
           <li><a href="<?php echo $welcome; ?>"><?php echo $text_welcome; ?></a></li>
           <li><a href="<?php echo $content_block; ?>"><?php echo $text_content_block; ?></a></li>
           <li><a href="<?php echo $news; ?>"><?php echo $text_news; ?></a></li>	
