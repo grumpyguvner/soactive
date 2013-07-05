@@ -126,5 +126,8 @@
                     </ul>
                 </div>
             <?php } ?>
+            <?php foreach ($blocks as $block) { ?>
+                <?php echo $block['description']; ?>
+            <?php } ?>
             <div id="notification"></div>
     
