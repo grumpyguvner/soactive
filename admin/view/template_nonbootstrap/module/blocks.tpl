@@ -19,8 +19,8 @@
 
                 <div class="htabs" id="mainTabs">
                     <a href="#BlockContent"><?php echo $tab_content; ?></a>
-                    <a href="#BlockFooter"><?php echo $tab_footer; ?></a>
                     <a href="#BlockHeader"><?php echo $tab_header; ?></a>
+                    <a href="#BlockFooter"><?php echo $tab_footer; ?></a>
 
                 </div> <!-- End .mainTabs -->
 
@@ -138,125 +138,7 @@
                     <?php } ?>
                 </div>
                 <!-- END CUSTOM BLOCK CONTENT -->
-
-                <!-- CUSTOM BLOCK FOOTER -->
-                <div id="BlockFooter" class="htabs-content">
-                    <div id="blockfootertab" class="vtabs">
-                        <?php $module_footer_row = 1; ?>
-                        <?php foreach ($modules_footer as $module_footer) { ?>
-                            <a href="#tab-module_footer-<?php echo $module_footer_row; ?>" id="module_footer-<?php echo $module_footer_row; ?>"><?php echo $tab_block . ' ' . $module_footer_row; ?>&nbsp;<img src="view/image/delete.png" alt="" onclick="$('.vtabs a:first').trigger('click'); $('#module_footer-<?php echo $module_footer_row; ?>').remove(); $('#tab-module_footer-<?php echo $module_footer_row; ?>').remove(); return false;" /></a>
-                            <?php $module_footer_row++; ?>
-                        <?php } ?>
-                        <span id="module_footer-add"><?php echo $button_add_new_block; ?>&nbsp;<img src="view/image/add.png" alt="" onclick="addModuleFooter();" /></span> 
-                    </div>
-                    
-                    <?php $module_footer_row = 1; ?>
-                    <?php foreach ($modules_footer as $module_footer) { ?>
-                        <div id="tab-module_footer-<?php echo $module_footer_row; ?>" class="vtabs-content">
-                            <div id="language_footer-<?php echo $module_footer_row; ?>" class="htabs">
-                                <?php foreach ($languages as $language) { ?>
-                                    <a href="#tab-language_footer-<?php echo $module_footer_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
-                                <?php } ?>
-                            </div>
-                            <?php foreach ($languages as $language) { ?>
-                                <div id="tab-language_footer-<?php echo $module_footer_row; ?>-<?php echo $language['language_id']; ?>">
-                                    <table class="form">
-                                        <tr>
-                                            <td><?php echo $entry_content; ?></td>
-                                            <td><textarea name="blocks_module_footer[<?php echo $module_footer_row; ?>][description][<?php echo $language['language_id']; ?>]" id="description1-<?php echo $module_footer_row; ?>-<?php echo $language['language_id']; ?>"><?php echo isset($module_footer['description'][$language['language_id']]) ? $module_footer['description'][$language['language_id']] : ''; ?></textarea></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            <?php } ?>
-                            <table class="form">
-                                <tr>
-                                    <td><?php echo $entry_layout; ?></td>
-                                    <td><select name="blocks_module_footer[<?php echo $module_footer_row; ?>][layout_id]">
-                                            <?php foreach ($layouts as $layout) { ?>
-                                                <?php if ($layout['layout_id'] == $module_footer['layout_id']) { ?>
-                                                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                                                <?php } else { ?>
-                                                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                                                <?php } ?>
-                                            <?php } ?>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo $entry_store; ?></td>
-                                    <td><div class="scrollbox">
-                                            <?php $class = 'even'; ?>
-                                            <div class="<?php echo $class; ?>">
-                                                <?php if (isset($module_footer['store_id']) && in_array(0, $module_footer['store_id'])) { ?>
-                                                    <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="0" checked="checked" />
-                                                <?php } else { ?>
-                                                    <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="0" />
-                                                <?php } ?>
-                                                <?php echo $text_default; ?>
-                                            </div>
-                                            <?php foreach ($stores as $store) { ?>
-                                                <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                                                <div class="<?php echo $class; ?>">
-                                                    <?php if (isset($module_footer['store_id']) && in_array($store['store_id'], $module_footer['store_id'])) { ?>
-                                                        <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="<?php echo $store['store_id']; ?>" checked="checked" />
-                                                        <?php echo $store['name']; ?>
-                                                    <?php } else { ?>
-                                                        <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="<?php echo $store['store_id']; ?>" />
-                                                        <?php echo $store['name']; ?>
-                                                    <?php } ?>
-                                                </div>
-                                            <?php } ?>
-                                        </div></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo $entry_position; ?></td>
-                                    <td><select name="blocks_module_footer[<?php echo $module_footer_row; ?>][position]">
-                                            <?php if ($module_footer['position'] == 'content_top') { ?>
-                                                <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
-                                            <?php } else { ?>
-                                                <option value="content_top"><?php echo $text_content_top; ?></option>
-                                            <?php } ?>
-                                            <?php if ($module_footer['position'] == 'content_bottom') { ?>
-                                                <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
-                                            <?php } else { ?>
-                                                <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
-                                            <?php } ?>
-                                            <?php if ($module_footer['position'] == 'column_left') { ?>
-                                                <option value="column_left" selected="selected"><?php echo $text_column_left; ?></option>
-                                            <?php } else { ?>
-                                                <option value="column_left"><?php echo $text_column_left; ?></option>
-                                            <?php } ?>
-                                            <?php if ($module_footer['position'] == 'column_right') { ?>
-                                                <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
-                                            <?php } else { ?>
-                                                <option value="column_right"><?php echo $text_column_right; ?></option>
-                                            <?php } ?>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo $entry_status; ?></td>
-                                    <td><select name="blocks_module_footer[<?php echo $module_footer_row; ?>][status]">
-                                            <?php if ($module_footer['status']) { ?>
-                                                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                                                <option value="0"><?php echo $text_disabled; ?></option>
-                                            <?php } else { ?>
-                                                <option value="1"><?php echo $text_enabled; ?></option>
-                                                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                                            <?php } ?>
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    <td><?php echo $entry_sort_order; ?></td>
-                                    <td><input type="text" name="blocks_module_footer[<?php echo $module_footer_row; ?>][sort_order]" value="<?php echo $module_footer['sort_order']; ?>" size="3" /></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <?php $module_footer_row++; ?>
-                    <?php } ?>
-                
-                    
-                </div>
-                <!-- END CUSTOM BLOCK FOOTER -->
-                
+                                
                 <!-- CUSTOM BLOCK HEADER -->
                 <div id="BlockHeader" class="htabs-content">
                     <div id="blockheadertab" class="vtabs">
@@ -287,8 +169,8 @@
                                 </div>
                             <?php } ?>
                             <table class="form">
-                                <tr>
-                                    <td><?php echo $entry_layout; ?></td>
+                                <!--tr>
+                                    <td><?php /* echo $entry_layout; ?></td>
                                     <td><select name="blocks_module_header[<?php echo $module_header_row; ?>][layout_id]">
                                             <?php foreach ($layouts as $layout) { ?>
                                                 <?php if ($layout['layout_id'] == $module_header['layout_id']) { ?>
@@ -296,9 +178,9 @@
                                                 <?php } else { ?>
                                                     <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
                                                 <?php } ?>
-                                            <?php } ?>
+                                            <?php } */ ?>
                                         </select></td>
-                                </tr>
+                                </tr-->
                                 <tr>
                                     <td><?php echo $entry_store; ?></td>
                                     <td><div class="scrollbox">
@@ -325,8 +207,8 @@
                                             <?php } ?>
                                         </div></td>
                                 </tr>
-                                <tr>
-                                    <td><?php echo $entry_position; ?></td>
+                                <!--tr>
+                                    <td><?php /* echo $entry_position; ?></td>
                                     <td><select name="blocks_module_header[<?php echo $module_header_row; ?>][position]">
                                             <?php if ($module_header['position'] == 'content_top') { ?>
                                                 <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
@@ -347,9 +229,9 @@
                                                 <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
                                             <?php } else { ?>
                                                 <option value="column_right"><?php echo $text_column_right; ?></option>
-                                            <?php } ?>
+                                            <?php } */ ?>
                                         </select></td>
-                                </tr>
+                                </tr-->
                                 <tr>
                                     <td><?php echo $entry_status; ?></td>
                                     <td><select name="blocks_module_header[<?php echo $module_header_row; ?>][status]">
@@ -374,6 +256,124 @@
                     
                 </div>
                 <!-- END CUSTOM BLOCK HEADER -->
+                
+                <!-- CUSTOM BLOCK FOOTER -->
+                <div id="BlockFooter" class="htabs-content">
+                    <div id="blockfootertab" class="vtabs">
+                        <?php $module_footer_row = 1; ?>
+                        <?php foreach ($modules_footer as $module_footer) { ?>
+                            <a href="#tab-module_footer-<?php echo $module_footer_row; ?>" id="module_footer-<?php echo $module_footer_row; ?>"><?php echo $tab_block . ' ' . $module_footer_row; ?>&nbsp;<img src="view/image/delete.png" alt="" onclick="$('.vtabs a:first').trigger('click'); $('#module_footer-<?php echo $module_footer_row; ?>').remove(); $('#tab-module_footer-<?php echo $module_footer_row; ?>').remove(); return false;" /></a>
+                            <?php $module_footer_row++; ?>
+                        <?php } ?>
+                        <span id="module_footer-add"><?php echo $button_add_new_block; ?>&nbsp;<img src="view/image/add.png" alt="" onclick="addModuleFooter();" /></span> 
+                    </div>
+                    
+                    <?php $module_footer_row = 1; ?>
+                    <?php foreach ($modules_footer as $module_footer) { ?>
+                        <div id="tab-module_footer-<?php echo $module_footer_row; ?>" class="vtabs-content">
+                            <div id="language_footer-<?php echo $module_footer_row; ?>" class="htabs">
+                                <?php foreach ($languages as $language) { ?>
+                                    <a href="#tab-language_footer-<?php echo $module_footer_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
+                                <?php } ?>
+                            </div>
+                            <?php foreach ($languages as $language) { ?>
+                                <div id="tab-language_footer-<?php echo $module_footer_row; ?>-<?php echo $language['language_id']; ?>">
+                                    <table class="form">
+                                        <tr>
+                                            <td><?php echo $entry_content; ?></td>
+                                            <td><textarea name="blocks_module_footer[<?php echo $module_footer_row; ?>][description][<?php echo $language['language_id']; ?>]" id="description1-<?php echo $module_footer_row; ?>-<?php echo $language['language_id']; ?>"><?php echo isset($module_footer['description'][$language['language_id']]) ? $module_footer['description'][$language['language_id']] : ''; ?></textarea></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            <?php } ?>
+                            <table class="form">
+                                <!--tr>
+                                    <td><?php /* echo $entry_layout; ?></td>
+                                    <td><select name="blocks_module_footer[<?php echo $module_footer_row; ?>][layout_id]">
+                                            <?php foreach ($layouts as $layout) { ?>
+                                                <?php if ($layout['layout_id'] == $module_footer['layout_id']) { ?>
+                                                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
+                                                <?php } else { ?>
+                                                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
+                                                <?php } ?>
+                                            <?php } */ ?>
+                                        </select></td>
+                                </tr-->
+                                <tr>
+                                    <td><?php echo $entry_store; ?></td>
+                                    <td><div class="scrollbox">
+                                            <?php $class = 'even'; ?>
+                                            <div class="<?php echo $class; ?>">
+                                                <?php if (isset($module_footer['store_id']) && in_array(0, $module_footer['store_id'])) { ?>
+                                                    <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="0" checked="checked" />
+                                                <?php } else { ?>
+                                                    <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="0" />
+                                                <?php } ?>
+                                                <?php echo $text_default; ?>
+                                            </div>
+                                            <?php foreach ($stores as $store) { ?>
+                                                <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                                                <div class="<?php echo $class; ?>">
+                                                    <?php if (isset($module_footer['store_id']) && in_array($store['store_id'], $module_footer['store_id'])) { ?>
+                                                        <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="<?php echo $store['store_id']; ?>" checked="checked" />
+                                                        <?php echo $store['name']; ?>
+                                                    <?php } else { ?>
+                                                        <input type="checkbox" name="blocks_module_footer[<?php echo $module_footer_row; ?>][store_id][]" value="<?php echo $store['store_id']; ?>" />
+                                                        <?php echo $store['name']; ?>
+                                                    <?php } ?>
+                                                </div>
+                                            <?php } ?>
+                                        </div></td>
+                                </tr>
+                                <!--tr>
+                                    <td><?php /* echo $entry_position; ?></td>
+                                    <td><select name="blocks_module_footer[<?php echo $module_footer_row; ?>][position]">
+                                            <?php if ($module_footer['position'] == 'content_top') { ?>
+                                                <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
+                                            <?php } else { ?>
+                                                <option value="content_top"><?php echo $text_content_top; ?></option>
+                                            <?php } ?>
+                                            <?php if ($module_footer['position'] == 'content_bottom') { ?>
+                                                <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
+                                            <?php } else { ?>
+                                                <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
+                                            <?php } ?>
+                                            <?php if ($module_footer['position'] == 'column_left') { ?>
+                                                <option value="column_left" selected="selected"><?php echo $text_column_left; ?></option>
+                                            <?php } else { ?>
+                                                <option value="column_left"><?php echo $text_column_left; ?></option>
+                                            <?php } ?>
+                                            <?php if ($module_footer['position'] == 'column_right') { ?>
+                                                <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
+                                            <?php } else { ?>
+                                                <option value="column_right"><?php echo $text_column_right; ?></option>
+                                            <?php } */ ?>
+                                        </select></td>
+                                </tr-->
+                                <tr>
+                                    <td><?php echo $entry_status; ?></td>
+                                    <td><select name="blocks_module_footer[<?php echo $module_footer_row; ?>][status]">
+                                            <?php if ($module_footer['status']) { ?>
+                                                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                                                <option value="0"><?php echo $text_disabled; ?></option>
+                                            <?php } else { ?>
+                                                <option value="1"><?php echo $text_enabled; ?></option>
+                                                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                                            <?php } ?>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $entry_sort_order; ?></td>
+                                    <td><input type="text" name="blocks_module_footer[<?php echo $module_footer_row; ?>][sort_order]" value="<?php echo $module_footer['sort_order']; ?>" size="3" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <?php $module_footer_row++; ?>
+                    <?php } ?>
+                
+                    
+                </div>
+                <!-- END CUSTOM BLOCK FOOTER -->
             </form>
         </div> <!-- End .content -->
 
