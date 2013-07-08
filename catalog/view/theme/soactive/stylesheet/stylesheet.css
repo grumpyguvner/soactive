@@ -2577,7 +2577,7 @@ height: 1em;
 
 .accordion .accordion-group .accordion-inner .box-content .box-category > ul {
 max-height: 250px;
-overflow: scroll;
+overflow: auto;
 }
 
 .accordion .accordion-group .accordion-heading {
