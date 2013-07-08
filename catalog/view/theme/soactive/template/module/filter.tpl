@@ -8,6 +8,8 @@ if ($filter_groups || $options) {
                     <?php
                     if ($filter_groups) {
                         foreach ($filter_groups as $filter_group) {
+                            if ($filter_group['count'])
+                            {
                             ?>
                             <div class="filter_category accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                 <div class="accordion-heading">
@@ -19,14 +21,16 @@ if ($filter_groups || $options) {
                                             <div class="box-category">
                                                 <div class="reset"><a href="#">clear</a></div>
                                                 <ul>
-                                                    <?php foreach ($filter_group['filter'] as $filter) { ?>
-
-                                                        <?php if (in_array($filter['filter_id'], $filter_category)) { ?>
+                                                    <?php foreach ($filter_group['filter'] as $filter) {
+                                                        if ($filter['count'])
+                                                        {
+                                                          if (in_array($filter['filter_id'], $filter_category)) { ?>
                                                             <li><label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" checked="checked" /> <?php echo $filter['name']; ?></label></li>
                                                         <?php } else { ?>
                                                             <li><label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" /> <?php echo $filter['name']; ?></label></li>
-                                                        <?php } ?>
-                                                    <?php } ?>
+                                                        <?php } 
+                                                        }
+                                                        } ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -34,10 +38,13 @@ if ($filter_groups || $options) {
                                 </div>
                             </div>
                             <?php
+                            }
                         }
                     }
                     if ($options) {
                         foreach ($options as $option) {
+                            if ($option['count'])
+                            {
                             ?>
                             <div class="filter_option accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                 <div class="accordion-heading">
@@ -49,14 +56,16 @@ if ($filter_groups || $options) {
                                             <div class="box-category">
                                                 <div class="reset"><a href="#">clear</a></div>
                                                 <ul>
-                                                    <?php foreach ($option['option_value'] as $option_value) { ?>
-
-                                                        <?php if (in_array($option_value['option_value_id'], $filter_option)) { ?>
+                                                    <?php foreach ($option['option_value'] as $option_value) {
+                                                        if ($option_value['count'])
+                                                        {
+                                                            if (in_array($option_value['option_value_id'], $filter_option)) { ?>
                                                             <li><label class="checkbox"><input type="checkbox" value="<?php echo $option_value['option_value_id']; ?>" id="option<?php echo $option_value['option_value_id']; ?>" checked="checked" /> <?php echo $option_value['name']; ?></label></li>
                                                         <?php } else { ?>
                                                             <li><label class="checkbox"><input type="checkbox" value="<?php echo $option_value['option_value_id']; ?>" id="option<?php echo $option_value['option_value_id']; ?>" /> <?php echo $option_value['name']; ?></label></li>
-                                                        <?php } ?>
-                                                    <?php } ?>
+                                                        <?php } 
+                                                        }
+                                                    } ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -64,8 +73,11 @@ if ($filter_groups || $options) {
                                 </div>
                             </div>
                             <?php
+                            }
                         }
                     }
+                    if ($filter_product_max_range || $has_sale || $has_new)
+                    {
                     ?>
                     <div class="filter_product accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                         <div class="accordion-heading">
@@ -77,6 +89,9 @@ if ($filter_groups || $options) {
                                     <div class="box-category">
                                         <div class="reset"><a href="#">clear</a></div>
                                         <ul>
+                                            <?php
+                                            if ($filter_product_max_range) {
+                                            ?>
                                             <li>
                                                 <div id="slider-range">
                                                     <div class="slider"></div>
@@ -86,6 +101,7 @@ if ($filter_groups || $options) {
                                                 </div>
                                             </li>
                                             <?php
+                                            }
                                             if ($has_sale) {
                                                 if (in_array('sale', $filter_product)) {
                                                     ?>
@@ -111,6 +127,9 @@ if ($filter_groups || $options) {
                             </div>
                         </div>
                     </div>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <input type="hidden" name="filter" value="">
                 <input type="hidden" name="option" value="">
@@ -129,23 +148,38 @@ if ($filter_groups || $options) {
             step: 5,
             values: [ <?php echo $filter_product_min_price ?>, <?php echo $filter_product_max_price ?> ],
             slide: function( event, ui ) {
-                $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+                if (Number(ui.values[ 0 ]) == <?php echo $filter_product_min_range ?> && Number(ui.values[ 1 ]) == <?php echo $filter_product_max_range ?>)
+                {
+                     $( "#filter_product" ).val('');
+                } else {
+                    $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+                }
                 $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 0 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
                 $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 1 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
             },
             change: function( event, ui ) {
-                $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
-                $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 0 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
-                $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 1 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
+                if (Number(ui.values[ 0 ]) == <?php echo $filter_product_min_range ?> && Number(ui.values[ 1 ]) == <?php echo $filter_product_max_range ?>)
+                {
+                     $( "#filter_product" ).val('');
+                } else {
+                    $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+                }
+                $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + Number(ui.values[ 0 ]) + '<?php echo  $this->currency->getSymbolRight() ?>');
+                $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + Number(ui.values[ 1 ]) + '<?php echo  $this->currency->getSymbolRight() ?>');
 
-                //$('#afilter').trigger('submit');
+                $('#afilter').trigger('submit');
             }
         });
+        
+        if (<?php echo $filter_product_min_price ?> != <?php echo $filter_product_min_range ?> || <?php echo $filter_product_max_price ?> != <?php echo $filter_product_max_range ?>)
+        {
+            $( "#filter_product" ).val( "range:" + <?php echo $filter_product_min_price ?> + ":" + <?php echo $filter_product_max_price ?> );
+        }
     });
 </script>
 <script type="text/javascript">
     $('#afilter input').change(function () {
-        //$('#afilter').trigger('submit');
+        $('#afilter').trigger('submit');
     });
     
     $('.reset a').click(function (e) {
@@ -156,8 +190,6 @@ if ($filter_groups || $options) {
         
     });
 </script>
-
-
 <script type="text/javascript"><!--
     $('#afilter').submit(function() {
         filter = [];

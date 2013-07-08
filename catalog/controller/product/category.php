@@ -15,6 +15,23 @@ class ControllerProductCategory extends Controller {
 		$this->load->model('tool/image');
 					
                 $this->data['breadcrumbs'] = $this->category->getBreadcrumbs();
+                
+		if (isset($this->request->get['filter'])) {
+			$filter = $this->request->get['filter'];
+		} else {
+			$filter = '';
+		}
+		if (isset($this->request->get['option'])) {
+			$option = $this->request->get['option'];
+		} else {
+			$option = '';
+		}
+		if (isset($this->request->get['product'])) {
+			$product = $this->request->get['product'];
+		} else {
+			$product = '';
+		}
+                
                 $path = $this->category->getPath();
 		
                 $sort = $this->category->getSort();
@@ -95,17 +112,50 @@ class ControllerProductCategory extends Controller {
                 
                 $this->data['products'] = array();
 	
-                $data['filter_category_id'] = $category_id;
-                $data['filters'] = $this->category->getFilterData();
-
-                $data['sort'] = $sort;
-
-                $data['order'] = $order;
-                $data['limit'] = $limit;	
-                $data['start'] = ($page - 1) * $limit;
+                $data = array(
+                        'filter_category_id' => $category_id,
+                        'filter_filter'      => $filter, 
+                        'filter_option'      => $option,
+                        'sort'               => $sort,
+                        'order'              => $order,
+                        'start'              => ($page - 1) * $limit,
+                        'limit'              => $limit
+                );
+                
+                if (!empty($product))
+                {
+                    $product = explode(',', $product);
+                    foreach ($product as $p)
+                    {
+                        if (preg_match('%range:\d+:\d+%', $p))
+                        {
+                            $price_range = explode(':', $p);
+                            $data['filter_product_min_price'] = $this->currency->convert($price_range[1], $this->currency->getCode(), $this->config->get('config_currency'));
+                            $data['filter_product_max_price'] = $this->currency->convert($price_range[2], $this->currency->getCode(), $this->config->get('config_currency'));
+                        } 
+                        elseif ($p == 'new')
+                        {
+                            $data['filter_new'] = true;
+                        }
+                        elseif ($p == 'sale')
+                        {
+                            $data['filter_sale'] = true;
+                        }
+                    }
+                }   
+                
+                if ($this->extensions->isInstalled('afilters'))
+                {
+                    
+                    $data['filters'] = $this->category->getFilterData();
+                    
+                    $product_total = $this->model_catalog_product->getTotalProductsAFiltered($data); 
+                    $results = $this->model_catalog_product->getProductsAFiltered($data);
+                } else {
+                    $product_total = $this->model_catalog_product->getTotalProducts($data); 
+                    $results = $this->model_catalog_product->getProducts($data);
+                }
 				
-                $product_total = $this->model_catalog_product->getTotalProductsAFiltered($data); 
-                $results = $this->model_catalog_product->getProductsAFiltered($data);
 	
                 foreach ($results as $result) {
                         if ($result['image']) {

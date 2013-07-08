@@ -106,7 +106,8 @@ class ControllerModuleFilter extends Controller {
 
                     foreach ($option['option_value'] as $option_value) {
                         $data = array(
-                            'filter_category_id' => $category_id
+                            'filter_category_id' => $category_id,
+                            'filter_option' => $option_value['option_value_id']
                         );
                         
                         $count = $this->model_catalog_product->getTotalProducts($data);
@@ -129,10 +130,9 @@ class ControllerModuleFilter extends Controller {
                 }
             }
             
-            
+            $range = $this->model_catalog_category->getCategoryPriceRange($category_id);
             $this->data['filter_product_min_range'] = 0;
-            $this->data['filter_product_max_range'] = 500;
-            
+            $this->data['filter_product_max_range'] = (ceil($this->currency->convert($range['max'], $this->config->get('config_currency'), $this->currency->getCode()) / 10) * 10);
             
             $this->data['filter_product_min_price'] = $this->data['filter_product_min_range'];
             $this->data['filter_product_max_price'] = $this->data['filter_product_max_range'];
@@ -147,8 +147,17 @@ class ControllerModuleFilter extends Controller {
                 }
             }
             
-            $this->data['has_sale'] = true;
-            $this->data['has_new'] = true;
+            $data = array(
+                        'filter_category_id' => $category_id,
+                        'filter_new' => true
+                    );
+            $this->data['has_new'] = $this->model_catalog_product->getTotalProducts($data) ? true : false;
+                        
+            $data = array(
+                        'filter_category_id' => $category_id,
+                        'filter_sale' => true
+                    );
+            $this->data['has_sale'] = $this->model_catalog_product->getTotalProducts($data) ? true : false;
 
             $this->setTemplate('module/filter.tpl');
 

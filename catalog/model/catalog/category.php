@@ -117,6 +117,12 @@ class ModelCatalogCategory extends Model {
         return $query->rows;
     }
 
+    public function getCategoryPriceRange($category_id) {
+        $query = $this->db->query("SELECT MIN(p.price) as min, MAX(p.price) as max FROM " . DB_PREFIX . "product p INNER JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.status = '1' AND p.date_available <= NOW() AND p2c.category_id = '" . (int) $category_id . "' AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' GROUP BY p.product_id");
+
+        return $query->row;
+    }
+
     public function getAttributes() {
         $query = $this->db->query("SELECT name, (SELECT agd.name FROM " . DB_PREFIX . "attribute_group_description agd WHERE agd.attribute_group_id = a.attribute_group_id AND agd.language_id = '" . (int) $this->config->get('config_language_id') . "') AS attribute_group FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.language_id = '" . (int) $this->config->get('config_language_id') . "'");
 

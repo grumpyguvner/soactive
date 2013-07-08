@@ -127,28 +127,43 @@ class Category {
                 $excludes = explode (",", $excludes);
             
             $urlQuery = "";
-            if ($this->extensions->isInstalled('afilters') && !in_array("cat_filters", $excludes)) {
-                if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
-                    foreach ($this->request->get['cat_filters'] as $key=>$val) {
-                        if (!is_array($val))
-                            $val = explode (",", $val);
-                        foreach ($val as $val2) {
-                            $urlQuery .= '&cat_filters['.$key.'][]=' . $val2; }
+            if ($this->extensions->isInstalled('afilters'))
+            {
+                if (!in_array("cat_filters", $excludes)) {
+                    if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
+                        foreach ($this->request->get['cat_filters'] as $key=>$val) {
+                            if (!is_array($val))
+                                $val = explode (",", $val);
+                            foreach ($val as $val2) {
+                                $urlQuery .= '&cat_filters['.$key.'][]=' . $val2; }
+                        }
+                    }
+                }
+                
+                if (!in_array("att_filters", $excludes)) {
+                    if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+                        foreach ($this->request->get['att_filters'] as $key=>$val) {
+                            if (!is_array($val))
+                                $val = explode (",", $val);
+                            foreach ($val as $val2) {
+                                $val2 = str_replace('&amp;','&',urldecode($val2)); 
+                                $urlQuery .= '&att_filters['.$key.'][]=' . urlencode($val2); 
+                            }
+                        }
                     }
                 }
             }
 
-            if ($this->extensions->isInstalled('afilters') && !in_array("att_filters", $excludes)) {
-                if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
-                    foreach ($this->request->get['att_filters'] as $key=>$val) {
-                        if (!is_array($val))
-                            $val = explode (",", $val);
-                        foreach ($val as $val2) {
-                            $val2 = str_replace('&amp;','&',urldecode($val2)); 
-                            $urlQuery .= '&att_filters['.$key.'][]=' . urlencode($val2); 
-                        }
-                    }
-                }
+            if (isset($this->request->get['filter'])&& !in_array("filter", $excludes)) {
+                    $urlQuery .= '&filter=' . $this->request->get['filter'];
+            }
+            
+            if (isset($this->request->get['option'])&& !in_array("option", $excludes)) {
+                    $urlQuery .= '&option=' . $this->request->get['option'];
+            }
+            
+            if (isset($this->request->get['product'])&& !in_array("product", $excludes)) {
+                    $urlQuery .= '&product=' . $this->request->get['product'];
             }
             
             if (isset($this->request->get['manufacturer_id']) && !in_array("manufacturer", $excludes))
@@ -174,25 +189,28 @@ class Category {
                             'group' => $this->getParentId(),
                             'value' => urlencode($this->getId()));
             
-            if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
-                foreach ($this->request->get['cat_filters'] as $key=>$val) {
-                    if (!is_array($val))
-                        $val = explode (",", $val);
-                    foreach ($val as $val2)
-                        $data[] = array('type'  => "category",
-                                        'group' => $key,
-                                        'value' => urlencode($val2));
+            if ($this->extensions->isInstalled('afilters'))
+            {
+                if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
+                    foreach ($this->request->get['cat_filters'] as $key=>$val) {
+                        if (!is_array($val))
+                            $val = explode (",", $val);
+                        foreach ($val as $val2)
+                            $data[] = array('type'  => "category",
+                                            'group' => $key,
+                                            'value' => urlencode($val2));
+                    }
                 }
-            }
 
-            if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
-                foreach ($this->request->get['att_filters'] as $key=>$val) {
-                    if (!is_array($val))
-                        $val = explode (",", $val);
-                    foreach ($val as $val2)
-                        $data[] = array('type'  => "attribute",
-                                        'group' => $key,
-                                        'value' => urlencode($val2));
+                if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+                    foreach ($this->request->get['att_filters'] as $key=>$val) {
+                        if (!is_array($val))
+                            $val = explode (",", $val);
+                        foreach ($val as $val2)
+                            $data[] = array('type'  => "attribute",
+                                            'group' => $key,
+                                            'value' => urlencode($val2));
+                    }
                 }
             }
             
