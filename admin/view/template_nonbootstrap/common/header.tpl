@@ -190,6 +190,7 @@ ob_start("fixMenu");
           <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
           <li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
           <li><a href="<?php echo $sage; ?>"><?php echo $text_sage; ?></a></li>
+          <li><a href="<?php echo $wms; ?>"><?php echo $text_wms; ?></a></li>
           <li><a href="<?php echo $zencart; ?>"><?php echo $text_zencart; ?></a></li>
         </ul>
       </li>
