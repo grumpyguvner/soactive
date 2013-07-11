@@ -1,5 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><div id="content_product"><?php echo $content_top; ?>
+<div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
@@ -10,7 +10,7 @@
     <?php if ($thumb || $images) { ?>
     <div class="left">
       <?php if ($thumb) { ?>
-        <div class="caption"><div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a><span><strong><?php if($stock_quantity <= 10){ echo $stock_quantity . ' ' . 'left!';} ?></strong></span></div></div>
+        <div class="caption"><div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a><span <?php if($stock_quantity > 10){ echo 'style="display: none"';} ?>><strong><?php if($stock_quantity <= 10){ echo $stock_quantity . ' ' . 'left!';} ?></strong></span></div></div>
       <?php } ?>
       <?php if ($images) { ?>
       <div class="image-additional">
@@ -359,7 +359,7 @@
     </div>
   </div>
         
-  </div></div>
+  </div>
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	overlayClose: true,
