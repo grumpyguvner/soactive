@@ -61,7 +61,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
     function cacheWMSData($forceRefresh = false) {
 
         $this->debug("fetching products from wms");
-        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 ORDER BY styles.stylenumber');
+        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 ORDER BY styles.stylenumber');
 
         $myModel = "";
         $product_id = 0;
@@ -182,54 +182,43 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 }
 
                 $this->debug("initializing sku lookup array");
-                $aStock = $this->dbQF->Execute('SELECT * FROM products WHERE styleid = "' . $aProduct->fields['uuid'] . '" ORDER BY bleepid');
+                $aStock = $this->dbQF->Execute('SELECT products.* FROM products LEFT JOIN colours ON products.colourid = colours.uuid LEFT JOIN sizes ON products.sizeid = sizes.uuid WHERE styleid = "' . $aProduct->fields['uuid'] . '" ORDER BY colours.priority, sizes.priority');
                 if ($aStock->RecordCount() > 0) {
                     while (!$aStock->EOF) {
                         $this->debug("");
-                        $this->debug("processing sku " . $aStock->fields['sku'] . "");
+                        $this->debug("processing sku " . $aStock->fields['bleepid'] . "");
                         //initialise sku variables
                         $size = "ONE SIZE";
-                        $colour = "";
-                        //We will be updating the quantity via Sage Interface
-                        $quantity = (float) $aStock->fields['quantity'];
-//                        $quantity = 0;
-                        $opts = explode(",", $aStock->fields['stock_attributes']);
-                        foreach ($opts as $k) {
-                            $aOptions = $this->dbQF->Execute('SELECT * FROM products_attributes JOIN products_options ON (products_attributes.options_id = products_options.products_options_id AND products_options.language_id = 1) JOIN products_options_values ON (products_attributes.options_values_id = products_options_values.products_options_values_id AND products_options_values.language_id = 1) WHERE products_attributes.products_id = ' . $aProduct->fields['uuid'] . ' AND products_attributes.products_attributes_id = ' . $k);
-                            if ($aOptions->RecordCount() > 0) {
-                                while (!$aOptions->EOF) {
-                                    $this->debug("fetching sku options " . $aOptions->fields['products_attributes_id'] . "");
-                                    $this->debug("option " . $aOptions->fields['products_options_name'] . ":" . $aOptions->fields['products_options_values_name'] . "");
-                                    switch ($aOptions->fields['products_options_name']) {
-                                        case "Size":
-                                            $size = (string) $aOptions->fields['products_options_values_name'];
-                                            break;
-                                        case "Product Code":
-                                            $colour = substr((string) $aOptions->fields['products_options_values_name'], 5);
-                                            break;
-                                        default:
-                                            //ignore
-                                            break;
-                                    }
-                                    $aOptions->MoveNext();
-                                }
+                        $aSize = $this->dbQF->Execute('SELECT * FROM sizes WHERE uuid = "' . $aStock->fields['sizeid'] . '" ORDER BY priority DESC');
+                        if ($aSize->RecordCount() > 0) {
+                            while (!$aSize->EOF) {
+                                $size = (string) $aSize->fields['name'];
+                                $aSize->MoveNext();
                             }
                         }
+                        $colour = "";
+                        $colourid = "0000";
+                        $aColour = $this->dbQF->Execute('SELECT * FROM colours WHERE uuid = "' . $aStock->fields['colourid'] . '" ORDER BY priority DESC');
+                        if ($aColour->RecordCount() > 0) {
+                            while (!$aColour->EOF) {
+                                $colour = (string) $aColour->fields['name'];
+                                $colourid = str_pad((string) $aColour->fields['bleepid'], 4, "0", STR_PAD_LEFT);
+                                $aColour->MoveNext();
+                            }
+                        }
+                        $quantity = (float) $aStock->fields['available_stock'];
 
-                        // The product model is obtained from the first 5 characters of the SKU code
-                        // the main model cant be used because different colours have different models
-                        $model = substr((string) $aStock->fields['sku'], 0, 5);
+                        $model = (string) $aProduct->fields['stylenumber']."-".$colourid;
 
                         $stock_item = array(
-                            "name" => (string) $aProduct->fields['stylename'] . $colour,
+                            "name" => (string) $aProduct->fields['stylename'],
                             "description" => $aProduct->fields['description'],
-                            //TODO: Get Image
-//                            "image" => (string) $aProduct->fields['products_image'],
                             "status" => (int) $aProduct->fields['webenabled'],
                             "price" => (float) $aProduct->fields['unitprice'],
-//                            "type" => (string) $type,
-                            "sku" => (string) $aStock->fields['sku'],
+                            "sku" => (string) $aStock->fields['bleepid'],
                             "size" => $size,
+                            "style" => (string) $aProduct->fields['stylenumber'],
+                            "colourid" => (int) $colourid,
                             "quantity" => $quantity,
                             "categories" => $myCategoryIds
                         );
@@ -309,15 +298,39 @@ class ModelToolWMSProduct extends ModelToolWMS {
             return false;
 
         //Fetch the product image
-        $url = "http://www.sealskinz.com/images/large/" . $stock_item['image'];
-        $saveto = DIR_IMAGE . 'data/products/' . $model . '.jpg';
-        if (!file_exists($saveto)) {
-            $this->debug("retrieving " . $url . " and saving as " . $saveto . "");
-            grab_image($url, $saveto);
-        }
+        $images = array();
+        $aImage = $this->dbQF->Execute("SELECT DISTINCT i.id, i.image_name, i.alt_text
+                                     FROM styles_images i
+                                     JOIN styles s ON (i.styleid = s.uuid)
+                                     JOIN colours ON (i.colourid = colours.uuid)
+                                WHERE s.stylenumber = '".$stock_item['style']."'
+                                      AND colours.bleepid =".$stock_item['colourid']."
+                                  AND i.webenabled = 1 AND i.inactive = 0
+                             ORDER BY i.displayorder");
+        $imgCount=0;
+        if ($aImage->RecordCount() > 0) {
+            while (!$aImage->EOF) {
+                $url = 'http://'.$this->config->get('wms_host').'/modules/activewms/styles_image.php?id='.$aImage->fields['id'];
 
-        if (!is_dir(DIR_IMAGE . 'data/products/'))
-            mkdir(DIR_IMAGE . 'data/products/', 0755);
+                if (!is_dir(DIR_IMAGE . 'data/products/'))
+                    mkdir(DIR_IMAGE . 'data/products/', 0755);
+                $saveto = DIR_IMAGE . 'data/products/' . $model . ($imgCount > 0 ? '-' . $imgCount : '') . '.jpg';
+                if (file_exists($saveto))
+                    unlink ($saveto);
+                if (!file_exists($saveto)) {
+                    $this->debug("retrieving " . $url . " and saving as " . $saveto . "");
+                    grab_image($url, $saveto);
+                }
+                if ($imgCount > 0) {
+                    $images[] = array(
+                        'image' => $saveto,
+                        'sort_order' => $imgCount
+                    );
+                }
+                $imgCount++;
+                $aImage->MoveNext();
+            }
+        }
 
         $image = (file_exists($saveto) ? 'data/products/' . $model . '.jpg' : "");
         $this->debug("using " . $image . " as image");
@@ -367,6 +380,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'tax_class_id' => 9, //TODO: lookup "STANDARD" VAT code instead of hard code
             'sort_order' => 999, //Set to 999 so that manually entered orders appear first
             'image' => $image,
+            'product_image' => $images,
             'product_description' => array(
                 $this->languageId => array(
                     'name' => (string) $stock_item['name'],
