@@ -24,9 +24,12 @@
       <div class="center">
           <h2><?php echo $heading_title; ?></h2>
           <div id="tabs" class="htabs"><a href="#tab-description"><?php echo $tab_description; ?></a>
-    <?php if ($attribute_groups) { ?>
-    <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
-    <?php } ?>
+    <?php 
+    if ($product_tabs) {
+        foreach ($product_tabs as $key => $tab) {
+                echo '<a href="#productTabAttr' . $key . '">' . $tab['name'] . '</a>';
+            }
+    } ?>
     <?php if ($review_status) { ?>
     <a href="#tab-review"><?php echo $tab_review; ?></a>
     <?php } ?>
@@ -36,7 +39,10 @@
   </div>
   <div id="tab-description" class="tab-content"><?php echo $description; ?>
   <table >
-      <?php foreach ($attribute_groups as $attribute_group) { ?>
+      <?php 
+      if (array_key_exists('General', $attribute_groups))
+      {
+      foreach ($attribute_groups['General'] as $attribute_group) { ?>
       <thead>
         <!--tr>
           <td colspan="2"><?php echo $attribute_group['name']; ?></td>
@@ -50,14 +56,26 @@
         </tr>
         <?php } ?>
       </tbody>
-      <?php } ?>
+      <?php
+      
+      }
+      }
+      ?>
     </table>
   </div>
-  <?php if ($attribute_groups) { ?>
-  <div id="tab-attribute" class="tab-content">
-    /* Inserire testo Delivery & Returns */
-  </div>
-  <?php } ?>
+          
+          
+    <?php
+    if ($product_tabs) {
+        foreach ($product_tabs as $key => $tab) {
+                ?>
+                <div id="productTabAttr<?php echo $key; ?>" class="tab-content">
+                    <?php echo $tab['text']; ?>
+                </div>
+                <?php
+        }
+    }
+    ?>
   <?php if ($review_status) { ?>
   <div id="tab-review" class="tab-content">
     <div id="review"></div>

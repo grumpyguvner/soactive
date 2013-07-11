@@ -31,7 +31,7 @@ class ControllerInformationInformation extends Controller {
 			$this->document->addLink($this->url->link('information/information', 'information_id=' . $information_id), 'canonical');
                         
                         
-                $this->data['seoClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($this->request->get['_route_'])));
+                $this->data['seoClass'] = isset($this->request->get['_route_']) ? preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($this->request->get['_route_']))) : '';
                 $this->data['catClass'] = preg_replace('%[^a-z0-9]%i', '', ucwords(strtolower($information_info['category'])));
 ;                        
 
