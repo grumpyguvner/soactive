@@ -23,9 +23,14 @@ class ControllerModuleGeolocation extends Controller {
         $this->data['text_disabled'] = $this->language->get('text_disabled');
 
         $this->data['entry_status'] = $this->language->get('entry_status');
+        $this->data['entry_country'] = $this->language->get('entry_country');
+        $this->data['entry_currency'] = $this->language->get('entry_currency');
+        $this->data['entry_language'] = $this->language->get('entry_language');
+        $this->data['entry_allow_to_buy'] = $this->language->get('entry_allow_to_buy');
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
+        $this->data['button_add_geo_zone'] = $this->language->get('button_add_geo_zone');
 
         if (isset($this->request->post['geolocation_status'])) {
             $this->data['geolocation_status'] = $this->request->post['geolocation_status'];
@@ -65,6 +70,49 @@ class ControllerModuleGeolocation extends Controller {
 
         $this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
+        $this->load->model('localisation/country');
+		 
+        $this->data['countries'] = $this->model_localisation_country->getCountries();
+
+        if (isset($this->request->post['zone_to_geo_zone'])) {
+                $this->data['zone_to_geo_zones'] = $this->request->post['zone_to_geo_zone'];
+        } elseif (isset($this->request->get['geo_zone_id'])) {
+                $this->data['zone_to_geo_zones'] = $this->model_localisation_geo_zone->getZoneToGeoZones($this->request->get['geo_zone_id']);
+        } else {
+                $this->data['zone_to_geo_zones'] = array();
+        }
+        
+        $this->load->model('localisation/currency');     
+        
+        $this->data['currencies'] = array();
+
+        $results = $this->model_localisation_currency->getCurrencies();
+
+        foreach ($results as $result) {
+
+                $this->data['currencies'][] = array(
+                        'currency_id'   => $result['currency_id'],
+                        'title'         => $result['title'],
+                        'code'          => $result['code'],
+                        'value'         => $result['value']
+                );
+        }
+        
+        $this->load->model('localisation/language');
+        
+        $this->data['languages'] = array();
+
+        $languages_results = $this->model_localisation_language->getLanguages();
+
+        foreach ($languages_results as $language) {
+            
+                $this->data['languages'][] = array(
+                        'language_id' => $language['language_id'],
+                        'name'        => $language['name'],
+                        'code'        => $language['code']
+                );		
+        }
+        
         $this->template = 'module/geolocation.tpl';
         $this->children = array(
             'common/header',
