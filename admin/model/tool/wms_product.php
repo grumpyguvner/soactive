@@ -37,6 +37,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_attribute`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "product_filter`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_description`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_image`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "product_option`");
