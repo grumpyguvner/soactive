@@ -14,13 +14,13 @@
       <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
     </div>
     <div class="content">
-        <form action="<?php echo $action; ?>" method="post" id="form">
+        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
             <table class="form">
                 <tr>
                     <td><?php echo $entry_status; ?></td>
-                    <td><select name="language_manager_status">
+                    <td><select name="geolocation_status">
                             <?php
-                            if ($language_manager_status) {
+                            if ($geolocation_status) {
                                 ?>
                                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                                 <option value="0"><?php echo $text_disabled; ?></option>
@@ -30,14 +30,13 @@
                                 <option value="1"><?php echo $text_enabled; ?></option>
                                 <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                                 <?php
-                            } // end if
+                            } // end if 
                             ?>
                         </select>
                     </td>
                 </tr>
             </table>
-        </form>
-        <table id="zone-to-geo-zone" class="list">
+        <table id="module" class="list">
           <thead>
             <tr>
               <td class="left"><?php echo $entry_country; ?></td>
@@ -47,49 +46,120 @@
               <td></td>
             </tr>
           </thead>
-          <?php $zone_to_geo_zone_row = 0; ?>
-          <?php foreach ($zone_to_geo_zones as $zone_to_geo_zone) { ?>
-          <tbody id="zone-to-geo-zone-row<?php echo $zone_to_geo_zone_row; ?>">
+          <?php $module_row = 0; ?>
+          <?php foreach ($modules as $module) { ?>
+          <tbody id="module-row<?php echo $module_row; ?>">
             <tr>
               <td class="left">
-                  <select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][country_id]" id="country<?php echo $zone_to_geo_zone_row; ?>" onchange="$('#zone<?php echo $zone_to_geo_zone_row; ?>').load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + this.value + '&zone_id=0');">
-                  <?php foreach ($countries as $country) { ?>
-                  <?php  if ($country['country_id'] == $zone_to_geo_zone['country_id']) { ?>
-                  <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                  <select name="geolocation_module[<?php echo $module_row; ?>][country_id]">
+                    <option value=""></option>
+                    <?php foreach ($countries as $country) { ?>
+                      <?php if ($country['country_id'] == $module['country_id']) { ?>
+                        <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                        
+                      <?php } else { ?>
+                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                        
+                      <?php } ?>
+                   <?php } ?>
+                  </select>
+                  <?php if (isset($error_country_id[$module_row])) { ?>
+                      <span class="error"><?php echo $error_country_id[$module_row]; ?></span>
                   <?php } ?>
-                  <?php } ?>
-                </select>
               </td>
-              <td>
-                  <?php foreach($currencies as $currency) {
-                      echo $currency['title'];
-                  } ?>
+              <td class="left">
+                  <select name="geolocation_module[<?php echo $module_row; ?>][currency_id]">
+                      <option value=""></option>
+                    <?php foreach($currencies as $currency) { ?>
+                      <?php if ($currency['currency_id'] == $module['currency_id']) { ?>
+                        <option value="<?php echo $currency['currency_id']; ?>" selected="selected"><?php echo $currency['title']; ?></option>
+                      <?php } else { ?>  
+                        <option value="<?php echo $currency['currency_id']; ?>"><?php echo $currency['title']; ?></option>
+                      <?php } ?>
+                    <?php } ?>
+                  </select>
               </td>
-              <td>
-                  <?php foreach($languages as $language) {
-                      echo $language['name'];
-                  } ?>
+              <td class="left"> 
+                  <select name="geolocation_module[<?php echo $module_row; ?>][language_id]">
+                    <option value=""></option>
+                    <?php foreach($languages as $language) { ?>
+                      <?php if ($language['language_id'] == $module['language_id']) { ?>
+                        <option value="<?php echo $language['language_id']; ?>" selected="selected"><?php echo $language['name']; ?></option>
+                      <?php } else { ?>
+                        <option value="<?php echo $language['language_id']; ?>"><?php echo $language['name']; ?></option>
+                      <?php } ?>
+                    <?php } ?>
+                  </select>
               </td>
-              <td class="left"><select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][zone_id]" id="zone<?php echo $zone_to_geo_zone_row; ?>">
-                </select></td>
-              <td class="left"><a onclick="$('#zone-to-geo-zone-row<?php echo $zone_to_geo_zone_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+              <td class="left">
+                  <select name="geolocation_module[<?php echo $module_row; ?>][allow_to_buy]">
+                      
+                      <?php if ($module['allow_to_buy']) { ?>
+                        <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                        <option value="0"><?php echo $text_no; ?></option>
+                      <?php } elseif ($module['allow_to_buy'] == '0') { ?> 
+                       <option value="1"><?php echo $text_yes; ?></option>
+                       <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                      <?php } else { ?> 
+                       <option value=""></option>
+                       <option value="1"><?php echo $text_yes; ?></option>
+                       <option value="0"><?php echo $text_no; ?></option>
+                      <?php } ?> 
+                  </select>
+              </td>
+              <td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+            
             </tr>
           </tbody>
-          <?php $zone_to_geo_zone_row++; ?>
+            <?php $module_row++; ?>
           <?php } ?>
           <tfoot>
             <tr>
               <td colspan="4"></td>
-              <td class="left"><a onclick="addGeoZone();" class="button"><?php echo $button_add_geo_zone; ?></a></td>
+              <td class="left"><a onclick="addModule();" class="button"><?php echo $button_add_module; ?></a></td>
             </tr>
           </tfoot>
         </table>
+        </form>
     </div>
   </div>
 </div>
 <script type="text/javascript"><!--
-$('#zone-id').load('index.php?route=localisation/geo_zone/zone&token=<?php echo $token; ?>&country_id=' + $('#country-id').attr('value') + '&zone_id=0');
-//--></script>
+var module_row = <?php echo $module_row; ?>;
+
+function addModule() {	
+	html  = '<tbody id="module-row' + module_row + '">';
+	html += '  <tr>';
+	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][country_id]">';
+        html += '    <option value="" selected="selected"></option>';
+	<?php foreach ($countries as $country) { ?>
+	html += '      <option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
+	<?php } ?>
+	html += '    </select></td>';
+        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][currency_id]">';
+        html += '    <option value="" selected="selected"></option>';
+	<?php foreach ($currencies as $currency) { ?>
+	html += '      <option value="<?php echo $currency['currency_id']; ?>"><?php echo addslashes($currency['title']); ?></option>';
+	<?php } ?>
+	html += '    </select></td>';
+        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][language_id]">';
+        html += '    <option value="" selected="selected"></option>';
+	<?php foreach ($languages as $language) { ?>
+	html += '      <option value="<?php echo $language['language_id']; ?>"><?php echo addslashes($language['name']); ?></option>';
+	<?php } ?>
+	html += '    </select></td>';
+	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][allow_to_buy]">'; 
+        html += '      <option value="" selected="selected"></option>';
+	html += '      <option value="1"><?php echo $text_yes; ?></option>';
+        html += '      <option value="0"><?php echo $text_no; ?></option>';
+        html += '    </select></td>';
+        html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+	html += '  </tr>';
+	html += '</tbody>';
+	
+	$('#module tfoot').before(html);
+	
+	module_row++;
+}
+//--></script> 
 <?php echo $footer; ?>

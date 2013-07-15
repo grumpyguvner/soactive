@@ -21,6 +21,8 @@ class ControllerModuleGeolocation extends Controller {
 
         $this->data['text_enabled'] = $this->language->get('text_enabled');
         $this->data['text_disabled'] = $this->language->get('text_disabled');
+        $this->data['text_yes'] = $this->language->get('text_yes');
+        $this->data['text_no'] = $this->language->get('text_no');
 
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_country'] = $this->language->get('entry_country');
@@ -30,7 +32,8 @@ class ControllerModuleGeolocation extends Controller {
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
-        $this->data['button_add_geo_zone'] = $this->language->get('button_add_geo_zone');
+		$this->data['button_add_module'] = $this->language->get('button_add_module');
+        $this->data['button_remove'] = $this->language->get('button_remove');
 
         if (isset($this->request->post['geolocation_status'])) {
             $this->data['geolocation_status'] = $this->request->post['geolocation_status'];
@@ -69,18 +72,46 @@ class ControllerModuleGeolocation extends Controller {
         $this->data['action'] = $this->url->link('module/geolocation', 'token=' . $this->session->data['token'], 'SSL');
 
         $this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
-
-        $this->load->model('localisation/country');
-		 
-        $this->data['countries'] = $this->model_localisation_country->getCountries();
-
-        if (isset($this->request->post['zone_to_geo_zone'])) {
-                $this->data['zone_to_geo_zones'] = $this->request->post['zone_to_geo_zone'];
-        } elseif (isset($this->request->get['geo_zone_id'])) {
-                $this->data['zone_to_geo_zones'] = $this->model_localisation_geo_zone->getZoneToGeoZones($this->request->get['geo_zone_id']);
+        
+        if (isset($this->error['warning'])) {
+                $this->data['error_warning'] = $this->error['warning'];
         } else {
-                $this->data['zone_to_geo_zones'] = array();
+                $this->data['error_warning'] = '';
         }
+        
+        if (isset($this->error['country_id'])) {
+                $this->data['error_country_id'] = $this->error['country_id'];
+        } else {
+                $this->data['error_country_id'] = array();
+        }
+        
+        $this->load->model('localisation/country');
+        
+        $this->data['modules'] = array();
+        
+        if (isset($this->request->post['geolocation_status'])) {
+            $this->data['geolocation_status'] = $this->request->post['geolocation_status'];
+        } elseif ($this->config->get('language_manager_status')) {
+            $this->data['geolocation_status'] = $this->config->get('geolocation_status');
+        } else {
+            $this->data['geolocation_status'] = 0;
+        } 
+        
+        if (isset($this->request->post['geolocation_module'])) {
+                $this->data['modules'] = $this->request->post['geolocation_module'];
+        } elseif ($this->config->get('geolocation_module')) { 
+                $this->data['modules'] = $this->config->get('geolocation_module');
+        }
+	
+        if (isset($this->request->post['allow_to_buy'])) {
+            $this->data['allow_to_buy'] = $this->request->post['allow_to_buy'];
+        } elseif ($this->config->get('allow_to_buy')) {
+            $this->data['allow_to_buy'] = $this->config->get('allow_to_buy');
+        } else {
+            $this->data['allow_to_buy'] = 0;
+        }         
+              
+        $this->data['countries'] = $this->model_localisation_country->getCountries();
         
         $this->load->model('localisation/currency');     
         
@@ -121,5 +152,25 @@ class ControllerModuleGeolocation extends Controller {
 
         $this->response->setOutput($this->render());
     }
+    
+    private function validate() {
+		if (!$this->user->hasPermission('modify', 'module/geolocation')) {
+			$this->error['warning'] = $this->language->get('error_permission');
+		}
+
+		if (isset($this->request->post['geolocation_module'])) {
+			foreach ($this->request->post['geolocation_module'] as $key => $value) {
+				if (!$value['country_id']) {
+					$this->error['country_id'][$key] = $this->language->get('error_country_id');
+				}			
+			}
+		}
+		
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
 }
 ?>

@@ -14,5 +14,6 @@ $_['entry_language']      = 'Language:';
 $_['entry_allow_to_buy']  = 'Allow to buy:';
 
 // Error
+$_['error_country_id']    = 'Warning: You have to fill the Country field!!';
 $_['error_permission']    = 'Warning: You do not have permission to modify module geolocation!';
 ?>
