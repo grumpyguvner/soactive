@@ -160,7 +160,7 @@ class ControllerModuleGeolocation extends Controller {
 
 		if (isset($this->request->post['geolocation_module'])) {
 			foreach ($this->request->post['geolocation_module'] as $key => $value) {
-				if (!$value['country_id']) {
+				if (!$value['iso_code_2']) {
 					$this->error['country_id'][$key] = $this->language->get('error_country_id');
 				}			
 			}

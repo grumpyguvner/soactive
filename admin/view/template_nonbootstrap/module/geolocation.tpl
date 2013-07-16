@@ -51,14 +51,14 @@
           <tbody id="module-row<?php echo $module_row; ?>">
             <tr>
               <td class="left">
-                  <select name="geolocation_module[<?php echo $module_row; ?>][country_id]">
+                  <select name="geolocation_module[<?php echo $module_row; ?>][iso_code_2]">
                     <option value=""></option>
                     <?php foreach ($countries as $country) { ?>
-                      <?php if ($country['country_id'] == $module['country_id']) { ?>
-                        <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
+                      <?php if ($country['iso_code_2'] == $module['iso_code_2']) { ?>
+                        <option value="<?php echo $country['iso_code_2']; ?>" selected="selected"><?php echo $country['name']; ?></option>
                         
                       <?php } else { ?>
-                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
+                        <option value="<?php echo $country['iso_code_2']; ?>"><?php echo $country['name']; ?></option>
                         
                       <?php } ?>
                    <?php } ?>
