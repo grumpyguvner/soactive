@@ -41,6 +41,7 @@ $_['text_write_review'] = 'WRITE REVIEW';
 $_['text_buy']          = 'BUY';
 $_['text_press']        = 'Press';
 $_['text_view_product_info'] = 'VIEW PRODUCT INFO';
+$_['text_says']         = 'Sealskinz says:';
 
 // Entry
 $_['entry_name']        = 'Your Name:';

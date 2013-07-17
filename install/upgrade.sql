@@ -523,3 +523,7 @@ CREATE TABLE IF NOT EXISTS `oc_syspro_order` (
   `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`order_id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#### Start 1.5.4:BC1.2.8
+
+ALTER TABLE `oc_review` ADD `reply` text COLLATE utf8_bin NOT NULL AFTER `rating`;
