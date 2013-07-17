@@ -2,7 +2,7 @@
 class ControllerCommonGeolocation extends Controller {
     public function index() {
         
-       if ($this->config->get('geolocation_status') && count($this->config->get('geolocation_module'))) { 
+       if ($this->extensions->isInstalled('geolocation', 'module') && $this->config->get('geolocation_status') && count($this->config->get('geolocation_countries'))) { 
              
             $timeout = 72;
 
@@ -37,13 +37,7 @@ class ControllerCommonGeolocation extends Controller {
                 $this->session->data['geolocation'][$user_ip]['timeadded'] = strtotime("now");
             }
             
-            $this->load->model('localisation/currency');
-            $currencies = $this->model_localisation_currency->getCurrencies();
-            
-            $this->load->model('localisation/language');
-            $languages = $this->model_localisation_language->getLanguages();
-            
-            foreach ($this->config->get('geolocation_module') as $country) {
+            foreach ($this->config->get('geolocation_countries') as $country) {
                 if ($country['iso_code_2'] == $this->session->data['geolocation'][$user_ip]['iso_code_2'])
                 {
                     if ((bool)$country['catalog_mode'])

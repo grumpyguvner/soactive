@@ -47,11 +47,11 @@
             </tr>
           </thead>
           <?php $module_row = 0; ?>
-          <?php foreach ($modules as $module) { ?>
+          <?php foreach ($geolocation_countries as $module) { ?>
           <tbody id="module-row<?php echo $module_row; ?>">
             <tr>
               <td class="left">
-                  <select name="geolocation_module[<?php echo $module_row; ?>][iso_code_2]">
+                  <select name="geolocation_countries[<?php echo $module_row; ?>][iso_code_2]">
                     <option value=""></option>
                     <?php foreach ($countries as $country) { ?>
                       <?php if ($country['iso_code_2'] == $module['iso_code_2']) { ?>
@@ -68,7 +68,7 @@
                   <?php } ?>
               </td>
               <td class="left">
-                  <select name="geolocation_module[<?php echo $module_row; ?>][currency_code]">
+                  <select name="geolocation_countries[<?php echo $module_row; ?>][currency_code]">
                       <option value=""><?php echo $text_default; ?></option>
                     <?php foreach($currencies as $currency) { ?>
                       <?php if ($currency['code'] == $module['currency_code']) { ?>
@@ -80,7 +80,7 @@
                   </select>
               </td>
               <td class="left"> 
-                  <select name="geolocation_module[<?php echo $module_row; ?>][language_code]">
+                  <select name="geolocation_countries[<?php echo $module_row; ?>][language_code]">
                     <option value=""><?php echo $text_default; ?></option>
                     <?php foreach($languages as $language) { ?>
                       <?php if ($language['code'] == $module['language_code']) { ?>
@@ -92,7 +92,7 @@
                   </select>
               </td>
               <td class="left">
-                  <select name="geolocation_module[<?php echo $module_row; ?>][catalog_mode]">
+                  <select name="geolocation_countries[<?php echo $module_row; ?>][catalog_mode]">
                       
                       <?php if ($module['catalog_mode'] == '1') { ?>
                        <option value=""><?php echo $text_default; ?></option>
@@ -132,25 +132,25 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {	
 	html  = '<tbody id="module-row' + module_row + '">';
 	html += '  <tr>';
-	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][iso_code_2]">';
+	html += '    <td class="left"><select name="geolocation_countries[' + module_row + '][iso_code_2]">';
         html += '    <option value="" selected="selected"></option>';
 	<?php foreach ($countries as $country) { ?>
-	html += '      <option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
+	html += '      <option value="<?php echo $country['iso_code_2']; ?>"><?php echo addslashes($country['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][currency_code]">';
+        html += '    <td class="left"><select name="geolocation_countries[' + module_row + '][currency_code]">';
         html += '    <option value="" selected="selected"><?php echo $text_default; ?></option>';
 	<?php foreach ($currencies as $currency) { ?>
 	html += '      <option value="<?php echo $currency['code']; ?>"><?php echo addslashes($currency['title']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][language_code]">';
+        html += '    <td class="left"><select name="geolocation_countries[' + module_row + '][language_code]">';
         html += '    <option value="" selected="selected"><?php echo $text_default; ?></option>';
 	<?php foreach ($languages as $language) { ?>
 	html += '      <option value="<?php echo $language['code']; ?>"><?php echo addslashes($language['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][catalog_mode]">'; 
+	html += '    <td class="left"><select name="geolocation_countries[' + module_row + '][catalog_mode]">'; 
         html += '      <option value="" selected="selected"><?php echo $text_default; ?></option>';
 	html += '      <option value="1"><?php echo $text_yes; ?></option>';
         html += '      <option value="0"><?php echo $text_no; ?></option>';
