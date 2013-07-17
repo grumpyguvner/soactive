@@ -2,7 +2,7 @@
 class ControllerCommonGeolocation extends Controller {
     public function index() {
         
-       if ($this->config->get('geolocation_status') && sizeof($this->config->get('geolocation_module')) >= 1) { 
+       if ($this->config->get('geolocation_status') && count($this->config->get('geolocation_module'))) { 
              
             $timeout = 72;
 
@@ -37,8 +37,6 @@ class ControllerCommonGeolocation extends Controller {
                 $this->session->data['geolocation'][$user_ip]['timeadded'] = strtotime("now");
             }
             
-            $this->session->data['geolocation']['127.0.0.1']['iso_code_2'] = 'FR';
-            
             $this->load->model('localisation/currency');
             $currencies = $this->model_localisation_currency->getCurrencies();
             
@@ -46,36 +44,47 @@ class ControllerCommonGeolocation extends Controller {
             $languages = $this->model_localisation_language->getLanguages();
             
             foreach ($this->config->get('geolocation_module') as $country) {
-                if ($country['iso_code_2'] == $this->session->data['geolocation']['127.0.0.1']['iso_code_2'])
+                if ($country['iso_code_2'] == $this->session->data['geolocation'][$user_ip]['iso_code_2'])
                 {
-                    if (!$country['allow_to_buy'])
+                    if ((bool)$country['catalog_mode'])
                     {
                         $this->config->set('config_block_buy', true);
-                        
-                        if (!is_null($country['currency_id'])) {
-                            foreach ($currencies as $currency) {
-                                if ($currency['currency_id'] == $country['currency_id']) {
-                                    $this->currency->set($currency['code']);
-                                }
-                            }
-                        }
-                        
-                        if (!is_null($country['language_id'])) {
-                            foreach ($languages as $language) {
-                                if ($language['language_id'] == $country['language_id']) {
-                                    $this->config->set('config_language_id', $language['language_id']);
-                                    $this->config->set('config_language', $language['code']);
-
-                                    // Language	
-                                    $data_language = new Language($language['directory'], $this->registry);
-                                    $data_language->load($language['filename']);
-                                    $this->registry->set('language', $data_language);
-                                }
-                            }
-                        }
-                        
                     }
-                    
+                        
+                    if ($this->currency->is_default() && !empty($country['currency_code']) && $this->currency->has($country['currency_code'])) {
+                        $this->currency->set($country['currency_code']);
+                    }
+
+                    if ($this->request->data['default_language'] && !empty($country['language_code']) && $this->session->data['language'] != $country['language_code'])
+                    {
+                        $languages = array();
+                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "language WHERE status = '1'");
+
+                        foreach ($query->rows as $result) {
+                            $languages[$result['code']] = $result;
+                        }
+                        
+                        if (array_key_exists($country['language_code'], $languages) && $languages[$country['language_code']]['status'])
+                        {
+                            $language = $languages[$country['language_code']];
+
+                            $this->session->data['language'] = $language['code'];
+
+                            if (defined('SITE_REGION')) {
+                                setcookie('language', $language['code'], time() + 60 * 60 * 24 * 30, '/' . SITE_REGION . '/', $this->request->server['HTTP_HOST']);
+                            } else {
+                                setcookie('language', $language['code'], time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
+                            }
+
+                            $this->config->set('config_language_id', $language['language_id']);
+                            $this->config->set('config_language', $language['code']);
+
+                            // Language	
+                            $objLanguage = new Language($language['directory'], $this->registry);
+                            $objLanguage->load($language['filename']);
+                            $this->registry->set('language', $objLanguage);
+                        }
+                    }
                 }
             }
             

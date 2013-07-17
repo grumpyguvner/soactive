@@ -4,6 +4,8 @@ class Currency {
 
     private $code;
     private $currencies = array();
+    
+    private $default = false;
 
     public function __construct($registry) {
         $this->config = $registry->get('config');
@@ -32,6 +34,7 @@ class Currency {
         } elseif ((isset($this->request->cookie['currency'])) && (array_key_exists($this->request->cookie['currency'], $this->currencies))) {
             $this->set($this->request->cookie['currency']);
         } else {
+            $this->default = true;
             $this->set($this->config->get('config_currency'));
         }
     }
@@ -176,6 +179,10 @@ class Currency {
 
     public function has($currency) {
         return isset($this->currencies[$currency]);
+    }
+
+    public function is_default() {
+        return $this->default ? true : false;
     }
 
 }

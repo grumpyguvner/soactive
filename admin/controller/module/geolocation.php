@@ -23,12 +23,13 @@ class ControllerModuleGeolocation extends Controller {
         $this->data['text_disabled'] = $this->language->get('text_disabled');
         $this->data['text_yes'] = $this->language->get('text_yes');
         $this->data['text_no'] = $this->language->get('text_no');
+        $this->data['text_default'] = $this->language->get('text_default');
 
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_country'] = $this->language->get('entry_country');
         $this->data['entry_currency'] = $this->language->get('entry_currency');
         $this->data['entry_language'] = $this->language->get('entry_language');
-        $this->data['entry_allow_to_buy'] = $this->language->get('entry_allow_to_buy');
+        $this->data['entry_catalog_mode'] = $this->language->get('entry_catalog_mode');
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -160,7 +161,7 @@ class ControllerModuleGeolocation extends Controller {
 
 		if (isset($this->request->post['geolocation_module'])) {
 			foreach ($this->request->post['geolocation_module'] as $key => $value) {
-				if (!$value['iso_code_2']) {
+				if (empty($value['iso_code_2'])) {
 					$this->error['country_id'][$key] = $this->language->get('error_country_id');
 				}			
 			}

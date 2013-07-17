@@ -42,7 +42,7 @@
               <td class="left"><?php echo $entry_country; ?></td>
               <td class="left"><?php echo $entry_currency; ?></td>
               <td class="left"><?php echo $entry_language; ?></td>
-              <td class="left"><?php echo $entry_allow_to_buy; ?></td>
+              <td class="left"><?php echo $entry_catalog_mode; ?></td>
               <td></td>
             </tr>
           </thead>
@@ -68,40 +68,42 @@
                   <?php } ?>
               </td>
               <td class="left">
-                  <select name="geolocation_module[<?php echo $module_row; ?>][currency_id]">
-                      <option value=""></option>
+                  <select name="geolocation_module[<?php echo $module_row; ?>][currency_code]">
+                      <option value=""><?php echo $text_default; ?></option>
                     <?php foreach($currencies as $currency) { ?>
-                      <?php if ($currency['currency_id'] == $module['currency_id']) { ?>
-                        <option value="<?php echo $currency['currency_id']; ?>" selected="selected"><?php echo $currency['title']; ?></option>
+                      <?php if ($currency['code'] == $module['currency_code']) { ?>
+                        <option value="<?php echo $currency['code']; ?>" selected="selected"><?php echo $currency['title']; ?></option>
                       <?php } else { ?>  
-                        <option value="<?php echo $currency['currency_id']; ?>"><?php echo $currency['title']; ?></option>
+                        <option value="<?php echo $currency['code']; ?>"><?php echo $currency['title']; ?></option>
                       <?php } ?>
                     <?php } ?>
                   </select>
               </td>
               <td class="left"> 
-                  <select name="geolocation_module[<?php echo $module_row; ?>][language_id]">
-                    <option value=""></option>
+                  <select name="geolocation_module[<?php echo $module_row; ?>][language_code]">
+                    <option value=""><?php echo $text_default; ?></option>
                     <?php foreach($languages as $language) { ?>
-                      <?php if ($language['language_id'] == $module['language_id']) { ?>
-                        <option value="<?php echo $language['language_id']; ?>" selected="selected"><?php echo $language['name']; ?></option>
+                      <?php if ($language['code'] == $module['language_code']) { ?>
+                        <option value="<?php echo $language['code']; ?>" selected="selected"><?php echo $language['name']; ?></option>
                       <?php } else { ?>
-                        <option value="<?php echo $language['language_id']; ?>"><?php echo $language['name']; ?></option>
+                        <option value="<?php echo $language['code']; ?>"><?php echo $language['name']; ?></option>
                       <?php } ?>
                     <?php } ?>
                   </select>
               </td>
               <td class="left">
-                  <select name="geolocation_module[<?php echo $module_row; ?>][allow_to_buy]">
+                  <select name="geolocation_module[<?php echo $module_row; ?>][catalog_mode]">
                       
-                      <?php if ($module['allow_to_buy']) { ?>
+                      <?php if ($module['catalog_mode'] == '1') { ?>
+                       <option value=""><?php echo $text_default; ?></option>
                         <option value="1" selected="selected"><?php echo $text_yes; ?></option>
                         <option value="0"><?php echo $text_no; ?></option>
-                      <?php } elseif ($module['allow_to_buy'] == '0') { ?> 
+                      <?php } elseif ($module['catalog_mode'] == '0') { ?> 
+                       <option value=""><?php echo $text_default; ?></option>
                        <option value="1"><?php echo $text_yes; ?></option>
                        <option value="0" selected="selected"><?php echo $text_no; ?></option>
                       <?php } else { ?> 
-                       <option value=""></option>
+                       <option value=""><?php echo $text_default; ?></option>
                        <option value="1"><?php echo $text_yes; ?></option>
                        <option value="0"><?php echo $text_no; ?></option>
                       <?php } ?> 
@@ -130,26 +132,26 @@ var module_row = <?php echo $module_row; ?>;
 function addModule() {	
 	html  = '<tbody id="module-row' + module_row + '">';
 	html += '  <tr>';
-	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][country_id]">';
+	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][iso_code_2]">';
         html += '    <option value="" selected="selected"></option>';
 	<?php foreach ($countries as $country) { ?>
 	html += '      <option value="<?php echo $country['country_id']; ?>"><?php echo addslashes($country['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][currency_id]">';
-        html += '    <option value="" selected="selected"></option>';
+        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][currency_code]">';
+        html += '    <option value="" selected="selected"><?php echo $text_default; ?></option>';
 	<?php foreach ($currencies as $currency) { ?>
-	html += '      <option value="<?php echo $currency['currency_id']; ?>"><?php echo addslashes($currency['title']); ?></option>';
+	html += '      <option value="<?php echo $currency['code']; ?>"><?php echo addslashes($currency['title']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][language_id]">';
-        html += '    <option value="" selected="selected"></option>';
+        html += '    <td class="left"><select name="geolocation_module[' + module_row + '][language_code]">';
+        html += '    <option value="" selected="selected"><?php echo $text_default; ?></option>';
 	<?php foreach ($languages as $language) { ?>
-	html += '      <option value="<?php echo $language['language_id']; ?>"><?php echo addslashes($language['name']); ?></option>';
+	html += '      <option value="<?php echo $language['code']; ?>"><?php echo addslashes($language['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][allow_to_buy]">'; 
-        html += '      <option value="" selected="selected"></option>';
+	html += '    <td class="left"><select name="geolocation_module[' + module_row + '][catalog_mode]">'; 
+        html += '      <option value="" selected="selected"><?php echo $text_default; ?></option>';
 	html += '      <option value="1"><?php echo $text_yes; ?></option>';
         html += '      <option value="0"><?php echo $text_no; ?></option>';
         html += '    </select></td>';

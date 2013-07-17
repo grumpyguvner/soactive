@@ -11,7 +11,7 @@ $_['entry_status']        = 'Status:';
 $_['entry_country']       = 'Country:';
 $_['entry_currency']      = 'Currency:';
 $_['entry_language']      = 'Language:';
-$_['entry_allow_to_buy']  = 'Allow to buy:';
+$_['entry_catalog_mode']  = 'Catalog Mode:';
 
 // Error
 $_['error_country_id']    = 'Warning: You have to fill the Country field!!';
