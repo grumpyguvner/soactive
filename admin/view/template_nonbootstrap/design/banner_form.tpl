@@ -89,17 +89,20 @@
 </div>
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"><!--
-<?php $image_row = 0; ?>
-   <?php foreach ($banner_images as $banner_image) { ?>    
-    <?php foreach ($languages as $language) { ?>
-    CKEDITOR.replace('description<?php echo $language['language_id']; ?>-<?php echo $image_row; ?>', {
+    
+    myFileBrowser = {
             filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
             filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
             filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
             filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
             filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
             filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-    });
+    };
+    
+<?php $image_row = 0; ?>
+   <?php foreach ($banner_images as $banner_image) { ?>    
+    <?php foreach ($languages as $language) { ?>
+    CKEDITOR.replace('description<?php echo $language['language_id']; ?>-<?php echo $image_row; ?>', myFileBrowser);
     <?php } ?>
     <?php $image_row++; ?>
   <?php } ?>
@@ -114,6 +117,10 @@ function addImage() {
     html += '<td class="left">';
 	<?php foreach ($languages as $language) { ?>
 	html += '<input type="text" name="banner_image[' + image_row + '][banner_image_description][<?php echo $language['language_id']; ?>][title]" value="" /> <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />';
+        html += '<br />';
+        html += '<b><?php echo $entry_description; ?></b>';
+        html += '<br /><br />';
+        html += '<textarea name="banner_image[' + image_row + '][banner_image_description][<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id'] . '-'; ?>' + image_row + '"></textarea>';
     <?php } ?>
 	html += '</td>';	
 	html += '<td class="left"><input type="text" name="banner_image[' + image_row + '][link]" value="" /></td>';	
@@ -125,8 +132,12 @@ function addImage() {
 	
 	$('#images tfoot').before(html);
 	
-	image_row++;
-}
+	<?php foreach ($languages as $language) { ?>
+            eval("CKEDITOR.replace('description<?php echo $language['language_id']; ?>-$$$$', myFileBrowser);".replace("$$$$",image_row));
+
+            <?php } ?>
+          image_row++;
+      } 
 //--></script>
 <script type="text/javascript"><!--
 function image_upload(field, thumb) {
