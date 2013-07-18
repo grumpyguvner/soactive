@@ -49,6 +49,12 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label"><?php echo $entry_meta_title; ?></label>
+                                <div class="controls">
+                                    <input type="text" name="ncategory_description[<?php echo $language['language_id']; ?>][meta_title]" size="100" value="<?php echo isset($ncategory_description[$language['language_id']]) ? $ncategory_description[$language['language_id']]['meta_title'] : ''; ?>" />                                       
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label"> <?php echo $entry_meta_description; ?></label>
                                 <div class="controls">
                                     <textarea name="ncategory_description[<?php echo $language['language_id']; ?>][meta_description]" cols="40" rows="5"><?php echo isset($ncategory_description[$language['language_id']]) ? $ncategory_description[$language['language_id']]['meta_description'] : ''; ?></textarea>
