@@ -1,102 +1,193 @@
 <?php echo $header; ?>
 <div id="content">
-<div class="breadcrumb">
-  <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-  <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-  <?php } ?>
-</div>
+    
+<?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+    
 <?php if ($error_warning) { ?>
 <div class="warning"><?php echo $error_warning; ?></div>
 <?php } ?>
 <div class="box">
   <div class="heading">
-    <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
-    <div class="buttons"><a onclick="$('#form').submit();" class="button"><span><?php echo $button_save; ?></span></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><span><?php echo $button_cancel; ?></span></a></div>
-  </div>
+            <h1><i class="icon-cogs"></i> <?php echo $heading_title; ?></h1>
+            <?php if ($error_warning) { ?>
+                <?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+            <?php } ?>
+            <div class="buttons form-actions form-actions-top">
+                <?php echo p3html::tb_form_button_save($button_save); ?>
+                <?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+            </div>
+        </div>
   <div class="content">
-	<div id="tabs" class="htabs">
-      <a href="#tab-module"><?php echo $tab_modules; ?></a>
-      <a href="#tab-mailchimp"><?php echo $tab_mailchimp; ?></a>
-      <a href="#tab-mailcampaign"><?php echo $tab_mailcampaign; ?></a>
-      <a href="#tab-email"><?php echo $tab_email; ?></a>
-    </div>
-    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-      <div id="tab-module">
+    <ul id="tabs" class="htabs nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab-module"><?php echo $tab_modules; ?></a></li>
+        <li><a data-toggle="tab" href="#tab-mailchimp"><?php echo $tab_mailchimp; ?></a></li>
+        <li><a data-toggle="tab" href="#tab-mailcampaign"><?php echo $tab_mailcampaign; ?></a></li>
+        <li><a data-toggle="tab" href="#tab-email"><?php echo $tab_email; ?></a></li>
+    </ul>
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+<!------------------------------------------------------------------------------------------------------------>      
+        <div class="tab-content">
+
+            <table id="tab-module" class="list table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="column-title"><i class="required text-error icon-asterisk"></i><?php echo $entry_title; ?></th>
+                        <th class="column-name"><?php echo $entry_name; ?></th>
+                        <th class="column-store"><?php echo $entry_store; ?></th>
+                        <th class="column-layout"><?php echo $entry_layout; ?></th>
+                        <th class="column-position"><?php echo $entry_position; ?></th>
+                        <th class="column-status"><?php echo $entry_status; ?></th>
+                        <th class="column-sort"><?php echo $entry_sort_order; ?></th>
+                        <th class="column-action"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $module_row = 0; ?>
+                    <?php foreach ($modules as $module) { ?>
+                        <tr id="module-row<?php echo $module_row; ?>">
+                            <td class="column-title">
+                                <?php foreach ($languages as $language) { ?>
+                                    <img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" />
+                                    <input type="text" name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][language_id][<?php echo $language['language_id']; ?>]" value="<?php if (!empty($module['language_id'][$language['language_id']])) { echo $module['language_id'][$language['language_id']];} ?>">
+                                    <br />
+                                <?php } ?>
+                                <span class="error"><?php echo $error_title; ?></span>
+                            </td>
+                            <td class="column-name">
+                                <select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][name]">
+                                  <option value="off" <?php if ($module['name'] == 'off') { echo 'selected="selected"'; }?>><?php echo $text_off; ?></option>
+                                  <option value="optional" <?php if ($module['name'] == 'optional') { echo 'selected="selected"'; }?>><?php echo $text_optional; ?></option>
+                                  <option value="required" <?php if ($module['name'] == 'required') { echo 'selected="selected"'; }?>><?php echo $text_required; ?></option>
+                                </select>
+                            </td>
+                            <td class="column-store">
+                                <select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][store_id]">
+                                    <option value="0"><?php echo $text_default; ?></option>
+                                    <?php foreach ($stores as $store) { ?>
+                                    <?php if ($store['store_id'] == $module['store_id']) { ?>
+                                    <option value="<?php echo $store['store_id']; ?>" selected="selected"><?php echo $store['name']; ?></option>
+                                    <?php } else { ?>
+                                    <option value="<?php echo $store['store_id']; ?>"><?php echo $store['name']; ?></option>
+                                    <?php } ?>
+                                    <?php } ?>
+                              </select>
+                            </td>
+                            <td class="column-layout">
+                                <select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][layout_id]">
+                                    <?php foreach ($layouts as $layout) { ?>
+                                    <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
+                                    <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
+                                    <?php } else { ?>
+                                    <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
+                                    <?php } ?>
+                                    <?php } ?>
+                              </select>
+                            </td>
+                            <td class="column-position">
+                                <select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][position]">
+                                    <?php if ($module['position'] == 'content_top') { ?>
+                                    <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
+                                    <?php } else { ?>
+                                    <option value="content_top"><?php echo $text_content_top; ?></option>
+                                    <?php } ?>
+                                    <?php if ($module['position'] == 'content_bottom') { ?>
+                                    <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
+                                    <?php } else { ?>
+                                    <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
+                                    <?php } ?>
+                                    <?php if ($module['position'] == 'column_left') { ?>
+                                    <option value="column_left" selected="selected"><?php echo $text_column_left; ?></option>
+                                    <?php } else { ?>
+                                    <option value="column_left"><?php echo $text_column_left; ?></option>
+                                    <?php } ?>
+                                    <?php if ($module['position'] == 'column_right') { ?>
+                                    <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
+                                    <?php } else { ?>
+                                    <option value="column_right"><?php echo $text_column_right; ?></option>
+                                    <?php } ?>
+                               </select>
+                            </td>
+                            <td class="column-status">
+                                <select <select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][status]"> class="input-small">
+                                    <?php echo p3html::oc_status_options($this->language, $module); ?>
+                                </select>
+                            </td>
+                            
+                            
+                            
+                            
+                        </tr>
+                        <?php $module_row++; ?>
+                    <?php } ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="column-action"><a onclick="addModule();" class="btn btn-small" title="<?php echo $button_add_module; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_module; ?></span></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+                    <div class="tab-pane" id="tab-data">
+                        <div class="form">
+                            
+                            
+                             
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="tab-design">
+                        <table class="list table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="column-name"><?php echo $entry_store; ?></th>
+                                    <th class="column-layout"><?php echo $entry_layout; ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="column-name"><?php echo $text_default; ?></td>
+                                    <td class="column-layout">
+                                        <select name="information_layout[0][layout_id]" class="span2 i-medium">
+                                            <option value="">&nbsp;</option>
+                                            <?php $selected = isset($information_layout[0]) ? $information_layout[0] : null; ?>
+                                            <?php echo p3html::oc_layout_options($layouts, $selected); ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <?php foreach ($stores as $store) { ?>
+                                    <tr>
+                                        <td class="columnname-"><?php echo $store['name']; ?></td>
+                                        <td class="column-layout">
+                                            <select name="information_layout[<?php echo $store['store_id']; ?>][layout_id]" class="span2 i-medium">
+                                                <option value="">&nbsp;</option>
+                                                <?php echo p3html::oc_layout_options($layouts, $layout); ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        
+<!------------------------------------------------------------------------------------------------------------>
+        <div id="tab-module">
 	  <table id="module" class="list">
-        <thead>
-          <tr>
-            <td class="left"><span class="required">*</span><?php echo $entry_title; ?></td>
-            <td class="left"><?php echo $entry_name; ?></td>
-            <td class="left"><?php echo $entry_store; ?></td>
-            <td class="left"><?php echo $entry_layout; ?></td>
-            <td class="left"><?php echo $entry_position; ?></td>
-            <td class="left"><?php echo $entry_status; ?></td>
-            <td class="right"><?php echo $entry_sort_order; ?></td>
-            <td></td>
-          </tr>
-        </thead>
+        
         <?php $module_row = 0; ?>
         <?php foreach ($modules as $module) { ?>
         <tbody id="module-row<?php echo $module_row; ?>">
           <tr>
-          	<td class="left">
-                <?php foreach ($languages as $language) { ?>
-                <img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" />
-                <input type="text" name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][language_id][<?php echo $language['language_id']; ?>]" value="<?php if (!empty($module['language_id'][$language['language_id']])) { echo $module['language_id'][$language['language_id']];} ?>">
-                <br />
-                <?php } ?>
-                <span class="error"><?php echo $error_title; ?></span>
-            </td>
-            <td class="left">
-              <select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][name]">
-	 		    <option value="off" <?php if ($module['name'] == 'off') { echo 'selected="selected"'; }?>><?php echo $text_off; ?></option>
- 			    <option value="optional" <?php if ($module['name'] == 'optional') { echo 'selected="selected"'; }?>><?php echo $text_optional; ?></option>
-			    <option value="required" <?php if ($module['name'] == 'required') { echo 'selected="selected"'; }?>><?php echo $text_required; ?></option>
-	  		  </select>
-	  		</td>
-            <td class="left"><select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][store_id]">
-                <option value="0"><?php echo $text_default; ?></option>
-                <?php foreach ($stores as $store) { ?>
-                <?php if ($store['store_id'] == $module['store_id']) { ?>
-                <option value="<?php echo $store['store_id']; ?>" selected="selected"><?php echo $store['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $store['store_id']; ?>"><?php echo $store['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select>
-			</td>
-            <td class="left"><select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][layout_id]">
-                <?php foreach ($layouts as $layout) { ?>
-                <?php if ($layout['layout_id'] == $module['layout_id']) { ?>
-                <option value="<?php echo $layout['layout_id']; ?>" selected="selected"><?php echo $layout['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select>
-			</td>
-            <td class="left"><select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][position]">
-                <?php if ($module['position'] == 'content_top') { ?>
-                <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
-                <?php } else { ?>
-                <option value="content_top"><?php echo $text_content_top; ?></option>
-                <?php } ?>
-                <?php if ($module['position'] == 'content_bottom') { ?>
-                <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
-                <?php } else { ?>
-                <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
-                <?php } ?>
-                <?php if ($module['position'] == 'column_left') { ?>
-                <option value="column_left" selected="selected"><?php echo $text_column_left; ?></option>
-                <?php } else { ?>
-                <option value="column_left"><?php echo $text_column_left; ?></option>
-                <?php } ?>
-                <?php if ($module['position'] == 'column_right') { ?>
-                <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
-                <?php } else { ?>
-                <option value="column_right"><?php echo $text_column_right; ?></option>
-                <?php } ?>
-              </select></td>
+          	
+            
+            
+            
+            
             <td class="left"><select name="<?php echo $classname; ?>_module[<?php echo $module_row; ?>][status]">
                 <?php if ($module['status']) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
