@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <td><?php echo $store_loc_email; ?></td>
-          <td><input type="text" id="Email" value="<?php echo $Email; ?>" name="Email" style="width:90px" /></td>
+          <td><input type="text" id="Email" value="<?php echo $Email; ?>" name="Email" /></td>
         </tr>
         <tr>
           <td><?php echo $store_loc_website; ?></td>

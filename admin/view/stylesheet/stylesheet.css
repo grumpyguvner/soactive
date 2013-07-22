@@ -593,3 +593,34 @@ div.comment + div.notes {
 div.notes {
     background: #EFEFEF;
 }
+.well {
+    background-color: #F5F5F5;
+    border: 1px solid #E3E3E3;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+    float: right;
+    width: 46%;
+}
+.well .alert-success {
+    background-color: #DFF0D8;
+    border-color: #D6E9C6;
+    color: #468847;
+}
+.well .alert {
+    background-color: #FCF8E3;
+    border: 1px solid #FBEED5;
+    border-radius: 2px 2px 2px 2px;
+    margin-bottom: 18px;
+    padding: 8px 35px 8px 14px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.p3adminForm, .well {
+    display: inline-block;
+    vertical-align: top;
+}
+.p3adminForm {
+    width: 50%;
+}

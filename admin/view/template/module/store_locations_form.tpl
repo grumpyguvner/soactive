@@ -35,16 +35,16 @@
           <td><textarea id="Address" name="Address" cols="20" rows="3"><?php echo $Address; ?></textarea><span><input type="checkbox" name="gCodeReq" id="gCodeReq" <?php echo $edit; ?>  />&nbsp;<?php echo $store_loc_gcode_req ?></span></td>
         </tr>
         <tr>
-          <td><?php echo $store_loc_website; ?></td>
-          <td><input type="text" id="Website" name="Website" value="<?php echo $Website ?>" style="width:180px" /></td>
-        </tr>
-        <tr>
           <td><?php echo $store_loc_latlon; ?></td>
           <td><?php echo $lat; ?>, <?php echo $lon; ?></td>
         </tr>
         <tr>
           <td><?php echo $store_loc_email; ?></td>
-          <td><input type="text" id="Email" value="<?php echo $Email; ?>" name="Email" style="width:90px" /></td>
+          <td><input type="text" id="Email" value="<?php echo $Email; ?>" name="Email" /></td>
+        </tr>
+        <tr>
+          <td><?php echo $store_loc_website; ?></td>
+          <td><input type="text" id="Website" name="Website" value="<?php echo $Website ?>" /></td>
         </tr>
         <tr>
           <td><?php echo $store_loc_phone; ?></td>
@@ -104,17 +104,11 @@
     </form>
   </div>
 </div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
-<script type="text/javascript"><!--
-CKEDITOR.replace('Details', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
-});
-//--></script> 
+<script src="<?php echo P3_CKEDITOR_DIR; ?>/ckeditor.js"></script>
+
+<script>
+        <?php echo p3html::oc_ckeditor_replace('Details', $token); ?>
+</script> 
 <script type="text/javascript">
 
 	
