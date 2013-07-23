@@ -88,6 +88,7 @@ $_['text_length_class']                = 'Length Classes';
 $_['text_wms']                         = 'WMS Interface';
 $_['text_zencart']                     = 'Zencart Import';
 $_['text_sage']                        = 'Sage Interface';
+$_['text_syspro']                      = 'Syspro Interface';
 $_['text_zone']                        = 'Zones';
 
 $_['text_welcome']                     = 'Blocks';

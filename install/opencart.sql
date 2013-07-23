@@ -2845,6 +2845,7 @@ CREATE TABLE `oc_return` (
   `price` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
   `quantity` int(4) NOT NULL,
   `refund_amount` DECIMAL(15,4) NOT NULL DEFAULT '0.0000',
+  `new_order_id` int(11) NOT NULL,
   `opened` tinyint(1) NOT NULL,
   `return_reason_id` int(11) NOT NULL,
   `return_action_id` int(11) NOT NULL,
@@ -2967,6 +2968,7 @@ CREATE TABLE `oc_review` (
   `author` varchar(64) NOT NULL,
   `text` text NOT NULL,
   `rating` int(1) NOT NULL,
+  `reply` text COLLATE utf8_bin NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -7733,3 +7735,59 @@ CREATE TABLE `oc_sage_order` (
   KEY `order_id` (`order_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Table structure for table `oc_syspro_tax_codes`
+--
+
+DROP TABLE IF EXISTS `oc_syspro_tax_code`;
+CREATE TABLE `oc_syspro_tax_code` (
+  `tax_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `tax_name` text COLLATE utf8_bin NOT NULL,
+  `tax_rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `filename` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `tax_class_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`tax_code`),
+  KEY `tax_class_id` (`tax_class_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Table structure for table `oc_syspro_stock_item`
+--
+
+DROP TABLE IF EXISTS `oc_syspro_stock_item`;
+CREATE TABLE `oc_syspro_stock_item` (
+  `stock_item_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `stock_item_name` text COLLATE utf8_bin NOT NULL,
+  `filename` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `product_id` int(11) NOT NULL,
+  `product_option_value_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`stock_item_code`),
+  KEY `product_id` (`product_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Table structure for table `oc_syspro_order`
+--
+
+DROP TABLE IF EXISTS `oc_syspro_order`;
+CREATE TABLE `oc_syspro_order` (
+  `order_id` int(11) NOT NULL,
+  `syspro_status` text COLLATE utf8_bin NOT NULL,
+  `filename` text COLLATE utf8_bin NOT NULL,
+  `data` blob,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_processed` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`order_id`)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

@@ -64,6 +64,12 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label"><?php echo $entry_meta_title; ?></label>
+                                            <div class="controls">
+                                                <input type="text" name="product_description[<?php echo $language['language_id']; ?>][meta_title]" class="span6 i-xxlarge" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : ''; ?>">                                                
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label class="control-label"><?php echo $entry_meta_description; ?></label>
                                             <div class="controls">
                                                 <textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" class="span6 i-xxlarge" rows="5"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea>

@@ -562,6 +562,7 @@ class ControllerSaleReturn extends Controller {
         $this->data['text_opened'] = $this->language->get('text_opened');
         $this->data['text_unopened'] = $this->language->get('text_unopened');
         $this->data['text_add_product'] = $this->language->get('text_add_product');
+        $this->data['text_order'] = $this->language->get('text_order');
 
         $this->data['entry_customer'] = $this->language->get('entry_customer');
         $this->data['entry_order_id'] = $this->language->get('entry_order_id');
@@ -581,6 +582,7 @@ class ControllerSaleReturn extends Controller {
         $this->data['entry_opened'] = $this->language->get('entry_opened');
         $this->data['entry_action'] = $this->language->get('entry_action');
         $this->data['entry_refund_amount'] = $this->language->get('entry_refund_amount');
+        $this->data['entry_shipping'] = $this->language->get('entry_shipping');
         
         
         $this->data['column_product'] = $this->language->get('column_product');
@@ -591,7 +593,7 @@ class ControllerSaleReturn extends Controller {
         
 
         $this->data['button_add_product'] = $this->language->get('button_add_product');
-
+        $this->data['button_update_total'] = $this->language->get('button_update_total');
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
 
@@ -866,6 +868,17 @@ class ControllerSaleReturn extends Controller {
             $order_products = array();
         }
         
+        if (isset($this->request->post['shipping_method'])) {
+            $this->data['shipping_method'] = $this->request->post['shipping_method'];
+        } else {
+            $this->data['shipping_method'] = '';
+        }
+
+        if (isset($this->request->post['shipping_code'])) {
+            $this->data['shipping_code'] = $this->request->post['shipping_code'];
+        } else {
+            $this->data['shipping_code'] = '';
+        }
         
         $this->data['order_products'] = array();
 
@@ -977,6 +990,7 @@ class ControllerSaleReturn extends Controller {
             $this->data['text_wait'] = $this->language->get('text_wait');
             $this->data['text_return_id'] = $this->language->get('text_return_id');
             $this->data['text_order_id'] = $this->language->get('text_order_id');
+            $this->data['text_new_order_id'] = $this->language->get('text_new_order_id');
             $this->data['text_date_ordered'] = $this->language->get('text_date_ordered');
             $this->data['text_customer'] = $this->language->get('text_customer');
             $this->data['text_email'] = $this->language->get('text_email');
@@ -1113,8 +1127,42 @@ class ControllerSaleReturn extends Controller {
             $this->data['model'] = $return_info['model'];
             $this->data['quantity'] = $return_info['quantity'];
             $this->data['price'] = $return_info['price'];
-            $this->data['refund_amount'] = $return_info['refund_amount'];            
+            
+            $this->load->model('localisation/return_action');
+            
+            $return_action_info = $this->model_localisation_return_action->getReturnAction($return_info['return_action_id']);
 
+            if ($return_action_info) {
+                $this->data['return_action'] = $return_action_info['name'];
+            } else {
+                $this->data['return_action'] = '';
+            }
+            
+            switch ($return_info['return_action_id'])
+            {
+                case $this->config->get('config_return_refund_action_id'):
+                    
+                    $this->data['refund_amount'] = $return_info['refund_amount'];
+                    break;
+                case $this->config->get('config_return_replacement_action_id'):
+                    $this->data['new_order_id'] = $return_info['new_order_id'];
+            
+                    $new_order_info = $this->model_sale_order->getOrder($return_info['new_order_id']);
+
+                    if ($return_info['new_order_id'] && $new_order_info) {
+                        $this->data['new_order'] = $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $return_info['new_order_id'], 'SSL');
+                    } else {
+                        $this->data['new_order'] = '';
+                    }
+                    
+                    break;
+                default:
+                    $this->data['return_actions'] = $this->model_localisation_return_action->getReturnActions();
+
+                    $this->data['return_action_id'] = $return_info['return_action_id'];
+                    break;
+            }
+            
             $this->load->model('localisation/return_reason');
 
             $return_reason_info = $this->model_localisation_return_reason->getReturnReason($return_info['return_reason_id']);
@@ -1127,12 +1175,6 @@ class ControllerSaleReturn extends Controller {
 
             $this->data['opened'] = $return_info['opened'] ? $this->language->get('text_yes') : $this->language->get('text_no');
             $this->data['comment'] = nl2br($return_info['comment']);
-
-            $this->load->model('localisation/return_action');
-
-            $this->data['return_actions'] = $this->model_localisation_return_action->getReturnActions();
-
-            $this->data['return_action_id'] = $return_info['return_action_id'];
 
             $this->data['return_statuses'] = $this->model_localisation_return_status->getReturnStatuses();
 

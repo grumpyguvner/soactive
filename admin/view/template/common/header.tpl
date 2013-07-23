@@ -169,8 +169,6 @@ function fixMenu($menu) {
                                                 <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
                                                 <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
                                                 <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
-                                                <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
-                                                <li><a href="<?php echo $event; ?>"><?php echo $text_event; ?></a></li>	
                                             </ul>
                                         </li>
 
@@ -221,14 +219,7 @@ function fixMenu($menu) {
                                             <a href="#" class="visible-collapsed dropdown-toggle" data-toggle="dropdown"><i class="icon-down-open"></i></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="<?php echo $setting; ?>"><?php echo $text_setting; ?></a></li>
-                                                <li class="dropdown-submenu">
-                                                    <a href="#" class="parent submenu-toggle" data-toggle="submenu"><?php echo $text_design; ?> <i class="icon-right-open hidden-collapsed"></i></a>
-                                                    <a href="#" class="visible-collapsed submenu-toggle" data-toggle="submenu"><i class="icon-down-open"></i></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
-                                                        <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
-                                                    </ul>
-                                                </li>
+                                                <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
                                                 <li class="dropdown-submenu">
                                                     <a href="#" class="parent submenu-toggle" data-toggle="submenu"><?php echo $text_users; ?> <i class="icon-right-open hidden-collapsed"></i></a>
                                                     <a href="#" class="visible-collapsed submenu-toggle" data-toggle="submenu"><i class="icon-down-open"></i></a>
@@ -242,6 +233,7 @@ function fixMenu($menu) {
                                                     <a href="#" class="visible-collapsed submenu-toggle" data-toggle="submenu"><i class="icon-down-open"></i></a>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="<?php echo $language; ?>"><?php echo $text_language; ?></a></li>
+                                                        <li><a href="<?php echo $language_manager; ?>"><?php echo $text_language_manager; ?></a></li>
                                                         <li><a href="<?php echo $currency; ?>"><?php echo $text_currency; ?></a></li>
                                                         <li><a href="<?php echo $stock_status; ?>"><?php echo $text_stock_status; ?></a></li>
                                                         <li><a href="<?php echo $order_status; ?>"><?php echo $text_order_status; ?></a></li>
@@ -274,6 +266,7 @@ function fixMenu($menu) {
                                                 <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
                                                 <li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
                                                 <li><a href="<?php echo $sage; ?>"><?php echo $text_sage; ?></a></li>
+                                                <li><a href="<?php echo $syspro; ?>"><?php echo $text_syspro; ?></a></li>
                                                 <li><a href="<?php echo $wms; ?>"><?php echo $text_wms; ?></a></li>
                                                 <li><a href="<?php echo $zencart; ?>"><?php echo $text_zencart; ?></a></li>
                                             </ul>
@@ -301,6 +294,7 @@ function fixMenu($menu) {
                                                     <ul class="dropdown-menu">
                                                         <li><a href="<?php echo $report_product_viewed; ?>"><?php echo $text_report_product_viewed; ?></a></li>
                                                         <li><a href="<?php echo $report_product_purchased; ?>"><?php echo $text_report_product_purchased; ?></a></li>
+                                                        <li><a href="<?php echo $report_product_stock; ?>"><?php echo $text_report_product_stock; ?></a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown-submenu">
@@ -311,7 +305,7 @@ function fixMenu($menu) {
                                                             <li><a href="<?php echo $report_customer_online; ?>"><?php echo $text_report_customer_online; ?></a></li>
     <?php } ?>
                                                         <li><a href="<?php echo $report_customer_order; ?>"><?php echo $text_report_customer_order; ?></a></li>
-                                                        <li><a href="<?php echo $report_product_stock; ?>"><?php echo $text_report_product_stock; ?></a></li>
+                                                        <li><a href="<?php echo $report_customer_purchased; ?>"><?php echo $text_report_customer_purchased; ?></a></li>
                                                         <li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>
                                                         <li><a href="<?php echo $report_customer_credit; ?>"><?php echo $text_report_customer_credit; ?></a></li>
                                                         <li><a href="<?php echo $report_register_your_product; ?>"><?php echo $text_report_register_your_product; ?></a></li>

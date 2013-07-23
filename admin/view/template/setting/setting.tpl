@@ -577,6 +577,21 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_affiliate; ?></label>
+                                        <div class="controls">
+                                            <select name="config_affiliate_id" class="i-medium input-block-level">
+                                                <option value="0"><?php echo $text_none; ?></option>
+                                                <?php echo p3html::oc_information_options($informations, $config_affiliate_id); ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><?php echo $entry_account_commission; ?></label>
+                                        <div class="controls">
+                                            <input type="text" name="config_account_commission" value="<?php echo $config_account_commission; ?>" class="input-mini">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label"><?php echo $entry_commission; ?></label>
                                         <div class="controls">
                                             <input type="text" name="config_commission" value="<?php echo $config_commission; ?>"  class="input-mini">
@@ -596,8 +611,8 @@
                                     <div class="control-group">
                                         <label class="control-label"><?php echo $entry_return_refund; ?></label>
                                         <div class="controls">
-                                            <select name="config_return_action_id" class="i-medium input-block-level">
-                                                <?php echo p3html::oc_return_actions_options($return_actions, $config_return_refund_action_id); ?>
+                                            <select name="config_return_refund_action_id" class="i-medium input-block-level">
+                                                <?php echo p3html::oc_return_action_options($return_actions, $config_return_refund_action_id); ?>
                                             </select>
                                         </div>
                                     </div>
@@ -605,7 +620,7 @@
                                         <label class="control-label"><?php echo $entry_return_replacement; ?></label>
                                         <div class="controls">
                                             <select name="config_return_action_id" class="i-medium input-block-level">
-                                                <?php echo p3html::oc_return_actions_options($return_actions, $config_return_replacement_action_id); ?>
+                                                <?php echo p3html::oc_return_action_options($return_actions, $config_return_replacement_action_id); ?>
                                             </select>
                                         </div>
                                     </div>

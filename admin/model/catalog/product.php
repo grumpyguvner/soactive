@@ -336,6 +336,11 @@ class ModelCatalogProduct extends Model {
 		return $query->row;
 	}
 	
+	public function getSysproProductInfo($product_id, $product_option_value_id = 0) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "syspro_stock_item WHERE product_id=" . (int)$product_id . ($product_option_value_id = 0 ? "" : " AND product_option_value_id=" . (int) $product_option_value_id));
+		return $query->row;
+	}
+	
 	public function getProducts($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)";

@@ -146,18 +146,6 @@
                         </tr>
                     </table>
                     <div id="replacement_order">
-                        <div id="totals"><?php
-                        if ($order_totals) { 
-                            foreach ($order_totals as $key => $order_total) {
-                                echo '<input type="hidden" name="order_total[' . $key . '][order_total_id]" value="" />';
-                                echo '<input type="hidden" name="order_total[' . $key . '][code]" value="' . $order_total['code'] . '" />';
-                                echo '<input type="hidden" name="order_total[' . $key . '][title]" value="' . $order_total['title'] . '" />';
-                                echo '<input type="hidden" name="order_total[' . $key . '][text]" value="' . $order_total['text'] . '" />';
-                                echo '<input type="hidden" name="order_total[' . $key . '][value]" value="' . $order_total['value'] . '" />';
-                                echo '<input type="hidden" name="order_total[' . $key . '][sort_order]" value="' . $order_total['sort_order'] . '" />';
-                            }
-                        }
-                        ?></div>
                         <table class="list">
                             <thead>
                                 <tr>
@@ -218,6 +206,29 @@
                                     </tr>
                                 <?php } ?>
                             </tbody>
+                            <tbody id="totals">
+                                <?php
+                                if ($order_totals)
+                                {
+                                    $total_row = 0;
+                                    foreach ($order_totals as $order_total) {
+                                        ?>
+                                        <tr id="total-row<?php echo $total_row; ?>">
+                                            <td class="right" colspan="5"><?php echo $order_total['title']; ?>:
+                                                <input type="hidden" name="order_total[<?php echo $total_row; ?>][order_total_id]" value="<?php echo $order_total['order_total_id']; ?>" />
+                                                <input type="hidden" name="order_total[<?php echo $total_row; ?>][code]" value="<?php echo $order_total['code']; ?>" />
+                                                <input type="hidden" name="order_total[<?php echo $total_row; ?>][title]" value="<?php echo $order_total['title']; ?>" />
+                                                <input type="hidden" name="order_total[<?php echo $total_row; ?>][text]" value="<?php echo $order_total['text']; ?>" />
+                                                <input type="hidden" name="order_total[<?php echo $total_row; ?>][value]" value="<?php echo $order_total['value']; ?>" />
+                                                <input type="hidden" name="order_total[<?php echo $total_row; ?>][sort_order]" value="<?php echo $order_total['sort_order']; ?>" /></td>
+                                            <td class="right"><?php echo $order_total['value']; ?></td>
+                                        </tr>
+                                        <?php $total_row++; ?>
+                                    <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
                         </table>
                         <table class="list">
                             <thead>
@@ -244,6 +255,35 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <table class="list" id="orderDetails">
+            <thead>
+              <tr>
+                <td class="left" colspan="2"><?php echo $text_order; ?></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="left"><?php echo $entry_shipping; ?></td>
+                <td class="left"><select name="shipping">
+                    <option value=""><?php echo $text_select; ?></option>
+                    <?php if ($shipping_code) { ?>
+                    <option value="<?php echo $shipping_code; ?>" selected="selected"><?php echo $shipping_method; ?></option>
+                    <?php } ?>
+                  </select>
+                  <input type="hidden" name="shipping_method" value="<?php echo $shipping_method; ?>" />
+                  <input type="hidden" name="shipping_code" value="<?php echo $shipping_code; ?>" />
+                  <?php if ($error_shipping_method) { ?>
+                  <span class="error"><?php echo $error_shipping_method; ?></span>
+                  <?php } ?></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td class="left">&nbsp;</td>
+                <td class="left"><a id="button-update" class="button"><?php echo $button_update_total; ?></a></td>
+              </tr>
+            </tfoot>
+          </table>
                     </div>
                 </div>
             </form>
@@ -305,6 +345,8 @@
                 $('input[name=\'lastname\']').attr('value', '');
                 $('input[name=\'email\']').attr('value', '');
                 $('input[name=\'telephone\']').attr('value', '');
+                $('input[name=\'shipping_method\']').attr('value', '');
+                $('input[name=\'shipping_code\']').attr('value', '');
                 if (order)
                 {
                     $('input[name=\'date_ordered\']').attr('value', order.date_added);
@@ -313,6 +355,16 @@
                     $('input[name=\'lastname\']').attr('value', order.lastname);
                     $('input[name=\'email\']').attr('value', order.email);
                     $('input[name=\'telephone\']').attr('value', order.telephone);
+                    
+                    $('input[name=\'shipping_method\']').attr('value', order.shipping_method);
+                    $('input[name=\'shipping_code\']').attr('value', order.shipping_code);
+                }
+                
+                if ($('input[name=\'shipping_method\']').val())
+                {
+                    $('select[name=\'shipping\']').html('<option value="' + $('input[name=\'shipping_code\']').val() + '" selected="selected">' + $('input[name=\'shipping_method\']').val() + '</option>');
+                } else {
+                    $('select[name=\'shipping\']').html('<option value=""><?php echo $text_select; ?></option>');
                 }
             }
         });
@@ -632,6 +684,17 @@
         }
         $('input[name=\'refund_amount\']').attr('value', (Number($('input[name=\'price\']').val())*Number($('input[name=\'quantity\']').val())));
     });
+    
+    
+$('select[name=\'shipping\']').bind('change', function() {
+	if (this.value) {
+		$('input[name=\'shipping_method\']').attr('value', $('select[name=\'shipping\'] option:selected').text());
+	} else {
+		$('input[name=\'shipping_method\']').attr('value', '');
+	}
+	
+	$('input[name=\'shipping_code\']').attr('value', this.value);
+});
     //--></script> 
 <script type="text/javascript"><!--
     
@@ -662,7 +725,7 @@
     //--></script>
 
 <script type="text/javascript"><!--
-    $('#button-product').live('click', function() {	
+    $('#button-product, #button-update').live('click', function() {	
 
         order_data = {
             store_id : order.store_id,
@@ -677,7 +740,9 @@
             payment_country_id : order.payment_country_id,
             payment_zone_id : order.payment_zone_id,
             payment_code : order.payment_code,
-            payment_postcode : order.payment_postcode
+            payment_postcode : order.payment_postcode,
+            shipping_method : $('input[name=shipping_method]').val(),
+            shipping_code : $('input[name=shipping_code]').val()
         };
         
         $('#option input, #option select, #product input').each(function () {
@@ -860,7 +925,7 @@
                         product = json['order_product'][i];
 					
                         html += '<tr id="product-row' + product_row + '">';
-                        html += '  <td class="center" style="width: 3px;"><img src="view/image/delete.png" title="<?php echo $button_remove; ?>" alt="<?php echo $button_remove; ?>" style="cursor: pointer;" onclick="$(\'#product-row' + product_row + '\').remove(); $(\'#button-update\').trigger(\'click\');" /></td>';
+                        html += '  <td class="center" style="width: 3px;"><img src="view/image/delete.png" title="<?php echo $button_remove; ?>" alt="<?php echo $button_remove; ?>" style="cursor: pointer;" onclick="$(\'#product-row' + product_row + '\').remove(); $(\'#button-product\').trigger(\'click\');" /></td>';
                         html += '  <td class="left">' + product['name'] + '<br /><input type="hidden" name="order_product[' + product_row + '][order_product_id]" value="" /><input type="hidden" name="order_product[' + product_row + '][product_id]" value="' + product['product_id'] + '" /><input type="hidden" name="order_product[' + product_row + '][name]" value="' + product['name'] + '" />';
 					
                         if (product['option']) {
@@ -903,30 +968,75 @@
                         product_row++;			
                     }
 				
-                    $('#product').html(html);
+                    $('#product').html(html);	
+                    $('#totals').html('');
+                    $('#orderDetails').show();
                 } else {
-                    html  = '</tr>';
+                    html  = '<tr>';
                     html += '  <td colspan="6" class="center"><?php echo $text_no_results; ?></td>';
                     html += '</tr>';	
 
                     $('#product').html(html);	
+                    $('#totals').html(html);
+                    $('#orderDetails').hide();
                 }
 						
                 // Totals
-                if (json['order_product'] != '' || json['order_voucher'] != '' || json['order_total'] != '') {
+                if (json['order_product'] != '' && json['order_total'] != '') {
                     html = '';
 			
                     var total_row = 0;
 				
                     for (i in json['order_total']) {
-                        total = json['order_total'][i];
 					
-                        html += '<input type="hidden" name="order_total[' + total_row + '][order_total_id]" value="" /><input type="hidden" name="order_total[' + total_row + '][code]" value="' + total['code'] + '" /><input type="hidden" name="order_total[' + total_row + '][title]" value="' + total['title'] + '" /><input type="hidden" name="order_total[' + total_row + '][text]" value="' + total['text'] + '" /><input type="hidden" name="order_total[' + total_row + '][value]" value="' + total['value'] + '" /><input type="hidden" name="order_total[' + total_row + '][sort_order]" value="' + total['sort_order'] + '" />';
+                       total = json['order_total'][i];
+					
+                        html += '<tr id="total-row' + total_row + '">';
+                        html += '  <td class="right" colspan="5"><input type="hidden" name="order_total[' + total_row + '][order_total_id]" value="" /><input type="hidden" name="order_total[' + total_row + '][code]" value="' + total['code'] + '" /><input type="hidden" name="order_total[' + total_row + '][title]" value="' + total['title'] + '" /><input type="hidden" name="order_total[' + total_row + '][text]" value="' + total['text'] + '" /><input type="hidden" name="order_total[' + total_row + '][value]" value="' + total['value'] + '" /><input type="hidden" name="order_total[' + total_row + '][sort_order]" value="' + total['sort_order'] + '" />' + total['title'] + ':</td>';
+                        html += '  <td class="right">' + total['value'] + '</td>';
+                        html += '</tr>';
 					
                         total_row++;
                     }
 				
                     $('#totals').html(html);					
+                } else {
+                    html  = '';	
+
+                    $('#totals').html(html);	
+                }
+                
+                // Shipping Methods
+                if (json['shipping_method']) {
+                        html = '<option value=""><?php echo $text_select; ?></option>';
+
+                        for (i in json['shipping_method']) {
+                                html += '<optgroup label="' + json['shipping_method'][i]['title'] + '">';
+
+                                if (!json['shipping_method'][i]['error']) {
+                                        for (j in json['shipping_method'][i]['quote']) {
+                                                if (json['shipping_method'][i]['quote'][j]['code'] == $('input[name=\'shipping_code\']').attr('value')) {
+                                                        html += '<option value="' + json['shipping_method'][i]['quote'][j]['code'] + '" selected="selected">' + json['shipping_method'][i]['quote'][j]['title'] + '</option>';
+                                                } else {
+                                                        html += '<option value="' + json['shipping_method'][i]['quote'][j]['code'] + '">' + json['shipping_method'][i]['quote'][j]['title'] + '</option>';
+                                                }
+                                        }		
+                                } else {
+                                        html += '<option value="" style="color: #F00;" disabled="disabled">' + json['shipping_method'][i]['error'] + '</option>';
+                                }
+
+                                html += '</optgroup>';
+                        }
+
+                        $('select[name=\'shipping\']').html(html);	
+
+                        if ($('select[name=\'shipping\'] option:selected').attr('value')) {
+                                $('input[name=\'shipping_method\']').attr('value', $('select[name=\'shipping\'] option:selected').text());
+                        } else {
+                                $('input[name=\'shipping_method\']').attr('value', '');
+                        }
+
+                        $('input[name=\'shipping_code\']').attr('value', $('select[name=\'shipping\'] option:selected').attr('value'));	
                 }
 			
             },

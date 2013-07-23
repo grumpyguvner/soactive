@@ -76,6 +76,10 @@
               <?php } ?></td>
           </tr>
           <tr>
+            <td><?php echo $entry_reply; ?></td>
+            <td><textarea name="reply" cols="60" rows="8"><?php echo $reply; ?></textarea></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_status; ?></td>
             <td><select name="status">
                 <?php if ($status) { ?>
@@ -85,7 +89,8 @@
                 <option value="1"><?php echo $text_enabled; ?></option>
                 <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                 <?php } ?>
-              </select></td>
+              </select>
+            </td>
           </tr>
         </table>
       </form>

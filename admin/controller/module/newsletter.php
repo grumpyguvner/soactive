@@ -66,6 +66,10 @@ class ControllerModuleNewsletter extends Controller {
       		'separator' => ' :: '
    		);
 
+                $this->data['tab_modules'] = $this->language->get('tab_modules');
+                $this->data['tab_mailchimp'] = $this->language->get('tab_mailchimp');
+                $this->data['tab_mailcampaign'] = $this->language->get('tab_mailcampaign');
+                
 		$this->data['action'] = $this->url->link('module/' . $this->name, 'token=' . $this->session->data['token'], 'SSL');
 
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
@@ -395,7 +399,7 @@ class ControllerModuleNewsletter extends Controller {
                     {
                         $total_lists[] = $list->ListID;
                     }
-            if(empty($this->request->post[$this->name . '_mailchimp_listid']) && !array_search($this->request->post[$this->name . '_mailchimp_listid'], $total_lists)){
+            if(empty($this->request->post[$this->name . '_mailcampaign_listid']) && !array_search($this->request->post[$this->name . '_mailcampaign_listid'], $total_lists)){
                $this->error['warning'] = $this->language->get('error_newsletter_mailcampaign_lists');
                 return false;
                 }

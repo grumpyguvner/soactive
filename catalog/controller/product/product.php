@@ -580,6 +580,8 @@ class ControllerProductProduct extends Controller {
 
 		$this->data['text_on'] = $this->language->get('text_on');
 		$this->data['text_no_reviews'] = $this->language->get('text_no_reviews');
+                $this->data['text_says'] = $this->language->get('text_says');
+                
 
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -596,8 +598,9 @@ class ControllerProductProduct extends Controller {
 		foreach ($results as $result) {
         	$this->data['reviews'][] = array(
         		'author'     => $result['author'],
-				'text'       => $result['text'],
-				'rating'     => (int)$result['rating'],
+                        'text'       => $result['text'],
+                        'rating'     => (int)$result['rating'],
+                        'reply'      => $result['reply'],
         		'reviews'    => sprintf($this->language->get('text_reviews'), (int)$review_total),
         		'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
         	);

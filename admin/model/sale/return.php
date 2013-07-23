@@ -38,6 +38,7 @@ class ModelSaleReturn extends Model {
                 $new_order_info = $old_order_info;
                 $new_order_info['order_product'] = $this->request->post['order_product'];
                 $new_order_info['order_total'] = $this->request->post['order_total'];
+                $new_order_info['order_status_id'] = 1; // hardcoded... sorry
                 
                 $new_order_id = $this->model_sale_order->addOrder($new_order_info);
                 
@@ -95,6 +96,8 @@ if ($return_amount > $order_amount)
                 }
 
                 $this->model_sale_order->addOrderHistory($new_order_info['order_id'], $dataOH);
+                
+                $this->db->query("UPDATE `" . DB_PREFIX . "return` SET new_order_id = '" . (int)$new_order_id . "' WHERE order_id = '" . (int) $data['order_id'] . "'");
 
                 break;
         }

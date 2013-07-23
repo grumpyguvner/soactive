@@ -10,6 +10,8 @@
         <?php if ($keywords) { ?>
             <meta name="keywords" content="<?php echo $keywords; ?>" />
         <?php } ?>
+            <meta name="google-site-verification" content="uTRSIhaTvT8os1WOM8Xtj6CNGcjPEvGgLmU3eGXKZ1M" />
+            <meta name="google-site-verification" content="GnpcrcP98Rc5FcauLQsmGiQ5XT_XhpOG62Pto9gWbfg" />
         <?php if ($icon) { ?>
             <link href="<?php echo $icon; ?>" rel="icon" />
         <?php } ?>
@@ -89,8 +91,8 @@
                                 <?php
                             }
                             ?>
-                            <li><a href="free-uk-delivery"><?php echo $text_free_delivery; ?></a></li>
-                            <li><a href="free-uk-returns"><?php echo $text_free_returns; ?></a></li>
+                            <li><a href="free-uk-delivery" class="white"><?php echo $text_free_delivery; ?></a></li>
+                            <li><a href="free-uk-returns" class="white"><?php echo $text_free_returns; ?></a></li>
                         </ul>
                         <ul id="right">
                             <?php if (!$logged) { ?>
@@ -148,6 +150,7 @@
                         <ul>
                             <li><a href='<?php echo $home; ?>'><span><img src="catalog/view/theme/sealskinz/image/home_button.png" alt="Home"/></span></a></li>
                             <li id="activity"><span><?php echo $text_activity ?></span>
+                                <?php $display_clearance = false; ?>
                                 <?php if ($categories) { ?>
                                     <ul class="wrap-menu">
                                         <div id="left">
@@ -175,7 +178,8 @@
                                                 </div>   
                                                 <div id="right" class="menu-column-right">
                                                     <?php   } ?>
-                                                        <li <?php echo ($key >= 8 ? 'style="border-left: none;"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
+                                                        <?php if ($child['name'] == "Clearance") $display_clearance = true; ?>
+                                                        <li <?php echo ($key >= 8 ? 'style="border-left: none;"' : '') ?> <?php echo ($child['name'] == "Clearance" ? 'class="clearance"' : '') ?>><a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a></li>
                                                     <?php } ?>
                                                 </div>
                                             <?php } ?>
@@ -187,6 +191,9 @@
                             <li><a href="http://www.sealskinz.com/blog/" target="_blank"><span><?php echo $text_blog ?></span></a></li>
                             <li><a href="<?php echo $stockist ?>"><span><?php echo $text_stockist ?></span></a></li>
                             <li><a href="registration"><span><?php echo $text_product_registration ?></span></a></li>
+                            <?php if ($display_clearance) { ?>
+                            <li class="clearance"><a href="/clearance" class="withpad">Clearance</a></li>
+                            <?php } ?>
                             
                         </ul>
                     </div>

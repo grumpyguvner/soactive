@@ -190,6 +190,7 @@ ob_start("fixMenu");
           <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
           <li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>
           <li><a href="<?php echo $sage; ?>"><?php echo $text_sage; ?></a></li>
+          <li><a href="<?php echo $syspro; ?>"><?php echo $text_syspro; ?></a></li>
           <li><a href="<?php echo $wms; ?>"><?php echo $text_wms; ?></a></li>
           <li><a href="<?php echo $zencart; ?>"><?php echo $text_zencart; ?></a></li>
         </ul>
@@ -215,6 +216,9 @@ ob_start("fixMenu");
           </li>
           <li><a class="parent"><?php echo $text_customer; ?></a>
             <ul>
+                <?php if (VERSION >= '1.5.4') { ?>
+                    <li><a href="<?php echo $report_customer_online; ?>"><?php echo $text_report_customer_online; ?></a></li>
+                <?php } ?>
               <li><a href="<?php echo $report_customer_order; ?>"><?php echo $text_report_customer_order; ?></a></li>
               <li><a href="<?php echo $report_customer_purchased; ?>"><?php echo $text_report_customer_purchased; ?></a></li>
               <li><a href="<?php echo $report_customer_reward; ?>"><?php echo $text_report_customer_reward; ?></a></li>

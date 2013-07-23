@@ -11,7 +11,7 @@ class ControllerPaymentPPStandard extends Controller {
 		$this->data['testmode'] = $this->config->get('pp_standard_test');
 		
 		if (!$this->config->get('pp_standard_test')) {
-    		$this->data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
+                    $this->data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
   		} else {
 			$this->data['action'] = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 		}
@@ -158,15 +158,19 @@ class ControllerPaymentPPStandard extends Controller {
 					case 'Canceled_Reversal':
 						$order_status_id = $this->config->get('pp_standard_canceled_reversal_status_id');
 						break;
-					case 'Completed':
-						if ((strtolower($this->request->post['receiver_email']) == strtolower($this->config->get('pp_standard_email'))) && ((float)$this->request->post['mc_gross'] == $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false))) {
-							$order_status_id = $this->config->get('pp_standard_completed_status_id');
-						} else {
-							$this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
-                                                        
-                                                        $comment .= 'RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']) . "\n";
-						}
-						break;
+                                        case 'Completed':
+                                            if (strtolower($this->request->post['receiver_email']) != strtolower($this->config->get('pp_standard_email'))) {
+                                                $this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
+
+                                                $comment .= 'RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']) . "\n";
+                                            } elseif ((float) $this->request->post['mc_gross'] != $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false)) {
+                                                $this->log->write('PP_STANDARD :: PAYMENT MISMATCH! ' . (float)$this->request->post['mc_gross']);
+
+                                                $comment .= 'PAYMENT MISMATCH! ' . (float)$this->request->post['mc_gross'] . "\n";
+                                            } else {
+                                                $order_status_id = $this->config->get('pp_standard_completed_status_id');
+                                            }
+                                            break;
 					case 'Denied':
 						$order_status_id = $this->config->get('pp_standard_denied_status_id');
 						break;
@@ -221,6 +225,10 @@ class ControllerPaymentPPStandard extends Controller {
                     case 'payment_type':
                     case 'pending_reason':
                     case 'reason_code':
+                    case 'txn_id':
+                    case 'invoice':
+                    case 'protection_eligibility':
+                    case 'payer_email':
                         $comment .= $key . ' {' . $value . '}' . "\n";
                         break;
                 }

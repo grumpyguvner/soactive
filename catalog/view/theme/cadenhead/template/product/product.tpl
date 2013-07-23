@@ -1,5 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><div id="content_product"><?php echo $content_top; ?>
+<div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
@@ -10,7 +10,7 @@
     <?php if ($thumb || $images) { ?>
     <div class="left">
       <?php if ($thumb) { ?>
-        <div class="caption"><div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a><span><strong><?php if($stock_quantity <= 10){ echo $stock_quantity . ' ' . 'left!';} ?></strong></span></div></div>
+        <div class="caption"><div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a><span <?php if($stock_quantity > 10){ echo 'style="display: none"';} ?>><strong><?php if($stock_quantity <= 10){ echo $stock_quantity . ' ' . 'left!';} ?></strong></span></div></div>
       <?php } ?>
       <?php if ($images) { ?>
       <div class="image-additional">
@@ -24,9 +24,12 @@
       <div class="center">
           <h2><?php echo $heading_title; ?></h2>
           <div id="tabs" class="htabs"><a href="#tab-description"><?php echo $tab_description; ?></a>
-    <?php if ($attribute_groups) { ?>
-    <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
-    <?php } ?>
+    <?php 
+    if ($product_tabs) {
+        foreach ($product_tabs as $key => $tab) {
+                echo '<a href="#productTabAttr' . $key . '">' . $tab['name'] . '</a>';
+            }
+    } ?>
     <?php if ($review_status) { ?>
     <a href="#tab-review"><?php echo $tab_review; ?></a>
     <?php } ?>
@@ -36,7 +39,10 @@
   </div>
   <div id="tab-description" class="tab-content"><?php echo $description; ?>
   <table >
-      <?php foreach ($attribute_groups as $attribute_group) { ?>
+      <?php 
+      if (array_key_exists('General', $attribute_groups))
+      {
+      foreach ($attribute_groups['General'] as $attribute_group) { ?>
       <thead>
         <!--tr>
           <td colspan="2"><?php echo $attribute_group['name']; ?></td>
@@ -50,14 +56,26 @@
         </tr>
         <?php } ?>
       </tbody>
-      <?php } ?>
+      <?php
+      
+      }
+      }
+      ?>
     </table>
   </div>
-  <?php if ($attribute_groups) { ?>
-  <div id="tab-attribute" class="tab-content">
-    /* Inserire testo Delivery & Returns */
-  </div>
-  <?php } ?>
+          
+          
+    <?php
+    if ($product_tabs) {
+        foreach ($product_tabs as $key => $tab) {
+                ?>
+                <div id="productTabAttr<?php echo $key; ?>" class="tab-content">
+                    <?php echo $tab['text']; ?>
+                </div>
+                <?php
+        }
+    }
+    ?>
   <?php if ($review_status) { ?>
   <div id="tab-review" class="tab-content">
     <div id="review"></div>
@@ -113,8 +131,11 @@
         <?php if ($product['rating']) { ?>
         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
         <?php } ?>
-        <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a></div>
+        <?php if ($product['price']) { ?>
+        <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a>
+        <?php } ?>
       <?php } ?>
+      </div>
     </div>
   </div>
   <?php } ?>
@@ -341,7 +362,7 @@
     </div>
   </div>
         
-  </div></div>
+  </div>
 <script type="text/javascript"><!--
 $('.colorbox').colorbox({
 	overlayClose: true,

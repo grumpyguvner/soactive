@@ -32,7 +32,7 @@
         <tbody>
           <?php foreach ($products as $product) { ?>
           <tr>
-            <td class="column-naù"><?php echo $product['name']; ?></td>
+            <td class="column-name"><?php echo $product['name']; ?></td>
             <td class="column-model hidden-phone"><?php echo $product['model']; ?></td>
             <td class="column-number"><?php echo $product['viewed']; ?></td>
             <td class="column-number"><?php echo $product['percent']; ?></td>
