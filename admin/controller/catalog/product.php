@@ -1003,26 +1003,24 @@ class ControllerCatalogProduct extends Controller {
         $this->load->model('catalog/filter');
         
         $this->data['has_filters'] = $this->model_catalog_filter->getTotalFilterGroups();
+        
+        $filters = $this->model_catalog_filter->getFilters();       
 
         if (isset($this->request->post['product_filter'])) {
-                $filters = $this->request->post['product_filter'];
+            $this->data['product_filter_selected'] = $this->request->post['product_filter'];
         } elseif (isset($this->request->get['product_id'])) {
-                $filters = $this->model_catalog_product->getProductFilters($this->request->get['product_id']);
+            $this->data['product_filter_selected'] = $this->model_catalog_product->getProductFilters($this->request->get['product_id']);
         } else {
-                $filters = array();
+            $this->data['product_filter_selected'] = array();
         }
-
+                
         $this->data['product_filters'] = array();
-
-        foreach ($filters as $filter_id) {
-                $filter_info = $this->model_catalog_filter->getFilter($filter_id);
-
-                if ($filter_info) {
+        
+        foreach ($filters as $filter_info) {
                         $this->data['product_filters'][] = array(
                                 'filter_id' => $filter_info['filter_id'],
                                 'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
                         );
-                }
         }	
 		
         // Attributes

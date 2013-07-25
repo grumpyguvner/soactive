@@ -245,7 +245,7 @@
           <h2><?php echo $text_product; ?></h2>
           <table class="form">
             <tr>
-              <td><?php echo $entry_product_count; ?></td>
+              <td><?php echo $entry_new_product_age; ?></td>
               <td><input type="text" name="config_new_product_age" value="<?php echo $config_new_product_age; ?>" size="3" /></td>
             </tr>
             <tr>

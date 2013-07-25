@@ -261,24 +261,37 @@
                   </div>
                   <?php } ?>
                 </div>
-                <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+                <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a>
+              </td>
             </tr>
+            
+            
+            
+            
+            
             <tr>
               <td><?php echo $entry_filter; ?></td>
-              <td><input type="text" name="filter" value="" /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
               <td><div id="product-filter" class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($product_filters as $product_filter) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="product-filter<?php echo $product_filter['filter_id']; ?>" class="<?php echo $class; ?>"><?php echo $product_filter['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="product_filter[]" value="<?php echo $product_filter['filter_id']; ?>" />
+                  <div id="product-filter<?php echo $product_filter['filter_id']; ?>" class="<?php echo $class; ?>">
+                    <?php if (in_array($product_filter['filter_id'], $product_filter_selected)) { ?>
+                    <input type="checkbox" name="product_filter[]" value="<?php echo $product_filter['filter_id']; ?>" checked="checked" />                    
+                    <?php echo $product_filter['name']; ?>
+                    <?php } else { ?>
+                    <input type="checkbox" name="product_filter[]" value="<?php echo $product_filter['filter_id']; ?>" />
+                    <?php echo $product_filter['name']; ?>
+                    <?php } ?>
                   </div>
                   <?php } ?>
-                </div></td>
-            </tr>   
+                </div>
+                <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a>
+              </td>
+            </tr>
+            
+            
+             
             <tr>
               <td><?php echo $entry_store; ?></td>
               <td><div class="scrollbox">

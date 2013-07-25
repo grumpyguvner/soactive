@@ -82,15 +82,15 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label"><?php echo $entry_description; ?></label>
+                                            <label class="control-label"><?php echo $entry_brief_summary; ?></label>
                                             <div class="controls">
-                                                <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>" class="input-block-level"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
+                                                <input type="text" name="product_description[<?php echo $language['language_id']; ?>][brief_summary]" class="span6 i-xxlarge" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['brief_summary'] : ''; ?>">                                                                                                
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label"><?php echo $entry_description; ?></label>
                                             <div class="controls">
-                                                <textarea name="product_description[<?php echo $language['language_id']; ?>][brief_summary]" id="brief_summary<?php echo $language['language_id']; ?>" class="input-block-level"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['brief_summary'] : ''; ?></textarea>
+                                                <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>" class="input-block-level"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -291,6 +291,27 @@
                                                 <label class="checkbox inline">
                                                     <input type="checkbox" name="product_category[]" value="<?php echo $category['category_id']; ?>"<?php if ($checked) { ?> checked="checked"<?php } ?>>
                                                     <?php echo $category['name']; ?>
+                                                </label>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                    <br>
+                                    <a class="btn btn-small" onclick="$(this).parent().find(':checkbox').attr('checked', true);"><i class="icon-cb-checked"></i> <?php echo $text_select_all; ?></a>
+                                    <a class="btn btn-small" onclick="$(this).parent().find(':checkbox').attr('checked', false);"><i class="icon-cb-unchecked"></i> <?php echo $text_unselect_all; ?></a>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $entry_filter; ?></label>
+                                <div class="controls">
+                                    <div class="scrollbox">
+                                        <?php $class = 'odd'; ?>
+                                        <?php foreach ($product_filters as $product_filter) { ?>
+                                            <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
+                                            <div class="<?php echo $class; ?>">
+                                                <?php $checked = (in_array($product_filter['filter_id'], $product_filter_selected)); ?>
+                                                <label class="checkbox inline">
+                                                    <input type="checkbox" name="product_filter[]" value="<?php echo $product_filter['filter_id']; ?>"<?php if ($checked) { ?> checked="checked"<?php } ?>>
+                                                    <?php echo $product_filter['name']; ?>
                                                 </label>
                                             </div>
                                         <?php } ?>

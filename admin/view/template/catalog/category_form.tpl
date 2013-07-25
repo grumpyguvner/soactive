@@ -160,10 +160,6 @@
                                 <div class="controls"><input type="text" name="column" value="<?php echo $column; ?>" maxlength="1" class="input-mini"></div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="category-is_filter"><?php echo $entry_is_filter; ?></label>
-                                <div class="controls"><input type="checkbox" name="is_filter" id="category-is_filter" value="1"<?php if ($is_filter) { ?> checked="checked"<?php } ?>></div>
-                            </div>
-                            <div class="control-group">
                                 <label class="control-label" for="category-members_only"><?php echo $entry_members_only; ?></label>
                                 <div class="controls"><input type="checkbox" name="members_only" id="category-members_only" value="1"<?php if ($members_only) { ?> checked="checked"<?php } ?>></div>
                             </div>
