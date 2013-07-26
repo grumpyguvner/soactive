@@ -1,31 +1,32 @@
 <?php echo $header; ?>
 <div id="content">
-<div class="breadcrumb">
-  <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-  <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-  <?php } ?>
-</div>
-<?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?></div>
-<?php } ?>
-<div class="box">
-  <div class="heading">
-    <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
-    <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
-  </div>
+<?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
+  <div class="box">
+
+    <div class="heading">
+      <h1><img src="view/image/module.png" alt="" /> <?php echo $heading_title; ?></h1>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_save($button_save); ?>
+				<?php echo p3html::tb_form_button_cancel($button_cancel, $cancel); ?>
+			</div>
+    </div>
   <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
   <div class="content">
-    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
 		<!-- start menu -->  
-        <table id="megamenu" class="list">
+        <table id="megamenu" class="list table table-striped table-hover">
           <thead>
             <tr>
-			  <td class="left"><?php echo $menu_title; ?></td>
-              <td class="left"><?php echo $menu_dropdown; ?></td>
-			  <td class="left" style="<?php echo $text_width; ?>45%;"><?php echo $menu_options; ?></td>
-			  <td class="left"><?php echo $menu_order; ?></td>
-			  <td class="left"><?php echo $menu_status; ?></td>
-              <td></td>
+                <th class="column-name"><?php echo $menu_title; ?></th>
+                <th class="column-dropdown"><?php echo $menu_dropdown; ?></th>
+                <th class="column-option" style="<?php echo $text_width; ?>45%;"><?php echo $menu_options; ?></th>
+                <th class="column-sort"><?php echo $menu_order; ?></th>
+                <th class="column-status"><?php echo $entry_status; ?></th>
+                <th class="column-action"></th>
             </tr>
           </thead>
           <?php $menu_row = 0; ?>
@@ -33,22 +34,32 @@
           <?php foreach ($menus as $menu) { ?>
           <tbody id="menu-row<?php echo $menu_row; ?>" style="border-bottom: 2px solid #808080;">
             <tr>
-			  <!-- title --> 
-			  <td class="left">
-				<?php foreach ($languages as $language) { ?>
-				  <input name="megamenu_menu[<?php echo $menu_row; ?>][title][<?php echo $language['language_id']; ?>]" value="<?php echo isset($menu['title'][$language['language_id']]) ? $menu['title'][$language['language_id']] : ''; ?>" />
-				  <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />
-				<?php } ?></td>
-			  <!-- dropdown -->
-			  <td class="left"><?php echo $text_width; ?><input type="text" name="megamenu_menu[<?php echo $menu_row; ?>][dropdown_width]" value="<?php echo $menu['dropdown_width']; ?>" size="3" /><br/>
-				<?php echo $text_number_of_columns; ?><input type="text" name="megamenu_menu[<?php echo $menu_row; ?>][dropdown_column]" value="<?php echo $menu['dropdown_column']; ?>" size="3" /></td>
-			  <!-- options --> 
-              <td class="left">
+                <td class="column-name">
+                    <label class="visible-480"></label>
+                    <?php foreach ($languages as $language) { ?>
+                        <input name="megamenu_menu[<?php echo $menu_row; ?>][title][<?php echo $language['language_id']; ?>]" value="<?php echo isset($menu['title'][$language['language_id']]) ? $menu['title'][$language['language_id']] : ''; ?>" />
+                        
+                        <i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i><br>
+                    <?php } ?>
+               </td>
+               
+                <!-- title --> 
+			 
+               
+               <!-- dropdown -->
+               <td class="column-dropdown">
+                    <label class="visible-480"></label>
+                    <?php echo $text_width; ?><input type="text" name="megamenu_menu[<?php echo $menu_row; ?>][dropdown_width]" value="<?php echo $menu['dropdown_width']; ?>" class="span1 i-mini" /><br/>
+                    <?php echo $text_number_of_columns; ?><input type="text" name="megamenu_menu[<?php echo $menu_row; ?>][dropdown_column]" value="<?php echo $menu['dropdown_column']; ?>" class="span1 i-mini" />
+               </td>
 			  
-				<!-- bonus hide / show / count option -->
+			  <!-- options --> 
+              <td class="column-option">
+                    <label class="visible-480"></label>
+                    <!-- bonus hide / show / count option -->
 				<div class="right">
-				  <a href="#" id="text-hide<?php echo $menu_row; ?>" style="display: none"><?php echo $text_hide; ?></a>
-				  <a href="#" id="text-show<?php echo $menu_row; ?>"><?php echo $text_show; ?></a>
+				  <a href="#" class="btn btn-small" id="text-hide<?php echo $menu_row; ?>" style="display: none"><?php echo $text_hide; ?></a>
+				  <a href="#" class="btn btn-small" id="text-show<?php echo $menu_row; ?>"><?php echo $text_show; ?></a>
 				</div>
 				<p class="text-menu-row<?php echo $menu_row; ?>" style="text-align: center; font-weight: bold;" ><?php echo count($menu['options']).' '.$text_options; ?></p>
 				<!-- end bonus hide / show / count option -->
@@ -58,7 +69,7 @@
 				<?php foreach ($menu['options'] as $opt) { ?>
 				<div class="count-option<?php echo $menu_row; ?>" id="menu-row<?php echo $menu_row; ?>-opt-row<?php echo $opt_row; ?>" style="border-bottom: 1px solid #DDD;padding: 5px 0;">
 				  <span><strong><?php echo $text_option." ".($opt_row + 1); ?></strong></span>
-			      <select name="megamenu_menu[<?php echo $menu_row; ?>][options][<?php echo $opt_row; ?>][opt]" onchange="showCustom(this,<?php echo $menu_row; ?>,<?php echo $opt_row; ?>)">
+			      <select name="megamenu_menu[<?php echo $menu_row; ?>][options][<?php echo $opt_row; ?>][opt]" onchange="showCustom(this,<?php echo $menu_row; ?>,<?php echo $opt_row; ?>)" class="input-small">
 					<?php if ($opt['opt'] == 'linkto') { ?>
 					<option value="linkto" selected="selected"><?php echo $option_linkto; ?></option>
 					<?php } else { ?>
@@ -315,7 +326,7 @@
 				</div>
 				<?php $opt_row++; ?>
 				<?php } ?>
-				<a style="float: right; margin-top: 5px;" onclick="addOption(this,<?php echo $menu_row; ?>, <?php echo $opt_row; ?>);" class="button"><?php echo $button_add_option; ?></a>
+				<a style="float: right; margin-top: 5px;" onclick="addOption(this,<?php echo $menu_row; ?>, <?php echo $opt_row; ?>);" class="btn btn-small"><?php echo $button_add_option; ?></a>
 				</div>	
 				<script type="text/javascript"><!--
 					$('#text-hide<?php echo $menu_row; ?>').click(function(){
@@ -335,20 +346,22 @@
 						return false;
 					});
 				//--></script>
-			  </td>
+               </td>
 			  <!-- order -->
-			  <td class="left"><input type="text" name="megamenu_menu[<?php echo $menu_row; ?>][order]" value="<?php echo $menu['order']; ?>" size="3" /></td>
+                <td class="column-sort">
+                  <label class="visible-480"><?php echo $entry_sort_order; ?></label>
+                  <input type="text" name="megamenu_menu[<?php echo $menu_row; ?>][order]" value="<?php echo $menu['order']; ?>" class="span1 i-mini">
+                </td>  
 			  <!-- status -->
-			  <td class="left"><select name="megamenu_menu[<?php echo $menu_row; ?>][status]">
-                  <?php if ($menu['status']) { ?>
-                  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                  <option value="0"><?php echo $text_disabled; ?></option>
-                  <?php } else { ?>
-                  <option value="1"><?php echo $text_enabled; ?></option>
-                  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                  <?php } ?>
-                </select></td>
-              <td class="left"><a onclick="$('#menu-row<?php echo $menu_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+                <td class="column-status">
+                    <label class="visible-480"><?php echo $entry_status; ?></label>
+                    <select name="megamenu_menu[<?php echo $menu_row; ?>][status]" class="input-small">
+                        <?php echo p3html::oc_status_options($this->language, $menu); ?>
+                    </select>
+                </td>
+                <td class="column-action">
+                    <a onclick="$('#menu-row<?php echo $menu_row; ?>').remove();" class="btn btn-small"><i class="icon-trash ims" title="<?php echo $button_remove; ?>"></i><span class="hidden-phone"> <?php echo $button_remove; ?></span></a>
+                </td>	
             </tr>
           </tbody>
           <?php $menu_row++; ?>
@@ -357,7 +370,9 @@
           <tfoot>
             <tr>
               <td colspan="5"></td>
-              <td class="left"><a onclick="addMenu();" class="button"><?php echo $button_add_menu; ?></a></td>
+              <td class="column-action">
+                  <a onclick="addMenu();" class="btn btn-small" title="<?php echo $button_add_menu; ?>"><i class="icon-plus-squared"></i><span class="hidden-phone"> <?php echo $button_add_menu; ?></span></a>
+              </td>
             </tr>
           </tfoot>
         </table>	 
