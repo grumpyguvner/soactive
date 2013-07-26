@@ -9,13 +9,13 @@ body {
 	font-family: 'Open Sans Condensed', sans-serif;
         font-style: normal;
         font-weight: 400;
-        font-size: 13px;
+        font-size: 14px;
 	margin: 0px;
 	padding: 0px;
         line-height: 17px;
 }
 body, td, th, input, textarea, select, a {
-	font-size: 13px;
+	font-size: 14px;
         font-family: 'Open Sans Condensed', sans-serif;
         color: #514f4f;
 }
@@ -108,7 +108,7 @@ label {
 	z-index: 99;
 }
 #header #logo {
-	margin-top: 14px;
+	margin-top: 19px;
         float: left;
 }
 #header #top {
@@ -666,7 +666,7 @@ a.buttonHome, input.buttonHome {
 	color: #514f4f;
 	line-height: 12px;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
@@ -1282,12 +1282,14 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .image span {
         background-color: #1DB4B7; 
-        width: 37px;
-        height: 18px;
+        width: 45px;
+        height: 20px;
         position: absolute;
-        left: 253px; 
-        top: 352px;
+        left: 245px; 
+        top: 350px;
         cursor: pointer;
+        font-size: 20px;
+        color: #fff;
 }
 .product-info .image > a, .product-info .image > a:hover {
         color: #514f4f;
