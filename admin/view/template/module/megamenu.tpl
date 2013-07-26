@@ -102,7 +102,7 @@
 					<?php } ?>
                   </select>
 				  <span style="margin-left: 20px;"><?php echo $text_fill_the_column ?></span>
-				  <input name="megamenu_menu[<?php echo $menu_row; ?>][options][<?php echo $opt_row; ?>][fill_column]" value="<?php echo $opt['fill_column']; ?>" size="3"/>
+				  <input name="megamenu_menu[<?php echo $menu_row; ?>][options][<?php echo $opt_row; ?>][fill_column]" value="<?php echo $opt['fill_column']; ?>" size="3" class="span1 i-mini"/>
 				  <a style="float: right" onclick="$('#menu-row<?php echo $menu_row; ?>-opt-row<?php echo $opt_row; ?>').remove();" title="<?php echo $button_remove_option; ?>"><img src="view/image/delete.png"></a>
 				  <div class="divcustom_<?php echo $menu_row; ?><?php echo $opt_row; ?>"></div>
 				  <!-- option category -->
@@ -380,18 +380,17 @@
     </form>
   </div>
 </div>
-
 <script type="text/javascript"><!--
 	var menu_row = <?php echo $menu_row; ?>;
 	var des_num = <?php echo $des_num;?>;
 	// add menu
     function addMenu() {
-      html  = '<tbody id="menu-row' + menu_row + '" style="border-bottom: 2px solid #808080;">';
-      html += '<tr>';
-      html += '<td class="left">';
+          html  = '<tbody id="menu-row' + menu_row + '" style="border-bottom: 2px solid #808080;">';
+          html += '<tr>';
+          html += '<td class="column-name">';
 	  <?php foreach ($languages as $language) { ?>
 		html += '<input name="megamenu_menu[' + menu_row + '][title][<?php echo $language['language_id']; ?>]" />';
-		html += '<img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /><br />';
+		html += '<i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i><br>';
 	  <?php } ?>
 	  html += '</td>';
 	  html += '<td class="left"><span><?php echo $text_width; ?></span><input type="text" name="megamenu_menu[' + menu_row + '][dropdown_width]" value="960" size="3" />';
@@ -408,20 +407,20 @@
 	  html += '  <option value="information"><?php echo $option_information; ?></option>';
 	  html += '</select>';
 	  html += '<span style="margin-left: 20px;"><?php echo $text_fill_the_column ?></span><input name="megamenu_menu[' + menu_row + '][options][0][fill_column]" value="6" size="3"/>';
-	  html += '<a style="float: right" onclick="$(\'#menu-row' + menu_row  + '-opt-row0\').remove();"><?php echo $button_remove_option; ?></a>';
+	  html += '<a style="float: right" onclick="$(\'#menu-row' + menu_row  + '-opt-row0\').remove();" class="btn btn-small"><?php echo $button_remove_option; ?></a>';
 	  html += '<div class="divcustom_' + menu_row + '0"></div>';
 	  html += '<div id="opt_linkto' + menu_row + '0" style="padding-left: 50px;">';
 	  html += '<p><span><?php echo $text_homepage_or_other_link; ?></span><input style="<?php echo $text_width; ?>50%;" type="text" name="megamenu_menu[' + menu_row + '][options][0][opt_linkto_link]" value="<?php echo HTTP_CATALOG; ?>" /></p>';
 	  html += '</div>'; 
 	  html += '</div>';
-	  html += '<a style="float: right; margin-top: 5px;" onclick="addOption(this,' + menu_row + ', 1);" class="button"><?php echo $button_add_option; ?></a>';
+	  html += '<a style="float: right; margin-top: 5px;" onclick="addOption(this,' + menu_row + ', 1);" class="btn btn-small"><?php echo $button_add_option; ?></a>';
 	  html += '</td>';
 	  html += '<td class="left"><input type="text" name="megamenu_menu[' + menu_row + '][order]" size="3" /></td>';
 	  html += '<td class="left"><select name="megamenu_menu[' + menu_row + '][status]">';
       html += '   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
       html += '   <option value="0"><?php echo $text_disabled; ?></option>';
       html += '</select></td>';
-      html += '<td class="left"><a onclick="$(\'#menu-row' + menu_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+      html += '<td class="left"><a onclick="$(\'#menu-row' + menu_row  + '\').remove();" class="btn btn-small"><?php echo $button_remove; ?></a></td>';
       html += '</tr>';
       html += '</tbody>'; 
 	
@@ -444,13 +443,13 @@
 	  html += '  <option value="information"><?php echo $option_information; ?></option>';
 	  html += '</select>';
 	  html += '<span style="margin-left: 20px;"><?php echo $text_fill_the_column ?></span><input name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][fill_column]" value="6" size="3"/>';
-	  html += '<a style="float: right" onclick="$(\'#menu-row' + opt_menu_row  + '-opt-row' + opt_row + '\').remove();"><?php echo $button_remove_option; ?></a>';
+	  html += '<a style="float: right" onclick="$(\'#menu-row' + opt_menu_row  + '-opt-row' + opt_row + '\').remove();" class="btn btn-small"><?php echo $button_remove_option; ?></a>';
 	  html += '<div class="divcustom_' + opt_menu_row + opt_row + '"></div>';
 	  html += '<div id="opt_linkto' + opt_menu_row + opt_row +'" style="padding-left: 50px;">';
 	  html += '<p><span><?php echo $text_homepage_or_other_link; ?></span><input style="<?php echo $text_width; ?>50%;" type="text" name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_linkto_link]" value="<?php echo HTTP_CATALOG; ?>" /></p>';
 	  html += '</div>';
 	  html += '</div>';
-	  html += '<a style="float: right; margin-top: 5px;" onclick="addOption(this,' + opt_menu_row + ', ' + (opt_row + 1) + ');" class="button"><?php echo $button_add_option; ?></a>';
+	  html += '<a style="float: right; margin-top: 5px;" onclick="addOption(this,' + opt_menu_row + ', ' + (opt_row + 1) + ');" class="btn btn-small"><?php echo $button_add_option; ?></a>';
 
 	  $(btAdd).before(html);
 	  $(btAdd).remove();
@@ -466,16 +465,16 @@
 	  // show category
 	  if (select.options[select.selectedIndex].value == 'category') {
 		html = '<div id="opt_category' + opt_menu_row + opt_row + '" style="padding-left: 50px;">';
-		html += '<p><span><?php echo $text_show_image; ?></span><select name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_show_img]">';
+		html += '<p style="margin: 13px 0;"><span><?php echo $text_show_image; ?></span><select name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_show_img]" class="input-small">';
 		html += '   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
 		html += '   <option value="0"><?php echo $text_disabled; ?></option>';
 		html += '</select>';
-		html += '&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $text_w_x_h; ?></span><input type="text" name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_img_w]" value="45" size="3" /><input type="text" name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_img_h]" value="45" size="3" /></p>';
-		html += '<p><span><?php echo $text_show_sub_category; ?></span><select name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_show_sub]">';
+		html += '&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $text_w_x_h; ?></span><input type="text" name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_img_w]" value="45" size="3" class="span1 i-mini" /><input type="text" name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_img_h]" value="45" size="3" class="span1 i-mini" /></p>';
+		html += '<p style="margin: 13px 0;"><span><?php echo $text_show_sub_category; ?></span><select name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_show_sub]" class="input-small">';
 		html += '   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
 		html += '   <option value="0"><?php echo $text_disabled; ?></option>';
 		html += '</select></p>';
-		html += '<p><span><?php echo $text_show_parent_category; ?></span><select name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_show_parent]">';
+		html += '<p style="margin: 13px 0;"><span><?php echo $text_show_parent_category; ?></span><select name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_category_show_parent]" class="input-small">';
 		html += '   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
 		html += '   <option value="0"><?php echo $text_disabled; ?></option>';
 		html += '</select></p>';
