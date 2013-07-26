@@ -3308,3 +3308,9 @@ overflow: auto;
     vertical-align: top;
     text-align: center;
 }
+.box-fbconnect {
+    margin-top: 20px;
+}
+.box-fbconnect .box-heading {
+    border-top: none;
+}

@@ -44,6 +44,20 @@
      	  </td>
 	</tr>
 	<?php } ?>
+        <tr>
+            <td><?php echo $entry_status; ?></td>
+            <td>
+                <select name="fbconnect_status">
+                    <?php if ($fbconnect_status) { ?>
+                        <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                        <option value="0"><?php echo $text_disabled; ?></option>
+                    <?php } else { ?>
+                        <option value="1"><?php echo $text_enabled; ?></option>
+                        <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr> 
       </table>
       <table id="module" class="list">
 		<thead>

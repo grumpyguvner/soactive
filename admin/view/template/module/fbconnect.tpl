@@ -47,7 +47,7 @@
                                 <span class="help"><?php echo $entry_button_desc; ?></span>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php } ?>   
                 </table>
                 <table id="module" class="list table table-striped table-hover">
                     <thead>

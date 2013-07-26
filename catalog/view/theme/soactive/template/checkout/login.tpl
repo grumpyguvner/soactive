@@ -35,4 +35,10 @@
     <br />
     <input type="button" value="<?php echo strtoupper($button_login); ?>" id="button-login" class="button" /><br />
     <br />
+    <div class="box box-fbconnect">
+        <div class="box-heading"></div>
+        <div class="box-content">
+            <a class="box-fbconnect-a" href="<?php echo $fbconnect_url; ?>"><?php echo $fbconnect_button; ?></a>
+        </div>
+    </div>
 </div>

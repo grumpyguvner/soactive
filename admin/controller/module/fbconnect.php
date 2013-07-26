@@ -133,6 +133,12 @@ class ControllerModulefbconnect extends Controller {
 		} elseif ($this->config->get('fbconnect_pwdsecret')) { 
 			$this->data['fbconnect_pwdsecret'] = $this->config->get('fbconnect_pwdsecret');
 		} else $this->data['fbconnect_pwdsecret'] = '';
+                
+                if (isset($this->request->post['fbconnect_status'])) {
+			$this->data['fbconnect_status'] = $this->request->post['fbconnect_status'];
+		} elseif ($this->config->get('fbconnect_pwdsecret')) { 
+			$this->data['fbconnect_status'] = $this->config->get('fbconnect_status');
+		} else $this->data['fbconnect_status'] = '';
 
 		if($opencartversion<1.51){
 			$this->data['modules']=array();
