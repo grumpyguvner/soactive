@@ -56,13 +56,23 @@
                                     <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
                                 <?php } ?>
                         </form>
+                        <br/>
                         <?php if ($fbconnect_url) { ?>
-                        <div class="box box-fbconnect">
-                            <div class="box-heading"><?php echo $heading_title; ?></div>
-                            <div class="box-content">
-                                <a class="box-fbconnect-a" href="<?php echo $fbconnect_url; ?>"><?php echo $fbconnect_button; ?></a>
+                            <div id="u_0_0" tabindex="0" role="button" class="pluginFaviconButton pluginFaviconButtonEnabled pluginFaviconButtonMedium">
+                                <table cellspacing="0" cellpadding="0" class="uiGrid">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i class="pluginFaviconButtonIcon img sp_login-button sx_login-button_medium"></i>
+
+                                            </td>
+                                            <td>
+                                                <span class="pluginFaviconButtonBorder"><a href="<?php echo $fbconnect_url; ?>" class="pluginFaviconButtonText fwb"><?php echo $fbconnect_button; ?></a></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
                         <?php } ?>
                       </div>
                     </div>

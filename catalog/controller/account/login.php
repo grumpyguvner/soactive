@@ -168,7 +168,7 @@ class ControllerAccountLogin extends Controller {
             $this->data['password'] = '';
         }
         
-        if ($this->extensions->isInstalled('fbconnect', 'module')) {
+        if ($this->extensions->isInstalled('fbconnect', 'module') && $this->config->get('fbconnect_status')) {
              $this->language->load('module/fbconnect'); 
 
              if (!$this->customer->isLogged()) {

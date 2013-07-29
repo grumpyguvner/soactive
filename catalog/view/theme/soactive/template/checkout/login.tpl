@@ -33,12 +33,23 @@
     <br />
     <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a><br />
     <br />
-    <input type="button" value="<?php echo strtoupper($button_login); ?>" id="button-login" class="button" /><br />
+    <input type="button" value="<?php echo strtoupper($button_login); ?>" id="button-login" class="button" />
     <br />
-    <div class="box box-fbconnect">
-        <div class="box-heading"></div>
-        <div class="box-content">
-            <a class="box-fbconnect-a" href="<?php echo $fbconnect_url; ?>"><?php echo $fbconnect_button; ?></a>
+    <?php if ($fbconnect_url) { ?>
+        <div id="u_0_0" tabindex="0" role="button" class="pluginFaviconButton pluginFaviconButtonEnabled pluginFaviconButtonMedium">
+            <table cellspacing="0" cellpadding="0" class="uiGrid">
+                <tbody>
+                    <tr>
+                        <td>
+                            <i class="pluginFaviconButtonIcon img sp_login-button sx_login-button_medium"></i>
+
+                        </td>
+                        <td>
+                            <span class="pluginFaviconButtonBorder"><a href="<?php echo $fbconnect_url; ?>" class="pluginFaviconButtonText fwb"><?php echo $fbconnect_button; ?></a></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
+    <?php } ?>
 </div>
