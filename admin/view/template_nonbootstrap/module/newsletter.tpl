@@ -15,10 +15,10 @@
   </div>
   <div class="content">
 	<div id="tabs" class="htabs">
-      <a href="#tab-module">Modules</a>
-      <a href="#tab-mailchimp">MailChimp</a>
-      <a href="#tab-mailcampaign">MailCampaign</a>
-      <a href="#tab-email">Email List</a>
+      <a href="#tab-module"><?php echo $tab_modules; ?></a>
+      <a href="#tab-mailchimp"><?php echo $tab_mailchimp; ?></a>
+      <a href="#tab-mailcampaign"><?php echo $tab_mailcampaign; ?></a>
+      <a href="#tab-email"><?php echo $tab_email; ?></a>
     </div>
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
       <div id="tab-module">

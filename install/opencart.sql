@@ -2598,6 +2598,7 @@ CREATE TABLE `oc_review` (
   `author` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
   `text` text COLLATE utf8_bin NOT NULL,
   `rating` int(1) NOT NULL,
+  `reply` text COLLATE utf8_bin NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

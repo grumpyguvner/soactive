@@ -72,6 +72,12 @@
 						</div>
           </div>
           <div class="control-group">
+            <label class="control-label"><?php echo $entry_reply; ?></label>
+            <div class="controls">
+		<textarea name="reply" class="input-block-level" rows="8"><?php echo $reply; ?></textarea>					
+            </div>
+          </div>
+          <div class="control-group">
             <label class="control-label"><?php echo $entry_status; ?></label>
             <div class="controls">
 							<select name="status" class="span2">

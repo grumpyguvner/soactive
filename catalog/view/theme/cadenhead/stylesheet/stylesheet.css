@@ -86,7 +86,8 @@ label {
 #content {
 	min-height: 400px;
 	margin-bottom: 25px;
-        margin-right: 14px;
+        margin-right: 14px;        
+        margin-left: 14px;
         
 }
 #content_contact {
@@ -97,17 +98,10 @@ label {
        width: 98%; 
        margin: 10px;
 }
-#content_product {
-       width: 99%; 
-       margin-left: 8px;
-       margin-top: 10px;
-       margin-bottom: 10px;
-}
 #contentback{
     height: 464px;
-    width: 959px;
+    width: 100%;
     background-image: url('../image/backhome.png');
-    margin: 10px 10px 10px 10px;
 }
 #contentbottom{
     margin: 360px 10px 10px 10px;
@@ -195,7 +189,7 @@ label {
 	padding-right: 14px;
 	border-top: 1px solid #FFFFFF;
 	border-left: 1px solid #FFFFFF;
-	
+	width: 160px;
 	background: #FFF;
 	position: relative;
 	z-index: 1;
@@ -1814,11 +1808,10 @@ div#textfooter2{
     padding: 3px;
     width: 31%;
     color: #dedede;
-     
     background: #222; /* browser che non supportano rgba */
     background: #3e6f5a;
     position: absolute;
-    left: 85px;
+    left: 89px;
     bottom: 0;
     margin: 22px;
 }

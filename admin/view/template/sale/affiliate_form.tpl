@@ -187,19 +187,23 @@
               <div class="control-group">
                 <label class="control-label"><?php echo $entry_payment; ?></label>
                 <div class="controls">
-									<label for="cheque" class="radio inline">
-										<?php echo $text_cheque; ?>
-										<input type="radio" name="payment" value="cheque" id="cheque"<?php if ($payment == 'cheque') { ?> checked="checked"<?php } ?>>
-									</label>
-									<label for="paypal" class="radio inline">
-										<input type="radio" name="payment" value="paypal" id="paypal"<?php if ($payment == 'paypal') { ?> checked="checked"<?php } ?>>
-										<?php echo $text_paypal; ?>
-									</label>
-									<label for="bank" class="radio inline">
-										<input type="radio" name="payment" value="bank" id="bank"<?php if ($payment == 'bank') { ?> checked="checked"<?php } ?>>
-										<?php echo $text_bank; ?>
-                  </label>
-								</div>
+                    <label for="voucher" class="radio inline">
+                            <?php echo $text_voucher; ?>
+                            <input type="radio" name="payment" value="voucher" id="voucher"<?php if ($payment == 'voucher') { ?> checked="checked"<?php } ?>>
+                    </label>
+                    <label for="cheque" class="radio inline">
+                            <?php echo $text_cheque; ?>
+                            <input type="radio" name="payment" value="cheque" id="cheque"<?php if ($payment == 'cheque') { ?> checked="checked"<?php } ?>>
+                    </label>
+                    <label for="paypal" class="radio inline">
+                            <input type="radio" name="payment" value="paypal" id="paypal"<?php if ($payment == 'paypal') { ?> checked="checked"<?php } ?>>
+                            <?php echo $text_paypal; ?>
+                    </label>
+                    <label for="bank" class="radio inline">
+                            <input type="radio" name="payment" value="bank" id="bank"<?php if ($payment == 'bank') { ?> checked="checked"<?php } ?>>
+                            <?php echo $text_bank; ?>
+                    </label>
+                </div>
               </div>
             </div>
             <div id="payment-cheque" class="payment">

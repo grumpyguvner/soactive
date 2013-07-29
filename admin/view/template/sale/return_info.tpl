@@ -92,6 +92,10 @@
             <td><?php echo $model; ?></td>
           </tr>
           <tr>
+            <th><?php echo $text_price; ?></th>
+            <td><?php echo $price; ?></td>
+          </tr>
+          <tr>
             <th><?php echo $text_quantity; ?></th>
             <td><?php echo $quantity; ?></td>
           </tr>

@@ -157,7 +157,7 @@ class ModelCatalogInformation extends Model {
 				'description' => $result['description'],
 				'meta_title'       => $result['meta_title'],
 				'meta_description' => $result['meta_description'],
-				'meta_keywords' => $result['meta_keywords']
+				'meta_keyword' => $result['meta_keyword']
 			);
 		}
 		

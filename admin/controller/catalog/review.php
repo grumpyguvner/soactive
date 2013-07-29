@@ -285,6 +285,7 @@ class ControllerCatalogReview extends Controller {
 		$this->data['entry_text'] = $this->language->get('entry_text');
 		$this->data['entry_good'] = $this->language->get('entry_good');
 		$this->data['entry_bad'] = $this->language->get('entry_bad');
+                $this->data['entry_reply'] = $this->language->get('entry_reply');
 
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -401,6 +402,14 @@ class ControllerCatalogReview extends Controller {
 			$this->data['rating'] = $review_info['rating'];
 		} else {
 			$this->data['rating'] = '';
+		}
+                
+                if (isset($this->request->post['reply'])) {
+			$this->data['reply'] = $this->request->post['reply'];
+		} elseif (!empty($review_info)) {
+			$this->data['reply'] = $review_info['reply'];
+		} else {
+			$this->data['reply'] = '';
 		}
 
 		if (isset($this->request->post['status'])) {

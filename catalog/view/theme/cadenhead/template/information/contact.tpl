@@ -1,5 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><div id=content_contact><?php echo $content_top; ?>
+<div id="content"><?php echo $content_top; ?>
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
@@ -60,5 +60,5 @@
       <div class="right"><input type="submit" value="<?php echo $button_continue; ?>" class="button" /></div>
     </div>
   </form>
-  <?php echo $content_bottom; ?></div></div>
+  <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

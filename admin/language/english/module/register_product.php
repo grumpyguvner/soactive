@@ -30,6 +30,7 @@ $_['button_delete']    	  = 'Delete';
 $_['button_export']       = 'Export';
 
 // Tab
+$_['tab_modules']         = 'Modules';
 $_['tab_email']           = 'Email List';
 
 // Entry

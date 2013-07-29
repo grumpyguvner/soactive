@@ -57,6 +57,12 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label"><?php echo $entry_meta_title; ?></label>
+                                            <div class="controls">
+                                                <input type="text" name="category_description[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset($category_description[$language['language_id']]['meta_title']) ? $category_description[$language['language_id']]['meta_title'] : ''; ?>" class="span6 i-xxlarge">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label class="control-label"><?php echo $entry_meta_description; ?></label>
                                             <div class="controls">
                                                 <textarea name="category_description[<?php echo $language['language_id']; ?>][meta_description]" rows="4" class="input-block-level"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['meta_description'] : ''; ?></textarea>
@@ -89,6 +95,18 @@
                                         <option value="0"><?php echo $text_none; ?></option>
                                         <?php echo p3html::oc_category_options($categories, $parent_id); ?>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $entry_googlebase_text; ?></label>
+                                <div class="controls">
+                                    <input type="text" name="googlebase_text" value="<?php echo $googlebase_text ?>" class="span6 i-xxlarge">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $entry_googlebase_xml; ?></label>
+                                <div class="controls">
+                                    <input type="text" name="googlebase_xml" value="<?php echo $googlebase_xml ?>" class="span6 i-xxlarge">
                                 </div>
                             </div>
                             <div class="control-group">

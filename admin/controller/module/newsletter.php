@@ -66,6 +66,10 @@ class ControllerModuleNewsletter extends Controller {
       		'separator' => ' :: '
    		);
 
+                $this->data['tab_modules'] = $this->language->get('tab_modules');
+                $this->data['tab_mailchimp'] = $this->language->get('tab_mailchimp');
+                $this->data['tab_mailcampaign'] = $this->language->get('tab_mailcampaign');
+                
 		$this->data['action'] = $this->url->link('module/' . $this->name, 'token=' . $this->session->data['token'], 'SSL');
 
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');

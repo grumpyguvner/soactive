@@ -160,7 +160,7 @@ class ControllerInformationEvent extends Controller {
 		
 		//echo '<pre>';print_r($this->data['available_events']);echo '</pre>';
 		
-		$this->setTemplate('event/events.tpl');
+		$this->setTemplate('information/events.tpl');
 		
 		$this->children = array(
 			'common/column_left',

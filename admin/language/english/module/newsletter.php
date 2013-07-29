@@ -24,6 +24,9 @@ $_['button_add']       	  = 'Add';
 $_['button_delete']    	  = 'Delete';
 
 // Tab
+$_['tab_modules']         = 'Modules';
+$_['tab_mailchimp']       = 'MailChimp';
+$_['tab_mailcampaign']    = 'MailCampaign';
 $_['tab_email']           = 'Email List';
 
 // Entry

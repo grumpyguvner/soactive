@@ -399,10 +399,10 @@ $order_status_label = p3html::order_status_label_for_order_id($this, $order_id);
           <div class="control-group">
             <label class="control-label"><?php echo $entry_order_status; ?></label>
             <div class="controls">
-							<select name="order_status_id" class="span2 i-medium">
-								<?php echo p3html::oc_order_status_options($order_statuses, $order_status_id); ?>
-              </select>
-						</div>
+                <select name="order_status_id" class="span2 i-medium">
+                    <?php echo p3html::oc_order_status_options($order_statuses, $order_status_id); ?>
+                </select>
+            </div>
           </div>
           <div class="control-group">
             <label class="control-label"></label>
