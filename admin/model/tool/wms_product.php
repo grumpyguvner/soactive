@@ -85,13 +85,22 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                 // Always add product to "Type" Category
                 $category = seoUrl((string) "Type");
-                $category_item = array(
-                    "name" => (string) "Type",
-                    "description" => "All types"
-                );
+                $category_description = array(
+                    $this->languageId => array(
+                        'name' => (string) "Type",
+                        'meta_keyword' => "Type",
+                        'meta_description' => "",
+                        'description' => "All types"
+                    ),
+                    $this->languageFr => array(
+                        'name' => (string) "Type",
+                        'meta_keyword' => "Type",
+                        'meta_description' => "",
+                        'description' => "All types"
+                ));
                 if ($myCategory != $category) {
                     $myCategory = $category;
-                    $parent_type_id = $this->createCategory($category, $category_item, 0);
+                    $parent_type_id = $this->createCategory($category, $category_description, 0);
                 }
                 if ($parent_type_id) {
                     if (!in_array($parent_type_id, $myCategoryIds))
@@ -102,28 +111,44 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                 if ($aCategories->RecordCount() > 0) {
                     while (!$aCategories->EOF) {
-                        $this->debug("");
                         $aCategory = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
-                        $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
-                        $myName = (string) $aCategory->fields['webdisplayname'];
-                        $myDesc = $aCategory->fields['webdescription'];
+                        $enCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
+                        $frCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
+                        // only continue if we have a record for soactive
+                        if ($enCategory->RecordCount() > 0) {
+                            $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
+                            
+                            $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
+                            $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
+                            $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
+                            $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
 
-                        //initialise category variables
-                        $category = seoUrl($myName);
-                        $category_item = array(
-                            "name" => $myName,
-                            "description" => $myDesc
-                        );
-
-                        if ($myCategory != $category) {
-                            $myCategory = $category;
-                            $category_id = $this->createCategory($category, $category_item, $parent_type_id);
-                        }
-                        if ($category_id) {
-                            if (!in_array($category_id, $myCategoryIds))
-                                $myCategoryIds[] = $category_id;
-                        } else {
-                            $error = true;
+                            //initialise category variables
+                            $category = seoUrl($myName);
+                            $category_description = array(
+                                $this->languageId => array(
+                                    'name' => $myName,
+                                    'meta_keyword' => $myName,
+                                    'meta_description' => "",
+                                    'description' => $myDesc
+                                ),
+                                $this->languageFr => array(
+                                    'name' => (string) $frName,
+                                    'meta_keyword' => $frName,
+                                    'meta_description' => "",
+                                    'description' => $frDesc
+                            ));
+                            if ($myCategory != $category) {
+                                $myCategory = $category;
+                                $category_id = $this->createCategory($category, $category_description, $parent_type_id);
+                            }
+                            if ($category_id) {
+                                if (!in_array($category_id, $myCategoryIds))
+                                    $myCategoryIds[] = $category_id;
+                            } else {
+                                $error = true;
+                            }
+                            
                         }
 
                         $aCategories->MoveNext();
@@ -137,13 +162,22 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                 // Always add product to "Activity" Category
                 $category = seoUrl((string) "Activity");
-                $category_item = array(
-                    "name" => (string) "Activity",
-                    "description" => "All activities"
-                );
+                $category_description = array(
+                    $this->languageId => array(
+                        'name' => (string) "Activity",
+                        'meta_keyword' => "Activity",
+                        'meta_description' => "",
+                        'description' => "All activities"
+                    ),
+                    $this->languageFr => array(
+                        'name' => (string) "Activity",
+                        'meta_keyword' => "Activity",
+                        'meta_description' => "",
+                        'description' => "All activities"
+                ));
                 if ($myCategory != $category) {
                     $myCategory = $category;
-                    $parent_activity_id = $this->createCategory($category, $category_item, 0);
+                    $parent_activity_id = $this->createCategory($category, $category_description, 0);
                 }
                 if ($parent_activity_id) {
                     if (!in_array($parent_activity_id, $myCategoryIds))
@@ -154,28 +188,44 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                 if ($aCategories->RecordCount() > 0) {
                     while (!$aCategories->EOF) {
-                        $this->debug("");
                         $aCategory = $this->dbQF->Execute('SELECT c.* FROM sports c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
-                        $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
-                        $myName = (string) $aCategory->fields['webdisplayname'];
-                        $myDesc = $aCategory->fields['webdescription'];
+                        $enCategory = $this->dbQF->Execute('SELECT o.* FROM sport_overrides o WHERE o.sportid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
+                        $frCategory = $this->dbQF->Execute('SELECT o.* FROM sport_overrides o WHERE o.sportid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
+                        // only continue if we have a record for soactive
+                        if ($enCategory->RecordCount() > 0) {
+                            $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
+                            
+                            $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
+                            $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
+                            $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
+                            $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
 
-                        //initialise category variables
-                        $category = seoUrl($myName);
-                        $category_item = array(
-                            "name" => $myName,
-                            "description" => $myDesc
-                        );
-
-                        if ($myCategory != $category) {
-                            $myCategory = $category;
-                            $category_id = $this->createCategory($category, $category_item, $parent_activity_id);
-                        }
-                        if ($category_id) {
-                            if (!in_array($category_id, $myCategoryIds))
-                                $myCategoryIds[] = $category_id;
-                        } else {
-                            $error = true;
+                            //initialise category variables
+                            $category = seoUrl($myName);
+                            $category_description = array(
+                                $this->languageId => array(
+                                    'name' => $myName,
+                                    'meta_keyword' => $myName,
+                                    'meta_description' => "",
+                                    'description' => $myDesc
+                                ),
+                                $this->languageFr => array(
+                                    'name' => (string) $frName,
+                                    'meta_keyword' => $frName,
+                                    'meta_description' => "",
+                                    'description' => $frDesc
+                            ));
+                            if ($myCategory != $category) {
+                                $myCategory = $category;
+                                $category_id = $this->createCategory($category, $category_description, $parent_activity_id);
+                            }
+                            if ($category_id) {
+                                if (!in_array($category_id, $myCategoryIds))
+                                    $myCategoryIds[] = $category_id;
+                            } else {
+                                $error = true;
+                            }
+                            
                         }
 
                         $aCategories->MoveNext();
@@ -252,8 +302,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
         return true;
     }
 
-    function createCategory($category, $category_item, $parent_id = 0) {
-        if (!is_array($category_item) || !array_key_exists("name", $category_item))
+    function createCategory($category, $category_description, $parent_id = 0) {
+        if (!is_array($category_description) || !array_key_exists("name", $category_description))
             return false;
 
         //We only create a new category the first time it is encountered as 
@@ -266,13 +316,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             "column" => (int) 1,
             "sort_order" => (int) 999,
             "status" => (int) 1,
-            'category_description' => array(
-                $this->languageId => array(
-                    'name' => (string) $category_item['name'],
-                    'meta_keyword' => (string) $category_item['name'],
-                    'meta_description' => "",
-                    'description' => (string) $category_item['description']
-            )),
+            'category_description' => $category_description,
             'keyword' => $category,
             'category_store' => $this->config->get('wms_products_store')
         );

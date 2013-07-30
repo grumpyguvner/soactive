@@ -587,5 +587,5 @@ CREATE TABLE IF NOT EXISTS `oc_syspro_order` (
 
 #### Start 1.5.4:BC1.2.13
 
-ALTER TABLE `oc_review` ADD `reply` text COLLATE utf8_bin NOT NULL AFTER `rating`;
+ALTER TABLE `oc_review` ADD `reply` text NOT NULL AFTER `rating`;
 
