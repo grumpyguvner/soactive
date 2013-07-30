@@ -50,6 +50,9 @@ DD_belatedPNG.fix('#logo img');
 <?php if ($error_environment) { ?>
 <div id="environment"><div class="warning"><?php echo $error_environment; ?></div></div>
 <?php } ?>
+
+<div id="environment"><div class="warning">Products are available but the online shop is under maintenance. Please telephone <strong>020 7935 6999</strong> to place an order.</div></div>
+
 <div id="header">
  
   <!--?php echo $language; ?-->
