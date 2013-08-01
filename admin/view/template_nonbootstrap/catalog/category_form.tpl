@@ -73,23 +73,30 @@
             ?>
             <tr>
               <td><?php echo $entry_filter; ?></td>
-              <td><input type="text" name="filter" value="" /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
               <td><div id="category-filter" class="scrollbox">
                   <?php $class = 'odd'; ?>
                   <?php foreach ($category_filters as $category_filter) { ?>
                   <?php $class = ($class == 'even' ? 'odd' : 'even'); ?>
-                  <div id="category-filter<?php echo $category_filter['filter_id']; ?>" class="<?php echo $class; ?>"><?php echo $category_filter['name']; ?><img src="view/image/delete.png" alt="" />
-                    <input type="hidden" name="category_filter[]" value="<?php echo $category_filter['filter_id']; ?>" />
+                  <div id="category-filter<?php echo $category_filter['filter_id']; ?>" class="<?php echo $class; ?>">
+                    <?php if (in_array($category_filter['filter_id'], $category_filter_selected)) { ?>
+                    <input type="checkbox" name="category_filter[]" value="<?php echo $category_filter['filter_id']; ?>" checked="checked" />                    
+                    <?php echo $category_filter['name']; ?>
+                    <?php } else { ?>
+                    <input type="checkbox" name="category_filter[]" value="<?php echo $category_filter['filter_id']; ?>" />
+                    <?php echo $category_filter['name']; ?>
+                    <?php } ?>
                   </div>
                   <?php } ?>
-                </div></td>
+                </div>
+                <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a>
+              </td>
             </tr>
             <?php
             }
             ?>
+            
+            
+            
             <tr>
               <td><?php echo $entry_googlebase_text; ?></td>
               <td><input name="googlebase_text" value="<?php echo $googlebase_text ?>" size="100" /></td>

@@ -158,6 +158,8 @@ class ControllerCatalogCategory extends Controller {
                 $this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_percent'] = $this->language->get('text_percent');
 		$this->data['text_amount'] = $this->language->get('text_amount');
+                $this->data['text_select_all'] = $this->language->get('text_select_all');
+                $this->data['text_unselect_all'] = $this->language->get('text_unselect_all');
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_meta_title'] = $this->language->get('entry_meta_title');
@@ -261,31 +263,29 @@ class ControllerCatalogCategory extends Controller {
 			$this->data['parent_id'] = 0;
 		}
                 
+                // Filters
 		$this->load->model('catalog/filter');
                 
                 $this->data['has_filters'] = $this->model_catalog_filter->getTotalFilterGroups();
-		
-		if (isset($this->request->post['category_filter'])) {
-			$filters = $this->request->post['category_filter'];
-		} elseif (isset($this->request->get['category_id'])) {		
-			$filters = $this->model_catalog_category->getCategoryFilters($this->request->get['category_id']);
-		} else {
-			$filters = array();
-		}
-	
+                $filters = $this->model_catalog_filter->getFilters(); 
+                
+                if (isset($this->request->post['category_filter'])) {
+                    $this->data['category_filter_selected'] = $this->request->post['category_filter'];
+                } elseif (isset($this->request->get['category_id'])) {
+                    $this->data['category_filter_selected'] = $this->model_catalog_category->getCategoryFilters($this->request->get['category_id']);
+                } else {
+                    $this->data['category_filter_selected'] = array();
+                }
+			
 		$this->data['category_filters'] = array();
 		
-		foreach ($filters as $filter_id) {
-			$filter_info = $this->model_catalog_filter->getFilter($filter_id);
-			
-			if ($filter_info) {
-				$this->data['category_filters'][] = array(
-					'filter_id' => $filter_info['filter_id'],
-					'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
-				);
-			}
-		}	
-
+                foreach ($filters as $filter_info) {
+                        $this->data['category_filters'][] = array(
+                                'filter_id' => $filter_info['filter_id'],
+                                'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
+                        );
+                }
+		
 		if (isset($this->request->post['googlebase_text'])) {
 			$this->data['googlebase_text'] = $this->request->post['googlebase_text'];
 		} elseif (!empty($category_info)) {
