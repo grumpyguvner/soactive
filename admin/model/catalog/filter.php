@@ -144,7 +144,7 @@ class ModelCatalogFilter extends Model {
 			$sql .= " AND fd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 		
-		$sql .= " ORDER BY f.sort_order ASC";
+		$sql .= " ORDER BY fd.sort_order, f.sort_order ASC";
 		
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
