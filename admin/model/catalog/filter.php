@@ -119,7 +119,25 @@ class ModelCatalogFilter extends Model {
 		return $query->row;
 	}
 	
-	public function getFilters($data = array()) {
+        //Use group_id = 0 to retrieve group by name
+	public function getFilterByName($name, $group_id = 0) {
+                $return_id = 0;
+                if ($group_id == 0) {
+                    $query = $this->db->query("SELECT DISTINCT filter_group_id AS return_id FROM " . DB_PREFIX . "filter_group_description WHERE `name` = '" . $name . "'");
+                } else {
+                    $query = $this->db->query("SELECT DISTINCT filter_id AS return_id FROM " . DB_PREFIX . "filter_description WHERE `name` = '" . $name . "' AND filter_group_id = " . $group_id);
+                }
+
+                if($query->row)
+                    $return_id = $query->row['return_id'];
+                if ($group_id == 0) {
+                    return $this->getFilterGroup($return_id);
+                } else {
+                    return $this->getFilter($return_id);
+                }
+	}
+	
+	public function getFilters($data) {
 		$sql = "SELECT *, (SELECT name FROM " . DB_PREFIX . "filter_group_description fgd WHERE f.filter_group_id = fgd.filter_group_id AND fgd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS `group` FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) WHERE fd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {

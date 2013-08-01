@@ -32,6 +32,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $this->db->query("TRUNCATE `" . DB_PREFIX . "category_to_layout`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "category_to_store`");
 
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "filter`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "filter_description`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "filter_group`");
+            $this->db->query("TRUNCATE `" . DB_PREFIX . "filter_group_description`");
+
             $this->db->query("TRUNCATE `" . DB_PREFIX . "manufacturer`");
             $this->db->query("TRUNCATE `" . DB_PREFIX . "manufacturer_to_store`");
 
@@ -77,30 +82,32 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                 $this->debug("initializing category array");
                 $myCategoryIds = array();
+                $myFilterIds = array();
                 
                 $this->debug("fetching product categories");
                 $aCategories = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid IN (SELECT categoryid FROM stylestocategories WHERE styleid = "' . $aProduct->fields['uuid'] . '")');
                 $type = "";
                 $myCategory = "";
 
-                // Always add product to "Type" Category
-                $category = seoUrl((string) "Type");
+                // Always add product to "Product" Category
+                $category = seoUrl((string) "Product");
                 $category_description = array(
                     $this->languageId => array(
-                        'name' => (string) "Type",
-                        'meta_keyword' => "Type",
+                        'name' => (string) "Product",
+                        'meta_keyword' => "Product",
                         'meta_description' => "",
-                        'description' => "All types"
+                        'description' => "All products"
                     ),
                     $this->languageFr => array(
-                        'name' => (string) "Type",
-                        'meta_keyword' => "Type",
+                        'name' => (string) "Produit",
+                        'meta_keyword' => "Produit",
                         'meta_description' => "",
-                        'description' => "All types"
+                        'description' => "All produits"
                 ));
                 if ($myCategory != $category) {
                     $myCategory = $category;
                     $parent_type_id = $this->createCategory($category, $category_description, 0);
+                    $filter_group_id = $this->createFilter("Product", 0);
                 }
                 if ($parent_type_id) {
                     if (!in_array($parent_type_id, $myCategoryIds))
@@ -141,10 +148,17 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             if ($myCategory != $category) {
                                 $myCategory = $category;
                                 $category_id = $this->createCategory($category, $category_description, $parent_type_id);
+                                $filter_id = $this->createFilter($category, $filter_group_id);
                             }
                             if ($category_id) {
                                 if (!in_array($category_id, $myCategoryIds))
                                     $myCategoryIds[] = $category_id;
+                            } else {
+                                $error = true;
+                            }
+                            if ($filter_id) {
+                                if (!in_array($filter_id, $myFilterIds))
+                                    $myFilterIds[] = $filter_id;
                             } else {
                                 $error = true;
                             }
@@ -161,23 +175,24 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 $myCategory = "";
 
                 // Always add product to "Activity" Category
-                $category = seoUrl((string) "Activity");
+                $category = seoUrl((string) "Sport");
                 $category_description = array(
                     $this->languageId => array(
-                        'name' => (string) "Activity",
-                        'meta_keyword' => "Activity",
+                        'name' => (string) "Sport",
+                        'meta_keyword' => "Sport",
                         'meta_description' => "",
-                        'description' => "All activities"
+                        'description' => "All sports"
                     ),
                     $this->languageFr => array(
-                        'name' => (string) "Activity",
-                        'meta_keyword' => "Activity",
+                        'name' => (string) "Sport",
+                        'meta_keyword' => "Sport",
                         'meta_description' => "",
-                        'description' => "All activities"
+                        'description' => "All sports"
                 ));
                 if ($myCategory != $category) {
                     $myCategory = $category;
                     $parent_activity_id = $this->createCategory($category, $category_description, 0);
+                    $filter_group_id = $this->createFilter("Sport", 0);
                 }
                 if ($parent_activity_id) {
                     if (!in_array($parent_activity_id, $myCategoryIds))
@@ -218,6 +233,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             if ($myCategory != $category) {
                                 $myCategory = $category;
                                 $category_id = $this->createCategory($category, $category_description, $parent_activity_id);
+                                $filter_id = $this->createFilter($category, $filter_group_id);
                             }
                             if ($category_id) {
                                 if (!in_array($category_id, $myCategoryIds))
@@ -225,10 +241,92 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             } else {
                                 $error = true;
                             }
+                            if ($filter_id) {
+                                if (!in_array($filter_id, $myFilterIds))
+                                    $myFilterIds[] = $filter_id;
+                            } else {
+                                $error = true;
+                            }
                             
                         }
 
                         $aCategories->MoveNext();
+                    }
+                }
+                
+                $this->debug("fetching product brand details");
+                $aBrand = $this->dbQF->Execute('SELECT s.* FROM suppliers s WHERE s.uuid = "' . $aProduct->fields['supplierid'] . '"');
+
+                // Always add product to "Brand" Category
+                $category = seoUrl((string) "Brand");
+                $category_description = array(
+                    $this->languageId => array(
+                        'name' => (string) "Brand",
+                        'meta_keyword' => "Brand",
+                        'meta_description' => "",
+                        'description' => "All brands"
+                    ),
+                    $this->languageFr => array(
+                        'name' => (string) "Marque",
+                        'meta_keyword' => "Marque",
+                        'meta_description' => "",
+                        'description' => "All marques"
+                ));
+                if ($myCategory != $category) {
+                    $myCategory = $category;
+                    $parent_brand_id = $this->createCategory($category, $category_description, 0);
+                    $filter_group_id = $this->createFilter("Brand", 0);
+                }
+                if ($parent_brand_id) {
+                    if (!in_array($parent_brand_id, $myCategoryIds))
+                        $myCategoryIds[] = $parent_brand_id;
+                } else {
+                    $error = true;
+                }
+
+                if ($aBrand->RecordCount() > 0) {
+                    while (!$aBrand->EOF) {
+                        $this->debug("processing brand " . $aBrand->fields['name'] . "");
+
+                        $myName = (string) $aBrand->fields['name'];
+                        $myDesc = (string) $aBrand->fields['name'];
+                        $frName = (string) $aBrand->fields['name'];
+                        $frDesc = (string) $aBrand->fields['name'];
+
+                        //initialise category variables
+                        $category = seoUrl($myName);
+                        $category_description = array(
+                            $this->languageId => array(
+                                'name' => $myName,
+                                'meta_keyword' => $myName,
+                                'meta_description' => "",
+                                'description' => $myDesc
+                            ),
+                            $this->languageFr => array(
+                                'name' => (string) $frName,
+                                'meta_keyword' => $frName,
+                                'meta_description' => "",
+                                'description' => $frDesc
+                        ));
+                        if ($myCategory != $category) {
+                            $myCategory = $category;
+                            $category_id = $this->createCategory($category, $category_description, $parent_brand_id);
+                            $filter_id = $this->createFilter($category, $filter_group_id);
+                        }
+                        if ($category_id) {
+                            if (!in_array($category_id, $myCategoryIds))
+                                $myCategoryIds[] = $category_id;
+                        } else {
+                            $error = true;
+                        }
+                        if ($filter_id) {
+                            if (!in_array($filter_id, $myFilterIds))
+                                $myFilterIds[] = $filter_id;
+                        } else {
+                            $error = true;
+                        }
+
+                        $aBrand->MoveNext();
                     }
                 }
 
@@ -271,7 +369,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             "style" => (string) $aProduct->fields['stylenumber'],
                             "colourid" => (int) $colourid,
                             "quantity" => $quantity,
-                            "categories" => $myCategoryIds
+                            "categories" => $myCategoryIds,
+                            "filters" => $myFilterIds
                         );
 
                         if ($myModel != $model) {
@@ -303,8 +402,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
     }
 
     function createCategory($category, $category_description, $parent_id = 0) {
-        if (!is_array($category_description) || !array_key_exists("name", $category_description))
+        if (!is_array($category_description))
             return false;
+        
+        $category = "womens-" . $category;
 
         //We only create a new category the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
@@ -336,6 +437,38 @@ class ModelToolWMSProduct extends ModelToolWMS {
         }
 
         return $category_info['category_id'];
+    }
+
+    function createFilter($filter, $group_id = 0) {
+        //We only create a new filter the first time it is encountered as 
+        // many fields will be controlled via backoffice and we dont want to overwrite.
+        $this->load->model('catalog/filter');
+        $filter_info = $this->model_catalog_filter->getFilterByName($filter, $group_id);
+        
+        if (!$filter_info) {
+            // if filter doesn't exist then create it
+            if ($group_id == 0) {
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "filter_group` SET sort_order = '999'"); 
+                $filter_group_id = $this->db->getLastId();
+                $this->db->query("INSERT INTO " . DB_PREFIX . "filter_group_description SET filter_group_id = '" . (int)$filter_group_id . "', language_id = '" . $this->languageId . "', name = '" . $this->db->escape($filter) . "'");
+            } else {
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "filter` SET filter_group_id = '" . $group_id . "', sort_order = '999'");
+                $filter_id = $this->db->getLastId();
+                $this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', filter_group_id = '" . (int)$group_id . "', language_id = '" . $this->languageId . "', name = '" . $this->db->escape($filter) . "'");
+            }
+            // fetch the newly created filter
+            $filter_info = $this->model_catalog_filter->getFilterByName($filter);
+        }
+        
+        if (!$filter_info) {
+            // if filter still doesn't exist then we have a problem
+            return false;
+        }
+
+        if ($group_id == 0)
+            return $filter_info['filter_group_id'];
+        else
+            return $filter_info['filter_id'];
     }
 
     function createProduct($model, $stock_item) {
@@ -437,6 +570,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'product_attribute' => $attribute,
             'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
             'product_category' => $stock_item['categories'],
+            'product_filter' => $stock_item['filters'],
             'product_store' => $this->config->get('wms_products_store')
         );
 
