@@ -137,7 +137,7 @@ class ModelCatalogFilter extends Model {
                 }
 	}
 	
-	public function getFilters($data) {
+	public function getFilters($data = array()) {
 		$sql = "SELECT f.*, fd.*, fgd.name AS `group` "
                      . "FROM " . DB_PREFIX . "filter f "
                      . "LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) "
