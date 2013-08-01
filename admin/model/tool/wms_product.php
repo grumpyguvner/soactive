@@ -11,6 +11,15 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
         if (!$this->cacheWMSData())
             return false;
+        
+        //FIX We need to add all filters to all categories
+        $aCatgeories = $this->db->query('SELECT category_id FROM `' . DB_PREFIX . 'category`');
+        foreach ($aCatgeories->rows AS $category) {
+            $aFilters = $this->db->query('SELECT filter_id FROM `' . DB_PREFIX . 'filter` WHERE filter_id NOT IN (SELECT filter_id FROM `' . DB_PREFIX . 'category_filter` WHERE category_id = ' . $category['category_id'] . ')');
+            foreach ($aFilters->rows AS $filter) {
+                $this->db->query('INSERT INTO `' . DB_PREFIX . 'category_filter` SET category_id = ' . $category['category_id'] . ', filter_id = ' . $filter['filter_id']);
+            }
+        }
 
         $this->debug("Import Complete");
         return true;
@@ -67,7 +76,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
     function cacheWMSData($forceRefresh = false) {
 
         $this->debug("fetching products from wms");
-        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 ORDER BY styles.stylenumber');
+        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
 
         $myModel = "";
         $product_id = 0;
@@ -75,11 +84,16 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $myProductOptionIds = array();
         $error = false;
 
+        $cnt = 10;
         if ($aProduct->RecordCount() > 0) {
-            while (!$aProduct->EOF) {
+            while (!$aProduct->EOF && $cnt > 0) {
+                $cnt--;
                 $this->debug("=================================================================================================");
                 $this->debug("processing product " . $aProduct->fields['stylenumber'] . " " . $aProduct->fields['stylename'] . "");
 
+                $filter_size_group_id = $this->createFilter("Size", 0, "Taille");
+                $filter_colour_group_id = $this->createFilter("Colour", 0, "Couleur");
+                
                 $this->debug("initializing category array");
                 $myCategoryIds = array();
                 $myFilterIds = array();
@@ -107,7 +121,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 if ($myCategory != $category) {
                     $myCategory = $category;
                     $parent_type_id = $this->createCategory($category, $category_description, 0);
-                    $filter_group_id = $this->createFilter("Product", 0);
+                    $filter_group_id = $this->createFilter("Product", 0, "Produit");
                 }
                 if ($parent_type_id) {
                     if (!in_array($parent_type_id, $myCategoryIds))
@@ -148,7 +162,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             if ($myCategory != $category) {
                                 $myCategory = $category;
                                 $category_id = $this->createCategory($category, $category_description, $parent_type_id);
-                                $filter_id = $this->createFilter($category, $filter_group_id);
+                                $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                             }
                             if ($category_id) {
                                 if (!in_array($category_id, $myCategoryIds))
@@ -192,7 +206,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 if ($myCategory != $category) {
                     $myCategory = $category;
                     $parent_activity_id = $this->createCategory($category, $category_description, 0);
-                    $filter_group_id = $this->createFilter("Sport", 0);
+                    $filter_group_id = $this->createFilter("Sport", 0, "Sport");
                 }
                 if ($parent_activity_id) {
                     if (!in_array($parent_activity_id, $myCategoryIds))
@@ -233,7 +247,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             if ($myCategory != $category) {
                                 $myCategory = $category;
                                 $category_id = $this->createCategory($category, $category_description, $parent_activity_id);
-                                $filter_id = $this->createFilter($category, $filter_group_id);
+                                $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                             }
                             if ($category_id) {
                                 if (!in_array($category_id, $myCategoryIds))
@@ -275,7 +289,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 if ($myCategory != $category) {
                     $myCategory = $category;
                     $parent_brand_id = $this->createCategory($category, $category_description, 0);
-                    $filter_group_id = $this->createFilter("Brand", 0);
+                    $filter_group_id = $this->createFilter("Brand", 0, "Marque");
                 }
                 if ($parent_brand_id) {
                     if (!in_array($parent_brand_id, $myCategoryIds))
@@ -311,7 +325,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         if ($myCategory != $category) {
                             $myCategory = $category;
                             $category_id = $this->createCategory($category, $category_description, $parent_brand_id);
-                            $filter_id = $this->createFilter($category, $filter_group_id);
+                            $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                         }
                         if ($category_id) {
                             if (!in_array($category_id, $myCategoryIds))
@@ -329,7 +343,35 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $aBrand->MoveNext();
                     }
                 }
+                
+                $stock_item = array(
+                    "name" => (string) $aProduct->fields['stylename'],
+                    "nameFr" => (string) $aProduct->fields['stylename'],
+                    "brief_summary" => $aProduct->fields['description'],
+                    "brief_summaryFr" => $aProduct->fields['description'],
+                    "description" => $aProduct->fields['webdescription'],
+                    "descriptionFr" => $aProduct->fields['webdescription'],
+                    "keywords" => $aProduct->fields['keywords'],
+                    "keywordsFr" => $aProduct->fields['keywords'],
+                    "status" => (int) $aProduct->fields['webenabled'],
+                    "price" => (float) $aProduct->fields['unitprice'],
+                    "sku" => "",
+                    "size" => "",
+                    "style" => (string) $aProduct->fields['stylenumber'],
+                    "colourid" => 0,
+                    "quantity" => 0,
+                    "categories" => $myCategoryIds,
+                    "filters" => $myFilterIds
+                );
 
+                $frProduct = $this->dbQF->Execute('SELECT * FROM styles_translations WHERE styleid = "' . $aProduct->fields['uuid'] . '" AND site = "www.attractive.fr"');
+                if (!$frProduct->EOF) {
+                    $stock_item["nameFr"] = (string) $frProduct->fields['stylename'];
+                    $stock_item["brief_summaryFr"] = (string) $frProduct->fields['description'];
+                    $stock_item["descriptionFr"] = (string) $frProduct->fields['webdescription'];
+                    $stock_item["keywordsFr"] = (string) $frProduct->fields['keywords'];
+                }
+                
                 $this->debug("initializing sku lookup array");
                 $aStock = $this->dbQF->Execute('SELECT products.* FROM products LEFT JOIN colours ON products.colourid = colours.uuid LEFT JOIN sizes ON products.sizeid = sizes.uuid WHERE styleid = "' . $aProduct->fields['uuid'] . '" ORDER BY colours.priority, sizes.priority');
                 if ($aStock->RecordCount() > 0) {
@@ -337,47 +379,53 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $this->debug("");
                         $this->debug("processing sku " . $aStock->fields['bleepid'] . "");
                         //initialise sku variables
-                        $size = "ONE SIZE";
-                        $aSize = $this->dbQF->Execute('SELECT * FROM sizes WHERE uuid = "' . $aStock->fields['sizeid'] . '" ORDER BY priority DESC');
-                        if ($aSize->RecordCount() > 0) {
-                            while (!$aSize->EOF) {
-                                $size = (string) $aSize->fields['name'];
-                                $aSize->MoveNext();
-                            }
-                        }
+                        $size = "one size";
+                        $sizeFr = "taille unique";
+                        $enSize = $this->dbQF->Execute('SELECT * FROM sizes_translations WHERE sizeid = "' . $aStock->fields['sizeid'] . '" AND site = "www.soactive.com"');
+                        if (!$enSize->EOF)
+                            $size = (string) $enSize->fields['name'];
+                        $frSize = $this->dbQF->Execute('SELECT * FROM sizes_translations WHERE sizeid = "' . $aStock->fields['sizeid'] . '" AND site = "www.attractive.fr"');
+                        if (!$frSize->EOF)
+                            $sizeFr = (string) $frSize->fields['name'];
+                        else
+                            $sizeFr = $size;
+                        $size_filter_id = $this->createFilter($size, $filter_size_group_id, $sizeFr);
+                        
                         $colour = "";
                         $colourid = "0000";
-                        $aColour = $this->dbQF->Execute('SELECT * FROM colours WHERE uuid = "' . $aStock->fields['colourid'] . '" ORDER BY priority DESC');
-                        if ($aColour->RecordCount() > 0) {
-                            while (!$aColour->EOF) {
-                                $colour = (string) $aColour->fields['name'];
-                                $colourid = str_pad((string) $aColour->fields['bleepid'], 4, "0", STR_PAD_LEFT);
-                                $aColour->MoveNext();
-                            }
+                        $aColour = $this->dbQF->Execute('SELECT * FROM colours WHERE uuid = "' . $aStock->fields['colourid'] . '"');
+                        if (!$aColour->EOF) {
+                            $colour = (string) $aColour->fields['name'];
+                            $colourid = str_pad((string) $aColour->fields['bleepid'], 4, "0", STR_PAD_LEFT);
                         }
+                        $enColour = $this->dbQF->Execute('SELECT * FROM colours_translations WHERE colourid = "' . $aStock->fields['colourid'] . '" AND site = "www.soactive.com"');
+                        if (!$enColour->EOF)
+                            $colour = (string) $enColour->fields['name'];
+                        $frColour = $this->dbQF->Execute('SELECT * FROM colours_translations WHERE colourid = "' . $aStock->fields['colourid'] . '" AND site = "www.attractive.fr"');
+                        if (!$frColour->EOF)
+                            $colourFr = (string) $frColour->fields['name'];
+                        $colour_filter_id = $this->createFilter($colour, $filter_colour_group_id, $colourFr);
+                        
                         $quantity = (float) $aStock->fields['available_stock'];
 
                         $model = (string) $aProduct->fields['stylenumber']."-".$colourid;
 
-                        $stock_item = array(
-                            "name" => (string) $aProduct->fields['stylename'],
-                            "description" => $aProduct->fields['description'],
-                            "status" => (int) $aProduct->fields['webenabled'],
-                            "price" => (float) $aProduct->fields['unitprice'],
-                            "sku" => (string) $aStock->fields['bleepid'],
-                            "size" => $size,
-                            "style" => (string) $aProduct->fields['stylenumber'],
-                            "colourid" => (int) $colourid,
-                            "quantity" => $quantity,
-                            "categories" => $myCategoryIds,
-                            "filters" => $myFilterIds
-                        );
+                        $stock_item["sku"] = (string) $aStock->fields['bleepid'];
+                        $stock_item["size"] = $size;
+                        $stock_item["colourid"] = (int) $colourid;
+                        $stock_item["quantity"] = $quantity;
 
                         if ($myModel != $model) {
                             $myModel = $model;
                             $product_id = $this->createProduct($model, $stock_item);
                         }
                         if ($product_id) {
+                            //Manually Add Size & Colour Filter Ids
+                            if ($size_filter_id)
+                                $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$size_filter_id . "'");
+                            if ($colour_filter_id)
+                                $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$colour_filter_id . "'");
+                            
                             if (!in_array($product_id, $myProductIds))
                                 $myProductIds[] = $product_id;
                             $product_option_id = $this->createProductOption($product_id, $stock_item);
@@ -439,7 +487,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         return $category_info['category_id'];
     }
 
-    function createFilter($filter, $group_id = 0) {
+    function createFilter($filter, $group_id = 0, $filterFr = "") {
         //We only create a new filter the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
         $this->load->model('catalog/filter');
@@ -451,10 +499,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 $this->db->query("INSERT INTO `" . DB_PREFIX . "filter_group` SET sort_order = '999'"); 
                 $filter_group_id = $this->db->getLastId();
                 $this->db->query("INSERT INTO " . DB_PREFIX . "filter_group_description SET filter_group_id = '" . (int)$filter_group_id . "', language_id = '" . $this->languageId . "', name = '" . $this->db->escape($filter) . "'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "filter_group_description SET filter_group_id = '" . (int)$filter_group_id . "', language_id = '" . $this->languageFr . "', name = '" . $this->db->escape(($filterFr == "" ? $filter : $filterFr)) . "'");
             } else {
                 $this->db->query("INSERT INTO `" . DB_PREFIX . "filter` SET filter_group_id = '" . $group_id . "', sort_order = '999'");
                 $filter_id = $this->db->getLastId();
                 $this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', filter_group_id = '" . (int)$group_id . "', language_id = '" . $this->languageId . "', name = '" . $this->db->escape($filter) . "'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', filter_group_id = '" . (int)$group_id . "', language_id = '" . $this->languageFr . "', name = '" . $this->db->escape(($filterFr == "" ? $filter : $filterFr)) . "'");
             }
             // fetch the newly created filter
             $filter_info = $this->model_catalog_filter->getFilterByName($filter);
@@ -561,19 +611,31 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'product_image' => $images,
             'product_description' => array(
                 $this->languageId => array(
-                    'name' => (string) $stock_item['name'],
-                    'meta_keyword' => (string) $stock_item['name'],
-                    'meta_description' => "",
-                    'description' => (string) $stock_item['description'],
+                    'name' => ((string) $stock_item['stylename'] == "" ? (string) $stock_item['name'] : (string) $stock_item['stylename']),
+                    'meta_title' => ((string) $stock_item['stylename'] == "" ? (string) $stock_item['name'] : (string) $stock_item['stylename']),
+                    'meta_keyword' => ((string) $stock_item['keywords'] == "" ? (string) $product_info['keywords'] : (string) $stock_item['keywords']),
+                    'meta_description' => ((string) $stock_item['brief_summary'] == "" ? (string) $product_info['brief_summary'] : (string) $stock_item['brief_summary']),
+                    'brief_summary' => ((string) $stock_item['brief_summary'] == "" ? (string) $product_info['brief_summary'] : (string) $stock_item['brief_summary']),
+                    'description' => ((string) $stock_item['description'] == "" ? (string) $product_info['description'] : (string) $stock_item['description']),
+                    'tag' => NULL
+            ),
+                $this->languageFr => array(
+                    'name' => (string) $stock_item['nameFr'],
+                    'meta_title' => (string) $stock_item['nameFr'],
+                    'meta_keyword' => (string) $stock_item['keywordsFr'],
+                    'meta_description' => (string) $stock_item['brief_summaryFr'],
+                    'brief_summary' => (string) $stock_item['brief_summaryFr'],
+                    'description' => (string) $stock_item['descriptionFr'],
                     'tag' => NULL
             )),
             'product_attribute' => $attribute,
-            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
+//            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
+            'keyword' => seoUrl($model),
             'product_category' => $stock_item['categories'],
             'product_filter' => $stock_item['filters'],
             'product_store' => $this->config->get('wms_products_store')
         );
-
+ 
         if (!$product_info) {
             // if product doesn't exist then create it
             $product_id = $this->model_catalog_product->addProduct($data);
@@ -638,9 +700,9 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 // if size option doesn't exist then create it
                 $data = array(
                     'option_id' => NULL,
-                    'type' => "radio",
+                    'type' => "select",
                     'sort_order' => 0,
-                    'option_description' => array(1 => array('name' => "Size"))
+                    'option_description' => array(1 => array('name' => "Size"), 2 => array('name' => "Taille"))
                 );
                 $this->size_option_id = (int) $this->model_catalog_option->addOption($data);
             }
@@ -648,7 +710,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         return $this->size_option_id;
     }
 
-    function getSizeOptionValueId($option_id, $name) {
+    function getSizeOptionValueId($option_id, $name, $nameFr = "") {
         //We should be able to cache these in an array ?
         $database = & $this->db;
         $sql = "SELECT option_value_id FROM `" . DB_PREFIX . "option_value_description` WHERE option_id = '" . (int) $option_id . "' AND name = '" . $this->db->escape($name) . "' AND language_id = '" . (int) $this->languageId . "'";
@@ -659,6 +721,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int) $option_id . "', image = '', sort_order = '0'");
         $option_value_id = $this->db->getLastId();
         $this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int) $option_value_id . "', option_id = '" . (int) $option_id . "', name = '" . $this->db->escape($name) . "', language_id = '" . (int) $this->languageId . "'");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int) $option_value_id . "', option_id = '" . (int) $option_id . "', name = '" . $this->db->escape(($nameFr == "" ? $name : $nameFr)) . "', language_id = '" . (int) $this->languageFr . "'");
         return (int) $option_value_id;
     }
 
