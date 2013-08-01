@@ -138,13 +138,18 @@ class ModelCatalogFilter extends Model {
 	}
 	
 	public function getFilters($data) {
-		$sql = "SELECT *, (SELECT name FROM " . DB_PREFIX . "filter_group_description fgd WHERE f.filter_group_id = fgd.filter_group_id AND fgd.language_id = '" . (int)$this->config->get('config_language_id') . "') AS `group` FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) WHERE fd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT f.*, fd.*, fgd.name AS `group` "
+                     . "FROM " . DB_PREFIX . "filter f "
+                     . "LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) "
+                     . "LEFT JOIN " . DB_PREFIX . "filter_group fg ON (fg.filter_group_id = f.filter_group_id) "
+                     . "LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fgd.filter_group_id = fg.filter_group_id) "
+                     . "WHERE fd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND fgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND fd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 		
-		$sql .= " ORDER BY fd.sort_order, f.sort_order ASC";
+		$sql .= " ORDER BY fg.sort_order, f.sort_order ASC";
 		
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
