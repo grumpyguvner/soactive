@@ -111,4 +111,5 @@
         $('div#error_environment').delay(3000).fadeOut();
 </script>
 
+<?php echo $welcome_popup; ?>
 </body></html>

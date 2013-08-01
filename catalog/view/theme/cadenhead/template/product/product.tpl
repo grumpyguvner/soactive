@@ -38,29 +38,29 @@
     <?php } ?>
   </div>
   <div id="tab-description" class="tab-content"><?php echo $description; ?>
-  <table >
+  <table ><tbody>
       <?php 
       if (array_key_exists('General', $attribute_groups))
       {
       foreach ($attribute_groups['General'] as $attribute_group) { ?>
-      <thead>
-        <!--tr>
+      <!--thead>
+        <tr>
           <td colspan="2"><?php echo $attribute_group['name']; ?></td>
-        </tr-->
-      </thead>
-      <tbody>
+        </tr>
+      </thead-->
+      
         <?php foreach ($attribute_group['attribute'] as $attribute) { ?>
         <tr>
           <td><strong><?php echo $attribute['name']; ?></strong></td>
           <td><?php echo $attribute['text']; ?></td>
         </tr>
         <?php } ?>
-      </tbody>
       <?php
       
       }
       }
       ?>
+      </tbody>
     </table>
   </div>
           
@@ -131,11 +131,9 @@
         <?php if ($product['rating']) { ?>
         <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" /></div>
         <?php } ?>
-        <?php if ($product['price']) { ?>
         <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a>
-        <?php } ?>
+        </div>
       <?php } ?>
-      </div>
     </div>
   </div>
   <?php } ?>
@@ -341,8 +339,8 @@
           <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />
         </div>
         <br/>
-        <div style="margin-top: 4px;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></div>
-        <div style="margin-left: 10px; margin-top: 4px;"> <a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
+        <div style="margin-top: 4px;width: 100%;"><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a></div>
+        <div style="margin-top: 4px;width: 100%;"><a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>
         <?php if ($minimum > 1) { ?>
         <div class="minimum"><?php echo $text_minimum; ?></div>
         <?php } ?>
