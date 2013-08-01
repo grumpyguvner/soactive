@@ -21,28 +21,28 @@
                         <span>Zoom</span>
                     <?php } ?>
                 </div>
-                <?php if ($images) { ?>
-                    <div class="image-additional">
-                        <?php
-                        if ($additional) {
-                            ?><a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" id="mainImage" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/><?php
+                
+                <div class="image-additional">
+                    <?php
+                    if ($additional) {
+                        ?><a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" id="mainImage" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/><?php
+
+                    }
+
+                    if ($images) {
+                      for ($i = 0; $i < count($images); $i++)  {
+
+                          if (empty($images[$i]['video'])) {
+                                        ?><a href="<?php echo $images[$i]['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $images[$i]['main']; ?>" <?php if ($i > 1) echo 'style="display: none;"' ?>><img src="<?php echo $images[$i]['thumb']; ?>" alt="" /></a><?php
+                        } else {
+                                        ?><a href="http://www.youtube.com/v/<?php echo $images[$i]['video']; ?>?rel=0&wmode=transparent" class="colorbox videoAdditional" rel="colorbox" data-video="<?php echo $images[$i]['video']; ?>" target="_blank" style="<?php if ($i > 1) echo "display: none;" ?>line-height:<?php echo $additionalHeight; ?>px;height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"><img src="http://img.youtube.com/vi/<?php echo $images[$i]['video']; ?>/0.jpg" alt="" /><span class="play-button" style="height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"></span></a><?php
+                            }
+                      }
 
                         }
-
-                        if ($images) {
-                          for ($i = 0; $i < count($images); $i++)  {
-
-                              if (empty($images[$i]['video'])) {
-                                            ?><a href="<?php echo $images[$i]['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $images[$i]['main']; ?>" <?php if ($i > 1) echo 'style="display: none;"' ?>><img src="<?php echo $images[$i]['thumb']; ?>" alt="" /></a><?php
-                            } else {
-                                            ?><a href="http://www.youtube.com/v/<?php echo $images[$i]['video']; ?>?rel=0&wmode=transparent" class="colorbox videoAdditional" rel="colorbox" data-video="<?php echo $images[$i]['video']; ?>" target="_blank" style="<?php if ($i > 1) echo "display: none;" ?>line-height:<?php echo $additionalHeight; ?>px;height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"><img src="http://img.youtube.com/vi/<?php echo $images[$i]['video']; ?>/0.jpg" alt="" /><span class="play-button" style="height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"></span></a><?php
-                                }
-                          }
-
-                            }
-                        ?>
-                    </div>
-                <?php } ?>
+                    ?>
+                </div>
+                
             <?php } ?>
           <div class="social">
               <div class="addthis_toolbox addthis_default_style ">

@@ -83,7 +83,6 @@ label {
 #column-left {
 	float: left;
 	width: 190px;
-        margin-right: 13px;
 }
 #column-right {
 	float: right;
@@ -94,7 +93,7 @@ label {
 	margin-bottom: 25px;
 }
 #column-left + #column-right + #content, #column-left + #content {
-	margin-left: 203px;
+	margin-left: 202px;
 }
 #column-right + #content {
 	margin-right: 186px;
