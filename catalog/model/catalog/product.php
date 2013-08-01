@@ -326,7 +326,7 @@ class ModelCatalogProduct extends Model {
             $recently_viewed = explode(',', $this->request->cookie['recently_viewed']);
         }
 
-        if ($pos = array_search($product_id, $recently_viewed)) {
+        if (($pos = array_search($product_id, $recently_viewed)) !== false) {
             unset($recently_viewed[$pos]);
         }
 
