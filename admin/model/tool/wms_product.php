@@ -86,8 +86,15 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
         $cnt = 10;
         if ($aProduct->RecordCount() > 0) {
-            while (!$aProduct->EOF && $cnt > 0) {
+            while (!$aProduct->EOF) {
                 $cnt--;
+                //delay execution so other processes have a chance
+                if($cnt<1) {
+                    if ($this->debugMode)
+                        die();
+                    sleep(5);
+                    $cnt=9;
+                }
                 $this->debug("=================================================================================================");
                 $this->debug("processing product " . $aProduct->fields['stylenumber'] . " " . $aProduct->fields['stylename'] . "");
 
@@ -381,6 +388,19 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         //initialise sku variables
                         $size = "one size";
                         $sizeFr = "taille unique";
+                        $size_filter_id=array();
+                        $aSize = $this->dbQF->Execute('SELECT * FROM sizes WHERE uuid = "' . $aStock->fields['sizeid'] . '"');
+                        if (!$aSize->EOF) {
+                            $size = (string) $aSize->fields['name'];
+                            
+                            $sizes=explode(",", (string) $aSize->fields['custom5']);
+                            $sizesFr=explode(",", (string) $aSize->fields['custom6']);
+                            foreach ($sizes as $key => $size){
+                                $sizeFr=(isset($sizesFr[$key]) ? $sizesFr[$key] : $size);
+                                if(!empty($size))
+                                    $size_filter_id[] = $this->createFilter($size, $filter_size_group_id, $sizeFr);
+                            }
+                        }
                         $enSize = $this->dbQF->Execute('SELECT * FROM sizes_translations WHERE sizeid = "' . $aStock->fields['sizeid'] . '" AND site = "www.soactive.com"');
                         if (!$enSize->EOF)
                             $size = (string) $enSize->fields['name'];
@@ -389,14 +409,23 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             $sizeFr = (string) $frSize->fields['name'];
                         else
                             $sizeFr = $size;
-                        $size_filter_id = $this->createFilter($size, $filter_size_group_id, $sizeFr);
+//                        $size_filter_id = $this->createFilter($size, $filter_size_group_id, $sizeFr);
                         
                         $colour = "";
                         $colourid = "0000";
+                        $colour_filter_id=array();
                         $aColour = $this->dbQF->Execute('SELECT * FROM colours WHERE uuid = "' . $aStock->fields['colourid'] . '"');
                         if (!$aColour->EOF) {
                             $colour = (string) $aColour->fields['name'];
                             $colourid = str_pad((string) $aColour->fields['bleepid'], 4, "0", STR_PAD_LEFT);
+                            
+                            $colours=explode(",", (string) $aColour->fields['custom5']);
+                            $coloursFr=explode(",", (string) $aColour->fields['custom6']);
+                            foreach ($colours as $key => $colour){
+                                $colourFr=(isset($coloursFr[$key]) ? $coloursFr[$key] : $colour);
+                                if (!empty($colour))
+                                    $colour_filter_id[] = $this->createFilter($colour, $filter_colour_group_id, $colourFr);
+                            }
                         }
                         $enColour = $this->dbQF->Execute('SELECT * FROM colours_translations WHERE colourid = "' . $aStock->fields['colourid'] . '" AND site = "www.soactive.com"');
                         if (!$enColour->EOF)
@@ -404,7 +433,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $frColour = $this->dbQF->Execute('SELECT * FROM colours_translations WHERE colourid = "' . $aStock->fields['colourid'] . '" AND site = "www.attractive.fr"');
                         if (!$frColour->EOF)
                             $colourFr = (string) $frColour->fields['name'];
-                        $colour_filter_id = $this->createFilter($colour, $filter_colour_group_id, $colourFr);
+                        
                         
                         $quantity = (float) $aStock->fields['available_stock'];
 
@@ -421,10 +450,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         }
                         if ($product_id) {
                             //Manually Add Size & Colour Filter Ids
-                            if ($size_filter_id)
-                                $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$size_filter_id . "'");
-                            if ($colour_filter_id)
-                                $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$colour_filter_id . "'");
+                            foreach ($size_filter_id as $add_filter_id)
+                                $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$add_filter_id . "'");
+                            foreach ($colour_filter_id as $add_filter_id)
+                                $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int)$product_id . "', filter_id = '" . (int)$add_filter_id . "'");
                             
                             if (!in_array($product_id, $myProductIds))
                                 $myProductIds[] = $product_id;
@@ -490,6 +519,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
     function createFilter($filter, $group_id = 0, $filterFr = "") {
         //We only create a new filter the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
+        $filter=trim($filter);
+        $filterFr=trim($filterFr);
         $this->load->model('catalog/filter');
         $filter_info = $this->model_catalog_filter->getFilterByName($filter, $group_id);
         
