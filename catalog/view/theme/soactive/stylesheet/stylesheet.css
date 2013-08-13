@@ -36,7 +36,6 @@ p {
 	margin-bottom: 20px;
 }
 a, a:visited, a b {
-	color: #1db4b7;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -976,6 +975,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 .category-info .cDescription p {
     line-height: 15px;
     margin-bottom: 0;
+    font-family: 'tahoma',sans-serif;
+    font-size: 12px;
 }
 .category-list {
 	overflow: auto;
@@ -1155,16 +1156,20 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid .productItem {
         text-align: center;
         line-height: 14px;
+        font-family: 'tahoma',sans-serif;
+        font-size: 12px;
 }
 .product-grid .productItem .name {
         margin-top: 5px;
         max-width: 192px;
 }
 .product-grid .productItem a {
-        color: #514f4f;
+        color: #888888;
 	text-decoration: none;
 	display: block;
-        line-height: 14px;
+        line-height: 15px;
+        font-family: 'tahoma',sans-serif;
+        font-size: 12px;
 }
 .product-grid .productItem .image {
         position: relative;
@@ -1338,6 +1343,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .briefSummary {
 	margin-bottom: 10px;
         width: 549px;
+        font-family: 'tahoma',sans-serif;
+        font-size: 12px;
 }
 .product-info .price {
 	overflow: auto;
@@ -2176,6 +2183,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer p {
     margin-bottom: 6px;
+    font-family: 'tahoma',sans-serif;
+    font-size: 12px;
 }
 #footer ul {
     font-size: 13px;
@@ -2186,7 +2195,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .followUs .social {
         display: inline-block;
         vertical-align: middle;
-        margin-bottom: 10px;
+        margin-top: 13px;
+        margin-bottom: 19px
 }
 #footer .followUs .social span a {
         padding: 0 2px;
@@ -2227,6 +2237,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer .column > div {
     margin-bottom: 20px;
+    font-family: 'tahoma',sans-serif;
+    font-size: 12px;
 }
 #footer .column .weAreSoactive > h4 > span {
     color: #1db4b7;
@@ -2241,9 +2253,10 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-right: 4px;
 }
 #footer .column .securePayment .needHelp > div > span + span {
-    font-size: 24px;
+    font-size: 27px;
     font-weight: bold;
     color: #1db4b7;
+    line-height: 28px;
 }
 #footer .column .securePayment .needHelp > img, #footer .column .securePayment .needHelp > div {
     display: inline;
@@ -2251,6 +2264,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .column .securePayment .trustPilot > img {
     float: left;
     margin-right: 4px;
+    margin-bottom: 6px;
 }
 #footer .column .securePayment .trustPilot > img, #footer .column .securePayment .trustPilot > div {
     display: inline;
@@ -2293,6 +2307,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .column a {
     text-decoration: none;
     color: #514f4f;
+    font-family: 'tahoma',sans-serif;
+    font-size: 12px;
 }
 #footer .column a:hover {
     color: #1db4b7;
@@ -2519,7 +2535,6 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin: 0px;
     font-weight: 700;
     line-height: 17px;
-    font-size: 18px;
 }
 .shopBar .shopBarInfo a {
     display: block;
@@ -2685,13 +2700,15 @@ overflow: auto;
     }
 
 }
-.jcarousel-skin-tango .jcarousel-item-horizontal a {
-	font-size: 14px;
+.jcarousel-skin-tango .jcarousel-item-horizontal a {    
+        font-family: 'tahoma',sans-serif;
+        font-size: 12px;
         width: 170px;
-        color: #514f4f;
+        color: #888888;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem {
-	
+	font-family: 'tahoma',sans-serif;
+        font-size: 12px;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.save {
         display: block;
@@ -2879,7 +2896,9 @@ overflow: auto;
     border: none;
     position: absolute;
     top: 0;
-    left: 108px;
+    left: 130px;
+    width: 40px;
+    height: 40px;
 }
 .completeLook {
     height: 290px;
@@ -2900,6 +2919,14 @@ overflow: auto;
     margin-top: 5px;
     max-width: 170px;
 }
+.completeLook li > .nameItem a {
+    font-family: 'tahoma',sans-serif;
+    font-size: 12px;
+    color: #888888;
+}
+.completeLook li > .priceItem {
+    color: #514F4F;
+}
 .completeLook span.price-old, .completeLook span.price-new, .completeLook span.price {
     font-weight: 700;
 }
@@ -2910,6 +2937,9 @@ overflow: auto;
 .completeLook span.price-new {
     color: #FF0758;
     display: inline-block;
+}
+.completeLook span.price {
+    color: #FD0303;
 }
 .completeLook .save {
     color: #FF0758;
@@ -3370,3 +3400,7 @@ overflow: auto;
     
 }
 /************* End Facebook login ***********/
+.tab-content #productTabDesc .descTab p, .review-list {
+    font-size: 12px;
+    font-family: 'tahoma',sans-serif;
+}
