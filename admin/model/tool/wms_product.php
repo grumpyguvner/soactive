@@ -73,10 +73,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
         }
     }
 
-    function cacheWMSData($forceRefresh = false) {
+    function cacheWMSData($stylenumber = "", $forceRefresh = false) {
 
         $this->debug("fetching products from wms");
-        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
+//        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
+        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
 
         $myModel = "";
         $product_id = 0;
@@ -91,7 +92,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 //delay execution so other processes have a chance
                 if($cnt<1) {
                     if ($this->debugMode)
-                        die();
+                        return true;
                     sleep(5);
                     $cnt=9;
                 }
@@ -350,6 +351,15 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $aBrand->MoveNext();
                     }
                 }
+
+                //Size guide
+                $sg_name = "";
+                $sg_html = "";
+                $aSizeGuide = $this->dbQF->Execute('SELECT * FROM sizeguides WHERE uuid = "' . $aProduct->fields['sizeguideid'] . '"');
+                if (!$aSizeGuide->EOF) {
+                    $sg_name = ((string) $aSizeGuide->fields['webdisplayname'] != "" ? (string) $aSizeGuide->fields['webdisplayname'] : (string) $aSizeGuide->fields['name']);
+                    $sg_html = (string) $aSizeGuide->fields['webdescription'];
+                }
                 
                 $stock_item = array(
                     "name" => (string) $aProduct->fields['stylename'],
@@ -362,8 +372,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     "keywordsFr" => $aProduct->fields['keywords'],
                     "status" => (int) $aProduct->fields['webenabled'],
                     "price" => (float) $aProduct->fields['unitprice'],
+                    "saleprice" => (float) $aProduct->fields['saleprice'],
                     "sku" => "",
                     "size" => "",
+                    "sizeguide_name" => (string) $sg_name,
+                    "sizeguide_html" => (string) $sg_html,
                     "style" => (string) $aProduct->fields['stylenumber'],
                     "colourid" => 0,
                     "quantity" => 0,
@@ -582,7 +595,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 }
                 if ($imgCount > 0) {
                     $images[] = array(
-                        'image' => $saveto,
+                        'image' => 'data/products/' . $model . ($imgCount > 0 ? '-' . $imgCount : '') . '.jpg',
                         'sort_order' => $imgCount
                     );
                 }
@@ -591,20 +604,99 @@ class ModelToolWMSProduct extends ModelToolWMS {
             }
         }
 
-        $image = (file_exists($saveto) ? 'data/products/' . $model . '.jpg' : "");
+        $image = (file_exists($saveto) ? 'data/products/' . $model . '.jpg' : "data/soactive-logo.png");
         $this->debug("using " . $image . " as image");
 
 
         $attribute = array();
-//        if (!empty($stock_item['type']))
-//        {
-//            $attribute[] = array(
-//                'attribute_id' => $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Type')), 
-//                'product_attribute_description' => array(
-//                    $this->languageId => array(
-//                        'text' => (string) $stock_item['type']
-//                )));
-//        };
+        if (!empty($stock_item['sizeguide_name']))
+        {
+            $attribute_id = $this->tableLookUp(DB_PREFIX . "attribute_description", 'attribute_id', array('name' => 'Size Guide'));
+            if (!$attribute_id) {
+                // need to create the attribute
+                $attribute_group_id = $this->tableLookUp(DB_PREFIX . "attribute_group_description", 'attribute_group_id', array('name' => 'Product Tabs'));
+                if (!$attribute_group_id) {
+                    // need to create the attribute group
+                    $this->load->model('catalog/attribute_group');
+                    $info_data = array(
+                        'sort_order' => '999',
+                        'attribute_group_description' => array(
+                            $this->languageId => array(
+                                'name' => "Product Tabs"
+                            ),
+                            $this->languageFr => array(
+                                'name' => "Product Tabs"
+                            )
+                        )
+                    );
+                    $attribute_id = $this->model_catalog_attribute->addAttribute($info_data);
+                }
+                $this->load->model('catalog/attribute');
+                $info_data = array(
+                    'attribute_group_id' => $attribute_group_id,
+                    'sort_order' => '999',
+                    'attribute_description' => array(
+                        $this->languageId => array(
+                            'name' => "Size Guide"
+                        ),
+                        $this->languageFr => array(
+                            'name' => "Size Guide"
+                        )
+                    )
+                );
+                $attribute_id = $this->model_catalog_attribute->addAttribute($info_data);
+            }
+            $information_id = (string) $this->tableLookUp(DB_PREFIX . "information_description", 'information_id', array('category' => 'Size Guides','title' => $stock_item['sizeguide_name']));
+            if (!$information_id) {
+                // need to create the information page
+                $this->load->model('catalog/information');
+                $info_data = array(
+                    'sort_order' => '999',
+                    'status' => 1,
+                    'information_description' => array(
+                        $this->languageId => array(
+                            'category' => "Size Guides",
+                            'title' => $stock_item['sizeguide_name'],
+                            'description' => $stock_item['sizeguide_html'],
+                            'meta_title' => "",
+                            'meta_keyword' => "",
+                            'meta_description' => ""
+                        ),
+                        $this->languageFr => array(
+                            'category' => "Size Guides",
+                            'title' => $stock_item['sizeguide_name'],
+                            'description' => $stock_item['sizeguide_html'],
+                            'meta_title' => "",
+                            'meta_keyword' => "",
+                            'meta_description' => ""
+                        )
+                    ),
+                    'information_store' => $this->config->get('wms_products_store')
+                );
+                $information_id = $this->model_catalog_information->addInformation($info_data);
+            }
+            $attribute[] = array(
+                'attribute_id' => $attribute_id,
+                'product_attribute_description' => array(
+                    $this->languageId => array(
+                        'text' => "information_id=" . (string) $information_id
+                ),
+                    $this->languageFr => array(
+                        'text' => "information_id=" . (string) $information_id
+                )));
+        };
+
+        $discount = array();
+        if ($stock_item['saleprice'] > 0 && $stock_item['saleprice'] < $stock_item['price'])
+        {
+            $customer_group_id = (string) $this->tableLookUp(DB_PREFIX . "customer_group_description", 'customer_group_id', array('name' => 'Default'));
+            $discount[] = array(
+                'customer_group_id' => $customer_group_id,
+                'quantity' => 0,
+                'priority' => 0,
+                'price' => $stock_item['saleprice']
+                );
+        };
 
         //We only create a new product the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
@@ -660,6 +752,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     'tag' => NULL
             )),
             'product_attribute' => $attribute,
+            'product_discount' => $discount,
 //            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
             'keyword' => seoUrl($model),
             'product_category' => $stock_item['categories'],
@@ -676,9 +769,9 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $product_id = $product_info['product_id'];
             $data['product_store'] = $this->model_catalog_product->getProductStores($product_id);
             $data['product_option'] = $this->model_catalog_product->getProductOptions($product_id);
-            $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
+//            $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
             $data['product_special'] = $this->model_catalog_product->getProductSpecials($product_id);
-            $data['product_image'] = $this->model_catalog_product->getProductImages($product_id);
+//            $data['product_image'] = $this->model_catalog_product->getProductImages($product_id);
             $data['product_download'] = $this->model_catalog_product->getProductDownloads($product_id);
 //            $data['product_asset'] = $this->model_catalog_product->getProductAssets($product_id);
 //            $data['product_category'] = $this->model_catalog_product->getProductCategories($product_id);
