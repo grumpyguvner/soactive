@@ -172,17 +172,27 @@
 				  <?php if ($opt['opt'] == 'static_block') { ?>
 					<div id="opt_static_block<?php echo $menu_row;?><?php echo $opt_row; ?>" style="padding-left: 50px;">
 						<p><span><?php echo $text_content; ?></span></p>
-						<div id="language-<?php echo $menu_row;?><?php echo $opt_row; ?>" class="htabs">
-							<?php foreach ($languages as $language) { ?>
-								<a href="#tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
-							<?php } ?>
-						</div>
-
-						<?php foreach ($languages as $language) { ?>
-							<div id="tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>">
-								<textarea name="megamenu_menu[<?php echo $menu_row;?>][options][<?php echo $opt_row; ?>][opt_static_block_des][<?php echo $language['language_id']; ?>]" id="description-<?php echo $des_num;?>-<?php echo $language['language_id']; ?>"><?php echo isset($opt['opt_static_block_des'][$language['language_id']]) ? $opt['opt_static_block_des'][$language['language_id']] : ''; ?></textarea>
-							</div>
-						<?php } ?>
+                                                <ul id="language-<?php echo $menu_row;?><?php echo $opt_row; ?>" class="htabs nav nav-tabs">
+                                                    <?php $langIndex = 0; ?>
+                                                    <?php foreach ($languages as $language) { ?>
+                                                        <li<?php if ($langIndex == 0) { ?> class="active"<?php } ?>><a href="#tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a></li>
+                                                        <?php $langIndex++; ?>
+                                                    <?php } ?>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <?php $langIndex = 0; ?>
+                                                    <?php foreach ($languages as $language) { ?>
+                                                        <div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="tab-language-<?php echo $module_row . '-' . $language['language_id']; ?>">
+                                                            <div class="form">
+                                                                <div id="tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>">
+                                                                    <textarea name="megamenu_menu[<?php echo $menu_row;?>][options][<?php echo $opt_row; ?>][opt_static_block_des][<?php echo $language['language_id']; ?>]" id="description-<?php echo $des_num;?>-<?php echo $language['language_id']; ?>"><?php echo isset($opt['opt_static_block_des'][$language['language_id']]) ? $opt['opt_static_block_des'][$language['language_id']] : ''; ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php $langIndex++; ?>
+                                                    <?php } ?>
+                                                </div>
+			
 						<script type="text/javascript"><!--
 							<?php foreach ($languages as $language) { ?>
 								CKEDITOR.replace('description-<?php echo $des_num;?>-<?php echo $language['language_id']; ?>', {
@@ -194,7 +204,7 @@
 								});  
 							<?php } ?>
 								
-							$('#language-<?php echo $menu_row;?><?php echo $opt_row; ?> a').tabs();
+							$('#language-<?php echo $menu_row;?><?php echo $opt_row; ?> li a').tabs();
 
 						//--></script>
 					</div>
@@ -388,14 +398,16 @@
           html  = '<tbody id="menu-row' + menu_row + '" style="border-bottom: 2px solid #808080;">';
           html += '<tr>';
           html += '<td class="column-name">';
+          html += '<label class="visible-480"></label>';
 	  <?php foreach ($languages as $language) { ?>
 		html += '<input name="megamenu_menu[' + menu_row + '][title][<?php echo $language['language_id']; ?>]" />';
 		html += '<i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i><br>';
 	  <?php } ?>
 	  html += '</td>';
-	  html += '<td class="left"><span><?php echo $text_width; ?></span><input type="text" name="megamenu_menu[' + menu_row + '][dropdown_width]" value="960" size="3" />';
-	  html += '<br/><span><?php echo $text_number_of_columns; ?></span><input type="text" name="megamenu_menu[' + menu_row + '][dropdown_column]" value="6" size="3" /></td>';
-	  html += '<td class="left">';
+	  html += '<td class="column-dropdown"><label class="visible-480"></label><?php echo $text_width; ?><input type="text" name="megamenu_menu[' + menu_row + '][dropdown_width]" value="960" class="span1 i-mini" />';
+	  html += '<br/><?php echo $text_number_of_columns; ?><input type="text" name="megamenu_menu[' + menu_row + '][dropdown_column]" value="6" class="span1 i-mini" /></td>';
+	  
+          html += '<td class="left">';
 	  html += '<div id="menu-row' + menu_row + '-opt-row0" style="border-bottom: 1px solid #DDD;padding: 5px 0;">';
 	  html += '<span><strong><?php echo $text_option." 1"; ?></strong></span>';
 	  html += '<select name="megamenu_menu[' + menu_row + '][options][0][opt]" onchange="showCustom(this,' + menu_row + ',0)" >';
@@ -406,8 +418,9 @@
 	  html += '  <option value="manufacturer"><?php echo $option_manufacturer; ?></option>';
 	  html += '  <option value="information"><?php echo $option_information; ?></option>';
 	  html += '</select>';
-	  html += '<span style="margin-left: 20px;"><?php echo $text_fill_the_column ?></span><input name="megamenu_menu[' + menu_row + '][options][0][fill_column]" value="6" size="3"/>';
-	  html += '<a style="float: right" onclick="$(\'#menu-row' + menu_row  + '-opt-row0\').remove();" class="btn btn-small"><?php echo $button_remove_option; ?></a>';
+	  html += '<span style="margin-left: 20px;"><?php echo $text_fill_the_column ?></span><input name="megamenu_menu[' + menu_row + '][options][0][fill_column]" value="6" size="3" class="span1 i-mini" />';
+	  html += '<i class="btn btn-small icon-trash ims remove" style="float: right;" onclick="$(\'#menu-row' + menu_row  + '-opt-row0\').remove();" title="<?php echo $button_remove_option; ?>"></i>';
+          
 	  html += '<div class="divcustom_' + menu_row + '0"></div>';
 	  html += '<div id="opt_linkto' + menu_row + '0" style="padding-left: 50px;">';
 	  html += '<p><span><?php echo $text_homepage_or_other_link; ?></span><input style="<?php echo $text_width; ?>50%;" type="text" name="megamenu_menu[' + menu_row + '][options][0][opt_linkto_link]" value="<?php echo HTTP_CATALOG; ?>" /></p>';
@@ -415,8 +428,8 @@
 	  html += '</div>';
 	  html += '<a style="float: right; margin-top: 5px;" onclick="addOption(this,' + menu_row + ', 1);" class="btn btn-small"><?php echo $button_add_option; ?></a>';
 	  html += '</td>';
-	  html += '<td class="left"><input type="text" name="megamenu_menu[' + menu_row + '][order]" size="3" /></td>';
-	  html += '<td class="left"><select name="megamenu_menu[' + menu_row + '][status]">';
+	  html += '<td class="left"><input type="text" name="megamenu_menu[' + menu_row + '][order]" class="span1 i-mini" /></td>';
+	  html += '<td class="left"><select name="megamenu_menu[' + menu_row + '][status]" class="input-small">';
       html += '   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
       html += '   <option value="0"><?php echo $text_disabled; ?></option>';
       html += '</select></td>';
@@ -508,19 +521,24 @@
 	  else if (select.options[select.selectedIndex].value == 'static_block') {
 		html  = '<div id="opt_static_block' + opt_menu_row + opt_row + '" style="padding-left: 50px;">';
 		html += '  <p><span><?php echo $text_content; ?></span></p>';
-		html += '  <div id="language-' + opt_menu_row + opt_row + '" class="htabs">';
+		html += '  <ul id="language-' + opt_menu_row + opt_row + '" class="htabs nav nav-tabs">';
+                <?php $langIndex = 0; ?>
 		<?php foreach ($languages as $language) { ?>
-		html += '    <a href="#tab-language-'+ opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>';
-		<?php } ?>
-		html += '  </div>';
-
-		<?php foreach ($languages as $language) { ?>
-		html += '   <div id="tab-language-'+ opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>">';
-		html += '      <textarea name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_static_block_des][<?php echo $language['language_id']; ?>]" id="description-' + des_num + '-<?php echo $language['language_id']; ?>"></textarea>';
-		html += '   </div>';
-		<?php } ?>
-
-		html += '</div>';
+                html += '<li<?php if ($langIndex == 0) { ?> class="active"<?php } ?>><a data-toggle="tab" href="#tab-language-'+ opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>"><i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i> <?php echo $language['name']; ?></a></li>';
+                <?php $langIndex++; ?>
+                <?php } ?>
+                html += '</ul>';
+                html += '<div class="tab-content">';
+                <?php $langIndex = 0; ?>
+                <?php foreach ($languages as $language) { ?>
+                html += '<div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="#tab-language-'+ opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>">';
+                html += '<div class="form">';
+                html += '      <textarea name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_static_block_des][<?php echo $language['language_id']; ?>]" id="description-' + des_num + '-<?php echo $language['language_id']; ?>"></textarea>';
+		html += '   </div></div>';
+                <?php $langIndex++; ?>
+                <?php } ?>    
+                html += '</div>';
+		
 		$('.divcustom_'+ opt_menu_row + opt_row).html(html);
 		
 		<?php foreach ($languages as $language) { ?>
@@ -533,7 +551,7 @@
 		});  
 		<?php } ?>
 		
-		$('#language-' + opt_menu_row + opt_row + ' a').tabs();
+		$('#language-' + opt_menu_row + opt_row + ' li a').tabs();
 		des_num++;
 	  }
 	  // show manufacturer
