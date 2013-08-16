@@ -376,20 +376,24 @@ class ControllerDesignBanner extends Controller {
 		
 		$this->data['banner_images'] = array();
 		
-		foreach ($banner_images as $banner_image) {
+		foreach ($banner_images as $language_id => $banners_image) {
+                    foreach ($banners_image as $key => $banner_image) {
 			if ($banner_image['image'] && file_exists(DIR_IMAGE . $banner_image['image'])) {
 				$image = $banner_image['image'];
 			} else {
 				$image = 'no_image.jpg';
 			}			
 			
-			$this->data['banner_images'][] = array(
-				'banner_image_description' => $banner_image['banner_image_description'],
+			$this->data['banner_images'][$language_id][] = array(
+				'title'                    => $banner_image['title'],
+                                'description'              => $banner_image['description'],
 				'link'                     => $banner_image['link'],
 				'image'                    => $image,
 				'thumb'                    => $this->model_tool_image->resize($image, 100, 100),
-                                'sort_order'               => $banner_image['sort_order']
-			);	
+                                'sort_order'               => $banner_image['sort_order'],
+                                'status'                   => $banner_image['status']
+			);
+                }
 		} 
 	
 		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);		

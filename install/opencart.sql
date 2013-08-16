@@ -259,6 +259,7 @@ CREATE TABLE `oc_banner_image` (
   `link` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
+  `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`banner_image_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

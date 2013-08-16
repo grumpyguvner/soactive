@@ -92,21 +92,25 @@ class ModelDesignBanner extends Model {
 		$banner_image_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "'");
 		
 		foreach ($banner_image_query->rows as $banner_image) {
-			$banner_image_description_data = array();
+			
 			 
 			$banner_image_description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "banner_image_description WHERE banner_image_id = '" . (int)$banner_image['banner_image_id'] . "' AND banner_id = '" . (int)$banner_id . "'");
 			
 			foreach ($banner_image_description_query->rows as $banner_image_description) {			
-				$banner_image_description_data[$banner_image_description['language_id']] = array('title' => $banner_image_description['title'], 'description' => $banner_image_description['description']);
-			}
+				
+			
 		
-			$banner_image_data[] = array(
-				'banner_image_description' => $banner_image_description_data,
+			$banner_image_data[$banner_image_description['language_id']][] = array(
+				'title'                    => $banner_image_description['title'],
+                                'description'              => $banner_image_description['description'],
 				'link'                     => $banner_image['link'],
 				'image'                    => $banner_image['image'],
-                                'sort_order'               => $banner_image['sort_order']
+                                'sort_order'               => $banner_image['sort_order'],
+                                'status'                   => $banner_image['status']
 			);
-		}
+		}       
+                
+                }
 		
 		return $banner_image_data;
 	}
