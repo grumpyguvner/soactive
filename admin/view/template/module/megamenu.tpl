@@ -175,14 +175,14 @@
                                                 <ul id="language-<?php echo $menu_row;?><?php echo $opt_row; ?>" class="htabs nav nav-tabs">
                                                     <?php $langIndex = 0; ?>
                                                     <?php foreach ($languages as $language) { ?>
-                                                        <li<?php if ($langIndex == 0) { ?> class="active"<?php } ?>><a href="#tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a></li>
+                                                        <li<?php if ($langIndex == 0) { ?> class="active"<?php } ?>><a href="#tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a></li>
                                                         <?php $langIndex++; ?>
                                                     <?php } ?>
                                                 </ul>
                                                 <div class="tab-content">
                                                     <?php $langIndex = 0; ?>
                                                     <?php foreach ($languages as $language) { ?>
-                                                        <div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="tab-language-<?php echo $module_row . '-' . $language['language_id']; ?>">
+                                                        <div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="tab-language-<?php echo $menu_row . $opt_row . '-' . $language['language_id']; ?>">
                                                             <div class="form">
                                                                 <div id="tab-language-<?php echo $menu_row;?><?php echo $opt_row; ?>-<?php echo $language['language_id']; ?>">
                                                                     <textarea name="megamenu_menu[<?php echo $menu_row;?>][options][<?php echo $opt_row; ?>][opt_static_block_des][<?php echo $language['language_id']; ?>]" id="description-<?php echo $des_num;?>-<?php echo $language['language_id']; ?>"><?php echo isset($opt['opt_static_block_des'][$language['language_id']]) ? $opt['opt_static_block_des'][$language['language_id']] : ''; ?></textarea>
@@ -524,17 +524,18 @@
 		html += '  <ul id="language-' + opt_menu_row + opt_row + '" class="htabs nav nav-tabs">';
                 <?php $langIndex = 0; ?>
 		<?php foreach ($languages as $language) { ?>
-                html += '<li<?php if ($langIndex == 0) { ?> class="active"<?php } ?>><a data-toggle="tab" href="#tab-language-'+ opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>"><i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i> <?php echo $language['name']; ?></a></li>';
+                html += '<li<?php if ($langIndex == 0) { ?> class="active"<?php } ?>><a data-toggle="tab" href="#tab-language-' + opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>"><i class="flag flag-<?php echo $language['code']; ?>" title="<?php echo $language['name']; ?>"></i> <?php echo $language['name']; ?></a></li>';
                 <?php $langIndex++; ?>
                 <?php } ?>
                 html += '</ul>';
                 html += '<div class="tab-content">';
                 <?php $langIndex = 0; ?>
                 <?php foreach ($languages as $language) { ?>
-                html += '<div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="#tab-language-'+ opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>">';
+                html += '<div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="tab-language-' + opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>">';
                 html += '<div class="form">';
+                html += '   <div id="tab-language-' + opt_menu_row + opt_row + '-<?php echo $language['language_id']; ?>">';
                 html += '      <textarea name="megamenu_menu[' + opt_menu_row + '][options][' + opt_row + '][opt_static_block_des][<?php echo $language['language_id']; ?>]" id="description-' + des_num + '-<?php echo $language['language_id']; ?>"></textarea>';
-		html += '   </div></div>';
+		html += '   </div></div></div>';
                 <?php $langIndex++; ?>
                 <?php } ?>    
                 html += '</div>';

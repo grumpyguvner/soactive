@@ -399,8 +399,8 @@
                     html += '			<div class="tab-pane'+active+'" id="tab-language-'+ module_row + '-<?php echo $language['language_id']; ?>">';
                     html += '				<div class="form">';
                     html += '					<div class="control-group">';
-                    html += '						<label class="control-label"><?php echo $entry_content; ?></label>';
-                    html += '						<div class="controls"><textarea name="blocks_module[' + module_row + '][description][<?php echo $language['language_id']; ?>]" id="description-' + module_row + '-<?php echo $language['language_id']; ?>" class="input-block-level"></textarea></div>';
+                    html += '						<label class="control-label"><?php echo $entry_description; ?></label>';
+                    html += '						<div class="controls"><textarea name="welcome_module[' + module_row + '][description][<?php echo $language['language_id']; ?>]" id="description-' + module_row + '-<?php echo $language['language_id']; ?>" class="input-block-level"></textarea></div>';
                     html += '					</div>';
                     html += '				</div>';
                     html += '			</div>';
@@ -412,20 +412,9 @@
                 html += '			<div class="control-group">';
                 html += '				<label class="control-label"><?php echo $entry_layout; ?></label>';
                 html += '				<div class="controls">';
-                html += '					<select name="blocks_module[' + module_row + '][layout_id]" class="span2 i-large">';
+                html += '					<select name="welcome_module[' + module_row + '][layout_id]" class="span2 i-large">';
                 html += '						<?php echo p3html::oc_layout_options($layouts, null, true); ?>';
                 html += '					</select>';
-                html += '				</div>';
-                html += '			</div>';
-                html += '			<div class="control-group">';
-                html += '				<label class="control-label"><?php echo $entry_store; ?></label>';
-                html += '				<div class="controls">';
-                html += '                                   <div class="scrollbox">';
-                                                              <?php $class = 'even'; ?>
-                html += '                                       <div class="<?php echo $class; ?>">';
-//                                                                    <?php /*if (isset($module['store_id']) && in_array(0, $module['store_id'])) {*/ ?>;
-//                html += '                                               <input type="checkbox" name="blocks_module[' + module_row + '][store_id][]" value="0" checked="checked" />';
-                html += '				    </div>';
                 html += '				</div>';
                 html += '			</div>';
                 html += '			<div class="control-group">';
