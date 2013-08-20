@@ -755,6 +755,8 @@ a.buttonHome:hover, input.buttonHome:hover {
         line-height: 16px;  
         display: inline-block;
         width: 76%;
+        font-size: 12px;
+        font-family: 'tahoma',sans-serif;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
@@ -2189,6 +2191,9 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer ul {
     font-size: 13px;
 }
+#footer .weAreSoactive .wsRow div {
+    margin-bottom: 15px;
+}
 #footer .followUs span {
     color: #1db4b7;
 }
@@ -2252,11 +2257,13 @@ a.buttonHome:hover, input.buttonHome:hover {
     float: left;
     margin-right: 4px;
 }
-#footer .column .securePayment .needHelp > div > span + span {
-    font-size: 27px;
+#footer .column .securePayment .needHelp > div > span + div {
+    color: #1DB4B7;
+    font-size: 34px;
     font-weight: bold;
-    color: #1db4b7;
     line-height: 28px;
+    margin-top: 6px;
+    text-align: left;
 }
 #footer .column .securePayment .needHelp > img, #footer .column .securePayment .needHelp > div {
     display: inline;
@@ -2334,8 +2341,9 @@ a.buttonHome:hover, input.buttonHome:hover {
     box-shadow: none;
     border-radius: 0;
     color: #514f4f;
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 0;
+    font-family: 'tahoma',sans-serif;
 }
 
 #powered {
@@ -2357,6 +2365,8 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-bottom: 10px;
     margin-top: 10px;
     text-align: center;
+    font-size: 12px;
+    font-family: 'tahoma',sans-serif;
 }
 .soInfo span {
     font-weight: bold;
@@ -2746,6 +2756,8 @@ overflow: auto;
     font-size: 12px;
     margin-bottom: 0;
     padding: 0;
+    font-family: 'tahoma', sans-serif;
+    font-size: 8px;
 }
 .jcarousel-skin-tango .jcarousel-item-placeholder {
     background: #fff;
@@ -3401,6 +3413,10 @@ overflow: auto;
 }
 /************* End Facebook login ***********/
 .tab-content #productTabDesc .descTab p, .review-list {
+    font-size: 12px;
+    font-family: 'tahoma',sans-serif;
+}
+.informationContent, .informationContent a {
     font-size: 12px;
     font-family: 'tahoma',sans-serif;
 }
