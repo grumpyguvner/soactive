@@ -130,7 +130,7 @@
     
 <?php $image_row = 0; ?>
 <?php foreach ($languages as $language) { ?>
-    <?php foreach ($banner_images as $banner_image) { ?>    
+    <?php foreach ($banner_images[$language['language_id']] as $banner_image) { ?>    
 
        CKEDITOR.replace('description<?php echo $language['language_id']; ?>-<?php echo $image_row; ?>', myFileBrowser);
 
@@ -144,41 +144,34 @@ var image_row = <?php echo $image_row; ?>;
 
 
 function addImage(languageId) {
-    
-    <?php foreach ($languages as $language) { ?>
-            
-            var language = <?php echo $language['language_id']; ?>;
-            
-            if (language == languageId) {
-                html  = '<tbody id="image-row' + language + '-' + image_row + '">';
+                html  = '<tbody id="image-row'  + languageId +  '-' + image_row + '">';
                 html += '<tr>';
                 html += '<td class="left">';
-                html += '<input type="text" name="banner_image[<?php echo $language['language_id']; ?>][' + image_row + '][title]" value="" />';
+                html += '<input type="text" name="banner_image[' + languageId + '][' + image_row + '][title]" value="" />';
                 html += '<br />';
                 html += '<b><?php echo $entry_description; ?></b>';
                 html += '<br /><br />';
-                html += '<textarea name="banner_image[<?php echo $language['language_id']; ?>][' + image_row + '][description]" id="description<?php echo $language['language_id'] . '-'; ?>' + image_row + '"></textarea>';
+                html += '<textarea name="banner_image[' + languageId + '][' + image_row + '][description]" id="description' + languageId + '-' + image_row + '"></textarea>';
                 html += '</td>';	
-                html += '<td class="left"><input type="text" name="banner_image[<?php echo $language['language_id']; ?>][' + image_row + '][link]" value="" /></td>';            
-                html += '<td class="left"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + image_row + '" /><input type="hidden" name="banner_image[<?php echo $language['language_id']; ?>][' + image_row + '][image]" value="" id="image' + image_row + '"  /><br /><a onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div></td>';
-                html += '<td><input type="text" name="banner_image[<?php echo $language['language_id']; ?>][' + image_row + '][sort_order]" value="" size="2" /></td>';
+                html += '<td class="left"><input type="text" name="banner_image[' + languageId + '][' + image_row + '][link]" value="" /></td>';            
+                html += '<td class="left"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="thumb' + image_row + '" /><input type="hidden" name="banner_image[' + languageId + '][' + image_row + '][image]" value="" id="image' + image_row + '"  /><br /><a onclick="image_upload(\'image' + image_row + '\', \'thumb' + image_row + '\');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$(\'#thumb' + image_row + '\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#image' + image_row + '\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div></td>';
+                html += '<td><input type="text" name="banner_image[' + languageId + '][' + image_row + '][sort_order]" value="" size="2" /></td>';
                 html += '<td class="left">';
-                html += '<select name="banner_image[<?php echo $language['language_id']; ?>][' + image_row + '][status]">';
+                html += '<select name="banner_image[' + languageId + '][' + image_row + '][status]">';
                 html += '   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
                 html += '   <option value="0"><?php echo $text_disabled; ?></option>';
                 html += '</select>';
                 html += '</td>';
-                html += '<td class="left"><a onclick="$(\'#image-row' + language + '-' + image_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+                html += '<td class="left"><a onclick="$(\'#image-row'  + languageId +  '-' + image_row  + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
                 html += '</tr>';
                 html += '</tbody>'; 
 
-                $('#images tfoot.image-row<?php echo $language['language_id']; ?>').before(html);
+                $('#images tfoot.image-row' + languageId).before(html);
 
-                eval("CKEDITOR.replace('description<?php echo $language['language_id']; ?>-$$$$', myFileBrowser);".replace("$$$$",image_row));
+                eval("CKEDITOR.replace('description" + languageId + "-$$$$', myFileBrowser);".replace("$$$$",image_row));
 
                 image_row++;
-            }
-       <?php } ?>    
+          
       } 
 //--></script>
 <script type="text/javascript"><!--
