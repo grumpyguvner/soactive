@@ -269,7 +269,9 @@ class ControllerDesignBanner extends Controller {
 		$this->data['text_default'] = $this->language->get('text_default');
 		$this->data['text_image_manager'] = $this->language->get('text_image_manager');
  		$this->data['text_browse'] = $this->language->get('text_browse');
-		$this->data['text_clear'] = $this->language->get('text_clear');			
+		$this->data['text_clear'] = $this->language->get('text_clear');	
+                $this->data['text_hide'] = $this->language->get('text_hide');
+                $this->data['text_show'] = $this->language->get('text_show');
 				
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_title'] = $this->language->get('entry_title');
@@ -395,7 +397,7 @@ class ControllerDesignBanner extends Controller {
 			);
                 }
 		} 
-	
+                
 		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);		
 
 		$this->template = 'design/banner_form.tpl';

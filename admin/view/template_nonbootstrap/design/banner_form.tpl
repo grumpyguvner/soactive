@@ -42,8 +42,9 @@
                 <a href="#language<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
             <?php } ?>
         </div>
-        <?php $image_row = 0; ?>
+        
         <?php foreach ($languages as $language) { ?>
+            <?php $image_row = 0; ?>
             <div id="language<?php echo $language['language_id']; ?>">
                 <table id="images" class="list">
                     <thead>
@@ -62,21 +63,31 @@
                             <tbody id="image-row<?php echo $language['language_id'] . '-' . $image_row; ?>">
                                 <tr>
                                     <td class="left">
+                                        <b><?php echo $entry_title; ?></b>
                                         <input type="text" name="banner_image[<?php echo $language['language_id']; ?>][<?php echo $image_row; ?>][title]" value="<?php echo isset($banner_image) ? $banner_image['title'] : ''; ?>" />
                                         <!-- Check if it is fine!!! -->
                                         <?php if (isset($error_banner_image[$language['language_id']][$image_row])) { ?>
                                             <span class="error"><?php echo $error_banner_image[$language['language_id']][$image_row]; ?></span>
                                         <?php } ?>
                                         <!-- End Check if it is fine -->    
-                                        <br/>
-                                        <b><?php echo $entry_description; ?></b>
                                         <br/><br/>
-                                        <textarea name="banner_image[<?php echo $language['language_id']; ?>][<?php echo $image_row; ?>][description]" id="description<?php echo $language['language_id'] . '-' . $image_row; ?>"><?php echo isset($banner_image) ? $banner_image['description'] : ''; ?></textarea>
+                                        <b><?php echo $entry_description; ?></b>
+                                        
+                                        <?php if ($banner_image['description']) { ?>
+                                        <br/>
+                                            <textarea name="banner_image[<?php echo $language['language_id']; ?>][<?php echo $image_row; ?>][description]" id="description<?php echo $language['language_id'] . '-' . $image_row; ?>"><?php echo isset($banner_image) ? $banner_image['description'] : ''; ?></textarea>                                            
+                                        <?php } else { ?>
+                                            
+                                             <a href="#" class="showDesc"><?php echo $text_show; ?></a>
+                                             <div id="textarea-wrap<?php echo $language['language_id'] . '-' . $image_row; ?>" style="display: none">
+                                                <textarea name="banner_image[<?php echo $language['language_id']; ?>][<?php echo $image_row; ?>][description]" id="description<?php echo $language['language_id'] . '-' . $image_row; ?>"><?php echo isset($banner_image) ? $banner_image['description'] : ''; ?></textarea>
+                                             </div>
+                                        <?php } ?> 
                                         <!-- Check if it is fine!!! -->
-                                        <?php if (isset($error_banner_image[$language['language_id']][$image_row])) { ?>
-                                            <span class="error"><?php echo $error_banner_image[$language['language_id']][$image_row]; ?></span>
-                                        <?php } ?>
-                                        <!-- End Check if it is fine -->      
+                                            <?php if (isset($error_banner_image[$language['language_id']][$image_row])) { ?>
+                                                <span class="error"><?php echo $error_banner_image[$language['language_id']][$image_row]; ?></span>
+                                            <?php } ?>
+                                        <!-- End Check if it is fine -->       
                                     </td>
                                     <td class="left"><input type="text" name="banner_image[<?php echo $language['language_id']; ?>][<?php echo $image_row; ?>][link]" value="<?php echo $banner_image['link']; ?>" /></td>
                                     <td class="left"><div class="image"><img src="<?php echo $banner_image['thumb']; ?>" alt="" id="thumb<?php echo $image_row; ?>" />
@@ -128,8 +139,9 @@
             filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
     };
     
-<?php $image_row = 0; ?>
+
 <?php foreach ($languages as $language) { ?>
+<?php $image_row = 0; ?>
     <?php foreach ($banner_images[$language['language_id']] as $banner_image) { ?>    
 
        CKEDITOR.replace('description<?php echo $language['language_id']; ?>-<?php echo $image_row; ?>', myFileBrowser);
@@ -205,4 +217,11 @@ function image_upload(field, thumb) {
 $('#tabs a').tabs(); 
 $('#languages a').tabs();
 //--></script> 
+
+<script type="text/javascript"><!--
+  $('.showDesc').click(function (e) {
+      e.preventDefault();
+      $(this).hide().next().show();
+  })
+//--></script>
 <?php echo $footer; ?>

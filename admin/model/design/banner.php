@@ -108,12 +108,19 @@ class ModelDesignBanner extends Model {
                                 'sort_order'               => $banner_image['sort_order'],
                                 'status'                   => $banner_image['status']
 			);
-		}       
+		}    
                 
+                $sort_order = array();
+                
+		foreach ($banner_image_data[$banner_image_description['language_id']] as $key => $value) {
+			$sort_order[$key] = $value['sort_order'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $banner_image_data[$banner_image_description['language_id']]);
                 }
-		
 		return $banner_image_data;
-	}
+	
+        }
 		
 	public function getTotalBanners() {
       	$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "banner");
