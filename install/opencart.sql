@@ -259,6 +259,7 @@ CREATE TABLE `oc_banner_image` (
   `link` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `sort_order` int(3) NOT NULL,
+  `status` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`banner_image_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -7741,10 +7742,10 @@ CREATE TABLE `oc_sage_order` (
 
 DROP TABLE IF EXISTS `oc_syspro_tax_code`;
 CREATE TABLE `oc_syspro_tax_code` (
-  `tax_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `tax_name` text COLLATE utf8_bin NOT NULL,
+  `tax_code` varchar(64) NOT NULL DEFAULT '',
+  `tax_name` text NOT NULL,
   `tax_rate` decimal(15,4) NOT NULL DEFAULT '0.0000',
-  `filename` text COLLATE utf8_bin NOT NULL,
+  `filename` text NOT NULL,
   `data` blob,
   `tax_class_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -7761,9 +7762,9 @@ CREATE TABLE `oc_syspro_tax_code` (
 
 DROP TABLE IF EXISTS `oc_syspro_stock_item`;
 CREATE TABLE `oc_syspro_stock_item` (
-  `stock_item_code` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `stock_item_name` text COLLATE utf8_bin NOT NULL,
-  `filename` text COLLATE utf8_bin NOT NULL,
+  `stock_item_code` varchar(64) NOT NULL DEFAULT '',
+  `stock_item_name` text NOT NULL,
+  `filename` text NOT NULL,
   `data` blob,
   `product_id` int(11) NOT NULL,
   `product_option_value_id` int(11) NOT NULL,
@@ -7782,8 +7783,8 @@ CREATE TABLE `oc_syspro_stock_item` (
 DROP TABLE IF EXISTS `oc_syspro_order`;
 CREATE TABLE `oc_syspro_order` (
   `order_id` int(11) NOT NULL,
-  `syspro_status` text COLLATE utf8_bin NOT NULL,
-  `filename` text COLLATE utf8_bin NOT NULL,
+  `syspro_status` text NOT NULL,
+  `filename` text NOT NULL,
   `data` blob,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
