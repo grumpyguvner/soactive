@@ -2453,9 +2453,11 @@ a.buttonHome:hover, input.buttonHome:hover {
 .wrapBrands a {
     margin-right: 10px;
 }
+
 .wrapBrands .featuredTitle {
-       margin-bottom: 20px;
    display: inline-block;
+   margin-bottom: 20px;
+   width: 100%;
 }
 .wrapBrands .featuredTitle > h5 {
    display: inline-block;
@@ -2463,10 +2465,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .wrapBrands .featuredTitle hr {
    border-bottom: 2px solid #B9BDBD;
-   width: 86%;
+   display: inline-block;
    float: right;
    vertical-align: middle;
-   display: inline-block;
+   width: 91%;
 }
 .wrapBrands .featuredTitle .brands {
    height: 58px;
