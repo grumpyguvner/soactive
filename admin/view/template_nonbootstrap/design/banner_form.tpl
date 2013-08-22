@@ -43,8 +43,8 @@
             <?php } ?>
         </div>
         
-        <?php foreach ($languages as $language) { ?>
             <?php $image_row = 0; ?>
+        <?php foreach ($languages as $language) { ?>
             <div id="language<?php echo $language['language_id']; ?>">
                 <table id="images" class="list">
                     <thead>
@@ -106,7 +106,7 @@
                                             <?php } ?>
                                         </select>
                                     </td>
-                                    <td class="left"><a onclick="$('#image-row-<?php echo $language['language_id'] . $image_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+                                    <td class="left"><a onclick="$('#image-row<?php echo $language['language_id'] . '-' . $image_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
                                 </tr>
                             </tbody>
                             <?php $image_row++; ?>
@@ -140,8 +140,8 @@
     };
     
 
-<?php foreach ($languages as $language) { ?>
 <?php $image_row = 0; ?>
+<?php foreach ($languages as $language) { ?>
     <?php foreach ($banner_images[$language['language_id']] as $banner_image) { ?>    
 
        CKEDITOR.replace('description<?php echo $language['language_id']; ?>-<?php echo $image_row; ?>', myFileBrowser);
@@ -179,11 +179,10 @@ function addImage(languageId) {
                 html += '</tbody>'; 
 
                 $('#images tfoot.image-row' + languageId).before(html);
-
-                eval("CKEDITOR.replace('description" + languageId + "-$$$$', myFileBrowser);".replace("$$$$",image_row));
+                
+                eval("CKEDITOR.replace('description££££-$$$$', myFileBrowser);".replace("££££",languageId).replace("$$$$",image_row));
 
                 image_row++;
-          
       } 
 //--></script>
 <script type="text/javascript"><!--

@@ -2449,30 +2449,27 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #1db4b7;
     margin-bottom: 20px;
 }
-
 .wrapBrands a {
     margin-right: 10px;
 }
-
 .wrapBrands .featuredTitle {
-   display: inline-block;
-   margin-bottom: 20px;
-   width: 100%;
+        margin-bottom: 20px;
+    display: inline-block;
 }
 .wrapBrands .featuredTitle > h5 {
-   display: inline-block;
-   margin-left: 10px;
+    display: inline-block;
+    margin-left: 10px;
 }
 .wrapBrands .featuredTitle hr {
-   border-bottom: 2px solid #B9BDBD;
-   display: inline-block;
-   float: right;
-   vertical-align: middle;
-   width: 91%;
+    border-bottom: 2px solid #B9BDBD;
+    width: 86%;
+    float: right;
+    vertical-align: middle;
+    display: inline-block;
 }
 .wrapBrands .featuredTitle .brands {
-   height: 58px;
-   padding: 12px 0 0;
+    height: 58px;
+    padding: 12px 0 0;
 }
 .wrapBrands .mens {
     width: 50%;
@@ -3417,7 +3414,7 @@ overflow: auto;
     font-size: 12px;
     font-family: 'tahoma',sans-serif;
 }
-.informationContent, .informationContent a, .informationContent td, .informationContent th, .informationContent p {
-   font-size: 14px;
-   font-family: 'tahoma',sans-serif;
+.informationContent, .informationContent a {
+    font-size: 12px;
+    font-family: 'tahoma',sans-serif;
 }
