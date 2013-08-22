@@ -226,6 +226,19 @@
 
 <?php if ($shipping_required) { ?>
     <div style="clear: both; padding-top: 15px; border-top: 1px solid #DDDDDD;">
+        <?php
+    if (isset($show_newsletter)) {
+        ?>
+        <label for="newsletter" class="checkbox"><input type="checkbox" name="newsletter" value="1" id="newsletter" />
+            <?php echo $entry_newsletter; ?></label>
+        <br />
+        <?php
+    } else {
+        ?>
+        <input type="hidden" name="newsletter" value="1" />
+        <?php
+    }
+    ?>
         <label for="shipping" class="checkbox"><?php if ($shipping_address) { ?>
                 <input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
             <?php } else { ?>

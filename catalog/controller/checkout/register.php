@@ -53,6 +53,15 @@ class ControllerCheckoutRegister extends Controller {
 		$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 		$this->data['entry_shipping'] = $this->language->get('entry_shipping');
                 $this->data['entry_date_birth'] = $this->language->get('entry_date_birth');
+                $this->data['entry_newsletter'] = $this->language->get('entry_newsletter');
+                
+                if (($this->config->get('newsletter_mailcampaign_enabled') && (!$this->config->get('newsletter_mailcampaign_account_listid') || !$this->config->get('newsletter_mailcampaign_account_optin'))) ||
+                    ($this->config->get('newsletter_mailchimp_enabled') && (!$this->config->get('newsletter_mailcampaign_mailchimp_listid') || !$this->config->get('newsletter_mailchimp_account_optin'))))
+                {
+                    $this->data['show_newsletter'] = false;
+                } else {
+                    $this->data['show_newsletter'] = true;
+                }
                 
 		$this->data['select_title'] = explode(',', $this->language->get('select_title'));
 
@@ -274,14 +283,6 @@ class ControllerCheckoutRegister extends Controller {
 			if ($this->request->post['confirm'] != $this->request->post['password']) {
 				$json['error']['confirm'] = $this->language->get('error_confirm');
 			}
-                        
-                        if (($this->config->get('newsletter_mailcampaign_enabled') && !$this->config->get('newsletter_mailcampaign_account_optin')) ||
-                            ($this->config->get('newsletter_mailchimp_enabled') && !$this->config->get('newsletter_mailchimp_account_optin')))
-                        {
-                            $this->data['show_newsletter'] = false;
-                        } else {
-                            $this->data['show_newsletter'] = true;
-                        }
 			
 			if ($this->config->get('config_account_id')) {
 				$this->load->model('catalog/information');
@@ -313,13 +314,7 @@ class ControllerCheckoutRegister extends Controller {
 					$this->session->data['shipping_postcode'] = $this->request->post['postcode'];					
 				}
                                 
-                                if (($this->config->get('newsletter_mailcampaign_enabled') && !$this->config->get('newsletter_mailcampaign_account_optin')) ||
-                                    ($this->config->get('newsletter_mailchimp_enabled') && !$this->config->get('newsletter_mailchimp_account_optin')))
-                                {
-                                    $this->session->data['newsletter'] = true;
-                                } else {
-                                    $this->session->data['newsletter'] = false;
-                                }
+                                $this->session->data['newsletter'] = (isset($this->request->post['newsletter']) && $this->request->post['newsletter']) ? true : false;
 			} else {
 				$json['redirect'] = $this->url->link('account/success');
 			}

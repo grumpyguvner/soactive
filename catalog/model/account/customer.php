@@ -12,12 +12,13 @@ class ModelAccountCustomer extends Model {
 
         $customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 
-        $this->load->model('account/newsletter');
+        if ((isset($data['newsletter']) && $data['newsletter']) ||
+            ($this->config->get('newsletter_mailcampaign_enabled') && $this->config->get('newsletter_mailcampaign_account_listid') && !$this->config->get('newsletter_mailcampaign_account_optin')) || 
+            ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_account_listid') && !$this->config->get('newsletter_mailchimp_account_optin')))
+        {
+            $this->load->model('account/newsletter');
 
-        if (isset($data['newsletter']) && $data['newsletter'] == 1) {
-            $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname'], 'account');
-        } elseif (isset($data['newsletter']) && $data['newsletter'] == 0) {
-            $this->model_account_newsletter->unsubscribe($data['email']);
+            $this->model_account_newsletter->subscribe($data['email'], $data, 'account');
         }
 
         $this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int) $this->config->get('config_store_id') . "', title = '" . $this->db->escape($data['title']) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', date_of_birth = '" . (!empty($data['day_birth']) && isset($data['month_birth']) && isset($data['year_birth']) ? $this->db->escape(date("Y-m-d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth']))) : NULL) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', newsletter = '" . (isset($data['newsletter']) ? (int) $data['newsletter'] : 0) . "', customer_group_id = '" . (int) $customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int) !$customer_group_info['approval'] . "', date_added = NOW()");
