@@ -2452,24 +2452,22 @@ a.buttonHome:hover, input.buttonHome:hover {
 .wrapBrands a {
     margin-right: 10px;
 }
-.wrapBrands .womens {
-    width: 49%;
-    margin-bottom: 20px;
+.wrapBrands .featuredTitle {
+        margin-bottom: 20px;
     display: inline-block;
 }
-.wrapBrands .womens > h5 {
+.wrapBrands .featuredTitle > h5 {
     display: inline-block;
     margin-left: 10px;
 }
-.wrapBrands .womens hr {
+.wrapBrands .featuredTitle hr {
     border-bottom: 2px solid #B9BDBD;
     width: 86%;
     float: right;
     vertical-align: middle;
     display: inline-block;
 }
-.wrapBrands .womens .brands {
-    border-right: 2px solid #B9BDBD;
+.wrapBrands .featuredTitle .brands {
     height: 58px;
     padding: 12px 0 0;
 }
