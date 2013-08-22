@@ -1183,15 +1183,19 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-grid .productItem .image img.newProduct {
         border: none;
-        left: 130px;
+        left: 150px;
         position: absolute;
         top: 0;
-}
+        width: 40px;
+        height: 40px;
+} 
 .product-grid .productItem .image img.saleProduct {
         border: none;
         position: absolute;
-        top: 190px;
-}
+        top: 215px;
+        height: 40px;
+        width: 40px
+} 
 #column-left + #column-right + #content .product-grid > div {
 	width: 125px;
 }
@@ -2902,9 +2906,11 @@ overflow: auto;
 #featuredStyles img.saleProduct {
     border: none;
     position: absolute;
-    top: 162px;
+    top: 186px;
     left: 0;
-}
+    height: 40px;
+    width: 40px;
+} 
 #featuredStyles img.newProduct {
     border: none;
     position: absolute;
