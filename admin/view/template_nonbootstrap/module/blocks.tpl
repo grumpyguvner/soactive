@@ -555,14 +555,6 @@
 
                 html += '  <table class="form">';
                 html += '    <tr>';
-                html += '      <td><?php echo $entry_layout; ?></td>';
-                html += '      <td><select name="blocks_module_footer[' + module_footer_row + '][layout_id]">';
-<?php foreach ($layouts as $layout) { ?>
-                    html += '           <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
-<?php } ?>
-                html += '      </select></td>';
-                html += '    </tr>';
-                html += '    <tr>';
                 html += '      <td><?php echo $entry_store; ?></td>';
                 html += '      <td><div class="scrollbox">';
                 divclass = 'even';
@@ -578,15 +570,6 @@
                     html += '          </div>';
 <?php } ?>
             html += '      </div></td>';
-            html += '    </tr>';
-            html += '    <tr>';
-            html += '      <td><?php echo $entry_position; ?></td>';
-            html += '      <td><select name="blocks_module_footer[' + module_footer_row + '][position]">';
-            html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
-            html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
-            html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
-            html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
-            html += '      </select></td>';
             html += '    </tr>';
             html += '    <tr>';
             html += '      <td><?php echo $entry_status; ?></td>';
@@ -664,14 +647,6 @@
 
                 html += '  <table class="form">';
                 html += '    <tr>';
-                html += '      <td><?php echo $entry_layout; ?></td>';
-                html += '      <td><select name="blocks_module_header[' + module_header_row + '][layout_id]">';
-<?php foreach ($layouts as $layout) { ?>
-                    html += '           <option value="<?php echo $layout['layout_id']; ?>"><?php echo $layout['name']; ?></option>';
-<?php } ?>
-                html += '      </select></td>';
-                html += '    </tr>';
-                html += '    <tr>';
                 html += '      <td><?php echo $entry_store; ?></td>';
                 html += '      <td><div class="scrollbox">';
                 divclass = 'even';
@@ -688,16 +663,6 @@
 <?php } ?>
             html += '      </div></td>';
             html += '    </tr>';
-            html += '    <tr>';
-            html += '      <td><?php echo $entry_position; ?></td>';
-            html += '      <td><select name="blocks_module_header[' + module_header_row + '][position]">';
-            html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
-            html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
-            html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
-            html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
-            html += '      </select></td>';
-            html += '    </tr>';
-            html += '    <tr>';
             html += '      <td><?php echo $entry_status; ?></td>';
             html += '      <td><select name="blocks_module_header[' + module_header_row + '][status]">';
             html += '        <option value="1"><?php echo $text_enabled; ?></option>';
