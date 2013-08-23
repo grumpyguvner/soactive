@@ -383,6 +383,7 @@ label {
         border-radius: 0;
         font-size: 12px;
         margin-bottom: 0;
+        font-family: 'tahoma', sans-serif;
 }
 #header #welcome {
 	z-index: 5;
