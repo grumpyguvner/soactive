@@ -61,7 +61,7 @@
                     <?php $image_row = 0; ?>
                     <?php foreach ($languages as $language) { ?>
                         <div class="tab-pane<?php if ($langIndex == 0) { ?> active<?php } ?>" id="language<?php echo $language['language_id']; ?>">
-                            <table id="images" class="list table table-striped table-hover">
+                            <table id="module" class="list table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="column-name"><?php echo $entry_title; ?></th>
@@ -209,7 +209,7 @@
                 html += '</tr>';
                 html += '</tbody>'; 
 
-                $('#images tfoot.image-row' + languageId).before(html);
+                $('#module tfoot.image-row' + languageId).before(html);
 
                 eval("<?php echo str_replace("\n", ' ', p3html::oc_ckeditor_replace('description££££-$$$$', $token)); ?>".replace("££££",languageId).replace("$$$$",image_row));
 
