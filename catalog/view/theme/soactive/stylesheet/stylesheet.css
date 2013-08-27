@@ -16,8 +16,11 @@ body {
 }
 body, td, th, input, textarea, select, a {
 	font-size: 14px;
-        font-family: 'tahoma', sans-serif;
+        font-family: tahoma, Geneva, sans-serif;
         color: #514f4f;
+}
+h1, h2, h3, h4, h5, h6 {
+        font-family: 'Open Sans Condesed', sans-serif;
 }
 h1, .welcome {
 	margin-top: 0px;
@@ -386,7 +389,7 @@ label {
         border-radius: 0;
         font-size: 12px;
         margin-bottom: 0;
-        font-family: 'tahoma', sans-serif;
+        font-family: tahoma, Geneva, sans-serif;
 }
 #header #welcome {
 	z-index: 5;
@@ -2770,7 +2773,7 @@ overflow: auto;
     font-size: 12px;
     margin-bottom: 0;
     padding: 0;
-    font-family: 'tahoma', sans-serif;
+    font-family: tahoma, Geneva, sans-serif;
     font-size: 8px;
     line-height: 12px;
 }
