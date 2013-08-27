@@ -16,7 +16,7 @@ body {
 }
 body, td, th, input, textarea, select, a {
 	font-size: 14px;
-        font-family: 'Open Sans Condensed', sans-serif;
+        font-family: 'tahoma', sans-serif;
         color: #514f4f;
 }
 h1, .welcome {
@@ -219,6 +219,9 @@ label {
 	box-shadow: 0px 2px 2px #DDDDDD;
 	background: #FFF;
 }
+#header #cart .content, .mini-cart-info .name small, .mini-cart-info td, .mini-cart-total td {
+        font-family: 'Open Sans Condensed',sans-serif;
+}
 #header #cart.active .content {
 	display: block;
 }
@@ -401,6 +404,7 @@ label {
 	color: #514f4f;
 	text-decoration: none;
 	font-size: 13px;
+        font-family: 'Open Sans Condensed',sans-serif;
 }
 #header .links a + a {
 	border-left: 1px solid #b9bdbd;
@@ -451,7 +455,7 @@ label {
 
 .breadcrumb a, .breadcrumb a:visited, .breadcrumb a b {
         color: #514f4f;
-        
+        font-family: 'Open Sans Condensed',sans-serif;
 }
 
 .breadcrumb .back {
@@ -1281,7 +1285,8 @@ a.buttonHome:hover, input.buttonHome:hover {
         border-left: 1px solid #514f4f;
         border-right: 1px solid #514f4f;
         text-align: center;
-        margin: 0
+        margin: 0;
+        font-family: 'Open Sans Condensed', sans-serif;  
 }
 .product-info .image {
 	border: 1px solid #b9bdbd;
@@ -1293,10 +1298,10 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .image span {
         background-color: #1DB4B7; 
-        width: 45px;
+        width: 39px;
         height: 20px;
         position: absolute;
-        left: 245px; 
+        left: 251px; 
         top: 350px;
         cursor: pointer;
         font-size: 20px;
@@ -1329,6 +1334,9 @@ a.buttonHome:hover, input.buttonHome:hover {
         top: 0;
         border: 1px solid #B9BDBD;
         z-index: 2;
+}
+.product-info .description, .product-info .price, .product-info .cart .cartButton, .product-info .gotQuestion .gotQuestionText, .product-info .image span {
+        font-family: 'Open Sans Condensed',sans-serif;
 }
 .product-info .description {
 	line-height: 20px;
@@ -2458,16 +2466,18 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-right: 10px;
 }
 .wrapBrands .featuredTitle {
-        margin-bottom: 20px;
+    margin-bottom: 20px;
     display: inline-block;
+    width: 100%;
 }
 .wrapBrands .featuredTitle > h5 {
     display: inline-block;
     margin-left: 10px;
+    font-family: 'Open Sans Condensed',sans-serif;
 }
 .wrapBrands .featuredTitle hr {
     border-bottom: 2px solid #B9BDBD;
-    width: 86%;
+    width: 91%;
     float: right;
     vertical-align: middle;
     display: inline-block;
@@ -2539,6 +2549,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .shopBar span {
     display: block;
     color: #514f4f;
+    font-family: 'Open Sans Condensed',sans-serif;
 }
 .shopBar br {
     display: none;
@@ -2761,6 +2772,7 @@ overflow: auto;
     padding: 0;
     font-family: 'tahoma', sans-serif;
     font-size: 8px;
+    line-height: 12px;
 }
 .jcarousel-skin-tango .jcarousel-item-placeholder {
     background: #fff;
@@ -2883,6 +2895,7 @@ overflow: auto;
     display: inline-block;
     padding-left: 10px;
     color: #1db4b7;
+    font-family: 'Open Sans Condensed',sans-serif;
 }
 .featuredTitle hr {
     display: inline-block;
