@@ -41,7 +41,7 @@
                             </div>
                             <div class="prow">
                                 <div class="pLabel">
-                                    <span class="required">*</span> <?php echo $entry_lastname; ?>
+                                    <span class="required">*</span> <span><?php echo $entry_lastname; ?></span>
                                 </div>
                                 <div class="pInput">
                                     <input type="text" name="lastname" value="<?php echo $lastname; ?>" />

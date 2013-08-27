@@ -16,11 +16,11 @@ body {
 }
 body, td, th, input, textarea, select, a {
 	font-size: 14px;
-        font-family: tahoma, Geneva, sans-serif;
+        font-family: 'tahoma', Geneva, sans-serif;
         color: #514f4f;
 }
 h1, h2, h3, h4, h5, h6 {
-        font-family: 'Open Sans Condesed', sans-serif;
+        font-family: 'Open Sans Condensed', sans-serif;
 }
 h1, .welcome {
 	margin-top: 0px;
@@ -389,7 +389,7 @@ label {
         border-radius: 0;
         font-size: 12px;
         margin-bottom: 0;
-        font-family: tahoma, Geneva, sans-serif;
+        font-family: 'tahoma', Geneva, sans-serif;
 }
 #header #welcome {
 	z-index: 5;
@@ -553,6 +553,7 @@ table.list td {
 table.list thead td {
 	background-color: #1db4b7;
 	padding: 0px 5px;
+        font-family: 'Open Sans Condensed', sans-serif;
 }
 table.list thead td a, .list thead td {
 	text-decoration: none;
@@ -764,7 +765,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
         width: 76%;
         font-size: 12px;
-        font-family: 'tahoma',sans-serif;
+        font-family: ''tahoma'',sans-serif;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
@@ -985,7 +986,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .category-info .cDescription p {
     line-height: 15px;
     margin-bottom: 0;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
     font-size: 12px;
 }
 .category-list {
@@ -1166,7 +1167,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid .productItem {
         text-align: center;
         line-height: 14px;
-        font-family: 'tahoma',sans-serif;
+        font-family: ''tahoma'',sans-serif;
         font-size: 12px;
 }
 .product-grid .productItem .name {
@@ -1178,7 +1179,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	text-decoration: none;
 	display: block;
         line-height: 15px;
-        font-family: 'tahoma',sans-serif;
+        font-family: ''tahoma'',sans-serif;
         font-size: 12px;
 }
 .product-grid .productItem .image {
@@ -1361,7 +1362,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .briefSummary {
 	margin-bottom: 10px;
         width: 549px;
-        font-family: 'tahoma',sans-serif;
+        font-family: ''tahoma'',sans-serif;
         font-size: 12px;
 }
 .product-info .price {
@@ -2201,7 +2202,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer p {
     margin-bottom: 6px;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
     font-size: 12px;
 }
 #footer ul {
@@ -2258,7 +2259,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer .column > div {
     margin-bottom: 20px;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
     font-size: 12px;
 }
 #footer .column .weAreSoactive > h4 > span {
@@ -2330,7 +2331,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .column a {
     text-decoration: none;
     color: #514f4f;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
     font-size: 12px;
 }
 #footer .column a:hover {
@@ -2359,7 +2360,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #514f4f;
     font-size: 12px;
     margin-bottom: 0;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
 }
 
 #powered {
@@ -2382,7 +2383,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-top: 10px;
     text-align: center;
     font-size: 12px;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
 }
 .soInfo span {
     font-weight: bold;
@@ -2728,13 +2729,13 @@ overflow: auto;
 
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a {    
-        font-family: 'tahoma',sans-serif;
+        font-family: ''tahoma'',sans-serif;
         font-size: 12px;
         width: 170px;
         color: #888888;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem {
-	font-family: 'tahoma',sans-serif;
+	font-family: ''tahoma'',sans-serif;
         font-size: 12px;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.save {
@@ -2773,7 +2774,7 @@ overflow: auto;
     font-size: 12px;
     margin-bottom: 0;
     padding: 0;
-    font-family: tahoma, Geneva, sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
     font-size: 8px;
     line-height: 12px;
 }
@@ -2953,7 +2954,7 @@ overflow: auto;
     max-width: 170px;
 }
 .completeLook li > .nameItem a {
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
     font-size: 12px;
     color: #888888;
 }
@@ -3227,7 +3228,7 @@ overflow: auto;
     display: inline-block;
     padding-right: 20px;
     min-height: 28px;
-    width: 130px;
+    width: 160px;
     vertical-align: top;
 }
 .content-account .prow .pLabel > span, .content-account .prow .pLabel > label {
@@ -3429,15 +3430,15 @@ overflow: auto;
 }
 .pluginFaviconButtonText {
     color: #fff !important;
-    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif !important;
+    font-family: 'lucida grande','tahoma',verdana,arial,sans-serif !important;
     
 }
 /************* End Facebook login ***********/
 .tab-content #productTabDesc .descTab p, .review-list {
     font-size: 12px;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
 }
 .informationContent, .informationContent a {
     font-size: 12px;
-    font-family: 'tahoma',sans-serif;
+    font-family: ''tahoma'',sans-serif;
 }
