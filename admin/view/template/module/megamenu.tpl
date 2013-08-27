@@ -18,7 +18,7 @@
   <div class="content">
     <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
 		<!-- start menu -->  
-        <table id="megamenu" class="list table table-striped table-hover">
+        <table id="module" class="list table table-striped table-hover">
           <thead>
             <tr>
                 <th class="column-name"><?php echo $menu_title; ?></th>
@@ -437,7 +437,7 @@
       html += '</tr>';
       html += '</tbody>'; 
 	
-      $('#megamenu tfoot').before(html);
+      $('#module tfoot').before(html);
 	  
       menu_row++;
     }
