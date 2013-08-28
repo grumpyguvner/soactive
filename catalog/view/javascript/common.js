@@ -345,6 +345,25 @@ function getURLVar(urlVarName) {
     return urlVarValue;
 } 
 
+cartTimeout = null;
+function openCart(delay, update) {
+    clearTimeout(cartTimeout);
+    if (typeof update != 'undefined' && update)
+    {
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        $('#cart').load('index.php?route=module/cart #cart > *');
+    }
+    $('#cart').addClass("active").css("border", "none");
+    if (typeof delay != 'undefined' && delay)
+    {
+        cartTimeout = setTimeout('closeCart()', delay);
+    }
+} 
+
+function closeCart() {
+    $('#cart').removeClass("active").css({'border-left':'2px solid #1db4b7', 'border-right': '2px solid #1db4b7', 'border-bottom': '2px solid #1db4b7' });
+}
+
 function addToCart(product_id, quantity) {
     quantity = typeof(quantity) != 'undefined' ? quantity : 1;
 
