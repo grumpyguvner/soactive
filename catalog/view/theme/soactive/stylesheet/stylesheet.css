@@ -160,6 +160,13 @@ label {
         height: 32px;
         padding-top: 3px;
 }
+#header #cart.hasItems {
+        background-color: #1DB4B7;
+} 
+#header #cart.active {
+        background: none;
+        border: none;
+} 
 #header #cart .heading {
 	float: right;
 	padding-right: 2px;
@@ -167,6 +174,11 @@ label {
 	background: #FFF;
 	position: relative;
 	z-index: 1;
+}  
+#header #cart.hasItems .heading {
+	padding-left: 10px;
+        padding-right: 0;
+        background-color: #1DB4B7;
 }
 #header #cart.active .heading {
 	margin-top: 5px;
@@ -179,6 +191,7 @@ label {
 	-moz-border-radius: 7px 7px 0px 0px;
 	-khtml-border-radius: 7px 7px 0px 0px;
 	border-radius: 7px 7px 0px 0px;
+        background: none;
 }
 #header #cart .heading h4 {
 	color: #333333;
@@ -192,9 +205,18 @@ label {
 	text-decoration: none;
         vertical-align: bottom;
 }
+#header #cart.hasItems .heading a, #header #cart.hasItems.active .heading a {
+        font-weight: bolder;
+}
 #header #cart .heading a span {
 	background: #FFFFFF url('../image/arrow-down.png') 100% 50% no-repeat;
 	padding-right: 15px;
+}
+#header #cart.hasItems .heading a span {
+	background-color: #1DB4B7;
+}
+#header #cart.active .heading a span {
+	background: none;
 }
 #header #cart .heading a span#cart-total {
 	margin-left: -10px;
@@ -411,6 +433,9 @@ label {
 }
 #header .links a + a {
 	border-left: 1px solid #b9bdbd;
+}
+#header .links td.name a, #header .links td.name small, #header .checkout a {
+        font-family: 'tahoma',Geneva,sans-serif;
 }
 #header .links #currency a {
 	padding: 0px 6px;
@@ -765,7 +790,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         display: inline-block;
         width: 76%;
         font-size: 12px;
-        font-family: ''tahoma'',sans-serif;
+        font-family: 'tahoma',sans-serif;
 }
 .tab-content #productTabDesc .rating {
         display: inline-block;
@@ -986,7 +1011,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .category-info .cDescription p {
     line-height: 15px;
     margin-bottom: 0;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
     font-size: 12px;
 }
 .category-list {
@@ -1167,7 +1192,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-grid .productItem {
         text-align: center;
         line-height: 14px;
-        font-family: ''tahoma'',sans-serif;
+        font-family: 'tahoma', Geneva, sans-serif;
         font-size: 12px;
 }
 .product-grid .productItem .name {
@@ -1179,7 +1204,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	text-decoration: none;
 	display: block;
         line-height: 15px;
-        font-family: ''tahoma'',sans-serif;
+        font-family: 'tahoma', Geneva, sans-serif;
         font-size: 12px;
 }
 .product-grid .productItem .image {
@@ -1362,7 +1387,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .briefSummary {
 	margin-bottom: 10px;
         width: 549px;
-        font-family: ''tahoma'',sans-serif;
+        font-family: 'tahoma', Geneva, sans-serif;
         font-size: 12px;
 }
 .product-info .price {
@@ -2060,17 +2085,18 @@ a.buttonHome:hover, input.buttonHome:hover {
     display: inline-block;
     padding-right: 20px;
     min-height: 28px;
-    width: 130px;
+    width: 160px;
     vertical-align: top;
 }
 .checkout-content .prow .pLabel > span, .checkout-content .prow .pLabel > label {
     display: inline-block;
     line-height: 30px;
     font-weight: 700;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 .checkout-content .pInput {
     display: inline-block;
-    width: 290px;
+    width: 225px;
 }
 .checkout-content .paSelect .pInput {
     float: right;
@@ -2202,7 +2228,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer p {
     margin-bottom: 6px;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
     font-size: 12px;
 }
 #footer ul {
@@ -2259,7 +2285,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 #footer .column > div {
     margin-bottom: 20px;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
     font-size: 12px;
 }
 #footer .column .weAreSoactive > h4 > span {
@@ -2331,7 +2357,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 #footer .column a {
     text-decoration: none;
     color: #514f4f;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
     font-size: 12px;
 }
 #footer .column a:hover {
@@ -2360,7 +2386,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     color: #514f4f;
     font-size: 12px;
     margin-bottom: 0;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
 }
 
 #powered {
@@ -2383,7 +2409,7 @@ a.buttonHome:hover, input.buttonHome:hover {
     margin-top: 10px;
     text-align: center;
     font-size: 12px;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
 }
 .soInfo span {
     font-weight: bold;
@@ -2729,13 +2755,13 @@ overflow: auto;
 
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal a {    
-        font-family: ''tahoma'',sans-serif;
+        font-family: 'tahoma', Geneva, sans-serif;
         font-size: 12px;
         width: 170px;
         color: #888888;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem {
-	font-family: ''tahoma'',sans-serif;
+	font-family: 'tahoma', Geneva, sans-serif;
         font-size: 12px;
 }
 .jcarousel-skin-tango .jcarousel-item-horizontal div.priceItem span.save {
@@ -2776,6 +2802,8 @@ overflow: auto;
     padding: 0;
     font-family: 'tahoma', Geneva, sans-serif;
     font-size: 8px;
+}
+.jcarousel-skin-tango .jcarousel-item-vertical a, .jcarousel-skin-tango .jcarousel-item-vertical .nameItem a, .jcarousel-skin-tango .jcarousel-item-vertical a, .jcarousel-skin-tango .jcarousel-item-vertical .priceItem span {
     line-height: 12px;
 }
 .jcarousel-skin-tango .jcarousel-item-placeholder {
@@ -2954,7 +2982,7 @@ overflow: auto;
     max-width: 170px;
 }
 .completeLook li > .nameItem a {
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
     font-size: 12px;
     color: #888888;
 }
@@ -3235,6 +3263,7 @@ overflow: auto;
     display: inline-block;
     line-height: 30px;
     font-weight: 700;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 .content-account .pInput {
     display: inline-block;
@@ -3436,9 +3465,9 @@ overflow: auto;
 /************* End Facebook login ***********/
 .tab-content #productTabDesc .descTab p, .review-list {
     font-size: 12px;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
 }
 .informationContent, .informationContent a {
     font-size: 12px;
-    font-family: ''tahoma'',sans-serif;
+    font-family: 'tahoma', Geneva, sans-serif;
 }

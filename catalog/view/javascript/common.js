@@ -254,13 +254,13 @@ $(document).ready(function() {
     /* Ajax Cart */
     $('#cart > .heading a').live('click', function() {
         $('#cart').addClass('active');
-        $('#header #cart').css('border','none');
+        
 		
         $('#cart').load('index.php?route=module/cart #cart > *');
 		
         $('#cart').live('mouseleave', function() {
             $(this).removeClass('active');
-            $('#header #cart').css({'border-left':'2px solid #1db4b7', 'border-right': '2px solid #1db4b7', 'border-bottom': '2px solid #1db4b7' });
+            
         });
     });
 
@@ -353,7 +353,7 @@ function openCart(delay, update) {
         $("html, body").animate({ scrollTop: 0 }, 600);
         $('#cart').load('index.php?route=module/cart #cart > *');
     }
-    $('#cart').addClass("active").css("border", "none");
+    $('#cart').addClass("active");
     if (typeof delay != 'undefined' && delay)
     {
         cartTimeout = setTimeout('closeCart()', delay);
@@ -361,7 +361,7 @@ function openCart(delay, update) {
 } 
 
 function closeCart() {
-    $('#cart').removeClass("active").css({'border-left':'2px solid #1db4b7', 'border-right': '2px solid #1db4b7', 'border-bottom': '2px solid #1db4b7' });
+    $('#cart').removeClass("active").addClass("hasItems");
 }
 
 function addToCart(product_id, quantity) {

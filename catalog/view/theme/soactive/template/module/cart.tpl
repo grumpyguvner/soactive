@@ -1,5 +1,4 @@
-<div id="cart">
-    
+<div id="cart" class="click<?php if ($products || $vouchers) echo ' hasItems' ?>">
   <div class="heading">
     <img src="catalog/view/theme/soactive/image/bag.png" alt="Bag" />
     <a><span id="cart-total"><?php echo $text_items; ?></span></a></div>
