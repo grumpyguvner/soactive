@@ -171,7 +171,7 @@ class ModelCatalogFilter extends Model {
 	public function getFilterDescriptions($filter_group_id) {
 		$filter_data = array();
 		
-		$filter_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "filter WHERE filter_group_id = '" . (int)$filter_group_id . "'");
+		$filter_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "filter WHERE filter_group_id = '" . (int)$filter_group_id . "' ORDER BY sort_order ASC");
 				
 		foreach ($filter_query->rows as $filter) {
 			$filter_description_data = array();
