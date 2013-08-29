@@ -686,13 +686,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 )));
         };
 
-        $discount = array();
+        $special = array();
         if ($stock_item['saleprice'] > 0 && $stock_item['saleprice'] < $stock_item['price'])
         {
             $customer_group_id = (string) $this->tableLookUp(DB_PREFIX . "customer_group_description", 'customer_group_id', array('name' => 'Default'));
-            $discount[] = array(
+            $special[] = array(
                 'customer_group_id' => $customer_group_id,
-                'quantity' => 0,
                 'priority' => 0,
                 'price' => $stock_item['saleprice']
                 );
@@ -752,7 +751,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     'tag' => NULL
             )),
             'product_attribute' => $attribute,
-            'product_discount' => $discount,
+            'product_special' => $special,
 //            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
             'keyword' => seoUrl($model),
             'product_category' => $stock_item['categories'],
@@ -769,8 +768,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $product_id = $product_info['product_id'];
             $data['product_store'] = $this->model_catalog_product->getProductStores($product_id);
             $data['product_option'] = $this->model_catalog_product->getProductOptions($product_id);
-//            $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
-            $data['product_special'] = $this->model_catalog_product->getProductSpecials($product_id);
+            $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
+//            $data['product_special'] = $this->model_catalog_product->getProductSpecials($product_id);
 //            $data['product_image'] = $this->model_catalog_product->getProductImages($product_id);
             $data['product_download'] = $this->model_catalog_product->getProductDownloads($product_id);
 //            $data['product_asset'] = $this->model_catalog_product->getProductAssets($product_id);
