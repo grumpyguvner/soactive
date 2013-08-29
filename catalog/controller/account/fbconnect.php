@@ -68,12 +68,15 @@ class ControllerAccountFbconnect extends Controller {
 				$add_data['fax'] = '';
 				$add_data['telephone'] = '';
 				$add_data['company'] = '';
-				$add_data['address_1'] = '';
-				$add_data['address_2'] = '';
-				$add_data['city'] = '';
-				$add_data['postcode'] = '';
-				$add_data['country_id'] = 0;
-				$add_data['zone_id'] = 0;
+                                
+                                if (isset($fbuser_profile['birthday']) && strtotime($fbuser_profile['birthday']) !== false)
+                                {
+                                    $dob = getdate(strtotime($fbuser_profile['birthday']));
+                                    
+                                    $add_data['day_birth'] = $dob['mday'];
+                                    $add_data['month_birth'] = $dob['mon'];
+                                    $add_data['year_birth'] = $dob['year'];
+                                }
 
 				$this->model_account_customer->addCustomer($add_data);
 				$this->config->set('config_customer_approval',$config_customer_approval);
