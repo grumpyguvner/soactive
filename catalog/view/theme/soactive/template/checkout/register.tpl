@@ -279,28 +279,29 @@
         </div>
    
 </div>
-<div style="clear: both; padding-top: 15px; border-top: 1px solid #EEEEEE;">  
-    <?php
-    if (isset($show_newsletter)) {
+<?php if ($shipping_required || $show_newsletter) { ?>
+    <div style="clear: both; padding-top: 15px; border-top: 1px solid #DDDDDD;">
+        <?php
+    if ($show_newsletter) {
         ?>
         <label for="newsletter" class="checkbox"><input type="checkbox" name="newsletter" value="1" id="newsletter" />
             <?php echo $entry_newsletter; ?></label>
-        <br />
         <?php
-    } else {
+    }
+    if ($shipping_required && $show_newsletter) echo '<br />';
+    if ($show_newsletter) {
         ?>
-        <input type="hidden" name="newsletter" value="1" />
+        <label for="shipping" class="checkbox"><?php if ($shipping_address) { ?>
+                <input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
+            <?php } else { ?>
+                <input type="checkbox" name="shipping_address" value="1" id="shipping" />
+            <?php } ?>
+            <?php echo $entry_shipping; ?></label>
         <?php
     }
     ?>
-    <?php if ($shipping_required) { ?>
-        <label for="shipping" class="checkbox"><input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
-            <?php echo $entry_shipping; ?></label>
-        <br />
-    <?php } ?>
-    <br />
-    <br />
-</div>
+    </div>
+<?php } ?>
 <?php if ($text_agree) { ?>
     <div class="buttons" style="text-align: right">
         <label class="checkbox"><input type="checkbox" name="agree" value="1" /> <?php echo $text_agree; ?>

@@ -9,10 +9,13 @@ require_once(DIR_SYSTEM . 'library/csrest_subscribers.php');
 //-----------------------------------------
 class ModelAccountNewsletter extends Model {
 
-    public function subscribe($email = '', $name = '', $name2 = '', $listType = '') {
+    public function subscribe($email = '', $fields = array(), $listType = '') {
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             return;
+        
+        if (!isset($fields['firstname'])) $fields['firstname'] = ($this->customer->IsLogged()) ? $this->customer->getFirstName() : '';
+        if (!isset($fields['lastname'])) $fields['lastname'] = ($this->customer->IsLogged()) ? $this->customer->getLastName() : '';
 
         if ($this->config->get('newsletter_mailcampaign_enabled')) {
             $listID = $this->config->get('newsletter_mailcampaign_listid');
@@ -33,8 +36,15 @@ class ModelAccountNewsletter extends Model {
                     break;
             }
             
+            $data = array();
+            
+            $data['name'] = '';
+            
+            if ($fields['firstname']) $data['name'] += $fields['firstname'] . ' ';
+            if ($fields['lastname']) $data['name'] += $fields['lastname'];
+            
             $mailcampaign = new CS_REST_Subscribers($listID, $this->config->get('newsletter_mailcampaign_apikey'));
-            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $name,
+            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $data['name'],
             'Resubscribe' => true
                 ));
 
@@ -67,8 +77,13 @@ class ModelAccountNewsletter extends Model {
             }
             
             $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
+            
+            $data = array();
+            
+            if ($fields['firstname']) $data['FNAME'] = $fields['firstname'];
+            if ($fields['lastname']) $data['LNAME'] = $fields['lastname'];
 
-            $retval = $mailchimp->listSubscribe($listID, $email, array(), 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
+            $retval = $mailchimp->listSubscribe($listID, $email, $data, 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
 
             if ($mailchimp->errorCode) {
                 //echo "Unable to load listSubscribe()!\n";
@@ -90,10 +105,10 @@ class ModelAccountNewsletter extends Model {
             if ($query->row['email'] == $email) {
                 $query = $this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter = 1 WHERE email = '" . $this->db->escape($email) . "'");
             } else {
-                $query = $this->db->query("INSERT INTO " . DB_PREFIX . "newsletter SET email = '" . $this->db->escape($email) . "', name = '" . $this->db->escape($name) . "', name2 = '" . $this->db->escape($name2) . "'");
+                $query = $this->db->query("INSERT INTO " . DB_PREFIX . "newsletter SET email = '" . $this->db->escape($email) . "', name = '" . $this->db->escape($fields['firstname']) . "', name2 = '" . $this->db->escape($fields['lastname']) . "'");
             }
         } else {
-            $query = $this->db->query("INSERT INTO " . DB_PREFIX . "newsletter SET email = '" . $this->db->escape($email) . "', name = '" . $this->db->escape($name) . "', name2 = '" . $this->db->escape($name2) . "'");
+            $query = $this->db->query("INSERT INTO " . DB_PREFIX . "newsletter SET email = '" . $this->db->escape($email) . "', name = '" . $this->db->escape($fields['firstname']) . "', name2 = '" . $this->db->escape($fields['lastname']) . "'");
         }
 
         $this->language->load('mail/newsletter');

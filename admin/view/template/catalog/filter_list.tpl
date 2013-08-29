@@ -1,24 +1,26 @@
 <?php echo $header; ?>
 <div id="content">
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <?php if ($error_warning) { ?>
-  <div class="warning"><?php echo $error_warning; ?></div>
-  <?php } ?>
-  <?php if ($success) { ?>
-  <div class="success"><?php echo $success; ?></div>
-  <?php } ?>
+  <?php echo p3html::tb_breadcrumbs($breadcrumbs); ?>
+
   <div class="box">
+
     <div class="heading">
       <h1><img src="view/image/order.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+			<?php if ($error_warning) { ?>
+				<?php echo p3html::tb_alert('error', $error_warning, true, 'warning'); ?>
+			<?php } ?>
+			<?php if ($success) { ?>
+				<?php echo p3html::tb_alert('success', $success, true, 'success'); ?>
+			<?php } ?>
+      <div class="buttons form-actions form-actions-top">
+				<?php echo p3html::tb_form_button_insert($button_insert, $insert); ?>
+				<?php echo p3html::tb_form_button_delete($button_delete); ?>
+			</div>
     </div>
+      
     <div class="content">
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="list">
+        <table class="list table table-striped table-hover">
           <thead>
             <tr>
               <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
@@ -44,9 +46,9 @@
                 <?php } else { ?>
                 <input type="checkbox" name="selected[]" value="<?php echo $filter['filter_group_id']; ?>" />
                 <?php } ?></td>
-              <td class="left"><?php echo $filter['name']; ?></td>
-              <td class="right"><?php echo $filter['sort_order']; ?></td>
-              <td class="right"><?php foreach ($filter['action'] as $action) { ?>
+              <td class="column-name"><?php echo $filter['name']; ?></td>
+              <td class="column-sort"><?php echo $filter['sort_order']; ?></td>
+              <td class="column-action"><?php foreach ($filter['action'] as $action) { ?>
                 [ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
                 <?php } ?></td>
             </tr>

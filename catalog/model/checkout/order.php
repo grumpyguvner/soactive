@@ -27,11 +27,13 @@ class ModelCheckoutOrder extends Model {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_total SET order_id = '" . (int)$order_id . "', code = '" . $this->db->escape($total['code']) . "', title = '" . $this->db->escape($total['title']) . "', text = '" . $this->db->escape($total['text']) . "', `value` = '" . (float)$total['value'] . "', sort_order = '" . (int)$total['sort_order'] . "'");
 		}
                 
-                if (isset($data['newsletter']) && $data['newsletter'])
+                if ((isset($data['newsletter']) && $data['newsletter']) ||
+                    ($this->config->get('newsletter_mailcampaign_enabled') && $this->config->get('newsletter_mailcampaign_checkout_listid') && !$this->config->get('newsletter_mailcampaign_checkout_optin')) || 
+                    ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_checkout_listid') && !$this->config->get('newsletter_mailchimp_checkout_optin')))
                 {
                     $this->load->model('account/newsletter');
 
-                    $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname'], 'checkout');
+                    $this->model_account_newsletter->subscribe($data['email'], $data, 'checkout');
                 }
 
 		return $order_id;

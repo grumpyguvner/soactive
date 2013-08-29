@@ -102,6 +102,8 @@ class ControllerCheckoutLogin extends Controller {
 		if (!$json) {
 			unset($this->session->data['guest']);
 				
+                        $this->session->data['newsletter'] = (bool)$this->customer->newsletter();
+                        
 			// Default Addresses
 			$this->load->model('account/address');
 				

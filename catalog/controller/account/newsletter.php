@@ -14,8 +14,9 @@ class ControllerAccountNewsletter extends Controller {
         $this->document->setTitle($this->language->get('heading_title'));
 
         if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+            
             if ($this->request->post['newsletter']) {
-                $this->model_account_newsletter->subscribe($this->customer->getEmail(), $this->customer->getFirstName(), $this->customer->getLastName(), 'account');
+                $this->model_account_newsletter->subscribe($this->customer->getEmail(), array(), 'account');
             } else {
                 $this->model_account_newsletter->unsubscribe($this->customer->getEmail());
             }

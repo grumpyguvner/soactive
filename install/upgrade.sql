@@ -589,3 +589,7 @@ CREATE TABLE IF NOT EXISTS `oc_syspro_order` (
 
 ALTER TABLE `oc_review` ADD `reply` text NOT NULL AFTER `rating`;
 
+#### Start 1.5.4:BC1.2.13
+
+ALTER TABLE `oc_banner_image` ADD `status` TINYINT(1) NOT NULL DEFAULT 1 AFTER `sort_order`;
+

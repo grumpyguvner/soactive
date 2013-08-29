@@ -41,6 +41,10 @@ class ControllerModuleNewsletter extends Controller {
 
         $success = null;
         $error = null;
+        
+        if (isset($this->request->get['listId'])) {
+            $this->config->set('newsletter_mailchimp_listid', $this->request->get['listId']);
+        }
 
         if (!$this->request->get['email'] || !filter_var($this->request->get['email'], FILTER_VALIDATE_EMAIL)) {
             $error = $this->language->get('error_email');
@@ -49,13 +53,15 @@ class ControllerModuleNewsletter extends Controller {
         if (empty($this->session->data['newsletter_name_required'])) {
             $this->session->data['newsletter_name_required'] = 'optional';
         }
+        
+        $data = array();
 
         if (empty($this->request->get['name'])) {
-            $this->request->get['name'] = '';
+            $data['firstname'] = $this->request->get['name'];
         }
 
-        if (empty($this->request->get['name2'])) {
-            $this->request->get['name2'] = '';
+        if (empty($this->request->get['lastname'])) {
+            $data['lastname'] = $this->request->get['name2'];
         }
 
 //		if ($this->session->data['newsletter_name_required'] == 'required' && !$this->request->get['name']) {
@@ -77,10 +83,10 @@ class ControllerModuleNewsletter extends Controller {
 
         if (is_null($error)) {
             if ($this->request->get['subscribe']) {
-                if ($this->customer->isLogged()) {
-                    $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2'], 'account');
+                if ($this->customer->isLogged() && !isset($this->request->get['listId'])) {
+                    $this->model_account_newsletter->subscribe($this->request->get['email'], $data, 'account');
                 } else {
-                    $this->model_account_newsletter->subscribe($this->request->get['email'], $this->request->get['name'], $this->request->get['name2']);
+                    $this->model_account_newsletter->subscribe($this->request->get['email'], $data);
                 }
                 if ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_double_optin')) {
                     $success = $this->language->get('text_subscribed_optin');

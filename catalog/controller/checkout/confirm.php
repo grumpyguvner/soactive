@@ -125,7 +125,9 @@ class ControllerCheckoutConfirm extends Controller {
                 $data['email'] = $this->customer->getEmail();
                 $data['telephone'] = $this->customer->getTelephone();
                 $data['fax'] = $this->customer->getFax();
-                $data['newsletter'] = $this->session->data['newsletter'];
+                if (isset($this->session->data['newsletter'])) {
+                    $data['newsletter'] = $this->session->data['newsletter'];
+                }
 
                 $this->load->model('account/address');
 

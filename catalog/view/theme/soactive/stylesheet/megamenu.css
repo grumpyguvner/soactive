@@ -104,6 +104,7 @@
 	position: relative;
         font-weight: 700;
 	padding: 0 12px;
+        font-family: 'Open Sans Condensed',sans-serif;
 }
 #megamenu > ul > li:hover > a {
 	background: #FFF;
@@ -188,7 +189,7 @@
     margin-top: 15px; 
 }
 #megamenu > ul > li > div.dropdown h5, #megamenu > ul > li > div.dropdown h6 {
-    
+    font-family: 'Open Sans Condensed',sans-serif;
     color: #514f4f;
     margin: 0 0 15px 0;
     

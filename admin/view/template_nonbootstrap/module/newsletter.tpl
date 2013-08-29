@@ -212,6 +212,7 @@
           <td><?php echo $mailchimp_account_lists; ?></td>
           <td>
             <select name="newsletter_mailchimp_account_listid">
+                <option><?php echo $text_none; ?></option>
             <?php
             foreach ($newsletter_mailchimp_lists as $listid => $listname)
             {
@@ -255,6 +256,7 @@
           <td><?php echo $mailchimp_checkout_lists; ?></td>
           <td>
             <select name="newsletter_mailchimp_checkout_listid">
+                <option><?php echo $text_none; ?></option>
             <?php
             foreach ($newsletter_mailchimp_lists as $listid => $listname)
             {
@@ -365,6 +367,7 @@
           <td><?php echo $mailcampaign_client_id; ?></td>
           <td>
             <select name="newsletter_mailcampaign_client_id">
+                <option></option>
             <?php
             foreach ($newsletter_mailcampaign_clients as $ctlistid => $listname)
             {
@@ -419,6 +422,7 @@
           <td><?php echo $mailcampaign_account_lists; ?></td>
           <td>
             <select name="newsletter_mailcampaign_account_listid">
+                <option><?php echo $text_none; ?></option>
             <?php
             foreach ($newsletter_mailcampaign_lists as $listid => $listname)
             {
@@ -462,6 +466,7 @@
           <td><?php echo $mailcampaign_checkout_lists; ?></td>
           <td>
             <select name="newsletter_mailcampaign_checkout_listid">
+                <option><?php echo $text_none; ?></option>
             <?php
             foreach ($newsletter_mailcampaign_lists as $listid => $listname)
             {
