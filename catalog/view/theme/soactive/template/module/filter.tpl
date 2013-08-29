@@ -195,13 +195,25 @@ if ($filter_groups || $options) {
         filter = [];
         option = [];
         product = [];
-	
-        $('.filter_category input[type=\'checkbox\']:checked').each(function(element) {
-            filter.push(this.value);
+        
+        $('.filter_category').each(function(element) {
+            if ($(this).find('input[type=\'checkbox\']:checked').length > 0)
+            {
+                filter[filter.length] = [];
+                $(this).find('input[type=\'checkbox\']:checked').each(function(element) {
+                    filter[filter.length-1].push(this.value);
+                });
+            }
         });
         
-        $('.filter_option input[type=\'checkbox\']:checked').each(function(element) {
-            option.push(this.value);
+        $('.filter_option').each(function(element) {
+            if ($(this).find('input[type=\'checkbox\']:checked').length > 0)
+            {
+                option[option.length] = [];
+                $(this).find('input[type=\'checkbox\']:checked').each(function(element) {
+                    option[option.length-1].push(this.value);
+                });
+            }
         });
         
         if ($('#filter_product').val() != '')
@@ -214,14 +226,22 @@ if ($filter_groups || $options) {
         
         if (filter.length)
         {
-            $('#afilter input[name=\'filter\']').attr('disabled', false).val(filter.join(','));
+            for (i = 0; i < filter.length; i++) 
+            {
+                filter[i].join(',');
+            }
+            $('#afilter input[name=\'filter\']').attr('disabled', false).val(filter.join(':'));
         } else {
             $('#afilter input[name=\'filter\']').attr('disabled', 'disabled').val();
         }
         
         if (option.length)
         {
-            $('#afilter input[name=\'option\']').attr('disabled', false).val(option.join(','));
+            for (i = 0; i < option.length; i++) 
+            {
+                option[i].join(',');
+            }
+            $('#afilter input[name=\'option\']').attr('disabled', false).val(option.join(':'));
         } else {
             $('#afilter input[name=\'option\']').attr('disabled', 'disabled').val();
         }
