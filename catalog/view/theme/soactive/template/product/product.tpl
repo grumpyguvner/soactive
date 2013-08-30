@@ -421,10 +421,10 @@ $('#button-cart').bind('click', function() {
 			} 
 			
 			if (json['success']) {
-//				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-//					
-//				$('.success').fadeIn('slow');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
+                                $('.success').fadeIn('slow').fadeOut(5000, "linear");
+                                
 				$('#cart-total').html(json['total']);
                     
                                 openCart(5000, true); 
