@@ -15,7 +15,11 @@ class ModelAccountCustomer extends Model {
         $this->load->model('account/newsletter');
 
         if ($data['newsletter'] == 1) {
-            $this->model_account_newsletter->subscribe($data['email'], $data['firstname'], $data['lastname'], 'account');
+            $date_of_birt['dob'] = (!empty($data['day_birth']) && isset($data['month_birth']) && isset($data['year_birth']) ? date("Y-m-d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth'])) : NULL);
+            $fields = array("firstname" => $data['firstname'], "lastname" => $data['lastname'], "title" => $data['title'], "dob" => $date_of_birt['dob']);
+            
+            
+            $this->model_account_newsletter->subscribe($data['email'], $fields, 'account');
         } elseif ($data['newsletter'] == 0) {
             $this->model_account_newsletter->unsubscribe($data['email']);
         }
