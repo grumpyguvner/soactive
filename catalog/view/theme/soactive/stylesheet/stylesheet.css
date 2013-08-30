@@ -1435,6 +1435,13 @@ a.buttonHome:hover, input.buttonHome:hover {
 	color: #000000;
         margin-bottom: 0;
 }
+.product-info .outOfStock {
+        color: #FD0303;
+        font-weight: bold;
+        margin-top: -10px;
+        padding-bottom: 10px;
+        padding-left: 9px;
+}
 .product-info .options .error {
         display: inline-block;
         font-weight: 700;

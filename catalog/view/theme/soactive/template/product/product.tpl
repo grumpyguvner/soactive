@@ -225,11 +225,6 @@
           </div>
           <?php } ?>
           <?php } ?>
-          <?php if (empty($option_value)) { ?>            
-            <div class="error">
-                <?php echo $text_out_of_stock; ?>
-            </div> 
-          <?php } ?>
         </div>
         <?php } ?>
         <div class="cart">
@@ -247,7 +242,12 @@
             <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo strtoupper($button_wishlist); ?></a>
         </div>
           
-    </div>  
+    </div> 
+     <?php if (empty($option_value)) { ?>            
+        <div class="outOfStock">
+            <?php echo $stock; ?>
+        </div> 
+      <?php } ?>   
       <div class="product-tab<?php if ($news && !empty($news)) echo ' news'?>"> 
             <ul class="nav nav-tabs" id="productTab">
                 <li class="active"><a href="#productTabDesc"><?php echo strtoupper($tab_description); ?></a></li>
