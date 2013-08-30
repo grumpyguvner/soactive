@@ -167,6 +167,7 @@ class ControllerProductProduct extends Controller {
 			$this->data['text_buy'] = $this->language->get('text_buy');
                         $this->data['text_press'] = $this->language->get('text_press');
                         $this->data['text_view_product_info'] = $this->language->get('text_view_product_info');
+                        $this->data['text_out_of_stock'] = $this->language->get('text_out_of_stock');
                         
                         if (count($this->data['breadcrumbs']) > 1)
                         {
