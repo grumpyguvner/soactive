@@ -39,13 +39,13 @@ class ControllerModuleFilter extends Controller {
             $this->data['action'] = str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url));
 
             if (isset($this->request->get['filter'])) {
-                $this->data['filter_category'] = explode(',', $this->request->get['filter']);
+                $this->data['filter_category'] = explode(',', str_replace(':', ',', $this->request->get['filter']));
             } else {
                 $this->data['filter_category'] = array();
             }
 
             if (isset($this->request->get['option'])) {
-                $this->data['filter_option'] = explode(',', $this->request->get['option']);
+                $this->data['filter_option'] = explode(',', str_replace(':', ',', $this->request->get['option']));
             } else {
                 $this->data['filter_option'] = array();
             }
