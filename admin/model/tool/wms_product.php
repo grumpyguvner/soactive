@@ -693,7 +693,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $special[] = array(
                 'customer_group_id' => $customer_group_id,
                 'priority' => 0,
-                'price' => $stock_item['saleprice']
+                'price' => round($stock_item['saleprice']/1.2,4)
                 );
         };
 
@@ -713,12 +713,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'quantity' => 0,
             'minimum' => "",
             'subtract' => 1,
-            'stock_status_id' => 7, //TODO: lookup "In Stock" OOS status code instead of hard code
+            'stock_status_id' => $this->config->get('config_stock_status_id'),
             'forward' => 0,
             'date_available' => date("Y-m-d"),
             'manufacturer_id' => NULL,
             'shipping' => 1,
-            'price' => round(($stock_item['price'] * 1.2), 2),
+            'price' => round($stock_item['price']/1.2,4),
             'points' => 0,
             'weight' => NULL,
             'weight_class_id' => NULL,
