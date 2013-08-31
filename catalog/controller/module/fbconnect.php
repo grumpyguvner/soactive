@@ -1,6 +1,7 @@
 <?php
 class ControllerModulefbconnect extends Controller {
 	protected function index($setting) {
+            if ($this->extensions->isInstalled('fbconnect', 'module') && $this->config->get('fbconnect_status')) {
 
 		$this->language->load('module/fbconnect'); 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -26,16 +27,12 @@ class ControllerModulefbconnect extends Controller {
 				$this->data['fbconnect_button'] = html_entity_decode($this->config->get('fbconnect_button_' . $this->config->get('config_language_id')));
 			}
 			else $this->data['fbconnect_button'] = $this->language->get('heading_title');
-
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/fbconnect.tpl')) {
-				$this->template = $this->config->get('config_template') . '/template/module/fbconnect.tpl';
-			} else {
-				$this->template = 'default/template/module/fbconnect.tpl';
-			}
+                        
+                        $this->setTemplate('module/fbconnect.tpl');
 
 			$this->render();
-		}				
-
+                }
+            }
 	}
 }
 ?>

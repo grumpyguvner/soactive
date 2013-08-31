@@ -241,7 +241,13 @@
         <div class="wishlist">
             <a class="button" onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo strtoupper($button_wishlist); ?></a>
         </div>
-    </div>  
+          
+    </div> 
+     <?php if (empty($option_value)) { ?>            
+        <div class="outOfStock">
+            <?php echo $stock; ?>
+        </div> 
+      <?php } ?>   
       <div class="product-tab<?php if ($news && !empty($news)) echo ' news'?>"> 
             <ul class="nav nav-tabs" id="productTab">
                 <li class="active"><a href="#productTabDesc"><?php echo strtoupper($tab_description); ?></a></li>
@@ -421,10 +427,10 @@ $('#button-cart').bind('click', function() {
 			} 
 			
 			if (json['success']) {
-//				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
-//					
-//				$('.success').fadeIn('slow');
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>');
 					
+                                $('.success').fadeIn('slow').fadeOut(5000, "linear");
+                                
 				$('#cart-total').html(json['total']);
                     
                                 openCart(5000, true); 

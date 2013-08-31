@@ -40,11 +40,19 @@ class ModelAccountNewsletter extends Model {
             
             $data['name'] = '';
             
-            if ($fields['firstname']) $data['name'] += $fields['firstname'] . ' ';
+            if ($fields['firstname']) $data['name'] = $fields['firstname'] . ' ';
             if ($fields['lastname']) $data['name'] += $fields['lastname'];
             
+            $data['title'] = '';
+            
+            if ($fields['title']) $data['title'] = $fields['title'];
+            
+            $data['dob'] = '';
+            
+            if ($fields['dob']) $data['dob'] = $fields['dob'];
+            
             $mailcampaign = new CS_REST_Subscribers($listID, $this->config->get('newsletter_mailcampaign_apikey'));
-            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $data['name'],
+            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $data['name'], 'title' => $data['title'], 'dob' => $data['dob'],
             'Resubscribe' => true
                 ));
 

@@ -166,46 +166,7 @@ class ControllerAccountLogin extends Controller {
             $this->data['password'] = $this->request->post['password'];
         } else {
             $this->data['password'] = '';
-        }
-        
-        if ($this->extensions->isInstalled('fbconnect', 'module') && $this->config->get('fbconnect_status')) {
-             $this->language->load('module/fbconnect'); 
-
-             if (!$this->customer->isLogged()) {
-
-            if (!isset($this->fbconnect)) {
-                require_once(DIR_SYSTEM . 'vendor/facebook-sdk/facebook.php');
-                $this->fbconnect = new Facebook(array(
-                            'appId' => $this->config->get('fbconnect_apikey'),
-                            'secret' => $this->config->get('fbconnect_apisecret'),
-                        ));
-            }
-
-            $this->data['fbconnect_url'] = $this->fbconnect->getLoginUrl(
-                    array(
-                        'scope' => 'email,user_birthday,user_location,user_hometown',
-                        'redirect_uri' => $this->url->link('account/fbconnect', '', 'SSL')
-                    )
-            );
-
-            if ($this->config->get('fbconnect_button_' . $this->config->get('config_language_id'))) {
-                $this->data['fbconnect_button'] = html_entity_decode($this->config->get('fbconnect_button_' . $this->config->get('config_language_id')));
-            }
-            else
-                $this->data['fbconnect_button'] = $this->language->get('heading_title');
-
-            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/fbconnect.tpl')) {
-                $this->template = $this->config->get('config_template') . '/template/module/fbconnect.tpl';
-            } else {
-                $this->template = 'default/template/module/fbconnect.tpl';
-            }
-
-            $this->render();
-        }
-        } else {
-            $this->data['fbconnect_url'] = '';
-            $this->data['fbconnect_button'] = '';
-        }		
+        }	
 
         $this->setTemplate('account/login.tpl');
 
@@ -215,7 +176,8 @@ class ControllerAccountLogin extends Controller {
             'common/content_top',
             'common/content_bottom',
             'common/footer',
-            'common/header'
+            'common/header',
+            'module/fbconnect'
         );
 
         $this->response->setOutput($this->render());

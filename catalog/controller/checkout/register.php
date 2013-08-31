@@ -56,7 +56,7 @@ class ControllerCheckoutRegister extends Controller {
                 $this->data['entry_newsletter'] = $this->language->get('entry_newsletter');
                 
                 if (($this->config->get('newsletter_mailcampaign_enabled') && (!$this->config->get('newsletter_mailcampaign_account_listid') || !$this->config->get('newsletter_mailcampaign_account_optin'))) ||
-                    ($this->config->get('newsletter_mailchimp_enabled') && (!$this->config->get('newsletter_mailcampaign_mailchimp_listid') || !$this->config->get('newsletter_mailchimp_account_optin'))))
+                    ($this->config->get('newsletter_mailchimp_enabled') && (!$this->config->get('newsletter_mailchimp_account_listid') || !$this->config->get('newsletter_mailchimp_account_optin'))))
                 {
                     $this->data['show_newsletter'] = false;
                 } else {

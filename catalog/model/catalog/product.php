@@ -427,8 +427,6 @@ class ModelCatalogProduct extends Model {
 
         $product_data = $this->cache->get('product.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . $cache);
 
-        $product_data = false;
-
         if (!$product_data) {
 
             $myCategories = array();
@@ -445,23 +443,28 @@ class ModelCatalogProduct extends Model {
                     }
                     unset($data['afilters'][0]);
                 }
-            }
+            } 
+           
+            $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+            $option_groups = (!empty($data['filter_option'])) ? explode(':', $data['filter_option']) : array();
 
             $sql = "SELECT p.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '" . (int) $customer_group_id . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special";
 
-            if (!empty($data['filter_category_id']) || !empty($data['filter_name']) || !empty($data['filter_option'])) {
+            if (!empty($data['filter_category_id']) || !empty($data['filter_name']) || !empty($data['filter_filter']) || !empty($data['filter_option'])) {
                 if (!empty($data['filter_sub_category'])) {
                     // $sql .= " FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (cp.category_id = p2c.category_id)";			
                     $sql .= " FROM " . DB_PREFIX . "product_to_category p2c";
                 } else {
                     $sql .= " FROM " . DB_PREFIX . "product_to_category p2c";
                 }
+                
+                foreach ($filter_groups as $key => $filters) {
+                    $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id)";
+                }
 
                 if (!empty($data['filter_name'])) {
                     $sql .= " LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = p2c.category_id and cd.language_id = '" . (int) $this->config->get('config_language_id') . "')";
-                }
-
-                if (!empty($data['filter_filter']) || !empty($data['filter_name'])) {
+                    
                     $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN " . DB_PREFIX . "product p ON (pf.product_id = p.product_id)";
                     $sql .= " LEFT JOIN " . DB_PREFIX . "filter_description fd ON (pf.filter_id = fd.filter_id and fd.language_id = '" . (int) $this->config->get('config_language_id') . "')";
                 } else {
@@ -471,8 +474,9 @@ class ModelCatalogProduct extends Model {
                 $sql .= " FROM " . DB_PREFIX . "product p";
             }
             
-            if (!empty($data['filter_option'])) {
-                $sql .= " LEFT JOIN " . DB_PREFIX . "product_option_value pov ON (p.product_id = pov.product_id)";
+            foreach ($option_groups as $key => $value)
+            {
+                $sql .= " LEFT JOIN " . DB_PREFIX . "product_option_value pov" . $key . " ON (p.product_id = pov" . $key . ".product_id)";
             }
 
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "'";
@@ -555,29 +559,30 @@ class ModelCatalogProduct extends Model {
                 }
 
                 $sql .= " AND (" . implode(' OR ', $implode_data) . ")";
-
-                if (!empty($data['filter_filter'])) {
+                
+                foreach ($filter_groups as $key => $filters) {
                     $implode = array();
 
-                    $filters = explode(',', $data['filter_filter']);
+                    $filters = explode(',', $filters);
 
                     foreach ($filters as $filter_id) {
                         $implode[] = (int) $filter_id;
                     }
 
-                    $sql .= " AND pf.filter_id IN (" . implode(',', $implode) . ")";
+                    $sql .= " AND pf" . $key . ".filter_id IN (" . implode(',', $implode) . ")";
                 }
 
-                if (!empty($data['filter_option'])) {
+
+                foreach ($option_groups as $key => $options) {
                     $implode = array();
 
-                    $filters = explode(',', $data['filter_option']);
+                    $options = explode(',', $options);
 
-                    foreach ($filters as $filter_id) {
-                        $implode[] = (int) $filter_id;
+                    foreach ($options as $option_id) {
+                        $implode[] = (int) $option_id;
                     }
 
-                    $sql .= " AND pov.option_value_id IN (" . implode(',', $implode) . ")";
+                    $sql .= " AND pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ")";
                 }
             }
 
@@ -930,7 +935,6 @@ class ModelCatalogProduct extends Model {
         $cache = md5(http_build_query($data));
 
         $product_data = $this->cache->get('product.total.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . $cache);
-        $product_data = false;
 
         if (!$product_data) {
             $myCategories = array();
@@ -948,7 +952,9 @@ class ModelCatalogProduct extends Model {
                     unset($data['afilters'][0]);
                 }
             }
-
+           
+            $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+            $option_groups = (!empty($data['filter_option'])) ? explode(':', $data['filter_option']) : array();
 
             $sql = "SELECT COUNT(DISTINCT p.product_id) AS total";
 
@@ -959,12 +965,14 @@ class ModelCatalogProduct extends Model {
                 } else {
                     $sql .= " FROM " . DB_PREFIX . "product_to_category p2c";
                 }
+                
+                foreach ($filter_groups as $key => $filters) {
+                    $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id)";
+                }
 
                 if (!empty($data['filter_name'])) {
                     $sql .= " LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = p2c.category_id and cd.language_id = '" . (int) $this->config->get('config_language_id') . "')";
-                }
-
-                if (!empty($data['filter_filter']) || !empty($data['filter_name'])) {
+                    
                     $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf ON (p2c.product_id = pf.product_id) LEFT JOIN " . DB_PREFIX . "product p ON (pf.product_id = p.product_id)";
                     $sql .= " LEFT JOIN " . DB_PREFIX . "filter_description fd ON (pf.filter_id = fd.filter_id and fd.language_id = '" . (int) $this->config->get('config_language_id') . "')";
                 } else {
@@ -974,8 +982,9 @@ class ModelCatalogProduct extends Model {
                 $sql .= " FROM " . DB_PREFIX . "product p";
             }
             
-            if (!empty($data['filter_option'])) {
-                $sql .= " LEFT JOIN " . DB_PREFIX . "product_option_value pov ON (p.product_id = pov.product_id)";
+            foreach ($option_groups as $key => $value)
+            {
+                $sql .= " LEFT JOIN " . DB_PREFIX . "product_option_value pov" . $key . " ON (p.product_id = pov" . $key . ".product_id)";
             }
 
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "'";
@@ -1057,30 +1066,31 @@ class ModelCatalogProduct extends Model {
                     }
                 }
 
-                $sql .= " AND (" . implode(' OR ', $implode_data) . ")";
-
-                if (!empty($data['filter_filter'])) {
+                $sql .= " AND (" . implode(' OR ', $implode_data) . ")"; 
+                
+                foreach ($filter_groups as $key => $filters) {
                     $implode = array();
 
-                    $filters = explode(',', $data['filter_filter']);
+                    $filters = explode(',', $filters);
 
                     foreach ($filters as $filter_id) {
                         $implode[] = (int) $filter_id;
                     }
 
-                    $sql .= " AND pf.filter_id IN (" . implode(',', $implode) . ")";
+                    $sql .= " AND pf" . $key . ".filter_id IN (" . implode(',', $implode) . ")";
                 }
 
-                if (!empty($data['filter_option'])) {
+
+                foreach ($option_groups as $key => $options) {
                     $implode = array();
 
-                    $filters = explode(',', $data['filter_option']);
+                    $options = explode(',', $options);
 
-                    foreach ($filters as $filter_id) {
-                        $implode[] = (int) $filter_id;
+                    foreach ($options as $option_id) {
+                        $implode[] = (int) $option_id;
                     }
 
-                    $sql .= " AND pov.option_value_id IN (" . implode(',', $implode) . ")";
+                    $sql .= " AND pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ")";
                 }
             }
 
