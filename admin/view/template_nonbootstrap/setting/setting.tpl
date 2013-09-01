@@ -263,6 +263,20 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><?php echo $entry_category_instockonly; ?></td>
+              <td><?php if ($config_category_instockonly) { ?>
+                <input type="radio" name="config_category_instockonly" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_category_instockonly" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_category_instockonly" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="config_category_instockonly" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_review; ?></td>
               <td><?php if ($config_review_status) { ?>
                 <input type="radio" name="config_review_status" value="1" checked="checked" id="confYes" />

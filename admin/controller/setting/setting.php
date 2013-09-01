@@ -71,6 +71,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_catalog_limit'] = $this->language->get('entry_catalog_limit');
 		$this->data['entry_admin_limit'] = $this->language->get('entry_admin_limit');
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
+		$this->data['entry_category_instockonly'] = $this->language->get('entry_category_instockonly');
 		$this->data['entry_new_product_age'] = $this->language->get('entry_new_product_age');
 		$this->data['entry_review'] = $this->language->get('entry_review');
         $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
@@ -113,7 +114,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
 		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
-        $this->data['entry_image_information'] = $this->language->get('entry_image_information');
+                $this->data['entry_image_information'] = $this->language->get('entry_image_information');
 		$this->data['entry_image_thumb'] = $this->language->get('entry_image_thumb');
 		$this->data['entry_image_popup'] = $this->language->get('entry_image_popup');
 		$this->data['entry_image_product'] = $this->language->get('entry_image_product');
@@ -503,6 +504,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_product_count'] = $this->request->post['config_product_count'];
 		} else {
 			$this->data['config_product_count'] = $this->config->get('config_product_count');
+		}
+                
+		if (isset($this->request->post['config_category_instockonly'])) {
+			$this->data['config_category_instockonly'] = $this->request->post['config_category_instockonly'];
+		} else {
+			$this->data['config_category_instockonly'] = $this->config->get('config_category_instockonly');
 		}
 		
 		if (isset($this->request->post['config_new_product_age'])) {

@@ -205,6 +205,10 @@ class ModelCatalogProduct extends Model {
         if (!empty($data['filter_manufacturer_id'])) {
             $sql .= " AND p.manufacturer_id = '" . (int) $data['filter_manufacturer_id'] . "'";
         }
+        
+        if ($this->config->get('config_category_instockonly')) {
+            $sql .= " AND p.quantity > 0";
+        }
 
         $sql .= " GROUP BY p.product_id";
 
@@ -608,6 +612,10 @@ class ModelCatalogProduct extends Model {
 
             if (!empty($data['filter_product_max_price'])) {
                 $sql .= " AND IFNULL((SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1),price) <= " . (float) $data['filter_product_max_price'];
+            }
+        
+            if ($this->config->get('config_category_instockonly')) {
+                $sql .= " AND p.quantity > 0";
             }
 
             $sql .= " GROUP BY p.product_id";
