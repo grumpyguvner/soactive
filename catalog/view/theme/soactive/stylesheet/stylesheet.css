@@ -1230,6 +1230,9 @@ a.buttonHome:hover, input.buttonHome:hover {
         height: 40px;
         width: 40px
 } 
+.product-grid .productItem .image img.saleProduct,#featuredStyles img.saleProduct {
+    display: none;
+}
 #column-left + #column-right + #content .product-grid > div {
 	width: 125px;
 }
