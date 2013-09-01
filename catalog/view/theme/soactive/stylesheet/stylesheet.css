@@ -434,6 +434,10 @@ label {
 #header .links a + a {
 	border-left: 1px solid #b9bdbd;
 }
+#header .links .checkoutLink {
+	font-weight: bold;
+        color: #1DB4B7;
+}
 #header .links td.name a, #header .links td.name small, #header .checkout a {
         font-family: 'tahoma',Geneva,sans-serif;
 }
