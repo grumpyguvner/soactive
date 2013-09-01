@@ -67,6 +67,7 @@ class ControllerModuleFilter extends Controller {
                     $filter_data = array();
                     
                     $count_group = 0;
+                    $count_active = 0;
 
                     foreach ($filter_group['filter'] as $filter) {
                         $data = array(
@@ -82,6 +83,11 @@ class ControllerModuleFilter extends Controller {
                             'count' => $count
                         );
                         
+                        if ($count)
+                        {
+                            $count_active++;
+                        }
+                        
                         $count_group += $count;
                     }
 
@@ -89,7 +95,8 @@ class ControllerModuleFilter extends Controller {
                         'filter_group_id' => $filter_group['filter_group_id'],
                         'name' => sprintf($this->language->get('filter_title'), $filter_group['name']),
                         'filter' => $filter_data,
-                        'count' => $count_group
+                        'count' => $count_group,
+                        'active' => $count_active
                     );
                 }
             }
@@ -103,6 +110,7 @@ class ControllerModuleFilter extends Controller {
                     $option_data = array();
                     
                     $count_group = 0;
+                    $count_active = 0;
 
                     foreach ($option['option_value'] as $option_value) {
                         $data = array(
@@ -118,6 +126,11 @@ class ControllerModuleFilter extends Controller {
                             'count' => $count
                         );
                         
+                        if ($count)
+                        {
+                            $count_active++;
+                        }
+                        
                         $count_group += $count;
                     }
 
@@ -125,14 +138,15 @@ class ControllerModuleFilter extends Controller {
                         'option_id' => $option['option_id'],
                         'name' => sprintf($this->language->get('option_title'), $option['name']),
                         'option_value' => $option_data,
-                        'count' => $count_group
+                        'count' => $count_group,
+                        'active' => $count_active
                     );
                 }
             }
             
             $range = $this->model_catalog_category->getCategoryPriceRange($category_id);
             $this->data['filter_product_min_range'] = 0;
-            $this->data['filter_product_max_range'] = (ceil($this->currency->convert($range['max'], $this->config->get('config_currency'), $this->currency->getCode()) / 10) * 10);
+            $this->data['filter_product_max_range'] = $range ? (ceil($this->currency->convert($range['max'], $this->config->get('config_currency'), $this->currency->getCode()) / 10) * 10) : 0;
             
             $this->data['filter_product_min_price'] = $this->data['filter_product_min_range'];
             $this->data['filter_product_max_price'] = $this->data['filter_product_max_range'];

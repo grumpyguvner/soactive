@@ -1,5 +1,6 @@
 <?php
 if ($filter_groups || $options) {
+    $cnt = 0;
     ?>
     <div class="aFilterbox box">
         <div class="afilterContent">
@@ -13,8 +14,12 @@ if ($filter_groups || $options) {
                             ?>
                             <div class="filter_category accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                 <div class="accordion-heading">
-                                    <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $filter_group['name']; ?></a>
+                                    <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" <?php echo ($filter_group['active'] > 1) ? ' data-toggle="collapse" class="accordion-toggle "' : ' class="accordion-toggle collapsed" onclick="javascript: return false;"' ?>><?php echo $filter_group['name']; ?></a>
                                 </div>
+                                <?php
+                                if ($filter_group['active'] > 1)
+                                {
+                                ?>
                                 <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
                                     <div class="accordion-inner">
                                         <div class="box-content">
@@ -36,6 +41,9 @@ if ($filter_groups || $options) {
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <?php
                             }
@@ -48,8 +56,12 @@ if ($filter_groups || $options) {
                             ?>
                             <div class="filter_option accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                 <div class="accordion-heading">
-                                    <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $option['name']; ?></a>
+                                    <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" <?php echo ($option['active'] > 1) ? ' data-toggle="collapse" class="accordion-toggle "' : ' class="accordion-toggle collapsed" onclick="javascript: return false;"' ?>><?php echo $option['name']; ?></a>
                                 </div>
+                                <?php
+                                if ($option['active'] > 1)
+                                {
+                                ?>
                                 <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
                                     <div class="accordion-inner">
                                         <div class="box-content">
@@ -71,6 +83,9 @@ if ($filter_groups || $options) {
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <?php
                             }
