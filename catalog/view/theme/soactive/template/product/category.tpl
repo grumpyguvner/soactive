@@ -74,12 +74,16 @@ if ($login_required)
             </div>
             <div class="sort"><span><?php echo $text_sort; ?></span>
                 <select onchange="location = this.value;">
-                    <?php foreach ($sorts as $sort_first) { ?>
+                    <?php foreach ($sorts as $sort_first) {
+                    if (stristr($sort_first['text'], 'Model') === false)
+                    {
+                        ?>
                         <?php if ($sort_first['value'] == $sort . '-' . $order) { ?>
                             <option value="<?php echo $sort_first['href']; ?>" selected="selected"><?php echo $sort_first['text']; ?></option>
                         <?php } else { ?>
                             <option value="<?php echo $sort_first['href']; ?>"><?php echo $sort_first['text']; ?></option>
                         <?php } ?>
+                    <?php } ?>
                     <?php } ?>
                 </select>
             </div>
