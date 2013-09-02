@@ -90,7 +90,7 @@
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="prow">
+                    <div class="prow" style="display: none;">
                         <div class="pLabel">
                                 <span><?php echo $entry_fax; ?></span>
                         </div>
