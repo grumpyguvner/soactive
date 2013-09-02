@@ -23,7 +23,10 @@
         <label for="payment-address-new" class="radio"><input type="radio" name="payment_address" value="new" id="payment-address-new" />
             <?php echo $text_address_new; ?></label>
     </p>
-
+<?php
+} else {
+?>
+    <input style="display: none" type="radio" name="payment_address" value="new" id="payment-address-new" />
 <?php } ?>
 
 

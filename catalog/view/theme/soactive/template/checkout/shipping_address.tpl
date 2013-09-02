@@ -18,6 +18,10 @@
             <?php echo $text_address_new; ?></label>
     </p>
 
+<?php
+} else {
+?>
+    <input style="display: none" type="radio" name="shipping_address" value="new" id="shipping-address-new" />
 <?php } ?>
 <div class="row"> 
     <div class="span10">
