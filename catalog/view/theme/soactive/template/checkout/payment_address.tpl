@@ -79,7 +79,7 @@
                     <input type="text" name="phone" value="" />
                 </div>
             </div>
-            <div class="prow">
+            <div class="prow" style="display:none">
                 <div class="pLabel">
                     <span><?php echo $entry_fax; ?></span>
                 </div>
