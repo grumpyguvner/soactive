@@ -26,7 +26,7 @@
 <?php
 } else {
 ?>
-    <input style="display: none" type="radio" name="payment_address" value="new" id="payment-address-new" />
+    <input style="display: none" type="radio" name="payment_address" value="new" id="payment-address-new" checked="checked" />
 <?php } ?>
 
 

@@ -21,7 +21,7 @@
 <?php
 } else {
 ?>
-    <input style="display: none" type="radio" name="shipping_address" value="new" id="shipping-address-new" />
+    <input style="display: none" type="radio" name="shipping_address" value="new" id="shipping-address-new" checked="checked" />
 <?php } ?>
 <div class="row"> 
     <div class="span10">
