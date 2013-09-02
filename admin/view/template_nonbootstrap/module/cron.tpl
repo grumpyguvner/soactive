@@ -62,8 +62,12 @@ function addModule() {
 
 	html += '      <table class="form">';
 	html += '        <tr>';
+	html += '          <td><?php echo $entry_name; ?></td>';
+	html += '          <td><input type="text" name="cron_data[' + module_row + '][name]" value="" /></td>';
+	html += '        </tr>';
+	html += '        <tr>';
 	html += '          <td><?php echo $entry_description; ?></td>';
-	html += '          <td><textarea name="cron_data[' + module_row + '][description]" id="description-' + module_row + '"></textarea></td>';
+	html += '          <td><textarea name="cron_data[' + module_row + '][description]" rows="8" cols="60" id="description-' + module_row + '"></textarea></td>';
 	html += '        </tr>';
 	html += '    <tr>';
 	html += '      <td><?php echo $entry_status; ?></td>';
@@ -71,10 +75,6 @@ function addModule() {
 	html += '        <option value="1"><?php echo $text_enabled; ?></option>';
 	html += '        <option value="0"><?php echo $text_disabled; ?></option>';
 	html += '      </select></td>';
-	html += '    </tr>';
-	html += '    <tr>';
-	html += '      <td><?php echo $entry_sort_order; ?></td>';
-	html += '      <td><input type="text" name="cron_data[' + module_row + '][sort_order]" value="" size="3" /></td>';
 	html += '    </tr>';
 	html += '  </table>'; 
 	html += '</div>';
