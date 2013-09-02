@@ -141,7 +141,7 @@ class ModelCatalogOption extends Model {
 	public function getOptionValueDescriptions($option_id) {
 		$option_value_data = array();
 		
-		$option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "option_value WHERE option_id = '" . (int)$option_id . "'");
+		$option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "option_value WHERE option_id = '" . (int)$option_id . "'  ORDER BY sort_order ASC ");
 				
 		foreach ($option_value_query->rows as $option_value) {
 			$option_value_description_data = array();
