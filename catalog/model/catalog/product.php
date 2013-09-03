@@ -224,6 +224,11 @@ class ModelCatalogProduct extends Model {
         
         if ($this->extensions->isInstalled('merchandising', 'module') && $this->config->get('merchandising_status')) {
             $sort_data[] = 'p2c.sort_order';
+                
+            if (isset($data['sort']) && $data['sort'] == 'p.sort_order')
+            {
+                $data['sort'] = 'p2c.sort_order';
+            }
         }
 
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
@@ -436,8 +441,6 @@ class ModelCatalogProduct extends Model {
         $cache = md5(http_build_query($data));
 
         $product_data = $this->cache->get('product.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . $cache);
-        
-        $product_data = false;
 
         if (!$product_data) {
 
@@ -640,6 +643,11 @@ class ModelCatalogProduct extends Model {
         
             if (!empty($data['filter_category_id']) && $this->extensions->isInstalled('merchandising', 'module') && $this->config->get('merchandising_status')) {
                 $sort_data[] = 'p2c.sort_order';
+                
+                if (isset($data['sort']) && $data['sort'] == 'p.sort_order')
+                {
+                    $data['sort'] = 'p2c.sort_order';
+                }
             }
 
             if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
