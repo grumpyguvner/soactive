@@ -102,7 +102,7 @@ class ControllerModuleMerchandising extends Controller {
         
         if (!$flag)
         {
-            $this->db->query("ALTER TABLE `" . DB_PREFIX . "product_to_category` ADD COLUMN `sort_order` INT(3) NOT NULL DEFAULT 999  AFTER `category_id`");
+            $this->db->query("ALTER TABLE `" . DB_PREFIX . "product_to_category` ADD COLUMN `sort_order` INT(3) NOT NULL DEFAULT 0  AFTER `category_id`");
         }
     }
 }

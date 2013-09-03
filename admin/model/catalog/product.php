@@ -401,10 +401,16 @@ class ModelCatalogProduct extends Model {
 				'p.status',
 				'p.sort_order'
 			);	
+                        
+                        if (!empty($data['filter_category_id']) && $this->extensions->isInstalled('merchandising', 'module')) {
+                            $sort_data[] = 'p2c.sort_order';
+                        }
 			
 			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 				$sql .= " ORDER BY " . $data['sort'];	
-			} else {
+                        } elseif (!empty($data['filter_category_id']) && $this->extensions->isInstalled('merchandising', 'module')) {
+                            $sql .= ' ORDER BY p2c.sort_order';
+                        } else {
 				$sql .= " ORDER BY pd.name";	
 			}
 			

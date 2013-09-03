@@ -189,6 +189,7 @@ class ControllerCatalogCategory extends Controller {
                 $this->data['tab_general'] = $this->language->get('tab_general');
                 $this->data['tab_data'] = $this->language->get('tab_data');
 		$this->data['tab_design'] = $this->language->get('tab_design');
+		$this->data['tab_merchandising'] = $this->language->get('tab_merchandising');
 		
  		if (isset($this->error['warning'])) {
 			$this->data['error_warning'] = $this->error['warning'];
@@ -227,8 +228,8 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->get['category_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-      		$category_info = $this->model_catalog_category->getCategory($this->request->get['category_id']);
-    	}
+                        $category_info = $this->model_catalog_category->getCategory($this->request->get['category_id']);
+                }
 		
 		$this->load->model('localisation/language');
 		
@@ -415,6 +416,72 @@ class ControllerCatalogCategory extends Controller {
 		$this->load->model('design/layout');
 		
 		$this->data['layouts'] = $this->model_design_layout->getLayouts();
+                
+                $this->data['merchandising'] = ($this->extensions->isInstalled('merchandising', 'module') && isset($this->request->get['category_id'])) ? true : false;
+                
+                if ($this->data['merchandising'])
+                {
+                    $this->load->language('catalog/product');
+                    
+                    $this->data['column_sort_order'] = $this->language->get('column_sort_order');
+                    $this->data['column_image'] = $this->language->get('column_image');
+                    $this->data['column_name'] = $this->language->get('column_name');
+                    $this->data['column_model'] = $this->language->get('column_model');
+                    $this->data['column_price'] = $this->language->get('column_price');
+                    $this->data['column_quantity'] = $this->language->get('column_quantity');
+                    $this->data['column_status'] = $this->language->get('column_status');
+                    $this->data['column_action'] = $this->language->get('column_action');
+                    
+                    $this->load->model('catalog/product');
+                    
+                    $this->data['products'] = array();
+
+                    $data = array('filter_category_id' => $this->request->get['category_id']);
+
+                    $this->load->model('tool/image');
+
+                    $results = $this->model_catalog_product->getProducts($data);
+
+                    foreach ($results as $result) {
+                        $action = array();
+
+                        $action[] = array(
+                            'text' => $this->language->get('text_edit'),
+                            'href' => $this->url->link('catalog/product/update', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'], 'SSL')
+                        );
+
+                        if ($result['image'] && file_exists(DIR_IMAGE . $result['image'])) {
+                            $image = $this->model_tool_image->resize($result['image'], 40, 40);
+                        } else {
+                            $image = $this->model_tool_image->resize('no_image.jpg', 40, 40);
+                        }
+
+                        $special = false;
+
+                        $product_specials = $this->model_catalog_product->getProductSpecials($result['product_id']);
+
+                        foreach ($product_specials as $product_special) {
+                            if (($product_special['date_start'] == '0000-00-00' || $product_special['date_start'] < date('Y-m-d')) && ($product_special['date_end'] == '0000-00-00' || $product_special['date_end'] > date('Y-m-d'))) {
+                                $special = $product_special['price'];
+
+                                break;
+                            }
+                        }
+
+                        $this->data['products'][] = array(
+                            'product_id' => $result['product_id'],
+                            'name' => $result['name'],
+                            'model' => $result['model'],
+                            'price' => $result['price'],
+                            'special' => $special,
+                            'image' => $image,
+                            'quantity' => $result['quantity'],
+                            'status' => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+                            'selected' => isset($this->request->post['selected']) && in_array($result['product_id'], $this->request->post['selected']),
+                            'action' => $action
+                        );
+                    }
+                }
 						
 		$this->template = 'catalog/category_form.tpl';
 		$this->children = array(
