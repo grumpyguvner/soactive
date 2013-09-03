@@ -74,10 +74,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
     }
 
     function cacheWMSData($stylenumber = "", $forceRefresh = false) {
-
         $this->debug("fetching products from wms");
 //        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
-        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
+        $limit = int($this->config->get('wms_products_limit'));
+        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT '.$limit : '');
+        $this->debug($aProductSql);
+        $aProduct = $this->dbQF->Execute($aProductSql);
 
         $myModel = "";
         $product_id = 0;
@@ -88,11 +90,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $cnt = 10;
         if ($aProduct->RecordCount() > 0) {
             while (!$aProduct->EOF) {
-                $cnt--;
                 //delay execution so other processes have a chance
+                $cnt--;
                 if($cnt<1) {
-                    if ($this->debugMode)
-                        return true;
+                    $this->debug("Pausing import for 5 secs");
                     sleep(5);
                     $cnt=9;
                 }
