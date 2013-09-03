@@ -552,6 +552,13 @@ label {
 	font-family: Verdana, Geneva, sans-serif;
 	display: block;
 }
+table.sizeguide {
+    width: 100%;
+}
+table.sizeguide td {
+    padding: 5px;
+    border-top: 1px solud #EcEcEc;
+}
 table.form {
 	width: 100%;
 	border-collapse: collapse;
