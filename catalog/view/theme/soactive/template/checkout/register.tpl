@@ -100,7 +100,7 @@
                 <select class="year" name="year_birth">
                     <?php
                     $actYear = date("Y",time());
-                    $startYear = date("Y",strtotime('-120years'));
+                    $startYear = date("Y",strtotime('-110years'));
                     if ($day_birth) {
                         for ($i = $actYear; $i >= $startYear; $i--) {
                             if ($i == $year_birth) {
@@ -287,16 +287,19 @@
         <label for="newsletter" class="checkbox"><input type="checkbox" name="newsletter" value="1" id="newsletter" />
             <?php echo $entry_newsletter; ?></label>
         <?php
-    }
-    if ($shipping_required && $show_newsletter) echo '<br />';
-    if ($show_newsletter) {
+    } else {
         ?>
-        <label for="shipping" class="checkbox"><?php if ($shipping_address) { ?>
-                <input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
+        <input type="hidden" name="newsletter" value="1" />
+        <?php
+    }
+    
+    if ($shipping_required && $show_newsletter) echo '<br />';
+    if ($shipping_required) {
+        ?>
+        <label for="shipping" class="checkbox"><input type="checkbox" name="shipping_address" value="1" id="shipping" checked="checked" />
+            <?php echo $entry_shipping; ?></label>
             <?php } else { ?>
                 <input type="checkbox" name="shipping_address" value="1" id="shipping" />
-            <?php } ?>
-            <?php echo $entry_shipping; ?></label>
         <?php
     }
     ?>

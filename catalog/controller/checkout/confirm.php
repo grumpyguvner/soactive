@@ -125,6 +125,28 @@ class ControllerCheckoutConfirm extends Controller {
                 $data['email'] = $this->customer->getEmail();
                 $data['telephone'] = $this->customer->getTelephone();
                 $data['fax'] = $this->customer->getFax();
+                
+                $this->load->model('account/customer');
+                $customer = $this->model_account_customer->getCustomer($this->customer->getId());
+                
+                if (!empty($customer['title'])) {
+                    $data['title'] = $customer['title'];
+                } else {
+                    $data['title'] = "";
+                }
+                
+                if (isset($this->request->post['day_birth']) && isset($this->request->post['month_birth']) && isset($this->request->post['year_birth'])) {
+                    
+                    $data['day_birth'] = $this->request->post['day_birth'];
+                    $data['month_birth'] = $this->request->post['month_birth'];
+                    $data['year_birth'] = $this->request->post['year_birth'];
+                } else {
+                    $data['day_birth'] = "";
+                    $data['month_birth'] = "";
+                    $data['year_birth'] = "";
+                }   
+                
+                
                 if (isset($this->session->data['newsletter'])) {
                     $data['newsletter'] = $this->session->data['newsletter'];
                 }
@@ -141,10 +163,9 @@ class ControllerCheckoutConfirm extends Controller {
                 $data['telephone'] = $this->session->data['guest']['telephone'];
                 $data['fax'] = $this->session->data['guest']['fax'];
                 $data['newsletter'] = $this->session->data['guest']['newsletter'];
-
                 $payment_address = $this->session->data['guest']['payment'];
             }
-
+            
             $data['payment_firstname'] = $payment_address['firstname'];
             $data['payment_lastname'] = $payment_address['lastname'];
             $data['payment_company'] = $payment_address['company'];

@@ -150,6 +150,12 @@ class ControllerModuleNewsletter extends Controller {
 			$this->data[$this->name . '_mailchimp_send_welcome'] = $this->config->get($this->name . '_mailchimp_send_welcome');
 		}
                 
+                if (isset($this->request->post[$this->name . '_mailchimp_custom_fields'])) {
+			$this->data[$this->name . '_mailchimp_custom_fields'] = $this->request->post[$this->name . '_mailchimp_custom_fields'];
+		} else {
+			$this->data[$this->name . '_mailchimp_custom_fields'] = $this->config->get($this->name . '_mailchimp_custom_fields');
+		}
+                
                         
         $this->data[$this->name . '_mailchimp_lists'] = false;
         
@@ -214,6 +220,12 @@ class ControllerModuleNewsletter extends Controller {
 			$this->data[$this->name . '_mailcampaign_checkout_listid'] = $this->request->post[$this->name . '_mailcampaign_checkout_listid'];
 		} else {
 			$this->data[$this->name . '_mailcampaign_checkout_listid'] = $this->config->get($this->name . '_mailcampaign_checkout_listid');
+		}
+                
+                if (isset($this->request->post[$this->name . '_mailcampaign_custom_fields'])) {
+			$this->data[$this->name . '_mailcampaign_custom_fields'] = $this->request->post[$this->name . '_mailcampaign_custom_fields'];
+		} else {
+			$this->data[$this->name . '_mailcampaign_custom_fields'] = $this->config->get($this->name . '_mailcampaign_custom_fields');
 		}
                 
                 if (isset($this->request->post[$this->name . '_mailcampaign_checkout_optin'])) {

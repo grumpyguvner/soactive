@@ -40,19 +40,28 @@ class ModelAccountNewsletter extends Model {
             
             $data['name'] = '';
             
-            if ($fields['firstname']) $data['name'] = $fields['firstname'] . ' ';
-            if ($fields['lastname']) $data['name'] += $fields['lastname'];
+            if ($fields['firstname']) $data['name'] .= $fields['firstname'] . ' ';
+            if ($fields['lastname']) $data['name'] .= $fields['lastname'];
             
-            $data['title'] = '';
+            $options = explode(',', $this->config->get('newsletter_mailcampaign_custom_fields'));
             
-            if ($fields['title']) $data['title'] = $fields['title'];
-            
-            $data['dob'] = '';
-            
-            if ($fields['dob']) $data['dob'] = $fields['dob'];
+            if (($fields['title']) && (in_array('title', $options))) $title = $fields['title'];
+            if (($fields['dob']) && (in_array('dob', $options))) $dob = $fields['dob'];
             
             $mailcampaign = new CS_REST_Subscribers($listID, $this->config->get('newsletter_mailcampaign_apikey'));
-            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $data['name'], 'title' => $data['title'], 'dob' => $data['dob'],
+            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $data['name'],
+                'CustomFields' => array(
+                  array(
+                      'Key' => 'title',
+                      'Value' => $title,
+                  ),
+                    
+                  array(
+                      'Key' => 'dob',
+                      'Value' => $dob
+                  )
+             ),
+                
             'Resubscribe' => true
                 ));
 
@@ -90,9 +99,16 @@ class ModelAccountNewsletter extends Model {
             
             if ($fields['firstname']) $data['FNAME'] = $fields['firstname'];
             if ($fields['lastname']) $data['LNAME'] = $fields['lastname'];
+            
+            $options = explode(',', $this->config->get('newsletter_mailchimp_custom_fields'));
+            
+            if (($fields['title']) && (in_array('title', $options))) $data['TITLE'] = $fields['title'];
+            if (($fields['dob']) && (in_array('dob', $options))) $data['DOB'] = $fields['dob'];
 
+            
+            
             $retval = $mailchimp->listSubscribe($listID, $email, $data, 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
-
+            
             if ($mailchimp->errorCode) {
                 //echo "Unable to load listSubscribe()!\n";
                 //echo "\tCode=".$api->errorCode."\n";

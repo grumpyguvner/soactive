@@ -334,6 +334,10 @@
                 <?php echo $text_no; ?>
                 <?php } ?></td>
         </tr>
+        <tr>
+          <td><?php echo $mailchimp_custom_fields; ?></td>
+          <td><input type="text" name="newsletter_mailchimp_custom_fields" value="<?php echo $newsletter_mailchimp_custom_fields ?>" size="50" /></td>
+        </tr>
       </table>
 	  </div>
         <!----------------- Start tab Campaign ----------------------->
@@ -500,6 +504,10 @@
                 <input type="radio" name="newsletter_mailcampaign_checkout_optin" value="0" checked="checked" />
                 <?php echo $text_no; ?>
                 <?php } ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $mailcampaign_custom_fields; ?></td>
+          <td><input type="text" name="newsletter_mailcampaign_custom_fields" value="<?php echo $newsletter_mailcampaign_custom_fields ?>" size="50" /></td>
         </tr>
 <!---------------------------------------- End AV 12/04/2013 --------------------------------------------------->
         

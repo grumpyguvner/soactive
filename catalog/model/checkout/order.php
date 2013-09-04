@@ -32,8 +32,11 @@ class ModelCheckoutOrder extends Model {
                     ($this->config->get('newsletter_mailchimp_enabled') && $this->config->get('newsletter_mailchimp_checkout_listid') && !$this->config->get('newsletter_mailchimp_checkout_optin')))
                 {
                     $this->load->model('account/newsletter');
-
-                    $this->model_account_newsletter->subscribe($data['email'], $data, 'checkout');
+                    
+                     $date_of_birth = (!empty($data['day_birth']) && !empty($data['month_birth']) && !empty($data['year_birth']) ? date("Y/m/d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth'])) : NULL);
+                     $fields = array("firstname" => $data['firstname'], "lastname" => $data['lastname'], "title" => $data['title'], "dob" => $date_of_birth);
+            
+                    $this->model_account_newsletter->subscribe($data['email'], $fields, 'checkout');
                 }
 
 		return $order_id;

@@ -142,8 +142,9 @@
                             <select class="year" name="year_birth">
                                 <?php
                                 $actYear = date("Y",time());
+                                $startYear = date("Y",strtotime('-110years'));
                                 if ($day_birth) {
-                                    for ($i = 1930; $i <= $actYear; $i++) {
+                                    for ($i = $actYear; $i >= $startYear; $i--) {
                                         if ($i == $year_birth) {
                                            echo '<option value="'.$year_birth.'" selected="selected">'.$year_birth.'</option>'; 
                                         } else {
@@ -152,7 +153,7 @@
                                     }
                                 } else {
                                     echo '<option value=""></option>';
-                                    for($i = 1930; $i <= $actYear; $i++) {
+                                    for($i = $actYear; $i >= $startYear; $i--) {
                                         echo '<option value="'.$i.'">'.$i.'</option>';
                                     }
                                 }
