@@ -82,6 +82,14 @@ class ModelCatalogCategory extends Model {
 				}
 			}
 		}
+                
+		if (isset($data['product_category'])) {
+			foreach ($data['product_category'] as $product_id => $sort_order) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category (product_id,category_id,sort_order) VALUES ('" . (int)$product_id . "','" . (int)$category_id . "','" . (int)$sort_order . "') ON DUPLICATE KEY UPDATE sort_order='" . (int)$sort_order . "'");
+			}	
+		
+                        $this->cache->delete('product');	
+		}
 						
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id. "'");
 		

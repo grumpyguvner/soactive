@@ -6,8 +6,6 @@ class ModelCatalogCategory extends Model {
 
         $query = $this->db->query("SELECT parent_id FROM " . DB_PREFIX . "category WHERE category_id = '" . (int) $category_id . "'");
 
-
-
         if ($query->num_rows) {
 
             return $query->row['parent_id'];
@@ -34,7 +32,6 @@ class ModelCatalogCategory extends Model {
         foreach ($query->rows as $result) {
             $implode[] = (int) $result['filter_id'];
         }
-
 
         $filter_group_data = array();
 
@@ -118,6 +115,8 @@ class ModelCatalogCategory extends Model {
     }
 
     public function getCategoryPriceRange($category_id) {
+        
+        
         $query = $this->db->query("SELECT MIN(p.price) as min, MAX(p.price) as max FROM " . DB_PREFIX . "product p INNER JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.status = '1' AND p.date_available <= NOW() AND p2c.category_id = '" . (int) $category_id . "' AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' GROUP BY p.product_id");
 
         return $query->row;

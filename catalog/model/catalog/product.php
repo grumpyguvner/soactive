@@ -132,9 +132,9 @@ class ModelCatalogProduct extends Model {
             $sql .= " LEFT JOIN " . DB_PREFIX . "product_tag pt ON (p.product_id = pt.product_id)";
         }
 
-//                if (!empty($myCategories)) {
-//                        $sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
-//                }
+        if (!empty($myCategories)) {
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";			
+        }
 
         $sql .= " WHERE pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "'";
 
@@ -221,6 +221,15 @@ class ModelCatalogProduct extends Model {
             'p.sort_order',
             'p.date_added'
         );
+        
+        if ($this->extensions->isInstalled('merchandising', 'module') && $this->config->get('merchandising_status')) {
+            $sort_data[] = 'p2c.sort_order';
+                
+            if (isset($data['sort']) && $data['sort'] == 'p.sort_order')
+            {
+                $data['sort'] = 'p2c.sort_order';
+            }
+        }
 
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
             if ($data['sort'] == 'pd.name' || $data['sort'] == 'p.model') {
@@ -228,6 +237,8 @@ class ModelCatalogProduct extends Model {
             } else {
                 $sql .= " ORDER BY " . $data['sort'];
             }
+        } elseif ($this->extensions->isInstalled('merchandising', 'module') && $this->config->get('merchandising_status')) {
+            $sort_data[] = 'ORDER BY p2c.sort_order';
         } else {
             $sql .= " ORDER BY p.sort_order";
         }
@@ -629,6 +640,15 @@ class ModelCatalogProduct extends Model {
                 'p.sort_order',
                 'p.date_added'
             );
+        
+            if (!empty($data['filter_category_id']) && $this->extensions->isInstalled('merchandising', 'module') && $this->config->get('merchandising_status')) {
+                $sort_data[] = 'p2c.sort_order';
+                
+                if (isset($data['sort']) && $data['sort'] == 'p.sort_order')
+                {
+                    $data['sort'] = 'p2c.sort_order';
+                }
+            }
 
             if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
                 if ($data['sort'] == 'pd.name' || $data['sort'] == 'p.model') {
@@ -638,6 +658,8 @@ class ModelCatalogProduct extends Model {
                 } else {
                     $sql .= " ORDER BY " . $data['sort'];
                 }
+            } elseif (!empty($data['filter_category_id']) && $this->extensions->isInstalled('merchandising', 'module') && $this->config->get('merchandising_status')) {
+                $sql .= ' ORDER BY p2c.sort_order';
             } else {
                 $sql .= " ORDER BY p.sort_order";
             }

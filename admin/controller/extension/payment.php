@@ -125,7 +125,7 @@ class ControllerExtensionPayment extends Controller {
 	public function install() {
 		$this->load->language('extension/payment');
 		
-		if (!$this->user->hasPermission('modify', 'extension/payment')) {
+		if (!$this->user->isSuperuser() && !$this->user->hasPermission('modify', 'extension/payment')) {
 			$this->session->data['error'] = $this->language->get('error_permission'); 
 			
 			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
@@ -155,7 +155,7 @@ class ControllerExtensionPayment extends Controller {
 	public function uninstall() {
 		$this->load->language('extension/payment');
 		
-		if (!$this->user->hasPermission('modify', 'extension/payment')) {
+		if (!$this->user->isSuperuser() && !$this->user->hasPermission('modify', 'extension/payment')) {
 			$this->session->data['error'] = $this->language->get('error_permission'); 
 			
 			$this->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
