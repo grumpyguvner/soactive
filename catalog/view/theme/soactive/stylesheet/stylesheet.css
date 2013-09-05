@@ -3078,7 +3078,7 @@ overflow: auto;
 }
 #myCarousel .carousel-inner .bannerWrapper .outerContainer .container .innerContainer a + a {
     float: right;
-    width: 119px;
+    width: auto;
 }
 #myCarousel .container {
     line-height: 473px;
