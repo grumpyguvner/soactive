@@ -4,12 +4,14 @@ include_once('wms_core.php');
 
 class ModelToolWMSProduct extends ModelToolWMS {
 
-    function import() {
+    function import($stylenumber = "") {
         $this->debugMode = $this->config->get('wms_products_debug');
-
+        
+        $this->debug("fetching ".($stylenumber=="" ? "ALL STYLES" : "style ".$stylenumber)." from wms");
+ 
         $this->truncate();
 
-        if (!$this->cacheWMSData())
+        if (!$this->cacheWMSData($stylenumber))
             return false;
         
         //FIX We need to add all filters to all categories
@@ -397,7 +399,6 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 $aStock = $this->dbQF->Execute('SELECT products.* FROM products LEFT JOIN colours ON products.colourid = colours.uuid LEFT JOIN sizes ON products.sizeid = sizes.uuid WHERE styleid = "' . $aProduct->fields['uuid'] . '" ORDER BY colours.priority, sizes.priority');
                 if ($aStock->RecordCount() > 0) {
                     while (!$aStock->EOF) {
-                        $this->debug("");
                         $this->debug("processing sku " . $aStock->fields['bleepid'] . "");
                         //initialise sku variables
                         $size = "one size";
