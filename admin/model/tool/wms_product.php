@@ -6,7 +6,9 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
     function import($stylenumber = "") {
         $this->debugMode = $this->config->get('wms_products_debug');
-
+        
+        $this->debug("fetching ".($stylenumber=="" ? "ALL STYLES" : "style ".$stylenumber)." from wms");
+ 
         $this->truncate();
 
         if (!$this->cacheWMSData($stylenumber))

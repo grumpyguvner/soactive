@@ -177,6 +177,10 @@ class ControllerToolWMS extends Controller {
     }
 
     public function import($stylenumber = "") {
+        
+        if($stylenumber=="")
+            $stylenumber = (isset($this->request->get['stylenumber']) ? $this->request->get['stylenumber'] : "");
+
         if ($this->validate()) {
 
             // send the categories, products and options from WMS
