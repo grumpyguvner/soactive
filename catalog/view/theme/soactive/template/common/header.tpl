@@ -79,7 +79,7 @@
                             <?php } ?>
                         </div>
                         <a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a>
-                        <?php echo $cart; ?>
+                        <div style="display: inline-block;"><?php echo $cart; ?></div>
                     </div>
                     <div id="search">
                         <div class="button-search"></div>

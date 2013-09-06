@@ -147,9 +147,9 @@ label {
 	z-index: 9;
         display: inline-block;
         vertical-align: middle;
-        position: absolute;
+/*        position: absolute;
         right: 0;
-        top: 0;
+        top: 0;*/
         border-left: 2px solid #1db4b7;
         border-right: 2px solid #1db4b7;
         border-bottom: 2px solid #1db4b7;
@@ -307,9 +307,9 @@ label {
         z-index: 9;
         display: inline-block;
         vertical-align: middle;
-        position: absolute;
-        right: 263px;
-        top: 11px;
+        position: relative;
+        /*right: 263px;*/
+        top: 0;
 }
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
@@ -337,8 +337,9 @@ label {
         width: 136px;
         min-height: 150px;
         padding: 15px 8px 10px;
-        position: relative;
-        top: 0;
+        position: absolute;
+        top: 24px;
+        right: 3px;
         text-align: left;
 } 
 #header #wrapCurrency.active .content {
@@ -449,8 +450,8 @@ label {
 #header .links .top {
         height: 30px;
         margin-bottom: 23px;
-        margin-top: 10px;
-        margin-right: 122px;
+/*        margin-top: 10px;
+        margin-right: 122px;*/
         text-align: right;
 }
 #header .links .top form {
