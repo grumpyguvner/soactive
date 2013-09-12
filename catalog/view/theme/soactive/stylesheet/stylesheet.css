@@ -162,10 +162,15 @@ label {
 }
 #header #cart.hasItems {
         background-color: #1DB4B7;
+        border: none;
+        width: 131px !important;
+        height: 32px !important; 
 } 
 #header #cart.active {
         background: none;
         border: none;
+        width: 124px;
+        height: 34px;
 } 
 #header #cart .heading {
 	float: right;
@@ -173,7 +178,7 @@ label {
         padding-left: 12px;
 	background: #FFF;
 	position: relative;
-	z-index: 1;
+	z-index: 101;
 }  
 #header #cart.hasItems .heading {
 	padding-left: 10px;
@@ -181,9 +186,10 @@ label {
         background-color: #1DB4B7;
 }
 #header #cart.active .heading {
-	margin-top: 5px;
+	margin-top: 0;
 	padding-top: 10px;
 	padding-bottom: 6px;
+        margin-left: -2px;
 	border-top: 1px solid #EEEEEE;
 	border-left: 1px solid #EEEEEE;
 	border-right: 1px solid #EEEEEE;
@@ -191,7 +197,7 @@ label {
 	-moz-border-radius: 7px 7px 0px 0px;
 	-khtml-border-radius: 7px 7px 0px 0px;
 	border-radius: 7px 7px 0px 0px;
-        background: none;
+        background: #fff;
 }
 #header #cart .heading h4 {
 	color: #333333;
@@ -227,8 +233,9 @@ label {
 #header #cart .content {
 	clear: both;
 	display: none;
-	position: relative;
-	top: -1px;
+	position: absolute;
+        right: 0;
+        top: 43px;
 	padding: 8px;
 	min-height: 150px;
 	border-top: 1px solid #EEEEEE;
@@ -243,6 +250,7 @@ label {
 	-moz-box-shadow: 0px 2px 2px #DDDDDD;
 	box-shadow: 0px 2px 2px #DDDDDD;
 	background: #FFF;
+        z-index: 100
 }
 #header #cart .content, .mini-cart-info .name small, .mini-cart-info td, .mini-cart-total td {
         font-family: 'Open Sans Condensed',sans-serif;
@@ -314,13 +322,14 @@ label {
 #header #wrapCurrency .heading {
         background: none repeat scroll 0 0 #FFFFFF;
         position: relative;
-        z-index: 1;
         float: right;
 } 
 #header #wrapCurrency.active .heading {
-	margin-top: -10px;
+	margin-top: -4px;
 	padding-top: 10px;
 	padding-bottom: 6px;
+}
+#header #wrapCurrency.active .heading a {
 }
 #header #wrapCurrency .heading #currentCurrency > img {
         vertical-align: baseline;
@@ -341,6 +350,7 @@ label {
         top: 24px;
         right: 3px;
         text-align: left;
+        font-family: 'Open Sans Condensed',sans-serif;
 } 
 #header #wrapCurrency.active .content {
 	display: block;
@@ -386,6 +396,9 @@ label {
         background-position: right;
         background-repeat: no-repeat;
         padding-right: 15px;
+}
+#header #wrapCurrency .heading a span {
+        vertical-align: bottom;
 }
 #header #search {
 	width: 332px;
@@ -448,7 +461,7 @@ label {
 #header .links .top a#wishlist-total {
 }
 #header .links .top {
-        height: 30px;
+        height: 38px;
         margin-bottom: 23px;
 /*        margin-top: 10px;
         margin-right: 122px;*/
