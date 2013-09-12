@@ -163,14 +163,16 @@ label {
 #header #cart.hasItems {
         background-color: #1DB4B7;
         border: none;
-        width: 131px !important;
-        height: 32px !important; 
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 2px;
 } 
 #header #cart.active {
         background: none;
         border: none;
-        width: 124px;
-        height: 34px;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 2px;
 } 
 #header #cart .heading {
 	float: right;
@@ -234,7 +236,7 @@ label {
 	clear: both;
 	display: none;
 	position: absolute;
-        right: 0;
+        right: 2px;
         top: 43px;
 	padding: 8px;
 	min-height: 150px;
