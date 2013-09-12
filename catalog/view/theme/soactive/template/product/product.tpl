@@ -95,7 +95,7 @@
           <?php if ($option['type'] == 'select') { ?>
           <div id="option-<?php echo $option['product_option_id']; ?>" class="option">
             <select name="option[<?php echo $option['product_option_id']; ?>]">
-              <option value=""><?php echo $text_select; ?></option>
+              <?php if (count($option['option_value']) != 1) echo '<option value="">' . $text_select_option . '</option>'; ?>
               <?php foreach ($option['option_value'] as $option_value) { ?>
               <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
               <?php if ($option_value['price']) { ?>

@@ -1,4 +1,7 @@
 <?php
+// autoload
+$_['text_select_option'] = 'Select Size';
+
 // Text
 $_['text_search']       = 'Search';
 $_['text_brand']        = 'Brand';
