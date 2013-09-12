@@ -158,7 +158,7 @@
                         </div>
                         <div class="pInput">
                             <select name="country_id">
-                                <option value=""><?php echo $text_select; ?></option>
+                                <option value=""><?php echo $text_select_region; ?></option>
                                 <?php foreach ($countries as $country) { ?>
                                     <?php if ($country['country_id'] == $country_id) { ?>
                                         <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
@@ -220,7 +220,7 @@
                     $('#shipping-postcode-required').hide();
                 }
 			
-                html = '<option value=""><?php echo $text_select; ?></option>';
+                html = '<option value=""><?php echo $text_select_region; ?></option>';
 			
                 if (json['zone'] != '') {
                     for (i = 0; i < json['zone'].length; i++) {
