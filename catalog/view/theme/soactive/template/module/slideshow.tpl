@@ -38,8 +38,15 @@ if (!empty($banners)) {
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#myCarousel .carouselBasebarContainer .container').prepend('<ol class="carousel-indicators"><?php echo $indicators ?></ol>');
-                $('#myCarousel').append('<a data-slide="prev" href="#myCarousel" class="left carousel-control"><span>‹‹</span></a><a data-slide="next" href="#myCarousel" class="right carousel-control"><span>››</span></a>').carousel();
-            });
+                $('#myCarousel').append('<a data-slide="prev" href="#myCarousel" class="left carousel-control"><span>‹‹</span></a><a data-slide="next" href="#myCarousel" class="right carousel-control"><span>››</span></a>').carousel({
+    'animation': {
+        'duration': 7000,
+        'easing':   'linear',
+        'complete': function() {
+        }
+    }
+});
+});
         </script>
     <?php } ?>
     <script type="text/javascript">
