@@ -65,7 +65,7 @@ if ($login_required)
             <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
             <div class="numberProducts">
                 <?php foreach ($limits as $hlimit) { ?>
-                    <?php if ($hlimit['value'] == '100' && $limit != '100') { ?>
+                    <?php if ($hlimit['value'] == '100' && $limit != '100' && $total >= '40') { ?>
                     <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_hundred_per_page; ?></a>
                     <?php } else if ($hlimit['value'] == '40' && $limit == '100') { ?>
                     <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_fourty_per_page; ?></a>
@@ -122,7 +122,7 @@ if ($login_required)
                         <div class="pagination"><?php echo $pagination; ?></div>&nbsp&nbsp
                         <div class="numberProducts">
                             <?php foreach ($limits as $hlimit) { ?>
-                                <?php if ($hlimit['value'] == '100' && $limit != '100') { ?>
+                                <?php if ($hlimit['value'] == '100' && $limit != '100' && $total >= '40') { ?>
                                 <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_hundred_per_page; ?></a>
                                 <?php } else if ($hlimit['value'] == '40' && $limit == '100') { ?>
                                 <a href="<?php echo $hlimit['href']; ?>"><?php echo $text_fourty_per_page; ?></a>

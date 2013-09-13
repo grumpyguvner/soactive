@@ -121,7 +121,7 @@ class ControllerProductCategory extends Controller {
                         'start'              => ($page - 1) * $limit,
                         'limit'              => $limit
                 );
-                
+                                
                 if (!empty($product))
                 {
                     $product = explode(',', $product);
@@ -150,9 +150,11 @@ class ControllerProductCategory extends Controller {
                     $data['filters'] = $this->category->getFilterData();
                     
                     $product_total = $this->model_catalog_product->getTotalProductsAFiltered($data); 
+                    $this->data['total'] = $product_total;
                     $results = $this->model_catalog_product->getProductsAFiltered($data);
                 } else {
                     $product_total = $this->model_catalog_product->getTotalProducts($data); 
+                    $this->data['total'] = $product_total;
                     $results = $this->model_catalog_product->getProducts($data);
                 }
 				
