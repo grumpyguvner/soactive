@@ -75,6 +75,12 @@ abstract class Controller {
         }
 
         if (file_exists(DIR_TEMPLATE . $this->template)) {
+            
+            if (is_object($this->language))
+            {
+                extract($this->language->getAllData());
+            }
+            
             extract($this->data);
 
             $data_layer = $this->data_layer;

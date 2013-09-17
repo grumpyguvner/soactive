@@ -94,6 +94,12 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label"><?php echo $entry_keyword; ?></label>
+                                            <div class="controls">
+                                                <input type="text" name="product_description[<?php echo $language['language_id']; ?>][keyword]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['keyword'] : ''; ?>" class="span6 i-xxlarge">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label class="control-label"><?php echo $entry_tag; ?></label>
                                             <div class="controls">
                                                 <?php if (VERSION >= '1.5.4') { ?>

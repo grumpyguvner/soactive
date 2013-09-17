@@ -80,6 +80,12 @@
                                                 <textarea name="category_description[<?php echo $language['language_id']; ?>][description]" id="description<?php echo $language['language_id']; ?>" class="input-block-level"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>
                                             </div>
                                         </div>
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $entry_keyword; ?></label>
+                                            <div class="controls">
+                                                <input type="text" name="category_description[<?php echo $language['language_id']; ?>][keyword]" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['keyword'] : ''; ?>" class="span6 i-xxlarge">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <?php $langIndex++; ?>

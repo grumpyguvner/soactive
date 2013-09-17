@@ -38,6 +38,10 @@ class ModelCatalogCategory extends Model {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 		}
 		
+		foreach ($data['category_description'] as $language_id => $value) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "', language_id = '" . (int)$language_id . "'");
+		}
+		
 		$this->cache->delete('category');
                 
                 //2012-06 MH Added new_id to return value
@@ -96,6 +100,10 @@ class ModelCatalogCategory extends Model {
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 		}
+                
+		foreach ($data['category_description'] as $language_id => $value) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "', language_id = '" . (int)$language_id . "'");
+		}
 		
 		$this->cache->delete('category');
 	}
@@ -119,7 +127,7 @@ class ModelCatalogCategory extends Model {
 	} 
 
 	public function getCategory($category_id) {
-		$query = $this->db->query("SELECT DISTINCT *, if(date_start,date_start,0) AS date_start, if(date_end,date_end,0) AS date_end, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "') AS keyword FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+		$query = $this->db->query("SELECT DISTINCT *, if(date_start,date_start,0) AS date_start, if(date_end,date_end,0) AS date_end, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "' and language_id = 0) AS keyword FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
 		
 		return $query->row;
 	} 
@@ -171,7 +179,7 @@ class ModelCatalogCategory extends Model {
 	public function getCategoryDescriptions($category_id) {
 		$category_description_data = array();
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
+		$query = $this->db->query("SELECT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "' and language_id = " . DB_PREFIX . "category_description.language_id) AS keyword FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
 		
 		foreach ($query->rows as $result) {
 			$category_description_data[$result['language_id']] = array(
@@ -179,7 +187,8 @@ class ModelCatalogCategory extends Model {
 				'meta_title'     => $result['meta_title'],
 				'meta_keyword'     => $result['meta_keyword'],
 				'meta_description' => $result['meta_description'],
-				'description'      => $result['description']
+				'description'      => $result['description'],
+				'keyword'          => $result['keyword']
 			);
 		}
 		

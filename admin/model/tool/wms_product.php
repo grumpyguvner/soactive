@@ -741,6 +741,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     'meta_description' => ((string) $stock_item['brief_summary'] == "" ? (string) $product_info['brief_summary'] : (string) $stock_item['brief_summary']),
                     'brief_summary' => ((string) $stock_item['brief_summary'] == "" ? (string) $product_info['brief_summary'] : (string) $stock_item['brief_summary']),
                     'description' => ((string) $stock_item['description'] == "" ? (string) $product_info['description'] : (string) $stock_item['description']),
+                    'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
                     'tag' => NULL
             ),
                 $this->languageFr => array(
@@ -750,12 +751,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     'meta_description' => (string) $stock_item['brief_summaryFr'],
                     'brief_summary' => (string) $stock_item['brief_summaryFr'],
                     'description' => (string) $stock_item['descriptionFr'],
+                    'keyword' => seoUrl($model . " " . (string) $stock_item['nameFr']) . ".html",
                     'tag' => NULL
             )),
             'product_attribute' => $attribute,
             'product_special' => $special,
-//            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
-            'keyword' => seoUrl($model),
+            'keyword' => '',
             'product_category' => $stock_item['categories'],
             'product_filter' => $stock_item['filters'],
             'product_store' => $this->config->get('wms_products_store')

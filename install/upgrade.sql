@@ -593,3 +593,6 @@ ALTER TABLE `oc_review` ADD `reply` text NOT NULL AFTER `rating`;
 
 ALTER TABLE `oc_banner_image` ADD `status` TINYINT(1) NOT NULL DEFAULT 1 AFTER `sort_order`;
 
+#### Start 1.5.4:BC1.2.14
+
+ALTER TABLE `oc_url_alias` ADD `language_id` int(11) NOT NULL AFTER `keyword`;

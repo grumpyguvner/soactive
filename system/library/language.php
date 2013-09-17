@@ -34,9 +34,14 @@ class Language {
 
         $this->directory = $directory;
     }
-
+    
     public function get($key) {
         return (isset($this->data[$key]) ? $this->data[$key] : $key);
+    }
+    
+    public function getAllData() {
+        
+        return $this->data;
     }
 
     public function load($filename) {
