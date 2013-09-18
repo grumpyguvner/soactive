@@ -1441,7 +1441,9 @@ CREATE TABLE `oc_filter_description` (
   `language_id` int(11) NOT NULL,
   `filter_group_id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`filter_id`,`language_id`)
+  PRIMARY KEY (`filter_id`,`language_id`),
+  KEY INDEX `index2` (`name`, `filter_group_id`),
+  KEY INDEX `index3` (`filter_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -1907,7 +1909,8 @@ CREATE TABLE `oc_option_value_description` (
   `language_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  PRIMARY KEY (`option_value_id`,`language_id`)
+  PRIMARY KEY (`option_value_id`,`language_id`),
+  KEY INDEX `index2` (`option_id`, `name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -2297,7 +2300,8 @@ CREATE TABLE `oc_product` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `viewed` int(5) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`product_id`)
+  PRIMARY KEY (`product_id`),
+  KEY INDEX `index2` (`model`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -2541,7 +2545,8 @@ CREATE TABLE `oc_product_option` (
   `option_id` int(11) NOT NULL,
   `option_value` text NOT NULL,
   `required` tinyint(1) NOT NULL,
-  PRIMARY KEY (`product_option_id`)
+  PRIMARY KEY (`product_option_id`),
+  KEY INDEX `index2` (`product_id`, `option_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -2585,7 +2590,8 @@ CREATE TABLE `oc_product_option_value` (
   `points_prefix` varchar(1) NOT NULL,
   `weight` decimal(15,8) NOT NULL,
   `weight_prefix` varchar(1) NOT NULL,
-  PRIMARY KEY (`product_option_value_id`)
+  PRIMARY KEY (`product_option_value_id`),
+  KEY INDEX `index2` (`product_option_id`, `product_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -3286,7 +3292,9 @@ CREATE TABLE `oc_url_alias` (
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   `language_id` int(11) NOT NULL,
-  PRIMARY KEY (`url_alias_id`)
+  PRIMARY KEY (`url_alias_id`),
+  KEY `index2` (`keyword`),
+  KEY `index3` (`query`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --

@@ -5,6 +5,11 @@ include_once('wms_core.php');
 class ModelToolWMSProduct extends ModelToolWMS {
 
     function import($stylenumber = "") {
+        
+        $this->cache->setQueue(true);
+        
+        $msc = microtime(true);
+        
         $this->debugMode = $this->config->get('wms_products_debug');
         
         $this->debug("fetching ".($stylenumber=="" ? "ALL STYLES" : "style ".$stylenumber)." from wms");
@@ -23,7 +28,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
             }
         }
 
-        $this->debug("Import Complete");
+        $msc = microtime(true)-$msc;
+        
+        $this->cache->queue(false);
+        $this->debug("Import Complete".':'.round($msc,2).' seconds');
         return true;
     }
 
@@ -810,7 +818,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int) $product_option_id . "', product_id = '" . (int) $product_id . "', option_id = '" . (int) $option_id . "', option_value_id = '" . (int) $option_value_id . "', sku = '" . $stock_item['sku'] . "', quantity = '" . (int) $quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+'");
             $product_option_value_id = (int) $this->db->getLastId();
         }
-        $this->db->query("UPDATE " . DB_PREFIX . "product p SET quantity = (SELECT SUM(quantity) FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_id = p.product_id)");
+        
+        $this->db->query("UPDATE " . DB_PREFIX . "product p SET quantity = (SELECT SUM(quantity) FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_id = p.product_id) WHERE product_id = '" . (int) $product_id . "'");
         return $product_option_value_id;
     }
 

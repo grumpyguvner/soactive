@@ -596,3 +596,16 @@ ALTER TABLE `oc_banner_image` ADD `status` TINYINT(1) NOT NULL DEFAULT 1 AFTER `
 #### Start 1.5.4:BC1.2.14
 
 ALTER TABLE `oc_url_alias` ADD `language_id` int(11) NOT NULL AFTER `keyword`;
+
+ALTER TABLE `oc_url_alias` ADD INDEX `index2` (`query`); 
+ALTER TABLE `oc_url_alias` ADD INDEX `index3` (`keyword`);
+
+ALTER TABLE `oc_product` ADD INDEX `index2` (`model`);
+
+ALTER TABLE `oc_product_option` ADD INDEX `index2` (`product_id`, `option_id`);
+ALTER TABLE `oc_product_option_value` ADD INDEX `index2` (`product_option_id`, `product_id`);
+
+ALTER TABLE `oc_filter_description` ADD INDEX `index2` (`name`, `filter_group_id`);
+ALTER TABLE `oc_filter_description` ADD INDEX `index3` (`filter_group_id`);
+
+ALTER TABLE `oc_option_value_description` ADD INDEX `index2` (`option_id`, `name`);
