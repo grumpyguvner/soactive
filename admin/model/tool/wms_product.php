@@ -511,6 +511,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         // many fields will be controlled via backoffice and we dont want to overwrite.
         $this->load->model('catalog/category');
         $category_info = $this->model_catalog_category->getCategoryByKeyword($category);
+        $category_filters = $this->model_catalog_category->getCategoryFilters($category);
         $data = array(
             "parent_id" => (int) $parent_id,
             "top" => (int) 1,
@@ -518,6 +519,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             "sort_order" => (int) 999,
             "status" => (int) 1,
             'category_description' => $category_description,
+            'category_filter' => $category_filters,
             'keyword' => $category,
             'category_store' => $this->config->get('wms_products_store')
         );
