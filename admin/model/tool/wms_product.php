@@ -30,7 +30,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
         $msc = microtime(true)-$msc;
         
-        $this->cache->queue(false);
+        $this->cache->setQueue(false);
         $this->debug("Import Complete".':'.round($msc,2).' seconds');
         return true;
     }
