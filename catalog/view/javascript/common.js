@@ -120,6 +120,14 @@
                         paContainer.find('input[name=\'city\']').val(json['address']['city']);
                         paContainer.find('select[name=\'country_id\']').val(json['address']['country_id']);
                         paContainer.find('select[name=\'zone_id\']').val(json['address']['zone_id']);
+                       
+                        if (!paContainer.find('select[name=\'zone_id\']').val())
+                        {
+                            paContainer.find('select[name=\'zone_id\']').append('<option value="' + json['address']['zone_id'] + '"></option>').val(json['address']['zone_id']);
+                            
+                            $('select[name=\'country_id\']').trigger('change');
+                        }
+                        
                         paContainer.find('.paLookup').hide();
                         paContainer.find('.paSelect').hide();
                         paContainer.find('.paAddress').show();

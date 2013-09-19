@@ -376,7 +376,9 @@
                 } else {
                     $('#payment-postcode-required').hide();
                 }
-			
+                
+                zone_id = $('#payment-address select[name=\'zone_id\']').val() ? $('#payment-address select[name=\'zone_id\']').val() : '<?php echo $zone_id; ?>' ;
+		
                 html = '<option value=""><?php echo $text_select; ?></option>';
 			
                 if (json['zone'] != '') {
@@ -384,7 +386,7 @@
                     for (i = 0; i < json['zone'].length; i++) {
                         html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 	    			
-                        if (json['zone'][i]['zone_id'] == '<?php echo $zone_id; ?>') {
+                        if (json['zone'][i]['zone_id'] == zone_id) {
                             html += ' selected="selected"';
                         }
 	
