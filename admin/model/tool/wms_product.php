@@ -424,7 +424,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 {
                                     $temp_id = $this->createFilter($size, $filter_size_group_id, $sizeFr);
                                     
-                                    if ($aStock->fields['available_stock'])
+                                    if ((float)$aStock->fields['available_stock'])
                                     {
                                         $size_filter_id[] = $temp_id;
                                     }
