@@ -421,7 +421,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             foreach ($sizes as $key => $size){
                                 $sizeFr=(isset($sizesFr[$key]) ? $sizesFr[$key] : $size);
                                 if(!empty($size))
-                                    $size_filter_id[] = $this->createFilter($size, $filter_size_group_id, $sizeFr);
+                                {
+                                    $temp_id = $this->createFilter($size, $filter_size_group_id, $sizeFr);
+                                    
+                                    if ((float)$aStock->fields['available_stock'])
+                                    {
+                                        $size_filter_id[] = $temp_id;
+                                    }
+                                }
                             }
                         }
                         $enSize = $this->dbQF->Execute('SELECT * FROM sizes_translations WHERE sizeid = "' . $aStock->fields['sizeid'] . '" AND site = "www.soactive.com"');
