@@ -1,7 +1,4 @@
 <?php
-if (is_file('redirects.php')) {
-    include_once('redirects.php');
-}
 
 // Define application environment
 defined('APPLICATION_ENV')
@@ -77,6 +74,10 @@ foreach ($query->rows as $setting) {
 if (!$store_query->num_rows) {
     $config->set('config_url', HTTP_SERVER);
     $config->set('config_ssl', HTTPS_SERVER);
+}
+
+if (is_file('redirects.php')) {
+    include_once('redirects.php');
 }
 
 // Url
