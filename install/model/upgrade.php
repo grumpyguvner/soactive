@@ -264,11 +264,12 @@ class ModelUpgrade extends Model {
                 $status = false;
 
                 // Drop primary keys and indexes.
-                $query = $this->db->query("SHOW INDEXES FROM `" . $table['name'] . "`");
-
+                $query = $this->db->query("SHOW INDEXES FROM `" . $table['name'] . "` WHERE Key_name = 'PRIMARY' or Seq_in_index = 1");
+                $temp = array();
                 foreach ($query->rows as $result) {
                     if ($result['Key_name'] != 'PRIMARY') {
                         $this->db->query("ALTER TABLE `" . $table['name'] . "` DROP INDEX `" . $result['Key_name'] . "`");
+                        
                     } else {
                         $status = true;
                     }
@@ -290,28 +291,28 @@ class ModelUpgrade extends Model {
                 }
                 
                 // Add the new fulltext				
-                foreach ($table['fulltext'] as $index) {
+                foreach ($table['fulltext'] as $key => $index) {
                     $index_data = array();
 
-                    foreach ($index as $key) {
-                        $index_data[] = '`' . $key . '`';
+                    foreach ($index as $value) {
+                        $index_data[] = '`' . $value . '`';
                     }
 
                     if ($index_data) {
-                        $this->db->query("ALTER TABLE `" . $table['name'] . "` ADD FULLTEXT (" . implode(',', $index_data) . ")");
+                        $this->db->query("ALTER TABLE `" . $table['name'] . "` ADD FULLTEXT `" . $table['name'] . "_" . $key . "` (" . implode(',', $index_data) . ")");
                     }
                 }
 
                 // Add the new indexes				
-                foreach ($table['index'] as $index) {
+                foreach ($table['index'] as $key => $index) {
                     $index_data = array();
 
-                    foreach ($index as $key) {
-                        $index_data[] = '`' . $key . '`';
+                    foreach ($index as $value) {
+                        $index_data[] = '`' . $value . '`';
                     }
 
                     if ($index_data) {
-                        $this->db->query("ALTER TABLE `" . $table['name'] . "` ADD INDEX (" . implode(',', $index_data) . ")");
+                        $this->db->query("ALTER TABLE `" . $table['name'] . "` ADD INDEX `" . $table['name'] . "_" . $key . "` (" . implode(',', $index_data) . ")");
                     }
                 }
 

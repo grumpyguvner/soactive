@@ -597,15 +597,24 @@ ALTER TABLE `oc_banner_image` ADD `status` TINYINT(1) NOT NULL DEFAULT 1 AFTER `
 
 ALTER TABLE `oc_url_alias` ADD `language_id` int(11) NOT NULL AFTER `keyword`;
 
-ALTER TABLE `oc_url_alias` ADD INDEX `index2` (`query`); 
-ALTER TABLE `oc_url_alias` ADD INDEX `index3` (`keyword`);
+ALTER TABLE `oc_url_alias` ADD INDEX `query` (`query`); 
+ALTER TABLE `oc_url_alias` ADD INDEX `keyword` (`keyword`);
 
-ALTER TABLE `oc_product` ADD INDEX `index2` (`model`);
+ALTER TABLE `oc_product` ADD INDEX `model` (`model`);
 
-ALTER TABLE `oc_product_option` ADD INDEX `index2` (`product_id`, `option_id`);
-ALTER TABLE `oc_product_option_value` ADD INDEX `index2` (`product_option_id`, `product_id`);
+ALTER TABLE `oc_product_option` ADD INDEX `product_option_product_id` (`product_id`, `option_id`);
+ALTER TABLE `oc_product_option_value` ADD INDEX `product_option_product_option_id` (`product_option_id`, `product_id`);
 
-ALTER TABLE `oc_filter_description` ADD INDEX `index2` (`name`, `filter_group_id`);
-ALTER TABLE `oc_filter_description` ADD INDEX `index3` (`filter_group_id`);
+ALTER TABLE `oc_filter_description` ADD INDEX `name` (`name`, `filter_group_id`);
+ALTER TABLE `oc_filter_description` ADD INDEX `filter_group_id` (`filter_group_id`);
 
-ALTER TABLE `oc_option_value_description` ADD INDEX `index2` (`option_id`, `name`);
+ALTER TABLE `oc_option_value_description` ADD INDEX `option_id` (`option_id`, `name`);
+
+#### Start 1.5.4:BC1.2.15
+
+ALTER TABLE `oc_order` ADD INDEX `customer_group_id` (`customer_group_id`);
+
+ALTER TABLE `oc_order_option` ADD INDEX `order_product_id` (`order_product_id`);
+ALTER TABLE `oc_order_option` ADD INDEX `order_id` (`order_id`);
+
+ALTER TABLE `oc_order_product` ADD INDEX `order_id` (`order_id`);
