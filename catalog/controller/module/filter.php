@@ -258,7 +258,7 @@ class ControllerModuleFilter extends Controller {
                     {
                         $flag = false;
                         foreach ($filter_group['filter'] as $filter) {
-                            if (array_search($filter['filter_id'], $value) != false)
+                            if (array_search($filter['filter_id'], $value) !== false)
                             {
                                 $flag = true;
                                 break;
@@ -299,9 +299,9 @@ class ControllerModuleFilter extends Controller {
                 $option_data = array();
                 
                 $option_exploded = explode(':', $option);
-                foreach ($option_exploded as &$value)
+                foreach ($option_exploded as $key => $value)
                 {
-                    $value = explode(',', $value);
+                    $option_exploded[$key] = explode(',', $value);
                 }
                 
                 foreach ($options as $option) {
