@@ -284,8 +284,8 @@ class ControllerModuleFilter extends Controller {
                         }
                     }
 
-                    $json['filter_groups'] = $filter_data;
                 }
+                $json['filter_groups'] = $filter_data;
             }
             
             
@@ -335,9 +335,8 @@ class ControllerModuleFilter extends Controller {
                             $option_data[] = $option_value['option_value_id'];
                         }
                     }
-
-                    $json['options'] = $option_data;
                 }
+                $json['options'] = $option_data;
             }
             
             $json['product_options'] = array();
