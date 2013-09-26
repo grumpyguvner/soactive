@@ -2672,6 +2672,11 @@ background: #000;
 width: .6em;
 height: 1em;
 }
+
+.aFilterbox .noneCurrent label {
+    color: #e5e5e5;
+    
+}
 .filterSale {
     color: #fd0303
 }

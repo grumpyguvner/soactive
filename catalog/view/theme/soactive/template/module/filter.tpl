@@ -154,59 +154,9 @@ if ($filter_groups || $options) {
         </div>
     </div>
 <?php } ?>
-<script>
-    $(function() {
-        $( "#slider-range .slider" ).slider({
-            range: true,
-            min: <?php echo $filter_product_min_range ?>,
-            max: <?php echo $filter_product_max_range ?>,
-            step: 5,
-            values: [ <?php echo $filter_product_min_price ?>, <?php echo $filter_product_max_price ?> ],
-            slide: function( event, ui ) {
-                if (Number(ui.values[ 0 ]) == <?php echo $filter_product_min_range ?> && Number(ui.values[ 1 ]) == <?php echo $filter_product_max_range ?>)
-                {
-                     $( "#filter_product" ).val('');
-                } else {
-                    $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
-                }
-                $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 0 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
-                $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 1 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
-            },
-            change: function( event, ui ) {
-                if (Number(ui.values[ 0 ]) == <?php echo $filter_product_min_range ?> && Number(ui.values[ 1 ]) == <?php echo $filter_product_max_range ?>)
-                {
-                     $( "#filter_product" ).val('');
-                } else {
-                    $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
-                }
-                $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + Number(ui.values[ 0 ]) + '<?php echo  $this->currency->getSymbolRight() ?>');
-                $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + Number(ui.values[ 1 ]) + '<?php echo  $this->currency->getSymbolRight() ?>');
-
-                $('#afilter').trigger('submit');
-            }
-        });
-        
-        if (<?php echo $filter_product_min_price ?> != <?php echo $filter_product_min_range ?> || <?php echo $filter_product_max_price ?> != <?php echo $filter_product_max_range ?>)
-        {
-            $( "#filter_product" ).val( "range:" + <?php echo $filter_product_min_price ?> + ":" + <?php echo $filter_product_max_price ?> );
-        }
-    });
-</script>
-<script type="text/javascript">
-    $('#afilter input').change(function () {
-        $('#afilter').trigger('submit');
-    });
-    
-    $('.reset a').click(function (e) {
-        e.preventDefault();
-        $(this).parents('.box-content').find('input:checked').attr('checked', false).trigger('change');
-        
-        $(this).parents('.box-content').find("#slider-range .slider" ).slider( "option", "values", [ <?php echo $filter_product_min_range ?>, <?php echo $filter_product_max_range ?> ] );
-        
-    });
-</script>
 <script type="text/javascript"><!--
-    $('#afilter').submit(function() {
+
+    function submitFilter () {
         filter = [];
         option = [];
         product = [];
@@ -267,7 +217,123 @@ if ($filter_groups || $options) {
         } else {
             $('#afilter input[name=\'product\']').attr('disabled', 'disabled').val();
         }
+    }
+    //--></script>
+<script type="text/javascript"><!--
+    
+    submitFilter();
+    
+    $.ajax({
+        url: '/index.php?route=module/filter/available&category_id=' + <?php echo $category_id; ?>,
+        dataType: 'json',
+        type: "GET",
+        data: $("#afilter").serialize(),
+        success: function(json) {
+                if (json != '') {
+
+                    $('.filter_category input[type=\'checkbox\']').each(function () {
+                        if (json.filter_groups.indexOf($(this).attr('value')) != -1)
+                        {
+                            $(this).attr('disabled', false).parents('li').removeClass('noneCurrent');
+                        } else {
+                            $(this).parents('li').addClass('noneCurrent');
+
+                            if (!$(this).is(':checked'))
+                            {
+                               $(this).attr('disabled', 'disabled');
+                            }
+                        }
+
+                    });
+
+                    $('.filter_option input[type=\'checkbox\']').each(function () {
+                        if (json.options.indexOf($(this).attr('value')) != -1)
+                        {
+                            $(this).attr('disabled', false).parents('li').removeClass('noneCurrent');
+                        } else {
+                            $(this).parents('li').addClass('noneCurrent');
+
+                            if (!$(this).is(':checked'))
+                            {
+                               $(this).attr('disabled', 'disabled');
+                            }
+                        }
+
+                    });
+
+                    $('.filter_product input[type=\'checkbox\']').each(function () {
+                        if (json.product_options.indexOf($(this).attr('value')) != -1)
+                        {
+                            $(this).attr('disabled', false).parents('li').removeClass('noneCurrent');
+                        } else {
+                            $(this).parents('li').addClass('noneCurrent');
+
+                            if (!$(this).is(':checked'))
+                            {
+                               $(this).attr('disabled', 'disabled');
+                            }
+                        }
+
+                    });
+                }
+        }
+    });
+    //--></script> 
+<script type="text/javascript"><!--
+    $('#afilter').submit(function() {
+        submitFilter();
 	
         return true;
     });
-    //--></script> 
+    //--></script>
+<script>
+    $(function() {
+        $( "#slider-range .slider" ).slider({
+            range: true,
+            min: <?php echo $filter_product_min_range ?>,
+            max: <?php echo $filter_product_max_range ?>,
+            step: 5,
+            values: [ <?php echo $filter_product_min_price ?>, <?php echo $filter_product_max_price ?> ],
+            slide: function( event, ui ) {
+                if (Number(ui.values[ 0 ]) == <?php echo $filter_product_min_range ?> && Number(ui.values[ 1 ]) == <?php echo $filter_product_max_range ?>)
+                {
+                     $( "#filter_product" ).val('');
+                } else {
+                    $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+                }
+                $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 0 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
+                $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + ui.values[ 1 ] + '<?php echo  $this->currency->getSymbolRight() ?>');
+            },
+            change: function( event, ui ) {
+                if (Number(ui.values[ 0 ]) == <?php echo $filter_product_min_range ?> && Number(ui.values[ 1 ]) == <?php echo $filter_product_max_range ?>)
+                {
+                     $( "#filter_product" ).val('');
+                } else {
+                    $( "#filter_product" ).val( "range:" + ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+                }
+                $( "#slider-range .from" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + Number(ui.values[ 0 ]) + '<?php echo  $this->currency->getSymbolRight() ?>');
+                $( "#slider-range .to" ).html( '<?php echo  $this->currency->getSymbolLeft() ?>' + Number(ui.values[ 1 ]) + '<?php echo  $this->currency->getSymbolRight() ?>');
+
+                $('#afilter').trigger('submit');
+            }
+        });
+        
+        if (<?php echo $filter_product_min_price ?> != <?php echo $filter_product_min_range ?> || <?php echo $filter_product_max_price ?> != <?php echo $filter_product_max_range ?>)
+        {
+            $( "#filter_product" ).val( "range:" + <?php echo $filter_product_min_price ?> + ":" + <?php echo $filter_product_max_price ?> );
+        }
+    });
+</script>
+<script type="text/javascript">
+    $('#afilter input').change(function () {
+        $('#afilter').trigger('submit');
+    });
+    
+    $('.reset a').click(function (e) {
+        e.preventDefault();
+        $(this).parents('.box-content').find('input:checked').attr('checked', false).trigger('change');
+        
+        $(this).parents('.box-content').find("#slider-range .slider" ).slider( "option", "values", [ <?php echo $filter_product_min_range ?>, <?php echo $filter_product_max_range ?> ] );
+        
+    });
+</script>
