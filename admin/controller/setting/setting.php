@@ -21,8 +21,11 @@ class ControllerSettingSetting extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
+                        $this->cache->delete('product');
+                        $this->cache->delete('category');
+                        
 			$this->redirect($this->url->link('setting/store', 'token=' . $this->session->data['token'], 'SSL'));
-		}
+                }
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
 		
@@ -73,6 +76,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_product_count'] = $this->language->get('entry_product_count');
 		$this->data['entry_category_instockonly'] = $this->language->get('entry_category_instockonly');
 		$this->data['entry_new_product_age'] = $this->language->get('entry_new_product_age');
+                $this->data['entry_sale_item'] = $this->language->get('entry_sale_item');
 		$this->data['entry_review'] = $this->language->get('entry_review');
         $this->data['entry_anonymous_review'] = $this->language->get('entry_anonymous_review');
 		$this->data['entry_download'] = $this->language->get('entry_download');
@@ -504,6 +508,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_product_count'] = $this->request->post['config_product_count'];
 		} else {
 			$this->data['config_product_count'] = $this->config->get('config_product_count');
+		}
+                
+                if (isset($this->request->post['config_sale_item'])) {
+			$this->data['config_sale_item'] = $this->request->post['config_sale_item'];
+		} else {
+			$this->data['config_sale_item'] = $this->config->get('config_sale_item');
 		}
                 
 		if (isset($this->request->post['config_category_instockonly'])) {

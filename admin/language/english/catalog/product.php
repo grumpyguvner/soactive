@@ -69,6 +69,7 @@ $_['entry_text']             = 'Text:';
 $_['entry_option']           = 'Option:';
 $_['entry_option_value']     = 'Option Value:';
 $_['entry_required']         = 'Required:';
+$_['entry_sale']             = 'Sale:';
 $_['entry_status']           = 'Status:';
 $_['entry_sort_order']       = 'Sort Order:';
 $_['entry_category']         = 'Categories:';

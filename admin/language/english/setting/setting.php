@@ -46,6 +46,7 @@ $_['entry_admin_limit']   	   = 'Default Items Per Page (Admin):<br /><span clas
 $_['entry_product_count']          = 'Category Product Count:<br /><span class="help">Show the number of products inside the subcategories in the storefront header category menu. Be warned, this will cause an extreme performance hit for stores with a lot of subcategories!</span>';
 $_['entry_category_instockonly']   = 'In Stock Only:<br /><span class="help">Only show products on the category page that are in stock.</span>';
 $_['entry_new_product_age']        = 'New Product Age:<br /><span class="help">Maximum number of days a product can be classified as "new"!</span>';
+$_['entry_sale_item']              = 'Manual Sale Items:<br /><span class="help">Determines if the sales are selected manually or automatically.</span>';
 $_['entry_review']       	   = 'Allow Reviews:<br /><span class="help">Enable/Disable new review entry and display of existing reviews</span>';
 $_['entry_anonymous_review']       = 'Allow Anonymous Reviews:<br /><span class="help">Enable/Disable new review entry and display of existing reviews</span>';
 $_['entry_download']               = 'Allow Downloads:';

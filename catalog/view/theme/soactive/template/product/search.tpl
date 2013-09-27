@@ -63,7 +63,7 @@
                                         <?php if ($product['new']) { ?> 
                                             <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                                         <?php } ?>
-                                        <?php if ($product['saving_percent']) { ?> 
+                                        <?php if ($product['sale'] && $this->config->get('config_sale_item') && $this->config->get('config_sale_item')==1) { ?> 
                                             <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
                                         <?php } ?> 
                                     <?php } ?>

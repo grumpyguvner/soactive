@@ -413,6 +413,7 @@ class ControllerProductProduct extends Controller {
 					'price'   	 => $price,
 					'special' 	 => $special,
                                         'saving_percent' => $result['saving_percent'],
+                                        'sale'           => $result['sale'],
                                         'new'            => $result['new'],
 					'rating'     => $rating,
 					'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),

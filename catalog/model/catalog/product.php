@@ -376,6 +376,12 @@ class ModelCatalogProduct extends Model {
                 $save = false;
                 $save_perc = false;
             }
+            
+            if ($this->config->get('config_sale_item')) {
+                $sale = $query->row['sale'] ? true : false;
+            } else {
+                $sale = $save_perc ? true : false;
+            }
 
             $days_left = floor((time() - strtotime($query->row['date_added'])) / ( 60 * 60 * 24));
 
@@ -401,6 +407,7 @@ class ModelCatalogProduct extends Model {
                 'image' => $query->row['image'],
                 'manufacturer_id' => $query->row['manufacturer_id'],
                 'manufacturer' => $query->row['manufacturer'],
+                'sale' => $sale,
                 'price' => $price,
                 'special' => $query->row['special'],
                 'saving' => $save,
@@ -614,7 +621,11 @@ class ModelCatalogProduct extends Model {
             }
 
             if (!empty($data['filter_sale']) && $data['filter_sale']) {
-                $sql .= " AND (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) > 0";
+                if ($this->config->get('config_sale_item')) {
+                    $sql .= " AND sale = 1 ";
+                } else {
+                    $sql .= " AND (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) > 0";
+                }
             }
 
             if (!empty($data['filter_product_min_price'])) {

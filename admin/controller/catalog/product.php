@@ -592,6 +592,7 @@ class ControllerCatalogProduct extends Controller {
         $this->data['entry_required'] = $this->language->get('entry_required');
         $this->data['entry_sort_order'] = $this->language->get('entry_sort_order');
         $this->data['entry_status'] = $this->language->get('entry_status');
+        $this->data['entry_sale'] = $this->language->get('entry_sale');
         $this->data['entry_customer_group'] = $this->language->get('entry_customer_group');
         $this->data['entry_date_start'] = $this->language->get('entry_date_start');
         $this->data['entry_date_end'] = $this->language->get('entry_date_end');
@@ -935,6 +936,14 @@ class ControllerCatalogProduct extends Controller {
             $this->data['stock_status_id'] = $this->config->get('config_stock_status_id');
         }
 
+        if (isset($this->request->post['sale'])) {
+            $this->data['sale'] = $this->request->post['sale'];
+        } elseif (!empty($product_info)) {
+            $this->data['sale'] = $product_info['sale'];
+        } else {
+            $this->data['sale'] = 1;
+        }
+        
         if (isset($this->request->post['status'])) {
             $this->data['status'] = $this->request->post['status'];
         } elseif (!empty($product_info)) {

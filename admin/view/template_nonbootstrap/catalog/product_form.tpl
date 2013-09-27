@@ -215,6 +215,26 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <?php if($this->config->get('config_sale_item') == 1) { ?>
+            <tr>
+              <td><?php echo $entry_sale; ?></td>
+              <td>
+                    <?php if ($sale) { ?>
+                    <input type="radio" name="sale" value="1" checked="checked" />
+                    <?php echo $text_yes; ?>
+                    <input type="radio" name="sale" value="0" />
+                    <?php echo $text_no; ?>
+                    <?php } else { ?>
+                    <input type="radio" name="sale" value="1" />
+                    <?php echo $text_yes; ?>
+                    <input type="radio" name="sale" value="0" checked="checked" />
+                    <?php echo $text_no; ?>
+                    <?php } ?>
+              </td>
+            </tr>
+            <?php } else { ?>
+                <input type="hidden" name="sale" value="<?php echo $sale; ?>">
+            <?php } ?>
             <tr>
               <td><?php echo $entry_status; ?></td>
               <td><select name="status">
