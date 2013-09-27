@@ -79,7 +79,19 @@ $(document).ready(function(){
   <div class="div1">
     <div class="div2"><img src="view/image/logo.png" title="<?php echo $heading_title; ?>" onclick="location = '<?php echo $home; ?>'" /></div>
     <?php if ($logged) { ?>
-    <div class="div3"><img src="view/image/lock.png" alt="" style="position: relative; top: 3px;" />&nbsp;<?php echo $logged; ?></div>
+    <div class="div3">
+        <img src="view/image/lock.png" alt="" style="position: relative; top: 3px;" />&nbsp;<?php echo $logged; ?>
+        <?php  ?>
+        <select name="user_group_id" id="user_group_id">
+            <?php foreach ($user_groups as $user_group) { ?>
+            <?php if ($user_group['user_group_id'] == $user_group_id) { ?>
+            <option value="<?php echo $user_group['user_group_id']; ?>" selected="selected"><?php echo $user_group['name']; ?></option>
+            <?php } else { ?>
+            <option value="<?php echo $user_group['user_group_id']; ?>"><?php echo $user_group['name']; ?></option>
+            <?php } ?>
+            <?php } ?>
+        </select>
+    </div>
     <?php } ?>
   </div>
   <?php if ($logged) { ?>
@@ -157,7 +169,7 @@ ob_start("fixMenu");
           <li><a class="parent"><?php echo $text_users; ?></a>
             <ul>
               <li><a href="<?php echo $user; ?>"><?php echo $text_user; ?></a></li>
-              <li><a href="<?php echo $user_group; ?>"><?php echo $text_user_group; ?></a></li>
+              <li><a href="<?php echo $user_group_link; ?>"><?php echo $text_user_group; ?></a></li>
             </ul>
           </li>
           <li><a class="parent"><?php echo $text_localisation; ?></a>
@@ -257,3 +269,11 @@ ob_end_flush();
   </div>
   <?php } ?>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('#user_group_id').change(function() {
+        alert($(this).val());
+    });
+});
+</script>

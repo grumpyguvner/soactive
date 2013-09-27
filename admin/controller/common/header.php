@@ -194,7 +194,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['tax_rate'] = $this->url->link('localisation/tax_rate', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['total'] = $this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['user'] = $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL');
-            $this->data['user_group'] = $this->url->link('user/user_permission', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['user_group_link'] = $this->url->link('user/user_permission', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['voucher'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['voucher_theme'] = $this->url->link('sale/voucher_theme', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['weight_class'] = $this->url->link('localisation/weight_class', 'token=' . $this->session->data['token'], 'SSL');
@@ -227,6 +227,12 @@ class ControllerCommonHeader extends Controller {
                     'href' => $result['url']
                 );
             }
+            
+            $this->load->model('user/user_group');
+
+            $data = Array('superuser' => $this->user->isSuperuser());
+
+            $this->data['user_groups'] = $this->model_user_user_group->getUserGroups($data);
         }
 
         $this->template = 'common/header.tpl';
