@@ -129,7 +129,7 @@ class ModelModulePostcodeAnywhere extends Model {
                                         'text'  => $address_info->Description . ', ' . $address_info->City);
                     }
             }
-            if ($data) return $data;
+            if ($data !== false) return $data;
         }
 
         return false;
