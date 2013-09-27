@@ -10,6 +10,7 @@ $_['text_module']                   = 'Modules';
 $_['entry_status']                  = 'Status:';
 $_['entry_content']                 = 'Content:';
 $_['entry_reset_cookie']            = 'Reset cookie:';
+$_['entry_site_region']            = 'Site Region:';
 
 // Error
 $_['error_permission']              = 'Warning: You do not have permission to modify module geolocation!';
