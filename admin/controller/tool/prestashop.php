@@ -7,13 +7,13 @@ class ControllerToolPrestashop extends Controller {
     }
 	
 	public function index() {
-                $this->load->model('tool/prestashop_customer');
 		$this->load->language('tool/prestashop');
 		$this->document->setTitle($this->language->get('heading_title'));
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
             
+                $this->load->model('tool/prestashop_customer');
 			$this->model_setting_setting->editSetting('prestashop', $this->request->post);
             $this->config->set('prestashop_host', $this->request->post['prestashop_host']);
             $this->config->set('prestashop_user', $this->request->post['prestashop_user']);
