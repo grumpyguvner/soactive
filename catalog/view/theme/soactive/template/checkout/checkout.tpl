@@ -13,10 +13,6 @@
     <?php if (isset($success) && $success) { ?>
         <div class="success"><?php echo $success; ?></div>
     <?php }
-    if (isset($error_warning) && $error_warning) {
-        ?>
-        <div class="warning"><?php echo $error_warning; ?></div>
-    <?php }
     ?>
 </div>
 <?php echo $column_left; ?><?php echo $column_right; ?><div id="content">
