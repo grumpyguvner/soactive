@@ -20,6 +20,7 @@ class ControllerModuleLocalisation extends Controller {
                 $this->redirect($this->url->link('common/home'));
             }
         }
+        
         if (isset($this->request->post['language_code']) && $this->request->post['language_code']) {
             $this->session->data['language'] = $this->request->post['language_code'];
 
