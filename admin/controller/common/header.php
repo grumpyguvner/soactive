@@ -228,19 +228,22 @@ class ControllerCommonHeader extends Controller {
                 );
             }
             
-            if(isset($this->request->post['user_group_id']))
+            if($this->user->isSuperuser() || $this->user->isDummyUser())
             {
-                $this->session->data['dummy_user_group_id'] = $this->request->post['user_group_id'];
-                header('location: ' . str_replace('amp;', '', $_SERVER['REQUEST_URI']));
-                exit();
+                if (isset($this->request->post['user_group_id']))
+                {
+                    $this->session->data['dummy_user_group_id'] = $this->request->post['user_group_id'];
+                    header('location: ' . str_replace('amp;', '', $_SERVER['REQUEST_URI']));
+                    exit();
+                }
+
+                $this->load->model('user/user_group');
+
+                $data = Array('superuser' => 1);
+
+                $this->data['user_group_id'] = isset($this->session->data['dummy_user_group_id']) ? $this->session->data['dummy_user_group_id'] : $this->user->getUserGroupId();
+                $this->data['user_groups'] = $this->model_user_user_group->getUserGroups($data);
             }
-            
-            $this->load->model('user/user_group');
-
-            $data = Array('superuser' => 1);
-
-            $this->data['user_group_id'] = $this->session->data['dummy_user_group_id'] ? $this->session->data['dummy_user_group_id'] : $this->user->getUserGroupId();
-            $this->data['user_groups'] = $this->model_user_user_group->getUserGroups($data);
         }
 
         $this->template = 'common/header.tpl';

@@ -81,7 +81,7 @@ $(document).ready(function(){
     <?php if ($logged) { ?>
     <div class="div3">
         <img src="view/image/lock.png" alt="" style="position: relative; top: 3px;" />&nbsp;<?php echo $logged; ?>
-        <?php if($this->user->isSuperuser() or $this->user->isDummyUser()){ ?>
+        <?php if (isset($user_groups)) { ?>
         <form style="display: inline;" id="adminForm" name="adminForm" action="" method="POST">
             <select name="user_group_id" id="user_group_id">
                 <?php foreach ($user_groups as $user_group) { ?>
