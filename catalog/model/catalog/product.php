@@ -977,7 +977,7 @@ class ModelCatalogProduct extends Model {
 
         $product_data = $this->cache->get('product.total.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . $cache);
 
-        if (!$product_data) {
+        if (is_null($product_data)) {
             $myCategories = array();
 
             if (!empty($data['filter_category_id']))
@@ -1028,7 +1028,70 @@ class ModelCatalogProduct extends Model {
                 $sql .= " LEFT JOIN " . DB_PREFIX . "product_option_value pov" . $key . " ON (p.product_id = pov" . $key . ".product_id)";
             }
 
-            $sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "'";
+            $sql .= " LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE ";
+
+            if (!empty($myCategories)) {
+                $implode_data = array();
+
+                foreach ($myCategories as $category_id) {
+                    $implode_data[] = "p2c.category_id = '" . (int) $category_id . "'";
+                }
+                if (!empty($data['filter_sub_category'])) {
+
+                    $this->load->model('catalog/category');
+
+                    $categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
+
+                    foreach ($categories as $category_id) {
+                        $implode_data[] = "p2c.category_id = '" . (int) $category_id . "'";
+                    }
+                }
+
+                $sql .= " (" . implode(' OR ', $implode_data) . ") AND "; 
+                
+                foreach ($filter_groups as $key => $filters) {
+                    $implode = array();
+
+                    $filters = explode(',', $filters);
+
+                    foreach ($filters as $filter_id) {
+                        $implode[] = (int) $filter_id;
+                    }
+
+                    $sql .= " pf" . $key . ".filter_id IN (" . implode(',', $implode) . ") AND ";
+                }
+
+
+                foreach ($option_groups as $key => $options) {
+                    $implode = array();
+
+                    $options = explode(',', $options);
+
+                    foreach ($options as $option_id) {
+                        $implode[] = (int) $option_id;
+                    }
+
+                    $sql .= " pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ") AND ";
+                }
+            }
+            
+            $sql .= " p.status = '1' AND p.date_available <= NOW() AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "'";
+
+            if (isset($data['filter_new'])) {
+                if ($data['filter_new']) {
+                    $sql .= " AND p.date_added > '" . date("Y-m-d", strtotime('-' . (int) $this->config->get('config_new_product_age') . ' day')) . "'";
+                } else {
+                    $sql .= " AND p.date_added < '" . date("Y-m-d", strtotime('-' . (int) $this->config->get('config_new_product_age') . ' day')) . "'";
+                }
+            }
+
+            if (!empty($data['filter_manufacturer_id'])) {
+                $sql .= " AND p.manufacturer_id = '" . (int) $data['filter_manufacturer_id'] . "'";
+            }
+        
+            if ($this->config->get('config_category_instockonly')) {
+                $sql .= " AND p.quantity > 0";
+            }
 
             if (!empty($data['filter_name']) || !empty($data['filter_tag'])) {
                 $sql .= " AND (";
@@ -1090,65 +1153,12 @@ class ModelCatalogProduct extends Model {
                 $sql .= ")";
             }
 
-            if (!empty($myCategories)) {
-                $implode_data = array();
-
-                foreach ($myCategories as $category_id) {
-                    $implode_data[] = "p2c.category_id = '" . (int) $category_id . "'";
-                }
-                if (!empty($data['filter_sub_category'])) {
-
-                    $this->load->model('catalog/category');
-
-                    $categories = $this->model_catalog_category->getCategoriesByParentId($data['filter_category_id']);
-
-                    foreach ($categories as $category_id) {
-                        $implode_data[] = "p2c.category_id = '" . (int) $category_id . "'";
-                    }
-                }
-
-                $sql .= " AND (" . implode(' OR ', $implode_data) . ")"; 
-                
-                foreach ($filter_groups as $key => $filters) {
-                    $implode = array();
-
-                    $filters = explode(',', $filters);
-
-                    foreach ($filters as $filter_id) {
-                        $implode[] = (int) $filter_id;
-                    }
-
-                    $sql .= " AND pf" . $key . ".filter_id IN (" . implode(',', $implode) . ")";
-                }
-
-
-                foreach ($option_groups as $key => $options) {
-                    $implode = array();
-
-                    $options = explode(',', $options);
-
-                    foreach ($options as $option_id) {
-                        $implode[] = (int) $option_id;
-                    }
-
-                    $sql .= " AND pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ")";
-                }
-            }
-
-            if (!empty($data['filter_manufacturer_id'])) {
-                $sql .= " AND p.manufacturer_id = '" . (int) $data['filter_manufacturer_id'] . "'";
-            }
-
-            if (isset($data['filter_new'])) {
-                if ($data['filter_new']) {
-                    $sql .= " AND p.date_added > '" . date("Y-m-d", strtotime('-' . (int) $this->config->get('config_new_product_age') . ' day')) . "'";
-                } else {
-                    $sql .= " AND p.date_added < '" . date("Y-m-d", strtotime('-' . (int) $this->config->get('config_new_product_age') . ' day')) . "'";
-                }
-            }
-
             if (!empty($data['filter_sale']) && $data['filter_sale']) {
-                $sql .= " AND (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) > 0";
+                if ($this->config->get('config_sale_item')) {
+                    $sql .= " AND p.sale = 1 ";
+                } else {
+                    $sql .= " AND (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) > 0";
+                }
             }
 
             if (!empty($data['filter_product_min_price'])) {
@@ -1158,13 +1168,9 @@ class ModelCatalogProduct extends Model {
             if (!empty($data['filter_product_max_price'])) {
                 $sql .= " AND IFNULL((SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1),price) <= " . (float) $data['filter_product_max_price'];
             }
-        
-            if ($this->config->get('config_category_instockonly')) {
-                $sql .= " AND p.quantity > 0";
-            }
 
             $query = $this->db->query($sql);
-
+            
             $product_data = $query->row['total'];
 
             $this->cache->set('product.total.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . $cache, $product_data);

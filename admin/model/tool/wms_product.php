@@ -508,7 +508,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         return true;
     }
 
-    function createCategory($category, $category_description, $parent_id = 0) {
+    function createCategory($category, $wms_category_description, $parent_id = 0) {
         if (!is_array($category_description))
             return false;
         
@@ -529,8 +529,23 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'keyword' => $category,
             'category_store' => $this->config->get('wms_products_store')
         );
-
-        if (!$category_info) {
+        
+        if ($category_info)
+        {
+            $category_id = $category_info['category_id'];
+            
+            $data = array_merge($data, $category_info);
+            
+            $data["parent_id"] = $parent_id;
+            $data["keyword"] = $category;
+            $data['category_store'] = $this->config->get('wms_products_store');
+            $data["category_description"] = $this->model_catalog_category->getCategoryDescriptions($category_id);
+            $data['category_filter'] = $this->model_catalog_category->getCategoryFilters($category_id);
+            
+            $this->model_catalog_category->editCategory($category_id, $data);
+        } else {
+            $category_description = $wms_category_description;
+            
             // if product doesn't exist then create it
             $category_id = $this->model_catalog_category->addCategory($data);
             
@@ -538,14 +553,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
             
             // fetch the newly created product
             $category_info = $this->model_catalog_category->getCategory($category_id);
-        } else {
-            $category_id = $category_info['category_id'];
-            $category_filters = $this->model_catalog_category->getCategoryFilters($category_id);
-            
-            $data['category_filter'] = $category_filters;
-            
-            $this->model_catalog_category->editCategory($category_id, $data);
         }
+        
         if (!$category_info) {
             // if product still doesn't exist then we have a problem
             return false;

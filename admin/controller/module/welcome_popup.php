@@ -30,6 +30,7 @@ class ControllerModuleWelcomePopup extends Controller {
         $this->data['entry_status'] = $this->language->get('entry_status');
         $this->data['entry_content'] = $this->language->get('entry_content');
         $this->data['entry_reset_cookie'] = $this->language->get('entry_reset_cookie');
+        $this->data['entry_site_region'] = $this->language->get('entry_site_region');
 
         $this->data['button_save'] = $this->language->get('button_save');
         $this->data['button_cancel'] = $this->language->get('button_cancel');
@@ -73,6 +74,14 @@ class ControllerModuleWelcomePopup extends Controller {
             $this->data['welcome_popup_status'] = $this->config->get('welcome_popup_status');
         } else {
             $this->data['welcome_popup_status'] = 0;
+        }
+
+        if (isset($this->request->post['welcome_popup_site_region'])) {
+            $this->data['welcome_popup_site_region'] = $this->request->post['welcome_popup_site_region'];
+        } elseif ($this->config->get('welcome_popup_site_region')) {
+            $this->data['welcome_popup_site_region'] = $this->config->get('welcome_popup_site_region');
+        } else {
+            $this->data['welcome_popup_site_region'] = '';
         }
         
         if (isset($this->request->post['welcome_popup_content'])) {

@@ -53,6 +53,11 @@
           </div>
           <?php } ?>
             <table class="form">
+                <tr>
+                    <td><?php echo $entry_site_region; ?></td>
+                    <td><input name="welcome_popup_site_region" value="<?php echo $welcome_popup_site_region ?>">
+                    </td>
+                </tr>
                  <tr>
                     <td><?php echo $entry_reset_cookie; ?></td>
                     <td><select name="welcome_popup_reset_cookie">

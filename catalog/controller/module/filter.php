@@ -3,6 +3,7 @@
 class ControllerModuleFilter extends Controller {
 
     protected function index($setting) {
+        
         if (isset($this->request->get['path'])) {
             $parts = explode('_', (string) $this->request->get['path']);
         } else {
@@ -62,6 +63,8 @@ class ControllerModuleFilter extends Controller {
             $this->load->model('catalog/product');
 
             $this->data['filter_groups'] = array();
+            
+            $available = array('filters' => array(), 'options' => array(), 'new' => false, 'sale' => false);
 
             $filter_groups = $this->model_catalog_category->getCategoryFilters($category_id);
 
@@ -89,6 +92,7 @@ class ControllerModuleFilter extends Controller {
                         if ($count)
                         {
                             $count_active++;
+                            $available['filters'][] = $filter['filter_id'];
                         }
                         
                         $count_group += $count;
@@ -132,6 +136,7 @@ class ControllerModuleFilter extends Controller {
                         if ($count)
                         {
                             $count_active++;
+                            $available['options'][] = $option_value['option_value_id'];
                         }
                         
                         $count_group += $count;
@@ -172,14 +177,17 @@ class ControllerModuleFilter extends Controller {
                         'filter_new' => true
                     );
             $this->data['has_new'] = $this->model_catalog_product->getTotalProducts($data) ? true : false;
-                        
+            $available['new'] = $this->data['has_new'];
+            
             $data = array(
                         'filter_category_id' => $category_id,
                         'filter_sale' => true
                     );
             $this->data['has_sale'] = $this->model_catalog_product->getTotalProducts($data) ? true : false;
+            $available['sale'] = $this->data['has_sale'];
             
-            $this->data['availableStock'] = $this->getAvailbleStock($category_id);
+            
+            $this->data['availableStock'] = $this->getAvailbleStock($category_id, $available);
 
             $this->setTemplate('module/filter.tpl');
 
@@ -187,24 +195,20 @@ class ControllerModuleFilter extends Controller {
         }
     }
     
-    public function available($category_id = null) {
+    public function available() {
         
         $json = array();
         
-        if (!$category_id && isset($this->request->get['category_id'])) {
-            $category_id = $this->request->get['category_id'];
-        }
-        
-        if ($category_id)
+        if (isset($this->request->get['category_id']))
         {
-            $json = $this->getAvailbleStock($category_id);
+            $json = $this->getAvailbleStock($this->request->get['category_id']);
         }
         
         $this->response->setOutput(json_encode($json));
         
     }
     
-    private function getAvailbleStock ($category_id = null) {
+    private function getAvailbleStock ($category_id = null, $available = false) {
         
         $json = array();
         
@@ -291,16 +295,18 @@ class ControllerModuleFilter extends Controller {
                     }
 
                     foreach ($filter_group['filter'] as $filter) {
-                        
-                        $data_current_temp = $data_current;
-                        
-                        $data_current_temp['filter_filter'] = implode(':', array_merge($filter_filtered, array($filter['filter_id'])));
-                        
-                        $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
-                        
-                        if ($count_current)
+                        if (!$available || in_array($filter['filter_id'], $available['filters']))
                         {
-                            $filter_data[] = $filter['filter_id'];
+                            $data_current_temp = $data_current;
+
+                            $data_current_temp['filter_filter'] = implode(':', array_merge($filter_filtered, array($filter['filter_id'])));
+
+                            $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
+
+                            if ($count_current)
+                            {
+                                $filter_data[] = $filter['filter_id'];
+                            }
                         }
                     }
 
@@ -345,15 +351,18 @@ class ControllerModuleFilter extends Controller {
                     }
 
                     foreach ($option['option_value'] as $option_value) {
-                        $data_current_temp = $data_current;
-                        
-                        $data_current_temp['filter_option'] = implode(':', array_merge($option_filtered, array($option_value['option_value_id'])));
-                        
-                        $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
-                        
-                        if ($count_current)
+                        if (!$available || in_array($option_value['option_value_id'], $available['options']))
                         {
-                            $option_data[] = $option_value['option_value_id'];
+                            $data_current_temp = $data_current;
+
+                            $data_current_temp['filter_option'] = implode(':', array_merge($option_filtered, array($option_value['option_value_id'])));
+
+                            $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
+
+                            if ($count_current)
+                            {
+                                $option_data[] = $option_value['option_value_id'];
+                            }
                         }
                     }
                 }
@@ -362,19 +371,25 @@ class ControllerModuleFilter extends Controller {
             
             $json['product_options'] = array();
             
-            $data_current_temp = $data_current;
-            $data_current_temp['filter_new'] = true;
+            if (!$available || $available['new'])
+            {
+                $data_current_temp = $data_current;
+                $data_current_temp['filter_new'] = true;
 
-            $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
+                $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
 
-            if ($count_current) $json['product_options'][] = 'new';
+                if ($count_current) $json['product_options'][] = 'new';
+            }
 
-            $data_current_temp = $data_current;
-            $data_current_temp['filter_sale'] = true;
+            if (!$available || $available['sale'])
+            {
+                $data_current_temp = $data_current;
+                $data_current_temp['filter_sale'] = true;
 
-            $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
+                $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
 
-            if ($count_current) $json['product_options'][] = 'sale';
+                if ($count_current) $json['product_options'][] = 'sale';
+            }
             
         }
         

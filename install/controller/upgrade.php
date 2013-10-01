@@ -38,6 +38,19 @@ class ControllerUpgrade extends Controller {
 		$this->response->setOutput($this->render());
 	}
 
+	public function autoupgrade() {
+		if ($this->validate()) {
+			$this->load->model('upgrade');
+
+			$this->model_upgrade->mysql();
+			
+                        $this->response->setOutput('Success : upgraded to version number ' . VERSION);
+                        exit();
+		}	
+
+		$this->response->setOutput($this->error['warning']);
+	}
+
 	private function validate() {
 
 		if (VERSION == FULL_VERSION) {

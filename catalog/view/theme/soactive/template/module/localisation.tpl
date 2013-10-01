@@ -40,10 +40,15 @@
                     </span>
                 </div>
                 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-<!--                    <div id="currency"><?php /* echo $text_currency; ?><br />
-                      <?php foreach ($currencies as $currency) { ?>
-                      <?php if ($currency['code'] == $currency_code) { ?>
-                      <?php if ($currency['symbol_left']) { ?>
+                                       <?php 
+                      if (count($currencies) > 1)
+                      {
+                          ?>
+                    <div id="currency"><?php echo $text_currency; ?><br />
+ <?php 
+                      foreach ($currencies as $currency) { 
+                          if ($currency['code'] == $currency_code) { 
+                              if ($currency['symbol_left']) { ?>
                       <a title="<?php echo $currency['title']; ?>"><b><?php echo $currency['symbol_left'] . ' ' . $currency['code']; ?></b></a>
                       <?php } else { ?>
                       <a title="<?php echo $currency['title']; ?>"><b><?php echo $currency['symbol_right'] . ' ' . $currency['code']; ?></b></a>
@@ -53,11 +58,15 @@
                       <a title="<?php echo $currency['title']; ?>" onclick="$('input[name=\'currency_code\']').attr('value', '<?php echo $currency['code']; ?>'); $(this).parents('form').submit();"><?php echo $currency['symbol_left'] . ' ' . $currency['code']; ?></a>
                       <?php } else { ?>
                       <a title="<?php echo $currency['title']; ?>" onclick="$('input[name=\'currency_code\']').attr('value', '<?php echo $currency['code']; ?>'); $(this).parents('form').submit();"><?php echo $currency['symbol_right'] . ' ' . $currency['code']; ?></a>
-                      <?php } ?>
-                      <?php } ?>
-                      <?php } */ ?>
+                      <?php 
+                      } 
+                      } 
+                      }
+                      ?>
                       <input type="hidden" name="currency_code" value="" />
-                    </div>-->
+                    </div>                      <?php 
+                      }
+                      ?>
                     
                     <div id="language"><?php echo $text_language; ?><br />
                         <?php foreach ($languages as $language) { ?>
