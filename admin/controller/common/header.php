@@ -2,7 +2,7 @@
 
 class ControllerCommonHeader extends Controller {
 
-    protected function index() {
+    protected function index() { 
         $this->data['title'] = $this->document->getTitle();
 
         if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -212,7 +212,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['megamenu'] = $this->url->link('module/megamenu', '&token=' . $this->session->data['token'], 'SSL');
             
             $this->data['event'] = $this->url->link('catalog/event', '&token=' . $this->session->data['token'], 'SSL');
-
+            
             $this->url->setCheckPermission(false);
 
             $this->data['stores'] = array();
@@ -228,10 +228,18 @@ class ControllerCommonHeader extends Controller {
                 );
             }
             
+            if(isset($this->request->post['user_group_id']))
+            {
+                $this->session->data['dummy_user_group_id'] = $this->request->post['user_group_id'];
+                header('location: ' . str_replace('amp;', '', $_SERVER['REQUEST_URI']));
+                exit();
+            }
+            
             $this->load->model('user/user_group');
 
-            $data = Array('superuser' => $this->user->isSuperuser());
+            $data = Array('superuser' => 1);
 
+            $this->data['user_group_id'] = $this->session->data['dummy_user_group_id'] ? $this->session->data['dummy_user_group_id'] : $this->user->getUserGroupId();
             $this->data['user_groups'] = $this->model_user_user_group->getUserGroups($data);
         }
 

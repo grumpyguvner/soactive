@@ -81,16 +81,19 @@ $(document).ready(function(){
     <?php if ($logged) { ?>
     <div class="div3">
         <img src="view/image/lock.png" alt="" style="position: relative; top: 3px;" />&nbsp;<?php echo $logged; ?>
-        <?php  ?>
-        <select name="user_group_id" id="user_group_id">
-            <?php foreach ($user_groups as $user_group) { ?>
-            <?php if ($user_group['user_group_id'] == $user_group_id) { ?>
-            <option value="<?php echo $user_group['user_group_id']; ?>" selected="selected"><?php echo $user_group['name']; ?></option>
-            <?php } else { ?>
-            <option value="<?php echo $user_group['user_group_id']; ?>"><?php echo $user_group['name']; ?></option>
-            <?php } ?>
-            <?php } ?>
-        </select>
+        <?php if($this->user->isSuperuser() or $this->user->isDummyUser()){ ?>
+        <form style="display: inline;" id="adminForm" name="adminForm" action="" method="POST">
+            <select name="user_group_id" id="user_group_id">
+                <?php foreach ($user_groups as $user_group) { ?>
+                <?php if ($user_group['user_group_id'] == $user_group_id) { ?>
+                <option value="<?php echo $user_group['user_group_id']; ?>" selected="selected"><?php echo $user_group['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $user_group['user_group_id']; ?>"><?php echo $user_group['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+            </select>
+        </form>
+        <?php } ?>
     </div>
     <?php } ?>
   </div>
@@ -273,7 +276,7 @@ ob_end_flush();
 <script>
 $(document).ready(function(){
     $('#user_group_id').change(function() {
-        alert($(this).val());
+        $('#adminForm').submit();
     });
 });
 </script>

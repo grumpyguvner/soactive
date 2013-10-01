@@ -32,7 +32,7 @@ class User {
 				
 				$this->superuser = (bool)$user_group_query->row['superuser'];
                                 
-                                if  ($this->superuser && isset($this->session->data['dummy_user_group_id']))
+                                if ($this->superuser && isset($this->session->data['dummy_user_group_id']))
                                 {
                                     if ($this->session->data['dummy_user_group_id'] != $this->user_group_id)
                                     {
