@@ -33,8 +33,8 @@ class ModelCheckoutOrder extends Model {
                 {
                     $this->load->model('account/newsletter');
                     
-                     $date_of_birth = (!empty($data['day_birth']) && !empty($data['month_birth']) && !empty($data['year_birth']) ? date("Y/m/d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth'])) : NULL);
-                     $fields = array("firstname" => $data['firstname'], "lastname" => $data['lastname'], "title" => $data['title'], "dob" => $date_of_birth);
+                     $dob = (!empty($data['day_birth']) && !empty($data['month_birth']) && !empty($data['year_birth']) ? date("Y/m/d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth'])) : NULL);
+                     $fields = array("firstname" => $data['firstname'], "lastname" => $data['lastname'], "title" => $data['title'], "dob" => $dob);
             
                     $this->model_account_newsletter->subscribe($data['email'], $fields, 'checkout');
                 }
