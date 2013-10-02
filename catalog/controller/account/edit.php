@@ -161,9 +161,9 @@ class ControllerAccountEdit extends Controller {
             $this->data['month_birth'] = $this->request->post['month_birth'];
             $this->data['year_birth'] = $this->request->post['year_birth'];
         } elseif (isset($customer_info)) {
-            $this->data['day_birth'] = date("d", strtotime($customer_info['date_of_birth']));
-            $this->data['month_birth'] = date("m", strtotime($customer_info['date_of_birth']));
-            $this->data['year_birth'] = date("Y", strtotime($customer_info['date_of_birth']));
+            $this->data['day_birth'] = date("d", strtotime($customer_info['dob']));
+            $this->data['month_birth'] = date("m", strtotime($customer_info['dob']));
+            $this->data['year_birth'] = date("Y", strtotime($customer_info['dob']));
         } else {
             $this->data['day_birth'] = '';
             $this->data['month_birth'] = '';
