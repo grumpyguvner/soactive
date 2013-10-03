@@ -136,12 +136,14 @@
   <?php echo $content_bottom; ?></div>
   <?php echo $footer; ?>
 <script type="text/javascript">
- //$(document).ready(function() {
-         $('#dob').val($('select.birth_year option:selected').val() + '/' +
-                         $('select.birth_month option:selected').val() + '/' +
-                         $('select.birth_day option:selected').val());
+ $(document).ready(function() {
  $('form.newsletter-form').submit(function() {
-        
+            $('#dob').val(
+            $('#year_birth').val() + '/' +
+            $('#month_birth').val() + '/' +
+            $('#day_birth').val()
+        );
+         
         $('.success, .warning, .attention, .information, .error').remove();
         
         $.ajax({
@@ -178,5 +180,5 @@
         });
         return false;
     });
-//});
+});
 </script>    
