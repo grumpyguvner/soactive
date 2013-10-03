@@ -83,7 +83,7 @@
                 ?>
             </select>
 
-            <select class="month" name="month_birth">
+            <select class="month" name="month_birth" id="month_birth">
                 <?php
                 if ($day_birth) {
                     for ($i = 1; $i <= 12; $i++) {
@@ -102,7 +102,7 @@
                 ?>
             </select>
 
-            <select class="year" name="year_birth">
+            <select class="year" name="year_birth" id="year_birth">
                 <?php
                 $actYear = date("Y",time());
                 $startYear = date("Y",strtotime('-110years'));
@@ -123,24 +123,9 @@
                 ?>
             </select>
             
-            <input type="hidden" name="dob" value="2013/12/02">
+            <input type="hidden" id="dob" name="dob" value="">
         </div>
     </div>
-      <h1><?php echo strtoupper($text_my_newsletters); ?></h1> 
-      <h4><?php echo $text_choose_newsletter ?></h4><br />
-      <div class="radioNewsletter">
-        <div><?php echo $text_choose_newsletter_womens ?></div>  
-        <div class="chooseNewsletter">
-            <input type="radio" name="newsletter_womens" value="1" /> <span><?php echo $text_yes ?></span>
-            <input type="radio" name="newsletter_womens" value="0" /><span><?php echo $text_no ?></span>
-        </div>
-
-        <div><?php echo $text_choose_newsletter_mens ?></div>
-        <div class="chooseNewsletter">
-            <input type="radio" name="newsletter_mens" value="1" /> <span><?php echo $text_yes ?></span>
-            <input type="radio" name="newsletter_mens" value="0" /><span><?php echo $text_no ?></span>
-        </div>
-      </div>  
       </div> 
       <div class="buttons">
           <div class="buttonLeft"><a href="<?php echo $back; ?>" class="button"><?php echo strtoupper($button_back); ?></a></div>
@@ -151,8 +136,11 @@
   <?php echo $content_bottom; ?></div>
   <?php echo $footer; ?>
 <script type="text/javascript">
+ //$(document).ready(function() {
+         $('#dob').val($('select.birth_year option:selected').val() + '/' +
+                         $('select.birth_month option:selected').val() + '/' +
+                         $('select.birth_day option:selected').val());
  $('form.newsletter-form').submit(function() {
-        
         
         $('.success, .warning, .attention, .information, .error').remove();
         
@@ -190,5 +178,5 @@
         });
         return false;
     });
-    
+//});
 </script>    
