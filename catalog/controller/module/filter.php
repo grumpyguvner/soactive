@@ -187,7 +187,8 @@ class ControllerModuleFilter extends Controller {
             $available['sale'] = $this->data['has_sale'];
             
             
-            $this->data['availableStock'] = $this->getAvailbleStock($category_id, $available);
+            //$this->data['availableStock'] = $this->getAvailbleStock($category_id, $available);
+            $this->data['availableStock'] = false;
 
             $this->setTemplate('module/filter.tpl');
 
