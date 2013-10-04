@@ -344,6 +344,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         if ($myCategory != $category) {
                             $myCategory = $category;
                             $category_id = $this->createCategory($category, $category_description, $parent_brand_id);
+$this->debug("category id = " . $category_id . "");
+                            
                             $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                         }
                         if ($category_id) {
@@ -560,7 +562,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             return false;
         }
 
-        return $category_info['category_id'];
+        return $category_id;
     }
 
     function createFilter($filter, $group_id = 0, $filterFr = "") {

@@ -301,7 +301,8 @@ class ControllerModuleFilter extends Controller {
 
                             $data_current_temp['filter_filter'] = implode(':', array_merge($filter_filtered, array($filter['filter_id'])));
 
-                            $count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
+                            //$count_current = $this->model_catalog_product->getTotalProducts($data_current_temp);
+                            $count_current = 1;
 
                             if ($count_current)
                             {
