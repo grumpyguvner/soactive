@@ -560,7 +560,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             return false;
         }
 
-        return $category_info['category_id'];
+        return $category_id;
     }
 
     function createFilter($filter, $group_id = 0, $filterFr = "") {
