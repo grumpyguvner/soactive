@@ -24,6 +24,8 @@ class ModelAccountNewsletter extends Model {
         
         if (!isset($fields['firstname'])) $fields['firstname'] = '';
         if (!isset($fields['lastname'])) $fields['lastname'] = '';
+        if (!isset($fields['language'])) $fields['language'] = $this->session->data['language'];
+        if (!isset($fields['currency'])) $fields['currency'] = $this->currency->getCode();
         
         if (!isset($fields['name'])) $fields['name'] = trim($fields['firstname'] . ' ' . $fields['lastname']);
         

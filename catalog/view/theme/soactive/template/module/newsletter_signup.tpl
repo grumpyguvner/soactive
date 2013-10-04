@@ -136,9 +136,12 @@
   <?php echo $content_bottom; ?></div>
   <?php echo $footer; ?>
 <script type="text/javascript">
- $(document).ready(function() {
- $('form.newsletter-form').submit(function() {
-            $('#dob').val(
+
+ $('form.newsletter-form').submit(function(e) {
+     
+        e.preventDefault();
+     
+        $('#dob').val(
             $('#year_birth').val() + '/' +
             $('#month_birth').val() + '/' +
             $('#day_birth').val()
@@ -180,5 +183,4 @@
         });
         return false;
     });
-});
 </script>    

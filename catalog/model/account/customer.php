@@ -12,18 +12,6 @@ class ModelAccountCustomer extends Model {
 
         $customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 
-        $this->load->model('account/newsletter');
-
-        if ($data['newsletter'] == 1) {
-            $dob = (!empty($data['day_birth']) && !empty($data['month_birth']) && !empty($data['year_birth']) ? date("Y/m/d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth'])) : "");
-            $fields = array("firstname" => $data['firstname'], "lastname" => $data['lastname'], "title" => $data['title'], "dob" => $dob);
-            
-            
-            $this->model_account_newsletter->subscribe($data['email'], $fields, 'account');
-        } elseif ($data['newsletter'] == 0) {
-            $this->model_account_newsletter->unsubscribe($data['email']);
-        }
-
         $this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int) $this->config->get('config_store_id') . "', title = '" . $this->db->escape($data['title']) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', dob = '" . (!empty($data['day_birth']) && !empty($data['month_birth']) && !empty($data['year_birth']) ? $this->db->escape(date("Y-m-d", mktime(0,0,0,$data['month_birth'],$data['day_birth'],$data['year_birth']))) : NULL) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', newsletter = '" . (isset($data['newsletter']) ? (int) $data['newsletter'] : 0) . "', customer_group_id = '" . (int) $customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int) !$customer_group_info['approval'] . "', date_added = NOW()");
 
 
@@ -36,6 +24,15 @@ class ModelAccountCustomer extends Model {
             $address_id = $this->db->getLastId();
 
             $this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int) $address_id . "' WHERE customer_id = '" . (int) $customer_id . "'");
+        }
+        
+        $this->load->model('account/newsletter');
+
+        if ($data['newsletter'] == 1) {
+            $customer_info = $this->getCustomer($customer_id);
+            $this->model_account_newsletter->subscribe($data['email'], $customer_info, 'account');
+        } elseif ($data['newsletter'] == 0) {
+            $this->model_account_newsletter->unsubscribe($data['email']);
         }
 
         $this->language->load('mail/customer');
