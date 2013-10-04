@@ -521,7 +521,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         
         $data = array(
             "parent_id" => (int) $parent_id,
-            "top" => (int) 1,
+            "top" => (int) 0,
             "column" => (int) 1,
             "sort_order" => (int) 999,
             "status" => (int) 1,
