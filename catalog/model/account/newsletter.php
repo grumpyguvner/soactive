@@ -14,9 +14,19 @@ class ModelAccountNewsletter extends Model {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             return;
         
-        if (!isset($fields['firstname'])) $fields['firstname'] = ($this->customer->IsLogged()) ? $this->customer->getFirstName() : '';
-        if (!isset($fields['lastname'])) $fields['lastname'] = ($this->customer->IsLogged()) ? $this->customer->getLastName() : '';
-
+        if($this->customer->IsLogged())
+        {
+            $this->load->model('account/customer');
+            $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+            
+            $fields = array_merge($customer_info,$fields);
+        }
+        
+        if (!isset($fields['firstname'])) $fields['firstname'] = '';
+        if (!isset($fields['lastname'])) $fields['lastname'] = '';
+        
+        if (!isset($fields['name'])) $fields['name'] = trim($fields['firstname'] . ' ' . $fields['lastname']);
+        
         if ($this->config->get('newsletter_mailcampaign_enabled')) {
             $listID = $this->config->get('newsletter_mailcampaign_listid');
             
@@ -38,31 +48,44 @@ class ModelAccountNewsletter extends Model {
             
             $data = array();
             
-            $data['name'] = '';
-            
-            if ($fields['firstname']) $data['name'] .= $fields['firstname'] . ' ';
-            if ($fields['lastname']) $data['name'] .= $fields['lastname'];
-            
             $options = explode(',', $this->config->get('newsletter_mailcampaign_custom_fields'));
-            
-            if (($fields['title']) && (in_array('title', $options))) $title = $fields['title'];
-            if (($fields['dob']) && (in_array('dob', $options))) $dob = $fields['dob'];
+            $customFields = array();
+            foreach($options as $option)
+            {
+                $option = explode(':', $option);
+                if (isset($fields[$option[0]]))
+                {
+                    if (isset($option[1]))
+                    {
+                        switch ($option[1])
+                        {
+                            case 'date':
+                                $time = strtotime($fields[$option[0]]);
+                                if($time === false)
+                                {
+                                    $fields[$option[0]] = '';
+                                }
+                                else
+                                {
+                                   $fields[$option[0]] = date('Y/m/d', $time);   
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    
+                    $customFields[] = array(
+                          'Key' => $option[0],
+                          'Value' => $fields[$option[0]]
+                    );
+                }
+            }
             
             $mailcampaign = new CS_REST_Subscribers($listID, $this->config->get('newsletter_mailcampaign_apikey'));
-            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $data['name'],
-                'CustomFields' => array(
-                  array(
-                      'Key' => 'title',
-                      'Value' => $title,
-                  ),
-                    
-                  array(
-                      'Key' => 'dob',
-                      'Value' => $dob
-                  )
-             ),
-                
-            'Resubscribe' => true
+            $result = $mailcampaign->add(array('EmailAddress' => $email, 'Name' => $fields['name'],
+                'CustomFields' => $customFields,
+                'Resubscribe' => true
                 ));
 
             if ($result->was_successful()) {
@@ -96,16 +119,39 @@ class ModelAccountNewsletter extends Model {
             $mailchimp = new mailchimp($this->config->get('newsletter_mailchimp_apikey'));
             
             $data = array();
-            
+                    
             if ($fields['firstname']) $data['FNAME'] = $fields['firstname'];
             if ($fields['lastname']) $data['LNAME'] = $fields['lastname'];
             
             $options = explode(',', $this->config->get('newsletter_mailchimp_custom_fields'));
-            
-            if (($fields['title']) && (in_array('title', $options))) $data['TITLE'] = $fields['title'];
-            if (($fields['dob']) && (in_array('dob', $options))) $data['DOB'] = $fields['dob'];
-
-            
+            foreach($options as $option)
+            {
+                $option = explode(':', strtolower($option));
+                if (isset($fields[$option[0]]))
+                {
+                    if (isset($option[1]))
+                    {
+                        switch ($option[1])
+                        {
+                            case 'date':
+                                $time = strtotime($fields[$option[0]]);
+                                if($time === false)
+                                {
+                                    $fields[$option[0]] = '';
+                                }
+                                else
+                                {
+                                   $fields[$option[0]] = date('Y/m/d', $time);   
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    
+                    $data[$option[0]] = $fields[$option[0]];
+                }
+            }
             
             $retval = $mailchimp->listSubscribe($listID, $email, $data, 'html', $this->config->get('newsletter_mailchimp_double_optin'), $this->config->get('newsletter_mailchimp_update_existing'), true, $this->config->get('newsletter_mailchimp_send_welcome'));
             

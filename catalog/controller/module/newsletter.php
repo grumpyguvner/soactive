@@ -54,20 +54,8 @@ class ControllerModuleNewsletter extends Controller {
             $this->session->data['newsletter_name_required'] = 'optional';
         }
         
-        $data = array();
+        $data = $this->request->get;
 
-        if (empty($this->request->get['name'])) {
-            $data['firstname'] = $this->request->get['name'];
-        }
-
-        if (empty($this->request->get['lastname'])) {
-            $data['lastname'] = $this->request->get['name2'];
-        }
-
-//		if ($this->session->data['newsletter_name_required'] == 'required' && !$this->request->get['name']) {
-//			$this->response->setOutput($this->language->get('error_name'), $this->config->get('config_compression'));
-//			return;
-//		}
         if (is_null($error)) {
             $this->load->model('account/customer');
             $total = $this->model_account_newsletter->getTotalNewsletterByEmail($this->request->get['email']);
