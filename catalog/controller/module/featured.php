@@ -63,6 +63,7 @@ class ControllerModuleFeatured extends Controller {
                                         'quantity'    	 => $product_info['quantity'],
 					'price'   	  => $price,
 					'special' 	  => $special,
+                                        'sale'      => $product_info['sale'],
                                         'saving_percent'            => $product_info['saving_percent'],
                                         'new'            => $product_info['new'],
 					'summary'     => htmlentities($summary, ENT_QUOTES, 'UTF-8'),

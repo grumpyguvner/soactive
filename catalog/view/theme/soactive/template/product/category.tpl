@@ -151,5 +151,8 @@ if ($login_required)
             <div class="right"><a href="<?php echo $continue; ?>" class="button"><?php echo $button_continue; ?></a></div>
         </div>
     <?php } ?>
+    <?php if (!$products) { ?>
+        <div class="content"><?php echo $text_empty; ?></div>
+    <?php } ?>
     <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>

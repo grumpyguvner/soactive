@@ -27,7 +27,7 @@
                       <?php if ($v1['new']) { ?> 
                           <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                       <?php } ?>
-                      <?php if ($v1['saving_percent']) { ?> 
+                      <?php if ($v1['sale']) { ?> 
                           <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
                       <?php } ?>
                       <?php } ?><br />

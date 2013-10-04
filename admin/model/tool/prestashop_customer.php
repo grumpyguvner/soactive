@@ -134,7 +134,7 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
                 $this->load->model('sale/customer');
                 $customer['customer_id'] = $this->model_sale_customer->addCustomer($customer);
                 
-                $this->db->query("UPDATE " . DB_PREFIX . "customer SET date_of_birth = '" . $this->db->escape($aCustomer->fields['birthday']) . "', password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape('ZabQEKHEjDzQY3rH6d9u6d5N9ge1yfsP15RtvQA7zcZsPKjosq2TJjbv') . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['date_add']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
+                $this->db->query("UPDATE " . DB_PREFIX . "customer SET dob = '" . $this->db->escape($aCustomer->fields['birthday']) . "', password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape('ZabQEKHEjDzQY3rH6d9u6d5N9ge1yfsP15RtvQA7zcZsPKjosq2TJjbv') . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['date_add']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
                 /*
                 $this->processReviews($customer_id, $customer);
                 

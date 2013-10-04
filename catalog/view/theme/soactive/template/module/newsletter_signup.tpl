@@ -17,6 +17,17 @@
     <div class="newsletterSignup content">
       <div class="prow">
           <div class="pLabel">
+              <span class="required">*</span> <span><?php echo $entry_title; ?></span>
+          </div>
+          <div class="pInput">
+              <input type="text" name="title" />
+              <?php if ($error_lastname) { ?>
+                  <span class="error"><?php echo $error_lastname; ?></span>
+              <?php } ?>
+          </div>
+      </div>
+      <div class="prow">
+          <div class="pLabel">
               <span class="required">*</span> <span><?php echo $entry_name2; ?></span>
           </div>
           <div class="pInput">
@@ -48,21 +59,73 @@
               <?php } ?>
           </div>
       </div>
-      <h1><?php echo strtoupper($text_my_newsletters); ?></h1> 
-      <h4><?php echo $text_choose_newsletter ?></h4><br />
-      <div class="radioNewsletter">
-        <div><?php echo $text_choose_newsletter_womens ?></div>  
-        <div class="chooseNewsletter">
-            <input type="radio" name="newsletter_womens" value="1" /> <span><?php echo $text_yes ?></span>
-            <input type="radio" name="newsletter_womens" value="0" /><span><?php echo $text_no ?></span>
+    <div class="prow">
+        <div class="pLabel">
+                <span class="required">*</span> <span><?php echo $entry_dob; ?></span>
         </div>
+        <div class="pInput">
+            <select class="day" name="day_birth" id="day_birth">
+                <?php
+                if ($day_birth) {
+                    for ($i = 1; $i <= 31; $i++) {
+                        if ($i == $day_birth) {
+                           echo '<option value="'.$day_birth.'" selected="selected">'.$day_birth.'</option>'; 
+                        } else {
+                           echo '<option value="'.$i.'">'.$i.'</option>';
+                        } 
+                    }
+                } else {
+                    echo '<option value=""></option>';
+                    for($i = 1; $i <= 31; $i++) {
+                        echo '<option value="'.$i.'">'.$i.'</option>';
+                    }
+                }
+                ?>
+            </select>
 
-        <div><?php echo $text_choose_newsletter_mens ?></div>
-        <div class="chooseNewsletter">
-            <input type="radio" name="newsletter_mens" value="1" /> <span><?php echo $text_yes ?></span>
-            <input type="radio" name="newsletter_mens" value="0" /><span><?php echo $text_no ?></span>
+            <select class="month" name="month_birth" id="month_birth">
+                <?php
+                if ($day_birth) {
+                    for ($i = 1; $i <= 12; $i++) {
+                        if ($i == $month_birth) {
+                           echo '<option value="'.$month_birth.'" selected="selected">'.date("F", mktime(0, 0, 0, $month_birth, 1, 2013)).'</option>'; 
+                        } else {
+                           echo '<option value="'.$i.'">'.date("F", mktime(0, 0, 0, $i, 1, 2013)).'</option>';
+                        } 
+                    }
+                } else {
+                    echo '<option value=""></option>';
+                    for($i = 1; $i <= 12; $i++) {
+                        echo '<option value="'.$i.'">'.date("F", mktime(0, 0, 0, $i, 1, 2013)).'</option>';
+                    }
+                }
+                ?>
+            </select>
+
+            <select class="year" name="year_birth" id="year_birth">
+                <?php
+                $actYear = date("Y",time());
+                $startYear = date("Y",strtotime('-110years'));
+                if ($day_birth) {
+                    for ($i = $actYear; $i >= $startYear; $i--) {
+                        if ($i == $year_birth) {
+                           echo '<option value="'.$year_birth.'" selected="selected">'.$year_birth.'</option>'; 
+                        } else {
+                           echo '<option value="'.$i.'">'.$i.'</option>';
+                        } 
+                    }
+                } else {
+                    echo '<option value=""></option>';
+                    for($i = $actYear; $i >= $startYear; $i--) {
+                        echo '<option value="'.$i.'">'.$i.'</option>';
+                    }
+                }
+                ?>
+            </select>
+            
+            <input type="hidden" id="dob" name="dob" value="">
         </div>
-      </div>  
+    </div>
       </div> 
       <div class="buttons">
           <div class="buttonLeft"><a href="<?php echo $back; ?>" class="button"><?php echo strtoupper($button_back); ?></a></div>
@@ -73,7 +136,14 @@
   <?php echo $content_bottom; ?></div>
   <?php echo $footer; ?>
 <script type="text/javascript">
+ $(document).ready(function() {
  $('form.newsletter-form').submit(function() {
+            $('#dob').val(
+            $('#year_birth').val() + '/' +
+            $('#month_birth').val() + '/' +
+            $('#day_birth').val()
+        );
+         
         $('.success, .warning, .attention, .information, .error').remove();
         
         $.ajax({
@@ -110,5 +180,5 @@
         });
         return false;
     });
-    
+});
 </script>    
