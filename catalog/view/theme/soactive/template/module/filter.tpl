@@ -29,7 +29,7 @@ if ($filter_groups || $options) {
                                                     <?php foreach ($filter_group['filter'] as $filter) {
                                                         if ($filter['count'])
                                                         {
-                                                          echo (in_array($filter['filter_id'], $availableStock['filter_groups'])) ? '<li>' : '<li class="">';
+                                                          echo (in_array($filter['filter_id'], $availableStock['filter_groups'])) ? '<li>' : '<li class="noneCurrent">';
                                                           if (in_array($filter['filter_id'], $filter_category)) { ?>
                                                             <label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" checked="checked" /> <?php echo $filter['name']; ?></label>
                                                         <?php } else { ?>
@@ -231,7 +231,7 @@ if ($filter_groups || $options) {
     $('.noneCurrent input[type=\'checkbox\']').each(function(element) {
         if (!$(this).is(':checked'))
         {
-           //$(this).attr('disabled', 'disabled');
+           $(this).attr('disabled', 'disabled');
         }
     });
     //--></script>
