@@ -509,7 +509,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
     }
 
     function createCategory($category, $wms_category_description, $parent_id = 0) {
-        if (!is_array($category_description))
+        if (!is_array($wms_category_description))
             return false;
         
         $category = "womens-" . $category;
