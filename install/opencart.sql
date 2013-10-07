@@ -1045,7 +1045,7 @@ CREATE TABLE `oc_customer` (
   `email` varchar(96) NOT NULL,
   `telephone` varchar(32) NOT NULL,
   `fax` varchar(32) NOT NULL,
-  `date_of_birth` DATE NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dob` DATE NOT NULL DEFAULT '0000-00-00 00:00:00',
   `password` varchar(40) NOT NULL,
   `salt` varchar(60) NOT NULL,
   `cart` text,
