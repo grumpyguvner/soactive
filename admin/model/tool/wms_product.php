@@ -116,52 +116,232 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 $this->debug("initializing category array");
                 $myCategoryIds = array();
                 $myFilterIds = array();
-                
-                $this->debug("fetching product categories");
-                $aCategories = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid IN (SELECT categoryid FROM stylestocategories WHERE styleid = "' . $aProduct->fields['uuid'] . '")');
-                $type = "";
-                $myCategory = "";
 
-                // Always add product to "Product" Category
-                $category = seoUrl((string) "Product");
-                $category_description = array(
-                    $this->languageId => array(
-                        'name' => (string) "Product",
-                        'meta_keyword' => "Product",
-                        'meta_description' => "",
-                        'description' => "All products"
-                    ),
-                    $this->languageFr => array(
-                        'name' => (string) "Produit",
-                        'meta_keyword' => "Produit",
-                        'meta_description' => "",
-                        'description' => "All produits"
-                ));
-                if ($myCategory != $category) {
-                    $myCategory = $category;
-                    $parent_type_id = $this->createCategory($category, $category_description, 0);
-                    $filter_group_id = $this->createFilter("Product", 0, "Produit");
-                }
-                if ($parent_type_id) {
-                    if (!in_array($parent_type_id, $myCategoryIds))
-                        $myCategoryIds[] = $parent_type_id;
-                } else {
-                    $error = true;
+                $genders = array("womens");
+                $this->debug("fetching product gender(s)");
+                $aGender = $this->dbQF->Execute('SELECT g.* FROM genders g WHERE g.uuid = "' . $aProduct->fields['genderid'] . '"');
+                if ($aGender->RecordCount() > 0) {
+                    switch (strtolower($aGender->fields['name'])) {
+                        case "unisex":
+                            $genders[] = "mens";
+                            break;
+                        case "mens":
+                            $genders = array("mens");
+                            break;
+                    }
                 }
 
-                if ($aCategories->RecordCount() > 0) {
-                    while (!$aCategories->EOF) {
-                        $aCategory = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
-                        $enCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
-                        $frCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
-                        // only continue if we have a record for soactive
-                        if ($enCategory->RecordCount() > 0) {
-                            $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
-                            
-                            $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
-                            $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
-                            $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
-                            $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
+                // Loop round all genders and create relevant categories
+                foreach ($genders as $gender) {
+                    
+                    $this->debug("fetching product categories");
+                    $aCategories = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid IN (SELECT categoryid FROM stylestocategories WHERE styleid = "' . $aProduct->fields['uuid'] . '")');
+                    $type = "";
+                    $myCategory = "";
+
+                    // Always add product to "Product" Category
+                    $category = seoUrl((string) "Product");
+                    $category_description = array(
+                        $this->languageId => array(
+                            'name' => (string) "Product",
+                            'meta_keyword' => "Product",
+                            'meta_description' => "",
+                            'description' => "All products"
+                        ),
+                        $this->languageFr => array(
+                            'name' => (string) "Produit",
+                            'meta_keyword' => "Produit",
+                            'meta_description' => "",
+                            'description' => "All produits"
+                    ));
+                    if ($myCategory != $category) {
+                        $myCategory = $category;
+                        $parent_type_id = $this->createCategory($gender, $category, $category_description, 0);
+                        $filter_group_id = $this->createFilter("Product", 0, "Produit");
+                    }
+                    if ($parent_type_id) {
+                        if (!in_array($parent_type_id, $myCategoryIds))
+                            $myCategoryIds[] = $parent_type_id;
+                    } else {
+                        $error = true;
+                    }
+
+                    if ($aCategories->RecordCount() > 0) {
+                        while (!$aCategories->EOF) {
+                            $aCategory = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
+                            $enCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
+                            $frCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
+                            // only continue if we have a record for soactive
+                            if ($enCategory->RecordCount() > 0) {
+                                $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
+
+                                $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
+                                $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
+                                $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
+                                $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
+
+                                //initialise category variables
+                                $category = seoUrl($myName);
+                                $category_description = array(
+                                    $this->languageId => array(
+                                        'name' => $myName,
+                                        'meta_keyword' => $myName,
+                                        'meta_description' => "",
+                                        'description' => $myDesc
+                                    ),
+                                    $this->languageFr => array(
+                                        'name' => (string) $frName,
+                                        'meta_keyword' => $frName,
+                                        'meta_description' => "",
+                                        'description' => $frDesc
+                                ));
+                                if ($myCategory != $category) {
+                                    $myCategory = $category;
+                                    $category_id = $this->createCategory($gender, $category, $category_description, $parent_type_id);
+                                    $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
+                                }
+                                if ($category_id) {
+                                    if (!in_array($category_id, $myCategoryIds))
+                                        $myCategoryIds[] = $category_id;
+                                } else {
+                                    $error = true;
+                                }
+                                if ($filter_id) {
+                                    if (!in_array($filter_id, $myFilterIds))
+                                        $myFilterIds[] = $filter_id;
+                                } else {
+                                    $error = true;
+                                }
+
+                            }
+
+                            $aCategories->MoveNext();
+                        }
+                    }
+
+                    $this->debug("fetching product sports categories");
+                    $aCategories = $this->dbQF->Execute('SELECT c.* FROM sports c WHERE c.uuid IN (SELECT sportid FROM stylestosports WHERE styleid = "' . $aProduct->fields['uuid'] . '")');
+                    $type = "";
+                    $myCategory = "";
+
+                    // Always add product to "Activity" Category
+                    $category = seoUrl((string) "Sport");
+                    $category_description = array(
+                        $this->languageId => array(
+                            'name' => (string) "Sport",
+                            'meta_keyword' => "Sport",
+                            'meta_description' => "",
+                            'description' => "All sports"
+                        ),
+                        $this->languageFr => array(
+                            'name' => (string) "Sport",
+                            'meta_keyword' => "Sport",
+                            'meta_description' => "",
+                            'description' => "All sports"
+                    ));
+                    if ($myCategory != $category) {
+                        $myCategory = $category;
+                        $parent_activity_id = $this->createCategory($gender, $category, $category_description, 0);
+                        $filter_group_id = $this->createFilter("Sport", 0, "Sport");
+                    }
+                    if ($parent_activity_id) {
+                        if (!in_array($parent_activity_id, $myCategoryIds))
+                            $myCategoryIds[] = $parent_activity_id;
+                    } else {
+                        $error = true;
+                    }
+
+                    if ($aCategories->RecordCount() > 0) {
+                        while (!$aCategories->EOF) {
+                            $aCategory = $this->dbQF->Execute('SELECT c.* FROM sports c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
+                            $enCategory = $this->dbQF->Execute('SELECT o.* FROM sport_overrides o WHERE o.sportid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
+                            $frCategory = $this->dbQF->Execute('SELECT o.* FROM sport_overrides o WHERE o.sportid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
+                            // only continue if we have a record for soactive
+                            if ($enCategory->RecordCount() > 0) {
+                                $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
+
+                                $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
+                                $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
+                                $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
+                                $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
+
+                                //initialise category variables
+                                $category = seoUrl($myName);
+                                $category_description = array(
+                                    $this->languageId => array(
+                                        'name' => $myName,
+                                        'meta_keyword' => $myName,
+                                        'meta_description' => "",
+                                        'description' => $myDesc
+                                    ),
+                                    $this->languageFr => array(
+                                        'name' => (string) $frName,
+                                        'meta_keyword' => $frName,
+                                        'meta_description' => "",
+                                        'description' => $frDesc
+                                ));
+                                if ($myCategory != $category) {
+                                    $myCategory = $category;
+                                    $category_id = $this->createCategory($gender, $category, $category_description, $parent_activity_id);
+                                    $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
+                                }
+                                if ($category_id) {
+                                    if (!in_array($category_id, $myCategoryIds))
+                                        $myCategoryIds[] = $category_id;
+                                } else {
+                                    $error = true;
+                                }
+                                if ($filter_id) {
+                                    if (!in_array($filter_id, $myFilterIds))
+                                        $myFilterIds[] = $filter_id;
+                                } else {
+                                    $error = true;
+                                }
+
+                            }
+
+                            $aCategories->MoveNext();
+                        }
+                    }
+
+                    $this->debug("fetching product brand details");
+                    $aBrand = $this->dbQF->Execute('SELECT s.* FROM suppliers s WHERE s.uuid = "' . $aProduct->fields['supplierid'] . '"');
+
+                    // Always add product to "Brand" Category
+                    $category = seoUrl((string) "Brand");
+                    $category_description = array(
+                        $this->languageId => array(
+                            'name' => (string) "Brand",
+                            'meta_keyword' => "Brand",
+                            'meta_description' => "",
+                            'description' => "All brands"
+                        ),
+                        $this->languageFr => array(
+                            'name' => (string) "Marque",
+                            'meta_keyword' => "Marque",
+                            'meta_description' => "",
+                            'description' => "All marques"
+                    ));
+                    if ($myCategory != $category) {
+                        $myCategory = $category;
+                        $parent_brand_id = $this->createCategory($gender, $category, $category_description, 0);
+                        $filter_group_id = $this->createFilter("Brand", 0, "Marque");
+                    }
+                    if ($parent_brand_id) {
+                        if (!in_array($parent_brand_id, $myCategoryIds))
+                            $myCategoryIds[] = $parent_brand_id;
+                    } else {
+                        $error = true;
+                    }
+
+                    if ($aBrand->RecordCount() > 0) {
+                        while (!$aBrand->EOF) {
+                            $this->debug("processing brand " . $aBrand->fields['name'] . "");
+
+                            $myName = (string) $aBrand->fields['name'];
+                            $myDesc = (string) $aBrand->fields['name'];
+                            $frName = (string) $aBrand->fields['name'];
+                            $frDesc = (string) $aBrand->fields['name'];
 
                             //initialise category variables
                             $category = seoUrl($myName);
@@ -180,7 +360,9 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             ));
                             if ($myCategory != $category) {
                                 $myCategory = $category;
-                                $category_id = $this->createCategory($category, $category_description, $parent_type_id);
+                                $category_id = $this->createCategory($gender, $category, $category_description, $parent_brand_id);
+    $this->debug("category id = " . $category_id . "");
+
                                 $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                             }
                             if ($category_id) {
@@ -195,173 +377,9 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             } else {
                                 $error = true;
                             }
-                            
+
+                            $aBrand->MoveNext();
                         }
-
-                        $aCategories->MoveNext();
-                    }
-                }
-                
-                $this->debug("fetching product sports categories");
-                $aCategories = $this->dbQF->Execute('SELECT c.* FROM sports c WHERE c.uuid IN (SELECT sportid FROM stylestosports WHERE styleid = "' . $aProduct->fields['uuid'] . '")');
-                $type = "";
-                $myCategory = "";
-
-                // Always add product to "Activity" Category
-                $category = seoUrl((string) "Sport");
-                $category_description = array(
-                    $this->languageId => array(
-                        'name' => (string) "Sport",
-                        'meta_keyword' => "Sport",
-                        'meta_description' => "",
-                        'description' => "All sports"
-                    ),
-                    $this->languageFr => array(
-                        'name' => (string) "Sport",
-                        'meta_keyword' => "Sport",
-                        'meta_description' => "",
-                        'description' => "All sports"
-                ));
-                if ($myCategory != $category) {
-                    $myCategory = $category;
-                    $parent_activity_id = $this->createCategory($category, $category_description, 0);
-                    $filter_group_id = $this->createFilter("Sport", 0, "Sport");
-                }
-                if ($parent_activity_id) {
-                    if (!in_array($parent_activity_id, $myCategoryIds))
-                        $myCategoryIds[] = $parent_activity_id;
-                } else {
-                    $error = true;
-                }
-
-                if ($aCategories->RecordCount() > 0) {
-                    while (!$aCategories->EOF) {
-                        $aCategory = $this->dbQF->Execute('SELECT c.* FROM sports c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
-                        $enCategory = $this->dbQF->Execute('SELECT o.* FROM sport_overrides o WHERE o.sportid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
-                        $frCategory = $this->dbQF->Execute('SELECT o.* FROM sport_overrides o WHERE o.sportid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
-                        // only continue if we have a record for soactive
-                        if ($enCategory->RecordCount() > 0) {
-                            $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
-                            
-                            $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
-                            $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
-                            $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
-                            $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
-
-                            //initialise category variables
-                            $category = seoUrl($myName);
-                            $category_description = array(
-                                $this->languageId => array(
-                                    'name' => $myName,
-                                    'meta_keyword' => $myName,
-                                    'meta_description' => "",
-                                    'description' => $myDesc
-                                ),
-                                $this->languageFr => array(
-                                    'name' => (string) $frName,
-                                    'meta_keyword' => $frName,
-                                    'meta_description' => "",
-                                    'description' => $frDesc
-                            ));
-                            if ($myCategory != $category) {
-                                $myCategory = $category;
-                                $category_id = $this->createCategory($category, $category_description, $parent_activity_id);
-                                $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
-                            }
-                            if ($category_id) {
-                                if (!in_array($category_id, $myCategoryIds))
-                                    $myCategoryIds[] = $category_id;
-                            } else {
-                                $error = true;
-                            }
-                            if ($filter_id) {
-                                if (!in_array($filter_id, $myFilterIds))
-                                    $myFilterIds[] = $filter_id;
-                            } else {
-                                $error = true;
-                            }
-                            
-                        }
-
-                        $aCategories->MoveNext();
-                    }
-                }
-                
-                $this->debug("fetching product brand details");
-                $aBrand = $this->dbQF->Execute('SELECT s.* FROM suppliers s WHERE s.uuid = "' . $aProduct->fields['supplierid'] . '"');
-
-                // Always add product to "Brand" Category
-                $category = seoUrl((string) "Brand");
-                $category_description = array(
-                    $this->languageId => array(
-                        'name' => (string) "Brand",
-                        'meta_keyword' => "Brand",
-                        'meta_description' => "",
-                        'description' => "All brands"
-                    ),
-                    $this->languageFr => array(
-                        'name' => (string) "Marque",
-                        'meta_keyword' => "Marque",
-                        'meta_description' => "",
-                        'description' => "All marques"
-                ));
-                if ($myCategory != $category) {
-                    $myCategory = $category;
-                    $parent_brand_id = $this->createCategory($category, $category_description, 0);
-                    $filter_group_id = $this->createFilter("Brand", 0, "Marque");
-                }
-                if ($parent_brand_id) {
-                    if (!in_array($parent_brand_id, $myCategoryIds))
-                        $myCategoryIds[] = $parent_brand_id;
-                } else {
-                    $error = true;
-                }
-
-                if ($aBrand->RecordCount() > 0) {
-                    while (!$aBrand->EOF) {
-                        $this->debug("processing brand " . $aBrand->fields['name'] . "");
-
-                        $myName = (string) $aBrand->fields['name'];
-                        $myDesc = (string) $aBrand->fields['name'];
-                        $frName = (string) $aBrand->fields['name'];
-                        $frDesc = (string) $aBrand->fields['name'];
-
-                        //initialise category variables
-                        $category = seoUrl($myName);
-                        $category_description = array(
-                            $this->languageId => array(
-                                'name' => $myName,
-                                'meta_keyword' => $myName,
-                                'meta_description' => "",
-                                'description' => $myDesc
-                            ),
-                            $this->languageFr => array(
-                                'name' => (string) $frName,
-                                'meta_keyword' => $frName,
-                                'meta_description' => "",
-                                'description' => $frDesc
-                        ));
-                        if ($myCategory != $category) {
-                            $myCategory = $category;
-                            $category_id = $this->createCategory($category, $category_description, $parent_brand_id);
-$this->debug("category id = " . $category_id . "");
-                            
-                            $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
-                        }
-                        if ($category_id) {
-                            if (!in_array($category_id, $myCategoryIds))
-                                $myCategoryIds[] = $category_id;
-                        } else {
-                            $error = true;
-                        }
-                        if ($filter_id) {
-                            if (!in_array($filter_id, $myFilterIds))
-                                $myFilterIds[] = $filter_id;
-                        } else {
-                            $error = true;
-                        }
-
-                        $aBrand->MoveNext();
                     }
                 }
 
@@ -510,11 +528,22 @@ $this->debug("category id = " . $category_id . "");
         return true;
     }
 
-    function createCategory($category, $wms_category_description, $parent_id = 0) {
-        if (!is_array($wms_category_description))
+    function createCategory($gender, $category, $wms_category_description, $parent_id = 0) {
+        if (!is_array($wms_category_description) || is_array($gender))
             return false;
         
-        $category = "womens-" . $category;
+        // Currently we only deal with 2 genders, not unisex and not childrens
+        // so if not mens then assume womens
+        switch (strtolower($gender)) {
+            case "mens":
+            case "male":
+                $myGender = "mens";
+                break;
+            default:
+                $myGender = "womens";
+                break;
+        }
+        $category = $myGender . "-" . $category;
 
         //We only create a new category the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
