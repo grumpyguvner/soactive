@@ -145,12 +145,15 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $this->languageId => array(
                             'name' => (string) "Product",
                             'meta_keyword' => "Product",
+                            'keyword' => seoUrl("Product"),
                             'meta_description' => "",
+                            'description' => "All products",
                             'description' => "All products"
                         ),
                         $this->languageFr => array(
                             'name' => (string) "Produit",
                             'meta_keyword' => "Produit",
+                            'keyword' => seoUrl("Produit"),
                             'meta_description' => "",
                             'description' => "All produits"
                     ));
@@ -186,12 +189,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                     $this->languageId => array(
                                         'name' => $myName,
                                         'meta_keyword' => $myName,
+                                        'keyword' => seoUrl($myName),
                                         'meta_description' => "",
                                         'description' => $myDesc
                                     ),
                                     $this->languageFr => array(
                                         'name' => (string) $frName,
                                         'meta_keyword' => $frName,
+                                        'keyword' => seoUrl($frName),
                                         'meta_description' => "",
                                         'description' => $frDesc
                                 ));
@@ -230,12 +235,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $this->languageId => array(
                             'name' => (string) "Sport",
                             'meta_keyword' => "Sport",
+                            'keyword' => seoUrl("Sport"),
                             'meta_description' => "",
                             'description' => "All sports"
                         ),
                         $this->languageFr => array(
                             'name' => (string) "Sport",
                             'meta_keyword' => "Sport",
+                            'keyword' => seoUrl("Sport"),
                             'meta_description' => "",
                             'description' => "All sports"
                     ));
@@ -271,12 +278,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                     $this->languageId => array(
                                         'name' => $myName,
                                         'meta_keyword' => $myName,
+                                        'keyword' => seoUrl($myName),
                                         'meta_description' => "",
                                         'description' => $myDesc
                                     ),
                                     $this->languageFr => array(
                                         'name' => (string) $frName,
                                         'meta_keyword' => $frName,
+                                        'keyword' => seoUrl($frName),
                                         'meta_description' => "",
                                         'description' => $frDesc
                                 ));
@@ -313,12 +322,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $this->languageId => array(
                             'name' => (string) "Brand",
                             'meta_keyword' => "Brand",
+                            'keyword' => seoUrl("Brand"),
                             'meta_description' => "",
                             'description' => "All brands"
                         ),
                         $this->languageFr => array(
                             'name' => (string) "Marque",
                             'meta_keyword' => "Marque",
+                            'keyword' => seoUrl("Marque"),
                             'meta_description' => "",
                             'description' => "All marques"
                     ));
@@ -349,12 +360,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 $this->languageId => array(
                                     'name' => $myName,
                                     'meta_keyword' => $myName,
+                                    'keyword' => seoUrl($myName),
                                     'meta_description' => "",
                                     'description' => $myDesc
                                 ),
                                 $this->languageFr => array(
                                     'name' => (string) $frName,
                                     'meta_keyword' => $frName,
+                                    'keyword' => seoUrl($frName),
                                     'meta_description' => "",
                                     'description' => $frDesc
                             ));
@@ -544,6 +557,13 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 break;
         }
         $category = $myGender . "-" . $category;
+        
+        foreach ($wms_category_description as $key => $description) {
+            if (isset($description['keyword']) && !empty($description['keyword']))
+            {
+                $wms_category_description[$key]['keyword'] = $myGender . "-" . $description['keyword'];
+            }
+        }
 
         //We only create a new category the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
@@ -556,7 +576,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             "column" => (int) 1,
             "sort_order" => (int) 999,
             "status" => (int) 1,
-            'category_description' => $category_description,
+            'category_description' => $wms_category_description,
             'keyword' => $category,
             'category_store' => $this->config->get('wms_products_store')
         );
@@ -570,7 +590,15 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $data["parent_id"] = $parent_id;
             $data["keyword"] = $category;
             $data['category_store'] = $this->config->get('wms_products_store');
-            $data["category_description"] = $this->model_catalog_category->getCategoryDescriptions($category_id);
+            $data["category_description"] = (array) $this->model_catalog_category->getCategoryDescriptions($category_id);
+            
+            foreach ($data["category_description"] as $key => $description) {
+                if (empty($description['keyword']) && isset($wms_category_description[$key]['keyword']))
+                {
+                    $data["category_description"][$key]['keyword'] = $wms_category_description[$key]['keyword'];
+                }
+            }
+            
             $data['category_filter'] = $this->model_catalog_category->getCategoryFilters($category_id);
             
             $this->model_catalog_category->editCategory($category_id, $data);

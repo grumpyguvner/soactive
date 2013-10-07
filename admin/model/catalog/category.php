@@ -102,7 +102,7 @@ class ModelCatalogCategory extends Model {
 		}
                 
 		foreach ($data['category_description'] as $language_id => $value) {
-                        $this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "', language_id = '" . (int)$language_id . "'");
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($value['keyword']) . "', language_id = '" . (int)$language_id . "'");
 		}
 		
 		$this->cache->delete('category');
@@ -134,7 +134,7 @@ class ModelCatalogCategory extends Model {
 	
 	public function getCategoryByKeyword($keyword) {
                 $category_id = 0;
-		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
+		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC");
 
                 if($query->row)
                     $category_id = substr ((string) $query->row['query'], 12);
