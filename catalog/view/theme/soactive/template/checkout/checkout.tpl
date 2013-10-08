@@ -107,39 +107,66 @@
             });	
         });
 <?php } ?>
-
-    // Checkout
     $('#button-account').live('click', function() {
         $.ajax({
-            url: 'index.php?route=checkout/' + $('input[name=\'account\']').attr('value'),
-            type: 'get',
+            url: 'index.php?route=checkout/register/validate',
+            type: 'post',
             data: {email: $('input[name=\'new-email\']').val()},
-            dataType: 'html',
+            dataType: 'json',
             beforeSend: function() {
                 $('#button-account').attr('disabled', true);
                 $('#button-account').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
-            },		
+            },	
             complete: function() {
-                $('.checkout-heading').removeClass('active');
-                $('#noLoggedHeadPayAddress').addClass('active');
-                $('#button-account').attr('disabled', false);
+                $('#headPayAddress1').addClass('active');
+                $('#button-account').attr('disabled', false); 
                 $('.wait').remove();
             },			
-            success: function(html) {
+            success: function(json) {
+                
                 $('.warning, .error').remove();
-			
-                $('#payment-address .checkout-content').html(html);
-				
-                $('#checkout .checkout-content').slideUp('slow');
-				
-                $('#payment-address .checkout-content').slideDown('slow');
-				
-                $('.checkout-heading a').remove();
-				
-                $('#checkout .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+						
+                if (json['redirect']) {
+                    location = json['redirect'];				
+                } else if (json['error']['warning']) {
+                        $('input[name=\'new-email\']').after('<div class="error">' + json['error']['warning'] + '</div>');
+                } else if (json['error']['email']) {
+                        $('input[name=\'new-email\']').after('<div class="error">' + json['error']['email'] + '</div>');
+                }
+                else {
+                    $.ajax({
+                        url: 'index.php?route=checkout/' + $('input[name=\'account\']').attr('value'),
+                        type: 'get',
+                        data: {email: $('input[name=\'new-email\']').val()},
+                        dataType: 'html',
+                        beforeSend: function() {
+                            $('#button-account').attr('disabled', true);
+                            $('#button-account').after('<span class="wait">&nbsp;<img src="catalog/view/theme/default/image/loading.gif" alt="" /></span>');
+                        },		
+                        complete: function() {
+                            $('.checkout-heading').removeClass('active');
+                            $('#noLoggedHeadPayAddress').addClass('active');
+                            $('#button-account').attr('disabled', false);
+                            $('.wait').remove();
+                        },			
+                        success: function(html) {
+                            $('.warning, .error').remove();
+
+                            $('#payment-address .checkout-content').html(html);
+
+                            $('#checkout .checkout-content').slideUp('slow');
+
+                            $('#payment-address .checkout-content').slideDown('slow');
+
+                            $('.checkout-heading a').remove();
+
+                            $('#checkout .checkout-heading').append('<a><?php echo $text_modify; ?></a>');
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                }
             }
         });
     });
