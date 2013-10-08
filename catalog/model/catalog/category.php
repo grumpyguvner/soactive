@@ -24,39 +24,50 @@ class ModelCatalogCategory extends Model {
         }
     }
 
-    public function getCategoryFilters($category_id) {
-        $implode = array();
-
-        $query = $this->db->query("SELECT filter_id FROM " . DB_PREFIX . "category_filter WHERE category_id = '" . (int) $category_id . "'");
-
-        foreach ($query->rows as $result) {
-            $implode[] = (int) $result['filter_id'];
-        }
-
+    public function getCategoryFilters($category_id, $data = array()) {
         $filter_group_data = array();
+        
+        $sql = "SELECT f.filter_group_id, fgd.name as fgd_name, f.filter_id, fd.name, COUNT(p.product_id) as total "
+             . "FROM " . DB_PREFIX . "category_filter cf "
+             . "JOIN " . DB_PREFIX . "filter f ON f.filter_id = cf.filter_id "
+             . "LEFT JOIN " . DB_PREFIX . "filter_description fd ON (fd.filter_id = f.filter_id) "
+             . "LEFT JOIN " . DB_PREFIX . "filter_group fg ON (fg.filter_group_id = f.filter_group_id) "
+             . "LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fgd.filter_group_id = fg.filter_group_id) "
+             . "LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON p2c.category_id = cf.category_id "
+             . "LEFT JOIN " . DB_PREFIX . "product_filter pf ON pf.filter_id = f.filter_id AND pf.product_id = p2c.product_id "
+             . "LEFT JOIN " . DB_PREFIX . "product p ON p.product_id = pf.product_id "
+             . "LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id) "
+             . "LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p2s.product_id = p.product_id) "
+             . "WHERE cf.category_id = '" . (int) $category_id . "' AND fgd.language_id = '" . (int) $this->config->get('config_language_id') . "' "
+             . "AND p.status = '1' AND p.date_available <= NOW() AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "' ";
+        
+        if ($this->config->get('config_category_instockonly')) {
+            $sql .= " AND p.quantity > 0 ";
+        }
+        
+        $sql .= "GROUP BY f.filter_id "
+              . "ORDER BY fg.sort_order, LCASE(fgd.name), f.sort_order ";
 
-        if ($implode) {
-            $filter_group_query = $this->db->query("SELECT DISTINCT f.filter_group_id, fgd.name, fg.sort_order FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_group fg ON (f.filter_group_id = fg.filter_group_id) LEFT JOIN " . DB_PREFIX . "filter_group_description fgd ON (fg.filter_group_id = fgd.filter_group_id) WHERE f.filter_id IN (" . implode(',', $implode) . ") AND fgd.language_id = '" . (int) $this->config->get('config_language_id') . "' GROUP BY f.filter_group_id ORDER BY fg.sort_order, LCASE(fgd.name)");
-
-            foreach ($filter_group_query->rows as $filter_group) {
-                $filter_data = array();
-
-                $filter_query = $this->db->query("SELECT DISTINCT f.filter_id, fd.name FROM " . DB_PREFIX . "filter f LEFT JOIN " . DB_PREFIX . "filter_description fd ON (f.filter_id = fd.filter_id) WHERE f.filter_id IN (" . implode(',', $implode) . ") AND f.filter_group_id = '" . (int) $filter_group['filter_group_id'] . "' AND fd.language_id = '" . (int) $this->config->get('config_language_id') . "' ORDER BY f.sort_order, LCASE(fd.name)");
-
-                foreach ($filter_query->rows as $filter) {
-                    $filter_data[] = array(
-                        'filter_id' => $filter['filter_id'],
-                        'name' => $filter['name']
-                    );
+        $query = $this->db->query($sql);
+        
+        if ($query->num_rows)
+        {
+            foreach ($query->rows as $row)
+            {
+                $temp = array('filter_id' => $row['filter_id'],
+                              'name' => $row['name'],
+                              'total' => $row['total']);
+                
+                if (!isset($filter_group_data[$row['filter_group_id']]))
+                {
+                    $filter_group_data[$row['filter_group_id']] = array(
+                                                                    'filter_group_id' => $row['filter_group_id'],
+                                                                    'name' => $row['fgd_name'],
+                                                                    'filter' => array()
+                                                                );
                 }
-
-                if ($filter_data) {
-                    $filter_group_data[] = array(
-                        'filter_group_id' => $filter_group['filter_group_id'],
-                        'name' => $filter_group['name'],
-                        'filter' => $filter_data
-                    );
-                }
+                
+                $filter_group_data[$row['filter_group_id']]['filter'][] = $temp;
             }
         }
 

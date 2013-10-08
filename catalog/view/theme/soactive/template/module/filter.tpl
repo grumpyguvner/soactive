@@ -29,7 +29,8 @@ if ($filter_groups || $options) {
                                                     <?php foreach ($filter_group['filter'] as $filter) {
                                                         if ($filter['count'])
                                                         {
-                                                          echo (in_array($filter['filter_id'], $availableStock['filter_groups'])) ? '<li>' : '<li class="noneCurrent">';
+                                                          //echo (in_array($filter['filter_id'], $availableStock['filter_groups'])) ? '<li>' : '<li class="noneCurrent">';
+                                                          echo '<li>';
                                                           if (in_array($filter['filter_id'], $filter_category)) { ?>
                                                             <label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" checked="checked" /> <?php echo $filter['name']; ?></label>
                                                         <?php } else { ?>
@@ -73,7 +74,8 @@ if ($filter_groups || $options) {
                                                     <?php foreach ($option['option_value'] as $option_value) {
                                                         if ($option_value['count'])
                                                         {
-                                                            echo (in_array($option_value['option_value_id'], $availableStock['options'])) ? '<li>' : '<li class="noneCurrent">';
+                                                            //echo (in_array($option_value['option_value_id'], $availableStock['options'])) ? '<li>' : '<li class="noneCurrent">';
+                                                            echo '<li>';
                                                             if (in_array($option_value['option_value_id'], $filter_option)) { ?>
                                                             <label class="checkbox"><input type="checkbox" value="<?php echo $option_value['option_value_id']; ?>" id="option<?php echo $option_value['option_value_id']; ?>" checked="checked" /> <?php echo $option_value['name']; ?></label>
                                                         <?php } else { ?>
@@ -122,7 +124,8 @@ if ($filter_groups || $options) {
                                             <?php
                                             }
                                             if ($has_sale) {
-                                                echo (in_array('sale', $availableStock['product_options'])) ? '<li class="filterSale">' : '<li class="filterSale noneCurrent">';
+                                                //echo (in_array('sale', $availableStock['product_options'])) ? '<li class="filterSale">' : '<li class="filterSale noneCurrent">';
+                                                echo '<li class="filterSale">';
                                                 if (in_array('sale', $filter_product)) {
                                                     ?>
                                                     <label class="checkbox"><input type="checkbox" value="sale" checked="checked" /> Sale items only</label>
@@ -133,7 +136,8 @@ if ($filter_groups || $options) {
                                                 echo '</li>';
                                             }
                                             if ($has_new) {
-                                                echo (in_array('new', $availableStock['product_options'])) ? '<li class="filterNew">' : '<li class="filterNew noneCurrent">';
+                                                //echo (in_array('new', $availableStock['product_options'])) ? '<li class="filterNew">' : '<li class="filterNew noneCurrent">';
+                                                echo '<li class="filterNew">';
                                                 if (in_array('new', $filter_product)) {
                                                     ?>
                                                     <label class="checkbox"><input type="checkbox" value="new" checked="checked" /> New items only</label>
