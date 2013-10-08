@@ -551,9 +551,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
             case "mens":
             case "male":
                 $myGender = "mens";
+                $myGenderFR = "hommes";
                 break;
             default:
                 $myGender = "womens";
+                $myGenderFR = "femmes";
                 break;
         }
         $category = $myGender . "-" . $category;
@@ -561,7 +563,21 @@ class ModelToolWMSProduct extends ModelToolWMS {
         foreach ($wms_category_description as $key => $description) {
             if (isset($description['keyword']) && !empty($description['keyword']))
             {
-                $wms_category_description[$key]['keyword'] = $myGender . "-" . $description['keyword'];
+                switch ($key)
+                {
+                    case 1:
+                        if ($myGender == "womens")
+                        {
+                            $wms_category_description[$key]['keyword'] = $description['keyword'];
+                        } else {
+                            $wms_category_description[$key]['keyword'] = $myGender . "-" . $description['keyword'];
+                        }
+                        break;
+                    case 2:
+                        $wms_category_description[$key]['keyword'] = $myGenderFR . "-" . $description['keyword'];
+                        break;
+                        
+                }
             }
         }
 
