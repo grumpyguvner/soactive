@@ -570,11 +570,16 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         {
                             $wms_category_description[$key]['keyword'] = $description['keyword'];
                         } else {
-                            $wms_category_description[$key]['keyword'] = $myGender . "-" . $description['keyword'];
+                            $wms_category_description[$key]['keyword'] = '';
                         }
                         break;
                     case 2:
-                        $wms_category_description[$key]['keyword'] = $myGenderFR . "-" . $description['keyword'];
+                        if ($myGender == "womens")
+                        {
+                            $wms_category_description[$key]['keyword'] = $description['keyword'];
+                        } else {
+                            $wms_category_description[$key]['keyword'] = $myGenderFR . '-' . $description['keyword'];
+                        }
                         break;
                         
                 }
