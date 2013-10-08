@@ -474,7 +474,7 @@ ALTER TABLE `oc_category` ADD `date_end` datetime NOT NULL DEFAULT '0000-00-00 0
 
 #### Start 1.5.4:BC1.2.7
 
-ALTER TABLE `oc_customer` ADD `date_of_birth` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `fax`;
+ALTER TABLE `oc_customer` ADD `dob` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `fax`;
 
 #### Start 1.5.4:BC1.2.8
 

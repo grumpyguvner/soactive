@@ -87,7 +87,7 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
                         $zone_id = 0;
                         
                         $this->load->model('module/postcode_anywhere');
-                        if ($this->model_module_postcode_anywhere->isAvailable())
+                        if (1 == 0 && $this->model_module_postcode_anywhere->isAvailable())
                         {
                             if (!empty($aAddress->fields['postcode']) && !empty($country_id)) {
                                 $json['addresses'] = $this->model_module_postcode_anywhere->getAddressesByPostcode($aAddress->fields['postcode'], $country_id);
@@ -99,7 +99,7 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
                             }
                         }
                         
-                        //$zone_id = $this->tableLookUp(DB_PREFIX . "zone", 'zone_id', array('country_id' => $country_id, 'code' => $aAddress->fields['zone_code']));
+                        $zone_id = $this->tableLookUp(DB_PREFIX . "zone", 'zone_id', array('country_id' => $country_id, 'code' => $aAddress->fields['zone_code']));
                         
                         $address = array();
                         $address['firstname'] = $aAddress->fields['firstname'];
