@@ -21,7 +21,7 @@ class ControllerCommonSeoUrl extends Controller {
                 default:
                     $route = "";
                     foreach ($parts as $part) {
-                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC");
+                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC, language_id ASC");
 
                         if ($query->num_rows) {
                             $url = explode('=', $query->row['query']);
@@ -132,7 +132,7 @@ class ControllerCommonSeoUrl extends Controller {
                             break;
                         default:
                             if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id') || ($data['route'] == 'news/article' && $key == 'news_id')) {
-                                $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int) $value) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC");
+                                $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int) $value) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC, language_id ASC");
 
                                 if ($query->num_rows) {
                                     $url .= '/' . $query->row['keyword'];
@@ -143,7 +143,7 @@ class ControllerCommonSeoUrl extends Controller {
                                 $categories = explode('_', $value);
 
                                 foreach ($categories as $category) {
-                                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'category_id=" . (int) $category . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC");
+                                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'category_id=" . (int) $category . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC, language_id ASC");
 
                                     if ($query->num_rows) {
                                         $url .= '/' . $query->row['keyword'];
