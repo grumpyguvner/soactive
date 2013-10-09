@@ -17,13 +17,15 @@
     <div class="newsletterSignup content">
       <div class="prow">
           <div class="pLabel">
-              <span class="required">*</span> <span><?php echo $entry_title; ?></span>
+              <span><?php echo $entry_title; ?></span>
           </div>
           <div class="pInput">
-              <input type="text" name="title" />
-              <?php if ($error_lastname) { ?>
-                  <span class="error"><?php echo $error_lastname; ?></span>
-              <?php } ?>
+              <select class="registerTitle" name="title"><option></option><?php
+              foreach ($select_title as $title)
+              {
+                  echo '<option>' . $title . '</option>';
+              }
+              ?></select>
           </div>
       </div>
       <div class="prow">
@@ -61,7 +63,7 @@
       </div>
     <div class="prow">
         <div class="pLabel">
-                <span class="required">*</span> <span><?php echo $entry_dob; ?></span>
+                <span><?php echo $entry_dob; ?></span>
         </div>
         <div class="pInput">
             <select class="day" name="day_birth" id="day_birth">

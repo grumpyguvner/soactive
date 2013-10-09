@@ -3286,12 +3286,12 @@ overflow: auto;
     border: 1px solid #514F4F;
 }
 .content-account .prow .pInput select.day, .content-account .prow .pInput select.year {
-    width: 52px;
-    margin-right: 10px;
+    width: 61px;
+    margin-right: 1px;
 } 
 .content-account .prow .pInput select.month {
     width: 83px;
-    margin-right: 10px;
+    margin-right: 1px;
 }
 .content-account .prow .pInput select.registerTitle {
     width: 90px;
