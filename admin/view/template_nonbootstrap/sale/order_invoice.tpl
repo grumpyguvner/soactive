@@ -9,85 +9,51 @@
 <body>
 <?php foreach ($orders as $order) { ?>
 <div style="page-break-after: always;">
-  <h1><?php echo $text_invoice; ?></h1>
   <table class="store">
     <tr>
-      <td><?php echo $order['store_name']; ?><br />
-        <?php echo $order['store_address']; ?><br />
-        <?php echo $text_telephone; ?> <?php echo $order['store_telephone']; ?><br />
-        <?php if ($order['store_fax']) { ?>
-        <?php echo $text_fax; ?> <?php echo $order['store_fax']; ?><br />
-        <?php } ?>
-        <?php echo $order['store_email']; ?><br />
-        <?php echo $order['store_url']; ?></td>
-      <td align="right" valign="top"><table>
-          <tr>
-            <td><b><?php echo $text_date_added; ?></b></td>
-            <td><?php echo $order['date_added']; ?></td>
-          </tr>
-          <?php if ($order['invoice_no']) { ?>
-          <tr>
-            <td><b><?php echo $text_invoice_no; ?></b></td>
-            <td><?php echo $order['invoice_no']; ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><b><?php echo $text_order_id; ?></b></td>
-            <td><?php echo $order['order_id']; ?></td>
-          </tr>
-          <tr>
-            <td><b><?php echo $text_payment_method; ?></b></td>
-            <td><?php echo $order['payment_method']; ?></td>
-          </tr>
-          <?php if ($order['shipping_method']) { ?>
-          <tr>
-            <td><b><?php echo $text_shipping_method; ?></b></td>
-            <td><?php echo $order['shipping_method']; ?></td>
-          </tr>
-          <?php } ?>
-        </table></td>
+        <td><b><?php echo $text_dispatch_note; ?></b></td>
+        <td align="center"><img src="../image/data/soactive-logo.png" alt="Soactive Logo"></td>
+        <td><b><?php echo $text_order_date; ?></b> <?php echo $order['date_added']; ?></td>
     </tr>
   </table>
-  <table class="address">
-    <tr class="heading">
-      <td width="50%"><b><?php echo $text_to; ?></b></td>
-      <td width="50%"><b><?php echo $text_ship_to; ?></b></td>
-    </tr>
+  <div style="height: 80px;"></div>
+  <table class="store">
     <tr>
-      <td><?php echo $order['payment_address']; ?><br/>
-        <?php echo $order['email']; ?><br/>
-        <?php echo $order['telephone']; ?>
-        <?php if ($order['payment_company_id']) { ?>
-        <br/>
-        <br/>
-        <?php echo $text_company_id; ?> <?php echo $order['payment_company_id']; ?>
-        <?php } ?>
-        <?php if ($order['payment_tax_id']) { ?>
-        <br/>
-        <?php echo $text_tax_id; ?> <?php echo $order['payment_tax_id']; ?>
-        <?php } ?></td>
-      <td><?php echo $order['shipping_address']; ?></td>
+      <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
+      <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
+      <td>BARCODE HERE</td>
     </tr>
   </table>
+  <div id="product-wrapper">
   <table class="product">
     <tr class="heading">
-      <td><b><?php echo $column_product; ?></b></td>
-      <td><b><?php echo $column_model; ?></b></td>
-      <td align="right"><b><?php echo $column_quantity; ?></b></td>
-      <td align="right"><b><?php echo $column_price; ?></b></td>
-      <td align="right"><b><?php echo $column_total; ?></b></td>
+      <td align="center"><b><?php echo $column_item; ?></b></td>
+      <td align="center"><b><?php echo $column_description; ?></b></td>
+      <td align="center"><b><?php echo $column_quantity; ?></b></td>
+      <td align="center"><b><?php echo $column_price; ?></b></td>
+      <td align="center"><b><?php echo $column_comments; ?></b></td>
+      <td align="center"><b><?php echo $column_return_code; ?></b></td>
     </tr>
     <?php foreach ($order['product'] as $product) { ?>
     <tr>
-      <td><?php echo $product['name']; ?>
+      <td>BARCODE</td>
+      <td>
+        <?php echo $product['name']; ?>
         <?php foreach ($product['option'] as $option) { ?>
-        <br />
-        &nbsp;<small> - <?php echo $option['name']; ?>: <?php echo $option['value']; ?></small>
-        <?php } ?></td>
-      <td><?php echo $product['model']; ?></td>
+        - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
+        <br /><small><?php echo $text_location; ?> </small>
+        <?php } ?>
+      </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
       <td align="right"><?php echo $product['price']; ?></td>
-      <td align="right"><?php echo $product['total']; ?></td>
+      <td align="right">
+        <?php if ($order['comment'])
+        {
+          echo $order['comment'];
+        }
+        ?>
+      </td>
+      <td align="right"></td>
     </tr>
     <?php } ?>
     <?php foreach ($order['voucher'] as $voucher) { ?>
@@ -97,25 +63,55 @@
       <td align="right">1</td>
       <td align="right"><?php echo $voucher['amount']; ?></td>
       <td align="right"><?php echo $voucher['amount']; ?></td>
+      <td align="right"></td>
     </tr>
     <?php } ?>
-    <?php foreach ($order['total'] as $total) { ?>
-    <tr>
-      <td align="right" colspan="4"><b><?php echo $total['title']; ?>:</b></td>
-      <td align="right"><?php echo $total['text']; ?></td>
+    <tr align="right">
+      <td style="border: 0px;" colspan="4"><b><?php echo $text_total_value; ?></b>
+        <?php
+        foreach ($order['total'] as $total) {
+            if($total['code'] == 'total') {
+                echo $total['text'];
+            }
+        }
+        ?>
+      </td>
     </tr>
-    <?php } ?>
+    <tr align="right">
+      <td style="border: 0px;" colspan="4"><b><?php echo $text_pandp; ?></b>
+        <?php echo $order['total'][1]['text']; ?>
+      </td>
+      <td  align="left" style="border: 0px;" colspan="4"><?php echo $order['total'][1]['title']; ?></td>
+    </tr>
   </table>
-  <?php if ($order['comment']) { ?>
-  <table class="comment">
-    <tr class="heading">
-      <td><b><?php echo $column_comment; ?></b></td>
-    </tr>
-    <tr>
-      <td><?php echo $order['comment']; ?></td>
+  <table class="store">
+    <tr align="center">
+      <td><?php echo $text_thanks; ?></td>
     </tr>
   </table>
-  <?php } ?>
+  </div>
+  <table class="store">
+    <tr>
+      <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
+      <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
+      <td>BARCODE HERE</td>
+    </tr>
+  </table>
+  <div id="bottom">
+  <table class="store" style="height: 204px;">
+    <tr>
+      <td style="padding-left: 10px; width: 50%;">
+        <h2><?php echo $text_return; ?></h2>
+        <span style="font-size: 11px;"><?php echo $text_return_notice; ?></span>
+        <div style="height: 17px;"></div>
+        <div style="padding-left: 30px; font-size: 13px;"><?php echo $text_return_address;?></div>
+      </td>
+      <td style="border-left: 1px solid #000; padding-left: 30px; width: 50%;">
+        <?php echo $order['shipping_address']; ?>
+      </td>
+    </tr>
+  </table>
+  </div>
 </div>
 <?php } ?>
 </body>
