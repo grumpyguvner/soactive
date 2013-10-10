@@ -78,7 +78,4 @@ h2 {
 #bottom {
     border: solid 1px #000;
     height: 204px;
-    position: absolute;
-    bottom: 25px;
-    width: 98%;
 }
