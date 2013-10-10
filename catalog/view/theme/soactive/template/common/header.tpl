@@ -47,9 +47,9 @@
         </script>
         <![endif]-->
         <?php if (isset($data_layer)) echo "<script>dataLayer =[" . json_encode($data_layer) . "];</script>"; ?>
-        <?php echo $google_analytics; ?>
     </head>
     <body>
+        <?php echo $google_analytics; ?>
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
