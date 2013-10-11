@@ -29,8 +29,7 @@ if ($filter_groups || $options) {
                                                     <?php foreach ($filter_group['filter'] as $filter) {
                                                         if ($filter['count'])
                                                         {
-                                                          //echo (in_array($filter['filter_id'], $availableStock['filter_groups'])) ? '<li>' : '<li class="noneCurrent">';
-                                                          echo '<li>';
+                                                          echo ($filter['filter_count']) ? '<li>' : '<li class="noneCurrent">';
                                                           if (in_array($filter['filter_id'], $filter_category)) { ?>
                                                             <label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" checked="checked" /> <?php echo $filter['name']; ?></label>
                                                         <?php } else { ?>
@@ -239,68 +238,6 @@ if ($filter_groups || $options) {
         }
     });
     //--></script>
-<?php /* ?>
-<script type="text/javascript"><!--
-    
-    submitFilter();
-    
-    $.ajax({
-        url: '/index.php?route=module/filter/available&category_id=' + <?php echo $category_id; ?>,
-        dataType: 'json',
-        type: "GET",
-        data: $("#afilter").serialize(),
-        success: function(json) {
-                if (json != '') {
-
-                    $('.filter_category input[type=\'checkbox\']').each(function () {
-                        if (json.filter_groups.length == 0 || json.filter_groups.indexOf($(this).attr('value')) != -1)
-                        {
-                            $(this).attr('disabled', false).parents('li').removeClass('noneCurrent');
-                        } else {
-                            $(this).parents('li').addClass('noneCurrent');
-
-                            if (!$(this).is(':checked'))
-                            {
-                               $(this).attr('disabled', 'disabled');
-                            }
-                        }
-
-                    });
-
-                    $('.filter_option input[type=\'checkbox\']').each(function () {
-                        if (json.options.length == 0 || json.options.indexOf($(this).attr('value')) != -1)
-                        {
-                            $(this).attr('disabled', false).parents('li').removeClass('noneCurrent');
-                        } else {
-                            $(this).parents('li').addClass('noneCurrent');
-
-                            if (!$(this).is(':checked'))
-                            {
-                               $(this).attr('disabled', 'disabled');
-                            }
-                        }
-
-                    });
-
-                    $('.filter_product input[type=\'checkbox\']').each(function () {
-                        if (json.product_options.indexOf($(this).attr('value')) != -1)
-                        {
-                            $(this).attr('disabled', false).parents('li').removeClass('noneCurrent');
-                        } else {
-                            $(this).parents('li').addClass('noneCurrent');
-
-                            if (!$(this).is(':checked'))
-                            {
-                               $(this).attr('disabled', 'disabled');
-                            }
-                        }
-
-                    });
-                }
-        }
-    });
-    //--></script> 
-<?php */ ?>
 <script type="text/javascript"><!--
     $('#afilter').submit(function() {
         submitFilter();

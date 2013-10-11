@@ -41,32 +41,61 @@ class ControllerModuleFilter extends Controller {
             }
 
             $this->data['action'] = str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url));
-
+            
             if (isset($this->request->get['filter'])) {
                 $this->data['filter_category'] = explode(',', str_replace(':', ',', $this->request->get['filter']));
+                $filter = $this->request->get['filter'];
             } else {
                 $this->data['filter_category'] = array();
+                $filter = '';
             }
 
             if (isset($this->request->get['option'])) {
                 $this->data['filter_option'] = explode(',', str_replace(':', ',', $this->request->get['option']));
+                $option = $this->request->get['option'];
             } else {
                 $this->data['filter_option'] = array();
+                $option = '';
             }
 
             if (isset($this->request->get['product'])) {
                 $this->data['filter_product'] = explode(',', $this->request->get['product']);
+                $product = $this->request->get['product'];
             } else {
                 $this->data['filter_product'] = array();
+                $product = '';
             }
 
             $this->load->model('catalog/product');
-
-            $this->data['filter_groups'] = array();
             
-            $available = array('filters' => array(), 'options' => array(), 'new' => false, 'sale' => false);
+            $data = array(
+                'filter_filter'      => $filter, 
+                'filter_option'      => $option
+            );
 
-            $filter_groups = $this->model_catalog_category->getCategoryFilters($category_id);
+            if (!empty($product))
+            {
+                $product = explode(',', $product);
+                foreach ($product as $p)
+                {
+                    if (preg_match('%range:\d+:\d+%', $p))
+                    {
+                        $price_range = explode(':', $p);
+                        $data['filter_product_min_price'] = $this->currency->convert($price_range[1], $this->currency->getCode(), $this->config->get('config_currency'));
+                        $data['filter_product_max_price'] = $this->currency->convert($price_range[2], $this->currency->getCode(), $this->config->get('config_currency'));
+                    } 
+                    elseif ($p == 'new')
+                    {
+                        $data['filter_new'] = true;
+                    }
+                    elseif ($p == 'sale')
+                    {
+                        $data['filter_sale'] = true;
+                    }
+                }
+            }  
+
+            $filter_groups = $this->model_catalog_category->getCategoryFilters($category_id, $data);
 
             if ($filter_groups) {
                 foreach ($filter_groups as $filter_group) {
@@ -80,7 +109,8 @@ class ControllerModuleFilter extends Controller {
                         $filter_data[] = array(
                             'filter_id' => $filter['filter_id'],
                             'name' => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $filter['total'] . ')' : ''),
-                            'count' => $filter['total']
+                            'count' => $filter['total'],
+                            'filter_count' => $filter['filter_total']
                         );
                         
                         if ($filter['total'])
