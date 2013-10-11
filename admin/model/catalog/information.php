@@ -33,6 +33,10 @@ class ModelCatalogInformation extends Model {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 		}
 		
+		foreach ($data['information_description'] as $language_id => $value) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($data['keyword']) . "', language_id = '" . (int)$language_id . "'");
+		}
+		
 		$this->cache->delete('information');
                 
                 return $information_id;
@@ -76,6 +80,10 @@ class ModelCatalogInformation extends Model {
 		if ($data['keyword']) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 		}
+                
+		foreach ($data['information_description'] as $language_id => $value) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'information_id=" . (int)$information_id . "', keyword = '" . $this->db->escape($value['keyword']) . "', language_id = '" . (int)$language_id . "'");
+		}
 		
 		$this->cache->delete('information');
 	}
@@ -91,7 +99,7 @@ class ModelCatalogInformation extends Model {
 	}	
 
 	public function getInformation($information_id) {
-		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=" . (int)$information_id . "') AS keyword FROM " . DB_PREFIX . "information WHERE information_id = '" . (int)$information_id . "'");
+		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=" . (int)$information_id . "' and language_id = 0) AS keyword FROM " . DB_PREFIX . "information WHERE information_id = '" . (int)$information_id . "'");
 		
 		return $query->row;
 	}
@@ -150,7 +158,7 @@ class ModelCatalogInformation extends Model {
 	public function getInformationDescriptions($information_id) {
 		$information_description_data = array();
 		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
+		$query = $this->db->query("SELECT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'information_id=" . (int)$information_id . "' and language_id = " . DB_PREFIX . "information_description.language_id) AS keyword FROM " . DB_PREFIX . "information_description WHERE information_id = '" . (int)$information_id . "'");
 
 		foreach ($query->rows as $result) {
 			$information_description_data[$result['language_id']] = array(
@@ -159,7 +167,8 @@ class ModelCatalogInformation extends Model {
 				'description' => $result['description'],
 				'meta_title'       => $result['meta_title'],
 				'meta_description' => $result['meta_description'],
-				'meta_keyword' => $result['meta_keyword']
+				'meta_keyword' => $result['meta_keyword'],
+				'keyword' => $result['keyword']
 			);
 		}
 		
