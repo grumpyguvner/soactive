@@ -172,6 +172,10 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr<?php echo $display; ?>>
+              <td><?php echo $entry_site_region; ?></td>
+              <td><input type="text" name="config_site_region" value="<?php echo $config_site_region; ?>" /></td>
+            </tr>
             <tr>
               <td><?php echo $entry_currency; ?></td>
               <td><select name="config_currency">
