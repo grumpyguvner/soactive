@@ -77,5 +77,14 @@ h2 {
 
 #bottom {
     border: solid 1px #000;
-    height: 204px;
+    height: 230px;
+    width: 793px;
+    position: absolute;
+    bottom: 0;
+}
+
+.page1, .page2 {
+    position: relative;
+    width: 793px;
+    height: 1122px;
 }
