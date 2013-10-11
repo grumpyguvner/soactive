@@ -39,7 +39,7 @@ class ModelModulePostcodeAnywhere extends Model {
                 {
                     foreach ($balance->Items as $credit)
                     {
-                        if ($credit->Percent > 5)
+                        if ($credit->Percent > 1)
                         {
                             return $this->available = true;
                         }
