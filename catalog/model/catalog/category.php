@@ -74,7 +74,7 @@ class ModelCatalogCategory extends Model {
                     foreach ($options as $option_id) {
                         $implode[] = (int) $option_id;
                     }
-                    $sql .= " LEFT JOIN " . DB_PREFIX . "product_option_value sub_pov" . $key . " ON (sub_pov" . $key . ".product_id = sub_p.product_id AND sub_pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ")) ";
+                    $sql .= " INNER JOIN " . DB_PREFIX . "product_option_value sub_pov" . $key . " ON (sub_pov" . $key . ".product_id = sub_p.product_id AND sub_pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ")) ";
                 }
                 $sql .= " INNER JOIN oc_product_description sub_pd ON (sub_pd.product_id = sub_p.product_id) ";
                 $sql .= " INNER JOIN oc_product_to_store sub_p2s ON (sub_p.product_id = sub_p2s.product_id) ";
@@ -123,7 +123,7 @@ class ModelCatalogCategory extends Model {
                   . "LEFT JOIN " . DB_PREFIX . "product p ON p.product_id = pf.product_id "
                   . "LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id) "
                   . "LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p2s.product_id = p.product_id) "
-                  . "WHERE cf.category_id = '" . (int) $category_id . "' AND fgd.language_id = '" . (int) $this->config->get('config_language_id') . "' "
+                  . "WHERE cf.category_id = '" . (int) $category_id . "' AND fgd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND fd.language_id = '" . (int) $this->config->get('config_language_id') . "' "
                   . "AND p.status = '1' AND p.date_available <= NOW() AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "' ";
 
             if ($this->config->get('config_category_instockonly')) {
@@ -163,40 +163,142 @@ class ModelCatalogCategory extends Model {
         return $filter_group_data;
     }
     
-    public function getCategoryOptions($category_id) {
-        $implode = array();
-
-        $query = $this->db->query("SELECT option_id FROM " . DB_PREFIX . "option WHERE is_filter = 1");
-
-        foreach ($query->rows as $result) {
-            $implode[] = (int)$result['option_id'];
+    public function getCategoryOptions($category_id, $data = array()) {
+        
+        if ($this->customer->isLogged()) {
+            $customer_group_id = $this->customer->getCustomerGroupId();
+        } else {
+            $customer_group_id = $this->config->get('config_customer_group_id');
         }
+        
+        $cache = md5(http_build_query($data));
 
-        $option_data = array();
+        $option_data = $this->cache->get('product.options.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . (int) $category_id . '.' . $cache);
 
-        if ($implode) {
-            $option_query = $this->db->query("SELECT DISTINCT o.option_id, od.name, o.sort_order FROM " . DB_PREFIX . "option_value ov LEFT JOIN " . DB_PREFIX . "option o ON (ov.option_id = o.option_id) LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE o.option_id IN (" . implode(',', $implode) . ") AND od.language_id = '" . (int) $this->config->get('config_language_id') . "' GROUP BY o.option_id ORDER BY o.sort_order, LCASE(od.name)");
+        if (is_null($option_data)) {
+        
+            $option_data = array();
 
-            foreach ($option_query->rows as $option) {
-                $option_value_data = array();
+            $sql = "SELECT o.option_id, od.name as od_name, ov.option_value_id, ovd.name, COUNT(DISTINCT p.product_id) as total, ";
+            
+            if (!empty($data['filter_filter']) || !empty($data['filter_option']) || isset($data['filter_new']) || (!empty($data['filter_sale']) && $data['filter_sale']) || !empty($data['filter_product_min_price']) || !empty($data['filter_product_max_price']))
+            {
+                $sql .= "IF (COUNT(DISTINCT p.product_id) > 0, (";
+                
+                $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+                $option_groups = (!empty($data['filter_option'])) ? explode(':', $data['filter_option']) : array();
 
-                $option_value_query = $this->db->query("SELECT DISTINCT ov.option_value_id, ovd.name FROM " . DB_PREFIX . "option_value ov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE ov.option_id IN (" . implode(',', $implode) . ") AND ov.option_id = '" . (int) $option['option_id'] . "' AND ovd.language_id = '" . (int) $this->config->get('config_language_id') . "' ORDER BY ov.sort_order, LCASE(ovd.name)");
+                $sql .= "SELECT COUNT(DISTINCT sub_p.product_id) ";
+                $sql .= " FROM oc_product sub_p ";
+                $sql .= " INNER JOIN oc_product_to_category sub_p2c ON sub_p2c.product_id = sub_p.product_id ";
+                $sql .= " INNER JOIN " . DB_PREFIX . "product_option_value sub_pov ON (sub_pov.product_id = sub_p2c.product_id) ";
+                $sql .= " INNER JOIN oc_option_value sub_ov ON sub_ov.option_value_id = sub_pov.option_value_id ";
+                foreach ($filter_groups as $key => $filters) {
+                    $implode = array();
 
-                foreach ($option_value_query->rows as $option_value) {
-                    $option_value_data[] = array(
-                        'option_value_id' => $option_value['option_value_id'],
-                        'name' => $option_value['name']
-                    );
+                    $filters = explode(',', $filters);
+
+                    foreach ($filters as $filter_id) {
+                        $implode[] = (int) $filter_id;
+                    }
+                    $sql .= " INNER JOIN oc_product_filter sub_pf" . $key . " ON (sub_pf" . $key . ".product_id = sub_p.product_id AND (sub_pf" . $key . ".filter_id IN (" . implode(',', $implode) . "))) ";
                 }
 
-                if ($option_value_data) {
-                    $option_data[] = array(
-                        'option_id' => $option['option_id'],
-                        'name' => $option['name'],
-                        'option_value' => $option_value_data
-                    );
+                foreach ($option_groups as $key => $value)
+                {
+                    $implode = array();
+
+                    $options = explode(',', $options);
+
+                    foreach ($options as $option_id) {
+                        $implode[] = (int) $option_id;
+                    }
+                    $sql .= " INNER JOIN " . DB_PREFIX . "product_option_value sub_pov" . $key . " ON (sub_pov" . $key . ".product_id = sub_p.product_id AND sub_pov" . $key . ".option_value_id IN (" . implode(',', $implode) . ")) ";
+                    $sql .= " INNER JOIN oc_option_value sub_ov" . $key . " ON sub_ov" . $key . ".option_value_id = sub_pov" . $key . ".option_value_id AND (sub_ov" . $key . ".option_value_id = sub_ov.option_value_id OR sub_ov" . $key . ".option_id <> sub_ov.option_id) ";
+                }
+                $sql .= " INNER JOIN oc_product_description sub_pd ON (sub_pd.product_id = sub_p.product_id) ";
+                $sql .= " INNER JOIN oc_product_to_store sub_p2s ON (sub_p.product_id = sub_p2s.product_id) ";
+                $sql .= " WHERE sub_p2c.category_id = '" . (int) $category_id . "' AND sub_p.status = '1' AND sub_p.date_available <= NOW() AND sub_p.quantity > 0 AND sub_pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND sub_p2s.store_id = '" . (int) $this->config->get('config_store_id') . "' ";
+
+                if (isset($data['filter_new'])) {
+                    if ($data['filter_new']) {
+                        $sql .= " AND sub_p.date_added > '" . date("Y-m-d", strtotime('-' . (int) $this->config->get('config_new_product_age') . ' day')) . "'";
+                    } else {
+                        $sql .= " AND sub_p.date_added < '" . date("Y-m-d", strtotime('-' . (int) $this->config->get('config_new_product_age') . ' day')) . "'";
+                    }
+                }
+
+                if ($this->config->get('config_category_instockonly')) {
+                    $sql .= " AND sub_p.quantity > 0";
+                }
+
+                if (!empty($data['filter_sale']) && $data['filter_sale']) {
+                    if ($this->config->get('config_sale_item')) {
+                        $sql .= " AND sub_p.sale = 1 ";
+                    } else {
+                        $sql .= " AND (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = sub_p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) > 0";
+                    }
+                }
+
+                if (!empty($data['filter_product_min_price'])) {
+                    $sql .= " AND IFNULL((SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = sub_p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1),sub_p.price) >= " . (float) $data['filter_product_min_price'];
+                }
+
+                if (!empty($data['filter_product_max_price'])) {
+                    $sql .= " AND IFNULL((SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = sub_p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1),sub_p.price) <= " . (float) $data['filter_product_max_price'];
+                }   
+                $sql .= "), 0) ";
+            } else {
+                $sql .= "COUNT(DISTINCT p.product_id) ";
+            }
+            
+            $sql .= " as filter_total "
+            
+            
+                  . "FROM " . DB_PREFIX . "option_value ov "
+                  . "LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) "
+                  . "LEFT JOIN " . DB_PREFIX . "option o ON (ov.option_id = o.option_id) "
+                  . "LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) "
+                  . "LEFT JOIN " . DB_PREFIX . "product_option_value pov ON (pov.option_value_id = ov.option_value_id) "
+                  . "LEFT JOIN " . DB_PREFIX . "product p ON p.product_id = pov.product_id "
+                  . "LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON p2c.product_id = p.product_id "
+                  . "LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id) "
+                  . "LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p2s.product_id = p.product_id) "
+                  . "WHERE o.is_filter = 1 and p2c.category_id = '" . (int) $category_id . "' AND od.language_id = '" . (int) $this->config->get('config_language_id') . "' AND ovd.language_id = '" . (int) $this->config->get('config_language_id') . "' "
+                  . "AND p.status = '1' AND p.date_available <= NOW() AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND p2s.store_id = '" . (int) $this->config->get('config_store_id') . "' ";
+
+            if ($this->config->get('config_category_instockonly')) {
+                $sql .= " AND p.quantity > 0 ";
+            }
+
+            $sql .= "GROUP BY ov.option_value_id "
+                  . "ORDER BY o.sort_order, LCASE(od.name), ov.sort_order, LCASE(ovd.name)";
+
+            $query = $this->db->query($sql);
+
+            if ($query->num_rows)
+            {
+                foreach ($query->rows as $row)
+                {
+                    $temp = array('option_value_id' => $row['option_value_id'],
+                                  'name' => $row['name'],
+                                  'total' => $row['total'],
+                                  'filter_total' => $row['filter_total']);
+
+                    if (!isset($option_data[$row['option_id']]))
+                    {
+                        $option_data[$row['option_id']] = array(
+                                                                        'option_id' => $row['option_id'],
+                                                                        'name' => $row['od_name'],
+                                                                        'option_value' => array()
+                                                                    );
+                    }
+
+                    $option_data[$row['option_id']]['option_value'][] = $temp;
                 }
             }
+            
+            $this->cache->set('product.options.' . (int) $this->config->get('config_language_id') . '.' . (int) $this->config->get('config_store_id') . '.' . (int) $customer_group_id . '.' . (int) $category_id . '.' . $cache, $option_data);
         }
 
         return $option_data;
@@ -216,8 +318,24 @@ class ModelCatalogCategory extends Model {
 
     public function getCategoryPriceRange($category_id) {
         
+        if ($this->customer->isLogged()) {
+            $customer_group_id = $this->customer->getCustomerGroupId();
+        } else {
+            $customer_group_id = $this->config->get('config_customer_group_id');
+        }
         
-        $query = $this->db->query("SELECT MIN(p.price) as min, MAX(p.price) as max FROM " . DB_PREFIX . "product p INNER JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE p.status = '1' AND p.date_available <= NOW() AND p2c.category_id = '" . (int) $category_id . "' AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' GROUP BY p.product_id");
+        $sql = "SELECT MIN(IFNULL(ps.price, p.price)) as min, MAX(IFNULL(ps.price, p.price)) as max "
+             . "FROM " . DB_PREFIX . "product p "
+             . "INNER JOIN " . DB_PREFIX . "product_to_category p2c ON (p2c.product_id = p.product_id) "
+             . "LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p2s.product_id = p2c.product_id) "
+             . "LEFT JOIN " . DB_PREFIX . "product_special ps ON (ps.product_id = p.product_id) AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) "
+             . "WHERE p.status = '1' AND p.date_available <= NOW() AND p2c.category_id = '" . (int) $category_id . "' AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' ";
+
+        if ($this->config->get('config_category_instockonly')) {
+            $sql .= " AND p.quantity > 0 ";
+        }
+        
+        $query = $this->db->query($sql);
 
         return $query->row;
     }

@@ -69,6 +69,7 @@ class ControllerModuleFilter extends Controller {
             $this->load->model('catalog/product');
             
             $data = array(
+                'filter_category_id' => $category_id,
                 'filter_filter'      => $filter, 
                 'filter_option'      => $option
             );
@@ -94,6 +95,8 @@ class ControllerModuleFilter extends Controller {
                     }
                 }
             }  
+            
+            $data_current = $data;
 
             $filter_groups = $this->model_catalog_category->getCategoryFilters($category_id, $data);
 
@@ -133,7 +136,7 @@ class ControllerModuleFilter extends Controller {
 
             $this->data['options'] = array();
             
-            $options = $this->model_catalog_category->getCategoryOptions($category_id);
+            $options = $this->model_catalog_category->getCategoryOptions($category_id, $data);
 
             if ($options) {
                 foreach ($options as $option) {
@@ -153,16 +156,16 @@ class ControllerModuleFilter extends Controller {
                         $option_data[] = array(
                             'option_value_id' => $option_value['option_value_id'],
                             'name' => $option_value['name'] . ($this->config->get('config_product_count') ? ' (' . $count . ')' : ''),
-                            'count' => $count
+                            'count' => $filter['total'],
+                            'filter_count' => $filter['filter_total']
                         );
                         
-                        if ($count)
+                        if ($filter['total'])
                         {
                             $count_active++;
-                            $available['options'][] = $option_value['option_value_id'];
                         }
                         
-                        $count_group += $count;
+                        $count_group += $filter['total'];
                     }
 
                     $this->data['options'][] = array(
@@ -175,10 +178,7 @@ class ControllerModuleFilter extends Controller {
                 }
             }
             
-            $data = array(
-                'filter_category_id' => $category_id
-            );
-            $range = $this->model_catalog_category->getCategoryPriceRange($data);
+            $range = $this->model_catalog_category->getCategoryPriceRange($category_id);
             $this->data['filter_product_min_range'] = 0;
             $this->data['filter_product_max_range'] = $range ? (ceil($this->currency->convert($range['max'], $this->config->get('config_currency'), $this->currency->getCode()) / 10) * 10) : 0;
             
@@ -200,14 +200,28 @@ class ControllerModuleFilter extends Controller {
                         'filter_new' => true
                     );
             $this->data['has_new'] = $this->model_catalog_product->getTotalProducts($data) ? true : false;
-            $available['new'] = $this->data['has_new'];
+            $this->data['has_new_filter'] = $this->data['has_new'];
+            
+            if ($this->data['has_new'])
+            {
+                $data_filter = $data_current;
+                $data_filter['filter_new'] = true;
+                $this->data['has_new_filter'] = $this->model_catalog_product->getTotalProducts($data_filter) ? true : false;
+            }
             
             $data = array(
                         'filter_category_id' => $category_id,
                         'filter_sale' => true
                     );
             $this->data['has_sale'] = $this->model_catalog_product->getTotalProducts($data) ? true : false;
-            $available['sale'] = $this->data['has_sale'];
+            $this->data['has_sale_filter'] = $this->data['has_sale'];
+            
+            if ($this->data['has_sale'])
+            {
+                $data_filter = $data_current;
+                $data_filter['filter_sale'] = true;
+                $this->data['has_sale_filter'] = $this->model_catalog_product->getTotalProducts($data_filter) ? true : false;
+            }
             
 
             $this->setTemplate('module/filter.tpl');
