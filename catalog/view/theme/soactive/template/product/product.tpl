@@ -59,9 +59,9 @@
     <div class="right">
       <div class="description">
       <h1><?php echo $heading_title; ?></h1>
-        <?php if ($manufacturer) { ?>
+        <?php /*if ($manufacturer) { ?>
         <span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a><br />
-        <?php } ?>
+        <?php }*/ ?>
       </div>
       <?php if ($price) { ?>
       <div class="price">
