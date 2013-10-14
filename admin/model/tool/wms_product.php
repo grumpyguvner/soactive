@@ -695,8 +695,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         if (!$brand_info) {
             
             $data = array('name' => $brand,
-                          'sort_order' => 999,
-                          'store_id' => 0);
+                          'sort_order' => 999);
             
             $this->model_catalog_manufacturer->addManufacturer($data);
             
