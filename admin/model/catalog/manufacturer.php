@@ -1,7 +1,7 @@
 <?php
 class ModelCatalogManufacturer extends Model {
 	public function addManufacturer($data) {
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer SET name = '" . $this->db->escape($data['name']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer SET name = '" . $this->db->escape($data['name']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
 		
 		$manufacturer_id = $this->db->getLastId();
 
@@ -58,6 +58,15 @@ class ModelCatalogManufacturer extends Model {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "') AS keyword FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		
 		return $query->row;
+	}
+	
+	public function getManufacturerByName($name) {
+                $manufacturer_id = 0;
+                
+		$query = $this->db->query("SELECT DISTINCT manufacturer_id FROM " . DB_PREFIX . "manufacturer WHERE `name` = '" . $this->db->escape($name) . "'");
+		
+		if($query->row)
+                    return $this->getManufacturer($query->row['manufacturer_id']);
 	}
 	
 	public function getManufacturers($data = array()) {

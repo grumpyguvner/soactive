@@ -159,7 +159,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     ));
                     if ($myCategory != $category) {
                         $myCategory = $category;
-                        $parent_type_id = $this->createCategory($gender, $category, $category_description, 0);
+                        $parent_type_id = $this->createCategory($gender, $category, $category_description, null, 0);
                         $filter_group_id = $this->createFilter("Product", 0, "Produit");
                     }
                     if ($parent_type_id) {
@@ -202,7 +202,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 ));
                                 if ($myCategory != $category) {
                                     $myCategory = $category;
-                                    $category_id = $this->createCategory($gender, $category, $category_description, $parent_type_id);
+                                    $category_id = $this->createCategory($gender, $category, $category_description, $aCategory->fields['google_taxonomy'], $parent_type_id);
                                     $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                                 }
                                 if ($category_id) {
@@ -248,7 +248,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     ));
                     if ($myCategory != $category) {
                         $myCategory = $category;
-                        $parent_activity_id = $this->createCategory($gender, $category, $category_description, 0);
+                        $parent_activity_id = $this->createCategory($gender, $category, $category_description, null, 0);
                         $filter_group_id = $this->createFilter("Sport", 0, "Sport");
                     }
                     if ($parent_activity_id) {
@@ -291,7 +291,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 ));
                                 if ($myCategory != $category) {
                                     $myCategory = $category;
-                                    $category_id = $this->createCategory($gender, $category, $category_description, $parent_activity_id);
+                                    $category_id = $this->createCategory($gender, $category, $category_description, null, $parent_activity_id);
                                     $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                                 }
                                 if ($category_id) {
@@ -335,7 +335,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     ));
                     if ($myCategory != $category) {
                         $myCategory = $category;
-                        $parent_brand_id = $this->createCategory($gender, $category, $category_description, 0);
+                        $parent_brand_id = $this->createCategory($gender, $category, $category_description, null, 0);
                         $filter_group_id = $this->createFilter("Brand", 0, "Marque");
                     }
                     if ($parent_brand_id) {
@@ -373,8 +373,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             ));
                             if ($myCategory != $category) {
                                 $myCategory = $category;
-                                $category_id = $this->createCategory($gender, $category, $category_description, $parent_brand_id);
+                                $category_id = $this->createCategory($gender, $category, $category_description, null, $parent_brand_id);
     $this->debug("category id = " . $category_id . "");
+                                $brand_id = $this->createBrand($myName);
+    $this->debug("brand id = " . $brand_id . "");
 
                                 $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
                             }
@@ -425,7 +427,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     "colourid" => 0,
                     "quantity" => 0,
                     "categories" => $myCategoryIds,
-                    "filters" => $myFilterIds
+                    "filters" => $myFilterIds,
+                    "manufacturer_id" => $brand_id,
                 );
 
                 $frProduct = $this->dbQF->Execute('SELECT * FROM styles_translations WHERE styleid = "' . $aProduct->fields['uuid'] . '" AND site = "www.attractive.fr"');
@@ -541,7 +544,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         return true;
     }
 
-    function createCategory($gender, $category, $wms_category_description, $parent_id = 0) {
+    function createCategory($gender, $category, $wms_category_description, $google_taxonomy = null, $parent_id = 0) {
         if (!is_array($wms_category_description) || is_array($gender))
             return false;
         
@@ -599,7 +602,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
             "status" => (int) 1,
             'category_description' => $wms_category_description,
             'keyword' => $category,
-            'category_store' => $this->config->get('wms_products_store')
+            'category_store' => $this->config->get('wms_products_store'),
+            'googlebase_text' => $google_taxonomy
         );
         
         if ($category_info)
@@ -612,6 +616,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $data["keyword"] = $category;
             $data['category_store'] = $this->config->get('wms_products_store');
             $data["category_description"] = (array) $this->model_catalog_category->getCategoryDescriptions($category_id);
+            $data["googlebase_text"] = $google_taxonomy;
             
             foreach ($data["category_description"] as $key => $description) {
                 if (empty($description['keyword']) && isset($wms_category_description[$key]['keyword']))
@@ -677,6 +682,33 @@ class ModelToolWMSProduct extends ModelToolWMS {
             return $filter_info['filter_group_id'];
         else
             return $filter_info['filter_id'];
+    }
+    
+    function createBrand($brand) {
+        //We only create a new filter the first time it is encountered as 
+        // many fields will be controlled via backoffice and we dont want to overwrite.
+        $brand=trim($brand);
+        
+        $this->load->model('catalog/manufacturer');
+        $brand_info = $this->model_catalog_manufacturer->getManufacturerByName($brand);
+        
+        if (!$brand_info) {
+            
+            $data = array('name' => $brand,
+                          'sort_order' => 999,
+                          'store_id' => 0);
+            
+            $this->model_catalog_manufacturer->addManufacturer($data);
+            
+            $brand_info = $this->model_catalog_manufacturer->getManufacturerByName($brand);
+        }
+        
+        if (!$brand_info) {
+            // if filter still doesn't exist then we have a problem
+            return false;
+        }
+
+        return $brand_info['manufacturer_id'];
     }
 
     function createProduct($model, $stock_item) {
@@ -830,7 +862,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'stock_status_id' => $this->config->get('config_stock_status_id'),
             'forward' => 0,
             'date_available' => date("Y-m-d"),
-            'manufacturer_id' => NULL,
+            'manufacturer_id' => $stock_item['manufacturer_id'],
             'shipping' => 1,
             'price' => round($stock_item['price']/1.2,4),
             'points' => 0,

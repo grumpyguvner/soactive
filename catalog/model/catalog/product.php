@@ -321,7 +321,7 @@ class ModelCatalogProduct extends Model {
 
     public function getProductGoogleBaseCategories($product_id) {
 
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) WHERE product_id = '" . $product_id . "' and c.googlebase_xml <> '' LIMIt 1");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_category pc LEFT JOIN " . DB_PREFIX . "category c ON (pc.category_id = c.category_id) WHERE product_id = '" . $product_id . "' and (c.googlebase_xml <> '' OR c.googlebase_text <> '') LIMIt 1");
 
         if ($query->num_rows > 0) {
 
