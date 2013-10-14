@@ -83,23 +83,20 @@
     }
     ?>
     <?php if($j <= $product_limit) { ?>
+    <?php foreach ($order['total'] as $total) { ?>
+    <?php if ($total['code'] == 'shipping') { ?>
     <tr align="right">
-      <td style="border: 0px;" colspan="4"><b><?php echo $text_total_value; ?></b>
-        <?php
-        foreach ($order['total'] as $total) {
-            if($total['code'] == 'total') {
-                echo $total['text'];
-            }
-        }
-        ?>
-      </td>
+      <td style="border: 0px;" align="right" colspan="3"><b><?php echo $text_pandp; ?></b></td>
+      <td style="border: 0px;" align="right"><?php echo $total['text']; ?></td>
+      <td style="border: 0px; text-align: left;" colspan="2"><?php echo $total['title']; ?></td>
     </tr>
+    <?php } else { ?>
     <tr align="right">
-      <td style="border: 0px;" colspan="4"><b><?php echo $text_pandp; ?></b>
-        <?php echo $order['total'][1]['text']; ?>
-      </td>
-      <td  align="left" style="border: 0px;" colspan="4"><?php echo $order['total'][1]['title']; ?></td>
+      <td style="border: 0px;" align="right" colspan="3"><b><?php echo $total['title']; ?></b></td>
+      <td style="border: 0px;" align="right"><?php echo $total['text']; ?></td>
     </tr>
+    <?php } ?>
+    <?php } ?>
     <?php } ?>
   </table>
   <?php if($j <= $product_limit) { ?>
@@ -205,23 +202,20 @@
     </tr>
     <?php } ?>
     <?php } ?>
+    <?php foreach ($order['total'] as $total) { ?>
+    <?php if ($total['code'] == 'shipping') { ?>
     <tr align="right">
-      <td style="border: 0px;" colspan="4"><b><?php echo $text_total_value; ?></b>
-        <?php
-        foreach ($order['total'] as $total) {
-            if($total['code'] == 'total') {
-                echo $total['text'];
-            }
-        }
-        ?>
-      </td>
+      <td style="border: 0px;" align="right" colspan="3"><b><?php echo $text_pandp; ?></b></td>
+      <td style="border: 0px;" align="right"><?php echo $total['text']; ?></td>
+      <td style="border: 0px; text-align: left;" colspan="2"><?php echo $total['title']; ?></td>
     </tr>
+    <?php } else { ?>
     <tr align="right">
-      <td style="border: 0px;" colspan="4"><b><?php echo $text_pandp; ?></b>
-        <?php echo $order['total'][1]['text']; ?>
-      </td>
-      <td  align="left" style="border: 0px;" colspan="4"><?php echo $order['total'][1]['title']; ?></td>
+      <td style="border: 0px;" align="right" colspan="3"><b><?php echo $total['title']; ?></b></td>
+      <td style="border: 0px;" align="right"><?php echo $total['text']; ?></td>
     </tr>
+    <?php } ?>
+    <?php } ?>
   </table>
   <table class="store">
     <tr align="center">

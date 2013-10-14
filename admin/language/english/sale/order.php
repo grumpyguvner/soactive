@@ -13,7 +13,7 @@ $_['text_store_name']                         = 'Store Name:';
 $_['text_store_url']                          = 'Store Url:';
 $_['text_total_value']                        = 'Total Value of items:';
 $_['text_location']                           = 'Location:';
-$_['text_pandp']                              = 'Postage & Packing:';
+$_['text_pandp']                              = 'Postage & Packing';
 $_['text_thanks']                             = 'Thank you for shopping with us at <span style="font-weight: bold; color: #1db4b7;">soactive.com</span> - we hope you enjoy your purchase!';
         
 $_['text_customer']                           = 'Customer:';
