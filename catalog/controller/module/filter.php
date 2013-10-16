@@ -25,6 +25,12 @@ class ControllerModuleFilter extends Controller {
             $this->data['heading_title'] = $this->language->get('heading_title');
 
             $this->data['button_filter'] = $this->language->get('button_filter');
+            
+            $this->data['text_clear'] = $this->language->get('text_clear');
+            $this->data['text_price_range'] = $this->language->get('text_price_range');
+            $this->data['text_sale_items'] = $this->language->get('text_sale_items');
+            $this->data['text_new_items'] = $this->language->get('text_new_items');
+            
 
             $url = '';
 

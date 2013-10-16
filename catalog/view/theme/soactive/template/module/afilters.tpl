@@ -118,7 +118,7 @@
                         ?>
                         <div class="accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                                     <div class="accordion-heading">
-                                        <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">PRICE RANGE</a>
+                                        <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $text_range; ?></a>
                                     </div>
                                     <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
                                         <div class="accordion-inner">
@@ -132,8 +132,8 @@
  <div id="slider-range">
     <div class="slider"></div>
 
-    <div class="from">£0</div>
-    <div class="to">£500</div>
+    <div class="from"><?php echo $text_low; ?></div>
+    <div class="to"><?php echo $text_max; ?></div>
  </div>
 
 <script>
@@ -165,10 +165,10 @@
 
                                                             if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
                                                                 ?>
-                                                                <li class="filterSale"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[sale][]' ?>" value="Sale" checked="checked" /> Sale items only</label></li>
+                                                                <li class="filterSale"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[sale][]' ?>" value="Sale" checked="checked" /> <?php echo $text_sale_item; ?></label></li>
                                                             <?php } else { ?>
 
-                                                                <li class="filterSale"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[sale][]' ?>" value="Sale" /> Sale items only</label></li>
+                                                                <li class="filterSale"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[sale][]' ?>" value="Sale" /> <?php echo $text_sale_item; ?></label></li>
                                                                 <?php
                                                             }
                                                         ?>
@@ -177,10 +177,10 @@
 
                                                             if (isset($myAttributes[$attribute['attribute_id']]) && in_array(urlencode($value), $myAttributes[$attribute['attribute_id']])) {
                                                                 ?>
-                                                                <li class="filterNew"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[new][]' ?>" value="New" checked="checked" /> New items only</label></li>
+                                                                <li class="filterNew"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[new][]' ?>" value="New" checked="checked" /> <?php echo $text_new_item; ?></label></li>
                                                             <?php } else { ?>
 
-                                                                <li class="filterNew"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[new][]' ?>" value="New" /> New items only</label></li>
+                                                                <li class="filterNew"><label class="checkbox"><input type="checkbox" name="<?php echo 'item_filters[new][]' ?>" value="New" /> <?php echo $text_new_item; ?></label></li>
                                                                 <?php
                                                             }
                                                         ?>

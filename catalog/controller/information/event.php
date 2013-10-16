@@ -213,6 +213,9 @@ class ControllerInformationEvent extends Controller {
 		$this->data['button_submit'] = $this->language->get('button_submit');
 		
 		$this->data['text_message'] = '';
+                $this->data['text_save'] = $this->language->get('text_save');
+                $this->data['text_rrp'] = $this->language->get('text_rrp');
+                $this->data['text_pay'] = $this->language->get('text_pay');
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			$this->db->query("
 			insert into ".DB_PREFIX."event_subscribers set

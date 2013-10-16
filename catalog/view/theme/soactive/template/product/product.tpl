@@ -68,8 +68,8 @@
         <?php if (!$special) { ?>
         <?php echo $price; ?>
         <?php } else { ?>
-          <span class="save">SAVE <?php echo $saving_percent . '% ' ?></span>
-          <span style="font-weight: normal; text-decoration: line-through;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
+          <span class="save"><?php echo $text_save; ?> <?php echo $saving_percent . '% ' ?></span>
+          <span style="font-weight: normal; text-decoration: line-through;"><?php echo $text_rrp; ?> </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> <?php echo $text_pay; ?> </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -267,7 +267,7 @@
                     
                     <?php if (isset($attribute_groups['Ratings'])) { ?>
                         <div class="rating">
-                            <label>OUR EXPERTS REVIEW</label>
+                            <label><?php echo $text_expert; ?></label>
                             <?php
                             foreach ($attribute_groups['Ratings'] as $attribute_group) {
                                 foreach ($attribute_group['attribute'] as $attribute) {
@@ -359,9 +359,9 @@
         </div>
         <div class="gotQuestion">
             <div class="gotQuestionText">
-                <span><i>Got a question about this product?</i></span>
+                <span><i><?php echo $text_question; ?></i></span>
                 <br/>
-                <span><i>ASK ONE OF OUR EXPERTS...</i></span>
+                <span><i><?php echo $text_ask; ?></i></span>
             </div>
             <a href="index.php?route=information/contact" type="button" class="button">CONTACT US</a>
         </div>
@@ -408,8 +408,8 @@
                           <?php if (!$product['special']) { ?>
                           <span>Pay: </span><span class="price"><?php echo $product['price']; ?></span>
                           <?php } else { ?>
-                          <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
-                          <span class="price-old">RRP: <?php echo $product['price']; ?></span> <span>Pay: </span><span class="price-new"><?php echo $product['special']; ?></span>
+                          <span class="save"><?php echo $text_save; ?> <?php echo $product['saving_percent'] . '%' ?></span>
+                          <span class="price-old"><?php echo $text_rrp; ?> <?php echo $product['price']; ?></span> <span><?php echo $text_pay; ?> </span><span class="price-new"><?php echo $product['special']; ?></span>
                           <?php } ?>
                         </div>
                      <?php } ?>

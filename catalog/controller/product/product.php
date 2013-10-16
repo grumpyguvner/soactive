@@ -154,6 +154,13 @@ class ControllerProductProduct extends Controller {
 			$this->data['text_share'] = $this->language->get('text_share');
 			$this->data['text_wait'] = $this->language->get('text_wait');
 			$this->data['text_tags'] = $this->language->get('text_tags');
+                        $this->data['text_zoom'] = $this->language->get('text_zoom');
+                        $this->data['text_save'] = $this->language->get('text_save');
+                        $this->data['text_rrp'] = $this->language->get('text_rrp');
+                        $this->data['text_pay'] = $this->language->get('text_pay');
+                        $this->data['text_expert'] = $this->language->get('text_expert');
+                        $this->data['text_question'] = $this->language->get('text_question');
+                        $this->data['text_ask'] = $this->language->get('text_ask');
                         $this->data['text_rating1'] = $this->language->get('text_rating1');
                         $this->data['text_rating2'] = $this->language->get('text_rating2');
                         $this->data['text_rating3'] = $this->language->get('text_rating3');
