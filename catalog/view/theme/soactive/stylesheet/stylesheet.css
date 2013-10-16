@@ -1500,7 +1500,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .product-info .wishlist {
         display: inline-block;
-        margin-left: 35px;
+        margin-left: 20px;
         vertical-align: top;
 }
 .product-info .wishlist a {
@@ -3012,7 +3012,7 @@ overflow: auto;
 }
 .completeLook li {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 10px;
     text-align: center;
     vertical-align: top;
     line-height: 14px;

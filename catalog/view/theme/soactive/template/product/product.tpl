@@ -369,10 +369,27 @@
       <?php echo $column_right; ?>
   </div>
   
-  <?php if ($products && count($products) > 0) { ?>
-        <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($tab_related) ?></h5></div>
-            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($products) <= 5) { echo ' completeLook';} ?>">
-              <?php foreach ($products as $product) { ?>
+  <?php
+  $product_display = array();
+  if (count($products) > 0) {
+      $product_display = $products;
+      $title = $tab_related;
+  } elseif (count($alsoBought) > 0) {
+      $product_display = $alsoBought;
+      $title = $tab_also_bought;
+  } elseif (count($alsoCategory) > 0) {
+      $product_display = $alsoCategory;
+      $title = $tab_category_items;
+  } elseif (count($bestSelling) > 0) {
+      $product_display = $bestSelling;
+      $title = $tab_best_selling;
+  }
+  ?>
+    
+  <?php if (($products && count($products) > 0) || ($alsoBought && count($alsoBought) > 0) || ($alsoCategory && count($alsoCategory) > 0) || ($bestSelling && count($bestSelling) > 0)) { ?>
+        <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($title); ?></h5></div>
+            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($product_display) <= 5) { echo ' completeLook';} ?>">
+                <?php foreach ($product_display as $product) { ?>
                   <li>
                       <?php if ($product['thumb']) { ?>
                       <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a>
