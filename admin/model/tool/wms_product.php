@@ -555,13 +555,14 @@ class ModelToolWMSProduct extends ModelToolWMS {
             case "male":
                 $myGender = "mens";
                 $myGenderFR = "hommes";
+                $category = $myGender . "-" . $category;
                 break;
             default:
                 $myGender = "womens";
                 $myGenderFR = "femmes";
+                $category = $category;
                 break;
         }
-        $category = $myGender . "-" . $category;
         
         foreach ($wms_category_description as $key => $description) {
             if (isset($description['keyword']) && !empty($description['keyword']))
@@ -569,20 +570,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 switch ($key)
                 {
                     case 1:
-                        if ($myGender == "womens")
-                        {
-                            $wms_category_description[$key]['keyword'] = $description['keyword'];
-                        } else {
-                            $wms_category_description[$key]['keyword'] = '';
-                        }
+                        $wms_category_description[$key]['keyword'] = $myGender . "-" . $description['keyword'];
                         break;
                     case 2:
-                        if ($myGender == "womens")
-                        {
-                            $wms_category_description[$key]['keyword'] = $description['keyword'];
-                        } else {
-                            $wms_category_description[$key]['keyword'] = $myGenderFR . '-' . $description['keyword'];
-                        }
+                        $wms_category_description[$key]['keyword'] = $myGenderFR . '-' . $description['keyword'];
                         break;
                         
                 }
@@ -619,7 +610,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $data["googlebase_text"] = $google_taxonomy;
             
             foreach ($data["category_description"] as $key => $description) {
-                if (empty($description['keyword']) && isset($wms_category_description[$key]['keyword']))
+                if (isset($wms_category_description[$key]['keyword']))
                 {
                     $data["category_description"][$key]['keyword'] = $wms_category_description[$key]['keyword'];
                 }
