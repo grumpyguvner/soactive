@@ -3297,6 +3297,7 @@ CREATE TABLE `oc_url_alias` (
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   `language_id` int(11) NOT NULL,
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`url_alias_id`),
   KEY `keyword` (`keyword`),
   KEY `query` (`query`)

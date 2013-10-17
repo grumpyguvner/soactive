@@ -2,7 +2,7 @@
 class ModelCatalogCategory extends Model {
 	public function addCategory($data) {
             
-		$this->db->query("INSERT INTO " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW(), date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_added = NOW()");
 	
 		$category_id = $this->db->getLastId();
 		
@@ -33,13 +33,24 @@ class ModelCatalogCategory extends Model {
 				}
 			}
 		}
-						
-		if ($data['keyword']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-		}
+                
+                $this->load->model('module/url_alias');
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'category_id=' . (int)$category_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		foreach ($data['category_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "', language_id = '" . (int)$language_id . "'");
+                    
+                    if (isset($value['keyword'])) {
+                        $url = array('keyword' => $value['keyword'],
+                                     'query' => 'category_id=' . (int)$category_id,
+                                     'language_id' => (int)$language_id);
+                        $this->model_module_url_alias->addUrlAlias($url);
+                    }
 		}
 		
 		$this->cache->delete('category');
@@ -49,7 +60,7 @@ class ModelCatalogCategory extends Model {
 	}
 	
 	public function editCategory($category_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', is_filter = '" . (int)$data['is_filter'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE category_id = '" . (int)$category_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', is_filter = '" . (int)$data['is_filter'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_added = NOW() WHERE category_id = '" . (int)$category_id . "'");
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "category SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE category_id = '" . (int)$category_id . "'");
@@ -94,15 +105,24 @@ class ModelCatalogCategory extends Model {
 		
                         $this->cache->delete('product');	
 		}
-						
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id. "'");
-		
-		if ($data['keyword']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-		}
                 
+                $this->load->model('module/url_alias');
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'category_id=' . (int)$category_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
+		
 		foreach ($data['category_description'] as $language_id => $value) {
-                        $this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'category_id=" . (int)$category_id . "', keyword = '" . $this->db->escape($value['keyword']) . "', language_id = '" . (int)$language_id . "'");
+                    
+                    if (isset($value['keyword'])) {
+                        $url = array('keyword' => $value['keyword'],
+                                     'query' => 'category_id=' . (int)$category_id,
+                                     'language_id' => (int)$language_id);
+                        $this->model_module_url_alias->addUrlAlias($url);
+                    }
 		}
 		
 		$this->cache->delete('category');
@@ -115,26 +135,32 @@ class ModelCatalogCategory extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_store WHERE category_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE category_id = '" . (int)$category_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "'");
 		
 		$query = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "category WHERE parent_id = '" . (int)$category_id . "'");
 
 		foreach ($query->rows as $result) {
 			$this->deleteCategory($result['category_id']);
 		}
+                
+                $this->load->model('module/url_alias');
+                $this->model_module_url_alias->deleteUrlAliasByQuery('category_id=' . (int)$category_id);
 		
 		$this->cache->delete('category');
 	} 
 
 	public function getCategory($category_id) {
-		$query = $this->db->query("SELECT DISTINCT *, if(date_start,date_start,0) AS date_start, if(date_end,date_end,0) AS date_end, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "' and language_id = 0) AS keyword FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
+		$query = $this->db->query("SELECT DISTINCT *, if(date_start,date_start,0) AS date_start, if(date_end,date_end,0) AS date_end, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "' and language_id = 0 ORDER BY date_added DESC LIMIT 1) AS keyword FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$category_id . "'");
 		
 		return $query->row;
 	} 
 	
 	public function getCategoryByKeyword($keyword) {
+            
+                $this->load->model('module/url_alias');
+                $keyword = $this->model_module_url_alias->seoUrl($keyword);
+            
                 $category_id = 0;
-		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC");
+		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
 
                 if($query->row)
                     $category_id = substr ((string) $query->row['query'], 12);
@@ -179,7 +205,7 @@ class ModelCatalogCategory extends Model {
 	public function getCategoryDescriptions($category_id) {
 		$category_description_data = array();
 		
-		$query = $this->db->query("SELECT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "' and language_id = " . DB_PREFIX . "category_description.language_id) AS keyword FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
+		$query = $this->db->query("SELECT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'category_id=" . (int)$category_id . "' and language_id = " . DB_PREFIX . "category_description.language_id ORDER BY date_added DESC LIMIT 1) AS keyword FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
 		
 		foreach ($query->rows as $result) {
 			$category_description_data[$result['language_id']] = array(

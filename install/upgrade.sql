@@ -623,3 +623,7 @@ ALTER TABLE `oc_order_product` ADD INDEX `order_id` (`order_id`);
 
 ALTER TABLE `oc_product` ADD `sale` TINYINT(1) NOT NULL DEFAULT '0' AFTER sort_order;
 ALTER TABLE `oc_customer` MODIFY `salt` varchar(60) NOT NULL;
+
+#### Start 1.5.4:BC1.2.17
+
+ALTER TABLE `oc_url_alias` ADD `language_id` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP AFTER `keyword`;

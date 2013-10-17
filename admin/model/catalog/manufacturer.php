@@ -14,10 +14,15 @@ class ModelCatalogManufacturer extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_to_store SET manufacturer_id = '" . (int)$manufacturer_id . "', store_id = '" . (int)$store_id . "'");
 			}
 		}
-				
-		if ($data['keyword']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'manufacturer_id=" . (int)$manufacturer_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-		}
+			
+                $this->load->model('module/url_alias');
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'manufacturer_id=' . (int)$manufacturer_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		$this->cache->delete('manufacturer');
 	}
@@ -36,12 +41,15 @@ class ModelCatalogManufacturer extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_to_store SET manufacturer_id = '" . (int)$manufacturer_id . "', store_id = '" . (int)$store_id . "'");
 			}
 		}
-			
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id. "'");
-		
-		if ($data['keyword']) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = 'manufacturer_id=" . (int)$manufacturer_id . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
-		}
+                
+                $this->load->model('module/url_alias');
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'manufacturer_id=' . (int)$manufacturer_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		$this->cache->delete('manufacturer');
 	}
@@ -49,13 +57,15 @@ class ModelCatalogManufacturer extends Model {
 	public function deleteManufacturer($manufacturer_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_to_store WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "'");
+                
+                $this->load->model('module/url_alias');
+                $this->model_module_url_alias->deleteUrlAliasByQuery('manufacturer_id=' . (int)$manufacturer_id);
 			
 		$this->cache->delete('manufacturer');
 	}	
 	
 	public function getManufacturer($manufacturer_id) {
-		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "') AS keyword FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+		$query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "' and language_id = 0 ORDER BY date_added DESC LIMIT 1) AS keyword FROM " . DB_PREFIX . "manufacturer WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
 		
 		return $query->row;
 	}
