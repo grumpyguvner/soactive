@@ -6,7 +6,6 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
     function import($stylenumber = "") {
         
-        $this->cache->setQueue(true);
         
         $msc = microtime(true);
         
@@ -30,7 +29,6 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
         $msc = microtime(true)-$msc;
         
-        $this->cache->setQueue(false);
         $this->debug("Import Complete".':'.round($msc,2).' seconds');
         return true;
     }
