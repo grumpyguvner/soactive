@@ -421,6 +421,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     "saleprice" => (float) $aProduct->fields['saleprice'],
                     "sku" => "",
                     "size" => "",
+                    "sizeFr" => "",
                     "sizeguide_name" => (string) $sg_name,
                     "sizeguide_html" => (string) $sg_html,
                     "style" => (string) $aProduct->fields['stylenumber'],
@@ -445,12 +446,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     while (!$aStock->EOF) {
                         $this->debug("processing sku " . $aStock->fields['bleepid'] . "");
                         //initialise sku variables
-                        $size = "one size";
+                        $sizeEn = "one size";
                         $sizeFr = "taille unique";
                         $size_filter_id=array();
                         $aSize = $this->dbQF->Execute('SELECT * FROM sizes WHERE uuid = "' . $aStock->fields['sizeid'] . '"');
                         if (!$aSize->EOF) {
-                            $size = (string) $aSize->fields['name'];
+                            $sizeEn = (string) $aSize->fields['name'];
                             
                             $sizes=explode(",", (string) $aSize->fields['custom5']);
                             $sizesFr=explode(",", (string) $aSize->fields['custom6']);
@@ -469,7 +470,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         }
                         $enSize = $this->dbQF->Execute('SELECT * FROM sizes_translations WHERE sizeid = "' . $aStock->fields['sizeid'] . '" AND site = "www.soactive.com"');
                         if (!$enSize->EOF)
-                            $size = (string) $enSize->fields['name'];
+                            $sizeEn = (string) $enSize->fields['name'];
                         $frSize = $this->dbQF->Execute('SELECT * FROM sizes_translations WHERE sizeid = "' . $aStock->fields['sizeid'] . '" AND site = "www.attractive.fr"');
                         if (!$frSize->EOF)
                             $sizeFr = (string) $frSize->fields['name'];
@@ -506,7 +507,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $model = (string) $aProduct->fields['stylenumber']."-".$colourid;
 
                         $stock_item["sku"] = (string) $aStock->fields['bleepid'];
-                        $stock_item["size"] = $size;
+                        $stock_item["size"] = $sizeEn;
+                        $stock_item["sizeFr"] = $sizeFr;
                         $stock_item["colourid"] = (int) $colourid;
                         $stock_item["quantity"] = $quantity;
 
@@ -931,7 +933,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $quantity = $stock_item['quantity'];
 
         $option_id = $this->getSizeOptionId();
-        $option_value_id = $this->getSizeOptionValueId($option_id, $stock_item['size']);
+        $option_value_id = $this->getSizeOptionValueId($option_id, $stock_item['size'], $stock_item['sizeFr']);
         $product_option_id = $this->getProductOptionId($product_id, $option_id);
 
         $database = & $this->db;
