@@ -44,6 +44,8 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
 
     function cachePrestashopData($forceRefresh = false) {
 
+        $this->load->model('sale/customer');
+        
         $this->debug("fetching customers from prestashop");
         $sql = 'SELECT * FROM ps_customer c LEFT JOIN ps_customer_group cg ON c.id_customer = cg.id_customer ORDER BY c.id_customer';
         if ($this->config->get('prestashop_orders_limit')) $sql .= ' LIMIT ' . (int)$this->config->get('prestashop_orders_limit');
@@ -60,88 +62,92 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
                 $this->debug("=================================================================================================");
                 $this->debug("processing customer ".$aCustomer->fields['firstname']." ".$aCustomer->fields['lastname']."");
                 
-                $customer_id = $aCustomer->fields['id_customer'];
+                $customer_info = $this->model_sale_customer->getCustomerByEmail($aCustomer->fields['email']);
                 
+                if (!$customer_info)
+                {
                 
-                $customer = array('firstname' => $aCustomer->fields['firstname'],
-                                  'lastname' => $aCustomer->fields['lastname'],
-                                  'email' => $aCustomer->fields['email'],
-                                  'fax' => '',
-                                  'telephone' => '',
-                                  'newsletter' => $aCustomer->fields['newsletter'],
-                                  'customer_group_id' => $aCustomer->fields['id_group'],
-                                  'status' => 1,
-                                  'approve' => 1,
-                                  'approve' => 1,
-                                  'password' => md5(dechex(rand(0,9999999))));
-                
-                $this->debug("fetching addresses for ".$aCustomer->fields['firstname']." ".$aCustomer->fields['lastname']." from prestashop");
-                $aAddress = $this->dbQF->Execute('SELECT a.*, c.iso_code FROM ps_address a LEFT JOIN ps_country c ON (a.id_country = c.id_country) LEFT JOIN ps_state z ON (a.id_state = z.id_state) WHERE a.id_customer = ' . (int)$aCustomer->fields['id_customer'] . ' and NOT a.deleted ORDER BY a.id_address');
-                
-                $addresses = array();
-                if ($aAddress->RecordCount() > 0) {
-                    while (!$aAddress->EOF) {
-                        
-                        $country_id = $this->tableLookUp(DB_PREFIX . "country", 'country_id', array('iso_code_2' => $aAddress->fields['iso_code']));
-                        
-                        $zone_id = 0;
-                        
-                        $this->load->model('module/postcode_anywhere');
-                        if (1 == 0 && $this->model_module_postcode_anywhere->isAvailable())
-                        {
-                            if (!empty($aAddress->fields['postcode']) && !empty($country_id)) {
-                                $json['addresses'] = $this->model_module_postcode_anywhere->getAddressesByPostcode($aAddress->fields['postcode'], $country_id);
-                                if ($json['addresses'])
-                                {
-                                    $temp = json_decode($json['addresses'][0]['value']);
-                                    $zone_id = $temp->zone_id;
+                    $customer_id = $aCustomer->fields['id_customer'];
+
+                    $customer = array('firstname' => $aCustomer->fields['firstname'],
+                                      'lastname' => $aCustomer->fields['lastname'],
+                                      'email' => $aCustomer->fields['email'],
+                                      'fax' => '',
+                                      'telephone' => '',
+                                      'newsletter' => $aCustomer->fields['newsletter'],
+                                      'customer_group_id' => $aCustomer->fields['id_group'],
+                                      'status' => 1,
+                                      'approve' => 1,
+                                      'approve' => 1,
+                                      'password' => md5(dechex(rand(0,9999999))));
+
+                    $this->debug("fetching addresses for ".$aCustomer->fields['firstname']." ".$aCustomer->fields['lastname']." from prestashop");
+                    $aAddress = $this->dbQF->Execute('SELECT a.*, c.iso_code FROM ps_address a LEFT JOIN ps_country c ON (a.id_country = c.id_country) LEFT JOIN ps_state z ON (a.id_state = z.id_state) WHERE a.id_customer = ' . (int)$aCustomer->fields['id_customer'] . ' and NOT a.deleted ORDER BY a.id_address');
+
+                    $addresses = array();
+                    if ($aAddress->RecordCount() > 0) {
+                        while (!$aAddress->EOF) {
+
+                            $country_id = $this->tableLookUp(DB_PREFIX . "country", 'country_id', array('iso_code_2' => $aAddress->fields['iso_code']));
+
+                            $zone_id = 0;
+
+                            $this->load->model('module/postcode_anywhere');
+                            if (1 == 0 && $this->model_module_postcode_anywhere->isAvailable())
+                            {
+                                if (!empty($aAddress->fields['postcode']) && !empty($country_id)) {
+                                    $json['addresses'] = $this->model_module_postcode_anywhere->getAddressesByPostcode($aAddress->fields['postcode'], $country_id);
+                                    if ($json['addresses'])
+                                    {
+                                        $temp = json_decode($json['addresses'][0]['value']);
+                                        $zone_id = $temp->zone_id;
+                                    }
                                 }
                             }
-                        }
-                        
-                        $zone_id = $this->tableLookUp(DB_PREFIX . "zone", 'zone_id', array('country_id' => $country_id, 'code' => $aAddress->fields['zone_code']));
-                        
-                        $address = array();
-                        $address['firstname'] = $aAddress->fields['firstname'];
-                        $address['lastname'] = $aAddress->fields['lastname'];
-                        $address['company'] = $aAddress->fields['company'];
-                        $address['company_id'] = '';
-                        $address['tax_id'] = '';
-                        $address['address_1'] = $aAddress->fields['address1'];
-                        $address['address_2'] = $aAddress->fields['address2'];
-                        $address['city'] = $aAddress->fields['city'];
-                        $address['postcode'] = $aAddress->fields['postcode'];
-                        $address['country_id'] = $country_id;
-                        $address['zone_id'] = $zone_id;
-                        if (empty($addresses))
-                        {
-                            $address['default'] = true;
-                            
-                            if ($aAddress->fields['phone'])
+
+                            $zone_id = $this->tableLookUp(DB_PREFIX . "zone", 'zone_id', array('country_id' => $country_id, 'code' => $aAddress->fields['city']));
+
+                            $address = array();
+                            $address['firstname'] = $aAddress->fields['firstname'];
+                            $address['lastname'] = $aAddress->fields['lastname'];
+                            $address['company'] = $aAddress->fields['company'];
+                            $address['company_id'] = '';
+                            $address['tax_id'] = '';
+                            $address['address_1'] = $aAddress->fields['address1'];
+                            $address['address_2'] = $aAddress->fields['address2'];
+                            $address['city'] = $aAddress->fields['city'];
+                            $address['postcode'] = $aAddress->fields['postcode'];
+                            $address['country_id'] = $country_id;
+                            $address['zone_id'] = $zone_id;
+                            if (empty($addresses))
                             {
-                                $customer['telephone'] = $aAddress->fields['phone'];
-                            } else $customer['telephone'] = $aAddress->fields['phone_mobile'];
-                            
-                            
+                                $address['default'] = true;
+
+                                if ($aAddress->fields['phone'])
+                                {
+                                    $customer['telephone'] = $aAddress->fields['phone'];
+                                } else $customer['telephone'] = $aAddress->fields['phone_mobile'];
+
+
+                            }
+                            $addresses[] = $address;
+                            $aAddress->MoveNext();
                         }
-                        $addresses[] = $address;
-                        $aAddress->MoveNext();
                     }
+
+                    $customer['address'] = $addresses;
+
+                    $customer['customer_id'] = $this->model_sale_customer->addCustomer($customer);
+
+                    $this->db->query("UPDATE " . DB_PREFIX . "customer SET dob = '" . $this->db->escape($aCustomer->fields['birthday']) . "', password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape('ZabQEKHEjDzQY3rH6d9u6d5N9ge1yfsP15RtvQA7zcZsPKjosq2TJjbv') . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['date_add']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
+                    /*
+                    $this->processReviews($customer_id, $customer);
+
+                    if ($this->config->get('prestashop_orders'))
+                    {
+                        $this->processOrders($customer_id, $customer);
+                    }*/
                 }
-                
-                $customer['address'] = $addresses;
-                
-                $this->load->model('sale/customer');
-                $customer['customer_id'] = $this->model_sale_customer->addCustomer($customer);
-                
-                $this->db->query("UPDATE " . DB_PREFIX . "customer SET dob = '" . $this->db->escape($aCustomer->fields['birthday']) . "', password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape('ZabQEKHEjDzQY3rH6d9u6d5N9ge1yfsP15RtvQA7zcZsPKjosq2TJjbv') . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['date_add']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
-                /*
-                $this->processReviews($customer_id, $customer);
-                
-                if ($this->config->get('prestashop_orders'))
-                {
-                    $this->processOrders($customer_id, $customer);
-                }*/
                 
                 $aCustomer->MoveNext();
             }
