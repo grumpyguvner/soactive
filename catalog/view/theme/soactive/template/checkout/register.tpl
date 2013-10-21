@@ -3,7 +3,7 @@
         <h2><?php echo $text_your_details; ?></h2>
         <div class="prow">
             <div class="pLabel">
-                <span class="required">*</span> <label>Title:</label>
+                <span class="required">*</span> <label><?php echo $entry_title; ?></label>
             </div>
             <div class="pInput">
                 <select class="registerTitle" name="title"><option></option><?php

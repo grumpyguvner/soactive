@@ -16,7 +16,7 @@
       <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
       <li><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></li>
       <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
-      <li><a href="index.php?route=information/contact">Contact Customer Service</a></li>
+      <li><a href="index.php?route=information/contact"><?php echo $text_contact; ?></a></li>
     </ul>
   </div>
 </div>

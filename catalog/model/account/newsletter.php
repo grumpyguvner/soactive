@@ -309,7 +309,7 @@ class ModelAccountNewsletter extends Model {
             if ($flag === false) $flag = 0;
             $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
             $retval_campaing = $mailcampaign->get($email);
-            if ($retval_campaing->was_successful()) {
+            if ($retval_campaing->was_successful() && $retval_campaing->response->State != 'Unsubscribed') {
                 $flag += 1;
             }
             
@@ -317,7 +317,7 @@ class ModelAccountNewsletter extends Model {
             {
                 $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_account_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
                 $retval_campaing = $mailcampaign->get($email);
-                if ($retval_campaing->was_successful()) {
+                if ($retval_campaing->was_successful() && $retval_campaing->response->State != 'Unsubscribed') {
                     $flag += 1;
                 }
             }
@@ -326,7 +326,7 @@ class ModelAccountNewsletter extends Model {
             {
                 $mailcampaign = new CS_REST_Subscribers($this->config->get('newsletter_mailcampaign_checkout_listid'), $this->config->get('newsletter_mailcampaign_apikey'));
                 $retval_campaing = $mailcampaign->get($email);
-                if ($retval_campaing->was_successful()) {
+                if ($retval_campaing->was_successful() && $retval_campaing->response->State != 'Unsubscribed') {
                     $flag += 1;
                 }
             }

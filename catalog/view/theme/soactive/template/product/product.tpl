@@ -68,8 +68,8 @@
         <?php if (!$special) { ?>
         <?php echo $price; ?>
         <?php } else { ?>
-          <span class="save">SAVE <?php echo $saving_percent . '% ' ?></span>
-          <span style="font-weight: normal; text-decoration: line-through;">RRP: </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> Pay: </span> <span class="price-new"><?php echo $special; ?></span>
+          <span class="save"><?php echo $text_save; ?> <?php echo $saving_percent . '% ' ?></span>
+          <span style="font-weight: normal; text-decoration: line-through;"><?php echo $text_rrp; ?> </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> <?php echo $text_pay; ?> </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -267,7 +267,7 @@
                     
                     <?php if (isset($attribute_groups['Ratings'])) { ?>
                         <div class="rating">
-                            <label>OUR EXPERTS REVIEW</label>
+                            <label><?php echo $text_expert; ?></label>
                             <?php
                             foreach ($attribute_groups['Ratings'] as $attribute_group) {
                                 foreach ($attribute_group['attribute'] as $attribute) {
@@ -359,9 +359,9 @@
         </div>
         <div class="gotQuestion">
             <div class="gotQuestionText">
-                <span><i>Got a question about this product?</i></span>
+                <span><i><?php echo $text_question; ?></i></span>
                 <br/>
-                <span><i>ASK ONE OF OUR EXPERTS...</i></span>
+                <span><i><?php echo $text_ask; ?></i></span>
             </div>
             <a href="index.php?route=information/contact" type="button" class="button">CONTACT US</a>
         </div>
@@ -369,10 +369,27 @@
       <?php echo $column_right; ?>
   </div>
   
-  <?php if ($products && count($products) > 0) { ?>
-        <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($tab_related) ?></h5></div>
-            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($products) <= 5) { echo ' completeLook';} ?>">
-              <?php foreach ($products as $product) { ?>
+  <?php
+  $product_display = array();
+  if (count($products) > 0) {
+      $product_display = $products;
+      $title = $tab_related;
+  } elseif (count($alsoBought) > 0) {
+      $product_display = $alsoBought;
+      $title = $tab_also_bought;
+  } elseif (count($alsoCategory) > 0) {
+      $product_display = $alsoCategory;
+      $title = $tab_category_items;
+  } elseif (count($bestSelling) > 0) {
+      $product_display = $bestSelling;
+      $title = $tab_best_selling;
+  }
+  ?>
+    
+  <?php if (($products && count($products) > 0) || ($alsoBought && count($alsoBought) > 0) || ($alsoCategory && count($alsoCategory) > 0) || ($bestSelling && count($bestSelling) > 0)) { ?>
+        <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($title); ?></h5></div>
+            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($product_display) <= 5) { echo ' completeLook';} ?>">
+                <?php foreach ($product_display as $product) { ?>
                   <li>
                       <?php if ($product['thumb']) { ?>
                       <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a>
@@ -391,8 +408,8 @@
                           <?php if (!$product['special']) { ?>
                           <span>Pay: </span><span class="price"><?php echo $product['price']; ?></span>
                           <?php } else { ?>
-                          <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
-                          <span class="price-old">RRP: <?php echo $product['price']; ?></span> <span>Pay: </span><span class="price-new"><?php echo $product['special']; ?></span>
+                          <span class="save"><?php echo $text_save; ?> <?php echo $product['saving_percent'] . '%' ?></span>
+                          <span class="price-old"><?php echo $text_rrp; ?> <?php echo $product['price']; ?></span> <span><?php echo $text_pay; ?> </span><span class="price-new"><?php echo $product['special']; ?></span>
                           <?php } ?>
                         </div>
                      <?php } ?>

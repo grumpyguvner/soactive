@@ -11,6 +11,10 @@ class ControllerModuleFeatured extends Controller {
 		
 		$this->load->model('tool/image');
 
+                $this->data['text_save'] = $this->language->get('text_save');
+                $this->data['text_rrp'] = $this->language->get('text_rrp');
+                $this->data['text_pay'] = $this->language->get('text_pay');
+                
 		$this->data['products'] = array();
 
 		$products = explode(',', $this->config->get('featured_product'));		

@@ -45,8 +45,16 @@ class ControllerModuleNewsletter extends Controller {
         if (isset($this->request->get['listId'])) {
             $this->config->set('newsletter_mailchimp_listid', $this->request->get['listId']);
         }
+        
+        if ($this->request->get['firstname'] == '') {
+            $error = $this->language->get('error_firstname');
+        }
 
-        if (!$this->request->get['email'] || !filter_var($this->request->get['email'], FILTER_VALIDATE_EMAIL)) {
+        else if ($this->request->get['lastname'] == '') {
+            $error = $this->language->get('error_lastname');
+        }
+        
+        else if (!$this->request->get['email'] || !filter_var($this->request->get['email'], FILTER_VALIDATE_EMAIL)) {
             $error = $this->language->get('error_email');
         }
 
@@ -138,6 +146,8 @@ class ControllerModuleNewsletter extends Controller {
         
         $this->data['action'] = $this->url->link('account/newsletter', '', 'SSL');
         $this->data['back'] = $this->url->link('common/home', '', 'SSL');
+        
+        $this->data['select_title'] = explode(',', $this->language->get('select_title'));
                
         if (count($this->data['breadcrumbs']) > 1)
             {

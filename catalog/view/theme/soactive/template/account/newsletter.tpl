@@ -27,34 +27,18 @@
                 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                         <table class="form">
                             <tr>
-                                <td><?php echo $text_choose_newsletter_womens ?></td>
+                                <td><?php echo $text_choose_newsletter_main ?></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center"><?php if ($newsletter) { ?>
-                                        <input type="radio" name="newsletter_womens" value="1" checked="checked" />
+                                        <input type="radio" name="newsletter" value="1" checked="checked" />
                                         <?php echo $text_yes; ?>&nbsp;
-                                        <input type="radio" name="newsletter_womens" value="0" />
+                                        <input type="radio" name="newsletter" value="0" />
                                         <?php echo $text_no; ?>
                                     <?php } else { ?>
-                                        <input type="radio" name="newsletter_womens" value="1" />
+                                        <input type="radio" name="newsletter" value="1" />
                                         <?php echo $text_yes; ?>&nbsp;
-                                        <input type="radio" name="newsletter_womens" value="0" checked="checked" />
-                                        <?php echo $text_no; ?>
-                                    <?php } ?></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo $text_choose_newsletter_mens ?></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center"><?php if ($newsletter) { ?>
-                                        <input type="radio" name="newsletter_mens" value="1" checked="checked" />
-                                        <?php echo $text_yes; ?>&nbsp;
-                                        <input type="radio" name="newsletter_mens" value="0" />
-                                        <?php echo $text_no; ?>
-                                    <?php } else { ?>
-                                        <input type="radio" name="newsletter_mens" value="1" />
-                                        <?php echo $text_yes; ?>&nbsp;
-                                        <input type="radio" name="newsletter_mens" value="0" checked="checked" />
+                                        <input type="radio" name="newsletter" value="0" checked="checked" />
                                         <?php echo $text_no; ?>
                                     <?php } ?></td>
                             </tr>

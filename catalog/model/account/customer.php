@@ -28,7 +28,7 @@ class ModelAccountCustomer extends Model {
         
         $this->load->model('account/newsletter');
 
-        if ($data['newsletter'] == 1) {
+        if ($data['newsletter'] == 1 || (($this->config->get('newsletter_mailcampaign_enabled') && !$this->config->get('newsletter_mailcampaign_account_optin')) || ($this->config->get('newsletter_mailchimp_enabled') && !$this->config->get('newsletter_mailchimp_account_optin')))) {
             $customer_info = $this->getCustomer($customer_id);
             $this->model_account_newsletter->subscribe($data['email'], $customer_info, 'account');
         } elseif ($data['newsletter'] == 0) {

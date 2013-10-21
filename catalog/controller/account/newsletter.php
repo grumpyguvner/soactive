@@ -53,6 +53,7 @@ class ControllerAccountNewsletter extends Controller {
         $this->data['text_choose_newsletter'] = $this->language->get('text_choose_newsletter');
         $this->data['text_choose_newsletter_womens'] = $this->language->get('text_choose_newsletter_womens');
         $this->data['text_choose_newsletter_mens'] = $this->language->get('text_choose_newsletter_mens');
+        $this->data['text_choose_newsletter_main'] = $this->language->get('text_choose_newsletter_main');
 
         $this->data['entry_newsletter'] = $this->language->get('entry_newsletter');
 

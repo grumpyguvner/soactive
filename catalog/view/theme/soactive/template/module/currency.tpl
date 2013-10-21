@@ -6,7 +6,7 @@
         <div class="content">
             <div class="mini-currency-info">
                 <div class="CurrencyTitle">
-                    <span></span><span>UNITED KINGDOM</span>
+                    <span></span><span><?php echo $text_uk; ?></span>
                 </div>
                 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                     <div id="currency"><?php echo $text_currency; ?><br />
@@ -30,7 +30,7 @@
                     </div>
                 </form>
                 <div class="country">
-                    Select Country:
+                    <?php echo $text_select; ?>
                 </div>
             </div> 
         </div>

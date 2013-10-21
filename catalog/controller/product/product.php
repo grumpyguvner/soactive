@@ -154,6 +154,13 @@ class ControllerProductProduct extends Controller {
 			$this->data['text_share'] = $this->language->get('text_share');
 			$this->data['text_wait'] = $this->language->get('text_wait');
 			$this->data['text_tags'] = $this->language->get('text_tags');
+                        $this->data['text_zoom'] = $this->language->get('text_zoom');
+                        $this->data['text_save'] = $this->language->get('text_save');
+                        $this->data['text_rrp'] = $this->language->get('text_rrp');
+                        $this->data['text_pay'] = $this->language->get('text_pay');
+                        $this->data['text_expert'] = $this->language->get('text_expert');
+                        $this->data['text_question'] = $this->language->get('text_question');
+                        $this->data['text_ask'] = $this->language->get('text_ask');
                         $this->data['text_rating1'] = $this->language->get('text_rating1');
                         $this->data['text_rating2'] = $this->language->get('text_rating2');
                         $this->data['text_rating3'] = $this->language->get('text_rating3');
@@ -205,6 +212,9 @@ class ControllerProductProduct extends Controller {
                         $this->data['tab_attribute_fabric'] = $this->language->get('tab_attribute_fabric');
 			$this->data['tab_review'] = sprintf($this->language->get('tab_review'), $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']));
 			$this->data['tab_related'] = $this->language->get('tab_related');
+                        $this->data['tab_category_items'] = $this->language->get('tab_category_items');
+                        $this->data['tab_also_bought'] = $this->language->get('tab_also_bought');
+                        $this->data['tab_best_selling'] = $this->language->get('tab_best_selling');
 			
 			$this->data['product_id'] = $this->request->get['product_id'];
 			$this->data['manufacturer'] = $product_info['manufacturer'];
@@ -464,6 +474,119 @@ class ControllerProductProduct extends Controller {
 				);
 			}
 			/* End Customers also bought */
+                        
+                        /* Other products in the category */
+                        if (isset($this->request->get['path'])) {
+                            $path = '';
+
+                            foreach (explode('_', $this->request->get['path']) as $path_id) {
+                                    if (!$path) {
+                                            $path = $path_id;
+                                    } else {
+                                            $path .= '_' . $path_id;
+                                    }
+
+                                    $category_info = $this->model_catalog_category->getCategory($path_id);
+                            }
+                            
+                            $this->data['alsoCategory'] = array();
+                            $data = array(
+                                'start'   	 => 0,
+                                'limit'   	 => 6,
+                                'filter_category_id' => $category_info['category_id']
+                            );
+                            $results = $this->model_catalog_product->getProducts($data);
+                        
+			foreach ($results as $result) {
+				if ($result['product_id'] != $product_id) {
+                                    if ($result['image']) {
+                                            $image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
+                                    } else {
+                                            $image = false;
+                                    }
+
+                                    if (!$this->config->get('config_block_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
+                                            $price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+                                    } else {
+                                            $price = false;
+                                    }
+
+                                    if ((float)$result['special']) {
+                                            $special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+                                    } else {
+                                            $special = false;
+                                    }
+
+                                    if ($this->config->get('config_review_status')) {
+                                            $rating = (int)$result['rating'];
+                                    } else {
+                                            $rating = false;
+                                    }
+
+                                    $this->data['alsoCategory'][] = array(
+                                            'product_id' => $result['product_id'],
+                                            'thumb'   	 => $image,
+                                            'name'    	 => $result['name'],
+                                            'price'   	 => $price,
+                                            'special' 	 => $special,
+                                            'saving_percent' => $result['saving_percent'],
+                                            'new'            => $result['new'],
+                                            'rating'     => $rating,
+                                            'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
+                                            'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+                                    );
+                                }
+                            }
+                        }
+                        
+			/* End Other products in category */
+                        
+                        /* Top selling products */
+                        $this->data['bestSelling'] = array();
+                        $results = $this->model_catalog_product->getBestSellerProducts(5);
+
+                        foreach ($results as $result) {
+                            if ($result['product_id'] != $product_id) {
+                                if ($result['image']) {
+                                        $image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
+                                } else {
+                                        $image = false;
+                                }
+
+                                if (!$this->config->get('config_block_buy') && (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price'))) {
+                                        $price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+                                } else {
+                                        $price = false;
+                                }
+
+                                if ((float)$result['special']) {
+                                        $special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+                                } else {
+                                        $special = false;
+                                }
+
+                                if ($this->config->get('config_review_status')) {
+                                        $rating = (int)$result['rating'];
+                                } else {
+                                        $rating = false;
+                                }
+
+                                $this->data['bestSelling'][] = array(
+                                        'product_id' => $result['product_id'],
+                                        'thumb'   	 => $image,
+                                        'name'    	 => $result['name'],
+                                        'price'   	 => $price,
+                                        'special' 	 => $special,
+                                        'saving_percent' => $result['saving_percent'],
+                                        'new'            => $result['new'],
+                                        'rating'     => $rating,
+                                        'reviews'    => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
+                                        'href'    	 => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+                                );
+                            }
+                        }
+                        
+			/* End Top selling products */
                         
                         /***************************** News press **********************************************/
                         $this->data['news'] = array();
