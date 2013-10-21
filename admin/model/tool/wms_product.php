@@ -978,13 +978,19 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $database = & $this->db;
         $sql = "SELECT option_value_id FROM `" . DB_PREFIX . "option_value_description` WHERE option_id = '" . (int) $option_id . "' AND name = '" . $this->db->escape($name) . "' AND language_id = '" . (int) $this->languageId . "'";
         $result = $this->db->query($sql);
+        
+        
         if ($result->rows)
-            return (int) $result->rows[0]['option_value_id'];
-
-        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int) $option_id . "', image = '', sort_order = '0'");
-        $option_value_id = $this->db->getLastId();
-        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int) $option_value_id . "', option_id = '" . (int) $option_id . "', name = '" . $this->db->escape($name) . "', language_id = '" . (int) $this->languageId . "'");
-        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int) $option_value_id . "', option_id = '" . (int) $option_id . "', name = '" . $this->db->escape(($nameFr == "" ? $name : $nameFr)) . "', language_id = '" . (int) $this->languageFr . "'");
+        {
+            $option_value_id = (int) $result->rows[0]['option_value_id'];
+        } else
+        {
+            $this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int) $option_id . "', image = '', sort_order = '0'");
+            $option_value_id = $this->db->getLastId();
+        }
+        
+        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int) $option_value_id . "', option_id = '" . (int) $option_id . "', name = '" . $this->db->escape($name) . "', language_id = '" . (int) $this->languageId . "' ON DUPLICATE KEY UPDATE name = '" . $this->db->escape($name) . "'");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int) $option_value_id . "', option_id = '" . (int) $option_id . "', name = '" . $this->db->escape(($nameFr == "" ? $name : $nameFr)) . "', language_id = '" . (int) $this->languageFr . "' ON DUPLICATE KEY UPDATE name = '" . $this->db->escape(($nameFr == "" ? $name : $nameFr)) . "'");
         return (int) $option_value_id;
     }
 
