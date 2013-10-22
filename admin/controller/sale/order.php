@@ -2389,12 +2389,14 @@ class ControllerSaleOrder extends Controller {
 
         if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
             $this->data['base'] = HTTPS_SERVER;
+            $server = HTTPS_IMAGE;
         } else {
             $this->data['base'] = HTTP_SERVER;
+            $server = HTTP_IMAGE;
         }
         
         if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
-            $this->data['logo'] = $this->data['base'] . $this->config->get('config_logo');
+            $this->data['logo'] = $server . $this->config->get('config_logo');
         } else {
             $this->data['logo'] = '';
         }

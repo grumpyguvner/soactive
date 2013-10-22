@@ -4,7 +4,7 @@ require('system/helper/barcodegen/class/BCGFont.php');
 require('system/helper/barcodegen/class/BCGColor.php');
 require('system/helper/barcodegen/class/BCGDrawing.php'); 
 
-$font = new BCGFont('/system/helper/barcodegen/class/font/Arial.ttf', 18);
+$font = new BCGFont('system/helper/barcodegen/class/font/Arial.ttf', 10);
 // The arguments are R, G, B for color.
 $color_black = new BCGColor(0, 0, 0);
 $color_white = new BCGColor(255, 255, 255); 
@@ -16,19 +16,24 @@ switch ($_GET['typ']) {
     case "ean":
         include('system/helper/barcodegen/class/BCGean13.barcode.php'); 
         $code = new BCGean13();
+        
+        $_GET['ref'] = str_pad('2' . $_GET['ref'], 12, "0", STR_PAD_LEFT);
+        
+        $code->setFont($font); // Font (or 0)
         break;
 
     default:
         include('system/helper/barcodegen/class/BCGcode39.barcode.php'); 
         $code = new BCGcode39();
+        
+        $code->setFont(0); // Font (or 0)
         break;
 }
 
 $code->setScale(2); // Resolution
-$code->setThickness(30); // Thickness
+$code->setThickness(10); // Thickness
 $code->setForegroundColor($color_black); // Color of bars
 $code->setBackgroundColor($color_white); // Color of spaces
-$code->setFont($font); // Font (or 0)
 
 $code->parse($_GET['ref']); // Text
 

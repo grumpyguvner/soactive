@@ -11,17 +11,17 @@
  <div class="page1">
   <table class="store">
     <tr>
-        <td><b><?php echo $text_dispatch_note; ?></b></td>
+        <td width="33%"><b><?php echo $text_dispatch_note; ?></b> <?php echo $order['order_id']; ?></td>
         <td align="center"><img src="<?php echo $logo; ?>" alt=""></td>
-        <td><b><?php echo $text_order_date; ?></b> <?php echo $order['date_added']; ?></td>
+        <td width="33%" style="text-align: right;"><b><?php echo $text_order_date; ?></b> <?php echo $order['date_added']; ?></td>
     </tr>
   </table>
   <div style="height: 80px;"></div>
   <table class="store">
     <tr>
-      <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
-      <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
-      <td><img src="/barcode/3of9/<?php echo $order['order_id']; ?>" alt="<?php echo $order['order_id']; ?>" /></td>
+      <td width="33%"><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
+      <td align="center"><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
+      <td width="33%" style="text-align: right;"><img src="/barcode/3of9/<?php echo $order['order_id']; ?>.png" alt="<?php echo $order['order_id']; ?>" /></td>
     </tr>
   </table>
   <div id="product-wrapper">
@@ -46,12 +46,12 @@
     {
     ?>
     <tr>
-      <td><?php if (!empty($product['option']) && !empty($product['option'][0]['sku']))?><img src="/barcode/ean/<?php echo $product['option'][0]['sku']; ?>" alt="<?php echo $product['option'][0]['sku']; ?>" /></td>
+      <td><?php if (!empty($product['option']) && !empty($product['option'][0]['sku']))?><img src="/barcode/ean/<?php echo $product['option'][0]['sku']; ?>.png" alt="<?php echo $product['option'][0]['sku']; ?>" /></td>
       <td>
         <?php echo $product['name']; ?>
         <?php foreach ($product['option'] as $option) { ?>
         - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
-        <br /><small><?php echo $text_location; ?> </small>
+<!--        <br /><small><?php echo $text_location; ?> </small>-->
         <?php } ?>
       </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
@@ -109,9 +109,9 @@
   </div>
   <table class="store">
     <tr>
-      <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
-      <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
-      <td><img src="/barcode/3of9/<?php echo $order['order_id']; ?>" alt="<?php echo $order['order_id']; ?>" /></td>
+      <td width="33%"><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
+      <td align="center"><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
+      <td width="33%" style="text-align: right;"><img src="/barcode/3of9/<?php echo $order['order_id']; ?>.png" alt="<?php echo $order['order_id']; ?>" /></td>
     </tr>
   </table>
   <div id="bottom">
@@ -123,8 +123,8 @@
         <div style="height: 17px;"></div>
         <div style="padding-left: 30px; font-size: 13px;"><?php echo $text_return_address;?></div>
       </td>
-      <td style="border-left: 1px solid #000; padding-left: 30px; width: 50%;">
-        <?php echo $order['shipping_address']; ?>
+      <td style=" padding-left: 30px; width: 50%;">
+        <img src="/catalog/view/theme/soactive/image/postage/postage_unknown.png" style="float: right;padding-right: 10px;" /><?php echo $order['shipping_address']; ?>
       </td>
     </tr>
   </table>
@@ -140,17 +140,17 @@
  <div style="height: 60px;"></div>
   <table class="store">
     <tr>
-        <td><b><?php echo $text_dispatch_note; ?></b></td>
-        <td align="center"><img src="../image/data/soactive-logo.png" alt="Soactive Logo"></td>
-        <td><b><?php echo $text_order_date; ?></b> <?php echo $order['date_added']; ?></td>
+        <td width="33%"><b><?php echo $text_dispatch_note; ?></b> <?php echo $order['order_id']; ?></td>
+        <td align="center"><img src="<?php echo $logo; ?>" alt=""></td>
+        <td width="33%" style="text-align: right;"><b><?php echo $text_order_date; ?></b> <?php echo $order['date_added']; ?></td>
     </tr>
   </table>
   <div style="height: 80px;"></div>
   <table class="store">
     <tr>
-      <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
+      <td width="33%"><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
       <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
-      <td>BARCODE HERE</td>
+      <td width="33%" style="text-align: right;"><img src="/barcode/3of9/<?php echo $order['order_id']; ?>.png" alt="<?php echo $order['order_id']; ?>" /></td>
     </tr>
   </table>
  <div id="product-wrapper">
@@ -171,12 +171,12 @@
     {
     ?>
     <tr>
-      <td>BARCODE</td>
+      <td><?php if (!empty($product['option']) && !empty($product['option'][0]['sku']))?><img src="/barcode/ean/<?php echo $product['option'][0]['sku']; ?>.png" alt="<?php echo $product['option'][0]['sku']; ?>" /></td>
       <td>
         <?php echo $product['name']; ?>
         <?php foreach ($product['option'] as $option) { ?>
         - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
-        <br /><small><?php echo $text_location; ?> </small>
+<!--        <br /><small><?php echo $text_location; ?> </small>-->
         <?php } ?>
       </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
@@ -225,9 +225,9 @@
   </div>
     <table class="store">
     <tr>
-      <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
+      <td width="33%"><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
       <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
-      <td>BARCODE HERE</td>
+      <td width="33%" style="text-align: right;"><img src="/barcode/3of9/<?php echo $order['order_id']; ?>.png" alt="<?php echo $order['order_id']; ?>" /></td>
     </tr>
   </table>
   </div>
