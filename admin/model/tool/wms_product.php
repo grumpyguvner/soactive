@@ -818,7 +818,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     $info_data['information_description'][$key]['title'] = $stock_item['sizeguide_name'];
                     $info_data['information_description'][$key]['description'] = $stock_item['sizeguide_html'];
                 }
-                $this->model_catalog_information->editInformation($info_data);
+                $this->model_catalog_information->editInformation($information_id, $info_data);
             }
             $attribute[] = array(
                 'attribute_id' => $attribute_id,
