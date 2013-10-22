@@ -87,7 +87,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $this->debug("fetching products from wms");
 //        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
         $limit = intval($this->config->get('wms_products_limit'));
-        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' AND styles.inactive = 0 AND styles.webenabled = 1 ' . ($stylenumber == "" ? ' AND (styles.available_stock > 0 OR styles.season LIKE "' . $this->season .'%") ' : '' ) . ' ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT '.$limit : '');
+        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' ' . ($stylenumber == "" ? ' AND AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "' . $this->season .'%") ' : '' ) . ' ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT '.$limit : '');
         $this->debug($aProductSql);
         $aProduct = $this->dbQF->Execute($aProductSql);
 
@@ -109,6 +109,16 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 }
                 $this->debug("=================================================================================================");
                 $this->debug("processing product " . $aProduct->fields['stylenumber'] . " " . $aProduct->fields['stylename'] . "");
+                
+                if (!$aProduct->fields['webenabled'] || $aProduct->fields['inactive'])
+                {
+                    $query = $this->db->query("UPDATE " . DB_PREFIX . "product set status = 0 WHERE model LIKE '" . $aProduct->fields['stylenumber'] . "-%'");
+                    
+                    $aProduct->MoveNext();
+                    
+                    continue;
+                }
+                
 
                 $filter_size_group_id = $this->createFilter("Size", 0, "Taille");
                 $filter_colour_group_id = $this->createFilter("Colour", 0, "Couleur");
