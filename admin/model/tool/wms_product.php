@@ -3,6 +3,8 @@
 include_once('wms_core.php');
 
 class ModelToolWMSProduct extends ModelToolWMS {
+    
+    private $season = '2013';
 
     function import($stylenumber = "") {
         
@@ -87,7 +89,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $this->debug("fetching products from wms");
 //        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
         $limit = intval($this->config->get('wms_products_limit'));
-        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT '.$limit : '');
+        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "'.$stylenumber.'"' ) . ' AND styles.inactive = 0 AND styles.webenabled = 1 ' . ($stylenumber == "" ? ' AND (styles.available_stock > 0 OR styles.season LIKE "' . $this->season .'%") ' : '' ) . ' ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT '.$limit : '');
         $this->debug($aProductSql);
         $aProduct = $this->dbQF->Execute($aProductSql);
 
@@ -405,6 +407,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     $sg_html = (string) $aSizeGuide->fields['webdescription'];
                 }
                 
+                $productStatus = (int) $aProduct->fields['webenabled'];
+                if (!preg_match('%^' . $this->season . '%', $aProduct->fields['season']) || !(int)$aProduct->fields['available_stock']) {
+                    $productStatus = 0;
+                }
+                
                 $stock_item = array(
                     "name" => (string) $aProduct->fields['stylename'],
                     "nameFr" => (string) $aProduct->fields['stylename'],
@@ -414,7 +421,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     "descriptionFr" => $aProduct->fields['webdescription'],
                     "keywords" => $aProduct->fields['keywords'],
                     "keywordsFr" => $aProduct->fields['keywords'],
-                    "status" => (int) $aProduct->fields['webenabled'],
+                    "status" => (int) $productStatus,
                     "price" => (float) $aProduct->fields['unitprice'],
                     "saleprice" => (float) $aProduct->fields['saleprice'],
                     "sku" => "",
@@ -496,7 +503,6 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         $frColour = $this->dbQF->Execute('SELECT * FROM colours_translations WHERE colourid = "' . $aStock->fields['colourid'] . '" AND site = "www.attractive.fr"');
                         if (!$frColour->EOF)
                             $colourFr = (string) $frColour->fields['name'];
-                        
                         
                         $quantity = (float) $aStock->fields['available_stock'];
 
@@ -738,7 +744,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             )
                         )
                     );
-                    $attribute_id = $this->model_catalog_attribute->addAttribute($info_data);
+                    $attribute_group_id = $this->model_catalog_attribute_group->addAttributeGroup($info_data);
                 }
                 $this->load->model('catalog/attribute');
                 $info_data = array(
@@ -756,9 +762,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 $attribute_id = $this->model_catalog_attribute->addAttribute($info_data);
             }
             $information_id = (string) $this->tableLookUp(DB_PREFIX . "information_description", 'information_id', array('category' => 'Size Guides','title' => $stock_item['sizeguide_name']));
+            
+            $this->load->model('catalog/information');
+            
             if (!$information_id) {
                 // need to create the information page
-                $this->load->model('catalog/information');
                 $info_data = array(
                     'sort_order' => '999',
                     'status' => 1,
@@ -783,6 +791,17 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     'information_store' => $this->config->get('wms_products_store')
                 );
                 $information_id = $this->model_catalog_information->addInformation($info_data);
+            } else {
+                $info_data = $this->model_catalog_information->getInformation($information_id);
+                
+                $info_data['information_description'] = $this->model_catalog_information->getInformationDescriptions($information_id);
+                
+                foreach ($info_data['information_description'] as $key => $value)
+                {
+                    $info_data['information_description'][$key]['title'] = $stock_item['sizeguide_name'];
+                    $info_data['information_description'][$key]['description'] = $stock_item['sizeguide_html'];
+                }
+                $this->model_catalog_information->editInformation($info_data);
             }
             $attribute[] = array(
                 'attribute_id' => $attribute_id,
@@ -875,7 +894,10 @@ class ModelToolWMSProduct extends ModelToolWMS {
             // fetch the newly created product
             $product_info = $this->model_catalog_product->getProduct($product_id);
         } else {
+            
             $product_id = $product_info['product_id'];
+            
+            $data['date_available'] = $product_info['date_available'];
             $data['product_store'] = $this->model_catalog_product->getProductStores($product_id);
             $data['product_option'] = $this->model_catalog_product->getProductOptions($product_id);
             $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);

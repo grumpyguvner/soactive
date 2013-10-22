@@ -182,11 +182,27 @@ class ControllerToolWMS extends Controller {
             $stylenumber = (isset($this->request->get['stylenumber']) ? $this->request->get['stylenumber'] : "");
 
         if ($this->validate()) {
-
             // send the categories, products and options from WMS
             $this->load->model('tool/wms_product');
             $this->model_tool_wms_product->import($stylenumber);
+        } else {
 
+            // return a permission error page
+            return $this->forward('error/permission');
+        }
+    }
+
+    public function importAllLive() {
+        if ($this->validate()) {
+            $query = $this->db->query("SELECT model from " . DB_PREFIX . "product where status or quantity");
+            if ($query->num_rows)
+            {
+                foreach ($query->rows as $result)
+                {
+                    $model = preg_replace('%^(\d*)-.*%', '\\1', $result['model']);
+                    $this->import($model);
+                }
+            }
         } else {
 
             // return a permission error page
