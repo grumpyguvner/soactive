@@ -2392,6 +2392,12 @@ class ControllerSaleOrder extends Controller {
         } else {
             $this->data['base'] = HTTP_SERVER;
         }
+        
+        if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+            $this->data['logo'] = $this->data['base'] . $this->config->get('config_logo');
+        } else {
+            $this->data['logo'] = '';
+        }
 
         $this->data['direction'] = $this->language->get('direction');
         $this->data['language'] = $this->language->get('code');
@@ -2544,10 +2550,14 @@ class ControllerSaleOrder extends Controller {
                         } else {
                             $value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
                         }
+                        
+                        $sku_query = $this->db->query("SELECT sku FROM " . DB_PREFIX . "product_option_value WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "'");
+                        $sku = ($sku_query->num_rows) ? $sku_query->row['sku'] : '';
 
                         $option_data[] = array(
                             'name' => $option['name'],
-                            'value' => $value
+                            'value' => $value,
+                            'sku' => $sku
                         );
                     }
 

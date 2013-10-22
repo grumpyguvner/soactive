@@ -12,7 +12,7 @@
   <table class="store">
     <tr>
         <td><b><?php echo $text_dispatch_note; ?></b></td>
-        <td align="center"><img src="../image/data/soactive-logo.png" alt="Soactive Logo"></td>
+        <td align="center"><img src="<?php echo $logo; ?>" alt=""></td>
         <td><b><?php echo $text_order_date; ?></b> <?php echo $order['date_added']; ?></td>
     </tr>
   </table>
@@ -21,7 +21,7 @@
     <tr>
       <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
       <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
-      <td>BARCODE HERE</td>
+      <td><img src="/barcode/3of9/<?php echo $order['order_id']; ?>" alt="<?php echo $order['order_id']; ?>" /></td>
     </tr>
   </table>
   <div id="product-wrapper">
@@ -46,7 +46,7 @@
     {
     ?>
     <tr>
-      <td>BARCODE</td>
+      <td><?php if (!empty($product['option']) && !empty($product['option'][0]['sku']))?><img src="/barcode/ean/<?php echo $product['option'][0]['sku']; ?>" alt="<?php echo $product['option'][0]['sku']; ?>" /></td>
       <td>
         <?php echo $product['name']; ?>
         <?php foreach ($product['option'] as $option) { ?>
@@ -111,7 +111,7 @@
     <tr>
       <td><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></td>
       <td><b><?php echo $text_customer; ?></b> <?php echo $order['firstname']; ?> <?php echo $order['lastname']; ?></td>
-      <td>BARCODE HERE</td>
+      <td><img src="/barcode/3of9/<?php echo $order['order_id']; ?>" alt="<?php echo $order['order_id']; ?>" /></td>
     </tr>
   </table>
   <div id="bottom">
