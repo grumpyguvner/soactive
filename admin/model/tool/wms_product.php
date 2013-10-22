@@ -87,7 +87,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         $this->debug("fetching products from wms");
 //        $aProduct = $this->dbQF->Execute('SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") <> "" AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "2013%") ORDER BY styles.stylenumber');
         $limit = intval($this->config->get('wms_products_limit'));
-        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "' . $stylenumber . '"' ) . ' ' . ($stylenumber == "" ? ' AND AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "' . $this->season . '%") ' : '' ) . ' ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT ' . $limit : '');
+        $aProductSql = 'SELECT * FROM styles WHERE IFNULL(styles.stylenumber,"") ' . ($stylenumber == "" ? '<> ""' : '= "' . $stylenumber . '"' ) . ' ' . ($stylenumber == "" ? ' AND styles.inactive = 0 AND styles.webenabled = 1 AND (styles.available_stock > 0 OR styles.season LIKE "' . $this->season . '%") ' : '' ) . ' ORDER BY styles.stylenumber' . ($limit > 0 ? ' LIMIT ' . $limit : '');
         $this->debug($aProductSql);
         $aProduct = $this->dbQF->Execute($aProductSql);
 
@@ -898,7 +898,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             )),
             'product_attribute' => $attribute,
             'product_special' => $special,
-            'keyword' => '',
+            'keyword' => seoUrl($model) . ".html",
             'product_category' => $stock_item['categories'],
             'product_filter' => $stock_item['filters'],
             'product_store' => $this->config->get('wms_products_store')
