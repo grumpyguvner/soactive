@@ -87,3 +87,7 @@ h2 {
     width: 793px;
     height: 1122px;
 }
+
+.page2 {
+    page-break-before:always;
+}

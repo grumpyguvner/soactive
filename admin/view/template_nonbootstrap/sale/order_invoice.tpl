@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="view/stylesheet/invoice.css" />
 </head>
 <body>
+    <div style="page-break-after:always">
 <?php foreach ($orders as $order) { ?>
  <div class="page1">
   <table class="store">
@@ -233,5 +234,6 @@
   </div>
   <?php } ?>
 <?php } ?>
+    </div>
 </body>
 </html>
