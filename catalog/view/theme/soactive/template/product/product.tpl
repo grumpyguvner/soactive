@@ -377,7 +377,7 @@
   } elseif (count($alsoBought) > 0) {
       $product_display = $alsoBought;
       $title = $tab_also_bought;
-  } elseif (count($alsoCategory) > 0) {
+  } elseif (isset($alsoCategory) && count($alsoCategory) > 0) {
       $product_display = $alsoCategory;
       $title = $tab_category_items;
   } elseif (count($bestSelling) > 0) {
@@ -398,7 +398,7 @@
                     ?>
                   <li>
                       <?php if ($product_linked['thumb']) { ?>
-                      <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product_linked['thumb']; ?>" alt="<?php echo $product_linked['name']; ?>" /></a>
+                      <a href="<?php echo $product_linked['href']; ?>"><img src="<?php echo $product_linked['thumb']; ?>" alt="<?php echo $product_linked['name']; ?>" /></a>
                       <?php if ($product_linked['new']) { ?> 
                           <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                       <?php } ?>

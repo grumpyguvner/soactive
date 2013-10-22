@@ -813,6 +813,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                 $info_data = $this->model_catalog_information->getInformation($information_id);
 
                 $info_data['information_description'] = $this->model_catalog_information->getInformationDescriptions($information_id);
+                $info_data['information_store'] = $this->config->get('wms_products_store');
 
                 foreach ($info_data['information_description'] as $key => $value) {
                     $info_data['information_description'][$key]['title'] = $stock_item['sizeguide_name'];

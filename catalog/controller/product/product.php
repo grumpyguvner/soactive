@@ -362,13 +362,12 @@ class ControllerProductProduct extends Controller {
                                 case "Product Tabs":
                                     foreach ($attGroup['attribute'] as $tab)
                                     {
+                                        $text = $tab['text'];
                                         if (preg_match('%^information_id=(\d+)%', $tab['text'])) {
                                             $this->load->model('catalog/information');
                                             $information_id = preg_replace('%^information_id=(\d+)%', '\\1', $tab['text']);
                                             $information_data = $this->model_catalog_information->getInformation($information_id);
-                                            $text = $information_data['description'];
-                                        } else {
-                                            $text = $tab['text'];
+                                            //$text = $information_data['description'];
                                         }
                                         $this->data['product_tabs'][] = array('name'=>$tab['name'],'text'=>html_entity_decode($text));
                                     }
