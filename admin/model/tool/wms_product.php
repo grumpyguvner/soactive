@@ -407,11 +407,6 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     $sg_html = (string) $aSizeGuide->fields['webdescription'];
                 }
                 
-                $productStatus = (int) $aProduct->fields['webenabled'];
-                if (!preg_match('%^' . $this->season . '%', $aProduct->fields['season']) || !(int)$aProduct->fields['available_stock']) {
-                    $productStatus = 0;
-                }
-                
                 $stock_item = array(
                     "name" => (string) $aProduct->fields['stylename'],
                     "nameFr" => (string) $aProduct->fields['stylename'],
@@ -421,7 +416,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     "descriptionFr" => $aProduct->fields['webdescription'],
                     "keywords" => $aProduct->fields['keywords'],
                     "keywordsFr" => $aProduct->fields['keywords'],
-                    "status" => (int) $productStatus,
+                    "status" => (int) $aProduct->fields['webenabled'],
                     "price" => (float) $aProduct->fields['unitprice'],
                     "saleprice" => (float) $aProduct->fields['saleprice'],
                     "sku" => "",
