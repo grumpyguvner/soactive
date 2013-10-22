@@ -201,6 +201,10 @@ class ControllerCheckoutRegister extends Controller {
 			if ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
 				$json['error']['warning'] = $this->language->get('error_exists');
 			}
+                        
+                        if (!filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+				$json['error']['email'] = $this->language->get('error_email');
+			}
 			
 			if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
 				$json['error']['telephone'] = $this->language->get('error_telephone');

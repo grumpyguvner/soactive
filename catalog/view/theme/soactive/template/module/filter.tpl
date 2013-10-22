@@ -24,7 +24,7 @@ if ($filter_groups || $options) {
                                     <div class="accordion-inner">
                                         <div class="box-content">
                                             <div class="box-category">
-                                                <div class="reset"><a href="#">clear</a></div>
+                                                <div class="reset"><a href="#"><?php echo $text_clear; ?></a></div>
                                                 <ul>
                                                     <?php foreach ($filter_group['filter'] as $filter) {
                                                         if ($filter['count'])
@@ -100,7 +100,7 @@ if ($filter_groups || $options) {
                     ?>
                     <div class="filter_product accordion-group" id="<?php echo 'accordion' . ++$cnt; ?>">
                         <div class="accordion-heading">
-                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle">PRICE RANGE</a>
+                            <a href="#collapse<?php echo $cnt; ?>" data-parent="#accordion<?php echo $cnt; ?>" data-toggle="collapse" class="accordion-toggle"><?php echo $text_price_range; ?></a>
                         </div>
                         <div class="accordion-body in collapse" id="<?php echo 'collapse' . $cnt; ?>">
                             <div class="accordion-inner">
@@ -125,9 +125,9 @@ if ($filter_groups || $options) {
                                                 echo ($has_sale_filter) ? '<li class="filterSale">' : '<li class="filterSale noneCurrent">';
                                                 if (in_array('sale', $filter_product)) {
                                                     ?>
-                                                    <label class="checkbox"><input type="checkbox" value="sale" checked="checked" /> Sale items only</label>
+                                                    <label class="checkbox"><input type="checkbox" value="sale" checked="checked" /> <?php echo $text_sale_items; ?></label>
                                                 <?php } else { ?>
-                                                    <label class="checkbox"><input type="checkbox" value="sale" /> Sale items only</label>
+                                                    <label class="checkbox"><input type="checkbox" value="sale" /> <?php echo $text_sale_items; ?></label>
                                                     <?php
                                                 }
                                                 echo '</li>';
@@ -136,9 +136,9 @@ if ($filter_groups || $options) {
                                                 echo ($has_new_filter) ? '<li class="filterNew">' : '<li class="filterNew noneCurrent">';
                                                 if (in_array('new', $filter_product)) {
                                                     ?>
-                                                    <label class="checkbox"><input type="checkbox" value="new" checked="checked" /> New items only</label>
+                                                    <label class="checkbox"><input type="checkbox" value="new" checked="checked" /> <?php echo $text_new_items; ?></label>
                                                 <?php } else { ?>
-                                                    <label class="checkbox"><input type="checkbox" value="new" /> New items only</label>
+                                                    <label class="checkbox"><input type="checkbox" value="new" /> <?php echo $text_new_items; ?></label>
                                                 <?php
                                                 }
                                                 echo '</li>';

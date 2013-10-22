@@ -1,5 +1,5 @@
 <?php if (count($currencies) > 1 || count($languages) > 1) { ?>
-    <div id="wrapCurrency" <?php if ($logged) echo 'style="right: 324px;"'; ?>>
+    <div id="wrapCurrency">
         <div class="heading">
           <a><span id="currentCurrency">
               <?php

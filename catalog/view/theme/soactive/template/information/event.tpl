@@ -39,8 +39,8 @@
                           <?php if (!$v1['special']) { ?>
                           Pay: <span class="price"><?php echo $v1['price']; ?></span>
                           <?php } else { ?>
-                          <span class="save">SAVE <?php echo $v1['saving_percent'] . '%' ?></span>
-                          <span class="price-old">RRP: <?php echo $v1['price']; ?></span> Pay: <span class="price-new"><?php echo $v1['special']; ?></span>
+                          <span class="save"><?php echo $text_save; ?> <?php echo $v1['saving_percent'] . '%' ?></span>
+                          <span class="price-old"><?php echo $text_rrp; ?> <?php echo $v1['price']; ?></span> <?php echo $text_pay; ?> <span class="price-new"><?php echo $v1['special']; ?></span>
                           <?php } ?>
                         </div>
                      <?php } ?>

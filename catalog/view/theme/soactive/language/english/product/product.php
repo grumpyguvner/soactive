@@ -46,7 +46,10 @@ $_['tab_attribute']     = 'Delivery & Returns';
 $_['tab_attribute_size']= 'Size Guide';
 $_['tab_attribute_fabric']= 'Fabric';
 $_['tab_review']        = 'Reviews (%s)';
-$_['tab_related']       = 'Complete the look'; 
+$_['tab_related']       = 'Complete the look';
+$_['tab_category_items'] = 'Related Items';
+$_['tab_also_bought'] = 'Customers Also Bought';
+$_['tab_best_selling'] = 'Popular Products';
 
 // Error
 $_['error_name']        = 'Warning: Review Name must be between 3 and 25 characters!';

@@ -1403,11 +1403,18 @@ class ControllerSaleOrder extends Controller {
             $this->data['heading_title'] = $this->language->get('heading_title');
 
             $this->data['text_order_id'] = $this->language->get('text_order_id');
+            $this->data['text_return'] = $this->language->get('text_return');
+            $this->data['text_return_notice'] = $this->language->get('text_return_notice');
+            $this->data['text_return_address'] = $this->language->get('text_return_address');
             $this->data['text_invoice_no'] = $this->language->get('text_invoice_no');
             $this->data['text_invoice_date'] = $this->language->get('text_invoice_date');
             $this->data['text_store_name'] = $this->language->get('text_store_name');
             $this->data['text_store_url'] = $this->language->get('text_store_url');
+            $this->data['text_total_value'] = $this->language->get('text_total_value');
+            $this->data['text_pandp'] = $this->language->get('text_pandp');
+            $this->data['text_thanks'] = $this->language->get('text_thanks');
             $this->data['text_customer'] = $this->language->get('text_customer');
+            $this->data['text_location'] = $this->language->get('text_location');
             $this->data['text_customer_group'] = $this->language->get('text_customer_group');
             $this->data['text_email'] = $this->language->get('text_email');
             $this->data['text_telephone'] = $this->language->get('text_telephone');
@@ -2385,6 +2392,12 @@ class ControllerSaleOrder extends Controller {
         } else {
             $this->data['base'] = HTTP_SERVER;
         }
+        
+        if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+            $this->data['logo'] = $this->data['base'] . $this->config->get('config_logo');
+        } else {
+            $this->data['logo'] = '';
+        }
 
         $this->data['direction'] = $this->language->get('direction');
         $this->data['language'] = $this->language->get('code');
@@ -2392,6 +2405,8 @@ class ControllerSaleOrder extends Controller {
         $this->data['text_invoice'] = $this->language->get('text_invoice');
 
         $this->data['text_order_id'] = $this->language->get('text_order_id');
+        $this->data['text_dispatch_note'] = $this->language->get('text_dispatch_note');
+        $this->data['text_order_date'] = $this->language->get('text_order_date');
         $this->data['text_invoice_no'] = $this->language->get('text_invoice_no');
         $this->data['text_invoice_date'] = $this->language->get('text_invoice_date');
         $this->data['text_date_added'] = $this->language->get('text_date_added');
@@ -2410,6 +2425,9 @@ class ControllerSaleOrder extends Controller {
         $this->data['column_price'] = $this->language->get('column_price');
         $this->data['column_total'] = $this->language->get('column_total');
         $this->data['column_comment'] = $this->language->get('column_comment');
+        $this->data['column_description'] = $this->language->get('column_description');
+        $this->data['column_comments'] = $this->language->get('column_comments');
+        $this->data['column_return_code'] = $this->language->get('column_return_code');
 
         $this->load->model('sale/order');
 
@@ -2532,10 +2550,14 @@ class ControllerSaleOrder extends Controller {
                         } else {
                             $value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
                         }
+                        
+                        $sku_query = $this->db->query("SELECT sku FROM " . DB_PREFIX . "product_option_value WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "'");
+                        $sku = ($sku_query->num_rows) ? $sku_query->row['sku'] : '';
 
                         $option_data[] = array(
                             'name' => $option['name'],
-                            'value' => $value
+                            'value' => $value,
+                            'sku' => $sku
                         );
                     }
 
@@ -2574,6 +2596,8 @@ class ControllerSaleOrder extends Controller {
                     'store_fax' => $store_fax,
                     'email' => $order_info['email'],
                     'telephone' => $order_info['telephone'],
+                    'firstname' => $order_info['firstname'],
+                    'lastname' => $order_info['lastname'],
                     'shipping_address' => $shipping_address,
                     'shipping_method' => $order_info['shipping_method'],
                     'payment_address' => $payment_address,

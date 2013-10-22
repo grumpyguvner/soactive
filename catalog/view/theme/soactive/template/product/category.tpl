@@ -106,10 +106,10 @@ if ($login_required)
                                 <?php if ($product['price']) { ?>
                                     <div class="priceItem">
                                         <?php if (!$product['special']) { ?>
-                                             <span>Pay: </span><span class="price"><?php echo $product['price']; ?></span>
+                                             <span><?php echo $text_pay; ?> </span><span class="price"><?php echo $product['price']; ?></span>
                                         <?php } else { ?>
-                                            <span class="save">SAVE <?php echo $product['saving_percent'] . '%' ?></span>
-                                            <span class="price-old">RRP: <?php echo $product['price']; ?></span> Pay: <span class="price-new"><?php echo $product['special']; ?></span>
+                                            <span class="save"><?php echo $text_save; ?> <?php echo $product['saving_percent'] . '%' ?></span>
+                                            <span class="price-old"><?php echo $text_rrp; ?> <?php echo $product['price']; ?></span> <?php echo $text_pay; ?> <span class="price-new"><?php echo $product['special']; ?></span>
                                         <?php } ?>
                                     </div>
                                 <?php } ?>
