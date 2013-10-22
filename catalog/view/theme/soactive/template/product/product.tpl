@@ -386,35 +386,44 @@
   }
   ?>
     
-  <?php if (($products && count($products) > 0) || ($alsoBought && count($alsoBought) > 0) || ($alsoCategory && count($alsoCategory) > 0) || ($bestSelling && count($bestSelling) > 0)) { ?>
+  <?php if (count($product_display)) { ?>
         <div class="featuredTitle" id="featuredProduct"><h5><?php echo strtoupper($title); ?></h5></div>
-            <ul id="featuredStyles" class="jcarousel-skin-tango<?php if (count($product_display) <= 5) { echo ' completeLook';} ?>">
-                <?php foreach ($product_display as $product) { ?>
+            <ul id="featuredStyles" class="jcarousel-skin-tango completeLook">
+                <?php 
+                $cnt = 0;
+                foreach ($product_display as $key => $product_linked) {
+                    if ($product_linked['product_id'] != $product_id)
+                    {
+                        $cnt++;
+                    ?>
                   <li>
-                      <?php if ($product['thumb']) { ?>
-                      <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a>
-                      <?php if ($product['new']) { ?> 
+                      <?php if ($product_linked['thumb']) { ?>
+                      <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product_linked['thumb']; ?>" alt="<?php echo $product_linked['name']; ?>" /></a>
+                      <?php if ($product_linked['new']) { ?> 
                           <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                       <?php } ?>
-                      <?php if ($product['sale']) { ?> 
+                      <?php if ($product_linked['sale']) { ?> 
                           <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
                       <?php } ?>
                       <?php } ?><br />
                       <div class="nameItem">
-                        <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                        <a href="<?php echo $product_linked['href']; ?>"><?php echo $product_linked['name']; ?></a>
                       </div>
-                      <?php if ($product['price']) { ?>
+                      <?php if ($product_linked['price']) { ?>
                         <div class="priceItem">
-                          <?php if (!$product['special']) { ?>
-                          <span>Pay: </span><span class="price"><?php echo $product['price']; ?></span>
+                          <?php if (!$product_linked['special']) { ?>
+                          <span>Pay: </span><span class="price"><?php echo $product_linked['price']; ?></span>
                           <?php } else { ?>
-                          <span class="save"><?php echo $text_save; ?> <?php echo $product['saving_percent'] . '%' ?></span>
-                          <span class="price-old"><?php echo $text_rrp; ?> <?php echo $product['price']; ?></span> <span><?php echo $text_pay; ?> </span><span class="price-new"><?php echo $product['special']; ?></span>
+                          <span class="save"><?php echo $text_save; ?> <?php echo $product_linked['saving_percent'] . '%' ?></span>
+                          <span class="price-old"><?php echo $text_rrp; ?> <?php echo $product_linked['price']; ?></span> <span><?php echo $text_pay; ?> </span><span class="price-new"><?php echo $product_linked['special']; ?></span>
                           <?php } ?>
                         </div>
                      <?php } ?>
                   </li>
-                <?php } ?> 
+                <?php
+                    if ($cnt == 4) break;
+                    }
+                } ?> 
             </ul>
   <?php } ?>
   

@@ -3009,6 +3009,8 @@ overflow: auto;
 .completeLook {
     height: 290px;
     padding: 10px 0;
+    margin-left: 15px;
+    overflow: hidden;
 }
 .completeLook li {
     display: inline-block;
