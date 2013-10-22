@@ -35,13 +35,6 @@ class ModelCatalogCategory extends Model {
 		}
                 
                 $this->load->model('module/url_alias');
-                	
-		if (isset($data['keyword'])) {
-                    $url = array('keyword' => $data['keyword'],
-                                 'query' => 'category_id=' . (int)$category_id,
-                                 'language_id' => 0);
-                    $this->model_module_url_alias->addUrlAlias($url);
-                }
 		
 		foreach ($data['category_description'] as $language_id => $value) {
                     
@@ -52,6 +45,13 @@ class ModelCatalogCategory extends Model {
                         $this->model_module_url_alias->addUrlAlias($url);
                     }
 		}
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'category_id=' . (int)$category_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		$this->cache->delete('category');
                 
@@ -107,13 +107,6 @@ class ModelCatalogCategory extends Model {
 		}
                 
                 $this->load->model('module/url_alias');
-                	
-		if (isset($data['keyword'])) {
-                    $url = array('keyword' => $data['keyword'],
-                                 'query' => 'category_id=' . (int)$category_id,
-                                 'language_id' => 0);
-                    $this->model_module_url_alias->addUrlAlias($url);
-                }
 		
 		foreach ($data['category_description'] as $language_id => $value) {
                     
@@ -124,6 +117,13 @@ class ModelCatalogCategory extends Model {
                         $this->model_module_url_alias->addUrlAlias($url);
                     }
 		}
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'category_id=' . (int)$category_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		$this->cache->delete('category');
 	}

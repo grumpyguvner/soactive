@@ -30,13 +30,6 @@ class ModelCatalogInformation extends Model {
 		}
                 
 		$this->load->model('module/url_alias');
-                	
-		if (isset($data['keyword'])) {
-                    $url = array('keyword' => $data['keyword'],
-                                 'query' => 'information_id=' . (int)$information_id,
-                                 'language_id' => 0);
-                    $this->model_module_url_alias->addUrlAlias($url);
-                }
 		
 		foreach ($data['information_description'] as $language_id => $value) {
                     
@@ -47,6 +40,13 @@ class ModelCatalogInformation extends Model {
                         $this->model_module_url_alias->addUrlAlias($url);
                     }
 		}
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'information_id=' . (int)$information_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		$this->cache->delete('information');
                 
@@ -87,13 +87,6 @@ class ModelCatalogInformation extends Model {
 		}
                 
 		$this->load->model('module/url_alias');
-                	
-		if (isset($data['keyword'])) {
-                    $url = array('keyword' => $data['keyword'],
-                                 'query' => 'information_id=' . (int)$information_id,
-                                 'language_id' => 0);
-                    $this->model_module_url_alias->addUrlAlias($url);
-                }
 		
 		foreach ($data['information_description'] as $language_id => $value) {
                     
@@ -104,6 +97,13 @@ class ModelCatalogInformation extends Model {
                         $this->model_module_url_alias->addUrlAlias($url);
                     }
 		}
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'information_id=' . (int)$information_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 		
 		$this->cache->delete('information');
 	}

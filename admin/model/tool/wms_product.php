@@ -898,7 +898,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             )),
             'product_attribute' => $attribute,
             'product_special' => $special,
-            'keyword' => seoUrl($model) . ".html",
+            'keyword' => seoUrl($model . " " . (string) $stock_item['name']) . ".html",
             'product_category' => $stock_item['categories'],
             'product_filter' => $stock_item['filters'],
             'product_store' => $this->config->get('wms_products_store')

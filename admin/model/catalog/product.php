@@ -110,13 +110,6 @@ class ModelCatalogProduct extends Model {
 		}
                 
                 $this->load->model('module/url_alias');
-                	
-		if (isset($data['keyword'])) {
-                    $url = array('keyword' => $data['keyword'],
-                                 'query' => 'product_id=' . (int)$product_id,
-                                 'language_id' => 0);
-                    $this->model_module_url_alias->addUrlAlias($url);
-                }
 		
 		foreach ($data['product_description'] as $language_id => $value) {
                     if (isset($value['keyword'])) {
@@ -126,6 +119,13 @@ class ModelCatalogProduct extends Model {
                         $this->model_module_url_alias->addUrlAlias($url);
                     }
 		}
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'product_id=' . (int)$product_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 						
 		$this->cache->delete('product');
                 // previously nothing was being returned but it is better to return the
@@ -269,13 +269,6 @@ class ModelCatalogProduct extends Model {
 		}
                 
                 $this->load->model('module/url_alias');
-                	
-		if (isset($data['keyword'])) {
-                    $url = array('keyword' => $data['keyword'],
-                                 'query' => 'product_id=' . (int)$product_id,
-                                 'language_id' => 0);
-                    $this->model_module_url_alias->addUrlAlias($url);
-                }
 		
 		foreach ($data['product_description'] as $language_id => $value) {
                     if (isset($value['keyword'])) {
@@ -285,6 +278,13 @@ class ModelCatalogProduct extends Model {
                         $this->model_module_url_alias->addUrlAlias($url);
                     }
 		}
+                	
+		if (isset($data['keyword'])) {
+                    $url = array('keyword' => $data['keyword'],
+                                 'query' => 'product_id=' . (int)$product_id,
+                                 'language_id' => 0);
+                    $this->model_module_url_alias->addUrlAlias($url);
+                }
 						
 		$this->cache->delete('product');
 	}
