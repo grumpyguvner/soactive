@@ -16,8 +16,8 @@ class ModelModuleUrlAlias extends Model {
                 }
 
                 $this->cache->delete('url');
-            } else {
-                $this->deleteUrlAliasByQuery($data['query'], $data['language_id']);
+            //} else {
+            //    $this->deleteUrlAliasByQuery($data['query'], $data['language_id']);
             }
 	}
 	
