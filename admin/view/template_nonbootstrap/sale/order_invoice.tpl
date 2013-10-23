@@ -54,7 +54,7 @@
         - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
         <?php } ?>
         <?php if ($product['location']) { ?>
-       <br /><small><?php echo $text_location; ?>: <?php echo $product['location']; ?></small>
+       <br /><small><?php echo $text_location; ?> <?php echo $product['location']; ?></small>
         <?php } ?>
       </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
@@ -180,7 +180,9 @@
         <?php echo $product['name']; ?>
         <?php foreach ($product['option'] as $option) { ?>
         - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
-<!--        <br /><small><?php echo $text_location; ?> </small>-->
+        <?php } ?>
+        <?php if ($product['location']) { ?>
+       <br /><small><?php echo $text_location; ?> <?php echo $product['location']; ?></small>
         <?php } ?>
       </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
