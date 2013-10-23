@@ -128,7 +128,7 @@
       </td>
       <td style=" padding-left: 30px; width: 50%;">
          <?php  
-          switch (strtoupper($shipping_method))
+          switch (strtoupper($order['shipping_method']))
             {
                 case "STANDARD DELIVERY":
                 case "UK STANDARD":
