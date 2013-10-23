@@ -421,7 +421,7 @@
                      <?php } ?>
                   </li>
                 <?php
-                    if ($cnt == 4) break;
+                    if ($cnt == 5) break;
                     }
                 } ?> 
             </ul>
