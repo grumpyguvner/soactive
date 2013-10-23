@@ -127,7 +127,23 @@
         <div style="padding-left: 30px; font-size: 13px;"><?php echo $text_return_address;?></div>
       </td>
       <td style=" padding-left: 30px; width: 50%;">
-<!--        <img src="/catalog/view/theme/soactive/image/postage/postage_unknown.png" style="float: right;padding-right: 10px;" />-->
+         <?php  
+          switch (strtoupper($shipping_method))
+            {
+                case "Standard Delivery":
+                case "UK Standard":
+                    echo '<img src="/catalog/view/theme/soactive/image/postage/postage_second_class.png" style="float: right;padding-right: 30px;" />';
+                    break;
+                case "European Standard":
+                case "ROW Standard":
+                case "Priority European Delivery":
+                case "Priority 1st Class Delivery":
+                case "Priority International Delivery":
+                    echo '<img src="/catalog/view/theme/soactive/image/postage/postage_first_class.png" style="float: right;padding-right: 30px;" />';
+                    break;
+            }
+           //<img src="/catalog/view/theme/soactive/image/postage/postage_unknown.png" style="float: right;padding-right: 30px;" />
+ ?>
             <?php echo $order['shipping_address']; ?>
       </td>
     </tr>
