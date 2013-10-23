@@ -59,9 +59,9 @@ class ControllerProductCategory extends Controller {
                 $this->data['text_grid'] = $this->language->get('text_grid');
                 $this->data['text_sort'] = $this->language->get('text_sort');
                 $this->data['text_limit'] = $this->language->get('text_limit');
-                $this->data['text_save'] = $this->language->get('text_limit');
-                $this->data['text_rrp'] = $this->language->get('text_limit');
-                $this->data['text_pay'] = $this->language->get('text_limit');
+                $this->data['text_save'] = $this->language->get('text_save');
+                $this->data['text_rrp'] = $this->language->get('text_rrp');
+                $this->data['text_pay'] = $this->language->get('text_pay');
                 $this->data['text_designed'] = $this->language->get('text_designed');
                 $this->data['text_pview'] = $this->language->get('text_pview');
                 $this->data['text_fourty_per_page'] = $this->language->get('text_fourty_per_page');
