@@ -2986,6 +2986,7 @@ overflow: auto;
 }
 #featuredStyles {
     list-style: none;
+    height: auto;
 }
 #featuredStyles img {
     border: 1px solid #b9bdbd;
