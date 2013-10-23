@@ -130,15 +130,15 @@
          <?php  
           switch (strtoupper($shipping_method))
             {
-                case "Standard Delivery":
-                case "UK Standard":
+                case "STANDARD DELIVERY":
+                case "UK STANDARD":
                     echo '<img src="/catalog/view/theme/soactive/image/postage/postage_second_class.png" style="float: right;padding-right: 30px;" />';
                     break;
-                case "European Standard":
-                case "ROW Standard":
-                case "Priority European Delivery":
-                case "Priority 1st Class Delivery":
-                case "Priority International Delivery":
+                case "EUROPEAN STANDARD":
+                case "ROW STANDARD":
+                case "PRIORITY EUROPEAN DELIVERY":
+                case "PRIORITY 1ST CLASS DELIVERY":
+                case "PRIORITY INTERNATIONAL DELIVERY":
                     echo '<img src="/catalog/view/theme/soactive/image/postage/postage_first_class.png" style="float: right;padding-right: 30px;" />';
                     break;
             }
