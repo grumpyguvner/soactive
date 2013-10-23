@@ -2432,6 +2432,8 @@ class ControllerSaleOrder extends Controller {
         $this->data['column_return_code'] = $this->language->get('column_return_code');
 
         $this->load->model('sale/order');
+        
+        $this->load->model('catalog/product');
 
         $this->load->model('setting/setting');
 
@@ -2545,6 +2547,8 @@ class ControllerSaleOrder extends Controller {
                     $option_data = array();
 
                     $options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
+                    
+                    $product_info = $this->model_catalog_product->getProduct($product['product_id']);
 
                     foreach ($options as $option) {
                         if ($option['type'] != 'file') {
@@ -2553,7 +2557,7 @@ class ControllerSaleOrder extends Controller {
                             $value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
                         }
                         
-                        $sku_query = $this->db->query("SELECT sku FROM " . DB_PREFIX . "product_option_value WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "'");
+                        $sku_query = $this->db->query("SELECT pov.sku FROM " . DB_PREFIX . "product_option_value WHERE pov.product_option_value_id = '" . (int)$option['product_option_value_id'] . "'");
                         $sku = ($sku_query->num_rows) ? $sku_query->row['sku'] : '';
 
                         $option_data[] = array(
@@ -2566,6 +2570,7 @@ class ControllerSaleOrder extends Controller {
                     $product_data[] = array(
                         'name' => $product['name'],
                         'model' => $product['model'],
+                        'location' => ($product_info) ? $product_info['location'] : '',
                         'option' => $option_data,
                         'quantity' => $product['quantity'],
                         'price' => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),

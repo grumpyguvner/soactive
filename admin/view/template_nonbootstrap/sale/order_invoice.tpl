@@ -52,7 +52,9 @@
         <?php echo $product['name']; ?>
         <?php foreach ($product['option'] as $option) { ?>
         - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
-<!--        <br /><small><?php echo $text_location; ?> </small>-->
+        <?php } ?>
+        <?php if ($product['location']) { ?>
+       <br /><small><?php echo $text_location; ?>: <?php echo $product['location']; ?></small>
         <?php } ?>
       </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
@@ -125,7 +127,8 @@
         <div style="padding-left: 30px; font-size: 13px;"><?php echo $text_return_address;?></div>
       </td>
       <td style=" padding-left: 30px; width: 50%;">
-        <img src="/catalog/view/theme/soactive/image/postage/postage_unknown.png" style="float: right;padding-right: 10px;" /><?php echo $order['shipping_address']; ?>
+<!--        <img src="/catalog/view/theme/soactive/image/postage/postage_unknown.png" style="float: right;padding-right: 10px;" />-->
+            <?php echo $order['shipping_address']; ?>
       </td>
     </tr>
   </table>
