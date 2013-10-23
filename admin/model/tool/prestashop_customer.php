@@ -3,6 +3,8 @@ include_once('prestashop_core.php');
 
 class ModelToolPrestashopCustomer extends ModelToolPrestashop {
 
+    private $salt = 'aZDDGM1iojdfz2x3cJz1uIGwOwCQQkPE6kU0CnRiqnFH3xRQFLnWCMdw';
+    
     function import() {
         $this->debugMode = $this->config->get('prestashop_orders_debug');
         
@@ -64,9 +66,10 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
                 
                 $customer_info = $this->model_sale_customer->getCustomerByEmail($aCustomer->fields['email']);
                 
-                if (!$customer_info)
+                if ($customer_info)
                 {
-                
+                    $this->db->query("UPDATE " . DB_PREFIX . "customer SET password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape($this->salt) . "' WHERE customer_id = '" . (int)$customer_info['customer_id'] . "'");
+                } else {
                     $customer_id = $aCustomer->fields['id_customer'];
 
                     $customer = array('firstname' => $aCustomer->fields['firstname'],
@@ -139,7 +142,7 @@ class ModelToolPrestashopCustomer extends ModelToolPrestashop {
 
                     $customer['customer_id'] = $this->model_sale_customer->addCustomer($customer);
 
-                    $this->db->query("UPDATE " . DB_PREFIX . "customer SET dob = '" . $this->db->escape($aCustomer->fields['birthday']) . "', password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape('ZabQEKHEjDzQY3rH6d9u6d5N9ge1yfsP15RtvQA7zcZsPKjosq2TJjbv') . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['date_add']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
+                    $this->db->query("UPDATE " . DB_PREFIX . "customer SET dob = '" . $this->db->escape($aCustomer->fields['birthday']) . "', password = '" . $this->db->escape($aCustomer->fields['passwd']) . "', salt = '" . $this->db->escape($this->salt) . "', approved = 1, date_added = '" . $this->db->escape($aCustomer->fields['date_add']) . "' WHERE customer_id = '" . (int)$customer['customer_id'] . "'");
                     /*
                     $this->processReviews($customer_id, $customer);
 
