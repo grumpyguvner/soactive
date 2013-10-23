@@ -120,13 +120,15 @@
   <div id="bottom">
   <table class="store" style="height: 230px;">
     <tr>
-      <td style="padding-left: 30px; width: 50%;">
+       <td style="width: 5%;"></td>
+      <td style="width: 42%;">
         <h2><?php echo $text_return; ?></h2>
         <span style="font-size: 11px;"><?php echo $text_return_notice; ?></span>
         <div style="height: 17px;"></div>
-        <div style="padding-left: 30px; font-size: 13px;"><?php echo $text_return_address;?></div>
+        <div style="padding-left: 20px; font-size: 13px;"><?php echo $text_return_address;?></div>
       </td>
-      <td style=" padding-left: 30px; width: 50%;">
+      <td style="width: 5%;"></td>
+      <td style="width: 42%;">
          <?php  
           switch (strtoupper($order['shipping_method']))
             {
@@ -146,6 +148,7 @@
  ?>
             <?php echo $order['shipping_address']; ?>
       </td>
+       <td style="width: 5%;"></td>
     </tr>
   </table>
   </div>
