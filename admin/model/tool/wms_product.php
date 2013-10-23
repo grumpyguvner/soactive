@@ -509,6 +509,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             $stock_item["sizeFr"] = $sizeFr;
                             $stock_item["colourid"] = (int) $colourid;
                             $stock_item["quantity"] = $quantity;
+                            $stock_item["location"] = $aStock->fields['location'];
 
                             if ($myModel != $model) {
                                 $myModel = $model;
@@ -854,7 +855,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'jan' => "",
             'isbn' => "",
             'mpn' => "",
-            'location' => "",
+            'location' => $stock_item['location'],
             'quantity' => 0,
             'minimum' => "",
             'subtract' => 1,
