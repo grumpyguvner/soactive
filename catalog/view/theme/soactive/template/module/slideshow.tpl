@@ -51,7 +51,7 @@ if (!empty($banners)) {
     <?php } ?>
     <script type="text/javascript">
         $('.bannerWrapper').each (function () {
-            if ($(this).find('a[href]:first').length) {
+            if ($(this).find('a[href]').length == 1) {
                 $(this).css('cursor', 'pointer').click(function () {
                     window.location = $(this).find('a[href]:first').attr('href');
                     return false;
