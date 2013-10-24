@@ -47,8 +47,8 @@
           <div class="social">
               <div class="addthis_toolbox addthis_default_style ">
                 <a class="addthis_button_tweet" tw:count="none"></a>
-                <a class="addthis_button_facebook_like" style="width:47px;overflow:hidden"></a>
-                <a class="addthis_button_pinterest_pinit"></a>
+                <a class="addthis_button_facebook_like"style="width:47px; z-index:4; margin-right: 0px;"></a>
+                <a class="addthis_button_pinterest_pinit" style="z-index:2; border-left:solid 7px #FFF;padding-left:0px;"></a>
                 <a class="addthis_button_google_plusone" g:plusone:size="medium" g:plusone:count="false"></a>
                 <a class="addthis_button_facebook_send"></a>
                 </div>
