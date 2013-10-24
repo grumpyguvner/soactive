@@ -1597,7 +1597,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 .product-info .social .addthis_toolbox {
         display: inline-block;
         margin-left: 4px;
-        width: 267px;
+        width: 275px;
         height: 24px;
 }
 .product-info .social a {
@@ -3517,4 +3517,9 @@ overflow: auto;
 .informationContent, .informationContent a {
     font-size: 12px;
     font-family: 'tahoma', Geneva, sans-serif;
+}
+
+.addthis_button_facebook_like {
+        
+        width: 45px !important;
 }
