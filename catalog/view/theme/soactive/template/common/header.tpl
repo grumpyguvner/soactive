@@ -16,7 +16,7 @@
         <?php foreach ($links as $link) { ?>
             <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
         <?php } ?>
-        <meta name="viewport" content="width=1020; initial-scale=1.0">
+        <meta name="viewport" content="width=1020,initial-scale=1.0">
         <link href="catalog/view/theme/soactive/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/stylesheet.css" />
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/megamenu.css" />
