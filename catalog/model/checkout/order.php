@@ -522,7 +522,20 @@ class ModelCheckoutOrder extends Model {
 						$mail->send();
 					}
 				}				
-			}		
+			}
+                        
+                        //Trust pilot
+                        if($this->extensions->isInstalled('trustpilot', 'module')) {
+                            if ($this->config->get('trustpilot_status')) {
+                                    $email = $this->config->get('trustpilot_email');
+
+                                    if ($email && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
+                                        $mail->setTo($this->config->get('trustpilot_email'));
+                                        $mail->send();
+                                    }
+                            }
+                        }
+                        
 		}
 	}
 	
