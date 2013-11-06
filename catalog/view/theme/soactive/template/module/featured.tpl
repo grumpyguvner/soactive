@@ -19,8 +19,8 @@
                 <?php if (!$product['special']) { ?>
                 Pay: <span class="price"><?php echo $product['price']; ?></span>
                 <?php } else { ?>
-                <span class="save"><?php echo $text_save ?> <?php echo $product['saving_percent'] . '%' ?></span>
-                <span class="price-old"><?php echo $text_rrp ?> <?php echo $product['price']; ?></span> <?php echo $text_pay ?> <span class="price-new"> <?php echo $product['special']; ?></span>
+<!--                <span class="save"><?php echo $text_save ?> <?php echo $product['saving_percent'] . '%' ?></span>-->
+                <?php echo $text_rrp ?> <span class="price-old" style="font-weight: normal"><?php echo $product['price']; ?></span> <?php echo $text_pay ?> <span class="price-new"> <?php echo $product['special']; ?></span>
               <?php } ?>
            </div>
          <?php } ?>

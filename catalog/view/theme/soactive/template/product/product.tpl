@@ -69,7 +69,7 @@
         <?php echo $price; ?>
         <?php } else { ?>
           <span class="save"><?php echo $text_save; ?> <?php echo $saving_percent . '% ' ?></span>
-          <span style="font-weight: normal; text-decoration: line-through;"><?php echo $text_rrp; ?> </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> <?php echo $text_pay; ?> </span> <span class="price-new"><?php echo $special; ?></span>
+          <span style="font-weight: normal;"><?php echo $text_retail_price; ?> </span><span class="price-old"><?php echo $price; ?></span><span style="font-weight: normal;"> <?php echo $text_pay; ?> </span> <span class="price-new"><?php echo $special; ?></span>
         <?php } ?>
         <?php if ($points) { ?>
         <span class="reward"><small><?php echo $text_points; ?> <?php echo $points; ?></small></span><br />
@@ -414,8 +414,8 @@
                           <?php if (!$product_linked['special']) { ?>
                           <span>Pay: </span><span class="price"><?php echo $product_linked['price']; ?></span>
                           <?php } else { ?>
-                          <span class="save"><?php echo $text_save; ?> <?php echo $product_linked['saving_percent'] . '%' ?></span>
-                          <span class="price-old"><?php echo $text_rrp; ?> <?php echo $product_linked['price']; ?></span> <span><?php echo $text_pay; ?> </span><span class="price-new"><?php echo $product_linked['special']; ?></span>
+<!--                          <span class="save"><?php echo $text_save; ?> <?php echo $product_linked['saving_percent'] . '%' ?></span>-->
+                          <?php echo $text_rrp; ?> <span class="price-old" style="font-weight: normal"><?php echo $product_linked['price']; ?></span> <span><?php echo $text_pay; ?> </span><span class="price-new"><?php echo $product_linked['special']; ?></span>
                           <?php } ?>
                         </div>
                      <?php } ?>

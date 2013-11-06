@@ -27,6 +27,6 @@ $_['text_model_asc']    = 'Model (A - Z)';
 $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Show:';
 $_['text_save']        = 'SAVE';
-$_['text_rrp']        = 'RRP:';
+$_['text_rrp']        = 'Retail:';
 $_['text_pay']        = 'Pay:';
 ?>

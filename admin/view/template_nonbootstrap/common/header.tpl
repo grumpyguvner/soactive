@@ -93,6 +93,14 @@ $(document).ready(function(){
                 <?php } ?>
             </select>
         </form>
+
+<script>
+$(document).ready(function(){
+    $('#user_group_id').change(function() {
+        $('#adminForm').submit();
+    });
+});
+</script>
         <?php } ?>
     </div>
     <?php } ?>
@@ -272,11 +280,3 @@ ob_end_flush();
   </div>
   <?php } ?>
 </div>
-
-<script>
-$(document).ready(function(){
-    $('#user_group_id').change(function() {
-        $('#adminForm').submit();
-    });
-});
-</script>
