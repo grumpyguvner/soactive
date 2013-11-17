@@ -627,3 +627,4 @@ ALTER TABLE `oc_customer` MODIFY `salt` varchar(60) NOT NULL;
 #### Start 1.5.4:BC1.2.17
 
 ALTER TABLE `oc_url_alias` ADD `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP AFTER `keyword`;
+ALTER TABLE `oc_product_option_value` ADD `location` VARCHAR(128) NOT NULL AFTER `ean`;

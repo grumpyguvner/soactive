@@ -2587,6 +2587,7 @@ CREATE TABLE `oc_product_option_value` (
   `option_value_id` int(11) NOT NULL,
   `sku` varchar(64) NOT NULL,
   `ean` varchar(64) NOT NULL,
+  `location` VARCHAR(128) NOT NULL,
   `quantity` int(3) NOT NULL,
   `subtract` tinyint(1) NOT NULL,
   `price` decimal(15,4) NOT NULL,

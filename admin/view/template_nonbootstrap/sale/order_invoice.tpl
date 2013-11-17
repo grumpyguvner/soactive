@@ -53,9 +53,10 @@
         <?php foreach ($product['option'] as $option) { ?>
         - <?php echo $option['name']; ?>: <?php echo $option['value']; ?>
         <?php } ?>
-        <?php if ($product['location']) { ?>
-       <br /><small><?php echo $text_location; ?> <?php echo $product['location']; ?></small>
-        <?php } ?>
+        <?php if (!empty($product['option'][0]['location'])) {
+            ?><br /><small><?php echo $text_location; ?> <?php echo $product['option'][0]['location']; ?></small><?php
+        } elseif ($product['location']) {
+            ?><br /><small><?php echo $text_location; ?> <?php echo $product['location']; ?></small><?php } ?>
       </td>
       <td align="right"><?php echo $product['quantity']; ?></td>
       <td align="right"><?php echo $product['price']; ?></td>

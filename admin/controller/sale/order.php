@@ -2557,13 +2557,15 @@ class ControllerSaleOrder extends Controller {
                             $value = utf8_substr($option['value'], 0, utf8_strrpos($option['value'], '.'));
                         }
                         
-                        $sku_query = $this->db->query("SELECT sku FROM " . DB_PREFIX . "product_option_value WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "'");
+                        $sku_query = $this->db->query("SELECT sku, location FROM " . DB_PREFIX . "product_option_value WHERE product_option_value_id = '" . (int)$option['product_option_value_id'] . "'");
                         $sku = ($sku_query->num_rows) ? $sku_query->row['sku'] : '';
+                        $location = ($sku_query->num_rows) ? $sku_query->row['location'] : '';
 
                         $option_data[] = array(
                             'name' => $option['name'],
                             'value' => $value,
-                            'sku' => $sku
+                            'sku' => $sku,
+                            'location' => $location
                         );
                     }
 
