@@ -916,6 +916,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             $product_id = $product_info['product_id'];
 
             $data['date_available'] = $product_info['date_available'];
+            $data['sale'] = $product_info['sale'];
             $data['product_store'] = $this->model_catalog_product->getProductStores($product_id);
             $data['product_option'] = $this->model_catalog_product->getProductOptions($product_id);
             $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
