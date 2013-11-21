@@ -11,7 +11,7 @@ if (!empty($banners)) {
                 $class = (preg_match('%.*class="(banner[^"]*)".*%', $banner['description'])) ? preg_replace('%.*class="(banner[^"]*)".*%s', ' \\1', $banner['description']) : false;
                 ?>
                 <div class="bannerWrapper item<?php if ($key == 0) echo ' active'; ?>">
-                    <?php if ($banner['link']) echo '<a href="' . $banner['link'] . '">'; ?><img class="bannerImage" src="<?php echo $banner['image']; ?>" width="<?php echo $banner['width']; ?>" height="<?php echo $banner['height']; ?>" /><?php if ($banner['link']) echo '</a>'; ?>
+                    <?php if ($banner['link']) echo '<a href="' . $banner['link'] . '" class="bwa">'; ?><img class="bannerImage" src="<?php echo $banner['image']; ?>" width="<?php echo $banner['width']; ?>" height="<?php echo $banner['height']; ?>" /><?php if ($banner['link']) echo '</a>'; ?>
                     <?php if ($banner['description']) { ?>
                         <div class="outerContainer">
                             <div class="container<?php if ($class) echo $class; ?>" style="height:<?php echo $banner['height']; ?>px;line-height:<?php echo $banner['height']; ?>px">
@@ -51,9 +51,9 @@ if (!empty($banners)) {
     <?php } ?>
     <script type="text/javascript">
         $('.bannerWrapper').each (function () {
-            if ($(this).find('a[href]').length == 1) {
+            if ($(this).find('a.bwa').length == 1) {
                 $(this).css('cursor', 'pointer').click(function () {
-                    window.location = $(this).find('a[href]:first').attr('href');
+                    window.location = $(this).find('a.bwa').attr('href');
                     return false;
                 });
                 $(this).find('*').css('cursor', 'pointer');
