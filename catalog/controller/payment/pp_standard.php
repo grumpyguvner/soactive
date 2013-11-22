@@ -1,5 +1,4 @@
 <?php
-
 class ControllerPaymentPPStandard extends Controller {
 	protected function index() {
 		$this->language->load('payment/pp_standard');
@@ -11,7 +10,7 @@ class ControllerPaymentPPStandard extends Controller {
 		$this->data['testmode'] = $this->config->get('pp_standard_test');
 		
 		if (!$this->config->get('pp_standard_test')) {
-                    $this->data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
+    		$this->data['action'] = 'https://www.paypal.com/cgi-bin/webscr';
   		} else {
 			$this->data['action'] = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 		}
@@ -44,23 +43,22 @@ class ControllerPaymentPPStandard extends Controller {
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);
 				}
-                                $producttotal = ($this->currency->format($product['price'], $order_info['currency_code'], false, false));
 				
 				$this->data['products'][] = array(
 					'name'     => $product['name'],
 					'model'    => $product['model'],
-					'price'    => $producttotal,
+					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], false, false),
 					'quantity' => $product['quantity'],
 					'option'   => $option_data,
 					'weight'   => $product['weight']
 				);
                                 
-                                $subtotal += ($producttotal*$product['quantity']);
+                                $subtotal += ($this->currency->format($product['price'], $order_info['currency_code'], false, false)*$product['quantity']);
 			}	
 			
 			$this->data['discount_amount_cart'] = 0;
 			
-			$total = $this->currency->format($order_info['total'] - $subtotal, $order_info['currency_code'], false, false);
+			$total = $this->currency->format($order_info['total'], $order_info['currency_code'], false, false) - $subtotal;
 
 			if ($total > 0) {
 				$this->data['products'][] = array(
@@ -98,18 +96,17 @@ class ControllerPaymentPPStandard extends Controller {
 			
 			$this->data['custom'] = $this->session->data['order_id'];
 		
-			$this->setTemplate('payment/pp_standard.tpl');
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/pp_standard.tpl')) {
+				$this->template = $this->config->get('config_template') . '/template/payment/pp_standard.tpl';
+			} else {
+				$this->template = 'default/template/payment/pp_standard.tpl';
+			}
 	
 			$this->render();
 		}
 	}
 	
 	public function callback() {
-                if (TRUE === TRUE) {
-                    $audit = new Log(date("Y-m-d") . "-paypal.log");
-                    $audit->write(serialize($this->request->post));
-                }
-            
 		if (isset($this->request->post['custom'])) {
 			$order_id = $this->request->post['custom'];
 		} else {
@@ -121,8 +118,6 @@ class ControllerPaymentPPStandard extends Controller {
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 		
 		if ($order_info) {
-                        $comment = '';
-                        
 			$request = 'cmd=_notify-validate';
 		
 			foreach ($this->request->post as $key => $value) {
@@ -146,8 +141,6 @@ class ControllerPaymentPPStandard extends Controller {
 			
 			if (!$response) {
 				$this->log->write('PP_STANDARD :: CURL failed ' . curl_error($curl) . '(' . curl_errno($curl) . ')');
-                                
-                                $comment .= 'CURL failed ' . curl_error($curl) . '(' . curl_errno($curl) . ')' . "\n";
 			}
 					
 			if ($this->config->get('pp_standard_debug')) {
@@ -162,19 +155,13 @@ class ControllerPaymentPPStandard extends Controller {
 					case 'Canceled_Reversal':
 						$order_status_id = $this->config->get('pp_standard_canceled_reversal_status_id');
 						break;
-                                        case 'Completed':
-                                            if (strtolower($this->request->post['receiver_email']) != strtolower($this->config->get('pp_standard_email'))) {
-                                                $this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
-
-                                                $comment .= 'RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']) . "\n";
-                                            } elseif ((float) $this->request->post['mc_gross'] != $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false)) {
-                                                $this->log->write('PP_STANDARD :: PAYMENT MISMATCH! ' . (float)$this->request->post['mc_gross']);
-
-                                                $comment .= 'PAYMENT MISMATCH! ' . (float)$this->request->post['mc_gross'] . "\n";
-                                            } else {
-                                                $order_status_id = $this->config->get('pp_standard_completed_status_id');
-                                            }
-                                            break;
+					case 'Completed':
+						if ((strtolower($this->request->post['receiver_email']) == strtolower($this->config->get('pp_standard_email'))) && ((float)$this->request->post['mc_gross'] == $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false))) {
+							$order_status_id = $this->config->get('pp_standard_completed_status_id');
+						} else {
+							$this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
+						}
+						break;
 					case 'Denied':
 						$order_status_id = $this->config->get('pp_standard_denied_status_id');
 						break;
@@ -202,43 +189,16 @@ class ControllerPaymentPPStandard extends Controller {
 				}
 				
 				if (!$order_info['order_status_id']) {
-					$this->model_checkout_order->confirm($order_id, $order_status_id, '', false, $this->getMessage($comment));
+					$this->model_checkout_order->confirm($order_id, $order_status_id);
 				} else {
-					$this->model_checkout_order->update($order_id, $order_status_id, '', false, $this->getMessage($comment));
+					$this->model_checkout_order->update($order_id, $order_status_id);
 				}
 			} else {
-				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'), '', false, $this->getMessage($comment));
+				$this->model_checkout_order->confirm($order_id, $this->config->get('config_order_status_id'));
 			}
 			
 			curl_close($curl);
 		}	
 	}
-        
-        private function getMessage($comment)
-        {
-            $comment = 'PayPal Standard Callback' . "\n" . $comment;
-            
-            foreach ($this->request->post as $key => $value)
-            {
-                switch ($key) {
-                    case 'auth_amount':
-                    case 'payer_status':
-                    case 'payment_date':
-                    case 'mc_gross':
-                    case 'mc_currency':
-                    case 'payment_type':
-                    case 'pending_reason':
-                    case 'reason_code':
-                    case 'txn_id':
-                    case 'invoice':
-                    case 'protection_eligibility':
-                    case 'payer_email':
-                        $comment .= $key . ' {' . $value . '}' . "\n";
-                        break;
-                }
-            }
-            
-            return trim($comment);
-        }
 }
 ?>
