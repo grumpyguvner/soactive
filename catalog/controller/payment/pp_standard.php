@@ -44,7 +44,7 @@ class ControllerPaymentPPStandard extends Controller {
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);
 				}
-                                $producttotal = ($this->currency->format($product['price'], $order_info['currency_code'], false, false)*$product['quantity']);
+                                $producttotal = ($this->currency->format($product['price'], $order_info['currency_code'], false, false));
 				
 				$this->data['products'][] = array(
 					'name'     => $product['name'],
@@ -55,7 +55,7 @@ class ControllerPaymentPPStandard extends Controller {
 					'weight'   => $product['weight']
 				);
                                 
-                                $subtotal += $producttotal;
+                                $subtotal += ($producttotal*$product['quantity']);
 			}	
 			
 			$this->data['discount_amount_cart'] = 0;
