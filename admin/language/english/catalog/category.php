@@ -33,8 +33,8 @@ $_['entry_sort_order']       = 'Sort Order:';
 $_['entry_status']           = 'Status:';
 $_['entry_layout']           = 'Layout Override:';
 $_['entry_members_only']     = 'Members Only:';
-$_['entry_date_start']       = 'Date Start:';
-$_['entry_date_end']         = 'Date End:';
+$_['entry_date_start']       = 'Date Start:<br /><span class="help">Format yyyy-mm-dd hh:mm</span>';
+$_['entry_date_end']         = 'Date End:<br /><span class="help">Format yyyy-mm-dd hh:mm</span>';
 
 // Error 
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';

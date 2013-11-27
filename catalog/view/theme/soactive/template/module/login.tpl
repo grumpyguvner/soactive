@@ -12,7 +12,7 @@
                 <td><input type="text" name="email" value="<?php echo $email; ?>" /></td>
             </tr>
             <tr>
-                <td><input type="radio" name="customer" value="existing" checked="checked"> <strong><?php echo $entry_password; ?></strong></td>
+                <td><strong><?php echo $entry_password; ?></strong></td>
                 <td><input type="password" name="password" value="<?php echo $password; ?>" /></td>
             </tr>
             <tr>
@@ -20,30 +20,14 @@
                 <td><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></td>
             </tr>
             <tr>
-                <td><input type="radio" id="customer_new" name="customer" value="new"> <b><?php echo $text_register; ?></b></td>
+                <td><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></td>
                 <td>&nbsp;</td>
             </tr>
+            <tr>
+                <td><input type="button" value="<?php echo strtoupper($button_login); ?>" class="button" /></td>
+                <td><?php echo ($fbconnect ? $fbconnect : '&nbsp;'); ?></td>
+            </tr>
         </table>
-        <input type="button" value="<?php echo strtoupper($button_login); ?>" class="button" />
-        <br/>
-        <?php if ($fbconnect_url) { ?>
-            <div id="u_0_0" tabindex="0" role="button" class="pluginFaviconButton pluginFaviconButtonEnabled pluginFaviconButtonMedium">
-                <table cellspacing="0" cellpadding="0" class="uiGrid">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <i class="pluginFaviconButtonIcon img sp_login-button sx_login-button_medium"></i>
-
-                            </td>
-                            <td>
-                                <span class="pluginFaviconButtonBorder"><a href="<?php echo $fbconnect_url; ?>" class="pluginFaviconButtonText fwb"><?php echo $fbconnect_button; ?></a></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        <?php } ?>
-        
         </div>
     </form>
 </div>
@@ -51,7 +35,8 @@
 $('#form-login-module').submit(function(event) {
     event.preventDefault();
     
-    if ($('#customer_new:checked').val())
+    if ($('#customer_new').is(':checked'))
+//    if ($('#customer_new:checked').val())
     { 
         window.location = '<?php echo $register ?>';
     } else {

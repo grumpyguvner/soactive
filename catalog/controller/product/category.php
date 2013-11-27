@@ -2,14 +2,18 @@
 class ControllerProductCategory extends Controller {  
 	public function index() { 
                 $category_id = $this->category->getIdFromPath();
+            
+		$this->language->load('product/category');
 
                 $this->category->load($category_id);
-                if ($this->category->getId() != $category_id || !$this->category->isAvailable()) {
+                if ($this->category->getId() != $category_id) {
                     $this->categoryNotFound();
                     return false;
                 }
-            
-		$this->language->load('product/category');
+                if (!$this->category->isAvailable()) {
+                    $this->categoryNotFound();
+                    return false;
+                }
 		
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');
