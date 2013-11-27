@@ -25,7 +25,7 @@ class Category {
 	}
 		
   	public function load($category_id) {
-                if (isset($this->session->data['category_id']) && $this->session->data['category_id'] == $category_id) {
+                if (!isset($this->session->data['category_id']) || $this->session->data['category_id'] != $category_id) {
                     $this->fetch($category_id);
                 }
   	}
