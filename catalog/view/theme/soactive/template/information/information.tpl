@@ -1,5 +1,8 @@
 <?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
 <div id="content"><?php echo $content_top; ?>
+    <?php if($thumb) { ?>
+    <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
+    <? } ?>
   <div class="breadcrumb">
     <?php if ($breadcrumbs) { ?>
       <?php $count = count($breadcrumbs) - 1; ?>
@@ -10,7 +13,9 @@
         <div class="back"><a href="<?php echo $breadcrumbs[$count-1]['href']; ?>"><?php echo $text_breadcrumb_back; ?></a></div>    
     <?php } ?>
   </div>
+    <?php if(!$thumb) { ?>
   <h1><?php echo $heading_title; ?></h1>
+      <? } ?>
   <?php echo $description; ?>
   <?php echo $content_bottom; ?></div>
 <?php echo $footer; ?>
