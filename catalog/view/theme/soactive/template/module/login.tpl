@@ -16,16 +16,12 @@
                 <td><input type="password" name="password" value="<?php echo $password; ?>" /></td>
             </tr>
             <tr>
-                <td></td>
+                <td><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></td>
                 <td><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></td>
             </tr>
             <tr>
-                <td><a href="<?php echo $register; ?>"><?php echo $text_register; ?></a></td>
                 <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td><input type="button" value="<?php echo strtoupper($button_login); ?>" class="button" /></td>
-                <td><?php echo ($fbconnect ? $fbconnect : '&nbsp;'); ?></td>
+                <td><input type="button" value="<?php echo strtoupper($button_login); ?>" class="button" /><?php echo ($fbconnect ? $fbconnect : '&nbsp;'); ?></td>
             </tr>
         </table>
         </div>
