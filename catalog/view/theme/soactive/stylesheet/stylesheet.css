@@ -1023,7 +1023,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 /* category */
 .category-info {
-	overflow: auto;
+	overflow: hidden;
         border-top: 1px solid #dee0e0;
         padding: 10px 0 5px;
 }
@@ -3383,7 +3383,8 @@ overflow: auto;
 }
 /***** Countdown ******/
 .countdown {
-  position: absolute;
+  display: inline-block;
+  position: relative;
   background: #009899;
   height: 62px;
   width: 190px;
@@ -3392,18 +3393,14 @@ overflow: auto;
   text-align: center;
 }
 .countdown div {
-  display: inline-block;
+  display: block;
   font-size: 24px;
-  font-weight: 100;
   font-weight: 700;
-  line-height: 1;
-  text-align: right;
-  margin-top: 7px;
-  margin-right: 6px;
+  margin-top: 12px;
 }
 .countdown div.countdownText {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
 }
 /**** End Countdown ***/

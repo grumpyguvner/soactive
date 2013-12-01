@@ -20,7 +20,6 @@ if ($login_required)
 <?php if ($thumb || $date_end || $description) { ?>
 <div class="category-info">
         <?php if ($thumb || $date_end) { ?>
-        <div class="categoryImage">
             <?php
             if ($date_end)
             {
@@ -34,7 +33,7 @@ if ($login_required)
       $('.countdown').countdown({
         date: endDate,
         render: function(data) {
-          $(this.el).html("<div>" + this.leadingZeros(data.days, 2) + " :<div class='countdownText'>Days</div></div><div>" + this.leadingZeros(data.hours, 2) + " :<div class='countdownText'>Hr</div></div><div>" + this.leadingZeros(data.min, 2) + " : <div class='countdownText'>Min</div></div><div>" + this.leadingZeros(data.sec, 2) + "<div class='countdownText'>Sec</div></div>");
+          $(this.el).html("<div>" + this.leadingZeros(data.days, 2) + ":" + this.leadingZeros(data.hours, 2) + ":" + this.leadingZeros(data.min, 2) + ":" + this.leadingZeros(data.sec, 2) + "</div><div class='countdownText'>Days : Hrs : Min : Sec</div>");
         }
       });
 
@@ -43,11 +42,12 @@ if ($login_required)
             <?php
             } else {
             ?>
+        <div class="categoryImage">
             <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
+        </div>    
             <?php
             } 
             ?>
-        </div>    
         <?php } ?>
         <?php if ($description) { ?>
             <div class="cDescription">
