@@ -132,6 +132,7 @@ $_['column_customer']                         = 'Customer';
 $_['column_status']                           = 'Status';
 $_['column_date_added']                       = 'Date Added';
 $_['column_date_modified']                    = 'Date Modified';
+$_['column_shipping_method']                  = 'Ship via';
 $_['column_item']                             = 'Item';
 $_['column_description']                      = 'Description';
 $_['column_comments']                         = 'Comments';

@@ -46,6 +46,9 @@ p3html::set_order_status_label_for_orders($this, $orders);
               <th class="column-status">
 								<?php echo p3html::tb_sort_heading($column_status, $sort_status, $sort, $order, 'status'); ?>
 							</th>
+              <th class="column-shipping-method">
+								<?php echo p3html::tb_sort_heading($column_shipping_method, $sort_shipping_method, $sort, $order, 'status'); ?>
+							</th>
               <th class="column-price hidden-phone">
 								<?php echo p3html::tb_sort_heading($column_total, $sort_total, $sort, $order, 'o.total'); ?>
 							</th>
@@ -73,6 +76,9 @@ p3html::set_order_status_label_for_orders($this, $orders);
                   <option value="0"<?php if ($filter_order_status_id == '0') { ?> selected="selected"<?php } ?>><?php echo $text_missing; ?></option>
 									<?php echo p3html::oc_order_status_options($order_statuses, $filter_order_status_id); ?>
                 </select>
+							</td>
+              <td class="column-shipping-method hidden-320">
+								<input type="text" name="filter_shipping_method" value="<?php echo $filter_shipping_method; ?>" class="span3 i-xlarge">
 							</td>
               <td class="column-price hidden-phone">
 								<input type="text" name="filter_total" value="<?php echo $filter_total; ?>" class="span1 i-small">
@@ -110,6 +116,7 @@ p3html::set_order_status_label_for_orders($this, $orders);
 								<?php echo $order['status']; ?>
 								<?php if ($order_status_label) { ?></span><?php } ?>
 							</td>
+              <td class="column-shippin-method hidden-320"><?php echo $order['shipping_method']; ?></td>
               <td class="column-price hidden-phone"><?php echo $order['total']; ?></td>
               <td class="column-date hidden-phone"><?php echo $order['date_added']; ?></td>
               <?php /* NOT USED IN DB QUERY ?><td class="column-date hidden-phone hidden-tablet"><?php echo $order['date_modified']; ?></td><?php */ ?>
@@ -155,6 +162,12 @@ function filter() {
 
 	if (filter_order_status_id != '*') {
 		url += '&filter_order_status_id=' + encodeURIComponent(filter_order_status_id);
+	}
+
+	var filter_shipping_method = $('input[name=\'filter_shipping_method\']').attr('value');
+
+	if (filter_shipping_method) {
+		url += '&filter_shipping_method=' + encodeURIComponent(filter_shipping_method);
 	}
 
 	var filter_total = $('input[name=\'filter_total\']').attr('value');
