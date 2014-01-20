@@ -37,7 +37,7 @@
                     <div class="wrap-edit">
                         <ul>
                             <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-                            <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
+<!--                            <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li> -->
                             <li><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></li>
                         </ul>
                     </div>
