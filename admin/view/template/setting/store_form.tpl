@@ -308,6 +308,14 @@
 							</div>
             </div>
             <div class="control-group">
+              <label class="control-label"><i class="required text-error icon-asterisk"></i><?php echo $entry_abandoned_status; ?></label>
+              <div class="controls">
+								<select name="config_abandoned_status_id" class="i-medium input-block-level">
+									<?php echo p3html::oc_order_status_options($order_statuses, $config_abandoned_status_id); ?>
+                </select>
+							</div>
+            </div>
+            <div class="control-group">
               <label class="control-label"><i class="required text-error icon-asterisk"></i><?php echo $entry_order_status; ?></label>
               <div class="controls">
 								<select name="config_order_status_id" class="i-medium input-block-level">

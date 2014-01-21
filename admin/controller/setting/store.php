@@ -655,6 +655,14 @@ class ControllerSettingStore extends Controller {
 			$this->data['config_checkout_id'] = '';
 		}
 
+		if (isset($this->request->post['config_abandoned_status_id'])) {
+			$this->data['config_abandoned_status_id'] = $this->request->post['config_abandoned_status_id'];
+		} elseif (isset($store_info['config_abandoned_status_id'])) {
+			$this->data['config_abandoned_status_id'] = $store_info['config_abandoned_status_id'];		
+		} else {
+			$this->data['config_abandoned_status_id'] = '';
+		}
+
 		if (isset($this->request->post['config_order_status_id'])) {
 			$this->data['config_order_status_id'] = $this->request->post['config_order_status_id'];
 		} elseif (isset($store_info['config_order_status_id'])) {

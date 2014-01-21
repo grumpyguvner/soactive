@@ -26,6 +26,13 @@ class ModelCheckoutOrder extends Model {
 		foreach ($data['totals'] as $total) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "order_total SET order_id = '" . (int)$order_id . "', code = '" . $this->db->escape($total['code']) . "', title = '" . $this->db->escape($total['title']) . "', text = '" . $this->db->escape($total['text']) . "', `value` = '" . (float)$total['value'] . "', sort_order = '" . (int)$total['sort_order'] . "'");
 		}
+
+                // Allow setting something other than 0 as the default order status
+                // used for basket abandonment.
+                if ($data['order_status_id']) {
+                    $this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$data['order_status_id'] . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
+                }
+
                 
                 if ((isset($data['newsletter']) && $data['newsletter']) ||
                     ($this->config->get('newsletter_mailcampaign_enabled') && $this->config->get('newsletter_mailcampaign_checkout_listid') && !$this->config->get('newsletter_mailcampaign_checkout_optin')) || 

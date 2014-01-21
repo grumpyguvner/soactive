@@ -103,6 +103,7 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_checkout'] = $this->language->get('entry_checkout');		
 		$this->data['entry_order_edit'] = $this->language->get('entry_order_edit');
 		$this->data['entry_invoice_prefix'] = $this->language->get('entry_invoice_prefix');
+		$this->data['entry_abandoned_status'] = $this->language->get('entry_abandoned_status');
 		$this->data['entry_order_status'] = $this->language->get('entry_order_status');
 		$this->data['entry_complete_status'] = $this->language->get('entry_complete_status');	
 		$this->data['entry_stock_display'] = $this->language->get('entry_stock_display');
@@ -691,6 +692,12 @@ class ControllerSettingSetting extends Controller {
 			$this->data['config_invoice_prefix'] = $this->config->get('config_invoice_prefix');			
 		} else {
 			$this->data['config_invoice_prefix'] = 'INV-' . date('Y') . '-00';
+		}
+		
+		if (isset($this->request->post['config_abandoned_status_id'])) {
+			$this->data['config_abandoned_status_id'] = $this->request->post['config_abandoned_status_id'];
+		} else {
+			$this->data['config_abandoned_status_id'] = $this->config->get('config_abandoned_status_id');		
 		}
 		
 		if (isset($this->request->post['config_order_status_id'])) {
