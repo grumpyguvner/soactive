@@ -7,7 +7,7 @@
         <table class="radio">
           <?php foreach ($shipping_methods as $shipping_method) { ?>
           <tr>
-            <td colspan="4"><b><?php echo $shipping_method['title']; ?></b></td>
+            <td colspan="3"><b><?php echo $shipping_method['title']; ?></b></td>
           </tr>
           <?php if (!$shipping_method['error']) { ?>
           <?php foreach ($shipping_method['quote'] as $quote) { ?>
@@ -18,7 +18,7 @@
               <?php } else { ?>
               <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
               <?php } ?></td>
-            <td colspan="2">
+            <td>
                 <label for="<?php echo $quote['code']; ?>"><b><?php echo $quote['title'] ?></b></label>
                 <?php echo $quote['description'] ?>
             </td>
