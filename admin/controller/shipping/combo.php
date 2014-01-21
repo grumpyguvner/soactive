@@ -31,6 +31,7 @@ class ControllerShippingCombo extends Controller {
 		$this->data['text_all_zones'] = $this->language->get('text_all_zones');
 		
 		$this->data['entry_name'] = $this->language->get('entry_name');
+		$this->data['entry_description'] = $this->language->get('entry_description');
 		$this->data['entry_unit'] = $this->language->get('entry_unit');
 		$this->data['entry_rate'] = $this->language->get('entry_rate');
 		$this->data['entry_tax_class'] = $this->language->get('entry_tax_class');

@@ -72,6 +72,16 @@
                 <?php } ?></td>
             </tr>
             <tr>
+              <td><span class="required">*</span> <?php echo $entry_description; ?></td>
+              <td><?php foreach ($languages as $language) { ?>
+                <input type="text" name="combo_modules[<?php echo intval($module_row-1); ?>][description][<?php echo $language['language_id']; ?>]" value="<?php echo isset($module['description'][$language['language_id']]) ? $module['name'][$language['language_id']] : ''; ?>" />
+                <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['description']; ?>" /><br />
+                <?php if (isset($error_module[intval($module_row-1)]['name'][$language['language_id']])) { ?>
+                <span class="error"><?php echo $error_module[intval($module_row-1)]['description'][$language['language_id']]; ?></span><br />
+                <?php } ?>
+                <?php } ?></td>
+            </tr>
+            <tr>
               <td><?php echo $entry_unit; ?></td>
               <td><select name="combo_modules[<?php echo intval($module_row-1); ?>][unit]">
                   <option value="weight"<?php if ($module['unit'] == 'weight') echo ' selected="selected"'?>><?php echo $text_weight; ?></option>

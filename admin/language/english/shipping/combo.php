@@ -20,6 +20,7 @@ $_['entry_geo_zone']   = 'Geo Zone:';
 $_['entry_status']     = 'Status:';
 $_['entry_sort_order'] = 'Sort Order:';
 $_['entry_name']       = 'Name:<br /><span class="help">%s will be replaced by unit value</span>';
+$_['entry_description'] = 'Description:';
 
 // Error
 $_['error_permission'] = 'Warning: You do not have permission to modify combination shipping!';
