@@ -74,7 +74,7 @@
             <tr>
               <td><span class="required">*</span> <?php echo $entry_description; ?></td>
               <td><?php foreach ($languages as $language) { ?>
-                <input type="text" name="combo_modules[<?php echo intval($module_row-1); ?>][description][<?php echo $language['language_id']; ?>]" value="<?php echo isset($module['description'][$language['language_id']]) ? $module['name'][$language['language_id']] : ''; ?>" />
+                <textarea name="combo_modules[<?php echo intval($module_row-1); ?>][description][<?php echo $language['language_id']; ?>]" cols="40" rows="5"><?php echo isset($module['description'][$language['language_id']]) ? $module['description'][$language['language_id']] : ''; ?></textarea>
                 <img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['description']; ?>" /><br />
                 <?php if (isset($error_module[intval($module_row-1)]['name'][$language['language_id']])) { ?>
                 <span class="error"><?php echo $error_module[intval($module_row-1)]['description'][$language['language_id']]; ?></span><br />
