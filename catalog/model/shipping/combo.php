@@ -70,7 +70,7 @@ class ModelShippingCombo extends Model {
 				if ((string)$cost != '') { 
                                         
                                         $title = isset($module['name'][$this->config->get('config_language_id')]) ? sprintf($module['name'][$this->config->get('config_language_id')], $unit) : '';
-                                        $description = isset($module['description'][$this->config->get('config_language_id')]) ? sprintf($module['name'][$this->config->get('config_language_id')], $unit) : '';
+                                        $description = isset($module['description'][$this->config->get('config_language_id')]) ? $module['description'][$this->config->get('config_language_id')] : '';
                                     
 					$quote_data['combo_' . $module['unqid']] = array(
 						'code'         => 'combo.combo_' . $module['unqid'],
