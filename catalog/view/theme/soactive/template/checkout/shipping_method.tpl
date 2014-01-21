@@ -18,7 +18,7 @@
               <?php } else { ?>
               <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
               <?php } ?></td>
-            <td><label for="<?php echo $quote['code']; ?>"><b><?php echo $quote['title'] ?></b></label></td>
+            <td><label for="<?php echo $quote['code']; ?>"><b><?php echo $quote['title'] ?></b></label><br/><?php echo $quote['description'] ?></td>
             <td style="text-align: right;"><label for="<?php echo $quote['code']; ?>"><b><?php echo $quote['text']; ?></b></label></td>
           </tr>
           <?php } ?>

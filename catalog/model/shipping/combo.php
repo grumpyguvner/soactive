@@ -70,10 +70,12 @@ class ModelShippingCombo extends Model {
 				if ((string)$cost != '') { 
                                         
                                         $title = isset($module['name'][$this->config->get('config_language_id')]) ? sprintf($module['name'][$this->config->get('config_language_id')], $unit) : '';
+                                        $description = isset($module['description'][$this->config->get('config_language_id')]) ? sprintf($module['name'][$this->config->get('config_language_id')], $unit) : '';
                                     
 					$quote_data['combo_' . $module['unqid']] = array(
 						'code'         => 'combo.combo_' . $module['unqid'],
 						'title'        => $title,
+						'description'  => $description,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('combo_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('combo_tax_class_id'), $this->config->get('config_tax')))
