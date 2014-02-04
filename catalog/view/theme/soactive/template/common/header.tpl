@@ -18,7 +18,7 @@
         <?php } ?>
         <meta name="viewport" content="width=1020,initial-scale=1.0">
         <link href="catalog/view/theme/soactive/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/stylesheet.css" />
+        <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/stylesheet-2014-02-04.css" />
         <link rel="stylesheet" type="text/css" href="catalog/view/theme/soactive/stylesheet/megamenu.css" />
         <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300normal,300italic,700normal|Open+Sans:400normal|Abel:400normal|Oswald:400normal|BenchNine:400normal|Unica+One:400normal|PT+Sans+Narrow:400normal|Droid+Sans:400normal|Droid+Serif:400normal|Cuprum:400normal|Ubuntu+Condensed:400normal&amp;subset=all">
         <?php foreach ($styles as $style) { ?>
