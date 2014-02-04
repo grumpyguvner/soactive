@@ -17,13 +17,13 @@ class ModelPaymentSagePay extends Model {
 		
 		$method_data = array();
 	
-		if ($status && $this->currency->getCode() == 'GBP') {  
+//		if ($status && $this->currency->getCode() == 'GBP') {  
       		$method_data = array( 
         		'code'       => 'sagepay',
         		'title'      => $this->language->get('text_title'),
 				'sort_order' => $this->config->get('sagepay_sort_order')
       		);
-    	}
+//    	}
    
     	return $method_data;
   	}
