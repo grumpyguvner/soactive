@@ -346,7 +346,7 @@ label {
         clear: both;
         display: none;
         width: 136px;
-        min-height: 150px;
+        min-height: 100px;
         padding: 15px 8px 10px;
         position: absolute;
         top: 24px;
@@ -457,8 +457,14 @@ label {
 #header .links td.name a, #header .links td.name small, #header .checkout a {
         font-family: 'tahoma',Geneva,sans-serif;
 }
+#header #localisation-form {
+	width: 100%;
+}
 #header .links #currency a {
 	padding: 0px 6px;
+}
+#header .links #language a {
+	padding: 0px;
 }
 #header .links .top a#wishlist-total {
 }

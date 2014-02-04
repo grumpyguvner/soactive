@@ -39,8 +39,11 @@
                         ?>
                     </span>
                 </div>
-                <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-                                       <?php 
+                <form id="localisation-form" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+<?php 
+                    if (($language_code == 'en' && $currency_code == 'GBP') || ($language_code == 'fr' && $currency_code == 'EUR')) {
+                        //we are already set on the correct currency so ignore currency selection
+                    } else {
                       if (count($currencies) > 1)
                       {
                           ?>
@@ -59,20 +62,24 @@
                       <?php } else { ?>
                       <a title="<?php echo $currency['title']; ?>" onclick="$('input[name=\'currency_code\']').attr('value', '<?php echo $currency['code']; ?>'); $(this).parents('form').submit();"><?php echo $currency['symbol_right'] . ' ' . $currency['code']; ?></a>
                       <?php 
-                      } 
-                      } 
+                            } 
+                          } 
                       }
                       ?>
                       <input type="hidden" name="currency_code" value="" />
                     </div>                      <?php 
+                      }
                       }
                       ?>
                     
                     <div id="language"><?php echo $text_language; ?><br />
                         <?php foreach ($languages as $language) { ?>
                         <div class="<?php echo $language['code']; ?>Flag">
-                            <img src="catalog/view/theme/soactive/image/flags/big_<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" onclick="$('input[name=\'language_code\']').attr('value', '<?php echo $language['code']; ?>'); $(this).parents('form').submit();" />
-                            <p><?php echo $language['name']; ?></p>
+                            <a title="<?php echo $language['name']; ?>" href="http://www.soactive.<?php echo ($language['code'] == 'en' ? 'com' : $language['code']); ?>">
+<!--                                <img src="catalog/view/theme/soactive/image/flags/big_<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" onclick="$('input[name=\'language_code\']').attr('value', '<?php echo $language['code']; ?>'); $(this).parents('form').submit();" /> -->
+                                <img src="catalog/view/theme/soactive/image/flags/big_<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" />
+                                <p><?php echo $language['name']; ?></p>
+                            </a>
                         </div>
                         <?php } ?>
                         <input type="hidden" name="language_code" value="" />
@@ -86,4 +93,16 @@
             </div> 
         </div>
  </div>
+<?php 
+if (($language_code == 'en' && $currency_code == 'GBP') || ($language_code == 'fr' && $currency_code == 'EUR')) {
+    //we are already set on the correct currency so ignore currency selection
+} else { ?>
+<script type="text/javascript"><!--
+    $(document).ready(function() {
+        $('input[name=\'currency_code\']').attr('value', '<?php echo ($language_code == "en" ? "GBP" : "EUR"); ?>');
+        $('#localisation-form').submit();
+    });
+    //-->
+</script> 
+<?php } ?>
 <?php } ?>

@@ -514,6 +514,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             if ($myModel != $model) {
                                 $myModel = $model;
                                 $product_id = $this->createProduct($model, $stock_item);
+                                $myProductOptionIds = array();
                             }
                             if ($product_id) {
                                 //Manually Add Size & Colour Filter Ids
@@ -538,6 +539,13 @@ class ModelToolWMSProduct extends ModelToolWMS {
                         }
                     }
                     $this->debug("sku lookup array initialized");
+                    $this->debug("removing options no longer used");
+                    if (count($myProductOptionIds) > 0) {
+                        $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int) $product_id . "' AND product_option_value_id NOT IN (" . implode(',', $myProductOptionIds) . ")");
+                    } else {
+                        $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int) $product_id . "'");
+                    }
+                    $this->db->query("UPDATE " . DB_PREFIX . "product p SET quantity = (SELECT SUM(quantity) FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_id = p.product_id) WHERE product_id = '" . (int) $product_id . "'");
                 } else {
                     $query = $this->db->query("UPDATE " . DB_PREFIX . "product set status = 0 WHERE model LIKE '" . $aProduct->fields['stylenumber'] . "-%'");
                 }
