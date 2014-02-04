@@ -44,7 +44,9 @@ class ControllerPaymentSagepay extends Controller {
 		}
 		
 		$data['BillingCity'] = $order_info['payment_city'];
-       	$data['BillingPostCode'] = $order_info['payment_postcode'];	
+       	$data['BillingPostCode'] = "0000";	
+        if (isset($order_info['payment_postcode']) && $order_info['payment_postcode'] <> "")
+            $data['BillingPostCode'] = $order_info['payment_postcode'];	
         $data['BillingCountry'] = $order_info['payment_iso_code_2'];
 		
 		if ($order_info['payment_iso_code_2'] == 'US') {
@@ -63,7 +65,9 @@ class ControllerPaymentSagepay extends Controller {
 			}
 		
         	$data['DeliveryCity'] = $order_info['shipping_city'];
-        	$data['DeliveryPostCode'] = $order_info['shipping_postcode'];
+        	$data['DeliveryPostCode'] = "0000";
+                if (isset($order_info['shipping_postcode']) && $order_info['shipping_postcode'] <> "")
+                    $data['DeliveryPostCode'] = $order_info['shipping_postcode'];
         	$data['DeliveryCountry'] = $order_info['shipping_iso_code_2'];
 		
 			if ($order_info['shipping_iso_code_2'] == 'US') {
