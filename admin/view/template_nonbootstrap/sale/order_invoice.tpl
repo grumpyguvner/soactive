@@ -129,8 +129,6 @@
         <div style="padding-left: 20px; font-size: 13px;"><?php echo $text_return_address;?></div
         <p style="margin-top: 20px;"><b><?php echo $text_order_id; ?></b> <?php echo $order['order_id']; ?></p>
         <img src="/barcode/3of9/<?php echo $order['order_id']; ?>.png" alt="<?php echo $order['order_id']; ?>" />
-    </tr>
-        
       </td>
       <td style="width: 5%;"></td>
       <td style="width: 42%;">
