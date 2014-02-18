@@ -58,7 +58,7 @@ class ControllerPaymentPPExpress extends Controller {
             $address->PostalCode = $order_info['shipping_postcode'];
             $address->Country = $order_info['shipping_iso_code_2'];
 
-            $paymentDetails = new PaymentDetailsType();
+             $paymentDetails = new PaymentDetailsType();
             $itemTotalValue = 0;
             //$taxTotalValue = 0;
 
@@ -83,7 +83,7 @@ class ControllerPaymentPPExpress extends Controller {
             //       $itemTotalValue + $taxTotalValue;
 
             $paymentDetails->ShipToAddress = $address;
-            $paymentDetails->ItemTotal = new BasicAmountType($currencyCode, $itemTotalValue);
+            $paymentDetails->ItemTotal = new BasicAmountType($currencyCode, $this->currency->format($itemTotalValue, $order_info['currency_code'], false, false));
             $paymentDetails->OrderTotal = new BasicAmountType($currencyCode, $this->currency->format($order_info['total'], $order_info['currency_code'], false, false));
             //$paymentDetails->TaxTotal = new BasicAmountType($currencyCode, $taxTotalValue);
 
