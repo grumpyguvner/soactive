@@ -97,7 +97,9 @@ class ControllerCheckoutSuccess extends Controller {
 		$data_layer['transactionCurrency'] = $order_info['currency_code'];
 		$data_layer['transactionTotal'] = $order_info['total'];
 		$data_layer['transactionShippingMethod'] = $order_info['shipping_method'];
+		$data_layer['transactionShipping'] = $this->model_account_order->getOrderShippingTotal($this->session->data['last_order_id']);
 		$data_layer['transactionPaymentType'] = $order_info['payment_method'];
+		$data_layer['transactionTax'] = $this->model_account_order->getOrderTaxTotal($this->session->data['last_order_id']);
 
                 $products_data = array();
                 

@@ -138,6 +138,22 @@ class ModelAccountOrder extends Model {
 	
 		return $query->rows;
 	}	
+	
+	public function getOrderShippingTotal($order_id) {
+		$query = $this->db->query("SELECT SUM(value) AS 'shipping' FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "' AND code = 'shipping'");
+		if ($query->num_rows) {	
+                    return $query->row['shipping'];
+                }
+		return 0;
+	}	
+	
+	public function getOrderTaxTotal($order_id) {
+		$query = $this->db->query("SELECT SUM(value) AS 'tax' FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "' AND code = 'tax'");
+		if ($query->num_rows) {	
+                    return $query->row['tax'];
+                }
+		return 0;
+	}	
 
 	public function getOrderHistories($order_id) {
 		$query = $this->db->query("SELECT date_added, os.name AS status, oh.comment, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND oh.notify = '1' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added");
