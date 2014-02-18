@@ -84,7 +84,7 @@ class ControllerPaymentPPExpress extends Controller {
 
             $paymentDetails->ShipToAddress = $address;
             $paymentDetails->ItemTotal = new BasicAmountType($currencyCode, $this->currency->format($itemTotalValue, $order_info['currency_code'], 1, false));
-            $paymentDetails->OrderTotal = new BasicAmountType($currencyCode, $this->currency->format($order_info['total'], $order_info['currency_code'], 1, false));
+            $paymentDetails->OrderTotal = new BasicAmountType($currencyCode, $this->currency->format($order_info['total'], $order_info['currency_code'], false, false));
             //$paymentDetails->TaxTotal = new BasicAmountType($currencyCode, $taxTotalValue);
 
             if ($this->config->get('pp_express_method')) {
@@ -95,7 +95,7 @@ class ControllerPaymentPPExpress extends Controller {
 
 //        $paymentDetails->HandlingTotal = $handlingTotal;
 //        $paymentDetails->InsuranceTotal = $insuranceTotal;
-            $paymentDetails->ShippingTotal = new BasicAmountType($currencyCode, $this->currency->format($order_info['total'], $order_info['currency_code'], 1, false)-$this->currency->format($itemTotalValue, $order_info['currency_code'], 1, false));
+            $paymentDetails->ShippingTotal = new BasicAmountType($currencyCode, $this->currency->format($order_info['total'], $order_info['currency_code'], false, false)-$this->currency->format($itemTotalValue, $order_info['currency_code'], 1, false));
 //        if(isset($_REQUEST['notifyURL']))
 //        {
 //                $paymentDetails->NotifyURL = $_REQUEST['notifyURL'];
