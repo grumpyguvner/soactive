@@ -402,9 +402,13 @@
                       <?php if ($product_linked['new']) { ?> 
                           <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                       <?php } ?>
-                      <?php if ($product_linked['sale']) { ?> 
-                          <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
-                      <?php } ?>
+                        <?php if ($product_linked['sale']) { 
+                                    if ($SERVER['HTTP_HOST'] == 'www.soactive.fr') { 
+                                        echo '<img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.fr.png" alt="Promo Produit">';
+                                    } else { 
+                                        echo '<img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">';
+                                    }
+                              } ?>    
                       <?php } ?><br />
                       <div class="nameItem">
                         <a href="<?php echo $product_linked['href']; ?>"><?php echo $product_linked['name']; ?></a>

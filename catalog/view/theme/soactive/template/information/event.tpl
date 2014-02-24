@@ -27,9 +27,13 @@
                       <?php if ($v1['new']) { ?> 
                           <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
                       <?php } ?>
-                      <?php if ($v1['sale']) { ?> 
-                          <img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">
-                      <?php } ?>
+                    <?php if ($v1['sale']) { 
+                                if ($SERVER['HTTP_HOST'] == 'www.soactive.fr') { 
+                                    echo '<img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.fr.png" alt="Promo Produit">';
+                                } else { 
+                                    echo '<img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">';
+                                }
+                          } ?>    
                       <?php } ?><br />
                       <div class="nameItem">
                         <a href="<?php echo $v1['href']; ?>"><?php echo $v1['name']; ?></a>
