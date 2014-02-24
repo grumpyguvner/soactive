@@ -8,7 +8,7 @@
                 <img class="newProduct" src="catalog/view/theme/soactive/image/new-icon.png" alt="New Product">
             <?php } ?>
             <?php if ($product['sale']) { 
-                        if ($SERVER['HTTP_HOST'] == 'www.soactive.fr') { 
+                        if ($_SERVER['HTTP_HOST'] == 'www.soactive.fr') { 
                             echo '<img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.fr.png" alt="Promo Produit">';
                         } else { 
                             echo '<img class="saleProduct" src="catalog/view/theme/soactive/image/sale-icon.png" alt="Sale Product">';
