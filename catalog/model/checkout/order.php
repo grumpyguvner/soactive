@@ -173,7 +173,7 @@ class ModelCheckoutOrder extends Model {
 	public function confirm($order_id, $order_status_id, $comment = '', $notify = false, $notes = '') {
 		$order_info = $this->getOrder($order_id);
 		 
-		if ($order_info && !$order_info['order_status_id']) {
+		if ($order_info && (!$order_info['order_status_id'] || $order_info['order_status_id'] == $this->config->get('config_abandoned_status_id'))) {
 			// Fraud Detection
 			if ($this->config->get('config_fraud_detection')) {
 				$this->load->model('checkout/fraud');
@@ -531,6 +531,10 @@ class ModelCheckoutOrder extends Model {
 				}				
 			}
                         
+                        //2014-02-26 Function to reserve stock in WMS, needs to be removed when no longer using WMS
+                        //           Added because still running SBB on prestashop and WMS
+                        $this->reserveWMSStock($order_id);
+                        
                         //Trust pilot
                         if($this->extensions->isInstalled('trustpilot', 'module')) {
                             if ($this->config->get('trustpilot_status')) {
@@ -642,5 +646,151 @@ class ModelCheckoutOrder extends Model {
 			}
 		}
 	}
+        
+	public function reserveWMSStock($order_id)
+	{
+
+            $order_info = $this->getOrder($order_id);
+            
+            if ($order_info) {
+                // Filling-in vars for sending to activeWMS
+                $activewmsid = ""; //reset the returned id
+                $post_data = array();
+                $post_data["TX"] = "HEADER";
+
+                $post_data["leadsource"] = $_SERVER['SERVER_NAME'];
+                $post_data["webconfirmationno"] = sprintf("%06d", $order_id);
+                $post_data["orderdate"] = $order_info['date_added'];
+
+                $post_data["billtoemail"] = $order_info['email'];
+                $post_data["lastname"] = $order_info['payment_lastname'];
+                $post_data["firstname"] = $order_info['payment_firstname'];
+                $post_data["gender"] = "";
+                $post_data["billtoaddress1"] = $order_info['payment_address_1'];
+                $post_data["billtoaddress2"] = $order_info['payment_address_2'];
+                $post_data["billtocity"] = $order_info['payment_city'];
+                $post_data["billtopostcode"] = $order_info['payment_postcode'];
+                $post_data["billtostate"] = $order_info['payment_zone'];
+                $post_data["billtocountry"] = $order_info['payment_country'];
+                $post_data["billtotelephone"] = "";
+
+                $post_data["shiptoname"] = $order_info['shipping_firstname'].' '.$order_info['shipping_lastname'];
+                $post_data["shiptoaddress1"] = $order_info['shipping_address_1'];
+                $post_data["shiptoaddress2"] = $order_info['shipping_address_2'];
+                $post_data["shiptocity"] = $order_info['shipping_city'];
+                $post_data["shiptopostcode"] = $order_info['shipping_postcode'];
+                $post_data["shiptostate"] = $order_info['shipping_zone'];
+                $post_data["shiptocountry"] = $order_info['shipping_country'];
+                $post_data["shiptotelephone"] = "";
+
+                $post_data["promocode"] = "";
+
+                $post_data["shippingmethod"] = $order_info['shipping_method'];
+
+                $post_data["shipping"] = 0;
+
+                $return = $this->postData($post_data);
+                if (!$return){
+                    return false;
+                }
+                $activewmsid = $return;
+
+                $line= 1;
+                $quantity = 0;
+                $totalweight = 0;
+                $totalcost = 0;
+                $totalti = 0;
+                $post_product = array();
+                $post_product["TX"] = "DETAIL";
+
+                $order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+                foreach ($order_product_query->rows as $product) {
+
+                        $post_product["orderid"] = $activewmsid;
+                        
+                        $post_product["brand"] = $product['model'];
+                        $post_product["stylename"] = $product['name'];
+                        $post_product["size"] = "";
+                        $post_product["upc"] = "";
+                        $post_product["unitweight"] = 0;
+                        $post_product["quantity"] = $product['quantity'];
+                        $post_product["unitcost"] = 0;
+
+                        $post_product["unitpromocode"] = "";
+                        $post_product["unitdiscount"] = 0;
+                        $post_product["unitprice"] = $product['price'];
+
+                        $post_product["currency"] = $order_info['currency_code'];
+                    
+                        $order_option_query = $this->db->query("SELECT pov.* FROM " . DB_PREFIX . "order_option oo JOIN " . DB_PREFIX . "product_option_value pov ON (oo.product_option_value_id = pov.product_option_value_id) WHERE oo.order_id = '" . (int)$order_id . "' AND oo.order_product_id = '" . (int)$product['order_product_id'] . "'");
+
+                        foreach ($order_option_query->rows as $option) {
+                                $post_product["upc"] = $option['sku'];
+                                $post_product["unitweight"] = $option['weight'];
+                        }
+
+                        $return = $this->postData($post_product);
+                        if (!$return){
+                                return false;
+                        }
+
+                        $line ++;
+                        $quantity += $product['quantity'];
+                        $totalweight += ($product['quantity'] * $post_product["unitweight"]);
+                        $totalcost += ($product['quantity'] * $post_product["unitcost"]);
+                        $totalti += ($product['quantity'] * $post_product["unitprice"]);
+                }
+
+                //Confirm that what has been posted matches the totals
+                $post_data = array();
+                $post_data["TX"] = "TOTALS";
+                $post_data["orderid"] = $activewmsid;
+                $post_data["lines"] = intval($line - 1);
+                $post_data["quantity"] = $quantity;
+                $post_data["totalweight"] = $totalweight;
+                $post_data["totalcost"] = $totalcost;
+                $post_data["totaldiscount"] = 0;
+                $post_data["totalti"] = $totalti;
+
+                $return = $this->postData($post_data);
+                if (!$return){
+                    return false;
+                }
+
+            }
+
+	}
+
+	private function postData($postData){
+                //add the login details if necessary
+                if (!isset($postData["activewmsuser"])){
+//                    $postData["phpbmsusername"] = $this->config->get('wms_user');
+//                    $postData["phpbmspassword"] = $this->config->get('wms_password');
+                    $postData["phpbmsusername"] = "sheactive";
+                    $postData["phpbmspassword"] = "St4rl!ght";
+                }
+
+		$curl = curl_init();
+
+		curl_setopt($curl, CURLOPT_URL, 'http://'.$this->config->get('wms_host').'/modules/activewms/api_reservestock.php');
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		$result = curl_exec($curl);
+		if (curl_errno($curl)) {
+		//	$this->log->LogError(curl_error($curl));
+			print_r (array("CURL_ERR", curl_error($curl)));
+			return false;
+		} else {
+			curl_close($curl);
+		}
+
+		if (substr($result,0,2)=='OK'){
+			//If export was ok then we should have the uuid from activewms
+			return substr($result,2);
+		}
+
+		return false;
+	}//end method --postData--
 }
 ?>

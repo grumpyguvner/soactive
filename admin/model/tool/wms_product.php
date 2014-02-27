@@ -500,7 +500,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                             if (!$frColour->EOF)
                                 $colourFr = (string) $frColour->fields['name'];
 
-                            $quantity = (float) $aStock->fields['available_stock'];
+                            $quantity = (float) $aStock->fields['available_stock'] - (float) $aStock->fields['reserved_stock'];
 
                             $model = (string) $aProduct->fields['stylenumber'] . "-" . $colourid;
 
