@@ -859,7 +859,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             //Save any existing product reviews
             $product_id = $product_info['product_id'];
             $attribute_group_id = $this->tableLookUp(DB_PREFIX . "attribute_group_description", 'attribute_group_id', array('name' => 'Ratings'));
-            $product_attribute_query = $this->db->query("SELECT attribute_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute a ON (pa.attribute_id = a.attribute_id) WHERE product_id = '" . (int)$product_id . "' AND a.attribute_group_id = '" . (int)$attribute_group_id . "'");
+            $product_attribute_query = $this->db->query("SELECT pa.attribute_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute a ON (pa.attribute_id = a.attribute_id) WHERE product_id = '" . (int)$product_id . "' AND a.attribute_group_id = '" . (int)$attribute_group_id . "'");
 
             foreach ($product_attribute_query->rows as $product_attribute) {
                     $product_attribute_description_data = array();
