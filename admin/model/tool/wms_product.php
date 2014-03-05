@@ -855,6 +855,26 @@ class ModelToolWMSProduct extends ModelToolWMS {
         // many fields will be controlled via backoffice and we dont want to overwrite.
         $this->load->model('catalog/product');
         $product_info = $this->model_catalog_product->getProductByModel($model);
+        if($product_info) {
+            //Save any existing product reviews
+            $product_id = $product_info['product_id'];
+            $attribute_group_id = $this->tableLookUp(DB_PREFIX . "attribute_group_description", 'attribute_group_id', array('name' => 'Ratings'));
+            $product_attribute_query = $this->db->query("SELECT attribute_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute a ON (pa.attribute_id = a.attribute_id) WHERE product_id = '" . (int)$product_id . "' AND a.attribute_group_id = '" . (int)$attribute_group_id . "'");
+
+            foreach ($product_attribute_query->rows as $product_attribute) {
+                    $product_attribute_description_data = array();
+                    
+                    $product_attribute_description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "' AND attribute_id = '" . (int)$product_attribute['attribute_id'] . "'");
+                    foreach ($product_attribute_description_query->rows as $product_attribute_description) {
+                            $product_attribute_description_data[$product_attribute_description['language_id']] = array('text' => $product_attribute_description['text']);
+                    }
+
+                    $attribute[] = array(
+                            'attribute_id'                  => $product_attribute['attribute_id'],
+                            'product_attribute_description' => $product_attribute_description_data
+                    );
+            }
+        }
         $data = array(
             'model' => $model,
             'sku' => "",
