@@ -445,7 +445,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     $aStock = $this->dbQF->Execute('SELECT products.* FROM products LEFT JOIN colours ON products.colourid = colours.uuid LEFT JOIN sizes ON products.sizeid = sizes.uuid WHERE styleid = "' . $aProduct->fields['uuid'] . '" ORDER BY colours.priority, sizes.priority');
                     if ($aStock->RecordCount() > 0) {
                         while (!$aStock->EOF) {
-                            $this->debug("processing sku " . $aStock->fields['bleepid'] . "");
+                            $this->debug("processing sku " . $aStock->fields['bleepid'] . " qty " . $aStock->fields['available_stock']);
                             //initialise sku variables
                             $sizeEn = "one size";
                             $sizeFr = "taille unique";
