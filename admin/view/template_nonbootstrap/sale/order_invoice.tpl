@@ -133,22 +133,18 @@
       <td style="width: 5%;"></td>
       <td style="width: 42%;">
          <?php  
-          switch (strtoupper($order['shipping_method']))
-            {
-                case "STANDARD DELIVERY":
-                case "UK STANDARD":
-                    echo '<img src="/catalog/view/theme/soactive/image/postage/postage_second_class.png" style="float: right;padding-right: 30px;" />';
-                    break;
-                case "EUROPEAN STANDARD":
-                case "ROW STANDARD":
-                case "PRIORITY EUROPEAN DELIVERY":
-                case "PRIORITY 1ST CLASS DELIVERY":
-                case "PRIORITY INTERNATIONAL DELIVERY":
-                    echo '<img src="/catalog/view/theme/soactive/image/postage/postage_first_class.png" style="float: right;padding-right: 30px;" />';
-                    break;
-            }
-           //<img src="/catalog/view/theme/soactive/image/postage/postage_unknown.png" style="float: right;padding-right: 30px;" />
- ?>
+         $postage = "/catalog/view/theme/soactive/image/postage/postage_unknown.png";
+         
+         //Set second class stamp
+         if (strpos(strtoupper($order['shipping_method']),"STANDARD"))
+            $postage = "/catalog/view/theme/soactive/image/postage/postage_second_class.png";
+         
+         //Set first class stamp
+         if (strpos(strtoupper($order['shipping_method']),"PRIORITY"))
+            $postage = "/catalog/view/theme/soactive/image/postage/postage_first_class.png";
+            
+         ?>
+            <img src="<?php echo $postage; ?>" style="float: right;padding-right: 30px;" />
             <?php echo $order['shipping_address']; ?>
       </td>
        <td style="width: 5%;"></td>
