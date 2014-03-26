@@ -136,11 +136,11 @@
          $postage = "/catalog/view/theme/soactive/image/postage/postage_unknown.png";
          
          //Set second class stamp
-         if (strpos(strtoupper($order['shipping_method']),"STANDARD"))
+         if (strpos(strtoupper($order['shipping_method']),'STANDARD') !== false)
             $postage = "/catalog/view/theme/soactive/image/postage/postage_second_class.png";
          
          //Set first class stamp
-         if (strpos(strtoupper($order['shipping_method']),"PRIORITY"))
+         if (strpos(strtoupper($order['shipping_method']),'PRIORITY') !== false)
             $postage = "/catalog/view/theme/soactive/image/postage/postage_first_class.png";
             
          ?>
