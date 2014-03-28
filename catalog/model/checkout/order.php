@@ -531,10 +531,6 @@ class ModelCheckoutOrder extends Model {
 				}				
 			}
                         
-                        //2014-02-26 Function to reserve stock in WMS, needs to be removed when no longer using WMS
-                        //           Added because still running SBB on prestashop and WMS
-                        $this->reserveWMSStock($order_id);
-                        
                         //Trust pilot
                         if($this->extensions->isInstalled('trustpilot', 'module')) {
                             if ($this->config->get('trustpilot_status')) {
@@ -545,6 +541,16 @@ class ModelCheckoutOrder extends Model {
                                         $mail->send();
                                     }
                             }
+                        }
+                        
+                        //2014-02-26 Function to reserve stock in WMS, needs to be removed when no longer using WMS
+                        //           Added because still running SBB on prestashop and WMS
+                        $cnt = 0;
+                        while (!$this->reserveWMSStock($order_id) && $cnt < 3) {
+                            //Attempt to reserve stock 3 times
+                            $mail->setTo("mark.horton@totallyboundless.com");
+                            $mail->setSubject(html_entity_decode("WMS RESERVE STOCK ERROR ATTEMPT " . $cnt++ . ": " . $subject, ENT_QUOTES, 'UTF-8'));
+                            $mail->send();
                         }
                         
 		}
@@ -778,8 +784,8 @@ class ModelCheckoutOrder extends Model {
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		$result = curl_exec($curl);
 		if (curl_errno($curl)) {
-		//	$this->log->LogError(curl_error($curl));
-			print_r (array("CURL_ERR", curl_error($curl)));
+                        $this->log->write("CURL ERROR: " . curl_error($curl));
+//			print_r (array("CURL_ERR", curl_error($curl)));
 			return false;
 		} else {
 			curl_close($curl);
