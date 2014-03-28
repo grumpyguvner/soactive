@@ -545,12 +545,19 @@ class ModelCheckoutOrder extends Model {
                         
                         //2014-02-26 Function to reserve stock in WMS, needs to be removed when no longer using WMS
                         //           Added because still running SBB on prestashop and WMS
-                        $cnt = 0;
-                        while (!$this->reserveWMSStock($order_id) && $cnt < 3) {
-                            //Attempt to reserve stock 3 times
-                            $mail->setTo("mark.horton@totallyboundless.com");
-                            $mail->setSubject(html_entity_decode("WMS RESERVE STOCK ERROR ATTEMPT " . $cnt++ . ": " . $subject, ENT_QUOTES, 'UTF-8'));
-                            $mail->send();
+                        $cnt = 1;
+                        $continue = $this->reserveWMSStock($order_id);
+                        while (!$continue) {
+                            if ($cnt > 3) {
+                                //Attempt to reserve stock 3 times
+                                $mail->setTo("mark.horton@totallyboundless.com");
+                                $mail->setSubject(html_entity_decode("WMS RESERVE STOCK ERROR FAILED " . $cnt . " TIMES: " . $subject, ENT_QUOTES, 'UTF-8'));
+                                $mail->send();
+                                $continue = true;
+                            } else {
+                                $cnt++;
+                                $continue = $this->reserveWMSStock($order_id);
+                            }
                         }
                         
 		}
