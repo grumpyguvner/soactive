@@ -288,7 +288,8 @@ class ControllerPaymentPPExpress extends Controller {
                 if (!$order_info['order_status_id']) {
                         $this->model_checkout_order->confirm($order_id, $order_status_id, '', false, $this->getMessage($comment, $transaction));
                 } else {
-                        $this->model_checkout_order->update($order_id, $order_status_id, '', false, $this->getMessage($comment, $transaction));
+//                        $this->model_checkout_order->update($order_id, $order_status_id, '', false, $this->getMessage($comment, $transaction));
+                        $this->model_checkout_order->confirm($order_id, $order_status_id, '', false, $this->getMessage($comment, $transaction));
                 }
                 
                 $this->response->redirect($this->url->link('checkout/success', '', 'SSL'));
