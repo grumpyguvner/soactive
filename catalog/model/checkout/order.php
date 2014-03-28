@@ -772,6 +772,8 @@ class ModelCheckoutOrder extends Model {
 
             }
 
+            return true;
+            
 	}
 
 	private function postData($postData){
