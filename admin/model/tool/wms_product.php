@@ -174,52 +174,61 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                         if ($aCategories->RecordCount() > 0) {
                             while (!$aCategories->EOF) {
-                                $aCategory = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '"');
-                                $enCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.soactive.com"');
-                                $frCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . ($aCategories->fields['parentid'] != "" ? $aCategories->fields['parentid'] : $aCategories->fields['uuid']) . '" AND o.site="www.attractive.fr"');
-                                // only continue if we have a record for soactive
-                                if ($enCategory->RecordCount() > 0) {
-                                    $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
 
-                                    $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
-                                    $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
-                                    $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
-                                    $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
+                                $uuids = array($aCategories->fields['uuid']);
+                                if ($aCategories->fields['parentid'] != "" ) {
+                                    $uuids[] = $aCategories->fields['parentid'];
+                                }
 
-                                    //initialise category variables
-                                    $category = seoUrl($myName);
-                                    $category_description = array(
-                                        $this->languageId => array(
-                                            'name' => $myName,
-                                            'meta_keyword' => $myName,
-                                            'keyword' => seoUrl($myName),
-                                            'meta_description' => "",
-                                            'description' => $myDesc
-                                        ),
-                                        $this->languageFr => array(
-                                            'name' => (string) $frName,
-                                            'meta_keyword' => $frName,
-                                            'keyword' => seoUrl($frName),
-                                            'meta_description' => "",
-                                            'description' => $frDesc
-                                            ));
-                                    if ($myCategory != $category) {
-                                        $myCategory = $category;
-                                        $category_id = $this->createCategory($gender, $category, $category_description, $aCategory->fields['google_taxonomy'], $parent_type_id);
-                                        $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
+                                foreach ($uuids as $uuid) {
+                                    $aCategory = $this->dbQF->Execute('SELECT c.* FROM categories c WHERE c.uuid = "' . $uuid . '"');
+                                    $enCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . $uuid . '" AND o.site="www.soactive.com"');
+                                    $frCategory = $this->dbQF->Execute('SELECT o.* FROM category_overrides o WHERE o.categoryid = "' . $uuid . '" AND o.site="www.attractive.fr"');
+                                    // only continue if we have a record for soactive
+                                    if ($enCategory->RecordCount() > 0) {
+                                        $this->debug("processing category " . $aCategory->fields['webdisplayname'] . "");
+
+                                        $myName = ((string) $enCategory->fields['webdisplayname'] != "" ? (string) $enCategory->fields['webdisplayname'] : (string) $aCategory->fields['webdisplayname']);
+                                        $frName = ((string) $frCategory->fields['webdisplayname'] != "" ? (string) $frCategory->fields['webdisplayname'] : $myName);
+                                        $myDesc = ((string) $enCategory->fields['webdescription'] != "" ? (string) $enCategory->fields['webdescription'] : (string) $aCategory->fields['webdescription']);
+                                        $frDesc = ((string) $frCategory->fields['webdescription'] != "" ? (string) $frCategory->fields['webdescription'] : $myDesc);
+
+                                        //initialise category variables
+                                        $category = seoUrl($myName);
+                                        $category_description = array(
+                                            $this->languageId => array(
+                                                'name' => $myName,
+                                                'meta_keyword' => $myName,
+                                                'keyword' => seoUrl($myName),
+                                                'meta_description' => "",
+                                                'description' => $myDesc
+                                            ),
+                                            $this->languageFr => array(
+                                                'name' => (string) $frName,
+                                                'meta_keyword' => $frName,
+                                                'keyword' => seoUrl($frName),
+                                                'meta_description' => "",
+                                                'description' => $frDesc
+                                                ));
+                                        if ($myCategory != $category) {
+                                            $myCategory = $category;
+                                            $category_id = $this->createCategory($gender, $category, $category_description, $aCategory->fields['google_taxonomy'], $parent_type_id);
+                                            $filter_id = $this->createFilter($myName, $filter_group_id, $frName);
+                                        }
+                                        if ($category_id) {
+                                            if (!in_array($category_id, $myCategoryIds))
+                                                $myCategoryIds[] = $category_id;
+                                        } else {
+                                            $error = true;
+                                        }
+                                        if ($filter_id) {
+                                            if (!in_array($filter_id, $myFilterIds))
+                                                $myFilterIds[] = $filter_id;
+                                        } else {
+                                            $error = true;
+                                        }
                                     }
-                                    if ($category_id) {
-                                        if (!in_array($category_id, $myCategoryIds))
-                                            $myCategoryIds[] = $category_id;
-                                    } else {
-                                        $error = true;
-                                    }
-                                    if ($filter_id) {
-                                        if (!in_array($filter_id, $myFilterIds))
-                                            $myFilterIds[] = $filter_id;
-                                    } else {
-                                        $error = true;
-                                    }
+                                    
                                 }
 
                                 $aCategories->MoveNext();
