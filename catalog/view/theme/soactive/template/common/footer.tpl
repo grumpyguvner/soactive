@@ -20,7 +20,7 @@
 </script>
 <script type="text/javascript">
 $('input[name=\'filter_name\']').autocomplete({
-	source: 'index.php?route=product/search/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent($(this).val()),
+	source: 'index.php?route=product/search/autocomplete&token=<?php echo $token; ?>',
         minLength: 3
 });
 </script>
