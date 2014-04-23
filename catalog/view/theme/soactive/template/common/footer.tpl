@@ -18,3 +18,10 @@
         return false;
     });
 </script>
+<script type="text/javascript">
+$('input[name=\'filter_name\']').autocomplete({
+	source: 'index.php?route=product/search/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+        minLength: 3
+   	}
+});
+</script>

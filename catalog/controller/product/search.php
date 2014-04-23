@@ -515,5 +515,42 @@ class ControllerProductSearch extends Controller {
 				
 		$this->response->setOutput($this->render());
   	}
+
+	public function autocomplete() {
+		$json = array();
+		
+		if (isset($this->request->get['filter_name'])) {
+			$this->load->model('catalog/product');
+			
+			$data = array(
+				'filter_name' => $this->request->get['filter_name'],
+				'start'       => 0,
+				'limit'       => 20
+			);
+		
+			$results = $this->model_catalog_product->getProducts($data);
+			
+			foreach ($results as $result) {
+				$json[] = array(
+					'product_id'        => $result['product_id'],
+					'name'              => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
+					'model'             => $result['model'],
+					'price'             => $result['price'],
+					'href'              => $this->url->link('product/product', '&product_id=' . $product['product_id'])
+				);					
+			}
+		}
+
+		$sort_order = array();
+	  
+		foreach ($json as $key => $value) {
+			$sort_order[$key] = $value['name'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $json);
+
+		$this->response->setOutput(json_encode($json));
+	}		
+		
 }
 ?>
