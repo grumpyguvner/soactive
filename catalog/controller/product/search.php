@@ -519,11 +519,11 @@ class ControllerProductSearch extends Controller {
 	public function autocomplete() {
 		$json = array();
 		
-		if (isset($this->request->get['filter_name'])) {
+		if (isset($this->request->get['term'])) {
 			$this->load->model('catalog/product');
 			
 			$data = array(
-				'filter_name' => $this->request->get['filter_name'],
+				'filter_name' => $this->request->get['term'],
 				'start'       => 0,
 				'limit'       => 20
 			);
