@@ -242,8 +242,15 @@ class Category {
             if (isset($this->request->get['path'])) {
                 $parts = explode('_', (string) $this->request->get['path']);
 
-                foreach ($parts as $path_id)
-                    $category_id = $path_id;
+                $parent_id = 0;
+                foreach ($parts as $path_id) {
+                    $category_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$path_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.parent_id = '" . (int)$parent_id . "' AND c.status = '1'");
+                    if ($category_query->num_rows) {
+                        $category_id = $path_id;
+                        $parent_id = $category_id;
+                    }
+                    
+                }
             }
             return $category_id;
         }

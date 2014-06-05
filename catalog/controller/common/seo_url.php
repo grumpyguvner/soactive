@@ -43,11 +43,8 @@ class ControllerCommonSeoUrl extends Controller {
                             }
                             //articles url
                             if ($url[0] == 'category_id') {
-                                if (!isset($this->request->get['path'])) {
-                                    $this->request->get['path'] = $url[1];
-                                } else {
-                                    $this->request->get['path'] .= '_' . $url[1];
-                                }
+                                $this->request->get['path'] = $this->getCategoryPath($parts);
+                                break;
                             }
 
                             if ($url[0] == 'manufacturer_id') {
@@ -230,6 +227,29 @@ class ControllerCommonSeoUrl extends Controller {
         }
         
         return $this->keyword[$cache];
+    }
+        
+    private function getCategoryPath($parts) {
+        $category_id = 0;
+        $parent_id = 0;
+        $path = "";
+        foreach ($parts as $part) {
+            //TODO: Doesn't seem to be saving language_id on seo_urls
+//            $category_query = $this->db->query("SELECT c.category_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "url_alias cd ON (CONCAT('category_id=',c.category_id) = cd.query) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE cd.keyword = '" . $part . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.parent_id = '" . (int)$parent_id . "' AND c.status = '1'");
+            $category_query = $this->db->query("SELECT c.category_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "url_alias cd ON (CONCAT('category_id=',c.category_id) = cd.query) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE cd.keyword = '" . $part . "' AND cd.language_id = '0' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.parent_id = '" . (int)$parent_id . "' AND c.status = '1'");
+            if ($category_query->num_rows) {
+                $category_id = $category_query->row['category_id'];
+                $parent_id = $category_id;
+                if (empty($path)) {
+                    $path = $category_id;
+                } else {
+                    $path .= '_' . $category_id;
+                }
+            }
+
+        }
+
+        return $path;
     }
 }
 

@@ -47,6 +47,7 @@ class ControllerProductCategory extends Controller {
                 $this->document->setDescription($this->category->getMetaDescription());
                 $this->document->setKeywords($this->category->getMetaKeyword());
 			
+                $this->data['category_id'] = $category_id;
                 $this->data['heading_title'] = $this->category->getName();
 
                 $this->data['text_refine'] = $this->language->get('text_refine');
