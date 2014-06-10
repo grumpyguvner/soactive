@@ -34,7 +34,8 @@ class ControllerModuleCategory extends Controller {
 
 		$this->data['categories'] = array();
 
-		$categories = $this->model_catalog_category->getCategories(0);
+                //2014-06-10 Amended to only display categories below the current category
+		$categories = $this->model_catalog_category->getCategories($this->session->data['category_id']);
 
 		foreach ($categories as $category) {
 			$total = $this->model_catalog_product->getTotalProducts(array('filter_category_id'  => $category['category_id']));
@@ -56,7 +57,7 @@ class ControllerModuleCategory extends Controller {
 				$children_data[] = array(
 					'category_id' => $child['category_id'],
 					'name'        => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
-					'href'        => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
+					'href'        => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $category['category_id'] . '_' . $child['category_id'])	
 				);		
 			}
 
@@ -64,7 +65,7 @@ class ControllerModuleCategory extends Controller {
 				'category_id' => $category['category_id'],
 				'name'        => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $total . ')' : ''),
 				'children'    => $children_data,
-				'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
+				'href'        => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $category['category_id'])
 			);	
 		}
 		
