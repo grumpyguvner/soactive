@@ -154,13 +154,17 @@ class ModelCatalogCategory extends Model {
 		return $query->row;
 	} 
 	
-	public function getCategoryByKeyword($keyword) {
+	public function getCategoryByKeyword($keyword, $parent_id = 0) {
             
                 $this->load->model('module/url_alias');
                 $keyword = $this->model_module_url_alias->seoUrl($keyword);
             
                 $category_id = 0;
-		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
+                if ($parent_id == 0) {
+                    $query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
+                } else {
+                    $query = $this->db->query("SELECT cd.query FROM " . DB_PREFIX . "category c JOIN " . DB_PREFIX . "url_alias cd ON (CONCAT('category_id=',c.category_id) = cd.query) WHERE cd.keyword = '" . $keyword . "' AND c.parent_id = '" . (int)$parent_id . "'");
+                }
 
                 if($query->row)
                     $category_id = substr ((string) $query->row['query'], 12);

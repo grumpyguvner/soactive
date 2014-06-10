@@ -127,20 +127,20 @@ class ModelToolWMSProduct extends ModelToolWMS {
                     
                     //second level navigation via gender & brands
                     $brandCategories = $this->cacheWMSBrand($aProduct);
-                    foreach ($genderCategories as $key => $category) {
-                        $myCategoryTree[$key]['children'] = array_merge_recursive($myCategoryTree[$key]['children'], $brandCategories);
+                    foreach ($genderCategories as $gKey => $gCategory) {
+                        $myCategoryTree[$gKey]['children'] = array_merge_recursive($myCategoryTree[$gKey]['children'], $brandCategories);
                     }
                     
                     //second level navigation via gender & product categories
                     $productCategories = $this->cacheWMSCategories($aProduct);
-                    foreach ($genderCategories as $key => $category) {
-                        $myCategoryTree[$key]['children'] = array_merge_recursive($myCategoryTree[$key]['children'], $productCategories);
+                    foreach ($genderCategories as $gKey => $gCategory) {
+                        $myCategoryTree[$gKey]['children'] = array_merge_recursive($myCategoryTree[$gKey]['children'], $productCategories);
                     }
                     
                     //second level navigation via gender & sport categories
                     $sportCategories = $this->cacheWMSSports($aProduct);
-                    foreach ($genderCategories as $key => $category) {
-                        $myCategoryTree[$key]['children'] = array_merge_recursive($myCategoryTree[$key]['children'], $sportCategories);
+                    foreach ($genderCategories as $gKey => $gCategory) {
+                        $myCategoryTree[$gKey]['children'] = array_merge_recursive($myCategoryTree[$gKey]['children'], $sportCategories);
                     }
                     
                     //third level navigation via gender & brands & product categories
@@ -166,6 +166,12 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 if ($third_level_id)
                                     if (!in_array($third_level_id, $myCategoryIds))
                                         $myCategoryIds[] = $third_level_id;
+                                foreach ($value3['children'] as $key4 => $value4) {
+                                    $fourth_level_id = $this->createCategory($key4, $value4['description'], null, $third_level_id);
+                                    if ($fourth_level_id)
+                                        if (!in_array($fourth_level_id, $myCategoryIds))
+                                            $myCategoryIds[] = $fourth_level_id;
+                                }
                             }
                         }
                     }
@@ -578,7 +584,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
         //We only create a new category the first time it is encountered as 
         // many fields will be controlled via backoffice and we dont want to overwrite.
         $this->load->model('catalog/category');
-        $category_info = $this->model_catalog_category->getCategoryByKeyword($category);
+        $category_info = $this->model_catalog_category->getCategoryByKeyword($category, $parent_id);
 
         $data = array(
             "parent_id" => (int) $parent_id,
@@ -618,7 +624,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             // if product doesn't exist then create it
             $category_id = $this->model_catalog_category->addCategory($data);
 
-            $this->db->query('INSERT INTO `' . DB_PREFIX . 'category_filter` (category_id, filter_id) SELECT ' . $category_id . ' as category_id, filter_id FROM `' . DB_PREFIX . 'filter`');
+//            $this->db->query('INSERT INTO `' . DB_PREFIX . 'category_filter` (category_id, filter_id) SELECT ' . $category_id . ' as category_id, filter_id FROM `' . DB_PREFIX . 'filter`');
 
             // fetch the newly created product
             $category_info = $this->model_catalog_category->getCategory($category_id);
