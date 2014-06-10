@@ -48,6 +48,26 @@ class Category {
                         $this->getAvailableDates($category_query->row['category_id']);
 
                         $this->session->data['category_id'] = $category_id;
+                        
+                        $parent_id = $category_query->row['parent_id'];
+                        while ($parent_id > 0) {
+                            $parent_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
+                            if ($parent_query->num_rows) {
+                                if (empty($this->name))
+                                    $this->name = $parent_query->row['name'];
+                                if (empty($this->description))
+                                    $this->description = $parent_query->row['description'];
+                                if (empty($this->meta_title))
+                                    $this->meta_title = $parent_query->row['meta_title'];
+                                if (empty($this->meta_description))
+                                    $this->meta_description = $parent_query->row['meta_description'];
+                                if (empty($this->meta_keyword))
+                                    $this->meta_keyword = $parent_query->row['meta_keyword'];
+                                if (empty($this->image))
+                                    $this->image = $parent_query->row['image'];
+                                $parent_id = $parent_query->row['parent_id'];
+                            }
+                        }
                 } else {
                         $this->reset();
                 }
