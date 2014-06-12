@@ -279,6 +279,7 @@ class Category {
             $data = array();
 
             $data[] = array(
+                'category_id' => 0,
                 'text'      => $this->language->get('text_home'),
                 'href'      => $this->url->link('common/home'),
                 'separator' => false
@@ -299,6 +300,7 @@ class Category {
 
                     if ($category_query->num_rows) {
                         $data[] = array(
+				'category_id' => $category_query->row['category_id'],
                                 'text'      => $category_query->row['name'],
                                 'href'      => $this->url->link('product/category', 'path=' . $path),
                                 'separator' => $this->language->get('text_separator')
@@ -309,7 +311,17 @@ class Category {
             return $data;
         }
 	
+	public function hasChildren() {
+		$query = $this->db->query("SELECT COUNT(*) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+		return $query->row['children'];
+	}
+	
 	public function getChildren() {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+		return $query->rows;
+	}
+	
+	public function getSiblings() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
 		return $query->rows;
 	}

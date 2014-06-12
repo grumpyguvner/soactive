@@ -984,7 +984,8 @@ a.buttonHome:hover, input.buttonHome:hover {
 	padding: 0;
 }
 .box-category > ul > li {
-	padding: 8px 8px 8px 0px;
+        margin-left: 0px;
+	padding: 2px 2px 2px 0px;
 }
 .box-category > ul > li + li {
 	border-top: 1px solid #EEEEEE;
@@ -994,22 +995,20 @@ a.buttonHome:hover, input.buttonHome:hover {
 	color: #333;
 }
 .box-category > ul > li ul {
-	display: none;
-}
-.box-category > ul > li a.active {
-	font-weight: bold;
+/*	display: none; */
 }
 .box-category > ul > li a.active + ul {
 	display: block;
 }
 .box-category > ul > li ul > li {
-	padding: 5px 5px 0px 10px;
+	padding: 2px 2px 0px 4px;
+        line-height: 16px;
 }
 .box-category > ul > li ul > li > a {
 	text-decoration: none;
 	display: block;
 }
-.box-category > ul > li ul > li > a.active {
+.box-category a.active {
 	font-weight: bold;
 }
 /* content */
