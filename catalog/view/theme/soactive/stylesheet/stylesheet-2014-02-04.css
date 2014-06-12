@@ -976,16 +976,16 @@ a.buttonHome:hover, input.buttonHome:hover {
 	margin-bottom: 4px;
 }
 /* box category */
-.box-category {
+.box-category a {
 }
 .box-category ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-.box-category > ul > li {
-        margin-left: 0px;
-	padding: 2px 2px 2px 0px;
+.box-category ul li * {
+        min-height: 16px;
+        margin-bottom: 0px;
 }
 .box-category > ul > li + li {
 	border-top: 1px solid #EEEEEE;
@@ -1002,11 +1002,14 @@ a.buttonHome:hover, input.buttonHome:hover {
 }
 .box-category > ul > li ul > li {
 	padding: 2px 2px 0px 4px;
-        line-height: 16px;
 }
 .box-category > ul > li ul > li > a {
 	text-decoration: none;
 	display: block;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis; 
+        height: 18px;
 }
 .box-category a.active {
 	font-weight: bold;
@@ -2737,6 +2740,7 @@ overflow: auto;
 }
 .accordion .accordion-group .accordion-inner .box-content .box-category > ul > li {
     padding: 0;
+    line-height: 16px;
 }
 /** End Accordion menu filter **/
 
