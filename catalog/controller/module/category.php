@@ -15,8 +15,16 @@ class ControllerModuleCategory extends Controller {
                 array_shift($breadcrumbs);
                 if (!$this->category->hasChildren())
                     array_pop($breadcrumbs);
+                
                 $this->data['breadcrumbs'] = $breadcrumbs;
-        
+                
+                $path = "";
+                foreach ($breadcrumbs as $breadcrumb) {
+                    $path .= '_' . (int)$breadcrumb['category_id'];
+                }
+                if (!empty($path))
+                    $path= substr($path, 1);
+                
 		$this->load->model('catalog/category');
 		$this->load->model('catalog/product');
 
@@ -38,7 +46,7 @@ class ControllerModuleCategory extends Controller {
 				'category_id' => $category['category_id'],
 				'name'        => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $total . ')' : ''),
 				'children'    => $children_data,
-				'href'        => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $category['category_id'])
+				'href'        => $this->url->link('product/category', 'path=' . $path . '_' . $category['category_id'])
 			);	
 		}
 		
