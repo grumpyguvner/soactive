@@ -320,6 +320,7 @@ CREATE TABLE `oc_category` (
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `top` tinyint(1) NOT NULL,
   `column` int(3) NOT NULL,
+  `information_id` int(11) NOT NULL DEFAULT '0',
   `sort_order` int(3) NOT NULL DEFAULT '0',
   `members_only` tinyint(1) NOT NULL,
   `date_start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

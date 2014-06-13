@@ -14,6 +14,11 @@ class ControllerProductCategory extends Controller {
                     $this->categoryNotFound();
                     return false;
                 }
+
+                if ($this->category->useLandingPage()) {
+                    $this->request->get['information_id'] = (int)$this->category->useLandingPage();
+                    return $this->forward('information/information');
+                }
 		
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');

@@ -10,6 +10,7 @@ class Category {
 	private $parent_id;
 	private $date_start;
 	private $date_end;
+	private $information_id;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -42,6 +43,7 @@ class Category {
                         $this->meta_keyword = $category_query->row['meta_keyword'];
                         $this->image = $category_query->row['image'];
                         $this->parent_id = $category_query->row['parent_id'];
+                        $this->information_id = $category_query->row['information_id'];
                         
                         $this->date_start = null;
                         $this->date_end = null;
@@ -84,6 +86,7 @@ class Category {
 		$this->meta_keyword = '';
 		$this->image = '';
 		$this->parent_id = '';
+		$this->information_id = '';
   	}
   
   	public function getId() {
@@ -387,5 +390,8 @@ class Category {
                 return true;
 	}
         
+        public function useLandingPage() {
+                return $this->information_id;
+        }
 }
 ?>
