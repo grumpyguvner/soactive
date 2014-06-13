@@ -21,45 +21,45 @@ class ControllerCommonSeoUrl extends Controller {
                     break;
                 default:
                     $route = "";
-                    foreach ($parts as $part) {
-                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC, date_added, language_id ASC LIMIT 1");
+                    $path = $this->getCategoryPath($parts);
+                    if ($path) {
+                        $this->request->get['path'] = $this->getCategoryPath($parts);
+                    } else {
+                        foreach ($parts as $part) {
+                            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC, date_added, language_id ASC LIMIT 1");
 
-                        if ($query->num_rows) {
-                            $url = explode('=', $query->row['query']);
+                            if ($query->num_rows) {
+                                $url = explode('=', $query->row['query']);
 
-                            if ($url[0] == 'product_id') {
-                                $this->request->get['product_id'] = $url[1];
-                            }
-                            //articles url
-                            if ($url[0] == 'news_id') {
-                                $this->request->get['news_id'] = $url[1];
-                            }
-                            if ($url[0] == 'ncategory_id' || $url[0] == 'ncat') {
-                                if (!isset($this->request->get['ncat'])) {
-                                    $this->request->get['ncat'] = $url[1];
-                                } else {
-                                    $this->request->get['ncat'] .= '_' . $url[1];
+                                if ($url[0] == 'product_id') {
+                                    $this->request->get['product_id'] = $url[1];
                                 }
-                            }
-                            //articles url
-                            if ($url[0] == 'category_id') {
-                                $this->request->get['path'] = $this->getCategoryPath($parts);
-                                break;
-                            }
+                                //articles url
+                                if ($url[0] == 'news_id') {
+                                    $this->request->get['news_id'] = $url[1];
+                                }
+                                if ($url[0] == 'ncategory_id' || $url[0] == 'ncat') {
+                                    if (!isset($this->request->get['ncat'])) {
+                                        $this->request->get['ncat'] = $url[1];
+                                    } else {
+                                        $this->request->get['ncat'] .= '_' . $url[1];
+                                    }
+                                }
 
-                            if ($url[0] == 'manufacturer_id') {
-                                $this->request->get['manufacturer_id'] = $url[1];
-                            }
+                                if ($url[0] == 'manufacturer_id') {
+                                    $this->request->get['manufacturer_id'] = $url[1];
+                                }
 
-                            if ($url[0] == 'information_id') {
-                                $this->request->get['information_id'] = $url[1];
-                            } elseif ($url[0]) {
-                                $route = $url[0];
+                                if ($url[0] == 'information_id') {
+                                    $this->request->get['information_id'] = $url[1];
+                                } elseif ($url[0]) {
+                                    $route = $url[0];
+                                } else {
+                                    $route = 'common/home';
+                                }
                             } else {
-                                $route = 'common/home';
+                                $this->request->get['route'] = 'error/not_found';
                             }
-                        } else {
-                            $this->request->get['route'] = 'error/not_found';
                         }
                     }
 
@@ -245,6 +245,8 @@ class ControllerCommonSeoUrl extends Controller {
                 } else {
                     $path .= '_' . $category_id;
                 }
+            } else {
+                return false;
             }
 
         }
