@@ -21,10 +21,7 @@ class ControllerCommonSeoUrl extends Controller {
                     break;
                 default:
                     $route = "";
-                    $path = $this->getCategoryPath($parts);
-                    if ($path) {
-                        $this->request->get['path'] = $this->getCategoryPath($parts);
-                    } else {
+                    if (!$this->getCategoryPath($parts)) {
                         foreach ($parts as $part) {
                             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "' ORDER BY IF(language_id = " . (int)$this->config->get('config_language_id') . ", 1, 0) DESC, date_added, language_id ASC LIMIT 1");
 
@@ -245,13 +242,14 @@ class ControllerCommonSeoUrl extends Controller {
                 } else {
                     $path .= '_' . $category_id;
                 }
+                $this->request->get['path'] = $path;
             } else {
                 return false;
             }
 
         }
 
-        return $path;
+        return true;
     }
 }
 
