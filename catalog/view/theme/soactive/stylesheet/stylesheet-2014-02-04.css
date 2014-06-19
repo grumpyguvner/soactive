@@ -983,7 +983,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	margin: 0;
 	padding: 0;
 }
-.box-category ul li * {
+.box-category ul li a {
         min-height: 16px;
         margin-bottom: 0px;
 }
@@ -2747,11 +2747,11 @@ overflow: auto;
     padding: 0;
     line-height: 14px;
 }
-.accordion .accordion-group .accordion-inner  .box-content .box-category a {
+.accordion .accordion-group .accordion-inner  .box-content .box-category > ul > li > a {
     font-size: 12px;
     padding-left: 20px;
 }
-.accordion .accordion-group .accordion-inner  .box-content .box-category a.active {
+.accordion .accordion-group .accordion-inner  .box-content .box-category ul li a.active {
     background: transparent url('../image/tick.png') no-repeat left center;
 }
 
