@@ -2746,7 +2746,7 @@ overflow: auto;
     padding-left: 20px;
 }
 .accordion .accordion-group .accordion-inner  .box-content .box-category a.active {
-    background: transparent url('../image/remove.png') no-repeat left center;
+    background: transparent url('../image/tick.png') no-repeat left center;
 }
 
 /** End Accordion menu filter **/
