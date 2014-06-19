@@ -3,6 +3,9 @@
 class ControllerModuleFilter extends Controller {
 
     protected function index($setting) {
+
+        //TODO: this needs to be put into module settings
+        $this->config->set('config_filter_use_names',1);
         
         if (isset($this->request->get['path'])) {
             $parts = explode('_', (string) $this->request->get['path']);
@@ -47,15 +50,40 @@ class ControllerModuleFilter extends Controller {
             }
 
             $this->data['action'] = str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url));
+
+
+            
+//            foreach ($_GET as $key => $value) {
+//                $data[$this->clean($key)] = $this->clean($value);
+//            }
             
             if (isset($this->request->get['filter'])) {
                 $this->data['filter_category'] = explode(',', str_replace(':', ',', $this->request->get['filter']));
                 $filter = $this->request->get['filter'];
             } else {
-                $this->data['filter_category'] = array();
-                $filter = '';
-            }
+                
+                $categoryFilters = $this->model_catalog_category->getCategoryFilters($category_id);
+                $categoryFilter = "";
 
+                if ($categoryFilters) {
+                    foreach ($categoryFilters as $filterGroup) {
+                        $groupName = strtolower($filterGroup['name']);
+                        if (isset($this->request->get[$groupName])) {
+                            $values = explode(',', str_replace(':', ',', $this->request->get[$groupName]));
+                            foreach ($filterGroup['filter'] as $filter) {
+                                $filterName = strtolower($filter['name']);
+                                if (in_array($filterName, $values)) {
+                                    $categoryFilter .= (empty($categoryFilter) ? "" : ",") . $filter['filter_id'];
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                $this->data['filter_category'] = explode(',', str_replace(':', ',', $categoryFilter));
+                $filter = $categoryFilter;
+            }
+            
             if (isset($this->request->get['option'])) {
                 $this->data['filter_option'] = explode(',', str_replace(':', ',', $this->request->get['option']));
                 $option = $this->request->get['option'];
@@ -76,7 +104,7 @@ class ControllerModuleFilter extends Controller {
             
             $data = array(
                 'filter_category_id' => $category_id,
-                'filter_filter'      => $filter, 
+                'filter_filter'      => $filter,
                 'filter_option'      => $option
             );
 
@@ -115,8 +143,10 @@ class ControllerModuleFilter extends Controller {
 
                     foreach ($filter_group['filter'] as $filter) {
 
+                        $url = $this->getUrl($filter_group['name'],$filter['name']);
                         $filter_data[] = array(
                             'filter_id' => $filter['filter_id'],
+                            'filter_url' => $url,
                             'name' => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $filter['total'] . ')' : ''),
                             'count' => $filter['total'],
                             'filter_count' => $filter['filter_total']
@@ -234,6 +264,35 @@ class ControllerModuleFilter extends Controller {
 
             $this->render();
         }
+    }
+    
+    private function getUrl($filterGroup, $filterValue) {
+        $filterGroup = strtolower(urlencode($filterGroup));
+        $filterValue = strtolower(urlencode($filterValue));
+        
+        $path = $this->category->getPath();
+        $urlQuery = $this->category->getUrlQuery($filterGroup);
+//        $urlQuery = "";
+        if (isset($this->request->get[$filterGroup])) {
+            $array = explode(",", $this->request->get[$filterGroup]);
+            if (in_array($filterValue, $array)) {
+                //if already in array then url should remove it
+                if(($key = array_search($filterValue, $array)) !== false) {
+                    unset($array[$key]);
+                }
+            } else {
+                //otherwise add it
+                $array[] = $filterValue;
+            }
+            if (count($array)) {
+                $urlQuery .= '&'.$filterGroup.'=' . implode(",", $array);
+            }
+        } else {
+            $urlQuery .= '&'.$filterGroup.'=' . $filterValue;
+        }
+        
+        $url = $this->url->link('product/category', 'path=' . $path . $urlQuery);
+        return $url;
     }
 
 }

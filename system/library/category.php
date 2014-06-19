@@ -151,56 +151,51 @@ class Category {
                 $excludes = explode (",", $excludes);
             
             $urlQuery = "";
-            if ($this->extensions->isInstalled('afilters'))
-            {
-                if (!in_array("cat_filters", $excludes)) {
-                    if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
-                        foreach ($this->request->get['cat_filters'] as $key=>$val) {
-                            if (!is_array($val))
-                                $val = explode (",", $val);
-                            foreach ($val as $val2) {
-                                $urlQuery .= '&cat_filters['.$key.'][]=' . $val2; }
-                        }
-                    }
-                }
-                
-                if (!in_array("att_filters", $excludes)) {
-                    if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
-                        foreach ($this->request->get['att_filters'] as $key=>$val) {
-                            if (!is_array($val))
-                                $val = explode (",", $val);
-                            foreach ($val as $val2) {
-                                $val2 = str_replace('&amp;','&',urldecode($val2)); 
-                                $urlQuery .= '&att_filters['.$key.'][]=' . urlencode($val2); 
+            
+            foreach ($this->request->get as $get => $value) {
+                switch ($get) {
+                    case 'route':
+                    case '_route_':
+                    case 'path':
+                        //ignore these
+                        break;
+                    
+                    case 'cat_filters':
+                    case 'att_filters':
+                        if ($this->extensions->isInstalled('afilters'))
+                        {
+                            if (!in_array("cat_filters", $excludes)) {
+                                if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
+                                    foreach ($this->request->get['cat_filters'] as $key=>$val) {
+                                        if (!is_array($val))
+                                            $val = explode (",", $val);
+                                        foreach ($val as $val2) {
+                                            $urlQuery .= '&cat_filters['.$key.'][]=' . $val2; }
+                                    }
+                                }
+                            }
+
+                            if (!in_array("att_filters", $excludes)) {
+                                if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+                                    foreach ($this->request->get['att_filters'] as $key=>$val) {
+                                        if (!is_array($val))
+                                            $val = explode (",", $val);
+                                        foreach ($val as $val2) {
+                                            $val2 = str_replace('&amp;','&',urldecode($val2)); 
+                                            $urlQuery .= '&att_filters['.$key.'][]=' . urlencode($val2); 
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
+                        break;
+
+                    default:
+                        if (!in_array($get, $excludes))
+                            $urlQuery .= '&' . $get . '=' . $value;
+                        break;
                 }
             }
-
-            if (isset($this->request->get['filter'])&& !in_array("filter", $excludes)) {
-                    $urlQuery .= '&filter=' . $this->request->get['filter'];
-            }
-            
-            if (isset($this->request->get['option'])&& !in_array("option", $excludes)) {
-                    $urlQuery .= '&option=' . $this->request->get['option'];
-            }
-            
-            if (isset($this->request->get['product'])&& !in_array("product", $excludes)) {
-                    $urlQuery .= '&product=' . $this->request->get['product'];
-            }
-            
-            if (isset($this->request->get['manufacturer_id']) && !in_array("manufacturer", $excludes))
-                $urlQuery .= '&manufacturer_id=' . $this->request->get['manufacturer_id'];
-			
-            if (isset($this->request->get['sort']) && !in_array("sort", $excludes))
-                $urlQuery .= '&sort=' . $this->request->get['sort'];
-
-            if (isset($this->request->get['order']) && !in_array("order", $excludes))
-                $urlQuery .= '&order=' . $this->request->get['order'];
-
-            if (isset($this->request->get['limit']) && !in_array("limit", $excludes))
-                $urlQuery .= '&limit=' . $this->request->get['limit'];
             
             return $urlQuery;
         }
