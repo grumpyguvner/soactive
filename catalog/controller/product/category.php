@@ -28,8 +28,26 @@ class ControllerProductCategory extends Controller {
 		if (isset($this->request->get['filter'])) {
 			$filter = $this->request->get['filter'];
 		} else {
-			$filter = '';
-		}
+                    $categoryFilters = $this->model_catalog_category->getCategoryFilters($category_id);
+                    $categoryFilter = "";
+
+                    if ($categoryFilters) {
+                        foreach ($categoryFilters as $filterGroup) {
+                            $groupName = strtolower($filterGroup['name']);
+                            if (isset($this->request->get[$groupName])) {
+                                $values = explode(',', str_replace(':', ',', $this->request->get[$groupName]));
+                                foreach ($filterGroup['filter'] as $filter) {
+                                    $filterName = strtolower($filter['name']);
+                                    if (in_array($filterName, $values)) {
+                                        $categoryFilter .= (empty($categoryFilter) ? "" : ",") . $filter['filter_id'];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    $filter = $categoryFilter;
+                }
 		if (isset($this->request->get['option'])) {
 			$option = $this->request->get['option'];
 		} else {
