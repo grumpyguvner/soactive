@@ -28,6 +28,7 @@ class ControllerProductCategory extends Controller {
 		if (isset($this->request->get['filter'])) {
 			$filter = $this->request->get['filter'];
 		} else {
+                    $this->load->model('catalog/category');
                     $categoryFilters = $this->model_catalog_category->getCategoryFilters($category_id);
                     $categoryFilter = "";
 
