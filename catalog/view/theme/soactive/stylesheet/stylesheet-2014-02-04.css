@@ -2745,9 +2745,10 @@ overflow: auto;
 }
 .accordion .accordion-group .accordion-inner .box-content .box-category > ul > li {
     padding: 0;
-    line-height: 16px;
+    line-height: 14px;
 }
 .accordion .accordion-group .accordion-inner  .box-content .box-category a {
+    font-size: 12px;
     padding-left: 20px;
 }
 .accordion .accordion-group .accordion-inner  .box-content .box-category a.active {
