@@ -510,6 +510,10 @@ label {
 .breadcrumb a, .breadcrumb a:visited, .breadcrumb a b {
         color: #514f4f;
         font-family: 'Open Sans Condensed',sans-serif;
+        text-decoration: underline;
+}
+.breadcrumb a:last-of-type {
+        text-decoration: none;
 }
 
 .breadcrumb .back {
@@ -991,7 +995,12 @@ a.buttonHome:hover, input.buttonHome:hover {
 	border-top: 1px solid #EEEEEE;
 }
 .box-category > ul > li > a {
-	text-decoration: none;
+	text-decoration: underline;
+	display: block;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis; 
+        height: 18px;
 	color: #333;
 }
 .box-category > ul > li ul {
@@ -1004,7 +1013,7 @@ a.buttonHome:hover, input.buttonHome:hover {
 	padding: 2px 2px 0px 4px;
 }
 .box-category > ul > li ul > li > a {
-	text-decoration: none;
+	text-decoration: underline;
 	display: block;
         overflow:hidden;
         white-space: nowrap;
@@ -1012,8 +1021,6 @@ a.buttonHome:hover, input.buttonHome:hover {
         height: 18px;
 }
 .box-category > ul > li ul > li > a.small {
-        height: 14px;
-        font-size: 12px;
         color: #1db4b7;
 }
 .box-category a.active {
@@ -2748,7 +2755,6 @@ overflow: auto;
     line-height: 14px;
 }
 .accordion .accordion-group .accordion-inner  .box-content .box-category > ul > li > a {
-    font-size: 12px;
     padding-left: 20px;
 }
 .accordion .accordion-group .accordion-inner  .box-content .box-category ul li a.active {
