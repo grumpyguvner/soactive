@@ -467,12 +467,23 @@ class ModelCatalogProduct extends Model {
                 }
             } 
            
-            $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+            if (!empty($data['filter_data'])) {
+                $usingNamedFilters = true;
+                $filter_groups = array();
+                foreach ($data['filter_data'] as $key => $value) {
+                    if ($value['type'] == 'filter') {
+                        $filter_groups[$value['group']][] = $value['value'];
+                    }
+                }
+            } else {
+                $usingNamedFilters = false;
+                $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+            }
             $option_groups = (!empty($data['filter_option'])) ? explode(':', $data['filter_option']) : array();
 
             $sql = "SELECT p.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = p.product_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = '" . (int) $customer_group_id . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int) $customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special";
 
-            if (!empty($data['filter_category_id']) || !empty($data['filter_name']) || !empty($data['filter_filter']) || !empty($data['filter_option'])) {
+            if (!empty($data['filter_category_id']) || !empty($data['filter_name']) || !empty($data['filter_data']) || !empty($data['filter_filter']) || !empty($data['filter_option'])) {
                 if (!empty($data['filter_sub_category'])) {
                     // $sql .= " FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (cp.category_id = p2c.category_id)";			
                     $sql .= " FROM " . DB_PREFIX . "product_to_category p2c";
@@ -481,7 +492,11 @@ class ModelCatalogProduct extends Model {
                 }
                 
                 foreach ($filter_groups as $key => $filters) {
-                    $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id)";
+                    if ($usingNamedFilters) {
+                        $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id) LEFT JOIN " . DB_PREFIX . "filter_description fd" . $key . " ON (pf" . $key . ".filter_id = fd" . $key . ".filter_id)";
+                    } else {
+                        $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id)";
+                    }
                 }
 
                 if (!empty($data['filter_name'])) {
@@ -583,15 +598,19 @@ class ModelCatalogProduct extends Model {
                 $sql .= " AND (" . implode(' OR ', $implode_data) . ")";
                 
                 foreach ($filter_groups as $key => $filters) {
-                    $implode = array();
+                    if ($usingNamedFilters) {
+                        $sql .= " AND fd" . $key . ".name IN ('" . implode("','", $filters) . "')";
+                    } else {
+                        $implode = array();
 
-                    $filters = explode(',', $filters);
+                        $filters = explode(',', $filters);
 
-                    foreach ($filters as $filter_id) {
-                        $implode[] = (int) $filter_id;
+                        foreach ($filters as $filter_id) {
+                            $implode[] = (int) $filter_id;
+                        }
+
+                        $sql .= " AND pf" . $key . ".filter_id IN (" . implode(',', $implode) . ")";
                     }
-
-                    $sql .= " AND pf" . $key . ".filter_id IN (" . implode(',', $implode) . ")";
                 }
 
 
@@ -994,12 +1013,23 @@ class ModelCatalogProduct extends Model {
                 }
             }
            
-            $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+            if (!empty($data['filter_data'])) {
+                $usingNamedFilters = true;
+                $filter_groups = array();
+                foreach ($data['filter_data'] as $key => $value) {
+                    if ($value['type'] == 'filter') {
+                        $filter_groups[$value['group']][] = $value['value'];
+                    }
+                }
+            } else {
+                $usingNamedFilters = false;
+                $filter_groups = (!empty($data['filter_filter'])) ? explode(':', $data['filter_filter']) : array();
+            }
             $option_groups = (!empty($data['filter_option'])) ? explode(':', $data['filter_option']) : array();
 
             $sql = "SELECT COUNT(DISTINCT p.product_id) AS total";
 
-            if (!empty($data['filter_category_id']) || !empty($data['filter_name']) || !empty($data['filter_option'])) {
+            if (!empty($data['filter_category_id']) || !empty($data['filter_name']) || !empty($data['filter_data']) || !empty($data['filter_filter']) || !empty($data['filter_option'])) {
                 if (!empty($data['filter_sub_category'])) {
                     // $sql .= " FROM " . DB_PREFIX . "category_path cp LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (cp.category_id = p2c.category_id)";			
                     $sql .= " FROM " . DB_PREFIX . "product_to_category p2c";
@@ -1008,7 +1038,11 @@ class ModelCatalogProduct extends Model {
                 }
                 
                 foreach ($filter_groups as $key => $filters) {
-                    $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id)";
+                    if ($usingNamedFilters) {
+                        $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id) LEFT JOIN " . DB_PREFIX . "filter_description fd" . $key . " ON (pf" . $key . ".filter_id = fd" . $key . ".filter_id)";
+                    } else {
+                        $sql .= " LEFT JOIN " . DB_PREFIX . "product_filter pf" . $key . " ON (p2c.product_id = pf" . $key . ".product_id)";
+                    }
                 }
 
                 if (!empty($data['filter_name'])) {
@@ -1050,15 +1084,19 @@ class ModelCatalogProduct extends Model {
                 $sql .= " (" . implode(' OR ', $implode_data) . ") AND "; 
                 
                 foreach ($filter_groups as $key => $filters) {
-                    $implode = array();
+                    if ($usingNamedFilters) {
+                        $sql .= " fd" . $key . ".name IN ('" . implode("','", $filters) . "') AND ";
+                    } else {
+                        $implode = array();
 
-                    $filters = explode(',', $filters);
+                        $filters = explode(',', $filters);
 
-                    foreach ($filters as $filter_id) {
-                        $implode[] = (int) $filter_id;
+                        foreach ($filters as $filter_id) {
+                            $implode[] = (int) $filter_id;
+                        }
+
+                        $sql .= " pf" . $key . ".filter_id IN (" . implode(',', $implode) . ") AND ";
                     }
-
-                    $sql .= " pf" . $key . ".filter_id IN (" . implode(',', $implode) . ") AND ";
                 }
 
 

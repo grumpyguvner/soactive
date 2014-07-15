@@ -146,6 +146,7 @@ class ControllerProductCategory extends Controller {
 	
                 $data = array(
                         'filter_category_id' => $category_id,
+                        'filter_data'        => $filterData, 
                         'filter_filter'      => $filter, 
                         'filter_option'      => $option,
                         'sort'               => $sort,

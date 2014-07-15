@@ -207,31 +207,55 @@ class Category {
             $data[] = array('type'  => "category",
                             'group' => $this->getParentId(),
                             'value' => urlencode($this->getId()));
-            
-            if ($this->extensions->isInstalled('afilters'))
-            {
-                if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
-                    foreach ($this->request->get['cat_filters'] as $key=>$val) {
-                        if (!is_array($val))
-                            $val = explode (",", $val);
-                        foreach ($val as $val2)
-                            $data[] = array('type'  => "category",
-                                            'group' => $key,
-                                            'value' => urlencode($val2));
-                    }
-                }
 
-                if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
-                    foreach ($this->request->get['att_filters'] as $key=>$val) {
-                        if (!is_array($val))
-                            $val = explode (",", $val);
+            foreach ($this->request->get as $get => $value) {
+                switch ($get) {
+                    case 'route':
+                    case '_route_':
+                    case 'path':
+                        //ignore these
+                        break;
+                    
+                    case 'cat_filters':
+                    case 'att_filters':
+                        if ($this->extensions->isInstalled('afilters'))
+                        {
+                            if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
+                                foreach ($this->request->get['cat_filters'] as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+                                    foreach ($val as $val2)
+                                        $data[] = array('type'  => "category",
+                                                        'group' => $key,
+                                                        'value' => urlencode($val2));
+                                }
+                            }
+
+                            if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+                                foreach ($this->request->get['att_filters'] as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+                                    foreach ($val as $val2)
+                                        $data[] = array('type'  => "attribute",
+                                                        'group' => $key,
+                                                        'value' => urlencode($val2));
+                                }
+                            }
+                        }
+                        break;
+
+                    default:
+                        //TODO: Need to validate whether is is a filter group!!
+                        $val = explode(",", $value);
                         foreach ($val as $val2)
-                            $data[] = array('type'  => "attribute",
-                                            'group' => $key,
+                            $data[] = array('type'  => "filter",
+                                            'group' => $get,
                                             'value' => urlencode($val2));
-                    }
+                        break;
                 }
             }
+            
+            
             
             return $data;
         }

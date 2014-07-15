@@ -1,4 +1,3 @@
-<?php echo $category_id; ?>
 <?php echo $header; ?>
 <?php
 if ($login_required)
