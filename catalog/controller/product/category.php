@@ -14,6 +14,11 @@ class ControllerProductCategory extends Controller {
                     $this->categoryNotFound();
                     return false;
                 }
+
+                if ($this->category->useLandingPage()) {
+                    $this->request->get['information_id'] = (int)$this->category->useLandingPage();
+                    return $this->forward('information/information');
+                }
 		
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');
@@ -23,8 +28,27 @@ class ControllerProductCategory extends Controller {
 		if (isset($this->request->get['filter'])) {
 			$filter = $this->request->get['filter'];
 		} else {
-			$filter = '';
-		}
+                    $this->load->model('catalog/category');
+                    $categoryFilters = $this->model_catalog_category->getCategoryFilters($category_id);
+                    $categoryFilter = "";
+
+                    if ($categoryFilters) {
+                        foreach ($categoryFilters as $filterGroup) {
+                            $groupName = strtolower($filterGroup['name']);
+                            if (isset($this->request->get[$groupName])) {
+                                $values = explode(',', str_replace(':', ',', $this->request->get[$groupName]));
+                                foreach ($filterGroup['filter'] as $filter) {
+                                    $filterName = strtolower($filter['name']);
+                                    if (in_array($filterName, $values)) {
+                                        $categoryFilter .= (empty($categoryFilter) ? "" : ",") . $filter['filter_id'];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    $filter = $categoryFilter;
+                }
 		if (isset($this->request->get['option'])) {
 			$option = $this->request->get['option'];
 		} else {
@@ -47,6 +71,7 @@ class ControllerProductCategory extends Controller {
                 $this->document->setDescription($this->category->getMetaDescription());
                 $this->document->setKeywords($this->category->getMetaKeyword());
 			
+                $this->data['category_id'] = $category_id;
                 $this->data['heading_title'] = $this->category->getName();
 
                 $this->data['text_refine'] = $this->language->get('text_refine');
@@ -121,6 +146,7 @@ class ControllerProductCategory extends Controller {
 	
                 $data = array(
                         'filter_category_id' => $category_id,
+                        'filter_data'        => $filterData, 
                         'filter_filter'      => $filter, 
                         'filter_option'      => $option,
                         'sort'               => $sort,

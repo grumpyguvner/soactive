@@ -6,7 +6,7 @@ class DB {
 	private $driver;
         
         private $audit;
-	private $auditLevel = 1; // 1 == not selects, 2 == all;
+	private $auditLevel = 2; // 1 == not selects, 2 == all;
 	private $auditStats = false;
         
         private $auditUsername = "unknown";

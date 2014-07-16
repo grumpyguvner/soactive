@@ -31,9 +31,9 @@ if ($filter_groups || $options) {
                                                         {
                                                           echo ($filter['filter_count']) ? '<li>' : '<li class="noneCurrent">';
                                                           if (in_array($filter['filter_id'], $filter_category)) { ?>
-                                                            <label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" checked="checked" /> <?php echo $filter['name']; ?></label>
+                                                            <a href="<?php echo $filter['filter_url']; ?>" class="active"><?php echo $filter['name']; ?></a>
                                                         <?php } else { ?>
-                                                            <label class="checkbox"><input type="checkbox" value="<?php echo $filter['filter_id']; ?>" id="filter<?php echo $filter['filter_id']; ?>" /> <?php echo $filter['name']; ?></label>
+                                                            <a href="<?php echo $filter['filter_url']; ?>"><?php echo $filter['name']; ?></a>
                                                         <?php } 
                                                           echo '</li>';
                                                         }

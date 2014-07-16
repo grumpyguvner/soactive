@@ -15,28 +15,6 @@ class ControllerProductProduct extends Controller {
 		
 		$this->load->model('catalog/category');	
 		
-		if (isset($this->request->get['path'])) {
-			$path = '';
-				
-			foreach (explode('_', $this->request->get['path']) as $path_id) {
-				if (!$path) {
-					$path = $path_id;
-				} else {
-					$path .= '_' . $path_id;
-				}
-				
-				$category_info = $this->model_catalog_category->getCategory($path_id);
-				
-				if ($category_info) {
-					$this->data['breadcrumbs'][] = array(
-						'text'      => $category_info['name'],
-						'href'      => $this->url->link('product/category', 'path=' . $path),
-						'separator' => $this->language->get('text_separator')
-					);
-				}
-			}
-		}
-		
 		$this->load->model('catalog/manufacturer');	
 		
 		if (isset($this->request->get['manufacturer_id'])) {
@@ -55,7 +33,9 @@ class ControllerProductProduct extends Controller {
 					'separator' => $this->language->get('text_separator')
 				);
 			}
-		}
+		} else {
+                        $this->data['breadcrumbs'] = $this->category->getBreadcrumbs();
+                }
 		
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_tag'])) {
 			$url = '';

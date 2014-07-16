@@ -10,6 +10,7 @@ class Category {
 	private $parent_id;
 	private $date_start;
 	private $date_end;
+	private $information_id;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -42,12 +43,33 @@ class Category {
                         $this->meta_keyword = $category_query->row['meta_keyword'];
                         $this->image = $category_query->row['image'];
                         $this->parent_id = $category_query->row['parent_id'];
+                        $this->information_id = $category_query->row['information_id'];
                         
                         $this->date_start = null;
                         $this->date_end = null;
                         $this->getAvailableDates($category_query->row['category_id']);
 
                         $this->session->data['category_id'] = $category_id;
+                        
+                        $parent_id = $category_query->row['parent_id'];
+                        while ($parent_id > 0) {
+                            $parent_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1'");
+                            if ($parent_query->num_rows) {
+                                if (empty($this->name))
+                                    $this->name = $parent_query->row['name'];
+                                if (empty($this->description))
+                                    $this->description = $parent_query->row['description'];
+                                if (empty($this->meta_title))
+                                    $this->meta_title = $parent_query->row['meta_title'];
+                                if (empty($this->meta_description))
+                                    $this->meta_description = $parent_query->row['meta_description'];
+                                if (empty($this->meta_keyword))
+                                    $this->meta_keyword = $parent_query->row['meta_keyword'];
+                                if (empty($this->image))
+                                    $this->image = $parent_query->row['image'];
+                                $parent_id = $parent_query->row['parent_id'];
+                            }
+                        }
                 } else {
                         $this->reset();
                 }
@@ -64,6 +86,7 @@ class Category {
 		$this->meta_keyword = '';
 		$this->image = '';
 		$this->parent_id = '';
+		$this->information_id = '';
   	}
   
   	public function getId() {
@@ -128,56 +151,51 @@ class Category {
                 $excludes = explode (",", $excludes);
             
             $urlQuery = "";
-            if ($this->extensions->isInstalled('afilters'))
-            {
-                if (!in_array("cat_filters", $excludes)) {
-                    if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
-                        foreach ($this->request->get['cat_filters'] as $key=>$val) {
-                            if (!is_array($val))
-                                $val = explode (",", $val);
-                            foreach ($val as $val2) {
-                                $urlQuery .= '&cat_filters['.$key.'][]=' . $val2; }
-                        }
-                    }
-                }
-                
-                if (!in_array("att_filters", $excludes)) {
-                    if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
-                        foreach ($this->request->get['att_filters'] as $key=>$val) {
-                            if (!is_array($val))
-                                $val = explode (",", $val);
-                            foreach ($val as $val2) {
-                                $val2 = str_replace('&amp;','&',urldecode($val2)); 
-                                $urlQuery .= '&att_filters['.$key.'][]=' . urlencode($val2); 
+            
+            foreach ($this->request->get as $get => $value) {
+                switch ($get) {
+                    case 'route':
+                    case '_route_':
+                    case 'path':
+                        //ignore these
+                        break;
+                    
+                    case 'cat_filters':
+                    case 'att_filters':
+                        if ($this->extensions->isInstalled('afilters'))
+                        {
+                            if (!in_array("cat_filters", $excludes)) {
+                                if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
+                                    foreach ($this->request->get['cat_filters'] as $key=>$val) {
+                                        if (!is_array($val))
+                                            $val = explode (",", $val);
+                                        foreach ($val as $val2) {
+                                            $urlQuery .= '&cat_filters['.$key.'][]=' . $val2; }
+                                    }
+                                }
+                            }
+
+                            if (!in_array("att_filters", $excludes)) {
+                                if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+                                    foreach ($this->request->get['att_filters'] as $key=>$val) {
+                                        if (!is_array($val))
+                                            $val = explode (",", $val);
+                                        foreach ($val as $val2) {
+                                            $val2 = str_replace('&amp;','&',urldecode($val2)); 
+                                            $urlQuery .= '&att_filters['.$key.'][]=' . urlencode($val2); 
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
+                        break;
+
+                    default:
+                        if (!in_array($get, $excludes))
+                            $urlQuery .= '&' . $get . '=' . $value;
+                        break;
                 }
             }
-
-            if (isset($this->request->get['filter'])&& !in_array("filter", $excludes)) {
-                    $urlQuery .= '&filter=' . $this->request->get['filter'];
-            }
-            
-            if (isset($this->request->get['option'])&& !in_array("option", $excludes)) {
-                    $urlQuery .= '&option=' . $this->request->get['option'];
-            }
-            
-            if (isset($this->request->get['product'])&& !in_array("product", $excludes)) {
-                    $urlQuery .= '&product=' . $this->request->get['product'];
-            }
-            
-            if (isset($this->request->get['manufacturer_id']) && !in_array("manufacturer", $excludes))
-                $urlQuery .= '&manufacturer_id=' . $this->request->get['manufacturer_id'];
-			
-            if (isset($this->request->get['sort']) && !in_array("sort", $excludes))
-                $urlQuery .= '&sort=' . $this->request->get['sort'];
-
-            if (isset($this->request->get['order']) && !in_array("order", $excludes))
-                $urlQuery .= '&order=' . $this->request->get['order'];
-
-            if (isset($this->request->get['limit']) && !in_array("limit", $excludes))
-                $urlQuery .= '&limit=' . $this->request->get['limit'];
             
             return $urlQuery;
         }
@@ -189,31 +207,55 @@ class Category {
             $data[] = array('type'  => "category",
                             'group' => $this->getParentId(),
                             'value' => urlencode($this->getId()));
-            
-            if ($this->extensions->isInstalled('afilters'))
-            {
-                if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
-                    foreach ($this->request->get['cat_filters'] as $key=>$val) {
-                        if (!is_array($val))
-                            $val = explode (",", $val);
-                        foreach ($val as $val2)
-                            $data[] = array('type'  => "category",
-                                            'group' => $key,
-                                            'value' => urlencode($val2));
-                    }
-                }
 
-                if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
-                    foreach ($this->request->get['att_filters'] as $key=>$val) {
-                        if (!is_array($val))
-                            $val = explode (",", $val);
+            foreach ($this->request->get as $get => $value) {
+                switch ($get) {
+                    case 'route':
+                    case '_route_':
+                    case 'path':
+                        //ignore these
+                        break;
+                    
+                    case 'cat_filters':
+                    case 'att_filters':
+                        if ($this->extensions->isInstalled('afilters'))
+                        {
+                            if (isset($this->request->get['cat_filters']) && (is_array($this->request->get['cat_filters']))) {
+                                foreach ($this->request->get['cat_filters'] as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+                                    foreach ($val as $val2)
+                                        $data[] = array('type'  => "category",
+                                                        'group' => $key,
+                                                        'value' => urlencode($val2));
+                                }
+                            }
+
+                            if (isset($this->request->get['att_filters']) && (is_array($this->request->get['att_filters']))) {
+                                foreach ($this->request->get['att_filters'] as $key=>$val) {
+                                    if (!is_array($val))
+                                        $val = explode (",", $val);
+                                    foreach ($val as $val2)
+                                        $data[] = array('type'  => "attribute",
+                                                        'group' => $key,
+                                                        'value' => urlencode($val2));
+                                }
+                            }
+                        }
+                        break;
+
+                    default:
+                        //TODO: Need to validate whether is is a filter group!!
+                        $val = explode(",", $value);
                         foreach ($val as $val2)
-                            $data[] = array('type'  => "attribute",
-                                            'group' => $key,
+                            $data[] = array('type'  => "filter",
+                                            'group' => $get,
                                             'value' => urlencode($val2));
-                    }
+                        break;
                 }
             }
+            
+            
             
             return $data;
         }
@@ -242,8 +284,15 @@ class Category {
             if (isset($this->request->get['path'])) {
                 $parts = explode('_', (string) $this->request->get['path']);
 
-                foreach ($parts as $path_id)
-                    $category_id = $path_id;
+                $parent_id = 0;
+                foreach ($parts as $path_id) {
+                    $category_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$path_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.parent_id = '" . (int)$parent_id . "' AND c.status = '1'");
+                    if ($category_query->num_rows) {
+                        $category_id = $path_id;
+                        $parent_id = $category_id;
+                    }
+                    
+                }
             }
             return $category_id;
         }
@@ -252,6 +301,7 @@ class Category {
             $data = array();
 
             $data[] = array(
+                'category_id' => 0,
                 'text'      => $this->language->get('text_home'),
                 'href'      => $this->url->link('common/home'),
                 'separator' => false
@@ -272,6 +322,7 @@ class Category {
 
                     if ($category_query->num_rows) {
                         $data[] = array(
+				'category_id' => $category_query->row['category_id'],
                                 'text'      => $category_query->row['name'],
                                 'href'      => $this->url->link('product/category', 'path=' . $path),
                                 'separator' => $this->language->get('text_separator')
@@ -282,7 +333,17 @@ class Category {
             return $data;
         }
 	
+	public function hasChildren() {
+		$query = $this->db->query("SELECT COUNT(*) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+		return $query->row['children'];
+	}
+	
 	public function getChildren() {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
+		return $query->rows;
+	}
+	
+	public function getSiblings() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$this->parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
 		return $query->rows;
 	}
@@ -348,5 +409,8 @@ class Category {
                 return true;
 	}
         
+        public function useLandingPage() {
+                return $this->information_id;
+        }
 }
 ?>

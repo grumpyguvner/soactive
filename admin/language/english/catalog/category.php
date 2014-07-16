@@ -21,6 +21,7 @@ $_['entry_meta_keyword']     = 'Meta Tag Keywords:';
 $_['entry_meta_description'] = 'Meta Tag Description:';
 $_['entry_description']      = 'Description:';
 $_['entry_parent']           = 'Parent Category:';
+$_['entry_information']      = 'Landing Page:';
 $_['entry_filter']           = 'Filters:<br /><span class="help">(Autocomplete)</span>';
 $_['entry_googlebase_text']  = 'Google Base Category Text:';
 $_['entry_googlebase_xml']   = 'Google Base Category XML:';

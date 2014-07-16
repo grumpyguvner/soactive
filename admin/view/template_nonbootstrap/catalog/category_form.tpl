@@ -71,6 +71,19 @@
                   <?php } ?>
                 </select></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_information; ?></td>
+              <td><select name="information_id">
+                  <option value="0"><?php echo $text_none; ?></option>
+                  <?php foreach ($landingpages as $landingpage) { ?>
+                  <?php if ($landingpage['information_id'] == $information_id) { ?>
+                  <option value="<?php echo $landingpage['information_id']; ?>" selected="selected"><?php echo $landingpage['title']; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $landingpage['information_id']; ?>"><?php echo $landingpage['title']; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
             <?php
             if ($has_filters)
             {

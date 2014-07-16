@@ -170,6 +170,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->data['entry_keyword'] = $this->language->get('entry_keyword');
 		$this->data['entry_filter'] = $this->language->get('entry_filter');
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
+		$this->data['entry_information'] = $this->language->get('entry_information');
 		$this->data['entry_googlebase_text'] = $this->language->get('entry_googlebase_text');
 		$this->data['entry_googlebase_xml'] = $this->language->get('entry_googlebase_xml');
 		$this->data['entry_is_filter'] = $this->language->get('entry_is_filter');
@@ -262,6 +263,18 @@ class ControllerCatalogCategory extends Controller {
 			$this->data['parent_id'] = $category_info['parent_id'];
 		} else {
 			$this->data['parent_id'] = 0;
+		}
+                
+		$this->load->model('catalog/information');
+		
+		$this->data['landingpages'] = $this->model_catalog_information->getInformations();
+
+		if (isset($this->request->post['information_id'])) {
+			$this->data['information_id'] = $this->request->post['information_id'];
+		} elseif (!empty($category_info)) {
+			$this->data['information_id'] = $category_info['information_id'];
+		} else {
+			$this->data['information_id'] = 0;
 		}
                 
                 // Filters

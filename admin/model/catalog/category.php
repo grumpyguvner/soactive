@@ -2,7 +2,7 @@
 class ModelCatalogCategory extends Model {
 	public function addCategory($data) {
             
-		$this->db->query("INSERT INTO " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', information_id = '" . (int)$data['information_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
 	
 		$category_id = $this->db->getLastId();
 		
@@ -60,7 +60,7 @@ class ModelCatalogCategory extends Model {
 	}
 	
 	public function editCategory($category_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', is_filter = '" . (int)$data['is_filter'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE category_id = '" . (int)$category_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "category SET parent_id = '" . (int)$data['parent_id'] . "', information_id = '" . (int)$data['information_id'] . "', googlebase_text = '" . $this->db->escape($data['googlebase_text']) . "', googlebase_xml = '" . $this->db->escape($data['googlebase_xml']) . "', `top` = '" . (isset($data['top']) ? (int)$data['top'] : 0) . "', `column` = '" . (int)$data['column'] . "', members_only = '" . (int)$data['members_only'] . "', is_filter = '" . (int)$data['is_filter'] . "', date_start = '" . $this->db->escape($data['date_start_date'] . ' ' . $data['date_start_time']) . "', date_end = '" . $this->db->escape($data['date_end_date'] . ' ' . $data['date_end_time']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE category_id = '" . (int)$category_id . "'");
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "category SET image = '" . $this->db->escape(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8')) . "' WHERE category_id = '" . (int)$category_id . "'");
@@ -154,13 +154,17 @@ class ModelCatalogCategory extends Model {
 		return $query->row;
 	} 
 	
-	public function getCategoryByKeyword($keyword) {
+	public function getCategoryByKeyword($keyword, $parent_id = 0) {
             
                 $this->load->model('module/url_alias');
                 $keyword = $this->model_module_url_alias->seoUrl($keyword);
             
                 $category_id = 0;
-		$query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
+                if ($parent_id == 0) {
+                    $query = $this->db->query("SELECT DISTINCT query FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $keyword . "' AND query LIKE 'category_id=%'");
+                } else {
+                    $query = $this->db->query("SELECT cd.query FROM " . DB_PREFIX . "category c JOIN " . DB_PREFIX . "url_alias cd ON (CONCAT('category_id=',c.category_id) = cd.query) WHERE cd.keyword = '" . $keyword . "' AND c.parent_id = '" . (int)$parent_id . "'");
+                }
 
                 if($query->row)
                     $category_id = substr ((string) $query->row['query'], 12);
