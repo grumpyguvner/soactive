@@ -218,6 +218,7 @@ class Category {
                     case 'page':
                     case 'limit':
                     case 'product':
+                    case 'gclid':
                         //ignore these
                         break;
                     
