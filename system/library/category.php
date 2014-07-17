@@ -213,6 +213,10 @@ class Category {
                     case 'route':
                     case '_route_':
                     case 'path':
+                    case 'sort':
+                    case 'order':
+                    case 'page':
+                    case 'limit':
                         //ignore these
                         break;
                     
