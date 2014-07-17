@@ -217,6 +217,7 @@ class Category {
                     case 'order':
                     case 'page':
                     case 'limit':
+                    case 'product':
                         //ignore these
                         break;
                     
