@@ -219,6 +219,10 @@ class Category {
                     case 'limit':
                     case 'product':
                     case 'gclid':
+                    case 'utm_medium':
+                    case 'utm_campaign':
+                    case 'utm_content':
+                    case 'utm_source':
                         //ignore these
                         break;
                     
