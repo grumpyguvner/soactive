@@ -24,7 +24,7 @@ if ($filter_groups || $options) {
                                     <div class="accordion-inner">
                                         <div class="box-content">
                                             <div class="box-category">
-                                                <div class="reset"><a href="#"><?php echo $text_clear; ?></a></div>
+                                                <div class="resetUrl"><a href="<?php echo $filter_group['clear_url']; ?>"><?php echo $text_clear; ?></a></div>
                                                 <ul>
                                                     <?php foreach ($filter_group['filter'] as $filter) {
                                                         if ($filter['count'])

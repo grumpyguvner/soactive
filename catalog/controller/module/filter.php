@@ -160,11 +160,13 @@ class ControllerModuleFilter extends Controller {
                         $count_group += $filter['total'];
                     }
 
+                    $url = $this->getUrl($filter_group['name']);
                     $this->data['filter_groups'][] = array(
                         'filter_group_id' => $filter_group['filter_group_id'],
                         'name' => sprintf($this->language->get('filter_title'), $filter_group['name']),
                         'filter' => $filter_data,
                         'count' => $count_group,
+                        'clear_url' => $url,
                         'active' => $count_active
                     );
                 }
@@ -266,7 +268,7 @@ class ControllerModuleFilter extends Controller {
         }
     }
     
-    private function getUrl($filterGroup, $filterValue) {
+    private function getUrl($filterGroup, $filterValue = "") {
         $filterGroup = strtolower(urlencode($filterGroup));
         $filterValue = strtolower(urlencode($filterValue));
         
@@ -274,21 +276,27 @@ class ControllerModuleFilter extends Controller {
         $urlQuery = $this->category->getUrlQuery($filterGroup);
 //        $urlQuery = "";
         if (isset($this->request->get[$filterGroup])) {
-            $array = explode(",", $this->request->get[$filterGroup]);
-            if (in_array($filterValue, $array)) {
-                //if already in array then url should remove it
-                if(($key = array_search($filterValue, $array)) !== false) {
-                    unset($array[$key]);
+            $array = array();
+            if (!empty($filterValue)) {
+                $array = explode(",", $this->request->get[$filterGroup]);
+                if (in_array($filterValue, $array)) {
+                    //if already in array then url should remove it
+                    if(($key = array_search($filterValue, $array)) !== false) {
+                        unset($array[$key]);
+                    }
+                } else {
+                    //otherwise add it
+                    $array[] = $filterValue;
                 }
-            } else {
-                //otherwise add it
-                $array[] = $filterValue;
             }
             if (count($array)) {
                 $urlQuery .= '&'.$filterGroup.'=' . implode(",", $array);
             }
+            
         } else {
-            $urlQuery .= '&'.$filterGroup.'=' . $filterValue;
+            if (!empty($filterValue)) {
+                $urlQuery .= '&'.$filterGroup.'=' . $filterValue;
+            }
         }
         
         $url = $this->url->link('product/category', 'path=' . $path . $urlQuery);

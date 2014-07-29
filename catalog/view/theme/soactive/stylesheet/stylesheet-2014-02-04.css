@@ -2702,7 +2702,8 @@ height: 1em;
     color: #1db4b7
 }
 
-.accordion .reset {
+.accordion .reset,
+.accordion .resetUrl {
  text-align: right;
  margin-bottom: .5em;
 }
