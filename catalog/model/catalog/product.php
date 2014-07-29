@@ -472,7 +472,7 @@ class ModelCatalogProduct extends Model {
                 $filter_groups = array();
                 foreach ($data['filter_data'] as $key => $value) {
                     if ($value['type'] == 'filter') {
-                        $filter_groups[$value['group']][] = $value['value'];
+                        $filter_groups[$value['group']][] = urldecode($value['value']);
                     }
                 }
             } else {
@@ -1018,7 +1018,7 @@ class ModelCatalogProduct extends Model {
                 $filter_groups = array();
                 foreach ($data['filter_data'] as $key => $value) {
                     if ($value['type'] == 'filter') {
-                        $filter_groups[$value['group']][] = $value['value'];
+                        $filter_groups[$value['group']][] = urldecode($value['value']);
                     }
                 }
             } else {
