@@ -5,6 +5,7 @@ include_once('wms_core.php');
 class ModelToolWMSProduct extends ModelToolWMS {
 
     private $season = '2013';
+    private $brand = '';
 
     function import($stylenumber = "") {
 
@@ -112,7 +113,8 @@ class ModelToolWMSProduct extends ModelToolWMS {
 
                 if ($aProduct->fields['webenabled'] && !$aProduct->fields['inactive']) {
 
-
+                    $this->brand = "";
+                    $filter_brand_group_id = $this->createFilter("Brand", 0, "Marque");
                     $filter_size_group_id = $this->createFilter("Size", 0, "Taille");
                     $filter_colour_group_id = $this->createFilter("Colour", 0, "Couleur");
 
@@ -292,6 +294,13 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 $myModel = $model;
                                 $product_id = $this->createProduct($model, $stock_item);
                                 $myProductOptionIds = array();
+                                
+                                if (!empty($this->brand)) {
+                                    $temp_id = $this->createFilter($this->brand, $filter_brand_group_id, $this->brand);
+                                    if ((float) $aStock->fields['available_stock']) {
+                                        $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int) $product_id . "', filter_id = '" . (int) $temp_id . "'");
+                                    }
+                                }
                             }
                             if ($product_id) {
                                 //Manually Add Size & Colour Filter Ids
@@ -405,6 +414,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
             while (!$aBrand->EOF) {
                 $this->debug("processing brand " . $aBrand->fields['name'] . "");
 
+                $this->brand = (string) $aBrand->fields['name'];
                 $myName = (string) $aBrand->fields['name'];
                 $myDesc = (string) $aBrand->fields['name'];
                 $frName = (string) $aBrand->fields['name'];
