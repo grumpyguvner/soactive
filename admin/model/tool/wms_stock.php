@@ -55,7 +55,7 @@ class ModelToolWMSStock extends ModelToolWMS {
 
                     $stock_item = array(
                         "status" => (int) $aProduct->fields['webenabled'],
-                        "price" => (float) $aProduct->fields['unitprice'],
+                        "price" => round((float) $aProduct->fields['unitprice'] / 1.2, 4),
                         "saleprice" => (float) $aProduct->fields['saleprice']
                     );
 
