@@ -56,7 +56,7 @@ class ModelToolWMSStock extends ModelToolWMS {
                     $stock_item = array(
                         "status" => (int) $aProduct->fields['webenabled'],
                         "price" => round((float) $aProduct->fields['unitprice'] / 1.2, 4),
-                        "saleprice" => (float) $aProduct->fields['saleprice']
+                        "saleprice" => round((float) $aProduct->fields['saleprice'] / 1.2, 4)
                     );
 
                     $this->debug("initializing sku lookup array");
@@ -128,7 +128,7 @@ class ModelToolWMSStock extends ModelToolWMS {
             $special[] = array(
                 'customer_group_id' => $customer_group_id,
                 'priority' => 0,
-                'price' => round($stock_item['saleprice'] / 1.2, 4)
+                'price' => $stock_item['saleprice']
             );
         };
 
