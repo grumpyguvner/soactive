@@ -289,6 +289,26 @@ class ModelCatalogProduct extends Model {
 		$this->cache->delete('product');
 	}
 	
+	public function editProductPrices($product_id, $data) {
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET price = '" . (float)$data['price'] . "', sale = '" . (int)$data['sale'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
+
+                $this->db->query("DELETE FROM " . DB_PREFIX . "product_discount WHERE product_id = '" . (int)$product_id . "'");
+		if (isset($data['product_discount'])) {
+                    foreach ($data['product_discount'] as $product_discount) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
+                    }
+		}
+		
+                $this->db->query("DELETE FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "'");
+		if (isset($data['product_special'])) {
+                    foreach ($data['product_special'] as $product_special) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "product_special SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_special['customer_group_id'] . "', priority = '" . (int)$product_special['priority'] . "', price = '" . (float)$product_special['price'] . "', date_start = '" . $this->db->escape($product_special['date_start']) . "', date_end = '" . $this->db->escape($product_special['date_end']) . "'");
+                    }
+		}
+						
+		$this->cache->delete('product');
+	}
+	
 	public function copyProduct($product_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int)$product_id . "' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 		
