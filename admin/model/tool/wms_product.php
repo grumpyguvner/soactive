@@ -295,7 +295,7 @@ class ModelToolWMSProduct extends ModelToolWMS {
                                 $product_id = $this->createProduct($model, $stock_item);
                                 $myProductOptionIds = array();
                                 
-                                if (!empty($this->brand)) {
+                                if ($this->brand <> "") {
                                     $temp_id = $this->createFilter($this->brand, $filter_brand_group_id, $this->brand);
                                     if ((float) $aStock->fields['available_stock']) {
                                         $this->db->query("INSERT IGNORE INTO " . DB_PREFIX . "product_filter SET product_id = '" . (int) $product_id . "', filter_id = '" . (int) $temp_id . "'");
