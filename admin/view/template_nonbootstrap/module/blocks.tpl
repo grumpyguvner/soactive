@@ -207,8 +207,8 @@
                                             <?php } ?>
                                         </div></td>
                                 </tr>
-                                <!--tr>
-                                    <td><?php /* echo $entry_position; ?></td>
+                                <tr>
+                                    <td><?php echo $entry_position; ?></td>
                                     <td><select name="blocks_module_header[<?php echo $module_header_row; ?>][position]">
                                             <?php if ($module_header['position'] == 'content_top') { ?>
                                                 <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
@@ -229,9 +229,9 @@
                                                 <option value="column_right" selected="selected"><?php echo $text_column_right; ?></option>
                                             <?php } else { ?>
                                                 <option value="column_right"><?php echo $text_column_right; ?></option>
-                                            <?php } */ ?>
+                                            <?php } ?>
                                         </select></td>
-                                </tr-->
+                                </tr>
                                 <tr>
                                     <td><?php echo $entry_status; ?></td>
                                     <td><select name="blocks_module_header[<?php echo $module_header_row; ?>][status]">
@@ -662,6 +662,15 @@
                     html += '          </div>';
 <?php } ?>
             html += '      </div></td>';
+            html += '    </tr>';
+            html += '    <tr>';
+            html += '      <td><?php echo $entry_position; ?></td>';
+            html += '      <td><select name="blocks_module[' + module_header_row + '][position]">';
+            html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
+            html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
+            html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
+            html += '      <option value="column_right"><?php echo $text_column_right; ?></option>';
+            html += '      </select></td>';
             html += '    </tr>';
             html += '      <td><?php echo $entry_status; ?></td>';
             html += '      <td><select name="blocks_module_header[' + module_header_row + '][status]">';

@@ -115,6 +115,21 @@ body div.container {
 	margin-top: 19px;
         float: left;
 }
+#header-blocks {
+        display: inline-block;
+	width: 380px;
+        padding: 0 10px;
+}
+#header-blocks #column-left {
+        display: inline-block;
+        float: none;
+	width: 190px;
+}
+#header-blocks #column-right {
+        display: inline-block;
+        float: none;
+	width: 190px;
+}
 #header #top {
 	width: 100%;
         float: right;

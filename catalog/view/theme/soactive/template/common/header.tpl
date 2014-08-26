@@ -88,6 +88,11 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
         <div class="container">
+            <?php foreach ($blocks as $block) { ?>
+            <?php if ($block['position'] == 'content_top') { ?>
+                <?php echo $block['description']; ?>
+            <?php } ?>
+            <?php } ?>
             <div id="header">
                 
             <?php if ($logo) { ?>
@@ -95,6 +100,41 @@
                     <a href="<?php echo $home; ?>"><img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>" /></a>
                 </div>
             <?php } ?>
+            <?php 
+                $contentLeft = "";
+                $contentRight = "";
+                foreach ($blocks as $block) { 
+                  if ($block['position'] == 'column_left') { 
+                      $contentLeft .= $block['description']; 
+                  } 
+                } 
+                foreach ($blocks as $block) { 
+                  if ($block['position'] == 'column_right') { 
+                      $contentRight .= $block['description']; 
+                  } 
+                }
+                if ($contentLeft <> "" && $contentRight <> "") {
+                    echo "<div id='header-blocks'>";
+                    if ($contentLeft <> "") {
+                        echo "<div id='column-left'>" . $contentLeft . "</div>";
+                    }
+                    if ($contentRight <> "") {
+                        echo "<div id='column-right'>" . $contentRight . "</div>";
+                    }
+                    echo "</div>";
+                } else {
+                    if ($contentLeft <> "" || $contentRight <> "") {
+                        echo "<div id='header-blocks'>";
+                        if ($contentLeft <> "") {
+                            echo $contentLeft;
+                        }
+                        if ($contentRight <> "") {
+                            echo $contentRight;
+                        }
+                        echo "</div>";
+                    }
+                }
+            ?>
                 <div class="links">
                     <div class="top">
                         
@@ -156,7 +196,9 @@
                 </div>
             <?php } ?>
             <?php foreach ($blocks as $block) { ?>
+            <?php if ($block['position'] == 'content_bottom') { ?>
                 <?php echo $block['description']; ?>
+            <?php } ?>
             <?php } ?>
             <div id="notification"></div>
     

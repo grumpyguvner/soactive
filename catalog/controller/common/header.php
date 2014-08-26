@@ -227,7 +227,8 @@ class ControllerCommonHeader extends Controller {
                         if ($blocks['status']) {
                             $module_data[] = array(
                                     'description'   => html_entity_decode($blocks['description'][$language], ENT_QUOTES, 'UTF-8'),
-                                    'sort_order'    => $blocks['sort_order']
+                                    'sort_order'    => $blocks['sort_order'],
+                                    'position'    => $blocks['position']
                             );
                         }
                     }
