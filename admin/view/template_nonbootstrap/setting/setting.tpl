@@ -795,6 +795,28 @@
                   <br />
                   <a onclick="image_upload('icon', 'thumb-icon');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-icon').attr('src', '<?php echo $no_image; ?>'); $('#icon').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
             </tr>
+            <tr>
+              <td><?php echo $entry_background; ?></td>
+              <td><div class="image"><img src="<?php echo $background; ?>" alt="" id="thumb-background" />
+                  <input type="hidden" name="config_background" value="<?php echo $config_background; ?>" id="background" />
+                  <br />
+                  <a onclick="image_upload('background', 'thumb-background');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-background').attr('src', '<?php echo $no_image; ?>'); $('#background').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+            </tr>
+            <tr<?php echo $display; ?>>
+              <td><?php echo $entry_background_size; ?></td>
+              <td><select name="config_background_size">
+                      <option <?php if ($config_background_size == 'auto') echo ' selected="selected"' ?>>auto</option>
+                      <option <?php if ($config_background_size == 'cover') echo ' selected="selected"' ?>>cover</option>
+                      <option <?php if ($config_background_size == 'contain') echo ' selected="selected"' ?>>contain</option>
+                </select></td>
+            </tr>
+            <tr<?php echo $display; ?>>
+              <td><?php echo $entry_background_attachment; ?></td>
+              <td><select name="config_background_attachment">
+                      <option <?php if ($config_background_attachment == 'scroll') echo ' selected="selected"' ?>>scroll</option>
+                      <option <?php if ($config_background_attachment == 'fixed') echo ' selected="selected"' ?>>fixed</option>
+                </select></td>
+            </tr>
             <tr<?php echo $display; ?>>
               <td><span class="required">*</span> <?php echo $entry_image_category; ?></td>
               <td><input type="text" name="config_image_category_width" value="<?php echo $config_image_category_width; ?>" size="3" />

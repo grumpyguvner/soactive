@@ -88,6 +88,9 @@ $_['entry_return_refund']          = 'Return Refunded:<br /><span class="help">T
 $_['entry_return_replacement']     = 'Return Replacement:<br /><span class="help">The return action to create a new replacement order.</span>';
 $_['entry_logo']                   = 'Store Logo:';
 $_['entry_icon']                   = 'Icon:<br /><span class="help">The icon should be a PNG that is 16px x 16px.</span>';
+$_['entry_background']             = 'Store Background Image:';
+$_['entry_background_size']        = 'Store Background Size:';
+$_['entry_background_attachment']  = 'Store Background Attachment:';
 $_['entry_image_category']         = 'Category Image Size:';
 $_['entry_image_information']      = 'Information Image Size:';
 $_['entry_image_thumb']            = 'Product Image Thumb Size:';

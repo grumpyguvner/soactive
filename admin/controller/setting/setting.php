@@ -119,6 +119,9 @@ class ControllerSettingSetting extends Controller {
 		$this->data['entry_return_replacement'] = $this->language->get('entry_return_replacement');
 		$this->data['entry_logo'] = $this->language->get('entry_logo');
 		$this->data['entry_icon'] = $this->language->get('entry_icon');
+		$this->data['entry_background'] = $this->language->get('entry_background');
+		$this->data['entry_background_size'] = $this->language->get('entry_background_size');
+		$this->data['entry_background_attachment'] = $this->language->get('entry_background_attachment');
 		$this->data['entry_image_category'] = $this->language->get('entry_image_category');
                 $this->data['entry_image_information'] = $this->language->get('entry_image_information');
 		$this->data['entry_image_thumb'] = $this->language->get('entry_image_thumb');
@@ -822,6 +825,30 @@ class ControllerSettingSetting extends Controller {
 			$this->data['icon'] = $this->model_tool_image->resize($this->config->get('config_icon'), 100, 100);		
 		} else {
 			$this->data['icon'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+
+		if (isset($this->request->post['config_background'])) {
+			$this->data['config_background'] = $this->request->post['config_background'];
+		} else {
+			$this->data['config_background'] = $this->config->get('config_background');			
+		}
+
+		if ($this->config->get('config_background') && file_exists(DIR_IMAGE . $this->config->get('config_background')) && is_file(DIR_IMAGE . $this->config->get('config_background'))) {
+			$this->data['background'] = $this->model_tool_image->resize($this->config->get('config_background'), 100, 100);		
+		} else {
+			$this->data['background'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+
+		if (isset($this->request->post['config_background_size'])) {
+			$this->data['config_background_size'] = $this->request->post['config_background_size'];
+		} else {
+			$this->data['config_background_size'] = $this->config->get('config_background_size');			
+		}
+
+		if (isset($this->request->post['config_background_attachment'])) {
+			$this->data['config_background_attachment'] = $this->request->post['config_background_attachment'];
+		} else {
+			$this->data['config_background_attachment'] = $this->config->get('config_background_attachment');			
 		}
 		
 		$this->data['no_image'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);

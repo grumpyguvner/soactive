@@ -68,6 +68,24 @@ class ControllerCommonHeader extends Controller {
             $this->data['logo'] = '';
         }
 
+        if ($this->config->get('config_background') && file_exists(DIR_IMAGE . $this->config->get('config_background'))) {
+            $this->data['background'] = $server . $this->config->get('config_background');
+        } else {
+            $this->data['background'] = '';
+        }
+
+        if ($this->config->get('config_background_size')) {
+            $this->data['backgroundSize'] = $this->config->get('config_background_size');
+        } else {
+            $this->data['backgroundSize'] = '';
+        }
+
+        if ($this->config->get('config_background_attachment')) {
+            $this->data['backgroundAttachment'] = $this->config->get('config_background_attachment');
+        } else {
+            $this->data['backgroundAttachment'] = '';
+        }
+
         if (ENVIRONMENT_WARNING) {
             $this->data['error_environment'] = 'Warning: You are currently in the <strong>' . strtoupper(APPLICATION_ENV) . '</strong> environment!';
         } else {

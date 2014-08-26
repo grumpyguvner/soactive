@@ -51,6 +51,34 @@
     </head>
     <body>
         <?php echo $google_analytics; ?>
+        <?php if ($background) { ?>
+         <style type="text/css">
+             @media (min-width: 1400px) {
+                html, body {
+                    background-color: transparent;
+                    background-image: url(<?php echo $background; ?>);
+                    <?php
+                    if ($backgroundSize) {
+                    ?>
+                    -webkit-background-size: <?php echo $backgroundSize; ?>;
+                    -moz-background-size: <?php echo $backgroundSize?>;
+                    -o-background-size: <?php echo $backgroundSize; ?>;
+                    background-size: <?php echo $backgroundSize; ?>;
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if ($backgroundAttachment) {
+                    ?>
+                    background-attachment: <?php echo $backgroundAttachment; ?>;
+                    <?php
+                    }
+                    ?>
+                    
+                }
+             }
+         </style>    
+         <?php } ?>
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];

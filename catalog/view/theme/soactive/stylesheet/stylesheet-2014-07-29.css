@@ -75,6 +75,9 @@ label {
 }
 
 /* layout */
+body div.container {
+	background-color: #fff;
+}
 .container {
 	width: 980px;
 	margin-left: auto;
