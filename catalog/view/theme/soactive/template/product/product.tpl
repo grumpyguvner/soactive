@@ -17,29 +17,23 @@
             <?php if ($thumb || $images) { ?>
                 <div class="image" id="wrap-image">
                     <?php if ($thumb) { ?>
-                        <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="" />
+                        <img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" data-colorbox="<?php echo $popup; ?>" data-thumb="<?php echo $additional; ?>" />
                         <span>Zoom</span>
                     <?php } ?>
                 </div>
-                
                 <div class="image-additional">
                     <?php
-                    if ($additional) {
-                        ?><a href="<?php echo $popup; ?>" target="_blank" class="colorbox imageAdditional" id="mainImage" rel="colorbox" data-main="<?php echo $thumb; ?>"><img src="<?php echo $additional; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" class="imageAdditional"/><?php
-
-                    }
-
                     if ($images) {
                       for ($i = 0; $i < count($images); $i++)  {
-
+                                    echo '<span>';
                           if (empty($images[$i]['video'])) {
-                                        ?><a href="<?php echo $images[$i]['popup']; ?>" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="<?php echo $images[$i]['main']; ?>" <?php if ($i > 1) echo 'style="display: none;"' ?>><img src="<?php echo $images[$i]['thumb']; ?>" alt="" /></a><?php
+                                        echo '<a href="' . $images[$i]['popup'] . '?img=img' . $i . '" title="' . $heading_title . '" alt="' . $heading_title . '" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="' . $images[$i]['main'] . '" data-popup="' . $images[$i]['popup'] . '" data-thumb="' . $images[$i]['thumb'] . '"><img id="img' . $i . '" src="' . $images[$i]['thumb'] . '" title="' . $heading_title . '" alt="' . $heading_title . '" /></a>';
                         } else {
-                                        ?><a href="http://www.youtube.com/v/<?php echo $images[$i]['video']; ?>?rel=0&wmode=transparent" class="colorbox videoAdditional" rel="colorbox" data-video="<?php echo $images[$i]['video']; ?>" target="_blank" style="<?php if ($i > 1) echo "display: none;" ?>line-height:<?php echo $additionalHeight; ?>px;height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"><img src="http://img.youtube.com/vi/<?php echo $images[$i]['video']; ?>/0.jpg" alt="" /><span class="play-button" style="height:<?php echo $additionalHeight; ?>px;width:<?php echo $additionalWidth; ?>px;"></span></a><?php
+                                        echo '<a href="http://www.youtube.com/v/' . $images[$i]['video'] . '?rel=0&wmode=transparent" title="' . $heading_title . '" alt="' . $heading_title . '" class="videoAdditional" data-video="' . $images[$i]['video'] . '" target="_blank"><img src="http://img.youtube.com/vi/' . $images[$i]['video'] . '/0.jpg" title="' . $heading_title . '" alt="' . $heading_title . '" /><em class="play-button"></em></a>';
                             }
+                                    echo '</span>';
                       }
-
-                        }
+                    }
                     ?>
                 </div>
                 
@@ -582,23 +576,38 @@ jQuery(document).ready(function() {
         
     $(document).ready(function () {
             
-        $('.image-additional').delegate('a.videoAdditional','click', function(){
-            $('.product-img .image').html('<iframe id="playingMovie" width="290" height="370" src="http://www.youtube.com/embed/' + $(this).data('video') + '?autoplay=1&rel=0&theme=light&autohide=1" frameborder="0" allowfullscreen></iframe>');
+        $('.image-additional').on('click', 'a.videoAdditional *', function(event) {
+            myparent = $(this).closest('a');
+            $('.product-img .image').html('<iframe id="playingMovie" src="http://www.youtube.com/embed/' + myparent.data('video') + '?autoplay=1&rel=0&theme=light&autohide=1&wmode=transparent" frameborder="0" allowfullscreen="allowfullscreen"></iframe>');
+            $('.product-img .image img').data('aTrigger', null);
             return false;
         });
             
-        $('.image-additional').delegate('a.imageAdditional','click', function(){
-            $('.product-img .image').html('<img src="' + $(this).data('main') + '" alt="" /><span>Zoom</span>');
+        $('.image-additional').on('click', 'a.imageAdditional img', function(event) {
+            event.stopPropagation();
+            mainimg = $('.product-img .image img');
+            main = mainimg.attr('src');
+            popup = mainimg.data('colorbox');
+            thumb = mainimg.data('thumb');
+            title = mainimg.attr('title');
+            myparent = $(this).closest('a');
+            $('.product-img .image').html('<img src="' + myparent.data('main') + '" alt="' + myparent.attr('alt') + '" title="' + myparent.attr('title') + '" data-colorbox="' + myparent.data('popup') + '" data-thumb="' + myparent.data('thumb') + '" />');
+            
+            myparent.parent().html('<a href="' + main + '" title="' + title + '" alt="' + title + '" target="_blank" class="colorbox imageAdditional" rel="colorbox" data-main="' + main + '" data-thumb="' + thumb + '" data-popup="' + popup + '"><img src="' + thumb + '" title="' + title + '" alt="' + title + '" /></a>');
             return false;
         });
             
-        $('.product-img .image').delegate('img','click', function(){
-            $('.colorbox, .videoAdditional').colorbox({
+        $('.product-img .image').on('click', 'img', function() {
+            $('.colorbox').colorbox({
+                href: $(this).data('colorbox'),
                 overlayClose: true,
-                opacity: 0.5,
-                open: true
+                opacity: 0.3,
+                open: true,
+                maxWidth: "95%",
+                maxHeight: "95%"
             });
             $('.videoAdditional').colorbox({iframe:true, innerWidth:'640', innerHeight:'390'});
+            if ($(this).data('aTrigger')) $($(this).data('aTrigger')).trigger('click');
         });
         
     });
