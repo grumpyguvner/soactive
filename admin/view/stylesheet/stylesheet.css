@@ -226,6 +226,11 @@ body > #container {
 	font-family: Verdana, Geneva, sans-serif;
 	display: block;
 }
+.loading {
+	height: 100%;
+        min-height: 350px;
+        background: url(../image/loading.gif) no-repeat center center;
+}
 .icon {
 	vertical-align: middle;
 	cursor: pointer;
