@@ -1258,7 +1258,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         position: relative;
 }
 .product-grid .productItem .image img {
-        border: 1px solid #dee0e0;
+        border: 1px solid transparent;
 	display: block;
 	margin-bottom: 0px;
 }
@@ -1356,7 +1356,7 @@ a.buttonHome:hover, input.buttonHome:hover {
         text-align: center;
 }
 .product-info #column-right ul > li > a > img {
-        border: 1px solid #b9bdbd;
+        border: 1px solid transparent;
 }
 .product-info #column-right .recentlyViewedTitle h5 {
         font-size: 12px;
@@ -3016,7 +3016,7 @@ overflow: auto;
     height: auto;
 }
 #featuredStyles img {
-    border: 1px solid #b9bdbd;
+    border: 1px solid transparent;
 }
 #featuredStyles img.saleProduct {
     border: none;
