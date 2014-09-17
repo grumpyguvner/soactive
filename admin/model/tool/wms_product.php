@@ -605,7 +605,11 @@ class ModelToolWMSProduct extends ModelToolWMS {
             'category_description' => $wms_category_description,
             'keyword' => $category,
             'category_store' => $this->config->get('wms_products_store'),
-            'googlebase_text' => $google_taxonomy
+            'googlebase_text' => $google_taxonomy,
+       	    'date_start_date' => '',
+	        'date_start_time' => '',
+	        'date_end_date' => '',
+	        'date_end_time' => ''
         );
 
         if ($category_info) {
