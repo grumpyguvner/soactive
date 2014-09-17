@@ -629,3 +629,20 @@ ALTER TABLE `oc_customer` MODIFY `salt` varchar(60) NOT NULL;
 ALTER TABLE `oc_url_alias` ADD `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP AFTER `keyword`;
 ALTER TABLE `oc_product_option_value` ADD `location` VARCHAR(128) NOT NULL AFTER `ean`;
 ALTER TABLE `oc_category` ADD `information_id` int(11) NOT NULL DEFAULT '0' AFTER `column`; 
+
+#### Start 1.5.4:BC1.2.18
+
+CREATE TABLE IF NOT EXISTS `oc_snippet` (
+  `snippet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `system` int(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`snippet_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `oc_snippet_description` (
+  `snippet_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`snippet_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

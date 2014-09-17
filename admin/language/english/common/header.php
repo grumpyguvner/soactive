@@ -8,6 +8,7 @@ $_['text_attribute']                   = 'Attributes';
 $_['text_attribute_group']             = 'Attribute Groups';
 $_['text_backup']                      = 'Backup / Restore';
 $_['text_banner']                      = 'Banners';
+$_['text_snippet']                     = 'HTML Snippets';
 $_['text_catalog']                     = 'Catalog';
 $_['text_category']                    = 'Categories';
 $_['text_confirm']                     = 'Delete/Uninstall cannot be undone! Are you sure you want to do this?';
@@ -92,10 +93,10 @@ $_['text_syspro']                      = 'Syspro Interface';
 $_['text_zone']                        = 'Zones';
 
 $_['text_welcome']                     = 'Blocks';
-$_['text_content_block']               = 'Content Block';
 $_['text_store_locations']             = 'Store locations';
 $_['text_news']                        = 'News / Blog';
 $_['text_megamenu']                    = 'Mega Menu';
+$_['text_blocks']                      = 'Blocks';
 
 ### Event Calendar - Start ###
 $_['text_event']              = 'Events';

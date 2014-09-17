@@ -3149,6 +3149,45 @@ INSERT INTO `oc_setting` (`setting_id`, `store_id`, `group`, `key`, `value`, `se
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `oc_snippet`
+--
+
+DROP TABLE IF EXISTS `oc_snippet`;
+CREATE TABLE `oc_snippet` (
+  `snippet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `system` int(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`snippet_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_snippet`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oc_snippet_description`
+--
+
+DROP TABLE IF EXISTS `oc_snippet_description`;
+CREATE TABLE `oc_snippet_description` (
+  `snippet_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`snippet_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `oc_snippet_description`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oc_stock_status`
 --
 

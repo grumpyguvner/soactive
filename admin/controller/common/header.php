@@ -28,6 +28,7 @@ class ControllerCommonHeader extends Controller {
         $this->data['text_attribute_group'] = $this->language->get('text_attribute_group');
         $this->data['text_backup'] = $this->language->get('text_backup');
         $this->data['text_banner'] = $this->language->get('text_banner');
+        $this->data['text_snippet'] = $this->language->get('text_snippet');
         $this->data['text_catalog'] = $this->language->get('text_catalog');
         $this->data['text_category'] = $this->language->get('text_category');
         $this->data['text_confirm'] = $this->language->get('text_confirm');
@@ -116,9 +117,9 @@ class ControllerCommonHeader extends Controller {
         
         $this->data['text_megamenu'] = $this->language->get('text_megamenu');
         $this->data['text_welcome'] = $this->language->get('text_welcome');
-        $this->data['text_content_block'] = $this->language->get('text_content_block');
         $this->data['text_store_locations'] = $this->language->get('text_store_locations');
         $this->data['text_news'] = $this->language->get('text_news');
+        $this->data['text_blocks'] = $this->language->get('text_blocks');
 
         ### Event Calendar - Start ###
         $this->data['text_event'] = $this->language->get('text_event');
@@ -139,6 +140,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['attribute_group'] = $this->url->link('catalog/attribute_group', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['banner'] = $this->url->link('design/banner', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['snippet'] = $this->url->link('design/snippet', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['category'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['country'] = $this->url->link('localisation/country', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['coupon'] = $this->url->link('sale/coupon', 'token=' . $this->session->data['token'], 'SSL');
@@ -208,8 +210,8 @@ class ControllerCommonHeader extends Controller {
             $this->data['news'] = $this->url->link('catalog/news', '&token=' . $this->session->data['token'], 'SSL');
             $this->data['store_locations'] = $this->url->link('module/store_locations', '&token=' . $this->session->data['token'], 'SSL');
             $this->data['welcome'] = $this->url->link('module/welcome', '&token=' . $this->session->data['token'], 'SSL');
-            $this->data['content_block'] = $this->url->link('module/blocks', '&token=' . $this->session->data['token'], 'SSL');
             $this->data['megamenu'] = $this->url->link('module/megamenu', '&token=' . $this->session->data['token'], 'SSL');
+            $this->data['blocks'] = $this->url->link('module/blocks', '&token=' . $this->session->data['token'], 'SSL');
             
             $this->data['event'] = $this->url->link('catalog/event', '&token=' . $this->session->data['token'], 'SSL');
             
