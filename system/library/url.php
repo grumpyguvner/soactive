@@ -36,21 +36,22 @@ class Url {
 		return $url;
 	}	
     
-	public function setCheckPermission ($checkPermission, $user = null) {
-        if (!is_null($user)) $this->user = $user;
-        
-        if (isset($this->user))
-        {
+
+    public function setCheckPermission($checkPermission, $registry = null) {
+        if (!is_null($registry))
+            $this->registry = $registry;
+
+        if (isset($this->registry)) {
             $this->checkPermission = $checkPermission;
         }
-	}
-    
+    }
+
     private function permission($route) {
-        if (isset($this->checkPermission) && $this->checkPermission)
-        {
-			
-            if (!isset($this->user)) $this->user = $this->registry->get('user');
-            
+        if (isset($this->checkPermission) && $this->checkPermission) {
+
+            if (!isset($this->user))
+                $this->user = $this->registry->get('user');
+
             $part = explode('/', $route);
 
             $route = '';
@@ -75,6 +76,15 @@ class Url {
 
             if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {
                 return false;
+            }
+            
+            $module = explode('/', $route);
+            if (array_shift($module) == 'module')
+            {
+                if (!isset($this->extensions))
+                    $this->extensions = $this->registry->get('extensions');
+                
+                return $this->extensions->isInstalled(array_shift($module), 'module');
             }
         }
         return true;

@@ -129,7 +129,7 @@ class ControllerCommonHeader extends Controller {
 
             $this->data['home'] = $this->url->link('common/login', '', 'SSL');
         } else {
-            $this->url->setCheckPermission(true, $this->user);
+            $this->url->setCheckPermission(true, $this->registry);
 
             $this->data['logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
 
