@@ -12,7 +12,39 @@ class ControllerModuleWelcomePopup extends Controller {
         $this->load->model('setting/setting');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            
+            $this->load->model('design/snippet');
+                        
+            $snippets = $this->model_design_snippet->getSnippetsByName('module/welcome_popup');
+            $snippet_ids = array();
+            foreach ($snippets as $snippet) {
+                $snippet_ids[$snippet['snippet_id']] = $snippet['snippet_id'];
+            }
+            if (isset($this->request->post['welcome_popup']))
+            {
+                foreach ($this->request->post['welcome_popup'] as &$module)
+                {   
+                    $snippet = array();
+                    $snippet['system'] = 1;
+                    $snippet['status'] = 1;
+                    $snippet['name'] = 'module/welcome_popup';
+                    $snippet['snippet_description'] = $module['description'];
+
+                    if (isset($module['snippet_id']) && $module['snippet_id']) {
+                        $this->model_design_snippet->editSnippet($module['snippet_id'], $snippet);
+                        unset($snippet_ids[$module['snippet_id']]);
+                    } else {
+                        $module['snippet_id'] = $this->model_design_snippet->addSnippet($snippet);
+                    }
+                    unset($module['description']);
+                }
+            }
+            
             $this->model_setting_setting->editSetting('welcome_popup', $this->request->post);
+            
+            foreach ($snippet_ids as $snippet_id) {
+                $this->model_design_snippet->deleteSnippet($snippet_id);
+            }
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -76,6 +108,15 @@ class ControllerModuleWelcomePopup extends Controller {
                 $this->data['modules'] = $this->request->post['welcome_popup'];
         } elseif ($this->config->get('welcome_popup')) { 
                 $this->data['modules'] = $this->config->get('welcome_popup');
+                foreach ($this->data['modules'] as &$module)
+                {
+                    if (isset($module['snippet_id'])) {
+
+                        $this->load->model('design/snippet');
+
+                        $module['description'] = $this->model_design_snippet->getSnippetDescriptions($module['snippet_id']);
+                    }
+                }
         }
 
         $this->load->model('design/layout');

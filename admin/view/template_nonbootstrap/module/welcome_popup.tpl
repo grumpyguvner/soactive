@@ -25,6 +25,7 @@
         <?php $module_row = 1; ?>
         <?php foreach ($modules as $module) { ?>
         <div id="tab-module-<?php echo $module_row; ?>" class="vtabs-content">
+            <input type="hidden" name="welcome_popup[<?php echo $module_row; ?>][snippet_id]" value="<?php echo $module['snippet_id'] ?>" />
           <div id="language-<?php echo $module_row; ?>" class="htabs">
             <?php foreach ($languages as $language) { ?>
             <a href="#tab-language-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
