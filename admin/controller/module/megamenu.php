@@ -10,7 +10,42 @@ class ControllerModuleMegaMenu extends Controller {
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('megamenu', $this->request->post);		
+                        $this->load->model('design/snippet');
+                        
+                        $snippets = $this->model_design_snippet->getSnippetsByName('module/megamenu');
+                        $snippet_ids = array();
+                        foreach ($snippets as $snippet) {
+                            $snippet_ids[$snippet['snippet_id']] = $snippet['snippet_id'];
+                        }
+                        
+                        if (isset($this->request->post['megamenu_menu'])) {
+
+                            foreach ($this->request->post['megamenu_menu'] as &$menu) {
+                                if (isset($menu['options'])) {
+                                    foreach ($menu['options'] as &$opt) {
+                                        $snippet = array();
+                                        $snippet['system'] = 1;
+                                        $snippet['status'] = 1;
+                                        $snippet['name'] = 'module/megamenu';
+                                        $snippet['snippet_description'] = $opt['opt_static_block_des'];
+
+                                        if (isset($opt['opt_static_block_snippet_id']) && $opt['opt_static_block_snippet_id']) {
+                                            $this->model_design_snippet->editSnippet($opt['opt_static_block_snippet_id'], $snippet);
+                                            unset($snippet_ids[$opt['opt_static_block_snippet_id']]);
+                                        } else {
+                                            $opt['opt_static_block_snippet_id'] = $this->model_design_snippet->addSnippet($snippet);
+                                        }
+                                        unset($opt['opt_static_block_des']);
+                                    }
+                                }
+                            }
+                        }
+
+                        $this->model_setting_setting->editSetting('megamenu', $this->request->post);
+                        
+                        foreach ($snippet_ids as $snippet_id) {
+                            $this->model_design_snippet->deleteSnippet($snippet_id);
+                        }
 					
 			$this->session->data['success'] = $this->language->get('text_success');
 						
@@ -103,6 +138,21 @@ class ControllerModuleMegaMenu extends Controller {
 			$this->data['menus'] = $this->request->post['megamenu_menu'];
 		} elseif ($this->config->get('megamenu_menu')) { 
 			$this->data['menus'] = $this->config->get('megamenu_menu');
+                        
+                        foreach ($this->data['menus'] as &$menu) {
+				if (isset($menu['options'])) {
+					foreach ($menu['options'] as &$opt) {
+                                                if ($opt['opt'] == 'static_block') {
+                                                    if (isset($opt['opt_static_block_snippet_id'])) {
+                                
+                                                        $this->load->model('design/snippet');
+
+                                                        $opt['opt_static_block_des'] = $this->model_design_snippet->getSnippetDescriptions($opt['opt_static_block_snippet_id']);
+                                                    }
+                                                }
+					}
+				}
+			}
 		}	
 		
 		$this->load->model('catalog/product');

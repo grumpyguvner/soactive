@@ -160,6 +160,7 @@
 				  <!-- option static block -->
 				  <?php if ($opt['opt'] == 'static_block') { ?>
 					<div id="opt_static_block<?php echo $menu_row;?><?php echo $opt_row; ?>" style="padding-left: 50px;">
+                                            <input type="hidden" name="megamenu_menu[<?php echo $menu_row;?>][options][<?php echo $opt_row; ?>][opt_static_block_snippet_id]" value="<?php echo isset($opt['opt_static_block_snippet_id']) ? $opt['opt_static_block_snippet_id'] : ''; ?>">
 						<p><span><?php echo $text_content; ?></span></p>
 						<div id="language-<?php echo $menu_row;?><?php echo $opt_row; ?>" class="htabs">
 							<?php foreach ($languages as $language) { ?>

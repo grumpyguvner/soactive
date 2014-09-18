@@ -1,6 +1,7 @@
 <?php  
 class ControllerModuleMegaMenu extends Controller {
 	protected function index() {
+            if ($this->extensions->isInstalled('megamenu', 'module')) {
 		// menu
 		$this->data['menus'] = array();
 		
@@ -19,6 +20,7 @@ class ControllerModuleMegaMenu extends Controller {
 			$this->load->model('catalog/information');
 			$this->load->model('catalog/category');
 			$this->load->model('catalog/product');
+			$this->load->model('tool/content_embed');
 			
 			foreach ($menus as $menu) {
 				if ($menu['status']){
@@ -113,11 +115,25 @@ class ControllerModuleMegaMenu extends Controller {
 							}
 							// static block
 							if ($option['opt'] == 'static_block') {
+                                                            
+                                                                if (isset($option['opt_static_block_snippet_id']))
+                                                                {
+                                                                    $this->load->model('design/snippet');
+
+                                                                    $snippet = $this->model_design_snippet->getSnippet($option['opt_static_block_snippet_id']);
+                                                                    $description = $snippet['description'];
+                                                                } else {
+                                                                    $description = $option['opt_static_block_des'][$this->config->get('config_language_id')];
+                                                                }
+                                                            
+                                                                $description = html_entity_decode($description, ENT_QUOTES, 'UTF-8');
+                                                                $description = $this->model_tool_content_embed->convert_placeholders($description);
+                                                            
 								$options[] = array(
 									'type'				=> 'static_block',
 									'width'				=> $menu['dropdown_width']/$menu['dropdown_column']*$option['fill_column'],
 									'column'			=> $option['fill_column'],
-									'description'		=> html_entity_decode($option['opt_static_block_des'][$this->config->get('config_language_id')], ENT_QUOTES, 'UTF-8')
+									'description'                   => $description
 								);
 							}
 							// product
@@ -192,13 +208,10 @@ class ControllerModuleMegaMenu extends Controller {
 		}
 		// end menu
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/megamenu.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/module/megamenu.tpl';
-		} else {
-			$this->template = 'default/template/module/megamenu.tpl';
-		}
+		$this->setTemplate('module/megamenu.tpl');
 		
-    	$this->render();
+                $this->render();
+            }
 	}
 	
 	private function getChildrenCategory($category, $path)
