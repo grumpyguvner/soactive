@@ -3,7 +3,45 @@
 
 Options +FollowSymlinks
 
+ErrorDocument 404 /404_soactive_FR.html
+
 RewriteEngine On
+# Restrict Robots by time of day (not while overnight WMS import is running)
+#RewriteCond %{TIME_HOUR} >01
+#RewriteCond %{TIME_HOUR} <06
+RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|Baiduspider|AhrefsBot) [NC]
+RewriteRule .* - [R=503,L]
+
+# Maintenance Mode
+#RewriteCond %{REMOTE_ADDR} !^31\.52\.209\.11
+#RewriteCond %{HTTP:X-FORWARDED-FOR} !^31\.52\.209\.11
+#RewriteCond %{REMOTE_ADDR} !^81\.155\.151\.30
+#RewriteCond %{HTTP:X-FORWARDED-FOR} !^81\.155\.151\.30
+#RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+#RewriteCond %{REQUEST_URI} !maintenance.html
+#RewriteCond %{REQUEST_URI} !admin.*
+#RewriteRule ^(.*)$ maintenance.html [R=302,L]
+RewriteRule ^maintenance.html http://soactive.local [L]
+
+# *IMMEDIATELY* treat 404
+# if 404 then stop immediately
+RewriteRule /404_soactive_FR.html - [QSA,L] - [QSA,L]
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*.soactive.com"
+</IfModule>
+<IfModule mod_expires.c>
+  # Turn on Expires and set default
+  ExpiresActive On
+  ExpiresDefault "access plus 1 day"
+
+  <FilesMatch "\.(css|js)$">
+      ExpiresDefault "access plus 7 days"
+  </FilesMatch>
+  <FilesMatch "\.(gif|png|jpg)$">
+      ExpiresDefault "access plus 7 days"
+  </FilesMatch>
+</IfModule>
 
 # Prevent Directoy listing 
 Options -Indexes
@@ -13,12 +51,35 @@ Options -Indexes
  Deny from all
 </FilesMatch>
 
+# Rewrites from category/filter work 2014-07-16
+RewriteRule ^femmes-(.*) femmes/$1 [R=301,L]
+RewriteRule ^femmes/(.*) womens/$1 [L,QSA]
+RewriteRule ^hommes-(.*) hommes/$1 [R=301,L]
+RewriteRule ^hommes/(.*) mens/$1 [L,QSA]
+RewriteRule ^mens-(.*) mens/$1 [R=301,L]
+RewriteRule ^womens-(.*) womens/$1 [R=301,L]
 # SEO URL Settings
 RewriteBase /
 
+RewriteCond %{HTTP_HOST} ^soactive\.local$ [NC]
+RewriteRule ^(UK|FR)(/.*)$ - [R=404,L]
+ 
+RewriteCond %{REMOTE_ADDR} !^31\.52\.209\.11
+RewriteCond %{HTTP:X-FORWARDED-FOR} !^31\.52\.209\.11
+RewriteCond %{REMOTE_ADDR} !^212\.42\.171.*
+RewriteCond %{HTTP:X-FORWARDED-FOR} !^212\.42\.171.*
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+RewriteCond %{REQUEST_URI} !^/admin [NC]
+RewriteCond %{HTTP_REFERER} !soactive\.com [NC]
+RewriteCond %{HTTP_HOST} !^soactive\.local$ [NC]
+RewriteCond %{HTTP_HOST} !^soactive-fr\.local$ [NC]
+RewriteRule ^(.*)$ http://soactive.local/$1 [R=301,L]
+
 # Sealskinz rewrite for multiregion
 #RewriteRule ^(UK|US)/image/(.*) image/$1/$2 [L,QSA]
-#RewriteRule ^(UK|US)(/.*|$) $2 [L,QSA]
+RewriteRule ^(UK|FR)(/.*|$) $2 [NC,L,QSA]
+
+RewriteRule ^barcode/(.*)/(.*)\.png barcode.php?typ=$1&ref=$2 [L,QSA]
 
 RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap
 RewriteRule ^googlebase.xml$ index.php?route=feed/google_base
