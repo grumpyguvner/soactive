@@ -10,7 +10,79 @@ class ControllerModuleBlocks extends Controller {
 		$this->load->model('setting/setting');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('blocks', $this->request->post);		
+                    
+                        $this->load->model('design/snippet');
+                        
+                        $snippets = $this->model_design_snippet->getSnippetsByName('module/block');
+                        $snippet_ids = array();
+                        foreach ($snippets as $snippet) {
+                            $snippet_ids[$snippet['snippet_id']] = $snippet['snippet_id'];
+                        }
+                        if (isset($this->request->post['blocks_module']))
+                        {
+                            foreach ($this->request->post['blocks_module'] as &$module)
+                            {   
+                                $snippet = array();
+                                $snippet['system'] = 1;
+                                $snippet['status'] = 1;
+                                $snippet['name'] = 'module/blocks';
+                                $snippet['snippet_description'] = $module['description'];
+                                
+                                if (isset($module['snippet_id']) && $module['snippet_id']) {
+                                    $this->model_design_snippet->editSnippet($module['snippet_id'], $snippet);
+                                    unset($snippet_ids[$module['snippet_id']]);
+                                } else {
+                                    $module['snippet_id'] = $this->model_design_snippet->addSnippet($snippet);
+                                }
+                                unset($module['description']);
+                            }
+                        }
+                        
+                        if (isset($this->request->post['blocks_module_header']))
+                        {
+                            foreach ($this->request->post['blocks_module_header'] as &$module)
+                            {   
+                                $snippet = array();
+                                $snippet['system'] = 1;
+                                $snippet['status'] = 1;
+                                $snippet['name'] = 'module/blocks';
+                                $snippet['snippet_description'] = $module['description'];
+                                
+                                if (isset($module['snippet_id']) && $module['snippet_id']) {
+                                    $this->model_design_snippet->editSnippet($module['snippet_id'], $snippet);
+                                    unset($snippet_ids[$module['snippet_id']]);
+                                } else {
+                                    $module['snippet_id'] = $this->model_design_snippet->addSnippet($snippet);
+                                }
+                                unset($module['description']);
+                            }
+                        }
+                        
+                        if (isset($this->request->post['blocks_module_footer']))
+                        {
+                            foreach ($this->request->post['blocks_module_footer'] as &$module)
+                            {   
+                                $snippet = array();
+                                $snippet['system'] = 1;
+                                $snippet['status'] = 1;
+                                $snippet['name'] = 'module/blocks';
+                                $snippet['snippet_description'] = $module['description'];
+                                
+                                if (isset($module['snippet_id']) && $module['snippet_id']) {
+                                    $this->model_design_snippet->editSnippet($module['snippet_id'], $snippet);
+                                    unset($snippet_ids[$module['snippet_id']]);
+                                } else {
+                                    $module['snippet_id'] = $this->model_design_snippet->addSnippet($snippet);
+                                }
+                                unset($module['description']);
+                            }
+                        }
+                    
+			$this->model_setting_setting->editSetting('blocks', $this->request->post);
+                        
+                        foreach ($snippet_ids as $snippet_id) {
+                            $this->model_design_snippet->deleteSnippet($snippet_id);
+                        }
 					
 			$this->session->data['success'] = $this->language->get('text_success');
 						
@@ -86,66 +158,6 @@ class ControllerModuleBlocks extends Controller {
 		$this->load->model('localisation/language');
 		
 		$this->data['languages'] = $this->model_localisation_language->getLanguages();
-		
-		$this->data['B_Block_Header_Top'] = array();
-		
-		if (isset($this->request->post['B_Block_Header_Top'])) {
-            $B_Block_Header_Top = $this->request->post['B_Block_Header_Top'];
-		} elseif ($this->config->get('B_Block_Header_Top')) { 
-            $B_Block_Header_Top = $this->config->get('B_Block_Header_Top');
-		} else{
-			$B_Block_Header_Top = '';
-		}
-		
-		$this->data['B_Block_Header_Top'] = $B_Block_Header_Top;
-		
-		$this->data['B_Block_Header_Bottom'] = array();
-		
-		if (isset($this->request->post['B_Block_Header_Bottom'])) {
-            $B_Block_Header_Bottom = $this->request->post['B_Block_Header_Bottom'];
-		} elseif ($this->config->get('B_Block_Header_Bottom')) { 
-            $B_Block_Header_Bottom = $this->config->get('B_Block_Header_Bottom');
-		}else{
-			$B_Block_Header_Bottom = '';
-		}
-		
-		$this->data['B_Block_Header_Bottom'] = $B_Block_Header_Bottom;
-		
-		$this->data['B_Block_Footer_1'] = array();
-		
-		if (isset($this->request->post['B_Block_Footer_1'])) {
-            $B_Block_Footer_1 = $this->request->post['B_Block_Footer_1'];
-		} elseif ($this->config->get('B_Block_Footer_1')) { 
-            $B_Block_Footer_1 = $this->config->get('B_Block_Footer_1');
-		} else{
-			$B_Block_Footer_1 = '';
-		}
-		
-		$this->data['B_Block_Footer_1'] = $B_Block_Footer_1;
-		
-		$this->data['B_Block_Footer_2'] = array();
-		
-		if (isset($this->request->post['B_Block_Footer_2'])) {
-            $B_Block_Footer_2 = $this->request->post['B_Block_Footer_2'];
-		} elseif ($this->config->get('B_Block_Footer_2')) { 
-            $B_Block_Footer_2 = $this->config->get('B_Block_Footer_2');
-		}else{
-			$B_Block_Footer_2 = '';
-		}
-		
-		$this->data['B_Block_Footer_2'] = $B_Block_Footer_2;
-		
-		$this->data['B_Block_Footer_3'] = array();
-		
-		if (isset($this->request->post['B_Block_Footer_3'])) {
-            $B_Block_Footer_3 = $this->request->post['B_Block_Footer_3'];
-		} elseif ($this->config->get('B_Block_Footer_3')) { 
-            $B_Block_Footer_3 = $this->config->get('B_Block_Footer_3');
-		}else{
-			$B_Block_Footer_3 = '';
-		}
-		
-		$this->data['B_Block_Footer_3'] = $B_Block_Footer_3;
 
 		$this->data['modules'] = array();
 		
@@ -153,6 +165,16 @@ class ControllerModuleBlocks extends Controller {
 			$this->data['modules'] = $this->request->post['blocks_module'];
 		} elseif ($this->config->get('blocks_module')) { 
 			$this->data['modules'] = $this->config->get('blocks_module');
+                        
+                        foreach ($this->data['modules'] as &$module)
+                        {
+                            if (isset($module['snippet_id'])) {
+                                
+                                $this->load->model('design/snippet');
+                                
+                                $module['description'] = $this->model_design_snippet->getSnippetDescriptions($module['snippet_id']);
+                            }
+                        }
 		}
                 
                 $this->data['modules_footer'] = array();
@@ -161,6 +183,16 @@ class ControllerModuleBlocks extends Controller {
 			$this->data['modules_footer'] = $this->request->post['blocks_module_footer'];
 		} elseif ($this->config->get('blocks_module_footer')) { 
 			$this->data['modules_footer'] = $this->config->get('blocks_module_footer');
+                        
+                        foreach ($this->data['modules_footer'] as &$module)
+                        {
+                            if (isset($module['snippet_id'])) {
+                                
+                                $this->load->model('design/snippet');
+                                
+                                $module['description'] = $this->model_design_snippet->getSnippetDescriptions($module['snippet_id']);
+                            }
+                        }
 		}
                 
                 $this->data['modules_header'] = array();
@@ -169,6 +201,16 @@ class ControllerModuleBlocks extends Controller {
 			$this->data['modules_header'] = $this->request->post['blocks_module_header'];
 		} elseif ($this->config->get('blocks_module_header')) { 
 			$this->data['modules_header'] = $this->config->get('blocks_module_header');
+                        
+                        foreach ($this->data['modules_header'] as &$module)
+                        {
+                            if (isset($module['snippet_id'])) {
+                                
+                                $this->load->model('design/snippet');
+                                
+                                $module['description'] = $this->model_design_snippet->getSnippetDescriptions($module['snippet_id']);
+                            }
+                        }
 		}
 		
 		$this->load->model('design/layout');
@@ -208,44 +250,6 @@ class ControllerModuleBlocks extends Controller {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "layout WHERE LOWER(name) = LOWER('".$layout_name."')");
 		return (int)$query->row['layout_id'];
 	}
-	
-	public function install() 
-	{
-		$this->load->model('setting/setting');
-		
-		$this->load->model('localisation/language');
-			
-		$languages = $this->model_localisation_language->getLanguages();
-		
-		$array_description_footer_0 = array();
-		$array_description0 = array();
-		$array_description1 = array();
-		$array_description2 = array();
-						
-		foreach($languages as $language){
-			$array_description_footer_0{$language['language_id']} = '&lt;div class=&quot;about-des&quot;&gt;&lt;a class=&quot;footer_logo&quot; href=&quot;#&quot; tilte=&quot;TopWear&quot;&gt;Topwear&lt;/a&gt;
-&lt;p class=&quot;f_color_3&quot;&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
-&lt;a class=&quot;read-more&quot; href=&quot;#&quot;&gt;Read more&lt;/a&gt;&lt;/div&gt;';
-			$array_description0{$language['language_id']} = '&lt;div class=&quot;static-home-link&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;facebook&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/facebook.jpg&quot; title=&quot;facebook&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;twitter&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/twitter.jpg&quot; title=&quot;twitter&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;RSS&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/RSS.jpg&quot; title=&quot;RSS&quot; /&gt;&lt;/a&gt;&lt;/div&gt;';
-			$array_description1{$language['language_id']} = '&lt;div class=&quot;static-home-banner-1&quot;&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;banner&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/banner1.jpg&quot; title=&quot;banner&quot; /&gt;&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;banner&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/banner2.jpg&quot; title=&quot;banner&quot; /&gt;&lt;/a&gt;&lt;/div&gt;';
-			$array_description2{$language['language_id']} = '&lt;div class=&quot;static-home-banner-2&quot;&gt;
-&lt;ul&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;banner&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/banner3.jpg&quot; title=&quot;banner&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;banner&quot; src=&quot;http://192.168.1.101/31_TopWear/trunk/site/image/data/bt_topwear/banner4.jpg&quot; title=&quot;banner&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;';
-		}
-		$blocks = array(
-			'B_Block_Footer_1' =>array('content' => $array_description_footer_0, 'status' => 1, 'store_id' => array(0=>0)),
-			'blocks_module' => array(
-				0 => array ( 'description' => $array_description0, 'layout_id' => $this->getIdLayout("home"), 'store_id' => array(0=>0), 'position' => 'content_top', 'status' => 1, 'sort_order' => 1),
-				1 => array ( 'description' => $array_description1, 'layout_id' => $this->getIdLayout("home"), 'store_id' => array(0=>0), 'position' => 'content_top', 'status' => 1, 'sort_order' => 3),
-				2 => array ( 'description' => $array_description2, 'layout_id' => $this->getIdLayout("home"), 'store_id' => array(0=>0), 'position' => 'content_top', 'status' => 1, 'sort_order' => 6)
-			)
-		);
-
-		$this->model_setting_setting->editSetting('blocks', $blocks);		
-	}	
 	
 
 

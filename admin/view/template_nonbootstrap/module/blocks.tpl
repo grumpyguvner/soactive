@@ -37,6 +37,7 @@
                     <?php $module_row = 1; ?>
                     <?php foreach ($modules as $module) { ?>
                         <div id="tab-module-<?php echo $module_row; ?>" class="vtabs-content">
+                            <input type="hidden" name="blocks_module[<?php echo $module_row; ?>][snippet_id]" value="<?php echo $module['snippet_id'] ?>" />
                             <div id="language-<?php echo $module_row; ?>" class="htabs">
                                 <?php foreach ($languages as $language) { ?>
                                     <a href="#tab-language-<?php echo $module_row; ?>-<?php echo $language['language_id']; ?>"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a>
@@ -152,6 +153,7 @@
                     
                     <?php $module_header_row = 1; ?>
                     <?php foreach ($modules_header as $module_header) { ?>
+                        <input type="hidden" name="blocks_module_header[<?php echo $module_header_row; ?>][snippet_id]" value="<?php echo $module_header['snippet_id'] ?>" />
                         <div id="tab-module_header-<?php echo $module_header_row; ?>" class="vtabs-content">
                             <div id="language_header-<?php echo $module_header_row; ?>" class="htabs">
                                 <?php foreach ($languages as $language) { ?>
@@ -270,6 +272,7 @@
                     
                     <?php $module_footer_row = 1; ?>
                     <?php foreach ($modules_footer as $module_footer) { ?>
+                        <input type="hidden" name="blocks_module_footer[<?php echo $module_footer_row; ?>][snippet_id]" value="<?php echo $module_footer['snippet_id'] ?>" />
                         <div id="tab-module_footer-<?php echo $module_footer_row; ?>" class="vtabs-content">
                             <div id="language_footer-<?php echo $module_footer_row; ?>" class="htabs">
                                 <?php foreach ($languages as $language) { ?>

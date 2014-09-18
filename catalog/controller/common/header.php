@@ -193,46 +193,55 @@ class ControllerCommonHeader extends Controller {
             }
         }
         
-        /**************************** MODULE CONTENT BLOCK *******************************/
-        $language = $this->config->get('config_language_id');                
-        
-        $module_data = array();
-        
-        $this->load->model('setting/setting');
-        
-        $settings_blocks = $this->model_setting_setting->getSetting('blocks');
-        if ($settings_blocks) {
-            foreach ($settings_blocks as $key => $setting_blocks) {
-                if ($key == 'blocks_module_header') {
-                    foreach ($setting_blocks as $blocks) {
-                    
-                        if ($blocks['status']) {
-                            $module_data[] = array(
-                                    'description'   => html_entity_decode($blocks['description'][$language], ENT_QUOTES, 'UTF-8'),
-                                    'sort_order'    => $blocks['sort_order']
-                            );
+        // Modules/Blocks
+        $this->data['blocks'] = array();
+        if ($this->extensions->isInstalled('blocks', 'module')) {
+            $language = $this->config->get('config_language_id');                
+
+            $module_data = array();
+
+            $this->load->model('setting/setting');
+
+            $settings_blocks = $this->model_setting_setting->getSetting('blocks');
+            if ($settings_blocks) {
+                foreach ($settings_blocks as $key => $setting_blocks) {
+                    if ($key == 'blocks_module_header') {
+                        foreach ($setting_blocks as $blocks) {
+
+                            if ($blocks['status']) {
+                                if (isset($blocks['snippet_id']))
+                                {
+                                    $this->load->model('design/snippet');
+
+                                    $snippet = $this->model_design_snippet->getSnippet($blocks['snippet_id']);
+
+                                    $description = $snippet['description'];
+                                } else {
+                                    $description = $blocks['description'][$this->config->get('config_language_id')];
+                                }
+                                $module_data[] = array(
+                                        'description'   => html_entity_decode($description, ENT_QUOTES, 'UTF-8'),
+                                        'sort_order'    => $blocks['sort_order']
+                                );
+                            }
                         }
                     }
                 }
-            }
-        }    
-        $sort_order = array(); 
-	  
-        foreach ($module_data as $key => $value) {
-            $sort_order[$key] = $value['sort_order'];
-        }
+            }    
+            $sort_order = array(); 
 
-        array_multisort($sort_order, SORT_ASC, $module_data);
-        
-        $this->data['blocks'] = array();
-        
-        foreach ($module_data as $module) {
-            if ($module) {
-                    $this->data['blocks'][] = $module;
+            foreach ($module_data as $key => $value) {
+                $sort_order[$key] = $value['sort_order'];
+            }
+
+            array_multisort($sort_order, SORT_ASC, $module_data);
+
+            foreach ($module_data as $module) {
+                if ($module) {
+                        $this->data['blocks'][] = $module;
+                }
             }
         }
-        
-        /**************************** END MODULE CONTENT BLOCK *******************************/
 
         $this->children = array(
             'module/localisation',
