@@ -143,10 +143,10 @@ class ControllerModuleFilter extends Controller {
 
                     foreach ($filter_group['filter'] as $filter) {
 
+                        $url = $this->getUrl($filter_group['name'],$filter['name']);
                         $filter_data[] = array(
                             'filter_id' => $filter['filter_id'],
-                            'filter_query' => $this->getUrlQuery($filter_group['name'],$filter['name']),
-                            'filter_url' => $this->getUrl($filter_group['name'],$filter['name']),
+                            'filter_url' => $url,
                             'name' => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $filter['total'] . ')' : ''),
                             'count' => $filter['total'],
                             'filter_count' => $filter['filter_total']
@@ -160,13 +160,13 @@ class ControllerModuleFilter extends Controller {
                         $count_group += $filter['total'];
                     }
 
+                    $url = $this->getUrl($filter_group['name']);
                     $this->data['filter_groups'][] = array(
                         'filter_group_id' => $filter_group['filter_group_id'],
                         'name' => sprintf($this->language->get('filter_title'), $filter_group['name']),
                         'filter' => $filter_data,
                         'count' => $count_group,
-                        'clear_query' => $this->getUrlQuery($filter_group['name']),
-                        'clear_url' => $this->getUrl($filter_group['name']),
+                        'clear_url' => $url,
                         'active' => $count_active
                     );
                 }
@@ -273,16 +273,6 @@ class ControllerModuleFilter extends Controller {
         $filterValue = strtolower(urlencode($filterValue));
         
         $path = $this->category->getPath();
-        $urlQuery = $this->getUrlQuery($filterGroup, $filterValue);
-        
-        $url = $this->url->link('product/category', 'path=' . $path . $urlQuery);
-        return $url;
-    }
-    
-    private function getUrlQuery($filterGroup, $filterValue = "") {
-        $filterGroup = strtolower(urlencode($filterGroup));
-        $filterValue = strtolower(urlencode($filterValue));
-        
         $urlQuery = $this->category->getUrlQuery($filterGroup);
 //        $urlQuery = "";
         if (isset($this->request->get[$filterGroup])) {
@@ -309,7 +299,8 @@ class ControllerModuleFilter extends Controller {
             }
         }
         
-        return $urlQuery;
+        $url = $this->url->link('product/category', 'path=' . $path . $urlQuery);
+        return $url;
     }
 
 }

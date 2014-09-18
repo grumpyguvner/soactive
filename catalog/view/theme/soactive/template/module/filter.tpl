@@ -24,16 +24,16 @@ if ($filter_groups || $options) {
                                     <div class="accordion-inner">
                                         <div class="box-content">
                                             <div class="box-category">
-                                                <div class="resetUrl"><a data-filter="<?php echo $filter_group['clear_query']; ?>" class="filter"><?php echo $text_clear; ?></a></div>
+                                                <div class="resetUrl"><a href="<?php echo $filter_group['clear_url']; ?>"><?php echo $text_clear; ?></a></div>
                                                 <ul>
                                                     <?php foreach ($filter_group['filter'] as $filter) {
                                                         if ($filter['count'])
                                                         {
                                                           echo ($filter['filter_count']) ? '<li>' : '<li class="noneCurrent">';
                                                           if (in_array($filter['filter_id'], $filter_category)) { ?>
-                                                            <a data-filter="<?php echo $filter['filter_query']; ?>" class="filter active"><?php echo $filter['name']; ?></a>
+                                                            <a href="<?php echo $filter['filter_url']; ?>" class="active"><?php echo $filter['name']; ?></a>
                                                         <?php } else { ?>
-                                                            <a data-filter="<?php echo $filter['filter_query']; ?>" class="filter"><?php echo $filter['name']; ?></a>
+                                                            <a href="<?php echo $filter['filter_url']; ?>"><?php echo $filter['name']; ?></a>
                                                         <?php } 
                                                           echo '</li>';
                                                         }
@@ -291,12 +291,5 @@ if ($filter_groups || $options) {
         
         $(this).parents('.box-content').find("#slider-range .slider" ).slider( "option", "values", [ <?php echo $filter_product_min_range ?>, <?php echo $filter_product_max_range ?> ] );
         
-    });
-</script>
-<script type="text/javascript">
-    $('a.filter').click(function (e) {
-        e.preventDefault();
-        // similar behavior as an HTTP redirect without adding to browser history
-        window.location.replace($(location).attr('pathname')+'?'+$(this).attr("data-filter"));
     });
 </script>

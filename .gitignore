@@ -1,11 +1,9 @@
 /.htaccess
-/robots.txt
 
-/config*.php
-/admin/config*.php
+config*.php
+admin/config*.php
 
-/redirects.php
-/google*.html
+redirects.php
 
 !index.html
 
