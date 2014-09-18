@@ -143,12 +143,14 @@ class ModelToolWMSStock extends ModelToolWMS {
         }
 
         $product_id = $product_info['product_id'];
-
+        
         $data['price'] = $stock_item['price'];
         $data['sale'] = $product_info['sale'];
         $data['product_discount'] = $this->model_catalog_product->getProductDiscounts($product_id);
         $data['product_special'] = $special;
-        $this->model_catalog_product->editProductPrices($product_id, $data);
+        // Price updates removed 2014-09-17 because of cache clearing
+        // ND aware that he needs to update prices the day before.
+//        $this->model_catalog_product->editProductPrices($product_id, $data);
 
         return $product_id;
     }
