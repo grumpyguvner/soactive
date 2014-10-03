@@ -2,7 +2,7 @@
 <div id="content"><?php echo $content_top; ?>
     <?php if($thumb) { ?>
     <img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" />
-    <? } ?>
+    <?php } ?>
   <div class="breadcrumb">
     <?php if ($breadcrumbs) { ?>
       <?php $count = count($breadcrumbs) - 1; ?>
@@ -15,7 +15,8 @@
   </div>
     <?php if(!$thumb) { ?>
   <h1><?php echo $heading_title; ?></h1>
-      <? } ?>
+      <?php } ?>
   <?php echo $description; ?>
-  <?php echo $content_bottom; ?></div>
+  <?php echo $content_bottom; ?>
+</div>
 <?php echo $footer; ?>
