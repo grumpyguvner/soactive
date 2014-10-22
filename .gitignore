@@ -17,3 +17,6 @@ redirects.php
 /nbproject
 
 /google*.html
+!/admin/controller/amazon/config.php
+!/admin/language/english/amazon/config.php
+!/admin/language/french/amazon/config.php

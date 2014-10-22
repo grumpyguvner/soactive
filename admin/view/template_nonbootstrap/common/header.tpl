@@ -112,6 +112,7 @@ ob_start("fixMenu");
 ?>
     <ul class="left" style="display: none;">
       <li id="dashboard"><a href="<?php echo $home; ?>" class="top"><?php echo $text_dashboard; ?></a></li>
+      <li id="amazon"><a href="<?php echo $amazon; ?>" class="top"><?php echo $text_amazon; ?></a></li>
       <li id="cms"><a class="top"><?php echo $text_cms; ?></a>
         <ul>
           <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
