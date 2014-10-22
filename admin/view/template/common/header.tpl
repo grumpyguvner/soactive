@@ -137,6 +137,12 @@ function fixMenu($menu) {
                                             </a>
                                         </li>
 
+                                        <li id="amazon">
+                                            <a href="<?php echo $amazon; ?>" class="top" title="<?php echo $text_amazon; ?>" data-hint="tooltip" data-placement="bottom">
+                                                <i class="icon-home icon-large"></i> <span class="visible-collapsed"><?php echo $text_amazon; ?></span>
+                                            </a>
+                                        </li>
+
                                         <li id="cms" class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-sitemap"></i> <?php echo $text_cms; ?> <i class="icon-down-open hidden-collapsed"></i></a>
                                             <a href="#" class="visible-collapsed dropdown-toggle" data-toggle="dropdown"><i class="icon-down-open"></i></a>
