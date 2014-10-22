@@ -426,8 +426,8 @@ class ControllerAmazonSynchronize extends Controller {
                 $pass = false ;
             }
             else
-            foreach($amazonProducts as $product_id)
-                $query = $this->db->query('INSERT INTO `'.DB_PREFIX.'amazon_products` values ( "' . $this->db->escape($product['sku']) . '",' . intval($language_id) . ')') ;
+            foreach($amazonProducts as $amazonProduct)
+                $query = $this->db->query('INSERT INTO `'.DB_PREFIX.'amazon_products` values ( "' . $this->db->escape($amazonProduct['sku']) . '",' . intval($language_id) . ')') ;
           }
 
           if ( count($productsUpdate) )
