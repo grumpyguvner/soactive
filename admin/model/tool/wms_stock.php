@@ -78,6 +78,7 @@ class ModelToolWMSStock extends ModelToolWMS {
                             $stock_item["sku"] = (string) $aStock->fields['bleepid'];
                             $stock_item["quantity"] = $quantity;
                             $stock_item["location"] = $aStock->fields['location'];
+                            $stock_item["ean"] = $aStock->fields['upc'];
 
                             if ($myModel != $model) {
                                 $myModel = $model;
@@ -169,7 +170,7 @@ class ModelToolWMSStock extends ModelToolWMS {
         }
 
         $product_option_value_id = $result->rows[0]['product_option_value_id'];
-        $this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET location = '" . $stock_item['location'] . "', quantity = '" . (int) $quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+' WHERE sku = '" . $this->db->escape($stock_item["sku"]) . "' AND product_id = '" . (int) $product_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "product_option_value SET ean = '" . $stock_item['ean'] . "', location = '" . $stock_item['location'] . "', quantity = '" . (int) $quantity . "', subtract = '1', price = '0', price_prefix = '+', points = '0', points_prefix = '+', weight = '0', weight_prefix = '+' WHERE sku = '" . $this->db->escape($stock_item["sku"]) . "' AND product_id = '" . (int) $product_id . "'");
 
         $this->db->query("UPDATE " . DB_PREFIX . "product p SET quantity = (SELECT SUM(quantity) FROM " . DB_PREFIX . "product_option_value pov WHERE pov.product_id = p.product_id) WHERE product_id = '" . (int) $product_id . "'");
         return $product_option_value_id;
