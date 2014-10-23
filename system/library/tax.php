@@ -84,7 +84,7 @@ final class Tax {
                 
                 if (!isset($this->tax_rates[$tax_class_id]))
                 {
-                    if ($this->customer->isLogged()) {
+                    if (isset($this->customer) && $this->customer->isLogged()) {
                             $customer_group_id = $this->customer->getCustomerGroupId();
                     } else {
                             $customer_group_id = $this->config->get('config_customer_group_id');

@@ -324,16 +324,17 @@ class ControllerAmazonSynchronize extends Controller {
             //
             if ( $product['tax_class_id'] )
             {
-                $tax = $this->model_amazon_synchronize->getTaxByClassId($product['tax_class_id']) ;
+                $newPrice = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
+//                $tax = $this->model_amazon_synchronize->getTaxByClassId($product['tax_class_id']) ;
 
-                if ( isset($tax['rate']) && $tax['rate'] )
-                {
-                  $product_tax  = $newPrice * ($tax['rate'] / 100) ;
-                  $newPrice     = $newPrice + $product_tax ;
+//                if ( isset($tax['rate']) && $tax['rate'] )
+//                {
+//                  $product_tax  = $newPrice * ($tax['rate'] / 100) ;
+//                  $newPrice     = $newPrice + $product_tax ;
 
                   if ( $this->debug )
-                      printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, nl2br(print_r($tax, true)), $cr) ;
-                }
+                      printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, "newPrice (with tax): $newPrice", $cr) ;
+//                }
             }
 
             //
