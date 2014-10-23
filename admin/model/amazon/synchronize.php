@@ -107,12 +107,5 @@ class ModelAmazonSynchronize extends Model {
       else return(false) ;
     }
 
-	public function getTaxByClassId($tax_class_id)
-    {
-      	$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "tax_class` WHERE tax_class_id = '" . intval($tax_class_id) . "'");
-
-		return $query->row ;
-	}
-
 }
 ?>

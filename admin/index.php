@@ -25,6 +25,7 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/currency.php');
+require_once(DIR_SYSTEM . 'library/tax.php');
 require_once(DIR_SYSTEM . 'library/user.php');
 require_once(DIR_SYSTEM . 'library/weight.php');
 require_once(DIR_SYSTEM . 'library/length.php');
@@ -140,6 +141,9 @@ $registry->set('extensions', new Extensions($registry));
 		
 // Currency
 $registry->set('currency', new Currency($registry));		
+
+// Tax
+$registry->set('tax', new Tax($registry));
 		
 // Weight
 $registry->set('weight', new Weight($registry));
