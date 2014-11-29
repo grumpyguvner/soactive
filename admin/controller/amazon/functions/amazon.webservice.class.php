@@ -463,7 +463,10 @@ class Service {
             {
                 $Messages[$m] = $this->createProductMessage ($Document, $products[$i]['SKU'],
                     $products[$i]['ProductIDType'], $products[$i]['ProductIDCode'], $products[$i]['ConditionType'],
-                    $products[$i]['ConditionNote'], $m+1, $updatingType);
+                    $products[$i]['ConditionNote'], 
+                    $products[$i]['Name'], 
+                    $products[$i]['Brand'], 
+                    $m+1, $updatingType);
                 $m++;
             }
             else
@@ -694,16 +697,19 @@ class Service {
         {
             if ($this->_debug) printf("$this->_cr updatePrices() function. Checking \$products[$i]... $this->_cr");
             if ($this->checkSKU($products[$i]['SKU']) == false ||
-                    ($products[$i]['Price'] = $this->checkPrice($products[$i]['Price'])) == false)
+                    ($products[$i]['Price'] = $this->checkPrice($products[$i]['Price'])) == false ||
+                    ($products[$i]['Special'] = $this->checkPrice($products[$i]['Special'])) == false)
             {
                 if ($this->_debug)
                 {
                     $value1 = $products[$i]['SKU'];
                     $value2 = $products[$i]['Price'];
+                    $value3 = $products[$i]['Special'];
                     printf("$this->_cr updatePrices() function. $this->_att an Warning occured during the test of the $i-th argument
                         There are values:$this->_cr
                         \$products[\$i]['SKU']: $value1 $this->_cr
                         \$products[\$i]['Price']: $value2 $this->_cr
+                        \$products[\$i]['Special']: $value3 $this->_cr
                         Function skips this item and continue xecution $this->_cr");
                 }
                 //return false;
@@ -735,7 +741,7 @@ class Service {
             if ($products[$i] != null)
             {
                 if ($this->_debug) printf("$this->_cr updatePrices() function. The $i-th message creation... $this->_cr");
-                $Messages[$m] = $this->createPriceMessage ($Document, $products[$i]['SKU'], $products[$i]['Price'], $m+1);
+                $Messages[$m] = $this->createPriceMessage ($Document, $products[$i]['SKU'], $products[$i]['Price'], $products[$i]['Special'], $m+1);
                 $m++;
             }
             else
@@ -1711,9 +1717,9 @@ class Service {
         return false;
     }
 
-    private function createProductMessage (DOMDocument $Document, $SKU, $ProductIDType, $ProductIDCode, $ConditionType, $ConditionNote, $MessageID, $updatingType = "Update")
+    private function createProductMessage (DOMDocument $Document, $SKU, $ProductIDType, $ProductIDCode, $ConditionType, $ConditionNote, $Title, $Brand, $MessageID, $updatingType = "Update")
     {
-        if ($this->_debug) printf("$this->_cr createProductMessage call \$SKU = $SKU \$ProductIDType = $ProductIDType \$ConditionType = $ConditionType \$MessageID = $MessageID \$updatingType = $updatingType $this->_cr");
+        if ($this->_debug) printf("$this->_cr createProductMessage call \$SKU = $SKU \$ProductIDType = $ProductIDType \$ConditionType = $ConditionType \$Title = $Title \$Brand = $Brand \$MessageID = $MessageID \$updatingType = $updatingType $this->_cr");
         $Message = $Document->createElement("Message");
         $MessageIDX = $Document->createElement("MessageID");
         $Message->appendChild($MessageIDX);
@@ -1758,6 +1764,20 @@ class Service {
                 $ConditionNoteX->appendChild($ConditionNoteText);
             }
         }
+        
+        $DescriptionX = $Document->createElement("DescriptionData");
+        $Product->appendChild($DescriptionX);
+        
+        $TitleX = $Document->createElement("Title");
+        $DescriptionX->appendChild($TitleX);
+        $TitleText = $Document->createTextNode($Title);
+        $TitleX->appendChild($TitleText);
+        
+        $BrandX = $Document->createElement("Brand");
+        $DescriptionX->appendChild($BrandX);
+        $BrandText = $Document->createTextNode($Brand);
+        $BrandX->appendChild($BrandText);
+        
         return $Message;
     }
 
@@ -1810,9 +1830,9 @@ class Service {
         return false;
     }
 
-    private function createPriceMessage(DOMDocument $Document, $SKU, $Price, $MessageID)
+    private function createPriceMessage(DOMDocument $Document, $SKU, $Price, $Special, $MessageID)
     {
-        if ($this->_debug) printf("$this->_cr createPriceMessage call. \$SKU = $SKU \$Price = $Price \$MessageID = $MessageID Current currency: $this->Currency $this->_cr");
+        if ($this->_debug) printf("$this->_cr createPriceMessage call. \$SKU = $SKU \$Price = $Price \$Special = $Special \$MessageID = $MessageID Current currency: $this->Currency $this->_cr");
         $Message = $Document->createElement("Message");
         $MessageIDX = $Document->createElement("MessageID");
         $Message->appendChild($MessageIDX);
@@ -1829,6 +1849,27 @@ class Service {
         $PriceX->appendChild($StandardPrice);
         $StandardPriceText = $Document->createTextNode($Price);
         $StandardPrice->appendChild($StandardPriceText);
+        if ($Special < $Price  && $Special > 0) {
+            $SaleX = $Document->createElement("Sale");
+            $PriceX->appendChild($SaleX);
+            
+            $StartX = $Document->createElement("StartDate");
+            $SaleX->appendChild($StartX);
+            $StartText=$Document->createTextNode(date(DATE_ATOM, strtotime("now")));
+            $StartX->appendChild($StartText);
+            
+            $EndX = $Document->createElement("EndDate");
+            $SaleX->appendChild($EndX);
+            $EndText=$Document->createTextNode(date(DATE_ATOM, strtotime("+48 hours")));
+            $EndX->appendChild($EndText);
+
+            $SalePrice = $Document->createElement("SalePrice");
+            $SalePrice->setAttribute("currency", $this->Currency /*"USD"*/);
+            $SaleX->appendChild($SalePrice);
+            $SalePriceText = $Document->createTextNode($Special);
+            $SalePrice->appendChild($SalePriceText);
+        }
+        
         return $Message;
     }
 
