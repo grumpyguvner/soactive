@@ -309,17 +309,6 @@ class ControllerAmazonSynchronize extends Controller {
             //
             $newPrice = $currency->convert($productPrice, $source_currency_code, $target_currency_code) ;
 
-            // Price Formula
-            //
-            $newPrice =  Amazon_Tools::Formula($newPrice, $price_formula) ;
-
-            // Price CallBack (see Admin > Module > Fnac)
-            //
-            $newPrice =  Amazon_Tools::CallBack($newPrice, $price_callback) ;
-
-            if ( $this->debug )
-                printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, "newPrice: $newPrice", $cr) ;
-
             // Apply Tax
             //
             if ( $product['tax_class_id'] )
@@ -336,6 +325,17 @@ class ControllerAmazonSynchronize extends Controller {
                       printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, "newPrice (with tax): $newPrice", $cr) ;
 //                }
             }
+
+            // Price Formula
+            //
+            $newPrice =  Amazon_Tools::Formula($newPrice, $price_formula) ;
+
+            // Price CallBack (see Admin > Module > Fnac)
+            //
+            $newPrice =  Amazon_Tools::CallBack($newPrice, $price_callback) ;
+
+            if ( $this->debug )
+                printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, "newPrice: $newPrice", $cr) ;
 
             //
             //  Prepare arrays to send to amazon
@@ -419,6 +419,17 @@ class ControllerAmazonSynchronize extends Controller {
         //
         if ( ! isset($this->request->post['lookup']) )
         {
+
+          if ( count($productsUpdate) )
+          {
+//            if ( ! $datas = $amazonApi->updateProducts($productsUpdate) )
+//            {
+//                printf('Error : query failed (%s)', nl2br(print_r($datas)) ) ;
+//                $pass = false ;
+//            }
+
+          }
+
           if ( count($productsCreate) )
           {
             if ( ! $datas = $amazonApi->addProducts($productsCreate) )
@@ -431,23 +442,13 @@ class ControllerAmazonSynchronize extends Controller {
                 $query = $this->db->query('INSERT INTO `'.DB_PREFIX.'amazon_products` values ( "' . $this->db->escape($amazonProduct['sku']) . '",' . intval($language_id) . ')') ;
           }
 
-          if ( count($productsUpdate) )
-          {
-            if ( ! $datas = $amazonApi->updateProducts($productsUpdate) )
-            {
-                printf('Error : query failed (%s)', nl2br(print_r($datas)) ) ;
-                $pass = false ;
-            }
-
-          }
-
           if ( count($productsDelete) )
           {
-            if ( ! $datas = $amazonApi->deleteProducts($productsDelete) )
-            {
-                printf( $this->l('Error : query failed (%s)'), nl2br(print_r($datas)) ) ;
-                $pass = false ;
-            }
+//            if ( ! $datas = $amazonApi->deleteProducts($productsDelete) )
+//            {
+//                printf( $this->l('Error : query failed (%s)'), nl2br(print_r($datas)) ) ;
+//                $pass = false ;
+//            }
           }
 
           // Update Synch Date

@@ -29,6 +29,8 @@ class ModelAmazonSynchronize extends Model {
 
 	public function getAmazonCatalog($startDate, $out_of_stock, $language_id, $categories)
     {
+        $customer_group_id = $this->config->get('config_customer_group_id');
+            
         $ext = '' ;
 
         if ( 1 )
@@ -81,7 +83,10 @@ class ModelAmazonSynchronize extends Model {
             'pd.meta_description',
             'pd.meta_keyword',
             'pd.tag',
-            'p2c.category_id'
+            'p2c.category_id',
+            'IFNULL((SELECT price FROM ' . DB_PREFIX . 'product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = "' . intval($customer_group_id) . '" AND ((ps.date_start = "0000-00-00" OR ps.date_start < NOW()) AND (ps.date_end = "0000-00-00" OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1),p.price) AS special',
+            'IFNULL((SELECT m.name FROM ' . DB_PREFIX . 'manufacturer m WHERE m.manufacturer_id = p.manufacturer_id),"' . $this->config->get('config_name') . '") AS manufacturer',
+            'IFNULL((SELECT ovd.name FROM ' . DB_PREFIX . 'option_value_description ovd WHERE ovd.option_value_id = pov.option_value_id AND ovd.option_id = pov.option_id AND ovd.language_id = "' . intval($language_id) . '"),"") AS size'
         );
         
         $sql = 'SELECT ' . implode(', ', $fields) . ' '
