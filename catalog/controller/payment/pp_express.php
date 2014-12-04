@@ -1,7 +1,7 @@
 <?php
 require_once DIR_SYSTEM . 'vendor/composer/autoload_real.php';
 
-return ComposerAutoloaderInit69c6ed8a4071781d5e74378df2dc7086::getLoader();
+ComposerAutoloaderInit69c6ed8a4071781d5e74378df2dc7086::getLoader();
 
 class ControllerPaymentPPExpress extends Controller {
 
