@@ -1,30 +1,5 @@
 <?php
-/* NOTICE OF LICENSE
- *
- * This source file is subject to a commercial license from SARL SMC
- * Use, copy, modification or distribution of this source file without written
- * license agreement from the SARL SMC is strictly forbidden.
- * In order to obtain a license, please contact us: olivier@common-services.com
- * ...........................................................................
- * INFORMATION SUR LA LICENCE D'UTILISATION
- *
- * L'utilisation de ce fichier source est soumise a une licence commerciale
- * concedee par la societe SMC
- * Toute utilisation, reproduction, modification ou distribution du present
- * fichier source sans contrat de licence ecrit de la part de la SARL SMC est
- * expressement interdite.
- * Pour obtenir une licence, veuillez contacter la SARL SMC a l'adresse: olivier@common-services.com
- * ...........................................................................
- * @package    Amazon Market Place
- * @copyright  Copyright (c) 2011-2011 S.A.R.L SMC (http://www.common-services.com)
- * @copyright  Copyright (c) 2011-2011 Olivier B.
- * @author     Olivier B.
- * @license    Commercial license
- * Support by mail  :  olivier@common-services.com
- * Support on forum :  delete
- * Skype : delete13_fr
- * Phone : +33.970465505
- */
+
 class ControllerAmazonSynchronize extends Controller {
 	private $error = array();
     private $name = 'amazon' ;
@@ -303,23 +278,19 @@ class ControllerAmazonSynchronize extends Controller {
                 $action = self::UPDATE ;
 
             $productPrice   = floatval($product['price']) ;
+            $productSpecial = floatval($product['special']);
             $productQty     = intval($product['quantity']) ;
 
             // Convert from/to currency
             //
             $newPrice = $currency->convert($productPrice, $source_currency_code, $target_currency_code) ;
+            $newSpecial = $currency->convert($productSpecial, $source_currency_code, $target_currency_code);
 
             // Apply Tax
             //
-            if ( $product['tax_class_id'] )
-            {
-                $newPrice = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
-//                $tax = $this->model_amazon_synchronize->getTaxByClassId($product['tax_class_id']) ;
-
-//                if ( isset($tax['rate']) && $tax['rate'] )
-//                {
-//                  $product_tax  = $newPrice * ($tax['rate'] / 100) ;
-//                  $newPrice     = $newPrice + $product_tax ;
+            if ($product['tax_class_id']) {
+                $newPrice = $this->tax->calculate($newPrice, $product['tax_class_id'], $this->config->get('config_tax'));
+                $newSpecial = $this->tax->calculate($newSpecial, $product['tax_class_id'], $this->config->get('config_tax'));
 
                   if ( $this->debug )
                       printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, "newPrice (with tax): $newPrice", $cr) ;
@@ -329,10 +300,12 @@ class ControllerAmazonSynchronize extends Controller {
             // Price Formula
             //
             $newPrice =  Amazon_Tools::Formula($newPrice, $price_formula) ;
+            $newSpecial = Amazon_Tools::Formula($newSpecial, $price_formula);
 
             // Price CallBack (see Admin > Module > Fnac)
             //
             $newPrice =  Amazon_Tools::CallBack($newPrice, $price_callback) ;
+            $newSpecial = Amazon_Tools::CallBack($newSpecial, $price_callback);
 
             if ( $this->debug )
                 printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, "newPrice: $newPrice", $cr) ;
@@ -347,8 +320,11 @@ class ControllerAmazonSynchronize extends Controller {
                 $productsCreate[$c]['ProductIDCode'] = $value ;
                 $productsCreate[$c]['ConditionType'] = 'New';
                 $productsCreate[$c]['ConditionNote'] = '' ; // Created by WS/API on ' . $currentDate;
-                $productsCreate[$c]['Quantity'] = $product['quantity'] ;
+                $productsCreate[$c]['Quantity'] = ($productQty - $out_of_stock);
                 $productsCreate[$c]['Price'] = $newPrice;
+                $productsCreate[$c]['Special'] = $newSpecial;
+                $productsCreate[$c]['Name'] = $product['name'] . (empty($product['size']) ? "" : ", " . $product['size']);
+                $productsCreate[$c]['Brand'] = $product['manufacturer'];
 
                 if ( $this->debug )
                     printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, nl2br(print_r($productsCreate[$c], true)), $cr) ;
@@ -362,16 +338,16 @@ class ControllerAmazonSynchronize extends Controller {
                 $productsUpdate[$u]['ProductIDCode'] = $value ;
                 $productsUpdate[$u]['ConditionType'] = 'New';
                 $productsUpdate[$u]['ConditionNote'] = '' ; // Updated by WS/API on ' . $currentDate;
-                $productsUpdate[$u]['Quantity'] = $product['quantity'] ;
+                $productsUpdate[$u]['Quantity'] = ($productQty - $out_of_stock);
                 $productsUpdate[$u]['Price'] = $newPrice;
+                $productsUpdate[$u]['Special'] = $newSpecial;
 
                 if ( $this->debug )
                     printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, nl2br(print_r($productsUpdate[$u], true)), $cr) ;
 
                 $u++ ;
             }
-            elseif ( $action == self::UPDATE && $productQty < $out_of_stock)
-            {
+            elseif ($action == self::UPDATE && $productQty <= $out_of_stock) {
                 $productsUpdate[$u]['SKU'] = $product['sku'] ;
                 $productsUpdate[$u]['ProductIDType'] = $type ;
                 $productsUpdate[$u]['ProductIDCode'] = $value ;
@@ -379,14 +355,14 @@ class ControllerAmazonSynchronize extends Controller {
                 $productsUpdate[$u]['ConditionNote'] = '' ; // Updated by WS/API on ' . $currentDate;
                 $productsUpdate[$u]['Quantity'] = 0 ;
                 $productsUpdate[$u]['Price'] = $newPrice;
+                $productsUpdate[$u]['Special'] = $newSpecial;
 
                 if ( $this->debug )
                     printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, nl2br(print_r($productsUpdate[$u], true)), $cr) ;
 
                 $u++ ;
             }
-            elseif ( $action == self::CREATE && $productQty < $out_of_stock )
-            {
+            elseif ($action == self::CREATE && $productQty <= $out_of_stock) {
                 $productsDelete[$d]['SKU'] = $product['sku'] ;
                 $productsDelete[$d]['ProductIDType'] = $type ;
                 $productsDelete[$d]['ProductIDCode'] = $value ;
@@ -405,6 +381,7 @@ class ControllerAmazonSynchronize extends Controller {
                 $productsIgnore[$i]['ConditionNote'] = '' ; // Updated by WS/API on ' . $currentDate;
                 $productsIgnore[$i]['Quantity'] = 0 ;
                 $productsIgnore[$i]['Price'] = $newPrice;
+                $productsIgnore[$i]['Special'] = $newSpecial;
 
                 if ( $this->debug )
                     printf("DEBUG: %s(%d) - Data is %s%s", basename(__FILE__), __LINE__, nl2br(print_r($productsIgnore[$i], true)), $cr) ;
@@ -420,13 +397,22 @@ class ControllerAmazonSynchronize extends Controller {
         if ( ! isset($this->request->post['lookup']) )
         {
 
+          if ( count($productsDelete) )
+          {
+            if ( ! $datas = $amazonApi->deleteProducts($productsDelete) )
+            {
+                printf( $this->l('Error : query failed (%s)'), nl2br(print_r($datas)) ) ;
+                $pass = false ;
+            }
+          }
+
           if ( count($productsUpdate) )
           {
-//            if ( ! $datas = $amazonApi->updateProducts($productsUpdate) )
-//            {
-//                printf('Error : query failed (%s)', nl2br(print_r($datas)) ) ;
-//                $pass = false ;
-//            }
+            if ( ! $datas = $amazonApi->updateProducts($productsUpdate) )
+            {
+                printf('Error : query failed (%s)', nl2br(print_r($datas)) ) ;
+                $pass = false ;
+            }
 
           }
 
@@ -440,15 +426,6 @@ class ControllerAmazonSynchronize extends Controller {
             else
             foreach($amazonProducts as $amazonProduct)
                 $query = $this->db->query('INSERT INTO `'.DB_PREFIX.'amazon_products` values ( "' . $this->db->escape($amazonProduct['sku']) . '",' . intval($language_id) . ')') ;
-          }
-
-          if ( count($productsDelete) )
-          {
-//            if ( ! $datas = $amazonApi->deleteProducts($productsDelete) )
-//            {
-//                printf( $this->l('Error : query failed (%s)'), nl2br(print_r($datas)) ) ;
-//                $pass = false ;
-//            }
           }
 
           // Update Synch Date
