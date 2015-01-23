@@ -382,7 +382,8 @@ class ControllerAmazonSynchronizePrices extends Controller {
         if (!isset($this->request->post['lookup'])) {
 
             if (count($productsUpdate)) {
-            if ( ! $datas = $amazonApi->updateProducts($productsUpdate) )
+            if ( ! $datas = $amazonApi->updateQuantities($productsUpdate) )
+//            if ( ! $datas = $amazonApi->updateProducts($productsUpdate) )
 //            if ( ! $datas = $amazonApi->updatePrices($productsUpdate) )
             {
                 printf('Error : query failed (%s)', nl2br(print_r($datas)) ) ;
